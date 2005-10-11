@@ -1,0 +1,2 @@
+Mit QMake 4.x bekommen die vom uic erstellten Header
+automatisch den Präfix ui_* - also vor der Portierung entfernen! 

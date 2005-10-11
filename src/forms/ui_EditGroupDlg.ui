@@ -1,0 +1,174 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>EditGroupDialog</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>EditGroupDialog</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>302</width>
+            <height>105</height>
+        </rect>
+    </property>
+    <property name="minimumSize">
+        <size>
+            <width>200</width>
+            <height>105</height>
+        </size>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>302</width>
+            <height>100</height>
+        </size>
+    </property>
+    <property name="caption">
+        <string>Gruppeneigenschaften</string>
+    </property>
+    <widget class="Line">
+        <property name="name">
+            <cstring>line1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>62</y>
+                <width>290</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>HLine</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Sunken</enum>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>EditTitle</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>10</y>
+                <width>230</width>
+                <height>21</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>Label1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>27</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Titel:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>Label2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>43</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Symbol:</string>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <property name="name">
+            <cstring>ComboIconPicker</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>40</y>
+                <width>50</width>
+                <height>21</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>ButtonCancel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>226</x>
+                <y>80</y>
+                <width>70</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Abbre&amp;chen</string>
+        </property>
+        <property name="accel">
+            <string>Alt+C</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>ButtonOK</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>147</x>
+                <y>80</y>
+                <width>70</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>O&amp;K</string>
+        </property>
+        <property name="accel">
+            <string>Alt+K</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>ButtonOK</sender>
+        <signal>clicked()</signal>
+        <receiver>EditGroupDialog</receiver>
+        <slot>OnOK()</slot>
+    </connection>
+    <connection>
+        <sender>ButtonCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>EditGroupDialog</receiver>
+        <slot>OnCancel()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>EditTitle</tabstop>
+    <tabstop>ComboIconPicker</tabstop>
+    <tabstop>ButtonOK</tabstop>
+    <tabstop>ButtonCancel</tabstop>
+</tabstops>
+<slots>
+    <slot>OnOK()</slot>
+    <slot>OnCancel()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>
