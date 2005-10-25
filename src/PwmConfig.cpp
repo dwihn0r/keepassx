@@ -23,8 +23,8 @@
 #include <qdir.h>
 #include <iostream.h>
 
-bool CConfig::loadFromIni(){
-CIniFile ini(QDir::homeDirPath()+"/.keepass/config");
+bool CConfig::loadFromIni(QString filename){
+CIniFile ini(filename);
 ini.ReadFile();
 ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
 Toolbar=ini.GetValueB("UI","ShowToolbar",true);
@@ -48,8 +48,8 @@ ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
 return true;
 }
 
-bool CConfig::saveToIni(){
-CIniFile ini(QDir::homeDirPath()+"/.keepass/config");
+bool CConfig::saveToIni(QString filename){
+CIniFile ini(filename);
 ini.ReadFile();
 ini.SetValueI("Options","ClipboardTimeOut",ClipboardTimeOut);
 ini.SetValueB("UI","ShowToolbar",Toolbar);

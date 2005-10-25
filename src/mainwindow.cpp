@@ -60,7 +60,7 @@
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 
-CMainWindow::CMainWindow(QApplication* app,QWidget* parent,const char* name, WFlags fl)
+CMainWindow::CMainWindow(QApplication* app,QString ArgFile,QString ArgCfg,QWidget* parent,const char* name, WFlags fl)
 : MainFrame(parent,name,fl)
 {
 FileOpen=false;
@@ -70,12 +70,23 @@ parentWidget()->setCaption(tr("Keepass Passwortsafe"));
 SecString::generateSessionKey();
 
 // Config //
-if(!QDir(QDir::homeDirPath()+"/.keepass").exists()){
+if(ArgCfg==""){
+ if(!QDir(QDir::homeDirPath()+"/.keepass").exists()){
 	QDir conf(QDir::homeDirPath());
 	if(!conf.mkdir(".keepass")){
 		cout << trUtf8("Warnung: Verzeichnis ~/.keepass konnte nicht erstellt werden.") << endl;}
+ }
+ IniFilename=QDir::homeDirPath()+"/.keepass/config";
+ config.loadFromIni(IniFilename);
 }
-config.loadFromIni();
+else
+{
+ IniFilename=ArgCfg;
+ config.loadFromIni(IniFilename);
+}
+
+
+
 CGroup::UI_ExpandByDefault=config.ExpandGroupTree;
 
 // Language //
@@ -154,7 +165,6 @@ connect(GroupView,SIGNAL(expanded(QListViewItem*)),this, SLOT(OnGroupItemExpande
 
 // MainWnd //
 CurrentGroup=NULL;
-CurrentEntry=NULL;
 Clipboard=QApplication::clipboard();
 GroupView->setSorting(-1);
 
@@ -229,6 +239,26 @@ if(config.ListView_HideUsernames){
 else{
 	View_HideUsernames->setOn(false);}
 
+////////////////////////////////////////////////
+GroupView->addColumn(trUtf8("Gruppen"));
+GroupView->setColumnWidth(0,GroupView->width()-4);
+SetupColumns();
+InitMenus();
+
+if(ArgFile==""){
+ if(config.OpenLast && config.LastFile!="")
+  {QFileInfo file(config.LastFile);
+   if(file.exists() && file.isFile())OpenDatabase(config.LastFile);
+   else config.LastFile="";}
+}
+else
+{
+  QFileInfo file(ArgFile);
+  if(file.exists() && file.isFile())OpenDatabase(ArgFile);
+   else cout << "file not found "<< ArgFile << endl;
+}
+
+
 }
 
 void CMainWindow::LoadImg(QString name,QImage& tmpImg){
@@ -245,7 +275,7 @@ if(tmpImg.load(appdir+"/../share/keepass/"+name)==false){
 CMainWindow::~CMainWindow()
 {
 OnClose();
-if(!config.saveToIni())
+if(!config.saveToIni(IniFilename))
 	QMessageBox::warning(this,tr("Warnung"),trUtf8("Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass\nSie Schreibrechte im Verzeichnis ~/.keepass besitzen."),tr("OK"),"","",0.0);
 if(translator)delete translator;
 delete [] EntryIcons;
@@ -406,10 +436,6 @@ EntryView->setColumnWidth(i,width);
 void CMainWindow::updateEntryView(){
 //  Achtung:
 //  Die ->pEntry bzw ->pGroup Zeiger sind zu diesem Zeitpunkt ungültig!
-if(CurrentEntry){
-
-
-}
 EntryView->clear();
 EntryItems.clear();
 if(!CurrentGroup)return;
@@ -452,24 +478,9 @@ tmp->setText(j++,entry->BinaryDesc);}
 }
 
 void CMainWindow::OnEntryChanged(QListViewItem* item){
-SetEditMenuState(STATE_SingleEntrySelected);
-CEntry& entry=*((EntryItem*)item)->pEntry;
-
-QString str=trUtf8("<B>Gruppe: </B>%1  <B>Titel: </B>%2  <B>Benutzername: </B>%3  <B>URL: </B>%4  <B>Passwort: </B>%5  <B>Erstellt: </B>%6  <B>letzte Änderung: </B>%7  <B>letzter Zugriff: </B>%8  <B>gültig bis: </B>%9");
-
-str= str.arg(CurrentGroup->pGroup->Name)
-	.arg(entry.Title)
-	.arg(entry.UserName)
-	.arg(entry.URL)
-	.arg(entry.Password.getString())
-	.arg(entry.Creation.GetString(0))
-	.arg(entry.LastMod.GetString(0))
-	.arg(entry.LastAccess.GetString(0))
-	.arg(entry.Expire.GetString(0));
-
-SummaryField->setText(str);
-entry.Password.delRef();
-CurrentEntry=(EntryItem*)item;
+if(item)SetEditMenuState(STATE_SingleEntrySelected);
+else SetEditMenuState(STATE_NoEntrySelected);
+updateEntryDetails((EntryItem*)item);
 }
 
 
@@ -480,14 +491,8 @@ QValueList<int> s;
 s.push_back(25); s.push_back(100);
 parentWidget()->resize(750,450);
 splitter->setSizes(s);
-GroupView->addColumn(trUtf8("Gruppen"));
-GroupView->setColumnWidth(0,GroupView->width()-4);
-SetupColumns();
-InitMenus();
-if(config.OpenLast && config.LastFile!="")
-{ QFileInfo file(config.LastFile);
-  if(file.exists() && file.isFile())OpenDatabase(config.LastFile);
-  else config.LastFile="";}
+
+
 
 ////////////////////////////////////
 /*Beim öffnen der Datenbank ist ein Fehler aufgetreten.
@@ -761,14 +766,14 @@ setModFlag(true);
 
 void CMainWindow::OnPasswordToClipboard()
 {
-Clipboard->setText(CurrentEntry->pEntry->Password.getString(),QClipboard::Clipboard);
+Clipboard->setText(currentEntry()->Password.getString(),QClipboard::Clipboard);
 ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
-CurrentEntry->pEntry->Password.delRef();
+currentEntry()->Password.delRef();
 }
 
 void CMainWindow::OnUserNameToClipboard()
 {
-Clipboard->setText(CurrentEntry->pEntry->UserName,  QClipboard::Clipboard);
+Clipboard->setText(currentEntry()->UserName,  QClipboard::Clipboard);
 ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
 }
 
@@ -778,7 +783,7 @@ Clipboard->clear(QClipboard::Clipboard); //löscht nicht den KDE-Klipper
 
 void CMainWindow::OnOpenURL()
 {
-OpenURL(CurrentEntry->pEntry->URL);
+OpenURL(currentEntry()->URL);
 }
 
 void CMainWindow::OpenURL(QString url){
@@ -789,7 +794,7 @@ browser.start();
 
 void CMainWindow::OnSaveAttachment()
 {
-CEntry& entry=*CurrentEntry->pEntry;
+CEntry& entry=*currentEntry();
 if(entry.BinaryDataLength==0){
 QMessageBox::information(NULL,trUtf8("Hinweis"),trUtf8("Dieser Eintrag hat keinen Dateianhang."),"OK");
 return;
@@ -864,7 +869,7 @@ if(pDlg->exec()){
 void CMainWindow::OnEditEntry()
 {
 CEditEntryDlg* pDlg= new CEditEntryDlg(this,0,true);
-pDlg->entry=CurrentEntry->pEntry;
+pDlg->entry=currentEntry();
 pDlg->exec();
 updateEntryView();
 if(pDlg->ModFlag)setModFlag(true);
@@ -872,7 +877,7 @@ if(pDlg->ModFlag)setModFlag(true);
 
 void CMainWindow::OnCopyEntry()
 {
-CEntry &src=*CurrentEntry->pEntry;
+CEntry &src=*currentEntry();
 CEntry entry=src;
 entry.sID=(*(db->Entries.end()-1)).sID+1;
 while(1){
@@ -900,7 +905,7 @@ setModFlag(true);
 
 void CMainWindow::OnDeleteEntry()
 {
-db->deleteEntry(CurrentEntry->pEntry);
+db->deleteEntry(currentEntry());
 updateEntryView();
 setModFlag(true);
 }
@@ -1311,6 +1316,7 @@ void CMainWindow::OnView_HideUsernamesToggled(bool state)
 {
 config.ListView_HideUsernames=state;
 updateEntryView();
+updateEntryDetails();
 }
 
 
@@ -1318,6 +1324,7 @@ void CMainWindow::OnView_HidePasswordsToggled(bool state)
 {
 config.ListView_HidePasswords=state;
 updateEntryView();
+updateEntryDetails();
 }
 
 void CMainWindow::OnGroupViewDrop(QDropEvent* e)
@@ -1375,4 +1382,41 @@ FileOpen=true;
 
 }
 
+void CMainWindow::updateEntryDetails(EntryItem* pItem){
+if(pItem==NULL){
+ SummaryField->setText("");
+ return;}
+CEntry& entry=*pItem->pEntry;
+QString str=trUtf8("<B>Gruppe: </B>%1  <B>Titel: </B>%2  <B>Benutzername: </B>%3  <B>URL: </B>%4  <B>Passwort: </B>%5  <B>Erstellt: </B>%6  <B>letzte Änderung: </B>%7  <B>letzter Zugriff: </B>%8  <B>gültig bis: </B>%9");
+str=str.arg(CurrentGroup->pGroup->Name).arg(entry.Title);
 
+if(!config.ListView_HideUsernames)	str=str.arg(entry.UserName);
+else str=str.arg("****");
+
+str=str.arg(entry.URL);
+
+if(!config.ListView_HidePasswords)	str=str.arg(entry.Password.getString());
+else	str=str.arg("****");
+
+str=str.arg(entry.Creation.GetString(0))
+	  .arg(entry.LastMod.GetString(0))
+	  .arg(entry.LastAccess.GetString(0))
+	  .arg(entry.Expire.GetString(0));
+SummaryField->setText(str);
+entry.Password.delRef();
+}
+
+
+void CMainWindow::updateEntryDetails(){
+updateEntryDetails( (EntryItem*)EntryView->currentItem() );
+}
+
+
+
+EntryItem* CMainWindow::currentEntryItem(){
+return (EntryItem*)EntryView->currentItem();
+}
+
+CEntry* CMainWindow::currentEntry(){
+return ((EntryItem*)EntryView->currentItem())->pEntry;
+}

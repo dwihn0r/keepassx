@@ -74,6 +74,7 @@ private:
  bool isEntrySidInUse(UINT32 sID);
  UINT32 getNewGroupId();
  UINT32 getNewEntrySid();
+ bool convHexToBinaryKey(char* HexKey, char* dst);
 };
 
 #endif

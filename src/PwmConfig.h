@@ -46,8 +46,8 @@ public:
  QString PwGenCharList;
  bool ExpandGroupTree;
 
- bool loadFromIni();
- bool saveToIni();
+ bool loadFromIni(QString filename);
+ bool saveToIni(QString filename);
 
 private:
  void ParseColumnString(QString str, bool* dst);

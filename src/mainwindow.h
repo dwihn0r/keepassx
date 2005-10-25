@@ -40,7 +40,7 @@ Q_OBJECT
 
 public:
   /*$PUBLIC_FUNCTIONS$*/
-  CMainWindow(QApplication* app, QWidget* parent = 0,const char* name = 0, WFlags fl = 0 );
+  CMainWindow(QApplication* app,QString ArgFile,QString ArgCfg, QWidget* parent = 0,const char* name = 0, WFlags fl = 0 );
   ~CMainWindow();
 protected:
   /*$PROTECTED_FUNCTIONS$*/
@@ -149,8 +149,11 @@ public:
  void setCurrentGroup(GroupItem* item);
  void updateEntryView();
  void updateGroupView();
+ void updateEntryDetails();
+ void updateEntryDetails(EntryItem* item);
+ inline EntryItem* currentEntryItem();
+ inline CEntry* currentEntry();
  GroupItem* CurrentGroup;
- EntryItem* CurrentEntry;
  QClipboard* Clipboard;
 
 private:
@@ -161,6 +164,7 @@ private:
  bool modflag;
  void setModFlag(bool);
  bool FileOpen;
+ QString IniFilename;
 };
 
 #endif

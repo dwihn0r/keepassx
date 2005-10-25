@@ -1118,130 +1118,16 @@
 </images>
 <connections>
     <connection>
-        <sender>MainFrame</sender>
-        <signal>pixmapSizeChanged(bool)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnMainWinResize()</slot>
-    </connection>
-    <connection>
-        <sender>File_Open</sender>
+        <sender>DEBUG_DbStructure</sender>
         <signal>activated()</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnFileOpen()</slot>
-    </connection>
-    <connection>
-        <sender>GroupView</sender>
-        <signal>selectionChanged(QListViewItem*)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnGroupChanged(QListViewItem*)</slot>
-    </connection>
-    <connection>
-        <sender>File_Close</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnMenu_closeDB()</slot>
-    </connection>
-    <connection>
-        <sender>File_Save</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnFileSave()</slot>
-    </connection>
-    <connection>
-        <sender>File_SaveAs</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnFileSaveAs()</slot>
-    </connection>
-    <connection>
-        <sender>tooButtonOpen</sender>
-        <signal>clicked()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnFileOpen()</slot>
-    </connection>
-    <connection>
-        <sender>toolButtonSave</sender>
-        <signal>clicked()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnFileSave()</slot>
-    </connection>
-    <connection>
-        <sender>File_Exit</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnMenuExit()</slot>
-    </connection>
-    <connection>
-        <sender>EntryView</sender>
-        <signal>selectionChanged(QListViewItem*)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnEntryChanged(QListViewItem*)</slot>
-    </connection>
-    <connection>
-        <sender>EntryView</sender>
-        <signal>doubleClicked(QListViewItem*,const QPoint&amp;,int)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnEntryDoubleClicked(QListViewItem*,const QPoint&amp;,int)</slot>
-    </connection>
-    <connection>
-        <sender>Edit_NewGroup</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnAddGroup()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_NewSubGroup</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnAddSubGroup()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_GroupProperties</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnEditGroup()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_DeleteGroup</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnDeleteGroup()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_PasswordToClipboard</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnPasswordToClipboard()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_UserNameToClipboard</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnUserNameToClipboard()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_OpenURL</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnOpenURL()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_SaveAttachment</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnSaveAttachment()</slot>
+        <slot>DEBUG_OnPrintDbStucture()</slot>
     </connection>
     <connection>
         <sender>Edit_AddEntry</sender>
         <signal>activated()</signal>
         <receiver>MainFrame</receiver>
         <slot>OnAddEntry()</slot>
-    </connection>
-    <connection>
-        <sender>Edit_EditEntry</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnEditEntry()</slot>
     </connection>
     <connection>
         <sender>Edit_CopyEntry</sender>
@@ -1256,40 +1142,82 @@
         <slot>OnDeleteEntry()</slot>
     </connection>
     <connection>
+        <sender>Edit_DeleteGroup</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnDeleteGroup()</slot>
+    </connection>
+    <connection>
+        <sender>Edit_EditEntry</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnEditEntry()</slot>
+    </connection>
+    <connection>
+        <sender>Edit_GlobalSearch</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnGlobalSearch()</slot>
+    </connection>
+    <connection>
+        <sender>Edit_GroupProperties</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnEditGroup()</slot>
+    </connection>
+    <connection>
         <sender>Edit_GroupSearch</sender>
         <signal>activated()</signal>
         <receiver>MainFrame</receiver>
         <slot>OnGroupSearch()</slot>
     </connection>
     <connection>
-        <sender>toolButtonAddEntry</sender>
-        <signal>clicked()</signal>
+        <sender>Edit_NewGroup</sender>
+        <signal>activated()</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnAddEntry()</slot>
+        <slot>OnAddGroup()</slot>
     </connection>
     <connection>
-        <sender>toolButtonEditEntry</sender>
-        <signal>clicked()</signal>
+        <sender>Edit_NewSubGroup</sender>
+        <signal>activated()</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnEditEntry()</slot>
+        <slot>OnAddSubGroup()</slot>
     </connection>
     <connection>
-        <sender>toolButtonDeleteEntry</sender>
-        <signal>clicked()</signal>
+        <sender>Edit_OpenURL</sender>
+        <signal>activated()</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnDeleteEntry()</slot>
+        <slot>OnOpenURL()</slot>
     </connection>
     <connection>
-        <sender>toolButtonPasswordToClipboard</sender>
-        <signal>clicked()</signal>
+        <sender>Edit_PasswordToClipboard</sender>
+        <signal>activated()</signal>
         <receiver>MainFrame</receiver>
         <slot>OnPasswordToClipboard()</slot>
     </connection>
     <connection>
-        <sender>toolButtonUserNameToClipboard</sender>
-        <signal>clicked()</signal>
+        <sender>Edit_SaveAttachment</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnSaveAttachment()</slot>
+    </connection>
+    <connection>
+        <sender>Edit_UserNameToClipboard</sender>
+        <signal>activated()</signal>
         <receiver>MainFrame</receiver>
         <slot>OnUserNameToClipboard()</slot>
+    </connection>
+    <connection>
+        <sender>EntryView</sender>
+        <signal>selectionChanged(QListViewItem*)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnEntryChanged(QListViewItem*)</slot>
+    </connection>
+    <connection>
+        <sender>EntryView</sender>
+        <signal>doubleClicked(QListViewItem*,const QPoint&amp;,int)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnEntryDoubleClicked(QListViewItem*,const QPoint&amp;,int)</slot>
     </connection>
     <connection>
         <sender>EntryView</sender>
@@ -1298,46 +1226,10 @@
         <slot>OnEntryRightClicked(QListViewItem*,const QPoint&amp;,int)</slot>
     </connection>
     <connection>
-        <sender>GroupView</sender>
-        <signal>rightButtonClicked(QListViewItem*,const QPoint&amp;,int)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnGroupRightClicked(QListViewItem*,const QPoint&amp;,int)</slot>
-    </connection>
-    <connection>
-        <sender>File_Settings</sender>
+        <sender>Extras_Language</sender>
         <signal>activated()</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnDbSettings()</slot>
-    </connection>
-    <connection>
-        <sender>File_ChangeKey</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnChangeDbKey()</slot>
-    </connection>
-    <connection>
-        <sender>File_New</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnFileNew()</slot>
-    </connection>
-    <connection>
-        <sender>View_ShowToolBar</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnViewToolbarToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>View_ShowEntryDetails</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnViewEntryDetailsToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>toolButtonNew</sender>
-        <signal>clicked()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnFileNew()</slot>
+        <slot>OnExtrasLanguage()</slot>
     </connection>
     <connection>
         <sender>Extras_Settings</sender>
@@ -1346,28 +1238,166 @@
         <slot>OnSettings()</slot>
     </connection>
     <connection>
+        <sender>File_ChangeKey</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnChangeDbKey()</slot>
+    </connection>
+    <connection>
+        <sender>File_Close</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnMenu_closeDB()</slot>
+    </connection>
+    <connection>
+        <sender>File_Exit</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnMenuExit()</slot>
+    </connection>
+    <connection>
+        <sender>File_ImportKWalletXML</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnImportKWalletXML()</slot>
+    </connection>
+    <connection>
+        <sender>File_Import_PwManager</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnImportPwManagerFile()</slot>
+    </connection>
+    <connection>
+        <sender>File_New</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileNew()</slot>
+    </connection>
+    <connection>
+        <sender>File_Open</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileOpen()</slot>
+    </connection>
+    <connection>
+        <sender>File_Save</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileSave()</slot>
+    </connection>
+    <connection>
+        <sender>File_SaveAs</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileSaveAs()</slot>
+    </connection>
+    <connection>
+        <sender>File_Settings</sender>
+        <signal>activated()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnDbSettings()</slot>
+    </connection>
+    <connection>
+        <sender>GroupView</sender>
+        <signal>selectionChanged(QListViewItem*)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnGroupChanged(QListViewItem*)</slot>
+    </connection>
+    <connection>
+        <sender>GroupView</sender>
+        <signal>rightButtonClicked(QListViewItem*,const QPoint&amp;,int)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnGroupRightClicked(QListViewItem*,const QPoint&amp;,int)</slot>
+    </connection>
+    <connection>
+        <sender>GroupView</sender>
+        <signal>dropped(QDropEvent*)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnGroupViewDrop(QDropEvent*)</slot>
+    </connection>
+    <connection>
         <sender>Help_About</sender>
         <signal>activated()</signal>
         <receiver>MainFrame</receiver>
         <slot>OnHelpAbout()</slot>
     </connection>
     <connection>
-        <sender>View_Column_Expire</sender>
-        <signal>toggled(bool)</signal>
+        <sender>Help_AboutQt</sender>
+        <signal>activated()</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnView_ColumnExpireToggled(bool)</slot>
+        <slot>OnHelpAboutQt()</slot>
+    </connection>
+    <connection>
+        <sender>MainFrame</sender>
+        <signal>pixmapSizeChanged(bool)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnMainWinResize()</slot>
+    </connection>
+    <connection>
+        <sender>tooButtonOpen</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileOpen()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonAddEntry</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnAddEntry()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonDeleteEntry</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnDeleteEntry()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonEditEntry</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnEditEntry()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonNew</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileNew()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonPasswordToClipboard</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnPasswordToClipboard()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonSave</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnFileSave()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonSearch</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnGlobalSearch()</slot>
+    </connection>
+    <connection>
+        <sender>toolButtonUserNameToClipboard</sender>
+        <signal>clicked()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnUserNameToClipboard()</slot>
+    </connection>
+    <connection>
+        <sender>toolSearch</sender>
+        <signal>returnPressed()</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnQickSearch()</slot>
     </connection>
     <connection>
         <sender>View_Column_Attachment</sender>
         <signal>toggled(bool)</signal>
         <receiver>MainFrame</receiver>
         <slot>OnView_ColumnAttachmentToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>View_Column_Username</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnView_ColumnUsernameToggled(bool)</slot>
     </connection>
     <connection>
         <sender>View_Column_Comment</sender>
@@ -1382,6 +1412,18 @@
         <slot>OnView_ColumnCreationToggled(bool)</slot>
     </connection>
     <connection>
+        <sender>View_Column_Expire</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnView_ColumnExpireToggled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>View_Column_LastAccess</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainFrame</receiver>
+        <slot>OnView_ColumnLastAccessToggled(bool)</slot>
+    </connection>
+    <connection>
         <sender>View_Column_LastMod</sender>
         <signal>toggled(bool)</signal>
         <receiver>MainFrame</receiver>
@@ -1394,10 +1436,10 @@
         <slot>OnView_ColumnPasswordToggled(bool)</slot>
     </connection>
     <connection>
-        <sender>View_Column_LastAccess</sender>
+        <sender>View_Column_Title</sender>
         <signal>toggled(bool)</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnView_ColumnLastAccessToggled(bool)</slot>
+        <slot>OnView_ColumnTitleToggled(bool)</slot>
     </connection>
     <connection>
         <sender>View_Column_URL</sender>
@@ -1406,46 +1448,10 @@
         <slot>OnView_ColumnUrlToggled(bool)</slot>
     </connection>
     <connection>
-        <sender>View_Column_Title</sender>
+        <sender>View_Column_Username</sender>
         <signal>toggled(bool)</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnView_ColumnTitleToggled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>Edit_GlobalSearch</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnGlobalSearch()</slot>
-    </connection>
-    <connection>
-        <sender>Extras_Language</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnExtrasLanguage()</slot>
-    </connection>
-    <connection>
-        <sender>toolButtonSearch</sender>
-        <signal>clicked()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnGlobalSearch()</slot>
-    </connection>
-    <connection>
-        <sender>toolSearch</sender>
-        <signal>returnPressed()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnQickSearch()</slot>
-    </connection>
-    <connection>
-        <sender>DEBUG_DbStructure</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>DEBUG_OnPrintDbStucture()</slot>
-    </connection>
-    <connection>
-        <sender>File_Import_PwManager</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnImportPwManagerFile()</slot>
+        <slot>OnView_ColumnUsernameToggled(bool)</slot>
     </connection>
     <connection>
         <sender>View_HidePasswords</sender>
@@ -1460,22 +1466,16 @@
         <slot>OnView_HideUsernamesToggled(bool)</slot>
     </connection>
     <connection>
-        <sender>GroupView</sender>
-        <signal>dropped(QDropEvent*)</signal>
+        <sender>View_ShowEntryDetails</sender>
+        <signal>toggled(bool)</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnGroupViewDrop(QDropEvent*)</slot>
+        <slot>OnViewEntryDetailsToggled(bool)</slot>
     </connection>
     <connection>
-        <sender>Help_AboutQt</sender>
-        <signal>activated()</signal>
+        <sender>View_ShowToolBar</sender>
+        <signal>toggled(bool)</signal>
         <receiver>MainFrame</receiver>
-        <slot>OnHelpAboutQt()</slot>
-    </connection>
-    <connection>
-        <sender>File_ImportKWalletXML</sender>
-        <signal>activated()</signal>
-        <receiver>MainFrame</receiver>
-        <slot>OnImportKWalletXML()</slot>
+        <slot>OnViewToolbarToggled(bool)</slot>
     </connection>
 </connections>
 <slots>

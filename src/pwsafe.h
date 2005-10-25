@@ -43,6 +43,7 @@ public:
 
 private:
   CMainWindow *mainWin;
+  void argHelp();
 };
 
 #endif // _PWSAFE_H_

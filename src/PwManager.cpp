@@ -93,7 +93,8 @@ if(CryptoAlgorithmus == ALGO_AES)
 		// Initialize Rijndael algorithm
 		if(aes.init(Rijndael::CBC, Rijndael::Decrypt, FinalKey,
 			Rijndael::Key32Bytes, EncryptionIV) != RIJNDAEL_SUCCESS)
-			{return false;}
+			{err=trUtf8("AES-Initialisierung fehlgeschlagen");
+			 return false;}
 		// Decrypt! The first bytes aren't encrypted (that's the header)
 		crypto_size = (unsigned long)aes.padDecrypt((UINT8 *)buffer + DB_HEADER_SIZE,
 			total_size  - DB_HEADER_SIZE, (UINT8 *)buffer + DB_HEADER_SIZE);
@@ -106,7 +107,7 @@ else if(CryptoAlgorithmus == ALGO_TWOFISH)
 			total_size - DB_HEADER_SIZE, (UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 
-if((crypto_size > 2147483446) || (crypto_size == 0)){return false;}
+if((crypto_size > 2147483446) || (crypto_size == 0)){err=trUtf8("Unerwarteter Wert für 'crypto_size'"); return false;}
 
 sha256_starts(&sha32);
 sha256_update(&sha32,(unsigned char *)buffer + DB_HEADER_SIZE,crypto_size);
@@ -254,8 +255,17 @@ unsigned long FileSize=file.size();
 
 if(FileSize == 32){
 	if(file.readBlock((char*)MasterKey,32) != 32){
+	  file.close();
+	  return false;}
+}
+else if(FileSize == 64){
+	char hex[64];
+	if(file.readBlock(hex,64) != 64){
+	  file.close();
+	  return false;}
 	file.close();
-	return false;}
+	if(!convHexToBinaryKey(hex,(char*)MasterKey)) return false;
+
 }
 else
 {
@@ -275,7 +285,7 @@ delete [] buffer;
 
 file.close();
 return true;
- }
+}
 
 
 CEntry* PwDatabase::addEntry(){
@@ -912,4 +922,17 @@ if(!sid)continue;
 if(!isEntrySidInUse(sid))break;
 }
 return sid;
+}
+
+bool PwDatabase::convHexToBinaryKey(char* HexKey, char* dst){
+QString hex=QString::fromAscii(HexKey,64);
+for(int i=0; i<64; i+=2){
+	bool err;
+	UINT8 bin;
+	bin=hex.mid(i,2).toUInt(&err,16);
+	if(!err){
+		qWarning("Invalid Hex Key\n");
+		return false;}
+	memcpy(dst+(i/2),&bin,1);
+}
 }
