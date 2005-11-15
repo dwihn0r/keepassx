@@ -19,7 +19,7 @@
 	SHA1(A million repetitions of "a") =
 		34AA973C D4C4DAA4 F61EEB2B DBAD2731 6534016F
 */
-
+#include "global.h"
 #include "sha1.h"
 
 #define SHA1_MAX_FILE_BUFFER 8000
@@ -33,7 +33,7 @@
 #endif
 #endif
 
-#ifdef SHA1_LITTLE_ENDIAN
+#ifdef KEEPASS_LITTLE_ENDIAN
 #define SHABLK0(i) (m_block->l[i] = \
 	(ROL32(m_block->l[i],24) & 0xFF00FF00) | (ROL32(m_block->l[i],8) & 0x00FF00FF))
 #else

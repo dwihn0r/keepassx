@@ -33,6 +33,7 @@
 #include <qpen.h>
 #include <qfiledialog.h>
 #include <qmessagebox.h>
+#include <qtoolbutton.h>
 
 
 #include "PasswordGenDlg.h"
@@ -72,7 +73,7 @@ Edit_URL->setText(entry->URL);
 Edit_Password->setText(entry->Password.getString());
 Edit_Password_w->setText(entry->Password.getString());
 entry->Password.delRef();
-if(!mainwnd->config.ShowPasswords)ChangeEchoMode();
+if(!mainwnd->config->ShowPasswords)ChangeEchoMode();
 OnPasswordwLostFocus();
 int bits=(entry->Password.length()*8);
 Label_Bits->setText(QString::number(bits)+" Bit");

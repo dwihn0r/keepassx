@@ -45,6 +45,7 @@ ParseBoolString(ini.GetValue("Options","PwGenOptions","1111100001"),PwGenOptions
 PwGenLength=ini.GetValueI("Options","PwGenLength",25);
 PwGenCharList=ini.GetValue("Options","PwGenCharList","");
 ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
+EnableKdePlugin=ini.GetValueB("KDE Plugin","Enabled",false);
 return true;
 }
 
@@ -70,6 +71,7 @@ ini.SetValue("Options","PwGenOptions",CreateBoolString(PwGenOptions,10),true);
 ini.SetValueI("Options","PwGenLength",PwGenLength,true);
 ini.SetValue("Options","PwGenCharList",PwGenCharList,true);
 ini.SetValueB("Options","ExpandGroupTree",ExpandGroupTree,true);
+ini.SetValueB("KDE Plugin","Enabled",EnableKdePlugin,true);
 if(!ini.WriteFile())return false;
 else return true;
 }

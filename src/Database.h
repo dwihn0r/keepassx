@@ -85,8 +85,8 @@ public:
 
 class Database:public AbstractDatabase{
 public:
- int CryptoAlgorithmus;
- int KeyEncRounds;
+ UINT32 CryptoAlgorithmus;
+ UINT32 KeyEncRounds;
  QString filename;
  bool modflag;
  int SearchGroupID;

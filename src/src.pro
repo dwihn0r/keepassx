@@ -8,17 +8,6 @@ INSTALLS += Share \
 target.path = /usr/local/bin 
 Share.files += ../share/keepass/* 
 Share.path = /usr/local/share/keepass 
-MOC_DIR = ../build/moc 
-UI_DIR = ../build/ui 
-OBJECTS_DIR = ../build/ 
-TARGET = ../bin/keepass 
-CONFIG += debug \
-          warn_off \
-          qt \
-          thread \
-          exceptions \
-          stl 
-TEMPLATE = app 
 FORMS += forms/ui_EditGroupDlg.ui \
          forms/ui_SearchDlg.ui \
          forms/ui_AboutDlg.ui \
@@ -62,7 +51,9 @@ HEADERS += lib/IniReader.h \
            dialogs/PasswordGenDlg.h \
            lib/random.h \
            Database.h \
-           lib/PwmTime.h 
+           lib/PwmTime.h \
+           lib/KdePlugin.h \
+           global.h 
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
@@ -93,4 +84,16 @@ SOURCES += lib/IniReader.cpp \
            dialogs/PasswordGenDlg.cpp \
            lib/random.cpp \
            Database.cpp \
-           lib/PwmTime.cpp 
+           lib/PwmTime.cpp \
+           lib/KdePlugin.cpp 
+MOC_DIR = ../build/moc
+UI_DIR = ../build/ui
+OBJECTS_DIR = ../build/
+TARGET = ../bin/keepass
+CONFIG += debug \
+warn_off \
+qt \
+thread \
+exceptions \
+stl
+TEMPLATE = app

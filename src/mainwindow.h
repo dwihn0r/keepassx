@@ -40,7 +40,7 @@ Q_OBJECT
 
 public:
   /*$PUBLIC_FUNCTIONS$*/
-  CMainWindow(QApplication* app,QString ArgFile,QString ArgCfg, QWidget* parent = 0,const char* name = 0, WFlags fl = 0 );
+  CMainWindow(QApplication* app,QString ArgFile,CConfig* config, QWidget* parent = 0,const char* name = 0, WFlags fl = 0 );
   ~CMainWindow();
 protected:
   /*$PROTECTED_FUNCTIONS$*/
@@ -125,7 +125,7 @@ public:
   QPixmap* Icon_Ok16x16;
   QTimer ClipboardTimer;
   QString appdir;
-  CConfig config;
+  CConfig* config;
 
  enum FileMenuState{STATE_FileOpen,
 				STATE_NoFileOpen};
@@ -145,6 +145,7 @@ public:
  void CloseDataBase();
  void OpenURL(QString url);
  GroupItem* getLastSameLevelItem(int i);
+
 
  void setCurrentGroup(GroupItem* item);
  void updateEntryView();

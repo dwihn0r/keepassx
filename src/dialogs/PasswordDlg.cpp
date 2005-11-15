@@ -57,7 +57,7 @@ Combo_Dirs->insertItem(0,Paths[i]);
 IsFile.append(false);
 }
 
-if(!parentwnd->config.ShowPasswords)ChangeEchoMode();
+if(!parentwnd->config->ShowPasswords)ChangeEchoMode();
 
 }
 

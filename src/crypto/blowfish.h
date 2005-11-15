@@ -15,6 +15,7 @@
 #ifndef BLOWFISH_H
 #define BLOWFISH_H
 
+#include "global.h"
 #include <stdint.h>
 #include <string>
 using std::string;
@@ -68,7 +69,7 @@ protected:
 	uint32_t function_F( uint32_t x)
 	{
 		uint16_t a, b, c, d;
-	#ifdef BIG_ENDIAN_HOST
+	#ifdef KEEPASS_BIG_ENDIAN
 		a = ((byte *) & x)[0];
 		b = ((byte *) & x)[1];
 		c = ((byte *) & x)[2];
@@ -86,7 +87,7 @@ protected:
 	       uint32_t *s0, uint32_t *s1, uint32_t *s2, uint32_t *s3)
 	{
 		l ^= p[i];
-	#ifdef BIG_ENDIAN_HOST
+	#ifdef KEEPASS_BIG_ENDIAN
 		r ^= (( s0[((byte*)&l)[0]] + s1[((byte*)&l)[1]])
 			^ s2[((byte*)&l)[2]]) + s3[((byte*)&l)[3]];
 	#else

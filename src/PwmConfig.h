@@ -45,6 +45,7 @@ public:
  int PwGenLength;
  QString PwGenCharList;
  bool ExpandGroupTree;
+ bool EnableKdePlugin;
 
  bool loadFromIni(QString filename);
  bool saveToIni(QString filename);

@@ -38,7 +38,7 @@ CChangeKeyDlg::CChangeKeyDlg(QWidget* parent,PwDatabase* _db,const char* name, b
 db=_db;
 parentwnd=((CMainWindow*)parentWidget());
 parentwnd->CreateBanner(Banner,parentwnd->Icon_Key32x32,trUtf8("Hauptschlüssel ändern"));
-if(!parentwnd->config.ShowPasswords)ChangeEchoMode();
+if(!parentwnd->config->ShowPasswords)ChangeEchoMode();
 ///@PlatformSpecific
 QDir media("/media");
 if(media.exists()){

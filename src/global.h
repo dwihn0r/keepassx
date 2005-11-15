@@ -1,0 +1,3 @@
+
+#define KEEPASS_LITTLE_ENDIAN
+//#define KEEPASS_BIG_ENDIAN

@@ -29,7 +29,7 @@
 
 
 // If you're compiling big endian, just comment out the following line
-#define SHA1_LITTLE_ENDIAN
+
 
 // #define or #undef this, if you want the CSHA1 class to wipe all
 // temporary variables after processing

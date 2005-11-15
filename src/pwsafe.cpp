@@ -21,31 +21,10 @@
 #include "mainwindow.h"
 #include "pwsafe.h"
 
-PwSafe::PwSafe(QApplication* app):QMainWindow( 0, "Keepass",WDestructiveClose)
+PwSafe::PwSafe(QApplication* app,QString& ArgFile,CConfig* cfg):QMainWindow( 0, "Keepass")
 {
-QString ArgFile,ArgCfg;
-if(app->argc()>1){
-int i=1;
-	if(app->argv()[i][0]!='-'){
-		ArgFile=app->argv()[i];
-		i++;
-	}
-	for(i; i<app->argc();i++){
-		if(QString(app->argv()[i])=="-h")
-			argHelp();
-		else if(QString(app->argv()[i])=="-cfg"){
-			if(i-1==app->argc()) cout << "No configuration file specified" << endl;
-			else{ArgCfg=app->argv()[i];}
-			}
-		else{cout << "** Unrecognized option: " << app->argv()[i] <<  endl;
-			exit(1);}
-	}
 
-
-
-
-}
-  mainWin=new CMainWindow(app,ArgFile,ArgCfg,this);
+  mainWin=new CMainWindow(app,ArgFile,cfg,this);
   setCentralWidget( mainWin );
 
 }
@@ -53,12 +32,4 @@ int i=1;
 PwSafe::~PwSafe()
 {
     delete mainWin;
-}
-
-void PwSafe::argHelp(){
-cout << "Keepass 0.1.3 (Alpha)" << endl;
-cout << "Usage: keepass [Filename] [Options]" << endl;
-cout << "  -h This Help" << endl;
-cout << "  -cfg ConfigFile Use specified configuration" << endl;
-exit(0);
 }

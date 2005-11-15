@@ -24,6 +24,7 @@
 
 #include <qapplication.h>
 #include <qmainwindow.h>
+#include "PwmConfig.h"
 
 class CMainWindow;
 
@@ -34,7 +35,7 @@ public:
     /**
      * Default Constructor
      */
-    PwSafe(QApplication*);
+    PwSafe(QApplication*,QString&, CConfig*);
 
     /**
      * Default Destructor
@@ -43,7 +44,6 @@ public:
 
 private:
   CMainWindow *mainWin;
-  void argHelp();
 };
 
 #endif // _PWSAFE_H_

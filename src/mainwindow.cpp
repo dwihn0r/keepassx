@@ -37,6 +37,7 @@
 #include <qvaluelist.h>
 #include <qlocale.h>
 #include <qmessagebox.h>
+#include <qlibrary.h>
 //STD
 #include <time.h>
 //local
@@ -60,65 +61,16 @@
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 
-CMainWindow::CMainWindow(QApplication* app,QString ArgFile,QString ArgCfg,QWidget* parent,const char* name, WFlags fl)
+CMainWindow::CMainWindow(QApplication* app,QString ArgFile,CConfig* cfg,QWidget* parent,const char* name, WFlags fl)
 : MainFrame(parent,name,fl)
 {
+config=cfg;
 FileOpen=false;
 App=app;
 appdir=app->applicationDirPath();
 parentWidget()->setCaption(tr("Keepass Passwortsafe"));
 SecString::generateSessionKey();
-
-// Config //
-if(ArgCfg==""){
- if(!QDir(QDir::homeDirPath()+"/.keepass").exists()){
-	QDir conf(QDir::homeDirPath());
-	if(!conf.mkdir(".keepass")){
-		cout << trUtf8("Warnung: Verzeichnis ~/.keepass konnte nicht erstellt werden.") << endl;}
- }
- IniFilename=QDir::homeDirPath()+"/.keepass/config";
- config.loadFromIni(IniFilename);
-}
-else
-{
- IniFilename=ArgCfg;
- config.loadFromIni(IniFilename);
-}
-
-
-
-CGroup::UI_ExpandByDefault=config.ExpandGroupTree;
-
-// Language //
-QLocale loc=QLocale::system();
-translator = 0;
-translator =new QTranslator;
-
-if(config.Language==""){
- switch(loc.language()){
-   case QLocale::German:
-	config.Language="_DEUTSCH_";
-	break;
-   case QLocale::English:
-	config.Language="english.qm";
-	break;
-   default:
-	config.Language="english.qm";
-	break;}
-}
-
-if(config.Language!="_DEUTSCH_"){
-  if(!translator->load(appdir+"/../share/keepass/i18n/"+config.Language)){
-   if(!translator->load(appdir+"/share/i18n/"+config.Language)){
-    config.Language="_DEUTSCH_";
-    QMessageBox::warning(this,tr("Warnung"),
-			 trUtf8("Die Übersetzungsdatei '%1' konnte nicht geladen werden.\n Die Sprache wurde auf Deutsch zurückgesetzt.")
-			 .arg(config.Language),tr("OK"),0,0,2,1);
-    delete translator;
-   translator=NULL;}}
-  else app->installTranslator(translator);
-}
-
+CGroup::UI_ExpandByDefault=config->ExpandGroupTree;
 
 // Icons, Pixmaps //
 
@@ -168,73 +120,73 @@ CurrentGroup=NULL;
 Clipboard=QApplication::clipboard();
 GroupView->setSorting(-1);
 
-if(config.Toolbar){
+if(config->Toolbar){
 	View_ShowToolBar->setOn(true);}
 else{	Toolbar->hide();
 	View_ShowToolBar->setOn(false);}
 
-if(config.EntryDetails){
+if(config->EntryDetails){
 	View_ShowEntryDetails->setOn(true);}
 else{	SummaryField->hide();
 	View_ShowEntryDetails->setOn(false);}
 
 
-if(config.Columns[0]){
+if(config->Columns[0]){
 	View_Column_Title->setOn(true);}
 else{
 	View_Column_Title->setOn(false);}
 
-if(config.Columns[1]){
+if(config->Columns[1]){
 	View_Column_Username->setOn(true);}
 else{
 	View_Column_Username->setOn(false);}
 
-if(config.Columns[2]){
+if(config->Columns[2]){
 	View_Column_URL->setOn(true);}
 else{
 	View_Column_URL->setOn(false);}
 
-if(config.Columns[3]){
+if(config->Columns[3]){
 	View_Column_Password->setOn(true);}
 else{
 	View_Column_Password->setOn(false);}
 
-if(config.Columns[4]){
+if(config->Columns[4]){
 	View_Column_Comment->setOn(true);}
 else{
 	View_Column_Comment->setOn(false);}
 
-if(config.Columns[5]){
+if(config->Columns[5]){
 	View_Column_Expire->setOn(true);}
 else{
 	View_Column_Expire->setOn(false);}
 
-if(config.Columns[6]){
+if(config->Columns[6]){
 	View_Column_Creation->setOn(true);}
 else{
 	View_Column_Creation->setOn(false);}
 
-if(config.Columns[7]){
+if(config->Columns[7]){
 	View_Column_LastMod->setOn(true);}
 else{
 	View_Column_LastMod->setOn(false);}
 
-if(config.Columns[8]){
+if(config->Columns[8]){
 	View_Column_LastAccess->setOn(true);}
 else{
 	View_Column_LastAccess->setOn(false);}
 
-if(config.Columns[9]){
+if(config->Columns[9]){
 	View_Column_Attachment->setOn(true);}
 else{
 	View_Column_Attachment->setOn(false);}
 
-if(config.ListView_HidePasswords){
+if(config->ListView_HidePasswords){
 	View_HidePasswords->setOn(true);}
 else{
 	View_HidePasswords->setOn(false);}
 
-if(config.ListView_HideUsernames){
+if(config->ListView_HideUsernames){
 	View_HideUsernames->setOn(true);}
 else{
 	View_HideUsernames->setOn(false);}
@@ -246,16 +198,16 @@ SetupColumns();
 InitMenus();
 
 if(ArgFile==""){
- if(config.OpenLast && config.LastFile!="")
-  {QFileInfo file(config.LastFile);
-   if(file.exists() && file.isFile())OpenDatabase(config.LastFile);
-   else config.LastFile="";}
+ if(config->OpenLast && config->LastFile!="")
+  {QFileInfo file(config->LastFile);
+   if(file.exists() && file.isFile())OpenDatabase(config->LastFile);
+   else config->LastFile="";}
 }
 else
 {
   QFileInfo file(ArgFile);
   if(file.exists() && file.isFile())OpenDatabase(ArgFile);
-   else cout << "file not found "<< ArgFile << endl;
+   else {cout << "file not found "<< ArgFile << endl;}
 }
 
 
@@ -275,9 +227,6 @@ if(tmpImg.load(appdir+"/../share/keepass/"+name)==false){
 CMainWindow::~CMainWindow()
 {
 OnClose();
-if(!config.saveToIni(IniFilename))
-	QMessageBox::warning(this,tr("Warnung"),trUtf8("Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass\nSie Schreibrechte im Verzeichnis ~/.keepass besitzen."),tr("OK"),"","",0.0);
-if(translator)delete translator;
 delete [] EntryIcons;
 delete Icon_Key32x32;
 delete Icon_Settings32x32;
@@ -400,25 +349,25 @@ int NumColumns=EntryView->columns();
 for(int i=0;i<NumColumns;i++)EntryView->removeColumn(0);
 int columnID[10];
 int i=0;
-if(config.Columns[0]){
+if(config->Columns[0]){
 columnID[0]=EntryView->addColumn(trUtf8("Titel"),0); i++;}
-if(config.Columns[1]){
+if(config->Columns[1]){
 columnID[1]=EntryView->addColumn(trUtf8("Benutzername"),0); i++;}
-if(config.Columns[2]){
+if(config->Columns[2]){
 columnID[2]=EntryView->addColumn(trUtf8("URL"),0); i++;}
-if(config.Columns[3]){
+if(config->Columns[3]){
 columnID[3]=EntryView->addColumn(trUtf8("Passwort"),0); i++;}
-if(config.Columns[4]){
+if(config->Columns[4]){
 columnID[4]=EntryView->addColumn(trUtf8("Kommentare"),0); i++;}
-if(config.Columns[5]){
+if(config->Columns[5]){
 columnID[5]=EntryView->addColumn(trUtf8("Gültig bis"),0); i++;}
-if(config.Columns[6]){
+if(config->Columns[6]){
 columnID[6]=EntryView->addColumn(trUtf8("Erstellung"),0); i++;}
-if(config.Columns[7]){
+if(config->Columns[7]){
 columnID[7]=EntryView->addColumn(trUtf8("letzte Änderung"),0); i++;}
-if(config.Columns[8]){
+if(config->Columns[8]){
 columnID[8]=EntryView->addColumn(trUtf8("letzter Zugriff"),0); i++;}
-if(config.Columns[9]){
+if(config->Columns[9]){
 columnID[9]=EntryView->addColumn(trUtf8("Anhang"),0); i++;}
 ResizeColumns();
 
@@ -445,32 +394,32 @@ CEntry* entry=&db->Entries[i];
 if((CurrentGroup->pGroup->ID==entry->GroupID) || (CurrentGroup->pGroup->ID==db->SearchGroupID && isInSearchResults(entry))){
 EntryItems.push_back(tmp=new EntryItem(entry,EntryView));
 int j=0;
-if(config.Columns[0]){
+if(config->Columns[0]){
 tmp->setText(j++,entry->Title);}
-if(config.Columns[1]){
-  if(config.ListView_HideUsernames)
+if(config->Columns[1]){
+  if(config->ListView_HideUsernames)
     tmp->setText(j++,"******");
   else
     tmp->setText(j++,entry->UserName);}
-if(config.Columns[2]){
+if(config->Columns[2]){
 tmp->setText(j++,entry->URL);}
-if(config.Columns[3]){
-  if(config.ListView_HidePasswords)
+if(config->Columns[3]){
+  if(config->ListView_HidePasswords)
     tmp->setText(j++,"******");
   else{
     tmp->setText(j++,entry->Password.getString());
     entry->Password.delRef();}}
-if(config.Columns[4]){
+if(config->Columns[4]){
 tmp->setText(j++,entry->Additional.section('\n',0,0));}
-if(config.Columns[5]){
+if(config->Columns[5]){
 tmp->setText(j++,entry->Expire.GetString(0));}
-if(config.Columns[6]){
+if(config->Columns[6]){
 tmp->setText(j++,entry->Creation.GetString(0));}
-if(config.Columns[7]){
+if(config->Columns[7]){
 tmp->setText(j++,entry->LastMod.GetString(0));}
-if(config.Columns[8]){
+if(config->Columns[8]){
 tmp->setText(j++,entry->LastAccess.GetString(0));}
-if(config.Columns[9]){
+if(config->Columns[9]){
 tmp->setText(j++,entry->BinaryDesc);}
   (*(EntryItems.end()-1))->setPixmap(0,EntryIcons[entry->ImageID]);
   }
@@ -509,6 +458,11 @@ updateGroupView();
 SetFileMenuState(STATE_FileOpen);
 */
 ////////////////////////////////////
+
+
+
+
+
 }
 }
 
@@ -520,9 +474,9 @@ OnEditEntry();
 
 
 void CMainWindow::CreateBanner(QLabel *Banner,QPixmap* symbol,QString text){
-CreateBanner(Banner,symbol,text,config.BannerColor1
-			       ,config.BannerColor2
-			       ,config.BannerTextColor); //überladene Funktion wird aufgerufen
+CreateBanner(Banner,symbol,text,config->BannerColor1
+			       ,config->BannerColor2
+			       ,config->BannerTextColor); //überladene Funktion wird aufgerufen
 }
 
 void CMainWindow::CreateBanner(QLabel *Banner,QPixmap* symbol,QString text,QColor color1,QColor color2,QColor textcolor){
@@ -582,7 +536,7 @@ EntryView->clear();
 EntryItems.clear();
 GroupView->clear();
 GroupItems.clear();
-config.LastFile=db->filename;
+config->LastFile=db->filename;
 db->CloseDataBase();
 delete db;
 FileOpen=false;
@@ -611,7 +565,7 @@ void CMainWindow::OnFileSaveAs()
 QString filename=QFileDialog::getSaveFileName(QDir::homeDirPath(),"*.kdb",this,trUtf8("Datenbank öffnen"));
 if(filename=="")return;
 db->filename=filename;
-config.LastFile=filename;
+config->LastFile=filename;
 db->SaveDataBase(filename);
 setModFlag(false);
 parentWidget()->setCaption(tr("Keepass - %1").arg(filename));
@@ -767,14 +721,14 @@ setModFlag(true);
 void CMainWindow::OnPasswordToClipboard()
 {
 Clipboard->setText(currentEntry()->Password.getString(),QClipboard::Clipboard);
-ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
+ClipboardTimer.start(config->ClipboardTimeOut*1000,true);
 currentEntry()->Password.delRef();
 }
 
 void CMainWindow::OnUserNameToClipboard()
 {
 Clipboard->setText(currentEntry()->UserName,  QClipboard::Clipboard);
-ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
+ClipboardTimer.start(config->ClipboardTimeOut*1000,true);
 }
 
 void CMainWindow::OnClipboardTimerEvent(){
@@ -788,7 +742,7 @@ OpenURL(currentEntry()->URL);
 
 void CMainWindow::OpenURL(QString url){
 QProcess browser;
-browser.setArguments(QStringList::split(' ',config.OpenUrlCommand.arg(url)));
+browser.setArguments(QStringList::split(' ',config->OpenUrlCommand.arg(url)));
 browser.start();
 }
 
@@ -1077,7 +1031,7 @@ else delete db;
 
 void CMainWindow::OnViewToolbarToggled(bool toggled)
 {
-config.Toolbar=toggled;
+config->Toolbar=toggled;
 if(toggled){
 Toolbar->show();
 }
@@ -1089,7 +1043,7 @@ Toolbar->hide();
 
 void CMainWindow::OnViewEntryDetailsToggled(bool toggled)
 {
-config.EntryDetails=toggled;
+config->EntryDetails=toggled;
 if(toggled){
 SummaryField->show();
 }
@@ -1115,7 +1069,7 @@ pDlg->show();
 
 void CMainWindow::OnView_ColumnExpireToggled(bool value)
 {
-config.Columns[5]=value;
+config->Columns[5]=value;
 SetupColumns();
 updateEntryView();
 
@@ -1123,14 +1077,14 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnAttachmentToggled(bool value)
 {
-config.Columns[9]=value;
+config->Columns[9]=value;
 SetupColumns();
 updateEntryView();
 }
 
 void CMainWindow::OnView_ColumnUrlToggled(bool value)
 {
-config.Columns[2]=value;
+config->Columns[2]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1138,7 +1092,7 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnTitleToggled(bool value)
 {
-config.Columns[0]=value;
+config->Columns[0]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1146,7 +1100,7 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnCreationToggled(bool value)
 {
-config.Columns[6]=value;
+config->Columns[6]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1154,7 +1108,7 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnLastAccessToggled(bool value)
 {
-config.Columns[8]=value;
+config->Columns[8]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1162,7 +1116,7 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnLastModToggled(bool value)
 {
-config.Columns[7]=value;
+config->Columns[7]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1170,7 +1124,7 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnCommentToggled(bool value)
 {
-config.Columns[4]=value;
+config->Columns[4]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1178,14 +1132,14 @@ updateEntryView();
 
 void CMainWindow::OnView_ColumnPasswordToggled(bool value)
 {
-config.Columns[3]=value;
+config->Columns[3]=value;
 SetupColumns();
 updateEntryView();
 }
 
 void CMainWindow::OnView_ColumnUsernameToggled(bool value)
 {
-config.Columns[1]=value;
+config->Columns[1]=value;
 SetupColumns();
 updateEntryView();
 }
@@ -1281,7 +1235,7 @@ switch(ret){
 }
 QString filename=QFileDialog::getOpenFileName(QDir::homeDirPath(),"*.pwm",this,trUtf8("Datenbank importieren"));
 if(filename=="")return;
-CSimplePasswordDialog dlg(!config.ShowPasswords,this,"SimplePasswordDlg",true);
+CSimplePasswordDialog dlg(!config->ShowPasswords,this,"SimplePasswordDlg",true);
 if(!dlg.exec())return;
 Import_PwManager importer;
 QString err;
@@ -1314,7 +1268,7 @@ FileOpen=true;
 
 void CMainWindow::OnView_HideUsernamesToggled(bool state)
 {
-config.ListView_HideUsernames=state;
+config->ListView_HideUsernames=state;
 updateEntryView();
 updateEntryDetails();
 }
@@ -1322,7 +1276,7 @@ updateEntryDetails();
 
 void CMainWindow::OnView_HidePasswordsToggled(bool state)
 {
-config.ListView_HidePasswords=state;
+config->ListView_HidePasswords=state;
 updateEntryView();
 updateEntryDetails();
 }
@@ -1390,12 +1344,12 @@ CEntry& entry=*pItem->pEntry;
 QString str=trUtf8("<B>Gruppe: </B>%1  <B>Titel: </B>%2  <B>Benutzername: </B>%3  <B>URL: </B>%4  <B>Passwort: </B>%5  <B>Erstellt: </B>%6  <B>letzte Änderung: </B>%7  <B>letzter Zugriff: </B>%8  <B>gültig bis: </B>%9");
 str=str.arg(CurrentGroup->pGroup->Name).arg(entry.Title);
 
-if(!config.ListView_HideUsernames)	str=str.arg(entry.UserName);
+if(!config->ListView_HideUsernames)	str=str.arg(entry.UserName);
 else str=str.arg("****");
 
 str=str.arg(entry.URL);
 
-if(!config.ListView_HidePasswords)	str=str.arg(entry.Password.getString());
+if(!config->ListView_HidePasswords)	str=str.arg(entry.Password.getString());
 else	str=str.arg("****");
 
 str=str.arg(entry.Creation.GetString(0))

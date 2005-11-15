@@ -431,7 +431,7 @@ int Blowfish::do_bf_setkey(byte * key, unsigned int keylen)
 	}
 
 	for (i = j = 0; i < BLOWFISH_ROUNDS + 2; ++i) {
-#ifdef BIG_ENDIAN_HOST
+#ifdef KEEPASS_BIG_ENDIAN
 		((byte *) & data)[0] = key[j];
 		((byte *) & data)[1] = key[(j + 1) % keylen];
 		((byte *) & data)[2] = key[(j + 2) % keylen];

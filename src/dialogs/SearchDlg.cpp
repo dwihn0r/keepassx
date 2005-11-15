@@ -33,26 +33,26 @@ parentwnd->CreateBanner(Banner,parentwnd->Icon_Search32x32,tr("Suchen"));
 group=pGroup;
 pw=parentwnd->db;
 
-checkBox_Cs->setChecked(parentwnd->config.SearchOptions[0]);
-checkBox_regExp->setChecked(parentwnd->config.SearchOptions[1]);
-checkBox_Title->setChecked(parentwnd->config.SearchOptions[2]);
-checkBox_Username->setChecked(parentwnd->config.SearchOptions[3]);
-checkBox_Password->setChecked(parentwnd->config.SearchOptions[4]);
-checkBox_Comment->setChecked(parentwnd->config.SearchOptions[5]);
-checkBox_URL->setChecked(parentwnd->config.SearchOptions[6]);
-checkBox_Attachment->setChecked(parentwnd->config.SearchOptions[7]);
+checkBox_Cs->setChecked(parentwnd->config->SearchOptions[0]);
+checkBox_regExp->setChecked(parentwnd->config->SearchOptions[1]);
+checkBox_Title->setChecked(parentwnd->config->SearchOptions[2]);
+checkBox_Username->setChecked(parentwnd->config->SearchOptions[3]);
+checkBox_Password->setChecked(parentwnd->config->SearchOptions[4]);
+checkBox_Comment->setChecked(parentwnd->config->SearchOptions[5]);
+checkBox_URL->setChecked(parentwnd->config->SearchOptions[6]);
+checkBox_Attachment->setChecked(parentwnd->config->SearchOptions[7]);
 }
 
 CSearchDlg::~CSearchDlg()
 {
-parentwnd->config.SearchOptions[0]=checkBox_Cs->isChecked();
-parentwnd->config.SearchOptions[1]=checkBox_regExp->isChecked();
-parentwnd->config.SearchOptions[2]=checkBox_Title->isChecked();
-parentwnd->config.SearchOptions[3]=checkBox_Username->isChecked();
-parentwnd->config.SearchOptions[4]=checkBox_Password->isChecked();
-parentwnd->config.SearchOptions[5]=checkBox_Comment->isChecked();
-parentwnd->config.SearchOptions[6]=checkBox_URL->isChecked();
-parentwnd->config.SearchOptions[7]=checkBox_Attachment->isChecked();
+parentwnd->config->SearchOptions[0]=checkBox_Cs->isChecked();
+parentwnd->config->SearchOptions[1]=checkBox_regExp->isChecked();
+parentwnd->config->SearchOptions[2]=checkBox_Title->isChecked();
+parentwnd->config->SearchOptions[3]=checkBox_Username->isChecked();
+parentwnd->config->SearchOptions[4]=checkBox_Password->isChecked();
+parentwnd->config->SearchOptions[5]=checkBox_Comment->isChecked();
+parentwnd->config->SearchOptions[6]=checkBox_URL->isChecked();
+parentwnd->config->SearchOptions[7]=checkBox_Attachment->isChecked();
 }
 
 void CSearchDlg::OnButtonClose()

@@ -42,7 +42,7 @@ parentwnd=((CMainWindow*)parentWidget());
 parentwnd->CreateBanner(Banner,parentwnd->Icon_I18n32x32,trUtf8("Spracheinstellungen"));
 
 QListViewItem* item;
-QString& config_lang=parentwnd->config.Language;
+QString& config_lang=parentwnd->config->Language;
 QStringList files;
 
 QString langdir=parentwnd->appdir+"/../share/keepass/i18n/";
@@ -111,10 +111,10 @@ if(!translator.load(langdir+filenames[i])){
 QMessageBox::information(this,translator.findMessage("_MSG",msg[2]).translation()
 			     ,translator.findMessage("_MSG",msg[0]).translation()
 			     ,translator.findMessage("_MSG",msg[1]).translation()
-			     ,0,0,2,1);
+			     ,0,0);
 }
 else QMessageBox::information(this,QString::fromUtf8(msg[2]),QString::fromUtf8(msg[0]),QString::fromUtf8(msg[1]),0,0,2,1);
-parentwnd->config.Language=filenames[i];
+parentwnd->config->Language=filenames[i];
 
 for(int j=0;j<pItems.size();j++){
 if(j==i)pItems[j]->setPixmap(0,*parentwnd->Icon_Ok16x16);

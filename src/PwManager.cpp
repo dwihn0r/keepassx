@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include "global.h"
 #include <iostream.h>
 #include <time.h>
 #include <qfile.h>
@@ -30,6 +31,8 @@
 #include "lib/random.h"
 
 #include "PwManager.h"
+
+
 
 bool PwDatabase::loadDatabase(QString _filename, QString& err){
 unsigned long total_size,crypto_size;
@@ -51,17 +54,17 @@ if(total_size < DB_HEADER_SIZE){
 err=trUtf8("Unerwartete Dateigröße (Dateigröße < DB_HEADER_SIZE)");
 return false; }
 
-memcpy(&Signature1,buffer,4);
-memcpy(&Signature2,buffer+4,4);
-memcpy(&Flags,buffer+8,4);
-memcpy(&Version,buffer+12,4);
+memcpyFromLEnd32(&Signature1,buffer);
+memcpyFromLEnd32(&Signature2,buffer+4);
+memcpyFromLEnd32(&Flags,buffer+8);
+memcpyFromLEnd32(&Version,buffer+12);
 memcpy(FinalRandomSeed,buffer+16,16);
 memcpy(EncryptionIV,buffer+32,16);
-memcpy(&NumGroups,buffer+48,4);
-memcpy(&NumEntries,buffer+52,4);
+memcpyFromLEnd32(&NumGroups,buffer+48);
+memcpyFromLEnd32(&NumEntries,buffer+52);
 memcpy(ContentsHash,buffer+56,32);
 memcpy(TrafoRandomSeed,buffer+88,32);
-memcpy(&KeyEncRounds,buffer+120,4);
+memcpyFromLEnd32(&KeyEncRounds,buffer+120);
 
 if((Signature1!=PWM_DBSIG_1) || (Signature2!=PWM_DBSIG_2)){
 err=trUtf8("Falsche Signatur");
@@ -134,12 +137,12 @@ bool bRet;
 	{
 		pField = buffer+pos;
 
-		memcpy(&FieldType, pField, 2);
+		memcpyFromLEnd16(&FieldType, pField);
 		pField += 2; pos += 2;
 		if(pos >= total_size) {
 		 return false; }
 
-		memcpy(&FieldSize, pField, 4);
+		memcpyFromLEnd32(&FieldSize, pField);
 		pField += 4; pos += 4;
 		if(pos >= (total_size + FieldSize)) {
 		return false;}
@@ -158,12 +161,12 @@ bool bRet;
 	{
 		pField = buffer+pos;
 
-		memcpy(&FieldType, pField, 2);
+		memcpyFromLEnd16(&FieldType, pField);
 		pField += 2; pos += 2;
 		if(pos >= total_size){
 		 return false;}
 
-		memcpy(&FieldSize, pField, 4);
+		memcpyFromLEnd32(&FieldSize, pField);
 		pField += 4; pos += 4;
 		if(pos >= (total_size + FieldSize)) {
 		return false; }
@@ -408,7 +411,7 @@ bool CGroup::ReadGroupField(UINT16 FieldType, UINT32 FieldSize, UINT8 *pData)
 		// Ignore field
 		break;
 	case 0x0001:
-		memcpy(&ID, pData, 4);
+		memcpyFromLEnd32(&ID, (char*)pData);
 		break;
 	case 0x0002:
 		//Name.fromUtf8((char*)pData);
@@ -427,13 +430,13 @@ bool CGroup::ReadGroupField(UINT16 FieldType, UINT32 FieldSize, UINT8 *pData)
 		Expire.Set(pData);
 		break;
 	case 0x0007:
-		memcpy(&ImageID, pData, 4);
+		memcpyFromLEnd32(&ImageID, (char*)pData);
 		break;
 	case 0x0008:
-		memcpy(&Level, pData, 2);
+		memcpyFromLEnd16(&Level, (char*)pData);
 		break;
 	case 0x0009:
-		memcpy(&Flags, pData, 4);
+		memcpyFromLEnd32(&Flags, (char*)pData);
 		break;
 	case 0xFFFF:
 		break;
@@ -465,10 +468,10 @@ switch(FieldType)
 		memcpy(ID, pData, 16);
 		break;
 	case 0x0002:
-		memcpy(&GroupID, pData, 4);
+		memcpyFromLEnd32(&GroupID, (char*)pData);
 		break;
 	case 0x0003:
-		memcpy(&ImageID, pData, 4);
+		memcpyFromLEnd32(&ImageID, (char*)pData);
 		break;
 	case 0x0004:
 		//Title=(char*)pData;
@@ -935,4 +938,26 @@ for(int i=0; i<64; i+=2){
 		return false;}
 	memcpy(dst+(i/2),&bin,1);
 }
+}
+
+void memcpyFromLEnd32(UINT32* dst,char* src){
+#ifdef KEEPASS_LITTLE_ENDIAN
+  memcpy(dst,src,4);
+#endif
+#ifdef KEEPASS_BIG_ENDIAN
+  memcpy(dst+3,src+0,1);
+  memcpy(dst+2,src+1,1);
+  memcpy(dst+1,src+2,1);
+  memcpy(dst+0,src+3,1);
+#endif
+}
+
+void memcpyFromLEnd16(UINT16* dst,char* src){
+#ifdef KEEPASS_LITTLE_ENDIAN
+  memcpy(dst,src,2);
+#endif
+#ifdef KEEPASS_BIG_ENDIAN
+  memcpy(dst+1,src+0,1);
+  memcpy(dst+0,src+1,1);
+#endif
 }

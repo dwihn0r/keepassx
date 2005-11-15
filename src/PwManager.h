@@ -30,7 +30,7 @@
  #define PWM_STD_KEYENCROUNDS 	6000
  #define ALGO_AES         		0
  #define ALGO_TWOFISH			1
- #define KEEPASS_VERSION			"0.1.2"
+ #define KEEPASS_VERSION			"0.1.3"
 
 #include <qcolor.h>
 #include <qobject.h>
@@ -76,5 +76,8 @@ private:
  UINT32 getNewEntrySid();
  bool convHexToBinaryKey(char* HexKey, char* dst);
 };
+
+ void memcpyFromLEnd32(UINT32* dst,char* src);
+ void memcpyFromLEnd16(UINT16* dst,char* src);
 
 #endif
