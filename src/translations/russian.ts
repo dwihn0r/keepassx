@@ -335,7 +335,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>Warnung</source>
-        <translation>Предупреждение</translation>
+        <translation type="obsolete">Предупреждение</translation>
     </message>
     <message>
         <source>Die &#xdc;bersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
@@ -625,47 +625,50 @@ Soll sie überschrieben werden?</source>
     </message>
     <message>
         <source>Warnung: Verzeichnis ~/.keepass konnte nicht erstellt werden.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Внимание: Невозможно создать директорию ~/.keepass.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Die Übersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
  Die Sprache wurde auf Deutsch zurückgesetzt.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Файл перевода &apos;%1&apos; не был загружен.
+Возврат к исходному переводу.</translation>
     </message>
     <message>
         <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
 Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Невозможно сохранить файл конфигурации.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при открытии базы:
+%1</translation>
     </message>
     <message>
         <source>Frage</source>
-        <translation type="unfinished"></translation>
+        <translation>Вопрос</translation>
     </message>
     <message encoding="UTF-8">
         <source>Es ist noch eine andere Datenbank geöffnet. Soll sie mit der zu importierenden Datenbank zusammengeführt oder geschlossen werden werden?</source>
-        <translation type="unfinished"></translation>
+        <translation>Другая база всё еще открыта. Хотите объединить её с импортируемой базой или закрыть?</translation>
     </message>
     <message encoding="UTF-8">
         <source>Zusammenführen</source>
-        <translation type="unfinished"></translation>
+        <translation>Объединить</translation>
     </message>
     <message encoding="UTF-8">
         <source>Schließen</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Datenbank importieren</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт базы</translation>
     </message>
     <message>
         <source>Die Datei konnte nicht importiert werden.
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл не может быть импортирован.
+%1</translation>
     </message>
 </context>
 <context>
@@ -1479,35 +1482,35 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Importieren aus</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт из</translation>
     </message>
     <message encoding="UTF-8">
         <source>Über Keepass...</source>
-        <translation type="unfinished"></translation>
+        <translation>О Keepass...</translation>
     </message>
     <message>
         <source>PwManager-Datei (*.pwm)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл PwManager (*.pwm)...</translation>
     </message>
     <message>
         <source>Dokumentation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Документация...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Passwörter verbergen</source>
-        <translation type="unfinished"></translation>
+        <translation>Спрятать пароли</translation>
     </message>
     <message>
         <source>Benutzernamen verbergen</source>
-        <translation type="unfinished"></translation>
+        <translation>Спрятать имена пользователей</translation>
     </message>
     <message>
         <source>KWallet XML-Datei (*.xml)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл KWallet XML (*.xml)...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Über QT...</source>
-        <translation type="unfinished"></translation>
+        <translation>О QT...</translation>
     </message>
 </context>
 <context>
@@ -1597,22 +1600,30 @@ als Übersetzung für Keepass fest.</source>
     <name>PwDatabase</name>
     <message encoding="UTF-8">
         <source>Unerwartete Dateigröße (Dateigröße &lt; DB_HEADER_SIZE)</source>
-        <translation type="unfinished"></translation>
+        <translation>Неожиданный размер файла (Filesize &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
         <source>Falsche Signatur</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная подпись</translation>
     </message>
     <message encoding="UTF-8">
         <source>Nicht unterstüzte Dateiversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдерживаемая версия файла</translation>
     </message>
     <message encoding="UTF-8">
         <source>Unbekannter Verschlüsselungsalgorithmus</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный алгоритм шифрования</translation>
     </message>
     <message encoding="UTF-8">
         <source>Hash-Test fehlgeschlage: der Schlüssl ist falsch oder die Datei ist beschädigt.</source>
+        <translation>Тест не пройден: Неправильный ключ или поврежденный файл.</translation>
+    </message>
+    <message>
+        <source>AES-Initialisierung fehlgeschlagen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Unerwarteter Wert für &apos;crypto_size&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1628,7 +1639,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="obsolete">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Abbrechen</source>
@@ -1680,67 +1691,76 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Die angegebene Datei existiert nicht.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл не существует.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Datei konnte nicht geöffnet werden.</source>
-        <translation type="unfinished">Невозможно открыть файл.</translation>
+        <translation>Невозможно открыть файл.</translation>
     </message>
     <message>
         <source>Datei ist leer</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустой файл</translation>
     </message>
     <message encoding="UTF-8">
         <source>Keine gültige PwManager-Datei</source>
-        <translation type="unfinished"></translation>
+        <translation>Некорректный PwManager-файл</translation>
     </message>
     <message encoding="UTF-8">
         <source>Nicht unterstützte Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдерживаемая версия</translation>
     </message>
     <message encoding="UTF-8">
         <source>Nicht unterstützter Hash-Algorithmus</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдерживаемый алгоритм</translation>
     </message>
     <message encoding="UTF-8">
         <source>Nicht unterstützter Verschlüsselungs-Algorithmus</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдерживаемый алгоритм шифрования</translation>
     </message>
     <message encoding="UTF-8">
         <source>Komprimierte PwManager-Dateien werden nicht unterstützt</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатые PwManager-файлы не поддерживаются</translation>
     </message>
     <message>
         <source>Falsches Passwort</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный пароль</translation>
     </message>
     <message encoding="UTF-8">
         <source>Dateiinhalt ungültig (Hash-Test fehlgeschlagen)</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильное содержимое (неправильный Хеш)</translation>
     </message>
     <message encoding="UTF-8">
         <source>Ungültiger XML-Inhalt</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильное XML-содержимое</translation>
     </message>
     <message>
         <source>Datei nicht gefunden</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл не найден</translation>
     </message>
     <message encoding="UTF-8">
         <source>Datei konnte nicht geöffnet werden</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть файл</translation>
     </message>
     <message encoding="UTF-8">
         <source>Ungültiges XML-Dokument</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильный XML-файл</translation>
     </message>
     <message encoding="UTF-8">
         <source>Dokument enthält keine Daten</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустой файл</translation>
     </message>
     <message>
         <source>/dev/random konnte nicht ge&#xc3;&#xb6;ffnet werden - nutze Standardbibliothek (stdlib)</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть /dev/random - используется stdlib</translation>
+    </message>
+    <message>
+        <source>Warnung</source>
+        <translation>Предупреждение</translation>
+    </message>
+    <message>
+        <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
+Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
+        <translation>Невозможно сохранить файл конфигурации.</translation>
     </message>
 </context>
 <context>
@@ -1982,42 +2002,42 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Bannerfarbverlauf</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет заголовка</translation>
     </message>
     <message encoding="UTF-8">
         <source>Gruppenbaum beim &amp;Öffnen aufklappen</source>
-        <translation type="unfinished"></translation>
+        <translation>Развернуть &amp;дерево группы при открытии</translation>
     </message>
 </context>
 <context>
     <name>SimplePasswordDialog</name>
     <message>
         <source>Passworteingabe</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Passwort:</source>
-        <translation type="unfinished">Пароль:</translation>
+        <translation>Пароль:</translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation type="unfinished">O&amp;K</translation>
+        <translation>O&amp;K</translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+K</translation>
     </message>
     <message>
         <source>Abbre&amp;chen</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation type="unfinished">Alt+C</translation>
+        <translation>Alt+C</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2036,7 +2056,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>$TRANSL_VERSION</source>
-        <translation>0.1.1</translation>
+        <translation>0.1.3</translation>
     </message>
 </context>
 <context>

@@ -239,7 +239,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>Warnung</source>
-        <translation>Warning</translation>
+        <translation type="obsolete">Warning</translation>
     </message>
     <message>
         <source>OK</source>
@@ -456,17 +456,12 @@ Soll sie überschrieben werden?</source>
     </message>
     <message>
         <source>Warnung: Verzeichnis ~/.keepass konnte nicht erstellt werden.</source>
-        <translation>Warnig: Could not create directory ~/.keepass.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Die Übersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
- Die Sprache wurde auf Deutsch zurückgesetzt.</source>
-        <translation></translation>
+        <translation type="obsolete">Warnig: Could not create directory ~/.keepass.</translation>
     </message>
     <message>
         <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
 Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
-        <translation>Could not save configuration file.</translation>
+        <translation type="obsolete">Could not save configuration file.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten:
@@ -1281,6 +1276,14 @@ active translation for Keepass.</translation>
         <source>Hash-Test fehlgeschlage: der Schlüssl ist falsch oder die Datei ist beschädigt.</source>
         <translation>Hash test failed: Wrong key or damaged file.</translation>
     </message>
+    <message>
+        <source>AES-Initialisierung fehlgeschlagen</source>
+        <translation>AES Init failed</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Unerwarteter Wert für &apos;crypto_size&apos;</source>
+        <translation>Unexpected &apos;crypto_size&apos; value</translation>
+    </message>
 </context>
 <context encoding="UTF-8">
     <name>QObject</name>
@@ -1294,7 +1297,7 @@ active translation for Keepass.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="obsolete">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Abbrechen</source>
@@ -1391,6 +1394,15 @@ active translation for Keepass.</translation>
     <message>
         <source>/dev/random konnte nicht ge&#xc3;&#xb6;ffnet werden - nutze Standardbibliothek (stdlib)</source>
         <translation>/dev/random could not be opened - using stdlib</translation>
+    </message>
+    <message>
+        <source>Warnung</source>
+        <translation>Warning</translation>
+    </message>
+    <message>
+        <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
+Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
+        <translation>Could not save configuration file.</translation>
     </message>
 </context>
 <context>
@@ -1638,7 +1650,7 @@ active translation for Keepass.</translation>
     </message>
     <message>
         <source>$TRANSL_VERSION</source>
-        <translation>0.1.2</translation>
+        <translation>0.1.3</translation>
     </message>
 </context>
 <context>
