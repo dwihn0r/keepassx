@@ -20,14 +20,14 @@
 
 #include "mainwindow.h"
 #include <qmessagebox.h>
-#include <qscrollview.h>
+#include <q3scrollview.h>
 #include <qlabel.h>
 #include <qdialog.h>
 #include <qfile.h>
 
 #include "AboutDlg.h"
 
-CAboutDialog::CAboutDialog(QWidget* parent, const char* name, bool modal, WFlags fl)
+CAboutDialog::CAboutDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : AboutDlg(parent,name, modal,fl)
 {
 mainwnd=((CMainWindow*)parentWidget());
@@ -57,7 +57,7 @@ close();
 void CAboutDialog::OnLicenseClicked(){
 
 QDialog dlg(this,NULL,true);
-QScrollView scroll(&dlg);
+Q3ScrollView scroll(&dlg);
 QLabel label(&scroll,"License-Scroll");
 scroll.addChild(&label);
 QFile gpl(((CMainWindow*)parentWidget())->appdir+"/../share/keepass/license.txt");
@@ -68,7 +68,7 @@ QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Die Datei '%1' konnte nicht 
 return;
 }
 
-if(!gpl.open(IO_ReadOnly)){
+if(!gpl.open(QIODevice::ReadOnly)){
 QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Die Datei '%1' konnte nicht geöffnet werden.")
 			  .arg("'license.txt'")+trUtf8("Es trat folgender Fehler auf:\n%1").arg(gpl.errorString())			 
 			  ,trUtf8("OK"),0,0,2,1);

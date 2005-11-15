@@ -21,23 +21,28 @@
 //QT
 #include <qtoolbutton.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qaction.h>
 #include <qimage.h>
-#include <qlistview.h>
-#include <qtextedit.h>
+#include <q3listview.h>
+#include <q3textedit.h>
 #include <qclipboard.h>
 #include <qapplication.h>
-#include <qprocess.h>
-#include <qfiledialog.h>
+#include <q3process.h>
+#include <q3filedialog.h>
 #include <qpoint.h>
 #include <qstatusbar.h>
 #include <qcolor.h>
 #include <qsplitter.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qlocale.h>
 #include <qmessagebox.h>
 #include <qlibrary.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QDropEvent>
+#include <QLabel>
+#include <QShowEvent>
 //STD
 #include <time.h>
 //local
@@ -61,7 +66,7 @@
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 
-CMainWindow::CMainWindow(QApplication* app,QString ArgFile,CConfig* cfg,QWidget* parent,const char* name, WFlags fl)
+CMainWindow::CMainWindow(QApplication* app,QString ArgFile,CConfig* cfg,QWidget* parent,const char* name, Qt::WFlags fl)
 : MainFrame(parent,name,fl)
 {
 config=cfg;
@@ -111,8 +116,8 @@ Icon_Search32x32=new QPixmap;
 
 // Signal-Slot Connections //
 connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimerEvent()));
-connect(GroupView,SIGNAL(collapsed(QListViewItem*)),this, SLOT(OnGroupItemCollapsed(QListViewItem*)));
-connect(GroupView,SIGNAL(expanded(QListViewItem*)),this, SLOT(OnGroupItemExpanded(QListViewItem*)));
+connect(GroupView,SIGNAL(collapsed(Q3ListViewItem*)),this, SLOT(OnGroupItemCollapsed(Q3ListViewItem*)));
+connect(GroupView,SIGNAL(expanded(Q3ListViewItem*)),this, SLOT(OnGroupItemExpanded(Q3ListViewItem*)));
 
 
 // MainWnd //
@@ -207,7 +212,7 @@ else
 {
   QFileInfo file(ArgFile);
   if(file.exists() && file.isFile())OpenDatabase(ArgFile);
-   else {cout << "file not found "<< ArgFile << endl;}
+   else {cout << "file not found "<< ArgFile.ascii() << endl;}
 }
 
 
@@ -247,7 +252,7 @@ void CMainWindow::OnMainWinResize()
 }
 
 void CMainWindow::OnFileOpen(){
-QString filename=QFileDialog::getOpenFileName(QDir::homeDirPath(),"*.kdb",this,trUtf8("Datenbank öffnen"));
+QString filename=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"*.kdb",this,trUtf8("Datenbank öffnen"));
 if(filename=="")return;
 OpenDatabase(filename);
 }
@@ -289,7 +294,7 @@ else{
 delete db;
 FileOpen=false;
 QMessageBox::critical(NULL,trUtf8("Fehler"),trUtf8("Beim öffnen der Datenbank ist ein Fehler aufgetreten:\n%1")
-				 .arg(err),trUtf8("OK"),0,0);
+				 .arg(err),trUtf8("OK"),0,0,0);
 }
 }
 
@@ -329,7 +334,7 @@ for(int i=0;i<GroupItems.size();i++){
 }
 
 
-void CMainWindow::OnGroupChanged(QListViewItem* item){
+void CMainWindow::OnGroupChanged(Q3ListViewItem* item){
 if(item){
 SetEditMenuState(STATE_SingleGroupSelected);
 setCurrentGroup((GroupItem*)item);
@@ -426,7 +431,7 @@ tmp->setText(j++,entry->BinaryDesc);}
 }
 }
 
-void CMainWindow::OnEntryChanged(QListViewItem* item){
+void CMainWindow::OnEntryChanged(Q3ListViewItem* item){
 if(item)SetEditMenuState(STATE_SingleEntrySelected);
 else SetEditMenuState(STATE_NoEntrySelected);
 updateEntryDetails((EntryItem*)item);
@@ -436,7 +441,7 @@ updateEntryDetails((EntryItem*)item);
 void CMainWindow::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
 SetEditMenuState(STATE_NoGroupSelected);
-QValueList<int> s;
+Q3ValueList<int> s;
 s.push_back(25); s.push_back(100);
 parentWidget()->resize(750,450);
 splitter->setSizes(s);
@@ -466,7 +471,7 @@ SetFileMenuState(STATE_FileOpen);
 }
 }
 
-void CMainWindow::OnEntryDoubleClicked(QListViewItem* item,const QPoint& Point, int column){
+void CMainWindow::OnEntryDoubleClicked(Q3ListViewItem* item,const QPoint& Point, int column){
 if(item && (column==0)){
 OnEditEntry();
 }
@@ -487,7 +492,7 @@ float b1[3];
 float b2[3];
 float a1,a2;
 QPixmap* banner_pixmap=new QPixmap(w,h); ///@FIXME löscht der Destruktor von QLabel die Pixmap zum schluss???
-QPainter painter(banner_pixmap,24);
+QPainter painter(banner_pixmap);
 QPen pen;
 pen.setWidth(1);
 painter.setPen(pen);
@@ -562,7 +567,7 @@ if(db->SaveDataBase(db->filename))setModFlag(false);
 
 void CMainWindow::OnFileSaveAs()
 {
-QString filename=QFileDialog::getSaveFileName(QDir::homeDirPath(),"*.kdb",this,trUtf8("Datenbank öffnen"));
+QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"*.kdb",this,trUtf8("Datenbank öffnen"));
 if(filename=="")return;
 db->filename=filename;
 config->LastFile=filename;
@@ -741,7 +746,7 @@ OpenURL(currentEntry()->URL);
 }
 
 void CMainWindow::OpenURL(QString url){
-QProcess browser;
+Q3Process browser;
 browser.setArguments(QStringList::split(' ',config->OpenUrlCommand.arg(url)));
 browser.start();
 }
@@ -753,7 +758,7 @@ if(entry.BinaryDataLength==0){
 QMessageBox::information(NULL,trUtf8("Hinweis"),trUtf8("Dieser Eintrag hat keinen Dateianhang."),"OK");
 return;
 }
-QString filename=QFileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Anhang speichern..."));
+QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Anhang speichern..."));
 if(filename=="")return;
 QFile file(filename);
 if(file.exists()){
@@ -763,7 +768,7 @@ if(file.remove()==false){
 QMessageBox::critical(NULL,trUtf8("Fehler"),trUtf8("Datei konnte nicht überschrieben werden."),trUtf8("OK"));
 return;}
 }
-if(file.open(IO_WriteOnly)==false){
+if(file.open(QIODevice::WriteOnly)==false){
 QMessageBox::critical(NULL,trUtf8("Fehler"),trUtf8("Datei konnte nicht erstellt werden."),trUtf8("OK"));
 return;
 }
@@ -896,11 +901,11 @@ updateGroupView();
 
 }
 
-void CMainWindow::OnEntryRightClicked(QListViewItem* item, const QPoint& pos,int column)
+void CMainWindow::OnEntryRightClicked(Q3ListViewItem* item, const QPoint& pos,int column)
 {
 if(!FileOpen)return;
 if(!CurrentGroup) return;
-QPopupMenu menu;
+Q3PopupMenu menu;
 connect(&menu, SIGNAL(activated(int)), this, SLOT(OnEntryCtxMenuClicked(int)));
 menu.insertItem(trUtf8("Passwort in Zwischenablage kopieren"),1);
 menu.insertItem(trUtf8("Benutzername in Zwischenablage kopieren"),2);
@@ -951,11 +956,11 @@ break;
 }
 }
 
-void CMainWindow::OnGroupRightClicked(QListViewItem* item, const QPoint& pos, int column)
+void CMainWindow::OnGroupRightClicked(Q3ListViewItem* item, const QPoint& pos, int column)
 {
 if(!FileOpen)return;
 
-QPopupMenu menu;
+Q3PopupMenu menu;
 if(column!=-1){
  if(((GroupItem*)item)->pGroup->ID!=db->SearchGroupID){
   connect(&menu, SIGNAL(activated(int)), this, SLOT(OnGroupCtxMenuClicked(int)));
@@ -1146,7 +1151,7 @@ updateEntryView();
 
 void CMainWindow::OnExtrasLanguage()
 {
-CLanguageDlg dlg(this,0,true);
+CLanguageDlg dlg(this,0/*,QT3 modal? = true*/);
 dlg.exec();
 }
 
@@ -1166,11 +1171,11 @@ modflag=flag;
 toolButtonSave->setEnabled(flag);
 }
 
-void CMainWindow::OnGroupItemExpanded(QListViewItem* item){
+void CMainWindow::OnGroupItemExpanded(Q3ListViewItem* item){
 ((GroupItem*)item)->pGroup->UI_ItemIsExpanded=true;
 }
 
-void CMainWindow::OnGroupItemCollapsed(QListViewItem* item){
+void CMainWindow::OnGroupItemCollapsed(Q3ListViewItem* item){
 ((GroupItem*)item)->pGroup->UI_ItemIsExpanded=false;
 }
 
@@ -1186,7 +1191,7 @@ if(db->Groups.size()){
 //cout << "Start: 0x" << QString::number((unsigned int)&db->Groups.front(),16) << endl;
 //cout << "End: 0x" << QString::number((unsigned int)&db->Groups.back(),16) << endl;
 for(int i=0;i<db->Groups.size();i++){
-cout << QString("(+%1) '%2', Level=%3, ID=%4").arg(i).arg(db->Groups[i].Name).arg(db->Groups[i].Level).arg(db->Groups[i].ID)
+cout << QString("(+%1) '%2', Level=%3, ID=%4").arg(i).arg(db->Groups[i].Name).arg(db->Groups[i].Level).arg(db->Groups[i].ID).ascii()
      << endl;
 }
 }
@@ -1201,7 +1206,7 @@ QString groupname="???";
 	groupname="'"+db->Groups[j].Name+"'";
 	break;}
 }
-cout << QString("(+%1) '%2', GroupID=%3 [%4], sID=%5").arg(i).arg(db->Entries[i].Title).arg(db->Entries[i].GroupID).arg(groupname).arg(db->Entries[i].sID)
+cout << QString("(+%1) '%2', GroupID=%3 [%4], sID=%5").arg(i).arg(db->Entries[i].Title).arg(db->Entries[i].GroupID).arg(groupname).arg(db->Entries[i].sID).ascii()
      << endl;
 }
 }
@@ -1233,7 +1238,7 @@ switch(ret){
 	case 2: return;
 		}
 }
-QString filename=QFileDialog::getOpenFileName(QDir::homeDirPath(),"*.pwm",this,trUtf8("Datenbank importieren"));
+QString filename=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"*.pwm",this,trUtf8("Datenbank importieren"));
 if(filename=="")return;
 CSimplePasswordDialog dlg(!config->ShowPasswords,this,"SimplePasswordDlg",true);
 if(!dlg.exec())return;
@@ -1305,7 +1310,7 @@ switch(ret){
 	case 2: return;
 		}
 }
-QString filename=QFileDialog::getOpenFileName(QDir::homeDirPath(),"*.xml",this,trUtf8("Datenbank importieren"));
+QString filename=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"*.xml",this,trUtf8("Datenbank importieren"));
 if(filename=="")return;
 Import_KWalletXml importer;
 QString err;

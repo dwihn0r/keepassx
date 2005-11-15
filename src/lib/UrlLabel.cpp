@@ -24,12 +24,15 @@
 #include <qcolor.h>
 #include <qcursor.h>
 #include <qfontmetrics.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QLabel>
 
-LinkLabel::LinkLabel(QWidget *parent, const char* name,const QString& text, int x, int y,WFlags f) : QLabel(parent,name,f){
+LinkLabel::LinkLabel(QWidget *parent, const char* name,const QString& text, int x, int y,Qt::WFlags f) : QLabel(parent,name,f){
 QFont font(parentWidget()->font()); font.setUnderline(true);
 setFont(font);
 setPaletteForegroundColor(QColor(20,20,255));
-setCursor(PointingHandCursor);
+setCursor(Qt::PointingHandCursor);
 setText(text);
 setPos(x,y);
 }
@@ -39,7 +42,7 @@ LinkLabel::~LinkLabel(){
 }
 
 void LinkLabel::mouseReleaseEvent(QMouseEvent* event){
-if(event->button()==LeftButton)
+if(event->button()==Qt::LeftButton)
 clicked();
 }
 

@@ -21,7 +21,7 @@
 #include "mainwindow.h"
 #include "pwsafe.h"
 
-PwSafe::PwSafe(QApplication* app,QString& ArgFile,CConfig* cfg):QMainWindow( 0, "Keepass")
+PwSafe::PwSafe(QApplication* app,QString& ArgFile,CConfig* cfg):Q3MainWindow( 0, "Keepass")
 {
 
   mainWin=new CMainWindow(app,ArgFile,cfg,this);

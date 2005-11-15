@@ -27,12 +27,12 @@
 #include <qpushbutton.h>
 #include <qcheckbox.h>
 #include <qdir.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qmessagebox.h>
 
 
 
-CChangeKeyDlg::CChangeKeyDlg(QWidget* parent,PwDatabase* _db,const char* name, bool modal, WFlags fl)
+CChangeKeyDlg::CChangeKeyDlg(QWidget* parent,PwDatabase* _db,const char* name, bool modal, Qt::WFlags fl)
 : ChangeKeyDialog(parent,name, modal,fl)
 {
 db=_db;
@@ -78,8 +78,8 @@ else
 			return;}
 }
 
-UINT8 file_key[32]={0};
-UINT8 pw_key[32]={0};
+Q_UINT8 file_key[32]={0};
+Q_UINT8 pw_key[32]={0};
 
 if(keyfile!=""){
 QFile file(keyfile);
@@ -87,7 +87,7 @@ if(file.exists()){
 int r=QMessageBox::warning(this,trUtf8("Vorhandene Datei überschreiben?"),trUtf8("Unter dem gewählten Dateinamen existiert bereits eine Datei.\nSoll sie überschrieben werden?"),"Ja","Nein",NULL,1,1);
 if(r==1)return;}
 getRandomBytes(file_key,1,32,true);
-if(file.open(IO_WriteOnly | IO_Truncate)==false){
+if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)==false){
 QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Schlüsseldatei konnte nicht geöffnet werden."),"OK",0,0,2,1);
 return;
 }
@@ -114,7 +114,7 @@ done(1);
 void CChangeKeyDlg::OnSelect()
 {
 if(Button_Browse->isEnabled()){
-keyfile=QFileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Schlüsseldatei öffnen"));
+keyfile=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Schlüsseldatei öffnen"));
 if(keyfile=="")return;
 Combo_Dirs->insertItem(keyfile);
 Combo_Dirs->setCurrentItem(Combo_Dirs->count()-1);
@@ -131,7 +131,7 @@ IsFile.append(true);
 
 void CChangeKeyDlg::OnBrowse()
 {
-QString dir=QFileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,trUtf8("Verzeichnis wählen"));
+QString dir=Q3FileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,trUtf8("Verzeichnis wählen"));
 if(dir=="")return;
 keyfile=dir+"/pwsafe.key";
 Combo_Dirs->insertItem(dir);
@@ -190,8 +190,8 @@ Edit_Password_2->setDisabled(true);}
 
 void CChangeKeyDlg::OnCheckBoxChanged(int i)
 {
-if(i==QButton::NoChange)return;
-if(i==QButton::On){
+if(i==QCheckBox::NoChange)return;
+if(i==QCheckBox::On){
 Combo_Dirs->setEnabled(true);
 Button_Browse->setEnabled(true);
 Edit_Password->setEnabled(true);

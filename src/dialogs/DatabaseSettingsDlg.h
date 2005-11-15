@@ -22,13 +22,15 @@
 #include "ui_DatabaseSettingsDlg.h"
 #include "mainwindow.h"
 #include "Database.h"
+//Added by qt3to4:
+#include <QShowEvent>
 
 class CDbSettingsDlg : public dbsettingdlg_base
 {
   Q_OBJECT
 
 public:
-  CDbSettingsDlg(CMainWindow* parent,Database* db,const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CDbSettingsDlg(CMainWindow* parent,Database* db,const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CDbSettingsDlg();
    virtual void showEvent(QShowEvent *);
   /*$PUBLIC_FUNCTIONS$*/

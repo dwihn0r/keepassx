@@ -20,39 +20,39 @@
 #ifndef _LISTVIEWS_H_
 #define _LISTVIEWS_H_
 
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qmime.h>
 #include "PwManager.h"
 
-class GroupItem: public QListViewItem{
+class GroupItem: public Q3ListViewItem{
 public:
 CGroup* pGroup;
 virtual bool acceptDrop(const QMimeSource * mime);
 ///////////////////////////////////////////////////////////////////////
-    GroupItem(CGroup*, QListView * parent );
-    GroupItem(CGroup*, QListViewItem * parent );
-    GroupItem(CGroup*, QListView * parent, QListViewItem * after );
-    GroupItem(CGroup*, QListViewItem * parent, QListViewItem * after );
+    GroupItem(CGroup*, Q3ListView * parent );
+    GroupItem(CGroup*, Q3ListViewItem * parent );
+    GroupItem(CGroup*, Q3ListView * parent, Q3ListViewItem * after );
+    GroupItem(CGroup*, Q3ListViewItem * parent, Q3ListViewItem * after );
 
-    GroupItem(CGroup*, QListView * parent,
+    GroupItem(CGroup*, Q3ListView * parent,
 		   QString,    QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null );
 
-   GroupItem(CGroup*, QListViewItem * parent,
+   GroupItem(CGroup*, Q3ListViewItem * parent,
 		   QString,     QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null );
 
-   GroupItem(CGroup*, QListView * parent, QListViewItem * after,
+   GroupItem(CGroup*, Q3ListView * parent, Q3ListViewItem * after,
 		   QString,     QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null );
 
-    GroupItem(CGroup*, QListViewItem * parent, QListViewItem * after,
+    GroupItem(CGroup*, Q3ListViewItem * parent, Q3ListViewItem * after,
 		   QString,     QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
@@ -62,34 +62,34 @@ virtual bool acceptDrop(const QMimeSource * mime);
 };
 
 
-class EntryItem: public QListViewItem{
+class EntryItem: public Q3ListViewItem{
 public:
 CEntry* pEntry;
 ///////////////////////////////////////////////////////////////////////
-    EntryItem(CEntry*, QListView * parent );
-    EntryItem(CEntry*, QListViewItem * parent );
-    EntryItem(CEntry*, QListView * parent, QListViewItem * after );
-    EntryItem(CEntry*, QListViewItem * parent, QListViewItem * after );
+    EntryItem(CEntry*, Q3ListView * parent );
+    EntryItem(CEntry*, Q3ListViewItem * parent );
+    EntryItem(CEntry*, Q3ListView * parent, Q3ListViewItem * after );
+    EntryItem(CEntry*, Q3ListViewItem * parent, Q3ListViewItem * after );
 
-    EntryItem(CEntry*, QListView * parent,
+    EntryItem(CEntry*, Q3ListView * parent,
 		   QString,    QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null );
 
-   EntryItem(CEntry*, QListViewItem * parent,
+   EntryItem(CEntry*, Q3ListViewItem * parent,
 		   QString,     QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null );
 
-   EntryItem(CEntry*, QListView * parent, QListViewItem * after,
+   EntryItem(CEntry*, Q3ListView * parent, Q3ListViewItem * after,
 		   QString,     QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null );
 
-    EntryItem(CEntry*, QListViewItem * parent, QListViewItem * after,
+    EntryItem(CEntry*, Q3ListViewItem * parent, Q3ListViewItem * after,
 		   QString,     QString = QString::null,
 		   QString = QString::null, QString = QString::null,
 		   QString = QString::null, QString = QString::null,
@@ -98,9 +98,9 @@ CEntry* pEntry;
 };
 
 
-class CGroupView: public QListView{
+class CGroupView: public Q3ListView{
 public:
-  CGroupView(QWidget * parent = 0, const char * name = 0, WFlags f = 0 );
+  CGroupView(QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0 );
 
 
 };

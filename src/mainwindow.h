@@ -28,6 +28,10 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qapplication.h>
+//Added by qt3to4:
+#include <QShowEvent>
+#include <QTranslator>
+#include <QDropEvent>
 #include "ui_MainWindow.h"
 #include "ListViews.h"
 #include "PwmConfig.h"
@@ -40,7 +44,7 @@ Q_OBJECT
 
 public:
   /*$PUBLIC_FUNCTIONS$*/
-  CMainWindow(QApplication* app,QString ArgFile,CConfig* config, QWidget* parent = 0,const char* name = 0, WFlags fl = 0 );
+  CMainWindow(QApplication* app,QString ArgFile,CConfig* config, QWidget* parent = 0,const char* name = 0, Qt::WFlags fl = 0 );
   ~CMainWindow();
 protected:
   /*$PROTECTED_FUNCTIONS$*/
@@ -54,9 +58,9 @@ public slots:
     virtual void OnClose();
     virtual void OnMainWinResize();
     virtual void OnFileOpen();
-    virtual void OnGroupChanged(QListViewItem*);
-    virtual void OnEntryChanged(QListViewItem*);
-    virtual void OnEntryDoubleClicked(QListViewItem*,const QPoint&,int);
+    virtual void OnGroupChanged(Q3ListViewItem*);
+    virtual void OnEntryChanged(Q3ListViewItem*);
+    virtual void OnEntryDoubleClicked(Q3ListViewItem*,const QPoint&,int);
     virtual void OnMenu_closeDB();
     virtual void OnFileSaveAs();
     virtual void OnFileSave();
@@ -76,9 +80,9 @@ public slots:
     virtual void OnEditEntry();
     virtual void OnAddEntry();
     virtual void OnSaveAttachment();
-    virtual void OnEntryRightClicked(QListViewItem* item, const QPoint& pos,int column);
+    virtual void OnEntryRightClicked(Q3ListViewItem* item, const QPoint& pos,int column);
     virtual void OnEntryCtxMenuClicked(int id);
-    virtual void OnGroupRightClicked(QListViewItem* item, const QPoint& pos, int column);
+    virtual void OnGroupRightClicked(Q3ListViewItem* item, const QPoint& pos, int column);
     virtual void OnGroupCtxMenuClicked(int id);
     virtual void OnChangeDbKey();
     virtual void OnDbSettings();
@@ -100,8 +104,8 @@ public slots:
     virtual void OnExtrasLanguage();
     virtual void OnSearchGroupCtxMenuClicked(int);
     virtual void OnQickSearch();
-    virtual void OnGroupItemExpanded(QListViewItem* item);
-    virtual void OnGroupItemCollapsed(QListViewItem* item);
+    virtual void OnGroupItemExpanded(Q3ListViewItem* item);
+    virtual void OnGroupItemCollapsed(Q3ListViewItem* item);
     virtual void DEBUG_OnPrintDbStucture();
     virtual void OnImportPwManagerFile();
     virtual void OnView_HideUsernamesToggled(bool state);

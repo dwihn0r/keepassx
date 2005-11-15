@@ -21,13 +21,16 @@
 #ifndef EDITENTRYDLG_H
 #define EDITENTRYDLG_H
 #include "ui_EditEntryDlg.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QShowEvent>
 
 class CEditEntryDlg : public EditEntryDialog
 {
   Q_OBJECT
 
 public:
-  CEditEntryDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0);
+  CEditEntryDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
   ~CEditEntryDlg();
   virtual void showEvent(QShowEvent *);
   /*$PUBLIC_FUNCTIONS$*/

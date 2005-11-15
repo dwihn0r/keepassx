@@ -20,61 +20,61 @@
 #include "ListViews.h"
 #include "PwManager.h"
 #include <qstring.h>
-#include <qlistview.h>
+#include <q3listview.h>
 
 
 
-GroupItem::GroupItem(CGroup* group, QListView * parent ) : QListViewItem(parent)
+GroupItem::GroupItem(CGroup* group, Q3ListView * parent ) : Q3ListViewItem(parent)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListViewItem * parent ): QListViewItem(parent)
+GroupItem::GroupItem(CGroup* group, Q3ListViewItem * parent ): Q3ListViewItem(parent)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListView * parent, QListViewItem * after ): QListViewItem(parent,after)
+GroupItem::GroupItem(CGroup* group, Q3ListView * parent, Q3ListViewItem * after ): Q3ListViewItem(parent,after)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListViewItem * parent, QListViewItem * after ): QListViewItem(parent,after)
+GroupItem::GroupItem(CGroup* group, Q3ListViewItem * parent, Q3ListViewItem * after ): Q3ListViewItem(parent,after)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListView* parent, QString l1,QString l2,QString l3,QString l4,
+GroupItem::GroupItem(CGroup* group, Q3ListView* parent, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListViewItem* parent, QString l1,QString l2,QString l3,QString l4,
+GroupItem::GroupItem(CGroup* group, Q3ListViewItem* parent, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListView* parent,QListViewItem* after, QString l1,QString l2,QString l3,QString l4,
+GroupItem::GroupItem(CGroup* group, Q3ListView* parent,Q3ListViewItem* after, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pGroup=group;
 setDropEnabled(true);
 }
 
-GroupItem::GroupItem(CGroup* group, QListViewItem* parent,QListViewItem* after, QString l1,QString l2,QString l3,QString l4,
+GroupItem::GroupItem(CGroup* group, Q3ListViewItem* parent,Q3ListViewItem* after, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pGroup=group;
 setDropEnabled(true);
@@ -91,57 +91,57 @@ return true;
 
 ///////////////////////////////
 
-EntryItem::EntryItem(CEntry* entry, QListView * parent ) : QListViewItem(parent)
+EntryItem::EntryItem(CEntry* entry, Q3ListView * parent ) : Q3ListViewItem(parent)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListViewItem * parent ): QListViewItem(parent)
+EntryItem::EntryItem(CEntry* entry, Q3ListViewItem * parent ): Q3ListViewItem(parent)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListView * parent, QListViewItem * after ): QListViewItem(parent,after)
+EntryItem::EntryItem(CEntry* entry, Q3ListView * parent, Q3ListViewItem * after ): Q3ListViewItem(parent,after)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListViewItem * parent, QListViewItem * after ): QListViewItem(parent,after)
+EntryItem::EntryItem(CEntry* entry, Q3ListViewItem * parent, Q3ListViewItem * after ): Q3ListViewItem(parent,after)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListView* parent, QString l1,QString l2,QString l3,QString l4,
+EntryItem::EntryItem(CEntry* entry, Q3ListView* parent, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListViewItem* parent, QString l1,QString l2,QString l3,QString l4,
+EntryItem::EntryItem(CEntry* entry, Q3ListViewItem* parent, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListView* parent,QListViewItem* after, QString l1,QString l2,QString l3,QString l4,
+EntryItem::EntryItem(CEntry* entry, Q3ListView* parent,Q3ListViewItem* after, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pEntry=entry;
 setDragEnabled(true);
 }
 
-EntryItem::EntryItem(CEntry* entry, QListViewItem* parent,QListViewItem* after, QString l1,QString l2,QString l3,QString l4,
+EntryItem::EntryItem(CEntry* entry, Q3ListViewItem* parent,Q3ListViewItem* after, QString l1,QString l2,QString l3,QString l4,
 					 QString l5,QString l6,QString l7,QString l8)
-		    :QListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
+		    :Q3ListViewItem(parent,after,l1,l2,l3,l4,l5,l6,l7,l8)
 {
 pEntry=entry;
 setDragEnabled(true);
@@ -150,6 +150,6 @@ setDragEnabled(true);
 
 
 
-CGroupView::CGroupView(QWidget * parent, const char * name, WFlags f):QListView(parent,name,f){
+CGroupView::CGroupView(QWidget * parent, const char * name, Qt::WFlags f):Q3ListView(parent,name,f){
 
 };

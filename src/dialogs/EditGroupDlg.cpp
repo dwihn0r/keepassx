@@ -22,10 +22,12 @@
 
 #include <qcombobox.h>
 #include <qlineedit.h>
+//Added by qt3to4:
+#include <QShowEvent>
 #include "EditGroupDlg.h"
 
 
-CEditGroupDialog::CEditGroupDialog(QWidget* parent, const char* name, bool modal, WFlags fl)
+CEditGroupDialog::CEditGroupDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : EditGroupDialog(parent,name, modal,fl)
 {
 IconID=0;

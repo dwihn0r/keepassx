@@ -22,7 +22,7 @@
 #define _CHANGEKEYDLG_H_
 #include "ui_ChangeKeyDlg.h"
 #include <qstringlist.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qfile.h>
 
 class CChangeKeyDlg : public ChangeKeyDialog
@@ -30,7 +30,7 @@ class CChangeKeyDlg : public ChangeKeyDialog
   Q_OBJECT
 
 public:
-  CChangeKeyDlg(QWidget* parent,PwDatabase* db, const char* name = 0, bool modal = true, WFlags fl = 0 );
+  CChangeKeyDlg(QWidget* parent,PwDatabase* db, const char* name = 0, bool modal = true, Qt::WFlags fl = 0 );
   ~CChangeKeyDlg();
   /*$PUBLIC_FUNCTIONS$*/
 
@@ -59,7 +59,7 @@ private:
 PwDatabase* db;
 CMainWindow* parentwnd;
 QStringList Paths;
-QValueList<bool> IsFile;
+Q3ValueList<bool> IsFile;
 
 public:
 QString keyfile;

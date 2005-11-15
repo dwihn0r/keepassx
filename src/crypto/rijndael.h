@@ -101,9 +101,9 @@ protected:
 	State     m_state;
 	Mode      m_mode;
 	Direction m_direction;
-	UINT8     m_initVector[MAX_IV_SIZE];
-	UINT32    m_uRounds;
-	UINT8     m_expandedKey[_MAX_ROUNDS+1][4][4];
+	Q_UINT8     m_initVector[MAX_IV_SIZE];
+	Q_UINT32    m_uRounds;
+	Q_UINT8     m_expandedKey[_MAX_ROUNDS+1][4][4];
 public:
 	//////////////////////////////////////////////////////////////////////////////////////////
 	// API
@@ -123,7 +123,7 @@ public:
 	//             this CAN be binary data (it is not expected to be null terminated)
 	// keyLen    : Rijndael::Key16Bytes , Rijndael::Key24Bytes or Rijndael::Key32Bytes
 	// initVector: initialization vector, you will usually use 0 here
-	int init(Mode mode,Direction dir,const UINT8 *key,KeyLength keyLen,UINT8 * initVector = 0);
+	int init(Mode mode,Direction dir,const Q_UINT8 *key,KeyLength keyLen,Q_UINT8 * initVector = 0);
 	// Encrypts the input array (can be binary data)
 	// The input array length must be a multiple of 16 bytes, the remaining part
 	// is DISCARDED.
@@ -131,28 +131,28 @@ public:
 	// Input len is in BITS!
 	// outBuffer must be at least inputLen / 8 bytes long.
 	// Returns the encrypted buffer length in BITS or an error code < 0 in case of error
-	int blockEncrypt(const UINT8 *input, int inputLen, UINT8 *outBuffer);
+	int blockEncrypt(const Q_UINT8 *input, int inputLen, Q_UINT8 *outBuffer);
 	// Encrypts the input array (can be binary data)
 	// The input array can be any length , it is automatically padded on a 16 byte boundary.
 	// Input len is in BYTES!
 	// outBuffer must be at least (inputLen + 16) bytes long
 	// Returns the encrypted buffer length in BYTES or an error code < 0 in case of error
-	int padEncrypt(const UINT8 *input, int inputOctets, UINT8 *outBuffer);
+	int padEncrypt(const Q_UINT8 *input, int inputOctets, Q_UINT8 *outBuffer);
 	// Decrypts the input vector
 	// Input len is in BITS!
 	// outBuffer must be at least inputLen / 8 bytes long
 	// Returns the decrypted buffer length in BITS and an error code < 0 in case of error
-	int blockDecrypt(const UINT8 *input, int inputLen, UINT8 *outBuffer);
+	int blockDecrypt(const Q_UINT8 *input, int inputLen, Q_UINT8 *outBuffer);
 	// Decrypts the input vector
 	// Input len is in BYTES!
 	// outBuffer must be at least inputLen bytes long
 	// Returns the decrypted buffer length in BYTES and an error code < 0 in case of error
-	int padDecrypt(const UINT8 *input, int inputOctets, UINT8 *outBuffer);
+	int padDecrypt(const Q_UINT8 *input, int inputOctets, Q_UINT8 *outBuffer);
 protected:
-	void keySched(UINT8 key[_MAX_KEY_COLUMNS][4]);
+	void keySched(Q_UINT8 key[_MAX_KEY_COLUMNS][4]);
 	void keyEncToDec();
-	void encrypt(const UINT8 a[16], UINT8 b[16]);
-	void decrypt(const UINT8 a[16], UINT8 b[16]);
+	void encrypt(const Q_UINT8 a[16], Q_UINT8 b[16]);
+	void decrypt(const Q_UINT8 a[16], Q_UINT8 b[16]);
 };
 	
 #endif // _RIJNDAEL_H_

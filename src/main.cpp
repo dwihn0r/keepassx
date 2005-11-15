@@ -24,6 +24,8 @@
 #include <qlocale.h>
 #include <qdir.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QTranslator>
 
 #include "pwsafe.h"
 #include "PwmConfig.h"

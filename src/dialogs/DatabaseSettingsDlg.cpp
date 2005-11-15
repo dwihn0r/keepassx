@@ -20,11 +20,13 @@
 #include <qcombobox.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QShowEvent>
 #include "mainwindow.h"
 #include "DatabaseSettingsDlg.h"
 
 
-CDbSettingsDlg::CDbSettingsDlg(CMainWindow* parent,Database* db, const char* name, bool modal, WFlags fl)
+CDbSettingsDlg::CDbSettingsDlg(CMainWindow* parent,Database* db, const char* name, bool modal, Qt::WFlags fl)
 : dbsettingdlg_base(parent,name, modal,fl)
 {
 database=db;

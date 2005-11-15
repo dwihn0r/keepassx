@@ -25,15 +25,15 @@
 class CPwmTime;
 class CPwmTime{
 public:
-  UINT16 Year;
-  UINT8 Month;
-  UINT8 Day;
-  UINT8 Hour;
-  UINT8 Minute;
-  UINT8 Second;
+  Q_UINT16 Year;
+  Q_UINT8 Month;
+  Q_UINT8 Day;
+  Q_UINT8 Hour;
+  Q_UINT8 Minute;
+  Q_UINT8 Second;
 
-  QString GetString(UINT16 format);
-  void Set(UINT8,UINT8,UINT16,UINT8,UINT8,UINT8);
+  QString GetString(Q_UINT16 format);
+  void Set(Q_UINT8,Q_UINT8,Q_UINT16,Q_UINT8,Q_UINT8,Q_UINT8);
   void Set(unsigned char* packedTime);
   void GetPackedTime(unsigned char* dst);
   static bool IsValidDate(QString& string);

@@ -97,3 +97,8 @@ thread \
 exceptions \
 stl
 TEMPLATE = app
+#The following line was inserted by qt3to4
+QT += xml  qt3support 
+#The following line was inserted by qt3to4
+CONFIG += uic3
+

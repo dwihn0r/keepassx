@@ -32,7 +32,7 @@ private:
 int AddToAssoctable(char* table,int start,int end,int pos);
 bool trim(unsigned char &value,int range);
 public:
-  CGenPwDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CGenPwDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CGenPwDialog();
   /*$PUBLIC_FUNCTIONS$*/
 

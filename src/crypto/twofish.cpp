@@ -245,7 +245,7 @@
  * 
  * Unfortunately there is no portable way of writing the constant
  * 0xffffffff. You don't know which suffix to use (U, or UL?)
- * The UINT32_MASK definition uses a bit of trickery. Shift-left
+ * The Q_UINT32_MASK definition uses a bit of trickery. Shift-left
  * is only defined if the shift amount is strictly less than the size
  * of the UInt32, so we can't use (1<<32). The answer it to take the value
  * 2, cast it to a UInt32, shift it left 31 positions, and subtract one.
@@ -263,11 +263,11 @@
  * For example, MS compilers have the __rotl and __rotr functions
  * that generate x86 rotation instructions.
  */
-#define UINT32_MASK    ( (((Twofish_UInt32)2)<<31) - 1 )
+#define Q_UINT32_MASK    ( (((Twofish_UInt32)2)<<31) - 1 )
 
 #ifndef _MSC_VER
-#define ROL32(x,n) ( (x)<<(n) | ((x) & UINT32_MASK) >> (32-(n)) )
-#define ROR32(x,n) ( (x)>>(n) | ((x) & UINT32_MASK) << (32-(n)) )
+#define ROL32(x,n) ( (x)<<(n) | ((x) & Q_UINT32_MASK) >> (32-(n)) )
+#define ROR32(x,n) ( (x)>>(n) | ((x) & Q_UINT32_MASK) << (32-(n)) )
 #else
 #define ROL32(x,n) (_lrotl((x), (n)))
 #define ROR32(x,n) (_lrotr((x), (n)))
@@ -306,7 +306,7 @@
  * This macro does not affect the conversion of the inputs and outputs
  * of the cipher. See the CONVERT_USING_CASTS macro for that.
  */
-#define SELECT_BYTE_FROM_UINT32_IN_MEMORY    0    /* default = 0 */
+#define SELECT_BYTE_FROM_Q_UINT32_IN_MEMORY    0    /* default = 0 */
 
 
 /*
@@ -331,7 +331,7 @@
  * This option does not work unless a UInt32 is exactly 32 bits.
  *
  * This macro only changes the reading/writing of the plaintext/ciphertext.
- * See the SELECT_BYTE_FROM_UINT32_IN_MEMORY to affect the way in which
+ * See the SELECT_BYTE_FROM_Q_UINT32_IN_MEMORY to affect the way in which
  * a UInt32 is split into 4 bytes for the S-box selection.
  */
 #define CONVERT_USING_CASTS    0    /* default = 0 */
@@ -339,7 +339,7 @@
 
 /* 
  * Endianness switch.
- * Only relevant if SELECT_BYTE_FROM_UINT32_IN_MEMORY or
+ * Only relevant if SELECT_BYTE_FROM_Q_UINT32_IN_MEMORY or
  * CONVERT_USING_CASTS is set.
  *
  * Set to 1 on a big-endian machine, and to 0 on a little-endian machine. 
@@ -407,7 +407,7 @@
 /* 
  * Compute byte offset within a UInt32 stored in memory.
  *
- * This is only used when SELECT_BYTE_FROM_UINT32_IN_MEMORY is set.
+ * This is only used when SELECT_BYTE_FROM_Q_UINT32_IN_MEMORY is set.
  * 
  * The input is the byte number 0..3, 0 for least significant.
  * Note the use of sizeof() to support UInt32 types that are larger
@@ -424,7 +424,7 @@
  * Macro to get Byte no. b from UInt32 value X.
  * We use two different definition, depending on the settings.
  */
-#if SELECT_BYTE_FROM_UINT32_IN_MEMORY
+#if SELECT_BYTE_FROM_Q_UINT32_IN_MEMORY
     /* Pick the byte from the memory in which X is stored. */
 #define SELECT_BYTE( X, b ) (((Twofish_Byte *)(&(X)))[BYTE_OFFSET(b)])
 #else

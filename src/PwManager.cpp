@@ -36,15 +36,15 @@
 
 bool PwDatabase::loadDatabase(QString _filename, QString& err){
 unsigned long total_size,crypto_size;
-UINT32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
-UINT8 TrafoRandomSeed[32];
-UINT8 FinalRandomSeed[16];
-UINT8 ContentsHash[32];
-UINT8 EncryptionIV[16];
+Q_UINT32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
+Q_UINT8 TrafoRandomSeed[32];
+Q_UINT8 FinalRandomSeed[16];
+Q_UINT8 ContentsHash[32];
+Q_UINT8 EncryptionIV[16];
 
 filename=_filename;
 QFile file(filename);
-file.open(IO_ReadOnly);
+file.open(QIODevice::ReadOnly);
 total_size=file.size();
 char* buffer = new char[total_size];
 file.readBlock(buffer,total_size);
@@ -83,7 +83,7 @@ else {
  }
 
 transformKey(MasterKey,TransformedMasterKey,TrafoRandomSeed,KeyEncRounds);
-UINT8 FinalKey[32];
+Q_UINT8 FinalKey[32];
 sha256_context sha32;
 sha256_starts(&sha32);
 sha256_update(&sha32,FinalRandomSeed, 16);
@@ -99,15 +99,15 @@ if(CryptoAlgorithmus == ALGO_AES)
 			{err=trUtf8("AES-Initialisierung fehlgeschlagen");
 			 return false;}
 		// Decrypt! The first bytes aren't encrypted (that's the header)
-		crypto_size = (unsigned long)aes.padDecrypt((UINT8 *)buffer + DB_HEADER_SIZE,
-			total_size  - DB_HEADER_SIZE, (UINT8 *)buffer + DB_HEADER_SIZE);
+		crypto_size = (unsigned long)aes.padDecrypt((Q_UINT8 *)buffer + DB_HEADER_SIZE,
+			total_size  - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 else if(CryptoAlgorithmus == ALGO_TWOFISH)
 	{
 		CTwofish twofish;
 		if(twofish.init(FinalKey, 32, EncryptionIV) != true){return false;}
-		crypto_size = (unsigned long)twofish.padDecrypt((UINT8 *)buffer + DB_HEADER_SIZE,
-			total_size - DB_HEADER_SIZE, (UINT8 *)buffer + DB_HEADER_SIZE);
+		crypto_size = (unsigned long)twofish.padDecrypt((Q_UINT8 *)buffer + DB_HEADER_SIZE,
+			total_size - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 
 if((crypto_size > 2147483446) || (crypto_size == 0)){err=trUtf8("Unerwarteter Wert für 'crypto_size'"); return false;}
@@ -127,8 +127,8 @@ Entries.resize(NumEntries);
 
 unsigned long tmp_id=0;
 unsigned long pos = DB_HEADER_SIZE;
-UINT16 FieldType;
-UINT32 FieldSize;
+Q_UINT16 FieldType;
+Q_UINT32 FieldSize;
 char* pField;
 bool bRet;
 
@@ -147,7 +147,7 @@ bool bRet;
 		if(pos >= (total_size + FieldSize)) {
 		return false;}
 
-	 	bRet = Groups[CurGroup].ReadGroupField(FieldType, FieldSize, (UINT8 *)pField);
+	 	bRet = Groups[CurGroup].ReadGroupField(FieldType, FieldSize, (Q_UINT8 *)pField);
 		if((FieldType == 0xFFFF) && (bRet == true)){
 			CurGroup++;} // Now and ONLY now the counter gets increased
 
@@ -171,7 +171,7 @@ bool bRet;
 		if(pos >= (total_size + FieldSize)) {
 		return false; }
 
-		bRet = Entries[CurEntry].ReadEntryField(FieldType,FieldSize,(UINT8*)pField);
+		bRet = Entries[CurEntry].ReadEntryField(FieldType,FieldSize,(Q_UINT8*)pField);
 		if((FieldType == 0xFFFF) && (bRet == true)){
 			Entries[CurEntry].sID=tmp_id++;
 			CurEntry++;} // Now and ONLY now the counter gets increased
@@ -196,18 +196,18 @@ return true;
 }
 
 
-void PwDatabase::transformKey(UINT8* src,UINT8* dst,UINT8* KeySeed,int rounds){
-UINT8* tmp=new UINT8[32];
+void PwDatabase::transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* KeySeed,int rounds){
+Q_UINT8* tmp=new Q_UINT8[32];
 Rijndael rijndael;
 sha256_context sha2;
-if(rijndael.init(Rijndael::ECB, Rijndael::Encrypt, (const UINT8 *)KeySeed,
+if(rijndael.init(Rijndael::ECB, Rijndael::Encrypt, (const Q_UINT8 *)KeySeed,
                  Rijndael::Key32Bytes, 0) != RIJNDAEL_SUCCESS){
-  cout << QString("unexpected error in %1, line %2").arg(__FILE__).arg(__LINE__) << endl;
+  cout << QString("unexpected error in %1, line %2").arg(__FILE__).arg(__LINE__).ascii() << endl;
   exit(1);}
 
 memcpy(tmp,src,32);
 for(int i=0;i<rounds;i++){
- rijndael.blockEncrypt((const UINT8 *)tmp, 256, (UINT8 *)tmp);
+ rijndael.blockEncrypt((const Q_UINT8 *)tmp, 256, (Q_UINT8 *)tmp);
 }
 
 sha256_starts(&sha2);
@@ -253,7 +253,7 @@ return true;
 bool PwDatabase::CalcMasterKeyByFile(QString filename){
 
 QFile file(filename);
-if(file.open(IO_ReadOnly) == false) return false;
+if(file.open(QIODevice::ReadOnly) == false) return false;
 unsigned long FileSize=file.size();
 
 if(FileSize == 32){
@@ -314,14 +314,14 @@ return &Entries.back();
 
 
 bool PwDatabase::CalcMasterKeyByFileAndPw(QString filename, QString& Password){
-UINT8* FileKey;
-UINT8* PasswordKey;
-PasswordKey=new UINT8[32];
-FileKey=new UINT8[32];
+Q_UINT8* FileKey;
+Q_UINT8* PasswordKey;
+PasswordKey=new Q_UINT8[32];
+FileKey=new Q_UINT8[32];
 sha256_context sha32;
 /////////////////////////
 QFile file(filename);
-if(file.open(IO_ReadOnly) == false) return false;
+if(file.open(QIODevice::ReadOnly) == false) return false;
 unsigned long FileSize=file.size();
 if(FileSize == 32){
 	if(file.readBlock((char*)FileKey,32) != 32){
@@ -381,14 +381,14 @@ return deleteEntry(getEntryIterator(entry));
 bool PwDatabase::IsMetaStream(CEntry& p){
 
 if(p.pBinaryData == NULL) return false;
-if(p.Additional == NULL) return false;
-if(p.BinaryDesc == NULL) return false;
+if(p.Additional == "") return false;
+if(p.BinaryDesc == "") return false;
 if(p.BinaryDesc != "bin-stream") return false;
-if(p.Title == NULL) return false;
+if(p.Title == "") return false;
 if(p.Title != "Meta-Info") return false;
-if(p.UserName == NULL) return false;
+if(p.UserName == "") return false;
 if(p.UserName != "SYSTEM") return false;
-if(p.URL == NULL) return false;
+if(p.URL == "") return false;
 if(p.URL != "$") return false;
 if(p.ImageID != 0) return false;
 return true;
@@ -402,7 +402,7 @@ entry->GroupID=dst->ID;
 
 
 
-bool CGroup::ReadGroupField(UINT16 FieldType, UINT32 FieldSize, UINT8 *pData)
+bool CGroup::ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData)
 {
 
 	switch(FieldType)
@@ -456,7 +456,7 @@ PwDatabase::~PwDatabase(){
 }
 
 
-bool CEntry::ReadEntryField(UINT16 FieldType, UINT32 FieldSize, UINT8 *pData){
+bool CEntry::ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData){
 
 
 switch(FieldType)
@@ -510,7 +510,7 @@ switch(FieldType)
 		{
 			///@TODO: im Destruktor löschen
 			///@TODO: im Konstruktor auf Null
-			pBinaryData = new UINT8[FieldSize];
+			pBinaryData = new Q_UINT8[FieldSize];
 			memcpy(pBinaryData, pData, FieldSize);
 			BinaryDataLength = FieldSize;
 		}
@@ -535,11 +535,11 @@ return true;
 
 bool PwDatabase::SaveDataBase(QString filename){
 CGroup SearchGroup;
-UINT32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
-UINT8 TrafoRandomSeed[32];
-UINT8 FinalRandomSeed[16];
-UINT8 ContentsHash[32];
-UINT8 EncryptionIV[16];
+Q_UINT32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
+Q_UINT8 TrafoRandomSeed[32];
+Q_UINT8 FinalRandomSeed[16];
+Q_UINT8 ContentsHash[32];
+Q_UINT8 EncryptionIV[16];
 
 if(SearchGroupID!=-1){
  for(int i=0;i<Groups.size();i++){
@@ -586,8 +586,8 @@ getRandomBytes(FinalRandomSeed,1,16,false);
 getRandomBytes(TrafoRandomSeed,1,32,false);
 getRandomBytes(EncryptionIV,1,16,false);
 
-UINT16 FieldType;
-UINT32 FieldSize;
+Q_UINT16 FieldType;
+Q_UINT32 FieldSize;
 int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
 
 for(int i=0; i < Groups.size(); i++){
@@ -743,7 +743,7 @@ memcpy(buffer+56,ContentsHash,32);
 memcpy(buffer+88,TrafoRandomSeed,32);
 memcpy(buffer+120,&KeyEncRounds,4);
 transformKey(MasterKey,TransformedMasterKey,TrafoRandomSeed,KeyEncRounds);
-UINT8 FinalKey[32];
+Q_UINT8 FinalKey[32];
 sha256_starts(&context);
 sha256_update(&context,FinalRandomSeed, 16);
 sha256_update(&context,TransformedMasterKey, 32);
@@ -758,18 +758,18 @@ Rijndael aes;
 	//TODO:ERR_MSG
 	delete [] buffer;
 	return false;}
-EncryptedPartSize = (unsigned long)aes.padEncrypt((UINT8*)buffer+DB_HEADER_SIZE,
+EncryptedPartSize = (unsigned long)aes.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZE,
 						  pos - DB_HEADER_SIZE,
-						  (UINT8*)buffer+DB_HEADER_SIZE);
+						  (Q_UINT8*)buffer+DB_HEADER_SIZE);
 }else if(CryptoAlgorithmus == ALGO_TWOFISH){
 CTwofish twofish;
 if(twofish.init(FinalKey, 32, EncryptionIV) == false){
 //TODO:ERR_MSG
 delete [] buffer;
 return false;}
-EncryptedPartSize = (unsigned long)twofish.padEncrypt((UINT8*)buffer+DB_HEADER_SIZE,
+EncryptedPartSize = (unsigned long)twofish.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZE,
 						      pos - DB_HEADER_SIZE,
-						      (UINT8*)buffer+DB_HEADER_SIZE);
+						      (Q_UINT8*)buffer+DB_HEADER_SIZE);
 }
 
 if((EncryptedPartSize > 2147483446) || (EncryptedPartSize == 0)){
@@ -778,7 +778,7 @@ delete [] buffer;
 return false;
 }
 
-if(file.open(IO_ReadWrite | IO_Truncate)==false){
+if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)==false){
 //TODO:ERR_MSG
 delete [] buffer;
 return false;
@@ -889,14 +889,14 @@ for(int i=0;i<db->Groups.size();i++){
 }
 }
 
-bool PwDatabase::isGroupIdInUse(UINT32 id){
+bool PwDatabase::isGroupIdInUse(Q_UINT32 id){
 for(int i=0;i<Groups.size();i++)
  if(Groups[i].ID==id)return true;
 
 return false;
 }
 
-bool PwDatabase::isEntrySidInUse(UINT32 sid){
+bool PwDatabase::isEntrySidInUse(Q_UINT32 sid){
 for(int i=0;i<Entries.size();i++)
  if(Entries[i].sID==sid)return true;
 
@@ -904,8 +904,8 @@ return false;
 }
 
 
-UINT32 PwDatabase::getNewGroupId(){
-UINT32 id;
+Q_UINT32 PwDatabase::getNewGroupId(){
+Q_UINT32 id;
 bool used;
 while(1){
 used=false;
@@ -917,8 +917,8 @@ if(used==false)break;}
 return id;
 }
 
-UINT32 PwDatabase::getNewEntrySid(){
-UINT32 sid;
+Q_UINT32 PwDatabase::getNewEntrySid(){
+Q_UINT32 sid;
 while(1){
 getRandomBytes(&sid,4,1,false);
 if(!sid)continue;
@@ -931,7 +931,7 @@ bool PwDatabase::convHexToBinaryKey(char* HexKey, char* dst){
 QString hex=QString::fromAscii(HexKey,64);
 for(int i=0; i<64; i+=2){
 	bool err;
-	UINT8 bin;
+	Q_UINT8 bin;
 	bin=hex.mid(i,2).toUInt(&err,16);
 	if(!err){
 		qWarning("Invalid Hex Key\n");
@@ -940,7 +940,7 @@ for(int i=0; i<64; i+=2){
 }
 }
 
-void memcpyFromLEnd32(UINT32* dst,char* src){
+void memcpyFromLEnd32(Q_UINT32* dst,char* src){
 #ifdef KEEPASS_LITTLE_ENDIAN
   memcpy(dst,src,4);
 #endif
@@ -952,7 +952,7 @@ void memcpyFromLEnd32(UINT32* dst,char* src){
 #endif
 }
 
-void memcpyFromLEnd16(UINT16* dst,char* src){
+void memcpyFromLEnd16(Q_UINT16* dst,char* src){
 #ifdef KEEPASS_LITTLE_ENDIAN
   memcpy(dst,src,2);
 #endif

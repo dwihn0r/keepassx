@@ -25,7 +25,7 @@
 #include <qregexp.h>
 #include <qmessagebox.h>
 
-CSearchDlg::CSearchDlg(CGroup* pGroup,QWidget* parent, const char* name, bool modal, WFlags fl)
+CSearchDlg::CSearchDlg(CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : Search_Dlg(parent,name, modal,fl)
 {
 parentwnd=(CMainWindow*)parent;

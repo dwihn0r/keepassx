@@ -22,6 +22,8 @@
 #define PASSWORDDIALOG_H
 #include "lib/UrlLabel.h"
 #include "ui_PasswordDlg.h"
+//Added by qt3to4:
+#include <Q3ValueList>
 
 class CPasswordDialog : public PasswordDlg
 {
@@ -31,7 +33,7 @@ private:
 CMainWindow* parentwnd;
 int NumComboEntries;
 QStringList Paths;
-QValueList<bool> IsFile;
+Q3ValueList<bool> IsFile;
 LinkLabel* Label_select;
 
 
@@ -43,7 +45,7 @@ bool canceled;
 
 
 public:
-  CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CPasswordDialog();
   /*$PUBLIC_FUNCTIONS$*/
 

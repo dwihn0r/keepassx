@@ -26,7 +26,7 @@
 #include "SettingsDlg.h"
 
 
-CSettingsDlg::CSettingsDlg(QWidget* parent, const char* name, bool modal, WFlags fl)
+CSettingsDlg::CSettingsDlg(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : SettingsDialog(parent,name, modal,fl)
 {
 pw=((CMainWindow*)parentWidget())->db;
@@ -36,13 +36,13 @@ mainwnd->CreateBanner(Banner,mainwnd->Icon_Settings32x32,trUtf8("Einstellungen")
 CheckBox_OpenLast->setChecked(mainwnd->config->OpenLast);
 SpinBox_ClipboardTime->setValue(mainwnd->config->ClipboardTimeOut);
 pixmTextColor->setPixmap(*(new QPixmap(pixmTextColor->width(),pixmTextColor->height())));
-pixmTextColor->pixmap()->fill(mainwnd->config->BannerTextColor);
+//pixmTextColor->pixmap()->fill(mainwnd->config->BannerTextColor);
 
 pixmColor1->setPixmap(*(new QPixmap(pixmColor1->width(),pixmColor1->height())));
-pixmColor1->pixmap()->fill(mainwnd->config->BannerColor1);
+//pixmColor1->pixmap()->fill(mainwnd->config->BannerColor1);
 
 pixmColor2->setPixmap(*(new QPixmap(pixmColor2->width(),pixmColor2->height())));
-pixmColor2->pixmap()->fill(mainwnd->config->BannerColor2);
+//pixmColor2->pixmap()->fill(mainwnd->config->BannerColor2);
 
 color1=mainwnd->config->BannerColor1;
 color2=mainwnd->config->BannerColor2;

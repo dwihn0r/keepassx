@@ -23,7 +23,7 @@
 #include <iostream.h>
 #include "random.h"
 
-UINT8 SecString::Key[32]={0};
+Q_UINT8 SecString::Key[32]={0};
 
 SecString::SecString(){
 data=NULL;

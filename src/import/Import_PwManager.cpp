@@ -34,7 +34,7 @@ char* buffer=NULL;
 int offset=0;
 int len=0;
 if(!file.exists()){err+=QObject::trUtf8("Die angegebene Datei existiert nicht."); return false;}
-if(!file.open(IO_ReadOnly)){err+=QObject::trUtf8("Datei konnte nicht geöffnet werden."); return false;}
+if(!file.open(QIODevice::ReadOnly)){err+=QObject::trUtf8("Datei konnte nicht geöffnet werden."); return false;}
 if(len=file.size()) buffer=new char[len];
 else {err+=QObject::trUtf8("Datei ist leer"); return false;}
 file.readBlock(buffer,len);
@@ -116,7 +116,7 @@ QString err;
 int col,line;
 if(!db.setContent(QString::fromUtf8(content,strlen(content)-1),false,&err,&line,&col)){
 	cout << "Import_PwManager::parseXmlContent():" << endl;
-	cout << (err+" (Line:%1 Column:%2)").arg(line).arg(col) << endl;
+	cout << (err+" (Line:%1 Column:%2)").arg(line).arg(col).ascii() << endl;
 	return false;}
 QDomElement root=db.documentElement();
 if(root.tagName()!="P")return false;

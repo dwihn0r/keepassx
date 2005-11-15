@@ -39,14 +39,14 @@ public:
 	CTwofish();
 	virtual ~CTwofish();
 
-	bool init(UINT8 *pKey, unsigned long uKeyLen, UINT8 *initVector = NULL);
+	bool init(Q_UINT8 *pKey, unsigned long uKeyLen, Q_UINT8 *initVector = NULL);
 
-	int padEncrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer);
-	int padDecrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer);
+	int padEncrypt(Q_UINT8 *pInput, int nInputOctets, Q_UINT8 *pOutBuffer);
+	int padDecrypt(Q_UINT8 *pInput, int nInputOctets, Q_UINT8 *pOutBuffer);
 
 private:
 	Twofish_key m_key;
-	UINT8 m_pInitVector[16];
+	Q_UINT8 m_pInitVector[16];
 };
 
 #endif

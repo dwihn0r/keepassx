@@ -24,16 +24,18 @@
 #include <qfont.h>
 #include <qlineedit.h>
 #include <qlabel.h>
-#include <qprogressbar.h>
-#include <qtextedit.h>
+#include <q3progressbar.h>
+#include <q3textedit.h>
 #include <qpixmap.h>
 #include <qcolor.h>
 #include <qcombobox.h>
 #include <qpainter.h>
 #include <qpen.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
+//Added by qt3to4:
+#include <QShowEvent>
 
 
 #include "PasswordGenDlg.h"
@@ -41,7 +43,7 @@
 
 
 
-CEditEntryDlg::CEditEntryDlg(QWidget* parent, const char* name, bool modal, WFlags fl)
+CEditEntryDlg::CEditEntryDlg(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : EditEntryDialog(parent,name, modal,fl)
 {
 
@@ -261,17 +263,17 @@ Edit_Expire_Time->setPaletteBackgroundColor(QColor(255,255,255));///@FIXME Stand
 
 void CEditEntryDlg::OnNewAttachment()
 {
-QString filename=QFileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Anhang hinzufügen..."));
+QString filename=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Anhang hinzufügen..."));
 if(filename=="")return;
 QFile file(filename);
-if(file.open(IO_ReadOnly)==false){
+if(file.open(QIODevice::ReadOnly)==false){
 file.close();
 QMessageBox::warning(NULL,trUtf8("Fehler"),trUtf8("Datei konnte nicht geöffnet werden."),"OK");
 return;
 }
 ModFlag=true;
 if(entry->pBinaryData)delete [] entry->pBinaryData;
-entry->pBinaryData = new UINT8 [file.size()];
+entry->pBinaryData = new Q_UINT8 [file.size()];
 
 if(entry->pBinaryData==NULL){
 file.close();
@@ -300,7 +302,7 @@ ButtonDeleteAttachment->setEnabled(true);
 
 void CEditEntryDlg::OnSaveAttachment()
 {
-QString filename=QFileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Anhang speichern..."));
+QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Anhang speichern..."));
 if(filename=="")return;
 QFile file(filename);
 if(file.exists()){
@@ -310,7 +312,7 @@ if(file.remove()==false){
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht überschrieben werden."),"OK");
 return;}
 }
-if(file.open(IO_WriteOnly)==false){
+if(file.open(QIODevice::WriteOnly)==false){
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht erstellt werden."),"OK");
 return;
 }

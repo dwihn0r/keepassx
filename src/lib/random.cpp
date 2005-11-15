@@ -31,11 +31,11 @@ else{
 dev_random = fopen("/dev/urandom","r");}
 
 if (dev_random==NULL){
- cout << QObject::tr("/dev/random konnte nicht geöffnet werden - nutze Standardbibliothek (stdlib)") << endl;
+ qWarning(QObject::tr("/dev/random konnte nicht geöffnet werden - nutze Standardbibliothek (stdlib)")+"\n");
  srand(QTime(0,0,0).secsTo(QTime::currentTime()));
  for(int i=0;i<NumBlocks*BlockSize;i++){
-	UINT8 rnd=rand()%256;
-	((UINT8*)buffer)[i]=rnd;
+	Q_UINT8 rnd=rand()%256;
+	((Q_UINT8*)buffer)[i]=rnd;
 	}
  return;
 }

@@ -40,7 +40,7 @@ public:
  static void generateSessionKey();
 
 private:
- static UINT8 Key[32];
+ static Q_UINT8 Key[32];
  QString plaintext;
  char* data;
  int len;

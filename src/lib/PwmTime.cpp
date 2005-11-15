@@ -21,9 +21,9 @@
 
 
 void CPwmTime::Set(unsigned char* pBytes){
-UINT32 dw1, dw2, dw3, dw4, dw5;
-dw1 = (UINT32)pBytes[0]; dw2 = (UINT32)pBytes[1]; dw3 = (UINT32)pBytes[2];
-dw4 = (UINT32)pBytes[3]; dw5 = (UINT32)pBytes[4];
+Q_UINT32 dw1, dw2, dw3, dw4, dw5;
+dw1 = (Q_UINT32)pBytes[0]; dw2 = (Q_UINT32)pBytes[1]; dw3 = (Q_UINT32)pBytes[2];
+dw4 = (Q_UINT32)pBytes[3]; dw5 = (Q_UINT32)pBytes[4];
 // Unpack 5 byte structure to date and time
 ///@FIXME nicht Endian-sicher
 Year = (dw1 << 6) | (dw2 >> 2);
@@ -36,14 +36,14 @@ Second = dw5 & 0x0000003F;
 
 void CPwmTime::GetPackedTime(unsigned char* pBytes){
 ///@FIXME nicht Endian-sicher
-pBytes[0] = (UINT8)(((UINT32)Year >> 6) & 0x0000003F);
-pBytes[1] = (UINT8)((((UINT32)Year & 0x0000003F) << 2) | (((UINT32)Month >> 2) & 0x00000003));
-pBytes[2] = (UINT8)((((UINT32)Month & 0x00000003) << 6) | (((UINT32)Day & 0x0000001F) << 1) | (((UINT32)Hour >> 4) & 0x00000001));
-pBytes[3] = (UINT8)((((UINT32)Hour & 0x0000000F) << 4) | (((UINT32)Minute >> 2) & 0x0000000F));
-pBytes[4] = (UINT8)((((UINT32)Minute & 0x00000003) << 6) | ((UINT32)Second & 0x0000003F));
+pBytes[0] = (Q_UINT8)(((Q_UINT32)Year >> 6) & 0x0000003F);
+pBytes[1] = (Q_UINT8)((((Q_UINT32)Year & 0x0000003F) << 2) | (((Q_UINT32)Month >> 2) & 0x00000003));
+pBytes[2] = (Q_UINT8)((((Q_UINT32)Month & 0x00000003) << 6) | (((Q_UINT32)Day & 0x0000001F) << 1) | (((Q_UINT32)Hour >> 4) & 0x00000001));
+pBytes[3] = (Q_UINT8)((((Q_UINT32)Hour & 0x0000000F) << 4) | (((Q_UINT32)Minute >> 2) & 0x0000000F));
+pBytes[4] = (Q_UINT8)((((Q_UINT32)Minute & 0x00000003) << 6) | ((Q_UINT32)Second & 0x0000003F));
 }
 
-QString CPwmTime::GetString(UINT16 format){
+QString CPwmTime::GetString(Q_UINT16 format){
 QString str;
 switch(format){
 	case 0:
@@ -88,7 +88,7 @@ str=str.arg(Second);}
 return str;
 }
 
-void CPwmTime::Set(UINT8 iDay,UINT8 iMonth,UINT16 iYear,UINT8 iHour,UINT8 iMinute,UINT8 iSecond){
+void CPwmTime::Set(Q_UINT8 iDay,Q_UINT8 iMonth,Q_UINT16 iYear,Q_UINT8 iHour,Q_UINT8 iMinute,Q_UINT8 iSecond){
 Day=iDay;
 Month=iMonth;
 Year=iYear;

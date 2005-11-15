@@ -68,16 +68,16 @@ private:
  EntryItr getEntryIterator(CEntry* pEntry);
  GroupItr getGroupIterator(CGroup* pGroup);
  bool IsMetaStream(CEntry& Entry);
- void transformKey(UINT8* src,UINT8* dst,UINT8* seed,int rounds);
+ void transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* seed,int rounds);
  bool readHeader(char* raw);
- bool isGroupIdInUse(UINT32 GroupID);
- bool isEntrySidInUse(UINT32 sID);
- UINT32 getNewGroupId();
- UINT32 getNewEntrySid();
+ bool isGroupIdInUse(Q_UINT32 GroupID);
+ bool isEntrySidInUse(Q_UINT32 sID);
+ Q_UINT32 getNewGroupId();
+ Q_UINT32 getNewEntrySid();
  bool convHexToBinaryKey(char* HexKey, char* dst);
 };
 
- void memcpyFromLEnd32(UINT32* dst,char* src);
- void memcpyFromLEnd16(UINT16* dst,char* src);
+ void memcpyFromLEnd32(Q_UINT32* dst,char* src);
+ void memcpyFromLEnd16(Q_UINT16* dst,char* src);
 
 #endif

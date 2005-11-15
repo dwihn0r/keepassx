@@ -23,12 +23,12 @@
 #define _PWSAFE_H_
 
 #include <qapplication.h>
-#include <qmainwindow.h>
+#include <q3mainwindow.h>
 #include "PwmConfig.h"
 
 class CMainWindow;
 
-class PwSafe : public QMainWindow
+class PwSafe : public Q3MainWindow
 {
     Q_OBJECT
 public:

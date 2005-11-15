@@ -24,16 +24,16 @@
 #include <qdir.h>
 #include <qstringlist.h>
 #include <qcheckbox.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qlineedit.h>
 #include <qcombobox.h>
 #include <qpushbutton.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qmessagebox.h>
 
 
 
-CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, WFlags fl)
+CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : PasswordDlg(parent,name, modal,fl)
 {
 parentwnd=((CMainWindow*)parentWidget());
@@ -95,7 +95,7 @@ return;
 void CPasswordDialog::OnButtonBrowse()
 {
 ///@PlatformSpecific
-QString dir=QFileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,QString::fromUtf8("Verzeichnis wählen"));
+QString dir=Q3FileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,QString::fromUtf8("Verzeichnis wählen"));
 if(dir=="")return;
 
 QFile file(dir+"/pwsafe.key");
@@ -117,7 +117,7 @@ QMessageBox::warning(this,"Datei nicht gefunden",QString::fromUtf8("Im gewählte
 void CPasswordDialog::OnSelectClicked()
 {
 if(Button_Browse->isEnabled()){
-keyfile=QFileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Schlüsseldatei öffnen"));
+keyfile=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Schlüsseldatei öffnen"));
 if(keyfile=="")return;
 Combo_Dirs->insertItem(keyfile);
 Combo_Dirs->setCurrentItem(Combo_Dirs->count()-1);
@@ -172,7 +172,7 @@ Button_Browse->setEnabled(true);}
 
 void CPasswordDialog::OnCheckBox_BothChanged(int state)
 {
-if(state==QButton::On){
+if(state==QCheckBox::On){
 Combo_Dirs->setEnabled(true);
 Button_Browse->setEnabled(true);
 Edit_Password->setEnabled(true);}

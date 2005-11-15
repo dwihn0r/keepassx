@@ -29,14 +29,14 @@ QFile file(FileName);
 if(!file.exists()){
 	err+=QObject::trUtf8("Datei nicht gefunden");
 	return false;}
-if(!file.open(IO_ReadOnly)){
+if(!file.open(QIODevice::ReadOnly)){
 	err+=QObject::trUtf8("Datei konnte nicht geöffnet werden");
 	return false;}
 int len=file.size();
 if(len==0){
 	err+=QObject::trUtf8("Datei ist leer");
 	return false;}
-UINT8* buffer=new UINT8[len];
+Q_UINT8* buffer=new Q_UINT8[len];
 file.readBlock((char*)buffer,len);
 file.close();
 QDomDocument doc;
@@ -44,7 +44,7 @@ QString xmlerr;
 int col,line;
 if(!doc.setContent(QString::fromUtf8((char*)buffer,len),false,&xmlerr,&line,&col)){
 	cout << "Import_PwManager::parseXmlContent():" << endl;
-	cout << (xmlerr+" (Line:%1 Column:%2)").arg(line).arg(col) << endl;
+	cout << (xmlerr+" (Line:%1 Column:%2)").arg(line).arg(col).ascii() << endl;
 	err+=QObject::trUtf8("Ungültiges XML-Dokument");
 	delete [] buffer;
 	return false;}
@@ -93,7 +93,7 @@ int offset=0;
 if(len<48){
 	err+=QObject::trUtf8("Unerwartete Dateilänge");
 	return false;}
-UINT8* buffer=new UINT8[len];
+Q_UINT8* buffer=new Q_UINT8[len];
 int df=file.readBlock((char*)buffer,len);
 file.close();
 

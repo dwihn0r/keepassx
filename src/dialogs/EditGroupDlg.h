@@ -23,13 +23,15 @@
 
 #include "ui_EditGroupDlg.h"
 #include <qstring.h>
+//Added by qt3to4:
+#include <QShowEvent>
 
 class CEditGroupDialog : public EditGroupDialog
 {
   Q_OBJECT
 
 public:
-  CEditGroupDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CEditGroupDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CEditGroupDialog();
 virtual void showEvent(QShowEvent *event);
   /*$PUBLIC_FUNCTIONS$*/

@@ -25,9 +25,9 @@
 #include <qradiobutton.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
-#include <qprogressbar.h>
+#include <q3progressbar.h>
 
-CGenPwDialog::CGenPwDialog(QWidget* parent, const char* name, bool modal, WFlags fl)
+CGenPwDialog::CGenPwDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : GenPwDlg(parent,name, modal,fl)
 {
 mainwnd=(CMainWindow*)(((CEditEntryDlg*)parentWidget())->parentWidget());
@@ -47,7 +47,7 @@ CGenPwDialog::~CGenPwDialog()
 void CGenPwDialog::OnRadio1StateChanged(int state)
 {
 switch (state){
- case QButton::On:
+ case QCheckBox::On:
  Radio_2->setChecked(false);
  checkBox1->setEnabled(true);
  checkBox2->setEnabled(true);
@@ -58,7 +58,7 @@ switch (state){
  checkBox7->setEnabled(true);
  checkBox8->setEnabled(true);
  break;
- case QButton::Off:
+ case QCheckBox::Off:
  if(Radio_2->isChecked()==false)Radio_2->setChecked(true);
  checkBox1->setDisabled(true);
  checkBox2->setDisabled(true);
@@ -70,7 +70,7 @@ switch (state){
  checkBox8->setDisabled(true);
 
  break;
- case QButton::NoChange:
+ case QCheckBox::NoChange:
  break;
 }
 
@@ -79,15 +79,15 @@ switch (state){
 void CGenPwDialog::OnRadio2StateChanged(int state)
 {
 switch (state){
- case QButton::On:
+ case QCheckBox::On:
  Radio_1->setChecked(false);
  Edit_chars->setEnabled(true);
  break;
- case QButton::Off:
+ case QCheckBox::Off:
   if(Radio_1->isChecked()==false)Radio_1->setChecked(true);
  Edit_chars->setDisabled(true);
  break;
- case QButton::NoChange:
+ case QCheckBox::NoChange:
  break;
 }
 
@@ -149,7 +149,7 @@ num+=AddToAssoctable(assoctable,128,255,num);
 QString str=Edit_chars->text();
 int i=0;
 while(str.length()>0){
-assoctable[i]=(char)((QChar)str[0]);
+assoctable[i]=((QChar)str[0]).toAscii();
 str.remove(str[0]);
 i++;
 num++;

@@ -40,7 +40,7 @@ CTwofish::~CTwofish()
 {
 }
 
-bool CTwofish::init(UINT8 *pKey, unsigned long uKeyLen, UINT8 *initVector)
+bool CTwofish::init(Q_UINT8 *pKey, unsigned long uKeyLen, Q_UINT8 *initVector)
 {
 	//ASSERT(pKey != NULL);
 	if(pKey == NULL) return false;
@@ -61,10 +61,10 @@ bool CTwofish::init(UINT8 *pKey, unsigned long uKeyLen, UINT8 *initVector)
 	return true;
 }
 
-int CTwofish::padEncrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
+int CTwofish::padEncrypt(Q_UINT8 *pInput, int nInputOctets, Q_UINT8 *pOutBuffer)
 {
 	int i, numBlocks, padLen;
-	UINT8 block[16], *iv;
+	Q_UINT8 block[16], *iv;
 
 	//ASSERT((pInput != NULL) && (nInputOctets != NULL) && (pOutBuffer != NULL));
 	if((pInput == NULL) || (nInputOctets <= 0) || (pOutBuffer == NULL)) return 0;
@@ -74,10 +74,10 @@ int CTwofish::padEncrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
 	iv = m_pInitVector;
 	for(i = numBlocks; i > 0; i--)
 	{
-		((UINT32*)block)[0] = ((UINT32*)pInput)[0] ^ ((UINT32*)iv)[0];
-		((UINT32*)block)[1] = ((UINT32*)pInput)[1] ^ ((UINT32*)iv)[1];
-		((UINT32*)block)[2] = ((UINT32*)pInput)[2] ^ ((UINT32*)iv)[2];
-		((UINT32*)block)[3] = ((UINT32*)pInput)[3] ^ ((UINT32*)iv)[3];
+		((Q_UINT32*)block)[0] = ((Q_UINT32*)pInput)[0] ^ ((Q_UINT32*)iv)[0];
+		((Q_UINT32*)block)[1] = ((Q_UINT32*)pInput)[1] ^ ((Q_UINT32*)iv)[1];
+		((Q_UINT32*)block)[2] = ((Q_UINT32*)pInput)[2] ^ ((Q_UINT32*)iv)[2];
+		((Q_UINT32*)block)[3] = ((Q_UINT32*)pInput)[3] ^ ((Q_UINT32*)iv)[3];
 
 		Twofish_encrypt(&m_key, (Twofish_Byte *)block, (Twofish_Byte *)pOutBuffer);
 
@@ -90,12 +90,12 @@ int CTwofish::padEncrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
 
 	for (i = 0; i < 16 - padLen; i++)
 	{
-		block[i] = (UINT8)(pInput[i] ^ iv[i]);
+		block[i] = (Q_UINT8)(pInput[i] ^ iv[i]);
 	}
 
 	for (i = 16 - padLen; i < 16; i++)
 	{
-		block[i] = (UINT8)((UINT8)padLen ^ iv[i]);
+		block[i] = (Q_UINT8)((Q_UINT8)padLen ^ iv[i]);
 	}
 
 	Twofish_encrypt(&m_key, (Twofish_Byte *)block, (Twofish_Byte *)pOutBuffer);
@@ -103,11 +103,11 @@ int CTwofish::padEncrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
 	return 16 * (numBlocks + 1);
 }
 
-int CTwofish::padDecrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
+int CTwofish::padDecrypt(Q_UINT8 *pInput, int nInputOctets, Q_UINT8 *pOutBuffer)
 {
 	int i, numBlocks, padLen;
-	UINT8 block[16];
-	UINT32 iv[4];
+	Q_UINT8 block[16];
+	Q_UINT32 iv[4];
 
 	//ASSERT((pInput != NULL) && (nInputOctets != NULL) && (pOutBuffer != NULL));
 	if((pInput == NULL) || (nInputOctets <= 0) || (pOutBuffer == NULL)) return 0;
@@ -121,10 +121,10 @@ int CTwofish::padDecrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
 	for(i = numBlocks - 1; i > 0; i--)
 	{
 		Twofish_decrypt(&m_key, (Twofish_Byte *)pInput, (Twofish_Byte *)block);
-		((UINT32*)block)[0] ^= iv[0];
-		((UINT32*)block)[1] ^= iv[1];
-		((UINT32*)block)[2] ^= iv[2];
-		((UINT32*)block)[3] ^= iv[3];
+		((Q_UINT32*)block)[0] ^= iv[0];
+		((Q_UINT32*)block)[1] ^= iv[1];
+		((Q_UINT32*)block)[2] ^= iv[2];
+		((Q_UINT32*)block)[3] ^= iv[3];
 		memcpy(iv, pInput, 16);
 		memcpy(pOutBuffer, block, 16);
 		pInput += 16;
@@ -132,10 +132,10 @@ int CTwofish::padDecrypt(UINT8 *pInput, int nInputOctets, UINT8 *pOutBuffer)
 	}
 
 	Twofish_decrypt(&m_key, (Twofish_Byte *)pInput, (Twofish_Byte *)block);
-	((UINT32*)block)[0] ^= iv[0];
-	((UINT32*)block)[1] ^= iv[1];
-	((UINT32*)block)[2] ^= iv[2];
-	((UINT32*)block)[3] ^= iv[3];
+	((Q_UINT32*)block)[0] ^= iv[0];
+	((Q_UINT32*)block)[1] ^= iv[1];
+	((Q_UINT32*)block)[2] ^= iv[2];
+	((Q_UINT32*)block)[3] ^= iv[3];
 	padLen = block[15];
 	if(padLen <= 0 || padLen > 16) return -1;
 	for(i = 16 - padLen; i < 16; i++)

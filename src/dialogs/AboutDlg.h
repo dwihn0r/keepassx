@@ -31,7 +31,7 @@ class CAboutDialog : public AboutDlg
 
   LinkLabel *Link_Homepage,*Link_EMail,*Link_License;
 public:
-  CAboutDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CAboutDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CAboutDialog();
 
  CMainWindow* mainwnd;

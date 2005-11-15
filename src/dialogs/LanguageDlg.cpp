@@ -22,8 +22,10 @@
 #include <qtranslator.h>
 #include <qdir.h>
 #include <qstringlist.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QShowEvent>
 #include <iostream.h>
 
 const char* infostrings[]={
@@ -35,13 +37,13 @@ const char* msg[]={QT_TRANSLATE_NOOP("_MSG","Die Änderung der Sprache wird erst
 		   QT_TRANSLATE_NOOP("_MSG","OK"),
 		   QT_TRANSLATE_NOOP("_MSG","Hinweis")};
 
-CLanguageDlg::CLanguageDlg(QWidget* parent, const char* name, WFlags fl)
+CLanguageDlg::CLanguageDlg(QWidget* parent, const char* name, Qt::WFlags fl)
 : LanguageDlg(parent,name,fl)
 {
 parentwnd=((CMainWindow*)parentWidget());
 parentwnd->CreateBanner(Banner,parentwnd->Icon_I18n32x32,trUtf8("Spracheinstellungen"));
 
-QListViewItem* item;
+Q3ListViewItem* item;
 QString& config_lang=parentwnd->config->Language;
 QStringList files;
 
@@ -51,7 +53,7 @@ if(dir.exists()){
 files=dir.entryList("*.qm",QDir::Files);
 }
 
-List->insertItem(item=new QListViewItem(List,"","Deutsch","-","-"));
+List->insertItem(item=new Q3ListViewItem(List,"","Deutsch","-","-"));
 if(config_lang=="_DEUTSCH_")item->setPixmap(0,*parentwnd->Icon_Ok16x16);
 pItems.push_back(item);
 filenames.push_back("_DEUTSCH_");
@@ -62,9 +64,9 @@ QTranslator translator;
  if(!translator.load(langdir+files[i])){
   QMessageBox::warning(this,tr("Warnung"),tr("Die Datei '%1' konnte nicht geladen werden.").arg(files[i]),tr("OK"),0,0,2,1);
   continue;}
-List->insertItem(item=new QListViewItem(List,"",translator.findMessage("_INFO","$TRANSL_LANGUAGE").translation()
-				       ,translator.findMessage("_INFO","$TRANSL_VERSION").translation()
-				       ,translator.findMessage("_INFO","$TRANSL_AUTHOR").translation()));
+List->insertItem(item=new Q3ListViewItem(List,"",translator.translate("_INFO","$TRANSL_LANGUAGE")
+				       ,translator.translate("_INFO","$TRANSL_VERSION")
+				       ,translator.translate("_INFO","$TRANSL_AUTHOR")));
 if(config_lang==files[i])item->setPixmap(0,*parentwnd->Icon_Ok16x16);
 pItems.push_back(item);
 filenames.push_back(files[i]);
@@ -85,13 +87,13 @@ List->setColumnWidth(3,width);
 }
 }
 
-void CLanguageDlg::OnItemRightClick(QListViewItem* item)
+void CLanguageDlg::OnItemRightClick(Q3ListViewItem* item)
 {
 //CTX-MENU
 
 }
 
-void CLanguageDlg::OnItemDoubleClicked(QListViewItem* item) // == Slot für Button "wählen"
+void CLanguageDlg::OnItemDoubleClicked(Q3ListViewItem* item) // == Slot für Button "wählen"
 {
 int i;
 QString langdir=parentwnd->appdir+"/../share/keepass/i18n/";
@@ -99,7 +101,7 @@ QString langdir=parentwnd->appdir+"/../share/keepass/i18n/";
 for(i=0;i<pItems.size();i++){
  if(item==pItems[i])break;
  if(i==pItems.size()-1){
-	cout << QString("unexpected error in %1, line %2").arg(__FILE__).arg(__LINE__) << endl;
+	qWarning(QString("unexpected error in %1, line %2").arg(__FILE__).arg(__LINE__)+"\n");
 	exit(-1);}
 }
 if(filenames[i]!="_DEUTSCH_"){
@@ -108,10 +110,10 @@ if(!translator.load(langdir+filenames[i])){
  QMessageBox::warning(this,tr("Warnung"),tr("Die Datei '%1' konnte nicht geladen werden.").arg(filenames[i]),tr("OK"),0,0,2,1);
  return;
 }
-QMessageBox::information(this,translator.findMessage("_MSG",msg[2]).translation()
-			     ,translator.findMessage("_MSG",msg[0]).translation()
-			     ,translator.findMessage("_MSG",msg[1]).translation()
-			     ,0,0);
+QMessageBox::information(this,translator.translate("_MSG",msg[2])
+			     ,translator.translate("_MSG",msg[0])
+			     ,translator.translate("_MSG",msg[1])
+			     ,0,0,0);
 }
 else QMessageBox::information(this,QString::fromUtf8(msg[2]),QString::fromUtf8(msg[0]),QString::fromUtf8(msg[1]),0,0,2,1);
 parentwnd->config->Language=filenames[i];
@@ -130,7 +132,7 @@ List->setColumnWidth(3,width);
 
 void CLanguageDlg::OnApplyButtonClicked()
 {
-QListViewItem* item=List->selectedItem();
+Q3ListViewItem* item=List->selectedItem();
 if(item)OnItemDoubleClicked(item);
 else QMessageBox::information(this,tr("Hinweis"),trUtf8("Es ist keine Übersetzung aufsgewählt."),tr("OK"),0,0,2,1);
 }

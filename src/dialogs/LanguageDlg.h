@@ -22,6 +22,8 @@
 #define _LANGUAGEDLG_H_
 #include "ui_LanguageDlg.h"
 #include <qpixmap.h>
+//Added by qt3to4:
+#include <QShowEvent>
 
 
 
@@ -30,11 +32,11 @@ class CLanguageDlg : public LanguageDlg
   Q_OBJECT
 
 public:
-  CLanguageDlg(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  CLanguageDlg(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0 );
   ~CLanguageDlg();
   CMainWindow* parentwnd;
   vector<QString> filenames;
-  vector<QListViewItem*> pItems;
+  vector<Q3ListViewItem*> pItems;
   /*$PUBLIC_FUNCTIONS$*/
 
 public slots:
@@ -48,8 +50,8 @@ protected:
 protected slots:
   /*$PROTECTED_SLOTS$*/
   virtual void showEvent(QShowEvent *e);
-    virtual void OnItemDoubleClicked(QListViewItem* item);
-    virtual void OnItemRightClick(QListViewItem* item);
+    virtual void OnItemDoubleClicked(Q3ListViewItem* item);
+    virtual void OnItemRightClick(Q3ListViewItem* item);
     virtual void OnButtonCloseClicked();
     virtual void OnApplyButtonClicked();
 

@@ -23,7 +23,7 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 
-CSimplePasswordDialog::CSimplePasswordDialog(bool HidePw,QWidget* parent, const char* name, bool modal, WFlags fl)
+CSimplePasswordDialog::CSimplePasswordDialog(bool HidePw,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : SimplePasswordDialog(parent,name, modal,fl)
 {
 if(HidePw)Button_HidePassword->toggle();

@@ -31,7 +31,7 @@ class CSettingsDlg : public SettingsDialog
 public:
   CMainWindow* mainwnd;
   PwDatabase* pw;
-  CSettingsDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CSettingsDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CSettingsDlg();
   /*$PUBLIC_FUNCTIONS$*/
 

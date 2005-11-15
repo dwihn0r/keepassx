@@ -28,10 +28,10 @@ class CEntry{
 public:
 CEntry();
 ~CEntry();
-UINT8 ID[16];
-UINT32 sID;
-UINT32 GroupID;
-UINT32 ImageID;
+Q_UINT8 ID[16];
+Q_UINT32 sID;
+Q_UINT32 GroupID;
+Q_UINT32 ImageID;
 QString Title;
 QString URL;
 QString UserName;
@@ -42,10 +42,10 @@ CPwmTime Creation;
 CPwmTime LastMod;
 CPwmTime LastAccess;
 CPwmTime Expire;
-UINT8 *pBinaryData;
-UINT32 BinaryDataLength;
-UINT32 PasswordLength;
-bool ReadEntryField(UINT16 FieldType, UINT32 FieldSize, UINT8 *pData);
+Q_UINT8 *pBinaryData;
+Q_UINT32 BinaryDataLength;
+Q_UINT32 PasswordLength;
+bool ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
 };
 
 
@@ -53,17 +53,17 @@ class CGroup{
 public:
 CGroup();
 ~CGroup();
-UINT32 ID;
-UINT32 ImageID;
-UINT32 NumEntries;
+Q_UINT32 ID;
+Q_UINT32 ImageID;
+Q_UINT32 NumEntries;
 QString Name;
 CPwmTime Creation;
 CPwmTime LastMod;
 CPwmTime LastAccess;
 CPwmTime Expire;
-UINT16 Level;
-UINT32 Flags;
-bool ReadGroupField(UINT16 FieldType, UINT32 FieldSize, UINT8 *pData);
+Q_UINT16 Level;
+Q_UINT32 Flags;
+bool ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
 
 bool 	  UI_ItemIsExpanded;
 static bool UI_ExpandByDefault;
@@ -85,15 +85,15 @@ public:
 
 class Database:public AbstractDatabase{
 public:
- UINT32 CryptoAlgorithmus;
- UINT32 KeyEncRounds;
+ Q_UINT32 CryptoAlgorithmus;
+ Q_UINT32 KeyEncRounds;
  QString filename;
  bool modflag;
  int SearchGroupID;
 
 protected:
- UINT8 MasterKey[32];
- UINT8 TransformedMasterKey[32];
+ Q_UINT8 MasterKey[32];
+ Q_UINT8 TransformedMasterKey[32];
 };
 
 #endif
