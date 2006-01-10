@@ -5,9 +5,13 @@
 
 INSTALLS += Share \
             target 
-target.path = /usr/local/bin 
 Share.files += ../share/keepass/* 
-Share.path = /usr/local/share/keepass 
+unix{ Share.path = /usr/local/share/keepass
+      target.path = /usr/local/bin
+}
+macx{ Share.path = /Applications/keepass.app/Contents
+      target.path = /Applications
+}
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
          forms/AboutDlg.ui \

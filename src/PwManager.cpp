@@ -25,6 +25,7 @@
 #include <qstringlist.h>
 #include <qobject.h>
 #include <qdatetime.h>
+#include <QSysInfo>
 #include "crypto/sha256.h"
 #include "crypto/rijndael.h"
 #include "crypto/twoclass.h"
@@ -946,25 +947,25 @@ for(int i=0; i<64; i+=2){
 }
 
 void memcpyFromLEnd32(Q_UINT32* dst,char* src){
-#ifdef KEEPASS_LITTLE_ENDIAN
+
+if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
+  memcpy(((char*)dst)+3,src+0,1);
+  memcpy(((char*)dst)+2,src+1,1);
+  memcpy(((char*)dst)+1,src+2,1);
+  memcpy(((char*)dst)+0,src+3,1);
+}
+else
   memcpy(dst,src,4);
-#endif
-#ifdef KEEPASS_BIG_ENDIAN
-  memcpy(dst+3,src+0,1);
-  memcpy(dst+2,src+1,1);
-  memcpy(dst+1,src+2,1);
-  memcpy(dst+0,src+3,1);
-#endif
 }
 
 void memcpyFromLEnd16(Q_UINT16* dst,char* src){
-#ifdef KEEPASS_LITTLE_ENDIAN
+
+if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
+  memcpy(((char*)dst)+1,src+0,1);
+  memcpy(((char*)dst)+0,src+1,1);
+}
+else
   memcpy(dst,src,2);
-#endif
-#ifdef KEEPASS_BIG_ENDIAN
-  memcpy(dst+1,src+0,1);
-  memcpy(dst+0,src+1,1);
-#endif
 }
 
 const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));

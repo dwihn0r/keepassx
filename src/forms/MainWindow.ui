@@ -1,0 +1,347 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>724</width>
+    <height>468</height>
+   </rect>
+  </property>
+  <property name="mouseTracking" >
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle" >
+   <string>Keepass Passwort-Manager</string>
+  </property>
+  <widget class="QWidget" name="centralWidget" >
+   <layout class="QVBoxLayout" >
+    <property name="margin" >
+     <number>9</number>
+    </property>
+    <property name="spacing" >
+     <number>6</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter" >
+      <property name="sizePolicy" >
+       <sizepolicy>
+        <hsizetype>7</hsizetype>
+        <vsizetype>7</vsizetype>
+        <horstretch>0</horstretch>
+        <verstretch>60</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="orientation" >
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="KeepassGroupView" name="GroupView" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy" >
+        <sizepolicy>
+         <hsizetype>7</hsizetype>
+         <vsizetype>7</vsizetype>
+         <horstretch>30</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="acceptDrops" >
+        <bool>true</bool>
+       </property>
+       <property name="showDropIndicator" stdset="0" >
+        <bool>true</bool>
+       </property>
+       <property name="dragEnabled" >
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="KeepassEntryView" name="EntryView" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy" >
+        <sizepolicy>
+         <hsizetype>7</hsizetype>
+         <vsizetype>7</vsizetype>
+         <horstretch>70</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="selectionMode" >
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="rootIsDecorated" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="DetailView" >
+      <property name="enabled" >
+       <bool>false</bool>
+      </property>
+      <property name="sizePolicy" >
+       <sizepolicy>
+        <hsizetype>7</hsizetype>
+        <vsizetype>7</vsizetype>
+        <horstretch>0</horstretch>
+        <verstretch>10</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>724</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuHilfe" >
+    <property name="title" >
+     <string>Hilfe</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuDatei" >
+    <property name="title" >
+     <string>Datei</string>
+    </property>
+    <widget class="QMenu" name="menuImportieren_aus" >
+     <property name="title" >
+      <string>Importieren aus</string>
+     </property>
+     <addaction name="FileImpPwmAction" />
+     <addaction name="FileImpKWalletXmlAction" />
+    </widget>
+    <addaction name="FileNewAction" />
+    <addaction name="FileOpenAction" />
+    <addaction name="FileCloseAction" />
+    <addaction name="separator" />
+    <addaction name="FileSaveAction" />
+    <addaction name="FileSaveAsAction" />
+    <addaction name="separator" />
+    <addaction name="FileSettingsAction" />
+    <addaction name="FileChangeKeyAction" />
+    <addaction name="separator" />
+    <addaction name="menuImportieren_aus" />
+    <addaction name="separator" />
+    <addaction name="FileExitAction" />
+   </widget>
+   <widget class="QMenu" name="menuExtras" >
+    <property name="title" >
+     <string>Extras</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAnsicht" >
+    <property name="title" >
+     <string>Ansicht</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuBearbeiten" >
+    <property name="title" >
+     <string>Bearbeiten</string>
+    </property>
+    <addaction name="EditNewGroupAction" />
+    <addaction name="EditEditGroupAction" />
+    <addaction name="EditDeleteGroupAction" />
+    <addaction name="separator" />
+    <addaction name="EditPasswordToClipboardAction" />
+    <addaction name="EditUsernameToClipboardAction" />
+    <addaction name="ActionOpenUrl" />
+    <addaction name="EditSaveAttachmentAction" />
+    <addaction name="separator" />
+    <addaction name="EditNewEntryAction" />
+    <addaction name="EditEditEntryAction" />
+    <addaction name="EditCloneEntryAction" />
+    <addaction name="EditDeleteEntryAction" />
+    <addaction name="separator" />
+    <addaction name="EditSearchAction" />
+    <addaction name="EditGroupSearchAction" />
+   </widget>
+   <addaction name="menuDatei" />
+   <addaction name="menuBearbeiten" />
+   <addaction name="menuAnsicht" />
+   <addaction name="menuExtras" />
+   <addaction name="menuHilfe" />
+  </widget>
+  <widget class="QToolBar" name="toolBar" >
+   <property name="sizePolicy" >
+    <sizepolicy>
+     <hsizetype>1</hsizetype>
+     <vsizetype>7</vsizetype>
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>51</width>
+     <height>31</height>
+    </size>
+   </property>
+   <property name="maximumSize" >
+    <size>
+     <width>16777215</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="iconSize" >
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea" >
+    <number>4</number>
+   </attribute>
+  </widget>
+  <action name="FileNewAction" >
+   <property name="text" >
+    <string>Neue Datenbank...</string>
+   </property>
+  </action>
+  <action name="FileOpenAction" >
+   <property name="text" >
+    <string>Datenbank öffnen...</string>
+   </property>
+  </action>
+  <action name="FileCloseAction" >
+   <property name="text" >
+    <string>Datenbank schließen</string>
+   </property>
+  </action>
+  <action name="FileSaveAction" >
+   <property name="text" >
+    <string>Datenbank speichern</string>
+   </property>
+  </action>
+  <action name="FileSaveAsAction" >
+   <property name="text" >
+    <string>Datenbank speichern unter...</string>
+   </property>
+  </action>
+  <action name="FileSettingsAction" >
+   <property name="text" >
+    <string>Datenbank-Einstellungen...</string>
+   </property>
+  </action>
+  <action name="FileChangeKeyAction" >
+   <property name="text" >
+    <string>Hauptschlüssel ändern...</string>
+   </property>
+  </action>
+  <action name="FileExitAction" >
+   <property name="text" >
+    <string>Beenden</string>
+   </property>
+  </action>
+  <action name="FileImpPwmAction" >
+   <property name="text" >
+    <string>PwManager-Datei (*.pwm)</string>
+   </property>
+  </action>
+  <action name="FileImpKWalletXmlAction" >
+   <property name="text" >
+    <string>KWallet XML-Datei (*.xml)</string>
+   </property>
+  </action>
+  <action name="EditNewGroupAction" >
+   <property name="text" >
+    <string>Neue Gruppe hinzufügen...</string>
+   </property>
+  </action>
+  <action name="EditEditGroupAction" >
+   <property name="text" >
+    <string>Gruppe bearbeiten...</string>
+   </property>
+  </action>
+  <action name="EditDeleteGroupAction" >
+   <property name="text" >
+    <string>Gruppe löschen</string>
+   </property>
+  </action>
+  <action name="EditPasswordToClipboardAction" >
+   <property name="text" >
+    <string>Passwort in Zwischenablage kopieren</string>
+   </property>
+  </action>
+  <action name="EditUsernameToClipboardAction" >
+   <property name="text" >
+    <string>Benutzername in Zwischenablage kopieren</string>
+   </property>
+  </action>
+  <action name="ActionOpenUrl" >
+   <property name="text" >
+    <string>URL öffnen</string>
+   </property>
+  </action>
+  <action name="EditSaveAttachmentAction" >
+   <property name="text" >
+    <string>Anhang speichern unter...</string>
+   </property>
+  </action>
+  <action name="EditNewEntryAction" >
+   <property name="text" >
+    <string>Neuen Eintrag hinzufügen...</string>
+   </property>
+  </action>
+  <action name="EditEditEntryAction" >
+   <property name="text" >
+    <string>Eintrag anzeigen/bearbeiten...</string>
+   </property>
+  </action>
+  <action name="EditDeleteEntryAction" >
+   <property name="text" >
+    <string>Eintrag löschen</string>
+   </property>
+  </action>
+  <action name="EditCloneEntryAction" >
+   <property name="text" >
+    <string>Eintrag duplizieren</string>
+   </property>
+  </action>
+  <action name="EditSearchAction" >
+   <property name="text" >
+    <string>In Datenbank suchen...</string>
+   </property>
+  </action>
+  <action name="EditGroupSearchAction" >
+   <property name="text" >
+    <string>In dieser Gruppe suchen...</string>
+   </property>
+  </action>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>KeepassGroupView</class>
+   <extends>QTreeWidget</extends>
+   <header>../../src/lib/GroupView.h</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
+   <class>KeepassEntryView</class>
+   <extends>QTreeWidget</extends>
+   <header>../../src/lib/EntryView.h</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
