@@ -17,20 +17,21 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+
 #ifndef EDITENTRYDLG_H
 #define EDITENTRYDLG_H
 #include "ui_EditEntryDlg.h"
-//Added by qt3to4:
 #include <QPixmap>
 #include <QShowEvent>
+#include "main.h"
+#include "PwManager.h"
 
-class CEditEntryDlg : public EditEntryDialog
+class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 {
   Q_OBJECT
 
 public:
-  CEditEntryDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+  CEditEntryDlg(PwDatabase* _db, CEntry* _entry,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
   ~CEditEntryDlg();
   virtual void showEvent(QShowEvent *);
   /*$PUBLIC_FUNCTIONS$*/
@@ -46,9 +47,8 @@ protected slots:
   /*$PROTECTED_SLOTS$*/
 
 public:
-CMainWindow* mainwnd;
 CEntry* entry;
-PwDatabase* pw;
+PwDatabase* db;
 QPixmap* banner_pixmap;
 bool ModFlag;
 
@@ -59,17 +59,16 @@ void InitIconComboBox();
 
 
 public slots:
-    virtual void OnExpTimeLostFocus();
-    virtual void OnExpDateLostFocus();
-    virtual void OnPasswordwLostFocus();
-    virtual void OnPasswordwTextChanged(const QString&);
-    virtual void OnPasswordTextChanged(const QString&);
-    virtual void ChangeEchoMode();
-    virtual void OnButtonCancel();
-    virtual void OnNewAttachment();
-    virtual void OnDeleteAttachment();
-    virtual void OnSaveAttachment();
-    virtual void OnButtonGenPw();
+    void OnPasswordwLostFocus();
+    void OnPasswordwTextChanged(const QString&);
+    void OnPasswordTextChanged(const QString&);
+    void ChangeEchoMode();
+    void OnButtonCancel();
+    void OnNewAttachment();
+    void OnDeleteAttachment();
+    void OnSaveAttachment();
+    void OnButtonGenPw();
+    void OnCheckBoxExpiresNeverChanged(int state);
 
 };
 

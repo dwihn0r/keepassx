@@ -20,9 +20,9 @@
 
 #include "SecString.h"
 #include <qmessagebox.h>
-#include <iostream.h>
+#include <iostream>
 #include "random.h"
-
+using namespace std;
 Q_UINT8 SecString::Key[32]={0};
 
 SecString::SecString(){

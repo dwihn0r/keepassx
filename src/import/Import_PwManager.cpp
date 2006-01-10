@@ -20,12 +20,12 @@
 
 #include <qobject.h>
 #include <qfile.h>
-#include <iostream.h>
+#include <iostream>
 #include <qdom.h>
 #include "crypto/blowfish.h"
 #include "crypto/sha1.h"
 #include "Import_PwManager.h"
-
+using namespace std;
 
 bool Import_PwManager::importFile(QString filename, QString password, PwDatabase* db, QString& err){
 database=db;

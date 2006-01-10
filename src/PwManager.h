@@ -17,9 +17,10 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+
 #ifndef _PW_MANAGER_H_
 #define _PW_MANAGER_H_
- #define DB_HEADER_SIZE 			124
+ #define DB_HEADER_SIZE 		124
  #define PWM_DBSIG_1			0x9AA2D903
  #define PWM_DBSIG_2			0xB54BFB65
  #define PWM_DBVER_DW  	 		0x00030002
@@ -30,12 +31,14 @@
  #define PWM_STD_KEYENCROUNDS 	6000
  #define ALGO_AES         		0
  #define ALGO_TWOFISH			1
- #define KEEPASS_VERSION			"0.1.3"
 
 #include <qcolor.h>
 #include <qobject.h>
+#include <QDateTime>
+#include <QDate>
+#include <QTime>
+#include <QStringList>
 #include "lib/SecString.h"
-#include "lib/PwmTime.h"
 #include "Database.h"
 
 
@@ -45,9 +48,8 @@ public:
  PwDatabase();
  ~ PwDatabase();
  bool loadDatabase(QString filename, QString& err);
- bool SaveDataBase(QString filename);
- bool NewDataBase();
- bool CloseDataBase();
+ bool saveDatabase();
+ bool closeDatabase();
  bool CalcMasterKeyByPassword(QString& password);
  bool CalcMasterKeyByFile(QString filename);
  bool CalcMasterKeyByFileAndPw(QString filename, QString& password);
@@ -59,7 +61,9 @@ public:
  EntryItr  deleteEntry(CEntry* pEntry);
  void      moveEntry(CEntry* pEntry,CGroup* pDstGroup);
  CEntry*   addEntry();
- void 	 merge(PwDatabase* db2);
+ void 	   merge(PwDatabase* db2);
+ QString   getError();  //get first error
+ QString   getErrors(); //get all errors in a \n seperated String
 
 
 
@@ -75,9 +79,14 @@ private:
  Q_UINT32 getNewGroupId();
  Q_UINT32 getNewEntrySid();
  bool convHexToBinaryKey(char* HexKey, char* dst);
+ QStringList Errors;
 };
 
+
+ extern const QDateTime Date_Never;
  void memcpyFromLEnd32(Q_UINT32* dst,char* src);
  void memcpyFromLEnd16(Q_UINT16* dst,char* src);
+ QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
+ void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
 
 #endif

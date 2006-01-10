@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #ifndef GENPWDIALOG_H
 #define GENPWDIALOG_H
 #include "ui_PasswordGenDlg.h"
@@ -25,7 +25,7 @@
 
 
 
-class CGenPwDialog : public GenPwDlg
+class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 {
   Q_OBJECT
 private:
@@ -44,14 +44,10 @@ protected:
 
 protected slots:
   /*$PROTECTED_SLOTS$*/
-public:
-CMainWindow* mainwnd;
 public slots:
     virtual void OnGeneratePw();
-public slots:
-    virtual void OnRadio2StateChanged(int);
-public slots:
-    virtual void OnRadio1StateChanged(int);
+    virtual void OnRadio2StateChanged(bool);
+    virtual void OnRadio1StateChanged(bool);
     virtual void OnCancel();
     virtual void OnAccept();
 };

@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QShowEvent>
 
-class CEditGroupDialog : public EditGroupDialog
+class CEditGroupDialog : public QDialog, public Ui_EditGroupDialog
 {
   Q_OBJECT
 

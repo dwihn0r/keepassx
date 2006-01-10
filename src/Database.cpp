@@ -24,10 +24,10 @@
 CEntry::CEntry(){
 ImageID=0;
 GroupID=0;
-Creation.SetToNow();
-LastMod.SetToNow();
-LastAccess.SetToNow();
-Expire.Set(28,12,2999,0,0,0);
+Creation=QDateTime::currentDateTime();
+LastMod=QDateTime::currentDateTime();
+LastAccess=QDateTime::currentDateTime();
+Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59));
 BinaryDataLength=0;
 pBinaryData=NULL;
 }
@@ -35,10 +35,10 @@ pBinaryData=NULL;
 bool CGroup::UI_ExpandByDefault=true;
 
 CGroup::CGroup(){
-Creation.SetToNow();
-LastAccess.SetToNow();
-LastMod.SetToNow();
-Expire.Set(1,1,2999,0,0,0);
+Creation=QDateTime::currentDateTime();
+LastAccess=QDateTime::currentDateTime();
+LastMod=QDateTime::currentDateTime();
+Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59));
 Level=0;
 ImageID=0;
 Name="<Group>";

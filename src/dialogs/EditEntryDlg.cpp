@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 
 #include <qpushbutton.h>
 #include <qpalette.h>
@@ -43,14 +43,77 @@
 
 
 
-CEditEntryDlg::CEditEntryDlg(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: EditEntryDialog(parent,name, modal,fl)
+CEditEntryDlg::CEditEntryDlg(PwDatabase* _db, CEntry* _entry,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+: QDialog(parent,name, modal,fl)
 {
-
-pw=((CMainWindow*)parentWidget())->db;
-mainwnd=((CMainWindow*)parentWidget());
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Key32x32,trUtf8("Eintrag bearbeiten"));
+Q_ASSERT(_db);
+Q_ASSERT(_entry);
+entry=_entry;
+db=_db;
+setupUi(this);
+createBanner(Banner,Icon_Key32x32,trUtf8("Eintrag bearbeiten"));
 ModFlag=false;
+connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
+connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
+connect(Edit_Password, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordTextChanged(const QString&)));
+connect(ButtonEchoMode, SIGNAL(clicked()), this, SLOT( ChangeEchoMode()));
+connect(ButtonCancel, SIGNAL(clicked()), this, SLOT( OnButtonCancel()));
+connect(ButtonOpenAttachment, SIGNAL(clicked()), this, SLOT( OnNewAttachment()));
+connect(ButtonDeleteAttachment, SIGNAL(clicked()), this, SLOT( OnDeleteAttachment()));
+connect(ButtonSaveAttachment, SIGNAL(clicked()), this, SLOT( OnSaveAttachment()));
+connect(ButtonGenPw, SIGNAL(clicked()), this, SLOT( OnButtonGenPw()));
+connect(ButtonOK, SIGNAL(clicked()),this,SLOT(OnButtonOK()));
+connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
+
+ButtonOpenAttachment->setIcon(*Icon_FileOpen);
+ButtonDeleteAttachment->setIcon(*Icon_EditDelete);
+ButtonSaveAttachment->setIcon(*Icon_FileSave);
+
+if(entry->pBinaryData==NULL){
+  ButtonSaveAttachment->setDisabled(true);
+  ButtonDeleteAttachment->setDisabled(true);}
+setCaption(entry->Title);
+setIcon(EntryIcons[entry->ImageID]);
+Edit_Title->setText(entry->Title);
+Edit_UserName->setText(entry->UserName);
+Edit_URL->setText(entry->URL);
+Edit_Password->setText(entry->Password.getString());
+Edit_Password_w->setText(entry->Password.getString());
+entry->Password.delRef();
+if(!config.ShowPasswords)
+  ChangeEchoMode();
+OnPasswordwLostFocus();
+int bits=(entry->Password.length()*8);
+Label_Bits->setText(QString::number(bits)+" Bit");
+if(bits>128)
+  bits=128;
+Progress_Quali->setValue(100*bits/128);
+Edit_Attachment->setText(entry->BinaryDesc);
+Edit_Comment->setText(entry->Additional);
+InitGroupComboBox();
+InitIconComboBox();
+if(entry->BinaryDataLength==0)
+  Label_AttachmentSize->setText("");
+else{
+  QString unit;
+  int faktor;
+  int prec;
+  if(entry->BinaryDataLength<1000){unit=" Byte";faktor=1;prec=0;}
+  else {if(entry->BinaryDataLength<1000000){unit=" kB";faktor=1000;prec=1;}
+  	else{unit=" MB";faktor=1000000;prec=1;}
+  }
+  Label_AttachmentSize->setText(QString::number((float)entry->BinaryDataLength/(float)faktor,'f',prec)+unit);
+}
+if(entry->Expire==Date_Never){
+  DateTime_Expire->setDisabled(true);
+  CheckBox_ExpiresNever->setChecked(true);
+}
+else{
+DateTime_Expire->setDateTime(entry->Expire);
+}
+
+
+
 }
 
 CEditEntryDlg::~CEditEntryDlg()
@@ -63,52 +126,14 @@ CEditEntryDlg::~CEditEntryDlg()
 void CEditEntryDlg::showEvent(QShowEvent *event){
 
 if(event->spontaneous()==false){
-if(entry->pBinaryData==NULL){
-ButtonSaveAttachment->setDisabled(true);
-ButtonDeleteAttachment->setDisabled(true);
-}
-setCaption(entry->Title);
-setIcon(mainwnd->EntryIcons[entry->ImageID]);
-Edit_Title->setText(entry->Title);
-Edit_UserName->setText(entry->UserName);
-Edit_URL->setText(entry->URL);
-Edit_Password->setText(entry->Password.getString());
-Edit_Password_w->setText(entry->Password.getString());
-entry->Password.delRef();
-if(!mainwnd->config->ShowPasswords)ChangeEchoMode();
-OnPasswordwLostFocus();
-int bits=(entry->Password.length()*8);
-Label_Bits->setText(QString::number(bits)+" Bit");
-if(bits>128)bits=128;
-Progress_Quali->setProgress(bits,128);
-Progress_Quali->setPercentageVisible(false);
-Edit_Attachment->setText(entry->BinaryDesc);
-Edit_Comment->setText(entry->Additional);
-InitGroupComboBox();
-InitIconComboBox();
-Edit_Expire_Date->setText((entry->Expire.GetString(0)).mid(0,10));
-Edit_Expire_Time->setText((entry->Expire.GetString(0)).mid(11,8));
-if(entry->BinaryDataLength==0){
-Label_AttachmentSize->setText("");
-}
-else
-{
-QString unit;
-int faktor;
-int prec;
-  if(entry->BinaryDataLength<1000){unit=" Byte";faktor=1;prec=0;}
-  else {if(entry->BinaryDataLength<1000000){unit=" kB";faktor=1000;prec=1;}
-  	else{unit=" MB";faktor=1000000;prec=1;}
-	}
-Label_AttachmentSize->setText(QString::number((float)entry->BinaryDataLength/(float)faktor,'f',prec)+unit);
-}
+
 
 }
 }
 
 void CEditEntryDlg::InitIconComboBox(){
 for(int i=0;i<52;i++){
-Combo_IconPicker->insertItem(((CMainWindow*)parentWidget())->EntryIcons[i],"",i);
+Combo_IconPicker->insertItem(EntryIcons[i],"",i);
 }
 Combo_IconPicker->setCurrentItem(entry->ImageID);
 }
@@ -117,38 +142,26 @@ Combo_IconPicker->setCurrentItem(entry->ImageID);
 void CEditEntryDlg::InitGroupComboBox(){
 QString tmp;
 int i;
-for(i=0;i!=pw->Groups.size();i++){
+for(i=0;i!=db->Groups.size();i++){
 tmp="";
-  for(int j=0;j<pw->Groups[i].Level;j++)tmp+="  ";
-Combo_Group->insertItem(((CMainWindow*)parentWidget())->EntryIcons[pw->Groups[i].ImageID],
- 			tmp+pw->Groups[i].Name,i);
+  for(int j=0;j<db->Groups[i].Level;j++)tmp+="  ";
+Combo_Group->insertItem(EntryIcons[db->Groups[i].ImageID],
+ 			tmp+db->Groups[i].Name,i);
 }
-Combo_Group->setCurrentItem(pw->getGroupIndex(entry->GroupID));
+Combo_Group->setCurrentItem(db->getGroupIndex(entry->GroupID));
 }
 
 void CEditEntryDlg::OnButtonOK()
 {
-
 if(QString::compare(Edit_Password->text(),Edit_Password_w->text())!=0){
 QMessageBox::warning(NULL,"Stopp",QString::fromUtf8("Passwort und Passwortwiederholung stimmen\nnicht überein."),"OK");
 return;
 }
-QString str=Edit_Expire_Date->text();
-if(CPwmTime::IsValidDate(str)==false){
-QMessageBox::warning(NULL,"Stopp",QString::fromUtf8(str+" ist kein gültiges Datum."),"OK");
-return;
-}
 
-str=Edit_Expire_Time->text();
-if(CPwmTime::IsValidTime(str)==false){
-QMessageBox::warning(NULL,"Stopp",QString::fromUtf8(str+" ist keine gültige Uhrzeit."),"OK");
-return;
-}
+if(CheckBox_ExpiresNever->state()==Qt::Checked){
+  DateTime_Expire->setDateTime(Date_Never);}
 
-CPwmTime tmp_Expire;
-tmp_Expire.SetDate(Edit_Expire_Date->text());
-tmp_Expire.SetTime(Edit_Expire_Time->text());
-if(tmp_Expire!=entry->Expire)
+if(DateTime_Expire->dateTime()!=entry->Expire)
 	ModFlag=true;
 if(entry->Title!=Edit_Title->text())
 	ModFlag=true;
@@ -163,18 +176,17 @@ if(passw!=Edit_Password->text())
 	ModFlag=true;
 entry->Password.delRef();
 
-entry->Expire.SetDate(Edit_Expire_Date->text());
-entry->Expire.SetTime(Edit_Expire_Time->text());
-entry->LastAccess.SetToNow();
-if(ModFlag)entry->LastMod.SetToNow();
+entry->Expire=DateTime_Expire->dateTime();
+entry->LastAccess=QDateTime::currentDateTime();
+if(ModFlag)entry->LastMod=QDateTime::currentDateTime();
 entry->Title=Edit_Title->text();
 entry->UserName=Edit_UserName->text();
 entry->URL=Edit_URL->text();
 QString s=Edit_Password->text();
 entry->Password.setString(s,true);
 entry->Additional=Edit_Comment->text();
-if(Combo_Group->currentItem()!=pw->getGroupIndex(entry->GroupID)){
-pw->moveEntry(entry,&pw->Groups[Combo_Group->currentItem()]);
+if(Combo_Group->currentItem()!=db->getGroupIndex(entry->GroupID)){
+db->moveEntry(entry,&db->Groups[Combo_Group->currentItem()]);
 }
 entry->ImageID=Combo_IconPicker->currentItem();
 done(1);
@@ -182,7 +194,7 @@ done(1);
 
 void CEditEntryDlg::OnButtonCancel()
 {
-entry->LastAccess.SetToNow();
+entry->LastAccess=QDateTime::currentDateTime();
 done(0);
 }
 
@@ -207,7 +219,7 @@ Edit_Password_w->setText("");
 int bits=(Edit_Password->text().length()*8);
 Label_Bits->setText(QString::number(bits)+" Bit");
 if(bits>128)bits=128;
-Progress_Quali->setProgress(bits,128);
+Progress_Quali->setValue(100*bits/128);
 }
 
 void CEditEntryDlg::OnPasswordwTextChanged(const QString& w)
@@ -235,30 +247,6 @@ Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Stand
 }
 
 
-}
-
-void CEditEntryDlg::OnExpDateLostFocus()
-{
-QString str=Edit_Expire_Date->text();
-if(CPwmTime::IsValidDate(str)==false){
-Edit_Expire_Date->setPaletteBackgroundColor(QColor(255,125,125));
-}
-else
-{
-Edit_Expire_Date->setPaletteBackgroundColor(QColor(255,255,255));///@FIXME Standart-Hintergrundfarbe nicht weiß
-}
-}
-
-void CEditEntryDlg::OnExpTimeLostFocus()
-{
-QString str=Edit_Expire_Time->text();
-if(CPwmTime::IsValidTime(str)==false){
-Edit_Expire_Time->setPaletteBackgroundColor(QColor(255,125,125));
-}
-else
-{
-Edit_Expire_Time->setPaletteBackgroundColor(QColor(255,255,255));///@FIXME Standart-Hintergrundfarbe nicht weiß
-}
 }
 
 void CEditEntryDlg::OnNewAttachment()
@@ -355,12 +343,15 @@ pDlg->show();
 }
 
 
-
-
-
-
-
-
+void CEditEntryDlg::OnCheckBoxExpiresNeverChanged(int state){
+if(state==Qt::Unchecked){
+ DateTime_Expire->setDisabled(false);
+}
+else
+{
+ DateTime_Expire->setDisabled(true);
+}
+}
 
 
 

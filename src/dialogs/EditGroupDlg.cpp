@@ -18,7 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "mainwindow.h"
+#include "main.h"
 
 #include <qcombobox.h>
 #include <qlineedit.h>
@@ -28,8 +28,9 @@
 
 
 CEditGroupDialog::CEditGroupDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: EditGroupDialog(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
+setupUi(this);
 IconID=0;
 }
 
@@ -41,7 +42,7 @@ void CEditGroupDialog::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
 EditTitle->setText(GroupName);
 for(int i=0;i<52;i++){
-ComboIconPicker->insertItem(((CMainWindow*)parentWidget())->EntryIcons[i],"",i);
+ComboIconPicker->insertItem(EntryIcons[i],"",i);
 }
 ComboIconPicker->setCurrentItem(IconID);
 }}

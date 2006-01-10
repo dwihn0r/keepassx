@@ -25,29 +25,29 @@
 #include <qradiobutton.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
-#include <q3progressbar.h>
+#include <QProgressBar>
 
 CGenPwDialog::CGenPwDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: GenPwDlg(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
-mainwnd=(CMainWindow*)(((CEditEntryDlg*)parentWidget())->parentWidget());
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Key32x32,QString::fromUtf8("Passwort generieren"));
-
-
-
+setupUi(this);
+createBanner(Banner,Icon_Key32x32,QString::fromUtf8("Passwort generieren"));
 Radio_1->setChecked(true);
-
 Edit_chars->setDisabled(true);
+connect(ButtonGenerate,SIGNAL(clicked()),this,SLOT(OnGeneratePw()));
+connect(Radio_1,SIGNAL(toggled(bool)),this,SLOT(OnRadio1StateChanged(bool)));
+connect(Radio_2,SIGNAL(toggled(bool)),this,SLOT(OnRadio2StateChanged(bool)));
+connect(Button_Cancel,SIGNAL(clicked()),this,SLOT(OnCancel()));
+connect(ButtonOK,SIGNAL(clicked()),this,SLOT(OnAccept()));
 }
 
 CGenPwDialog::~CGenPwDialog()
 {
 }
 
-void CGenPwDialog::OnRadio1StateChanged(int state)
+void CGenPwDialog::OnRadio1StateChanged(bool state)
 {
-switch (state){
- case QCheckBox::On:
+if(state){
  Radio_2->setChecked(false);
  checkBox1->setEnabled(true);
  checkBox2->setEnabled(true);
@@ -57,8 +57,7 @@ switch (state){
  checkBox6->setEnabled(true);
  checkBox7->setEnabled(true);
  checkBox8->setEnabled(true);
- break;
- case QCheckBox::Off:
+}else{
  if(Radio_2->isChecked()==false)Radio_2->setChecked(true);
  checkBox1->setDisabled(true);
  checkBox2->setDisabled(true);
@@ -68,27 +67,19 @@ switch (state){
  checkBox6->setDisabled(true);
  checkBox7->setDisabled(true);
  checkBox8->setDisabled(true);
-
- break;
- case QCheckBox::NoChange:
- break;
 }
 
 }
 
-void CGenPwDialog::OnRadio2StateChanged(int state)
+void CGenPwDialog::OnRadio2StateChanged(bool state)
 {
-switch (state){
- case QCheckBox::On:
+if(state){
  Radio_1->setChecked(false);
  Edit_chars->setEnabled(true);
- break;
- case QCheckBox::Off:
+}
+else{
   if(Radio_1->isChecked()==false)Radio_1->setChecked(true);
  Edit_chars->setDisabled(true);
- break;
- case QCheckBox::NoChange:
- break;
 }
 
 }

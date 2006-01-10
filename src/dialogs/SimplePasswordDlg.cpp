@@ -24,8 +24,9 @@
 #include <qpushbutton.h>
 
 CSimplePasswordDialog::CSimplePasswordDialog(bool HidePw,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: SimplePasswordDialog(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
+setupUi(this);
 if(HidePw)Button_HidePassword->toggle();
 }
 

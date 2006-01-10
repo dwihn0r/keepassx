@@ -21,8 +21,9 @@
 #define _DATABASE_H_
 
 #include <vector.h>
-#include "lib/PwmTime.h"
+#include <QDateTime>
 #include "lib/SecString.h"
+using namespace std;
 
 class CEntry{
 public:
@@ -38,10 +39,10 @@ QString UserName;
 SecString Password;
 QString Additional;
 QString BinaryDesc;
-CPwmTime Creation;
-CPwmTime LastMod;
-CPwmTime LastAccess;
-CPwmTime Expire;
+QDateTime Creation;
+QDateTime LastMod;
+QDateTime LastAccess;
+QDateTime Expire;
 Q_UINT8 *pBinaryData;
 Q_UINT32 BinaryDataLength;
 Q_UINT32 PasswordLength;
@@ -57,10 +58,10 @@ Q_UINT32 ID;
 Q_UINT32 ImageID;
 Q_UINT32 NumEntries;
 QString Name;
-CPwmTime Creation;
-CPwmTime LastMod;
-CPwmTime LastAccess;
-CPwmTime Expire;
+QDateTime Creation;
+QDateTime LastMod;
+QDateTime LastAccess;
+QDateTime Expire;
 Q_UINT16 Level;
 Q_UINT32 Flags;
 bool ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
@@ -75,21 +76,15 @@ typedef vector<CEntry>::iterator EntryItr;
 typedef vector<CGroup>::iterator GroupItr;
 
 
-class AbstractDatabase{
-public:
- vector<CGroup>Groups;
- vector<CEntry>Entries;
-};
-
-
-
-class Database:public AbstractDatabase{
+class Database{
 public:
  Q_UINT32 CryptoAlgorithmus;
  Q_UINT32 KeyEncRounds;
  QString filename;
  bool modflag;
  int SearchGroupID;
+ vector<CGroup>Groups;
+ vector<CEntry>Entries;
 
 protected:
  Q_UINT8 MasterKey[32];

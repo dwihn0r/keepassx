@@ -21,11 +21,11 @@
 #define _ABOUTDIALOG_H_
 #include "ui_AboutDlg.h"
 #include "lib/UrlLabel.h"
-#include "mainwindow.h"
+#include "main.h"
 
 
 
-class CAboutDialog : public AboutDlg
+class CAboutDialog : public QDialog, public Ui_AboutDlg
 {
   Q_OBJECT
 
@@ -34,7 +34,6 @@ public:
   CAboutDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CAboutDialog();
 
- CMainWindow* mainwnd;
   /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

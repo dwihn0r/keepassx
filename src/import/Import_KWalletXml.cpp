@@ -19,10 +19,11 @@
  ***************************************************************************/
 
 #include "Import_KWalletXml.h"
-#include <iostream.h>
+#include <iostream>
 #include <qobject.h>
 #include <qfile.h>
 #include <qdom.h>
+using namespace std;
 
 bool Import_KWalletXml::importFile(QString FileName,PwDatabase* pwm,QString& err){
 QFile file(FileName);

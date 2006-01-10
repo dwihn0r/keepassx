@@ -22,7 +22,6 @@
 #define _LINKLABEL_H_
 #include <qlabel.h>
 #include <q3signal.h>
-//Added by qt3to4:
 #include <QMouseEvent>
 
 class LinkLabel : public QLabel{

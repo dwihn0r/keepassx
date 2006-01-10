@@ -8,31 +8,29 @@ INSTALLS += Share \
 target.path = /usr/local/bin 
 Share.files += ../share/keepass/* 
 Share.path = /usr/local/share/keepass 
-FORMS += forms/ui_EditGroupDlg.ui \
-         forms/ui_SearchDlg.ui \
-         forms/ui_AboutDlg.ui \
-         forms/ui_LanguageDlg.ui \
-         forms/ui_SettingsDlg.ui \
-         forms/ui_ChangeKeyDlg.ui \
-         forms/ui_MainWindow.ui \
-         forms/ui_SimplePasswordDlg.ui \
-         forms/ui_DatabaseSettingsDlg.ui \
-         forms/ui_PasswordDlg.ui \
-         forms/ui_EditEntryDlg.ui \
-         forms/ui_PasswordGenDlg.ui 
+FORMS += forms/EditGroupDlg.ui \
+         forms/SearchDlg.ui \
+         forms/AboutDlg.ui \
+         forms/LanguageDlg.ui \
+         forms/SettingsDlg.ui \
+         forms/ChangeKeyDlg.ui \
+         forms/MainWindow.ui \
+         forms/SimplePasswordDlg.ui \
+         forms/DatabaseSettingsDlg.ui \
+         forms/PasswordDlg.ui \
+         forms/EditEntryDlg.ui \
+         forms/PasswordGenDlg.ui 
 TRANSLATIONS += translations/english.ts \
                 translations/russian.ts 
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \
            mainwindow.h \
            PwManager.h \
-           pwsafe.h \
            crypto/rijndael.h \
            lib/SecString.h \
            crypto/sha256.h \
            crypto/twoclass.h \
            crypto/twofish.h \
-           ListViews.h \
            import/Import_PwManager.h \
            crypto/blowfish.h \
            crypto/sha1.h \
@@ -51,21 +49,21 @@ HEADERS += lib/IniReader.h \
            dialogs/PasswordGenDlg.h \
            lib/random.h \
            Database.h \
-           lib/PwmTime.h \
            lib/KdePlugin.h \
-           global.h 
+           global.h \
+           main.h \
+           lib/GroupView.h \
+           lib/EntryView.h 
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
            mainwindow.cpp \
            PwManager.cpp \
-           pwsafe.cpp \
            crypto/rijndael.cpp \
            lib/SecString.cpp \
            crypto/sha256.c \
            crypto/twoclass.cpp \
            crypto/twofish.cpp \
-           ListViews.cpp \
            import/Import_PwManager.cpp \
            crypto/blowfish.cpp \
            crypto/sha1.cpp \
@@ -84,12 +82,16 @@ SOURCES += lib/IniReader.cpp \
            dialogs/PasswordGenDlg.cpp \
            lib/random.cpp \
            Database.cpp \
-           lib/PwmTime.cpp \
-           lib/KdePlugin.cpp 
+           lib/KdePlugin.cpp \
+           lib/GroupView.cpp \
+           lib/EntryView.cpp 
+QT += xml \
+qt3support
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/
 TARGET = ../bin/keepass
+INCLUDEPATH += ./
 CONFIG += debug \
 warn_off \
 qt \
@@ -97,8 +99,3 @@ thread \
 exceptions \
 stl
 TEMPLATE = app
-#The following line was inserted by qt3to4
-QT += xml  qt3support 
-#The following line was inserted by qt3to4
-CONFIG += uic3
-

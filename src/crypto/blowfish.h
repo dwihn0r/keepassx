@@ -16,7 +16,7 @@
 #define BLOWFISH_H
 
 #include "global.h"
-#include <stdint.h>
+//#include <stdint.h>
 #include <string>
 using std::string;
 

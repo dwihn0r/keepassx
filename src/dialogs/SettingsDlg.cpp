@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #include <qpixmap.h>
 #include <qcheckbox.h>
 #include <qspinbox.h>
@@ -27,30 +27,28 @@
 
 
 CSettingsDlg::CSettingsDlg(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: SettingsDialog(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
-pw=((CMainWindow*)parentWidget())->db;
-mainwnd=((CMainWindow*)parentWidget());
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Settings32x32,trUtf8("Einstellungen"));
-
-CheckBox_OpenLast->setChecked(mainwnd->config->OpenLast);
-SpinBox_ClipboardTime->setValue(mainwnd->config->ClipboardTimeOut);
+setupUi(this);
+createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"));
+CheckBox_OpenLast->setChecked(config.OpenLast);
+SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
 pixmTextColor->setPixmap(*(new QPixmap(pixmTextColor->width(),pixmTextColor->height())));
-//pixmTextColor->pixmap()->fill(mainwnd->config->BannerTextColor);
+//pixmTextColor->pixmap()->fill(config.BannerTextColor);
 
 pixmColor1->setPixmap(*(new QPixmap(pixmColor1->width(),pixmColor1->height())));
-//pixmColor1->pixmap()->fill(mainwnd->config->BannerColor1);
+//pixmColor1->pixmap()->fill(config.BannerColor1);
 
 pixmColor2->setPixmap(*(new QPixmap(pixmColor2->width(),pixmColor2->height())));
-//pixmColor2->pixmap()->fill(mainwnd->config->BannerColor2);
+//pixmColor2->pixmap()->fill(config.BannerColor2);
 
-color1=mainwnd->config->BannerColor1;
-color2=mainwnd->config->BannerColor2;
-textcolor=mainwnd->config->BannerTextColor;
+color1=config.BannerColor1;
+color2=config.BannerColor2;
+textcolor=config.BannerTextColor;
 
-CheckBox_ShowPasswords->setChecked(mainwnd->config->ShowPasswords);
-Edit_BrowserCmd->setText(mainwnd->config->OpenUrlCommand);
-CheckBox_ExpandGroupTree->setChecked(mainwnd->config->ExpandGroupTree);
+CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
+Edit_BrowserCmd->setText(config.OpenUrlCommand);
+CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
 
 }
 
@@ -60,14 +58,14 @@ CSettingsDlg::~CSettingsDlg()
 
 void CSettingsDlg::OnOK()
 {
-mainwnd->config->OpenLast=CheckBox_OpenLast->isChecked();
-mainwnd->config->ClipboardTimeOut=SpinBox_ClipboardTime->value();
-mainwnd->config->BannerColor1=color1;
-mainwnd->config->BannerColor2=color2;
-mainwnd->config->BannerTextColor=textcolor;
-mainwnd->config->ShowPasswords=CheckBox_ShowPasswords->isChecked();
-mainwnd->config->OpenUrlCommand=Edit_BrowserCmd->text();
-mainwnd->config->ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
+config.OpenLast=CheckBox_OpenLast->isChecked();
+config.ClipboardTimeOut=SpinBox_ClipboardTime->value();
+config.BannerColor1=color1;
+config.BannerColor2=color2;
+config.BannerTextColor=textcolor;
+config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
+config.OpenUrlCommand=Edit_BrowserCmd->text();
+config.ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
 close();
 }
 
@@ -85,7 +83,7 @@ QPixmap *px=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
 px->fill(c);
 pixmTextColor->clear();
 pixmTextColor->setPixmap(*px);
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);}
+createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);}
 }
 
 
@@ -98,7 +96,7 @@ QPixmap *px=new QPixmap(pixmColor2->width(),pixmColor2->height());
 px->fill(c);
 pixmColor2->clear();
 pixmColor2->setPixmap(*px);
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);}
+createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);}
 }
 
 
@@ -111,7 +109,7 @@ QPixmap *px=new QPixmap(pixmColor1->width(),pixmColor1->height());
 px->fill(c);
 pixmColor1->clear();
 pixmColor1->setPixmap(*px);
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);
+createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);
 }
 }
 

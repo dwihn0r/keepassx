@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #ifndef PASSWORDDIALOG_H
 #define PASSWORDDIALOG_H
 #include "lib/UrlLabel.h"
@@ -25,12 +25,11 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 
-class CPasswordDialog : public PasswordDlg
+class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 {
   Q_OBJECT
 
 private:
-CMainWindow* parentwnd;
 int NumComboEntries;
 QStringList Paths;
 Q3ValueList<bool> IsFile;
@@ -41,7 +40,7 @@ public:
 
 QString keyfile;
 QString password;
-bool canceled;
+
 
 
 public:
@@ -51,22 +50,21 @@ public:
 
 public slots:
   /*$PUBLIC_SLOTS$*/
-
     virtual void OnOK();
     virtual void OnCancel();
     virtual void OnSelectClicked();
     virtual void OnButtonBrowse();
+    virtual void OnComboSelectionChanged(int);
+    virtual void OnPasswordChanged(const QString &txt);
+    virtual void OnCheckBox_BothChanged(int state);
+    virtual void ChangeEchoMode();
 protected:
   /*$PROTECTED_FUNCTIONS$*/
 
 protected slots:
   /*$PROTECTED_SLOTS$*/
 
-public slots:
-    virtual void OnComboSelectionChanged(int);
-    virtual void OnPasswordChanged(const QString &txt);
-    virtual void OnCheckBox_BothChanged(int state);
-    virtual void ChangeEchoMode();
+
 };
 
 #endif

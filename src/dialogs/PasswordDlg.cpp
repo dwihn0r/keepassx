@@ -18,7 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "mainwindow.h"
+#include "main.h"
 
 #include "PasswordDlg.h"
 #include <qdir.h>
@@ -34,12 +34,20 @@
 
 
 CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: PasswordDlg(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
-parentwnd=((CMainWindow*)parentWidget());
-parentwnd->CreateBanner(Banner,parentwnd->Icon_Key32x32,trUtf8("Datenbank öffnen"));
+setupUi(this);
+createBanner(Banner,Icon_Key32x32,trUtf8("Datenbank öffnen"));
 Label_select=new LinkLabel((QWidget*)groupframe,"Select",trUtf8("Datei manuell wählen..."),410,100);
-connect(Label_select,SIGNAL(clicked()),this,SLOT(OnSelectClicked()));
+connect( Combo_Dirs, SIGNAL( activated(int) ), this, SLOT( OnComboSelectionChanged(int) ) );
+connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
+connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
+connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
+connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
+connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
+
 ///@PlatformSpecific
 QDir media("/media");
 if(media.exists()){
@@ -57,7 +65,7 @@ Combo_Dirs->insertItem(0,Paths[i]);
 IsFile.append(false);
 }
 
-if(!parentwnd->config->ShowPasswords)ChangeEchoMode();
+if(!config.ShowPasswords)ChangeEchoMode();
 
 }
 
@@ -116,7 +124,7 @@ QMessageBox::warning(this,"Datei nicht gefunden",QString::fromUtf8("Im gewählte
 
 void CPasswordDialog::OnSelectClicked()
 {
-if(Button_Browse->isEnabled()){
+if(ButtonBrowse->isEnabled()){
 keyfile=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Schlüsseldatei öffnen"));
 if(keyfile=="")return;
 Combo_Dirs->insertItem(keyfile);
@@ -133,13 +141,11 @@ IsFile.append(true);
 
 void CPasswordDialog::OnCancel()
 {
-canceled=true;
-close();
+done(0);
 }
 
 void CPasswordDialog::OnOK()
 {
-canceled=false;
 
 if(CheckBox_Both->isChecked()){
  if(password==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Bitte geben Sie ein Passwort ein.")
@@ -155,7 +161,7 @@ else
                                       ,trUtf8("OK"),"","",0,0);
 			return;}
 }
-close();
+done(1);
 }
 
 void CPasswordDialog::OnPasswordChanged(const QString &txt)
@@ -163,10 +169,10 @@ void CPasswordDialog::OnPasswordChanged(const QString &txt)
 password=Edit_Password->text();
 if(txt!="" && !(CheckBox_Both->isChecked())){
 Combo_Dirs->setDisabled(true);
-Button_Browse->setDisabled(true);}
+ButtonBrowse->setDisabled(true);}
 else{
 Combo_Dirs->setEnabled(true);
-Button_Browse->setEnabled(true);}
+ButtonBrowse->setEnabled(true);}
 
 }
 
@@ -174,7 +180,7 @@ void CPasswordDialog::OnCheckBox_BothChanged(int state)
 {
 if(state==QCheckBox::On){
 Combo_Dirs->setEnabled(true);
-Button_Browse->setEnabled(true);
+ButtonBrowse->setEnabled(true);
 Edit_Password->setEnabled(true);}
 else{
 Edit_Password->setText("");

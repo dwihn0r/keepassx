@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #include "PwManager.h"
 #include "../lib/random.h"
 #include "ChangeKeyDlg.h"
@@ -33,12 +33,21 @@
 
 
 CChangeKeyDlg::CChangeKeyDlg(QWidget* parent,PwDatabase* _db,const char* name, bool modal, Qt::WFlags fl)
-: ChangeKeyDialog(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
+setupUi(this);
+connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+connect( Button_Browse, SIGNAL( clicked() ), this, SLOT( OnBrowse() ) );
+connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
+connect( Edit_Password_2, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPassword2Changed(const QString&) ) );
+connect( Combo_Dirs, SIGNAL( activated(int) ), this, SLOT( OnComboChanged(int) ) );
+connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBoxChanged(int) ) );
+connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
+
 db=_db;
-parentwnd=((CMainWindow*)parentWidget());
-parentwnd->CreateBanner(Banner,parentwnd->Icon_Key32x32,trUtf8("Hauptschlüssel ändern"));
-if(!parentwnd->config->ShowPasswords)ChangeEchoMode();
+createBanner(Banner,Icon_Key32x32,trUtf8("Hauptschlüssel ändern"));
+if(!config.ShowPasswords)ChangeEchoMode();
 ///@PlatformSpecific
 QDir media("/media");
 if(media.exists()){

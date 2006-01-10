@@ -17,15 +17,16 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
 #ifndef _CHANGEKEYDLG_H_
 #define _CHANGEKEYDLG_H_
 #include "ui_ChangeKeyDlg.h"
 #include <qstringlist.h>
 #include <q3valuelist.h>
 #include <qfile.h>
+#include "main.h"
+#include "PwManager.h"
 
-class CChangeKeyDlg : public ChangeKeyDialog
+class CChangeKeyDlg : public QDialog, public Ui_ChangeKeyDialog
 {
   Q_OBJECT
 
@@ -57,7 +58,6 @@ public slots:
 
 private:
 PwDatabase* db;
-CMainWindow* parentwnd;
 QStringList Paths;
 Q3ValueList<bool> IsFile;
 

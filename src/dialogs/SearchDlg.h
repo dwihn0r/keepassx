@@ -17,17 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
 #ifndef SEARCHDLG_H
 #define SEARCHDLG_H
 #include "ui_SearchDlg.h"
+#include "main.h"
+#include "PwManager.h"
 
-class CSearchDlg : public Search_Dlg
+class CSearchDlg : public QDialog, public Ui_Search_Dlg
 {
   Q_OBJECT
-
 public:
-  CSearchDlg(CGroup* pGroup=NULL,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
+  CSearchDlg(CGroup* pGroup=NULL,QWidget* parent = 0, const char* name = 0, 
+	     bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CSearchDlg();
   /*$PUBLIC_FUNCTIONS$*/
 
@@ -45,18 +46,9 @@ public slots:
 public slots:
     virtual void OnButtonSearch();
 
-
 private:
-  CMainWindow* parentwnd;
-  CGroup* group;
-  PwDatabase* pw;
   QString txt;
   bool regexp;
-  bool search(QString&);
-
-public:   
-  vector<CEntry*> hits;
-
 };
 
 #endif

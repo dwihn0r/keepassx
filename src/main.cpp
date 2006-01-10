@@ -18,51 +18,58 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <iostream.h>
+#include <iostream>
 #include <qapplication.h>
 #include <qlibrary.h>
 #include <qlocale.h>
 #include <qdir.h>
-#include <qmessagebox.h>
-//Added by qt3to4:
+#include <QMessageBox>
 #include <QTranslator>
+#include <QPainter>
+#include <QImage>
+#include <QStyleFactory>
 
-#include "pwsafe.h"
+#include "main.h"
 #include "PwmConfig.h"
-#include "lib/KdePlugin.h"
+#include "mainwindow.h"
+using namespace std;
 
-void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg){
-if(argc>1){
-int i=1;
-	if(argv[i][0]!='-'){
-		ArgFile=QString::fromUtf8(argv[i]);
-		i++;
-	}
-	for(i; i<argc;i++){
-		if(QString(argv[i])=="-h"){
-			cout << "Keepass 0.1.3 (Alpha)" << endl;
-			cout << "Usage: keepass [Filename] [Options]" << endl;
-			cout << "  -h This Help" << endl;
-			cout << "  -cfg ConfigFile Use specified configuration" << endl;
-			exit(0);
-			}
-		else if(QString(argv[i])=="-cfg"){
-			if(i-1==argc) cout << "No configuration file specified." << endl;
-			else{ArgCfg=QString::fromUtf8(argv[i+1]); i++;}
-			}
-		else{cout << "** Unrecognized option: " << argv[i] <<  endl;
-			exit(1);}
-	}
+CConfig config;
+QString  AppDir;
+QPixmap *Icon_Key32x32;
+QPixmap *Icon_Settings32x32;
+QPixmap *Icon_Search32x32;
+QPixmap *Icon_I18n32x32;
+QPixmap *Icon_Ok16x16;
+QPixmap *EntryIcons;
+QIcon *Icon_FileNew;
+QIcon *Icon_FileOpen;
+QIcon *Icon_FileClose;
+QIcon *Icon_FileSave;
+QIcon *Icon_FileSaveAs;
+QIcon *Icon_Exit;
+QIcon *Icon_File_Export;
+QIcon *Icon_EditDelete;
+QString DateTimeFormat("no-format-string");
 
-}
-}
+
+inline void loadImages();
+inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg);
+
 
 int main(int argc, char **argv)
 {
+/*
+QStringList keys=QStyleFactory::keys();
+for(int i=0; i<keys.size(); i++){
+cout << keys[i].ascii() << endl;
+}
+QApplication::setStyle(QStyleFactory::create("slimplastic"));
+*/
 QString ArgFile,ArgCfg,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg);
-CConfig config;
-
+QApplication* app=new QApplication(argc,argv);
+AppDir=app->applicationDirPath();
 //Load Config
 if(ArgCfg==""){
  if(!QDir(QDir::homeDirPath()+"/.keepass").exists()){
@@ -73,41 +80,9 @@ if(ArgCfg==""){
  IniFilename=QDir::homeDirPath()+"/.keepass/config";
  config.loadFromIni(IniFilename);
 }
-else
-{
- IniFilename=ArgCfg;
- config.loadFromIni(IniFilename);
-}
-
-//KDE PlugIn
-QApplication* app=NULL;
-if(config.EnableKdePlugin){
-cout << "don't activate the kde plugin option" << endl;
-exit(1);
-/*
-  QLibrary lib("/home/tarek/Documents/keepass_kde/bin/libkeepass_kde.so");
-  if(!lib.load()){
-		cout << "Could not load KDE plugin." << endl;
-		exit(1);
-  }
-  CKdePlugin KdePlugin;
-  if(!KdePlugin.resolveSymbols(lib)){
-		cout << "KDE plugin: Symbols could not be resolved." << endl;
-		exit(1);
-	}
-  app=KdePlugin.getAppObj(argc,argv);
-  QApplication*(*_getAppObj)(int,char**);
-  _getAppObj=(QApplication*(*)(int,char**))lib.resolve("getAppObj");
-  app=_getAppObj(argc,argv**);
-  if(!app){cout << "app==NULL" << endl;
-		 exit(1);
-			}
-*/
-}
 else{
-app=new QApplication(argc,argv);
-}
-
+ IniFilename=ArgCfg;
+ config.loadFromIni(IniFilename);}
 
 
 //Internationalization
@@ -129,6 +104,7 @@ if(config.Language==""){
 	config.Language="english.qm";
 	break;}
 }
+
 if(config.Language!="_DEUTSCH_"){
   if(!translator->load(app->applicationDirPath()+"/../share/keepass/i18n/"+config.Language)){
    if(!translator->load(app->applicationDirPath()+"/share/i18n/"+config.Language)){
@@ -141,16 +117,16 @@ if(config.Language!="_DEUTSCH_"){
   else app->installTranslator(translator);
 }
 
- PwSafe *mainWin = 0;
- 
- mainWin = new PwSafe(app,ArgFile,&config);
- app->setMainWidget( mainWin );
- mainWin->show();
- int ret=app->exec();
- if(!config.saveToIni(IniFilename))
+DateTimeFormat=QObject::trUtf8("dd'.'MM'.'yy' 'hh':'mm");
+loadImages();
+
+KeepassMainWindow *mainWin = new KeepassMainWindow();
+mainWin->show();
+int r=app->exec();
+if(!config.saveToIni(IniFilename))
 	QMessageBox::warning(NULL,QObject::tr("Warnung"),QObject::trUtf8("Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass\nSie Schreibrechte im Verzeichnis ~/.keepass besitzen."),QObject::tr("OK"),"","",0.0);
- delete app;
- return ret;
+delete app;
+return r;
 }
 
 
@@ -160,55 +136,154 @@ if(config.Language!="_DEUTSCH_"){
 
 
 
-/********* KDE **************
-#include <kapplication.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
-#include <klocale.h>
-
-static const char description[] =
-    I18N_NOOP("A KDE KPart Application");
-
-static const char version[] = "0.1";
-
-static KCmdLineOptions options[] =
-{
-//    { "+[URL]", I18N_NOOP( "Document to open" ), 0 },
-    KCmdLineLastOption
-};
-
-int main(int argc, char **argv)
-{
-    KAboutData about("Keepass", I18N_NOOP("Keepass"), version, description,
-                     KAboutData::License_BSD, "(C) %{YEAR} Tarek Saidi", 0, 0, "tareks@arcor.de");
-    about.addAuthor( "Tarek Saidi", 0, "tareks@arcor.de" );
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineArgs::addCmdLineOptions( options );
-    KApplication app;
-    PwSafe *mainWin = 0;
-
-    if (app.isRestored())
-    {
-        RESTORE(PwSafe);
-    }
-    else
-    {
-        // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-        /// @todo do something with the command line args here
-
-        mainWin = new PwSafe();
-        app.setMainWidget( mainWin );
-        mainWin->show();
-
-        args->clear();
-    }
-
-    // mainWin has WDestructiveClose flag by default, so it will delete itself.
-    return app.exec();
+void createBanner(QLabel *Banner,QPixmap* symbol,QString text){
+createBanner(Banner,symbol,text,config.BannerColor1
+			       ,config.BannerColor2
+			       ,config.BannerTextColor); //call overloaded function
 }
 
-*/
+
+void createBanner(QLabel *Banner,QPixmap* symbol,QString text,QColor color1,QColor color2,QColor textcolor){
+int w=Banner->width();
+int h=Banner->height();
+QColor color;
+float b1[3];
+float b2[3];
+float a1,a2;
+QPixmap* banner_pixmap=new QPixmap(w,h); ///@FIXME löscht der Destruktor von QLabel die Pixmap zum schluss???
+QPainter painter(banner_pixmap);
+QPen pen;
+pen.setWidth(1);
+painter.setPen(pen);
+QFont font("Arial",16);
+painter.setFont(font);
+if(color1!=color2){
+ b1[0]=color1.red();
+ b1[1]=color1.green();
+ b1[2]=color1.blue();
+ b2[0]=color2.red();
+ b2[1]=color2.green();
+ b2[2]=color2.blue();
+ for(int x=0;x<w;x++){
+  a2=(float)x/(float)w;
+  a1=1-a2;
+  color.setRgb(	(int)(a1*b1[0]+a2*b2[0]),
+		(int)(a1*b1[1]+a2*b2[1]),
+		(int)(a1*b1[2]+a2*b2[2]));
+  pen.setColor(color);
+  painter.setPen(pen);
+  painter.drawLine(x,0,x,h);
+ }
+}
+else{
+ banner_pixmap->fill(color1);
+}
+painter.drawPixmap(10,10,*symbol);
+pen.setColor(textcolor);
+painter.setPen(pen);
+painter.drawText(50,30,text);
+Banner->setPixmap(*banner_pixmap);
+}
 
 
+
+void openBrowser(QString url){
+
+
+
+}
+
+
+void loadImg(QString name,QPixmap& Img){
+if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
+ if(Img.load(AppDir+"/share/"+name)==false){
+ QMessageBox::critical(0,QObject::trUtf8("Fehler"),QObject::trUtf8("Die Datei '%1' konnte nicht gefunden werden.")
+				   .arg(name),QObject::tr("OK"),0,0,2,1);
+ exit(1);
+}}
+
+}
+
+
+
+void loadImages(){
+QString ThemeDir="nuvola/32x32";
+QPixmap tmpImg;
+//-----------------------
+loadImg("clientic.png",tmpImg);
+EntryIcons=new QPixmap[NUM_CLIENT_ICONS];
+for(int i=0;i<52;i++){
+EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
+//--------------------------
+loadImg("key.png",tmpImg);
+Icon_Key32x32=new QPixmap;
+*Icon_Key32x32=tmpImg;
+//--------------------------
+loadImg("settings.png",tmpImg);
+Icon_Settings32x32=new QPixmap;
+*Icon_Settings32x32=tmpImg;
+//--------------------------
+loadImg("i18n.png",tmpImg);
+Icon_I18n32x32=new QPixmap;
+*Icon_I18n32x32=tmpImg;
+//--------------------------
+loadImg("ok.png",tmpImg);
+Icon_Ok16x16=new QPixmap;
+*Icon_Ok16x16=tmpImg;
+//--------------------------
+loadImg("search.png",tmpImg);
+Icon_Search32x32=new QPixmap;
+*Icon_Search32x32=tmpImg;
+//--------------------------
+loadImg(ThemeDir+"/actions/filenew.png",tmpImg);
+Icon_FileNew=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/fileopen.png",tmpImg);
+Icon_FileOpen=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/filesave.png",tmpImg);
+Icon_FileSave=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/filesaveas.png",tmpImg);
+Icon_FileSaveAs=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/fileclose.png",tmpImg);
+Icon_FileClose=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/exit.png",tmpImg);
+Icon_Exit=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/editdelete.png",tmpImg);
+Icon_EditDelete=new QIcon(tmpImg);
+
+
+}
+
+
+void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg){
+if(argc>1){
+int i=1;
+	if(argv[i][0]!='-'){
+		ArgFile=QString::fromUtf8(argv[i]);
+		i++; }
+	for(i; i<argc;i++){
+		if(QString(argv[i])=="-h"){
+			cout << "Keepass 0.1.3 (Alpha)" << endl;
+			cout << "Usage: keepass [Filename] [Options]" << endl;
+			cout << "  -h This Help" << endl;
+			cout << "  -cfg ConfigFile Use specified configuration" << endl;
+			exit(0);
+			}
+		else if(QString(argv[i])=="-cfg"){
+			if(i-1==argc) cout << "No configuration file specified." << endl;
+			else{ArgCfg=QString::fromUtf8(argv[i+1]); i++;}
+			}
+		else{cout << "** Unrecognized argument: " << argv[i] <<  endl;
+			exit(1);}
+	}
+   }
+}
+
+void showErrMsg(const QString& msg,QWidget* parent){
+QMessageBox::critical(parent,QObject::tr("Fehler"),msg,QObject::tr("OK"));
+}

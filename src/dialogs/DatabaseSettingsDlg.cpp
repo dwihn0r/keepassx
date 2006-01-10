@@ -22,14 +22,17 @@
 #include <qmessagebox.h>
 //Added by qt3to4:
 #include <QShowEvent>
-#include "mainwindow.h"
+#include "main.h"
 #include "DatabaseSettingsDlg.h"
 
 
-CDbSettingsDlg::CDbSettingsDlg(CMainWindow* parent,Database* db, const char* name, bool modal, Qt::WFlags fl)
-: dbsettingdlg_base(parent,name, modal,fl)
+CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,Database* db, const char* name, bool modal, Qt::WFlags fl)
+: QDialog(parent,name, modal,fl)
 {
+setupUi(this);
 database=db;
+connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 }
 
 CDbSettingsDlg::~CDbSettingsDlg()
@@ -38,7 +41,7 @@ CDbSettingsDlg::~CDbSettingsDlg()
 
 void CDbSettingsDlg::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
-((CMainWindow*)parentWidget())->CreateBanner(Banner,((CMainWindow*)parentWidget())->Icon_Settings32x32,"Einstellungen");
+createBanner(Banner,Icon_Settings32x32,"Einstellungen");
 ComboAlgo->insertItem(trUtf8("AES(Rijndael):  256 Bit   (Standard)"),0);
 ComboAlgo->insertItem(trUtf8("Twofish:  256 Bit"),1);
 ComboAlgo->setCurrentItem(database->CryptoAlgorithmus); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
@@ -49,7 +52,7 @@ EditRounds->setText(QString::number(database->KeyEncRounds));
 
 void CDbSettingsDlg::OnCancel()
 {
-close();
+done(0);
 }
 
 
@@ -72,7 +75,7 @@ return;
 database->KeyEncRounds=rounds;
 database->CryptoAlgorithmus=ComboAlgo->currentItem();
 
-close();
+done(1);
 }
 
 

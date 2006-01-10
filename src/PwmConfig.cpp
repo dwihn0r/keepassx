@@ -21,7 +21,8 @@
 #include "PwmConfig.h"
 #include <qobject.h>
 #include <qdir.h>
-#include <iostream.h>
+#include <iostream>
+using namespace std;
 
 bool CConfig::loadFromIni(QString filename){
 CIniFile ini((char*)filename.data());

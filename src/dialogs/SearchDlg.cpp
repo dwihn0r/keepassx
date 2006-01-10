@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include "main.h"
 #include "PwManager.h"
 #include "SearchDlg.h"
 #include <qlineedit.h>
@@ -26,33 +27,30 @@
 #include <qmessagebox.h>
 
 CSearchDlg::CSearchDlg(CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: Search_Dlg(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
-parentwnd=(CMainWindow*)parent;
-parentwnd->CreateBanner(Banner,parentwnd->Icon_Search32x32,tr("Suchen"));
-group=pGroup;
-pw=parentwnd->db;
-
-checkBox_Cs->setChecked(parentwnd->config->SearchOptions[0]);
-checkBox_regExp->setChecked(parentwnd->config->SearchOptions[1]);
-checkBox_Title->setChecked(parentwnd->config->SearchOptions[2]);
-checkBox_Username->setChecked(parentwnd->config->SearchOptions[3]);
-checkBox_Password->setChecked(parentwnd->config->SearchOptions[4]);
-checkBox_Comment->setChecked(parentwnd->config->SearchOptions[5]);
-checkBox_URL->setChecked(parentwnd->config->SearchOptions[6]);
-checkBox_Attachment->setChecked(parentwnd->config->SearchOptions[7]);
+setupUi(this);
+createBanner(Banner,Icon_Search32x32,tr("Suchen"));
+checkBox_Cs->setChecked(config.SearchOptions[0]);
+checkBox_regExp->setChecked(config.SearchOptions[1]);
+checkBox_Title->setChecked(config.SearchOptions[2]);
+checkBox_Username->setChecked(config.SearchOptions[3]);
+checkBox_Password->setChecked(config.SearchOptions[4]);
+checkBox_Comment->setChecked(config.SearchOptions[5]);
+checkBox_URL->setChecked(config.SearchOptions[6]);
+checkBox_Attachment->setChecked(config.SearchOptions[7]);
 }
 
 CSearchDlg::~CSearchDlg()
 {
-parentwnd->config->SearchOptions[0]=checkBox_Cs->isChecked();
-parentwnd->config->SearchOptions[1]=checkBox_regExp->isChecked();
-parentwnd->config->SearchOptions[2]=checkBox_Title->isChecked();
-parentwnd->config->SearchOptions[3]=checkBox_Username->isChecked();
-parentwnd->config->SearchOptions[4]=checkBox_Password->isChecked();
-parentwnd->config->SearchOptions[5]=checkBox_Comment->isChecked();
-parentwnd->config->SearchOptions[6]=checkBox_URL->isChecked();
-parentwnd->config->SearchOptions[7]=checkBox_Attachment->isChecked();
+config.SearchOptions[0]=checkBox_Cs->isChecked();
+config.SearchOptions[1]=checkBox_regExp->isChecked();
+config.SearchOptions[2]=checkBox_Title->isChecked();
+config.SearchOptions[3]=checkBox_Username->isChecked();
+config.SearchOptions[4]=checkBox_Password->isChecked();
+config.SearchOptions[5]=checkBox_Comment->isChecked();
+config.SearchOptions[6]=checkBox_URL->isChecked();
+config.SearchOptions[7]=checkBox_Attachment->isChecked();
 }
 
 void CSearchDlg::OnButtonClose()
@@ -60,9 +58,9 @@ void CSearchDlg::OnButtonClose()
 done(0);
 }
 
-
 void CSearchDlg::OnButtonSearch()
 {
+/*
 txt=Edit_Search->text();
 regexp=checkBox_regExp->isChecked();
 if(txt==""){
@@ -81,8 +79,12 @@ for(int i=0;i<pw->Entries.size();i++){
  pw->Entries[i].Password.delRef();
  if(hit)hits.push_back(&pw->Entries[i]);
 }
+*/
 done(1);
+
 }
+
+/*
 bool CSearchDlg::search(QString& str){
 if(regexp){
  QRegExp exp(txt,checkBox_Cs->isChecked());
@@ -90,7 +92,7 @@ if(regexp){
 else{
  if(str.contains(txt,checkBox_Cs->isChecked())==0)return false;}
 return true;
-}
+}*/
 
 /*$SPECIALIZATION$*/
 

@@ -17,20 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #ifndef SETTINGSDLG_H
 #define SETTINGSDLG_H
 
 #include "ui_SettingsDlg.h"
 #include <qcolor.h>
 
-class CSettingsDlg : public SettingsDialog
+class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 {
   Q_OBJECT
 
 public:
-  CMainWindow* mainwnd;
-  PwDatabase* pw;
   CSettingsDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CSettingsDlg();
   /*$PUBLIC_FUNCTIONS$*/

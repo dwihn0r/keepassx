@@ -102,6 +102,10 @@
         <source>Die Datei &apos;%1&apos; konnte nicht geöffnet werden.</source>
         <translation>Невозможно открыть файл &apos;%1&apos;.</translation>
     </message>
+    <message>
+        <source>http://keepass.berlios.de/index.php</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CChangeKeyDlg</name>
@@ -328,350 +332,6 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
 </context>
 <context>
-    <name>CMainWindow</name>
-    <message>
-        <source>Keepass Passwortsafe</source>
-        <translation>Keepass Password Safe</translation>
-    </message>
-    <message>
-        <source>Warnung</source>
-        <translation type="obsolete">Предупреждение</translation>
-    </message>
-    <message>
-        <source>Die &#xdc;bersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
-Die Sprache wurde auf Deutsch zur&#xfc;ckgesetzt.</source>
-        <translation type="obsolete">Файл перевода &apos;%1&apos; не может быть загружен
-Будет использован язык по умолчанию.</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Fehler</source>
-        <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>Die Datei &apos;%1&apos; konnte nicht gefunden werden.</source>
-        <translation>Невозможно открыть файл &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Datenbank &#xf6;ffnen</source>
-        <translation type="obsolete">Открыть базу паролей</translation>
-    </message>
-    <message>
-        <source>Keepass - %1</source>
-        <translation>Keepass - %1</translation>
-    </message>
-    <message>
-        <source>Abbrechen</source>
-        <translation>Отменить</translation>
-    </message>
-    <message>
-        <source>Titel</source>
-        <translation>Заголовок</translation>
-    </message>
-    <message>
-        <source>Benutzername</source>
-        <translation>Имя пользователя</translation>
-    </message>
-    <message>
-        <source>URL</source>
-        <translation>URL</translation>
-    </message>
-    <message>
-        <source>Passwort</source>
-        <translation>Пароль</translation>
-    </message>
-    <message>
-        <source>Kommentare</source>
-        <translation>Комментарии</translation>
-    </message>
-    <message>
-        <source>G&#xfc;ltig bis</source>
-        <translation type="obsolete">Годен до</translation>
-    </message>
-    <message>
-        <source>Erstellung</source>
-        <translation>Создание</translation>
-    </message>
-    <message>
-        <source>letzte &#xc4;nderung</source>
-        <translation type="obsolete">Изменен</translation>
-    </message>
-    <message>
-        <source>letzter Zugriff</source>
-        <translation>последний Доступ</translation>
-    </message>
-    <message>
-        <source>Anhang</source>
-        <translation>Вложение</translation>
-    </message>
-    <message>
-        <source>&lt;B&gt;Gruppe: &lt;/B&gt;%1  &lt;B&gt;Titel: &lt;/B&gt;%2  &lt;B&gt;Benutzername: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Passwort: &lt;/B&gt;%5  &lt;B&gt;Erstellt: &lt;/B&gt;%6  &lt;B&gt;letzte &#xc4;nderung: &lt;/B&gt;%7  &lt;B&gt;letzter Zugriff: &lt;/B&gt;%8  &lt;B&gt;g&#xfc;ltig bis: &lt;/B&gt;%9</source>
-        <translation type="obsolete">&lt;B&gt;Категория: &lt;/B&gt;%1  &lt;B&gt;Заголовок: &lt;/B&gt;%2  &lt;B&gt;Имя пользователя: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создан: &lt;/B&gt;%6  &lt;B&gt;Изменен: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Годен до: &lt;/B&gt;%9</translation>
-    </message>
-    <message>
-        <source>Gruppen</source>
-        <translation>Категории</translation>
-    </message>
-    <message>
-        <source>Datenbank speichern?</source>
-        <translation>Сохранить базу?</translation>
-    </message>
-    <message>
-        <source>Soll die aktuelle Datenbank vor dem Schlie&#xdf;en gespeichert werden?</source>
-        <translation type="obsolete">Хотите сохранить базу перед закрытием?</translation>
-    </message>
-    <message>
-        <source>Ja</source>
-        <translation>Да</translation>
-    </message>
-    <message>
-        <source>Nein</source>
-        <translation>Нет</translation>
-    </message>
-    <message>
-        <source>Gruppeneigenschaften</source>
-        <translation>Настройки</translation>
-    </message>
-    <message>
-        <source>Hinweis</source>
-        <translation>Информация</translation>
-    </message>
-    <message>
-        <source>Dieser Eintrag hat keinen Dateianhang.</source>
-        <translation>Запись не имеет вложений.</translation>
-    </message>
-    <message>
-        <source>Anhang speichern...</source>
-        <translation>Сохранить вложение...</translation>
-    </message>
-    <message>
-        <source>Vorhandene Datei &#xfc;berschreiben?</source>
-        <translation type="obsolete">Перезаписать существующий файл?</translation>
-    </message>
-    <message>
-        <source>Unter dem gew&#xe4;hlten Dateinamen existiert bereits eine Datei.
-Soll sie &#xfc;berschrieben werden?</source>
-        <translation type="obsolete">Перезаписать существующий файл?</translation>
-    </message>
-    <message>
-        <source>Datei konnte nicht &#xfc;berschrieben werden.</source>
-        <translation type="obsolete">Невозможно перезаписать файл.</translation>
-    </message>
-    <message>
-        <source>Datei konnte nicht erstellt werden.</source>
-        <translation>Невозможно создать файл.</translation>
-    </message>
-    <message>
-        <source>Beim schreiben in der Datei ist ein Fehler aufgetreten.</source>
-        <translation>Ошибка во время записи файла.</translation>
-    </message>
-    <message>
-        <source>Die Datei konnte nicht vollst&#xe4;ndig geschrieben werden.</source>
-        <translation type="obsolete">Файл не может быть полностью записан.</translation>
-    </message>
-    <message>
-        <source>Suche erfolglos</source>
-        <translation>Поиск закончен</translation>
-    </message>
-    <message>
-        <source>Die Suche lieferte keine Ergebnisse.</source>
-        <translation>Ничего не найдено.</translation>
-    </message>
-    <message>
-        <source>Suchergebnisse</source>
-        <translation>Результаты поиска</translation>
-    </message>
-    <message>
-        <source>Passwort in Zwischenablage kopieren</source>
-        <translation>Скопировать пароль в буфер обмена</translation>
-    </message>
-    <message>
-        <source>Benutzername in Zwischenablage kopieren</source>
-        <translation>Скопировать Имя Пользователя в буфер обмена</translation>
-    </message>
-    <message>
-        <source>URL &#xf6;ffnen</source>
-        <translation type="obsolete">Открыть URL</translation>
-    </message>
-    <message>
-        <source>Eintrag hinzuf&#xfc;gen...</source>
-        <translation type="obsolete">Добавить запись...</translation>
-    </message>
-    <message>
-        <source>Eintrag anzeigen/bearbeiten</source>
-        <translation>Показать/Редактировать запись</translation>
-    </message>
-    <message>
-        <source>Eintrag duplizieren</source>
-        <translation>Повторяющаяся запись</translation>
-    </message>
-    <message>
-        <source>Eintrag l&#xf6;schen</source>
-        <translation type="obsolete">Удалить запись</translation>
-    </message>
-    <message>
-        <source>Gruppe hinzuf&#xfc;gen...</source>
-        <translation type="obsolete">Добавить группу...</translation>
-    </message>
-    <message>
-        <source>Untergruppe hinzuf&#xfc;gen...</source>
-        <translation type="obsolete">Добавить подгруппу...</translation>
-    </message>
-    <message>
-        <source>Gruppe l&#xf6;schen</source>
-        <translation type="obsolete">Удалить группу</translation>
-    </message>
-    <message>
-        <source>Eigenschaften</source>
-        <translation>Настройки</translation>
-    </message>
-    <message>
-        <source>Ausblenden</source>
-        <translation>Спрятать</translation>
-    </message>
-    <message>
-        <source>Einstellungen</source>
-        <translation>Опции</translation>
-    </message>
-    <message>
-        <source>Platzhalter</source>
-        <translation>Заменить символ</translation>
-    </message>
-    <message>
-        <source>&lt; noch nicht implementiert &gt;</source>
-        <translation>&lt; еще не реализовано &gt;</translation>
-    </message>
-    <message>
-        <source>Beim &#xf6;ffnen der Datenbank ist ein Fehler aufgetreten.</source>
-        <translation type="obsolete">Невозможно открыть базу.</translation>
-    </message>
-    <message>
-        <source>Laden fehlgeschlagen. &lt;TODO: Fehlerbeschreibung&gt;</source>
-        <translation type="obsolete">Загрузка невозможна. &lt;TODO: Error Desc.&gt;</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Die Übersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
-Die Sprache wurde auf Deutsch zurückgesetzt.</source>
-        <translation type="obsolete">Файл перевода &apos;%1&apos; не может быть загружен
-Будет использован язык по умолчанию.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Datenbank öffnen</source>
-        <translation>Открыть базу паролей</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten.</source>
-        <translation type="obsolete">Невозможно открыть базу.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gültig bis</source>
-        <translation>Годен до</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>letzte Änderung</source>
-        <translation>Изменен</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>&lt;B&gt;Gruppe: &lt;/B&gt;%1  &lt;B&gt;Titel: &lt;/B&gt;%2  &lt;B&gt;Benutzername: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Passwort: &lt;/B&gt;%5  &lt;B&gt;Erstellt: &lt;/B&gt;%6  &lt;B&gt;letzte Änderung: &lt;/B&gt;%7  &lt;B&gt;letzter Zugriff: &lt;/B&gt;%8  &lt;B&gt;gültig bis: &lt;/B&gt;%9</source>
-        <translation>&lt;B&gt;Категория: &lt;/B&gt;%1  &lt;B&gt;Заголовок: &lt;/B&gt;%2  &lt;B&gt;Имя пользователя: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создан: &lt;/B&gt;%6  &lt;B&gt;Изменен: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Годен до: &lt;/B&gt;%9</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Soll die aktuelle Datenbank vor dem Schließen gespeichert werden?</source>
-        <translation>Хотите сохранить базу перед закрытием?</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Vorhandene Datei überschreiben?</source>
-        <translation>Перезаписать существующий файл?</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Unter dem gewählten Dateinamen existiert bereits eine Datei.
-Soll sie überschrieben werden?</source>
-        <translation>Перезаписать существующий файл?</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Datei konnte nicht überschrieben werden.</source>
-        <translation>Невозможно перезаписать файл.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Die Datei konnte nicht vollständig geschrieben werden.</source>
-        <translation>Файл не может быть полностью записан.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>URL öffnen</source>
-        <translation>Открыть URL</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Eintrag hinzufügen...</source>
-        <translation>Добавить запись...</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Eintrag löschen</source>
-        <translation>Удалить запись</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Untergruppe hinzufügen...</source>
-        <translation>Добавить подгруппу...</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gruppe löschen</source>
-        <translation>Удалить группу</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gruppe hinzufügen...</source>
-        <translation>Добавить группу...</translation>
-    </message>
-    <message>
-        <source>Warnung: Verzeichnis ~/.keepass konnte nicht erstellt werden.</source>
-        <translation type="obsolete">Внимание: Невозможно создать директорию ~/.keepass.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Die Übersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
- Die Sprache wurde auf Deutsch zurückgesetzt.</source>
-        <translation type="obsolete">Файл перевода &apos;%1&apos; не был загружен.
-Возврат к исходному переводу.</translation>
-    </message>
-    <message>
-        <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
-Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
-        <translation type="obsolete">Невозможно сохранить файл конфигурации.</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten:
-%1</source>
-        <translation>Ошибка при открытии базы:
-%1</translation>
-    </message>
-    <message>
-        <source>Frage</source>
-        <translation>Вопрос</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Es ist noch eine andere Datenbank geöffnet. Soll sie mit der zu importierenden Datenbank zusammengeführt oder geschlossen werden werden?</source>
-        <translation>Другая база всё еще открыта. Хотите объединить её с импортируемой базой или закрыть?</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Zusammenführen</source>
-        <translation>Объединить</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Schließen</source>
-        <translation>Закрыть</translation>
-    </message>
-    <message>
-        <source>Datenbank importieren</source>
-        <translation>Импорт базы</translation>
-    </message>
-    <message>
-        <source>Die Datei konnte nicht importiert werden.
-%1</source>
-        <translation>Файл не может быть импортирован.
-%1</translation>
-    </message>
-</context>
-<context>
     <name>CPasswordDialog</name>
     <message>
         <source>Datenbank &#xf6;ffnen</source>
@@ -730,11 +390,11 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     </message>
     <message>
         <source>Hinweis</source>
-        <translation>Информация</translation>
+        <translation type="obsolete">Информация</translation>
     </message>
     <message>
         <source>Bitte geben Sie einen Suchbegriff ein.</source>
-        <translation>Пожалуйста, введите хотя-бы один символ.</translation>
+        <translation type="obsolete">Пожалуйста, введите хотя-бы один символ.</translation>
     </message>
 </context>
 <context>
@@ -928,6 +588,10 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     <message encoding="UTF-8">
         <source>gültig bis:</source>
         <translation>годен до:</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>läuft nicht ab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1124,6 +788,424 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     </message>
 </context>
 <context>
+    <name>KeepassEntryView</name>
+    <message>
+        <source>Titel</source>
+        <translation type="unfinished">Заголовок</translation>
+    </message>
+    <message>
+        <source>Benutzername</source>
+        <translation type="unfinished">Имя пользователя</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation type="unfinished">URL</translation>
+    </message>
+    <message>
+        <source>Passwort</source>
+        <translation type="unfinished">Пароль</translation>
+    </message>
+    <message>
+        <source>Kommentare</source>
+        <translation type="unfinished">Комментарии</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Gültig bis</source>
+        <translation type="unfinished">Годен до</translation>
+    </message>
+    <message>
+        <source>Erstellung</source>
+        <translation type="unfinished">Создание</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>letzte Änderung</source>
+        <translation type="unfinished">Изменен</translation>
+    </message>
+    <message>
+        <source>letzter Zugriff</source>
+        <translation type="unfinished">последний Доступ</translation>
+    </message>
+    <message>
+        <source>Anhang</source>
+        <translation type="unfinished">Вложение</translation>
+    </message>
+</context>
+<context>
+    <name>KeepassGroupView</name>
+    <message>
+        <source>Gruppen</source>
+        <translation type="unfinished">Категории</translation>
+    </message>
+</context>
+<context>
+    <name>KeepassMainWindow</name>
+    <message>
+        <source>Keepass Passwortsafe</source>
+        <translation type="obsolete">Keepass Password Safe</translation>
+    </message>
+    <message>
+        <source>Warnung</source>
+        <translation type="obsolete">Предупреждение</translation>
+    </message>
+    <message>
+        <source>Die &#xdc;bersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
+Die Sprache wurde auf Deutsch zur&#xfc;ckgesetzt.</source>
+        <translation type="obsolete">Файл перевода &apos;%1&apos; не может быть загружен
+Будет использован язык по умолчанию.</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Fehler</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Die Datei &apos;%1&apos; konnte nicht gefunden werden.</source>
+        <translation type="obsolete">Невозможно открыть файл &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Datenbank &#xf6;ffnen</source>
+        <translation type="obsolete">Открыть базу паролей</translation>
+    </message>
+    <message>
+        <source>Keepass - %1</source>
+        <translation>Keepass - %1</translation>
+    </message>
+    <message>
+        <source>Abbrechen</source>
+        <translation>Отменить</translation>
+    </message>
+    <message>
+        <source>Titel</source>
+        <translation type="obsolete">Заголовок</translation>
+    </message>
+    <message>
+        <source>Benutzername</source>
+        <translation type="obsolete">Имя пользователя</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation type="obsolete">URL</translation>
+    </message>
+    <message>
+        <source>Passwort</source>
+        <translation type="obsolete">Пароль</translation>
+    </message>
+    <message>
+        <source>Kommentare</source>
+        <translation type="obsolete">Комментарии</translation>
+    </message>
+    <message>
+        <source>G&#xfc;ltig bis</source>
+        <translation type="obsolete">Годен до</translation>
+    </message>
+    <message>
+        <source>Erstellung</source>
+        <translation type="obsolete">Создание</translation>
+    </message>
+    <message>
+        <source>letzte &#xc4;nderung</source>
+        <translation type="obsolete">Изменен</translation>
+    </message>
+    <message>
+        <source>letzter Zugriff</source>
+        <translation type="obsolete">последний Доступ</translation>
+    </message>
+    <message>
+        <source>Anhang</source>
+        <translation type="obsolete">Вложение</translation>
+    </message>
+    <message>
+        <source>&lt;B&gt;Gruppe: &lt;/B&gt;%1  &lt;B&gt;Titel: &lt;/B&gt;%2  &lt;B&gt;Benutzername: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Passwort: &lt;/B&gt;%5  &lt;B&gt;Erstellt: &lt;/B&gt;%6  &lt;B&gt;letzte &#xc4;nderung: &lt;/B&gt;%7  &lt;B&gt;letzter Zugriff: &lt;/B&gt;%8  &lt;B&gt;g&#xfc;ltig bis: &lt;/B&gt;%9</source>
+        <translation type="obsolete">&lt;B&gt;Категория: &lt;/B&gt;%1  &lt;B&gt;Заголовок: &lt;/B&gt;%2  &lt;B&gt;Имя пользователя: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создан: &lt;/B&gt;%6  &lt;B&gt;Изменен: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Годен до: &lt;/B&gt;%9</translation>
+    </message>
+    <message>
+        <source>Gruppen</source>
+        <translation type="obsolete">Категории</translation>
+    </message>
+    <message>
+        <source>Datenbank speichern?</source>
+        <translation type="obsolete">Сохранить базу?</translation>
+    </message>
+    <message>
+        <source>Soll die aktuelle Datenbank vor dem Schlie&#xdf;en gespeichert werden?</source>
+        <translation type="obsolete">Хотите сохранить базу перед закрытием?</translation>
+    </message>
+    <message>
+        <source>Ja</source>
+        <translation>Да</translation>
+    </message>
+    <message>
+        <source>Nein</source>
+        <translation>Нет</translation>
+    </message>
+    <message>
+        <source>Gruppeneigenschaften</source>
+        <translation type="obsolete">Настройки</translation>
+    </message>
+    <message>
+        <source>Hinweis</source>
+        <translation type="obsolete">Информация</translation>
+    </message>
+    <message>
+        <source>Dieser Eintrag hat keinen Dateianhang.</source>
+        <translation type="obsolete">Запись не имеет вложений.</translation>
+    </message>
+    <message>
+        <source>Anhang speichern...</source>
+        <translation type="obsolete">Сохранить вложение...</translation>
+    </message>
+    <message>
+        <source>Vorhandene Datei &#xfc;berschreiben?</source>
+        <translation type="obsolete">Перезаписать существующий файл?</translation>
+    </message>
+    <message>
+        <source>Unter dem gew&#xe4;hlten Dateinamen existiert bereits eine Datei.
+Soll sie &#xfc;berschrieben werden?</source>
+        <translation type="obsolete">Перезаписать существующий файл?</translation>
+    </message>
+    <message>
+        <source>Datei konnte nicht &#xfc;berschrieben werden.</source>
+        <translation type="obsolete">Невозможно перезаписать файл.</translation>
+    </message>
+    <message>
+        <source>Datei konnte nicht erstellt werden.</source>
+        <translation type="obsolete">Невозможно создать файл.</translation>
+    </message>
+    <message>
+        <source>Beim schreiben in der Datei ist ein Fehler aufgetreten.</source>
+        <translation type="obsolete">Ошибка во время записи файла.</translation>
+    </message>
+    <message>
+        <source>Die Datei konnte nicht vollst&#xe4;ndig geschrieben werden.</source>
+        <translation type="obsolete">Файл не может быть полностью записан.</translation>
+    </message>
+    <message>
+        <source>Suche erfolglos</source>
+        <translation type="obsolete">Поиск закончен</translation>
+    </message>
+    <message>
+        <source>Die Suche lieferte keine Ergebnisse.</source>
+        <translation type="obsolete">Ничего не найдено.</translation>
+    </message>
+    <message>
+        <source>Suchergebnisse</source>
+        <translation type="obsolete">Результаты поиска</translation>
+    </message>
+    <message>
+        <source>Passwort in Zwischenablage kopieren</source>
+        <translation type="obsolete">Скопировать пароль в буфер обмена</translation>
+    </message>
+    <message>
+        <source>Benutzername in Zwischenablage kopieren</source>
+        <translation type="obsolete">Скопировать Имя Пользователя в буфер обмена</translation>
+    </message>
+    <message>
+        <source>URL &#xf6;ffnen</source>
+        <translation type="obsolete">Открыть URL</translation>
+    </message>
+    <message>
+        <source>Eintrag hinzuf&#xfc;gen...</source>
+        <translation type="obsolete">Добавить запись...</translation>
+    </message>
+    <message>
+        <source>Eintrag anzeigen/bearbeiten</source>
+        <translation type="obsolete">Показать/Редактировать запись</translation>
+    </message>
+    <message>
+        <source>Eintrag duplizieren</source>
+        <translation type="obsolete">Повторяющаяся запись</translation>
+    </message>
+    <message>
+        <source>Eintrag l&#xf6;schen</source>
+        <translation type="obsolete">Удалить запись</translation>
+    </message>
+    <message>
+        <source>Gruppe hinzuf&#xfc;gen...</source>
+        <translation type="obsolete">Добавить группу...</translation>
+    </message>
+    <message>
+        <source>Untergruppe hinzuf&#xfc;gen...</source>
+        <translation type="obsolete">Добавить подгруппу...</translation>
+    </message>
+    <message>
+        <source>Gruppe l&#xf6;schen</source>
+        <translation type="obsolete">Удалить группу</translation>
+    </message>
+    <message>
+        <source>Eigenschaften</source>
+        <translation type="obsolete">Настройки</translation>
+    </message>
+    <message>
+        <source>Ausblenden</source>
+        <translation type="obsolete">Спрятать</translation>
+    </message>
+    <message>
+        <source>Einstellungen</source>
+        <translation type="obsolete">Опции</translation>
+    </message>
+    <message>
+        <source>Platzhalter</source>
+        <translation type="obsolete">Заменить символ</translation>
+    </message>
+    <message>
+        <source>&lt; noch nicht implementiert &gt;</source>
+        <translation type="obsolete">&lt; еще не реализовано &gt;</translation>
+    </message>
+    <message>
+        <source>Beim &#xf6;ffnen der Datenbank ist ein Fehler aufgetreten.</source>
+        <translation type="obsolete">Невозможно открыть базу.</translation>
+    </message>
+    <message>
+        <source>Laden fehlgeschlagen. &lt;TODO: Fehlerbeschreibung&gt;</source>
+        <translation type="obsolete">Загрузка невозможна. &lt;TODO: Error Desc.&gt;</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Die Übersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
+Die Sprache wurde auf Deutsch zurückgesetzt.</source>
+        <translation type="obsolete">Файл перевода &apos;%1&apos; не может быть загружен
+Будет использован язык по умолчанию.</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Datenbank öffnen</source>
+        <translation type="obsolete">Открыть базу паролей</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten.</source>
+        <translation type="obsolete">Невозможно открыть базу.</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Gültig bis</source>
+        <translation type="obsolete">Годен до</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>letzte Änderung</source>
+        <translation type="obsolete">Изменен</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>&lt;B&gt;Gruppe: &lt;/B&gt;%1  &lt;B&gt;Titel: &lt;/B&gt;%2  &lt;B&gt;Benutzername: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Passwort: &lt;/B&gt;%5  &lt;B&gt;Erstellt: &lt;/B&gt;%6  &lt;B&gt;letzte Änderung: &lt;/B&gt;%7  &lt;B&gt;letzter Zugriff: &lt;/B&gt;%8  &lt;B&gt;gültig bis: &lt;/B&gt;%9</source>
+        <translation type="obsolete">&lt;B&gt;Категория: &lt;/B&gt;%1  &lt;B&gt;Заголовок: &lt;/B&gt;%2  &lt;B&gt;Имя пользователя: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;%4  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создан: &lt;/B&gt;%6  &lt;B&gt;Изменен: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Годен до: &lt;/B&gt;%9</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Soll die aktuelle Datenbank vor dem Schließen gespeichert werden?</source>
+        <translation type="obsolete">Хотите сохранить базу перед закрытием?</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Vorhandene Datei überschreiben?</source>
+        <translation type="obsolete">Перезаписать существующий файл?</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Unter dem gewählten Dateinamen existiert bereits eine Datei.
+Soll sie überschrieben werden?</source>
+        <translation type="obsolete">Перезаписать существующий файл?</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Datei konnte nicht überschrieben werden.</source>
+        <translation type="obsolete">Невозможно перезаписать файл.</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Die Datei konnte nicht vollständig geschrieben werden.</source>
+        <translation type="obsolete">Файл не может быть полностью записан.</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>URL öffnen</source>
+        <translation type="obsolete">Открыть URL</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Eintrag hinzufügen...</source>
+        <translation type="obsolete">Добавить запись...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Eintrag löschen</source>
+        <translation type="obsolete">Удалить запись</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Untergruppe hinzufügen...</source>
+        <translation type="obsolete">Добавить подгруппу...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Gruppe löschen</source>
+        <translation type="obsolete">Удалить группу</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Gruppe hinzufügen...</source>
+        <translation type="obsolete">Добавить группу...</translation>
+    </message>
+    <message>
+        <source>Warnung: Verzeichnis ~/.keepass konnte nicht erstellt werden.</source>
+        <translation type="obsolete">Внимание: Невозможно создать директорию ~/.keepass.</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Die Übersetzungsdatei &apos;%1&apos; konnte nicht geladen werden.
+ Die Sprache wurde auf Deutsch zurückgesetzt.</source>
+        <translation type="obsolete">Файл перевода &apos;%1&apos; не был загружен.
+Возврат к исходному переводу.</translation>
+    </message>
+    <message>
+        <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
+Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
+        <translation type="obsolete">Невозможно сохранить файл конфигурации.</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten:
+%1</source>
+        <translation>Ошибка при открытии базы:
+%1</translation>
+    </message>
+    <message>
+        <source>Frage</source>
+        <translation type="obsolete">Вопрос</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Es ist noch eine andere Datenbank geöffnet. Soll sie mit der zu importierenden Datenbank zusammengeführt oder geschlossen werden werden?</source>
+        <translation type="obsolete">Другая база всё еще открыта. Хотите объединить её с импортируемой базой или закрыть?</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Zusammenführen</source>
+        <translation type="obsolete">Объединить</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Schließen</source>
+        <translation type="obsolete">Закрыть</translation>
+    </message>
+    <message>
+        <source>Datenbank importieren</source>
+        <translation type="obsolete">Импорт базы</translation>
+    </message>
+    <message>
+        <source>Die Datei konnte nicht importiert werden.
+%1</source>
+        <translation type="obsolete">Файл не может быть импортирован.
+%1</translation>
+    </message>
+    <message>
+        <source>unbekannter Fehler in PwDatabase::loadDatabase()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Databank öffnen...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speichern?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Sollen die Änderungen an der aktuellen Datenbank gespeichert werden?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Speichern fehlgeschlagen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Die Datei konnte nicht gespeichert werden.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LanguageDlg</name>
     <message>
         <source>Keepass</source>
@@ -1186,43 +1268,43 @@ als Übersetzung für Keepass fest.</source>
     <name>MainFrame</name>
     <message>
         <source>Form1</source>
-        <translation>Form1</translation>
+        <translation type="obsolete">Form1</translation>
     </message>
     <message>
         <source>Neue Datenbank</source>
-        <translation>Новая база</translation>
+        <translation type="obsolete">Новая база</translation>
     </message>
     <message>
         <source>Datei</source>
-        <translation>Файл</translation>
+        <translation type="obsolete">Файл</translation>
     </message>
     <message>
         <source>Bearbeiten</source>
-        <translation>Редактирование</translation>
+        <translation type="obsolete">Редактирование</translation>
     </message>
     <message>
         <source>Ansicht</source>
-        <translation>Вид</translation>
+        <translation type="obsolete">Вид</translation>
     </message>
     <message>
         <source>Spalten</source>
-        <translation>Колонки</translation>
+        <translation type="obsolete">Колонки</translation>
     </message>
     <message>
         <source>Extras</source>
-        <translation>Дополнительно</translation>
+        <translation type="obsolete">Дополнительно</translation>
     </message>
     <message>
         <source>Hilfe</source>
-        <translation>Помощь</translation>
+        <translation type="obsolete">Помощь</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation>Панель инструментов</translation>
+        <translation type="obsolete">Панель инструментов</translation>
     </message>
     <message>
         <source>neue Datenbank</source>
-        <translation>Новая база</translation>
+        <translation type="obsolete">Новая база</translation>
     </message>
     <message>
         <source>Datenbank &#xf6;ffnen</source>
@@ -1230,7 +1312,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Datenbank speichern</source>
-        <translation>Сохранить базу</translation>
+        <translation type="obsolete">Сохранить базу</translation>
     </message>
     <message>
         <source>Eintrag hinzuf&#xfc;gen</source>
@@ -1238,7 +1320,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Eintrag bearbeiten</source>
-        <translation>Редактировать запись</translation>
+        <translation type="obsolete">Редактировать запись</translation>
     </message>
     <message>
         <source>Eintrag l&#xf6;schen</source>
@@ -1246,35 +1328,35 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Benutzername in Zwischenablage kopieren</source>
-        <translation>Копировать Имя в буфер обмена</translation>
+        <translation type="obsolete">Копировать Имя в буфер обмена</translation>
     </message>
     <message>
         <source>Passwort in Zwischenablage kopieren</source>
-        <translation>Копировать Пароль в буфер обмена</translation>
+        <translation type="obsolete">Копировать Пароль в буфер обмена</translation>
     </message>
     <message>
         <source>in Datenbank suchen</source>
-        <translation>Поиск</translation>
+        <translation type="obsolete">Поиск</translation>
     </message>
     <message>
         <source>&lt; PLATZHALTER &gt;</source>
-        <translation>&lt; пусто &gt;</translation>
+        <translation type="obsolete">&lt; пусто &gt;</translation>
     </message>
     <message>
         <source>Hilfe anzeigen</source>
-        <translation>Помощь</translation>
+        <translation type="obsolete">Помощь</translation>
     </message>
     <message>
         <source>Schnellsuche</source>
-        <translation>Быстрый поиск</translation>
+        <translation type="obsolete">Быстрый поиск</translation>
     </message>
     <message>
         <source>Beenden</source>
-        <translation>Выход</translation>
+        <translation type="obsolete">Выход</translation>
     </message>
     <message>
         <source>&amp;Neue Datenbank...</source>
-        <translation>&amp;Новая база...</translation>
+        <translation type="obsolete">&amp;Новая база...</translation>
     </message>
     <message>
         <source>&amp;Datenbank &#xf6;ffnen...</source>
@@ -1286,15 +1368,15 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Datenbank s&amp;peichern</source>
-        <translation>&amp;Сохранить базу</translation>
+        <translation type="obsolete">&amp;Сохранить базу</translation>
     </message>
     <message>
         <source>Datenbank speichern unter...</source>
-        <translation>Сохранить базу как...</translation>
+        <translation type="obsolete">Сохранить базу как...</translation>
     </message>
     <message>
         <source>Datenbank-Einstellungen...</source>
-        <translation>Настройки базы...</translation>
+        <translation type="obsolete">Настройки базы...</translation>
     </message>
     <message>
         <source>Hauptschl&#xfc;ssel &#xe4;ndern...</source>
@@ -1302,15 +1384,15 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>&amp;Neue Gruppe erstellen...</source>
-        <translation>&amp;Новая категория...</translation>
+        <translation type="obsolete">&amp;Новая категория...</translation>
     </message>
     <message>
         <source>Neue &amp;Untergruppe ertellen...</source>
-        <translation>&amp;Новая подкатегория...</translation>
+        <translation type="obsolete">&amp;Новая подкатегория...</translation>
     </message>
     <message>
         <source>Gruppe &amp;bearbeiten...</source>
-        <translation>&amp;Редактировать категорию...</translation>
+        <translation type="obsolete">&amp;Редактировать категорию...</translation>
     </message>
     <message>
         <source>Gruppe &amp;l&#xf6;schen</source>
@@ -1318,11 +1400,11 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>&amp;Passwort in Zwischenablage kopieren</source>
-        <translation>Копировать &amp;Пароль в буфер обмена</translation>
+        <translation type="obsolete">Копировать &amp;Пароль в буфер обмена</translation>
     </message>
     <message>
         <source>Ben&amp;utzername in Zwischenablage kopieren</source>
-        <translation>Копировать &amp;имя в буфер обмена</translation>
+        <translation type="obsolete">Копировать &amp;имя в буфер обмена</translation>
     </message>
     <message>
         <source>U&amp;RL &#xf6;ffnen</source>
@@ -1330,7 +1412,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>&amp;Anhang speichern unter...</source>
-        <translation>Сохранить вложение &amp;как...</translation>
+        <translation type="obsolete">Сохранить вложение &amp;как...</translation>
     </message>
     <message>
         <source>Eintrag &amp;hinzuf&#xfc;gen...</source>
@@ -1338,11 +1420,11 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Eintrag bearbeiten/&amp;anzeigen...</source>
-        <translation>Показать/&amp;Редактировать запись...</translation>
+        <translation type="obsolete">Показать/&amp;Редактировать запись...</translation>
     </message>
     <message>
         <source>Eintrag &amp;duplizieren</source>
-        <translation>&amp;Dup Копировать запись</translation>
+        <translation type="obsolete">&amp;Dup Копировать запись</translation>
     </message>
     <message>
         <source>Eintrag l&amp;&#xf6;schen</source>
@@ -1350,19 +1432,19 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>In Datenbank &amp;suchen...</source>
-        <translation>&amp;Поиск в базе...</translation>
+        <translation type="obsolete">&amp;Поиск в базе...</translation>
     </message>
     <message>
         <source>In dieser Gru&amp;ppe suchen...</source>
-        <translation>Поиск в &amp;категории...</translation>
+        <translation type="obsolete">Поиск в &amp;категории...</translation>
     </message>
     <message>
         <source>&amp;Toolbar anzeigen</source>
-        <translation>Показать панель &amp;инструментов</translation>
+        <translation type="obsolete">Показать панель &amp;инструментов</translation>
     </message>
     <message>
         <source>Einstellungen...</source>
-        <translation>Настройки...</translation>
+        <translation type="obsolete">Настройки...</translation>
     </message>
     <message>
         <source>&#xdc;ber...</source>
@@ -1370,31 +1452,31 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Titel</source>
-        <translation>Заголовок</translation>
+        <translation type="obsolete">Заголовок</translation>
     </message>
     <message>
         <source>Benutzername</source>
-        <translation>Имя пользователя</translation>
+        <translation type="obsolete">Имя пользователя</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>URL</translation>
+        <translation type="obsolete">URL</translation>
     </message>
     <message>
         <source>Passwort</source>
-        <translation>Пароль</translation>
+        <translation type="obsolete">Пароль</translation>
     </message>
     <message>
         <source>Kommentar</source>
-        <translation>Комментарий</translation>
+        <translation type="obsolete">Комментарий</translation>
     </message>
     <message>
         <source>Ablaufdatum</source>
-        <translation>Годен до</translation>
+        <translation type="obsolete">Годен до</translation>
     </message>
     <message>
         <source>Letzter Zugriff</source>
-        <translation>последний доступ</translation>
+        <translation type="obsolete">последний доступ</translation>
     </message>
     <message>
         <source>Letzte &#xc4;nderung</source>
@@ -1402,31 +1484,31 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Erstellungsdatum</source>
-        <translation>Создание</translation>
+        <translation type="obsolete">Создание</translation>
     </message>
     <message>
         <source>Anhang</source>
-        <translation>Вложение</translation>
+        <translation type="obsolete">Вложение</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation>Неназвано</translation>
+        <translation type="obsolete">Неназвано</translation>
     </message>
     <message>
         <source>Sprache...</source>
-        <translation>Язык...</translation>
+        <translation type="obsolete">Язык...</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation>DEBUG</translation>
+        <translation type="obsolete">DEBUG</translation>
     </message>
     <message>
         <source>Eintragsansicht anzeigen</source>
-        <translation>Расширенный вид записи</translation>
+        <translation type="obsolete">Расширенный вид записи</translation>
     </message>
     <message>
         <source>Datenbankstruktur</source>
-        <translation>Структура базы</translation>
+        <translation type="obsolete">Структура базы</translation>
     </message>
     <message>
         <source>Eintragsansicht antzeigen</source>
@@ -1434,43 +1516,43 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message encoding="UTF-8">
         <source>Datenbank öffnen</source>
-        <translation>Открыть базу</translation>
+        <translation type="obsolete">Открыть базу</translation>
     </message>
     <message encoding="UTF-8">
         <source>Eintrag hinzufügen</source>
-        <translation>Добавить запись</translation>
+        <translation type="obsolete">Добавить запись</translation>
     </message>
     <message encoding="UTF-8">
         <source>Eintrag löschen</source>
-        <translation>Удалить запись</translation>
+        <translation type="obsolete">Удалить запись</translation>
     </message>
     <message encoding="UTF-8">
         <source>&amp;Datenbank öffnen...</source>
-        <translation>Обкрыть &amp;базу...</translation>
+        <translation type="obsolete">Обкрыть &amp;базу...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Datenbank &amp;schließen</source>
-        <translation>&amp;Закрыть базу</translation>
+        <translation type="obsolete">&amp;Закрыть базу</translation>
     </message>
     <message encoding="UTF-8">
         <source>Hauptschlüssel ändern...</source>
-        <translation>Изменить главный ключ...</translation>
+        <translation type="obsolete">Изменить главный ключ...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Gruppe &amp;löschen</source>
-        <translation>&amp;Удалить категорию</translation>
+        <translation type="obsolete">&amp;Удалить категорию</translation>
     </message>
     <message encoding="UTF-8">
         <source>U&amp;RL öffnen</source>
-        <translation>Открыть U&amp;RL</translation>
+        <translation type="obsolete">Открыть U&amp;RL</translation>
     </message>
     <message encoding="UTF-8">
         <source>Eintrag &amp;hinzufügen...</source>
-        <translation>Добавить &amp;запись...</translation>
+        <translation type="obsolete">Добавить &amp;запись...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Eintrag l&amp;öschen</source>
-        <translation>&amp;Удалить запись</translation>
+        <translation type="obsolete">&amp;Удалить запись</translation>
     </message>
     <message encoding="UTF-8">
         <source>Über...</source>
@@ -1478,39 +1560,110 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message encoding="UTF-8">
         <source>Letzte Änderung</source>
-        <translation>Последее изменение</translation>
+        <translation type="obsolete">Последее изменение</translation>
     </message>
     <message>
         <source>Importieren aus</source>
-        <translation>Импорт из</translation>
+        <translation type="obsolete">Импорт из</translation>
     </message>
     <message encoding="UTF-8">
         <source>Über Keepass...</source>
-        <translation>О Keepass...</translation>
+        <translation type="obsolete">О Keepass...</translation>
     </message>
     <message>
         <source>PwManager-Datei (*.pwm)...</source>
-        <translation>Файл PwManager (*.pwm)...</translation>
+        <translation type="obsolete">Файл PwManager (*.pwm)...</translation>
     </message>
     <message>
         <source>Dokumentation...</source>
-        <translation>Документация...</translation>
+        <translation type="obsolete">Документация...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Passwörter verbergen</source>
-        <translation>Спрятать пароли</translation>
+        <translation type="obsolete">Спрятать пароли</translation>
     </message>
     <message>
         <source>Benutzernamen verbergen</source>
-        <translation>Спрятать имена пользователей</translation>
+        <translation type="obsolete">Спрятать имена пользователей</translation>
     </message>
     <message>
         <source>KWallet XML-Datei (*.xml)...</source>
-        <translation>Файл KWallet XML (*.xml)...</translation>
+        <translation type="obsolete">Файл KWallet XML (*.xml)...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Über QT...</source>
-        <translation>О QT...</translation>
+        <translation type="obsolete">О QT...</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Keepass Passwort-Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ansicht</source>
+        <translation type="unfinished">Вид</translation>
+    </message>
+    <message>
+        <source>Extras</source>
+        <translation type="unfinished">Дополнительно</translation>
+    </message>
+    <message>
+        <source>Hilfe</source>
+        <translation type="unfinished">Помощь</translation>
+    </message>
+    <message>
+        <source>Bearbeiten</source>
+        <translation type="unfinished">Редактирование</translation>
+    </message>
+    <message>
+        <source>Datei</source>
+        <translation type="unfinished">Файл</translation>
+    </message>
+    <message>
+        <source>Importieren aus</source>
+        <translation type="unfinished">Импорт из</translation>
+    </message>
+    <message>
+        <source>Neue Datenbank...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Datenbank öffnen...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Datenbank schließen...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Datenbank speichern</source>
+        <translation type="unfinished">Сохранить базу</translation>
+    </message>
+    <message>
+        <source>Datenbank speichern unter...</source>
+        <translation type="unfinished">Сохранить базу как...</translation>
+    </message>
+    <message>
+        <source>Datenbank-Einstellungen...</source>
+        <translation type="unfinished">Настройки базы...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Hauptschlüssel ändern...</source>
+        <translation type="unfinished">Изменить главный ключ...</translation>
+    </message>
+    <message>
+        <source>Beenden</source>
+        <translation type="unfinished">Выход</translation>
+    </message>
+    <message>
+        <source>PwManager-Datei (*.pwm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KWallet XML-Datei (*.xml)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1525,11 +1678,11 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>O&amp;K</translation>
+        <translation type="obsolete">O&amp;K</translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation>Alt+K</translation>
+        <translation type="obsolete">Alt+K</translation>
     </message>
     <message>
         <source>Schl&#xfc;ssel</source>
@@ -1561,7 +1714,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Abbre&amp;chen</source>
-        <translation>&amp;Отмена</translation>
+        <translation type="obsolete">&amp;Отмена</translation>
     </message>
     <message>
         <source>Abb&amp;rechen</source>
@@ -1569,7 +1722,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message encoding="UTF-8">
         <source>Datenbank öffnen</source>
-        <translation>Открыть базу</translation>
+        <translation type="obsolete">Открыть базу</translation>
     </message>
     <message encoding="UTF-8">
         <source>Geben Sie das Passwort ein oder wählen Sie eine Schlüsseldatei.</source>
@@ -1589,11 +1742,31 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message encoding="UTF-8">
         <source>Alt+ä</source>
-        <translation>Alt+B</translation>
+        <translation type="obsolete">Alt+B</translation>
     </message>
     <message encoding="UTF-8">
         <source>Passwort &lt;b&gt;und&lt;/b&gt; Schlüsseldatei verwenden</source>
-        <translation>Использовать пароль &lt;b&gt;и&lt;/b&gt; ключевой файл</translation>
+        <translation type="obsolete">Использовать пароль &lt;b&gt;и&lt;/b&gt; ключевой файл</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Abbrechen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Alt+Ä</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Passwort UND Schlüsseldatei benutzen</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1631,7 +1804,7 @@ als Übersetzung für Keepass fest.</source>
     <name>QObject</name>
     <message>
         <source>Fehler</source>
-        <translation type="obsolete">Ошбка</translation>
+        <translation type="unfinished">Ошбка</translation>
     </message>
     <message>
         <source>Das Datenbankformat Version 0.1 wird nicht unterst&#xfc;tzt.</source>
@@ -1683,7 +1856,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message encoding="UTF-8">
         <source>ungültiger RGB-Farbwert: </source>
-        <translation>некорректное RGB значение цвета:</translation>
+        <translation type="obsolete">некорректное RGB значение цвета:</translation>
     </message>
     <message encoding="UTF-8">
         <source>&apos;/dev/random&apos; bzw. &apos;/dev/urandom&apos; konnte nicht zum lesen geöffnet werden.</source>
@@ -1761,6 +1934,19 @@ als Übersetzung für Keepass fest.</source>
         <source>Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass
 Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
         <translation>Невозможно сохранить файл конфигурации.</translation>
+    </message>
+    <message>
+        <source>dd&apos;.&apos;MM&apos;.&apos;yy&apos; &apos;hh&apos;:&apos;mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Die Datei &apos;%1&apos; konnte nicht gefunden werden.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>ungültiger RGB-Farbwert.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #ifndef _LANGUAGEDLG_H_
 #define _LANGUAGEDLG_H_
 #include "ui_LanguageDlg.h"
@@ -27,14 +27,13 @@
 
 
 
-class CLanguageDlg : public LanguageDlg
+class CLanguageDlg : public QDialog, public Ui_LanguageDlg
 {
   Q_OBJECT
 
 public:
   CLanguageDlg(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0 );
   ~CLanguageDlg();
-  CMainWindow* parentwnd;
   vector<QString> filenames;
   vector<Q3ListViewItem*> pItems;
   /*$PUBLIC_FUNCTIONS$*/

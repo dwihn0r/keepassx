@@ -23,7 +23,7 @@
 
 #include "ui_SimplePasswordDlg.h"
 
-class CSimplePasswordDialog : public SimplePasswordDialog
+class CSimplePasswordDialog : public QDialog, public Ui_SimplePasswordDialog
 {
   Q_OBJECT
 

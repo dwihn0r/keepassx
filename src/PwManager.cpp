@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "global.h"
-#include <iostream.h>
+#include <iostream>
 #include <time.h>
 #include <qfile.h>
 #include <qstringlist.h>
@@ -29,10 +29,27 @@
 #include "crypto/rijndael.h"
 #include "crypto/twoclass.h"
 #include "lib/random.h"
-
+using namespace std;
 #include "PwManager.h"
 
+QString PwDatabase::getError(){
+if(Errors.size()){
+QString r=Errors.front();
+Errors.pop_front();
+return r;
+}
+else return QString(trUtf8("unbekannter Fehler"));
+}
 
+QString PwDatabase::getErrors(){
+QString r;
+for(int i=0; i<Errors.size(); i++){
+r+=Errors[i];
+r+='\n';
+}
+Errors.clear();
+return r;
+}
 
 bool PwDatabase::loadDatabase(QString _filename, QString& err){
 unsigned long total_size,crypto_size;
@@ -110,7 +127,7 @@ else if(CryptoAlgorithmus == ALGO_TWOFISH)
 			total_size - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 
-if((crypto_size > 2147483446) || (crypto_size == 0)){err=trUtf8("Unerwarteter Wert für 'crypto_size'"); return false;}
+if((crypto_size > 2147483446) || (crypto_size == 0)){err=trUtf8("Entschlüsselung nicht möglich - der Schlüssel ist falsch oder die Datei beschädigt."); return false;}
 
 sha256_starts(&sha32);
 sha256_update(&sha32,(unsigned char *)buffer + DB_HEADER_SIZE,crypto_size);
@@ -418,16 +435,16 @@ bool CGroup::ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pDa
 		Name=QString::fromUtf8((char*)pData);
 		break;
 	case 0x0003:
-		Creation.Set(pData);
+		Creation=dateFromPackedStruct5(pData);
 		break;
 	case 0x0004:
-		LastMod.Set(pData);
+		LastMod=dateFromPackedStruct5(pData);
 		break;
 	case 0x0005:
-		LastAccess.Set(pData);
+		LastAccess=dateFromPackedStruct5(pData);
 		break;
 	case 0x0006:
-		Expire.Set(pData);
+		Expire=dateFromPackedStruct5(pData);
 		break;
 	case 0x0007:
 		memcpyFromLEnd32(&ImageID, (char*)pData);
@@ -491,16 +508,16 @@ switch(FieldType)
 		Additional=QString::fromUtf8((char*)pData);
 		break;
 	case 0x0009:
-		Creation.Set(pData);
+		Creation=dateFromPackedStruct5(pData);
 		break;
 	case 0x000A:
-		LastMod.Set(pData);
+		LastMod=dateFromPackedStruct5(pData);
 		break;
 	case 0x000B:
-		LastAccess.Set(pData);
+		LastAccess=dateFromPackedStruct5(pData);
 		break;
 	case 0x000C:
-		Expire.Set(pData);
+		Expire=dateFromPackedStruct5(pData);
 		break;
 	case 0x000D:
 		BinaryDesc=(char*)pData;
@@ -527,13 +544,13 @@ switch(FieldType)
 	return true; // Field processed
 }
 
-bool PwDatabase::CloseDataBase(){
+bool PwDatabase::closeDatabase(){
 Groups.clear();
 Entries.clear();
 return true;
 }
 
-bool PwDatabase::SaveDataBase(QString filename){
+bool PwDatabase::saveDatabase(){
 CGroup SearchGroup;
 Q_UINT32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
 Q_UINT8 TrafoRandomSeed[32];
@@ -604,22 +621,22 @@ for(int i=0; i < Groups.size(); i++){
 		FieldType = 0x0003; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Groups[i].Creation.GetPackedTime((unsigned char*)buffer+pos);pos += 5;
+		dateToPackedStruct5(Groups[i].Creation,(unsigned char*)buffer+pos); pos += 5;
 
 		FieldType = 0x0004; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Groups[i].LastMod.GetPackedTime((unsigned char*)buffer+pos);pos += 5;
+		dateToPackedStruct5(Groups[i].LastMod,(unsigned char*)buffer+pos);pos += 5;
 
 		FieldType = 0x0005; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Groups[i].LastAccess.GetPackedTime((unsigned char*)buffer+pos);pos += 5;
+		dateToPackedStruct5(Groups[i].LastAccess,(unsigned char*)buffer+pos);pos += 5;
 
 		FieldType = 0x0006; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Groups[i].Expire.GetPackedTime((unsigned char*)buffer+pos);pos += 5;
+		dateToPackedStruct5(Groups[i].Expire,(unsigned char*)buffer+pos);pos += 5;
 
 		FieldType = 0x0007; FieldSize = 4;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
@@ -692,23 +709,23 @@ for(int i = 0; i < Entries.size(); i++){
 		FieldType = 0x0009; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Entries[i].Creation.GetPackedTime((unsigned char*)buffer+pos); pos+=5;
+		dateToPackedStruct5(Entries[i].Creation,(unsigned char*)buffer+pos); pos+=5;
 
 
 		FieldType = 0x000A; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Entries[i].LastMod.GetPackedTime((unsigned char*)buffer+pos); pos+=5;
+		dateToPackedStruct5(Entries[i].LastMod,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000B; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Entries[i].LastAccess.GetPackedTime((unsigned char*)buffer+pos); pos+=5;
+		dateToPackedStruct5(Entries[i].LastAccess,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000C; FieldSize = 5;
 		memcpy(buffer+pos, &FieldType, 2); pos += 2;
 		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		Entries[i].Expire.GetPackedTime((unsigned char*)buffer+pos); pos+=5;
+		dateToPackedStruct5(Entries[i].Expire,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000D;
 		FieldSize = Entries[i].BinaryDesc.utf8().length() + 1; // Add terminating NULL character space
@@ -795,18 +812,6 @@ file.close();
 delete [] buffer;
 if(SearchGroupID!=-1)Groups.push_back(SearchGroup);
 return true;
-}
-
-bool PwDatabase::NewDataBase(){
-filename="";
-SearchGroupID=-1;
-CryptoAlgorithmus=ALGO_AES;
-KeyEncRounds=6000;
-
-CGroup g;
-g.ID=1;
-g.Name=QObject::trUtf8("Standardgruppe");
-Groups.push_back(g);
 }
 
 GroupItr PwDatabase::getGroupIterator(CGroup* pGroup){
@@ -960,4 +965,28 @@ void memcpyFromLEnd16(Q_UINT16* dst,char* src){
   memcpy(dst+1,src+0,1);
   memcpy(dst+0,src+1,1);
 #endif
+}
+
+const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));
+
+QDateTime dateFromPackedStruct5(const unsigned char* pBytes){
+Q_UINT32 dw1, dw2, dw3, dw4, dw5;
+dw1 = (Q_UINT32)pBytes[0]; dw2 = (Q_UINT32)pBytes[1]; dw3 = (Q_UINT32)pBytes[2];
+dw4 = (Q_UINT32)pBytes[3]; dw5 = (Q_UINT32)pBytes[4];
+int y = (dw1 << 6) | (dw2 >> 2);
+int mon = ((dw2 & 0x00000003) << 2) | (dw3 >> 6);
+int d = (dw3 >> 1) & 0x0000001F;
+int h = ((dw3 & 0x00000001) << 4) | (dw4 >> 4);
+int min = ((dw4 & 0x0000000F) << 2) | (dw5 >> 6);
+int s = dw5 & 0x0000003F;
+return QDateTime(QDate(y,mon,d),QTime(h,min));
+}
+
+
+void dateToPackedStruct5(const QDateTime& d,unsigned char* pBytes){
+pBytes[0] = (Q_UINT8)(((Q_UINT32)d.date().year() >> 6) & 0x0000003F);
+pBytes[1] = (Q_UINT8)((((Q_UINT32)d.date().year() & 0x0000003F) << 2) | (((Q_UINT32)d.date().month() >> 2) & 0x00000003));
+pBytes[2] = (Q_UINT8)((((Q_UINT32)d.date().month() & 0x00000003) << 6) | (((Q_UINT32)d.date().day() & 0x0000001F) << 1) | (((Q_UINT32)d.time().hour() >> 4) & 0x00000001));
+pBytes[3] = (Q_UINT8)((((Q_UINT32)d.time().hour() & 0x0000000F) << 4) | (((Q_UINT32)d.time().minute() >> 2) & 0x0000000F));
+pBytes[4] = (Q_UINT8)((((Q_UINT32)d.time().minute() & 0x00000003) << 6) | ((Q_UINT32)d.time().second() & 0x0000003F));
 }

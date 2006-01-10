@@ -18,20 +18,20 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "mainwindow.h"
 #include <qmessagebox.h>
 #include <q3scrollview.h>
 #include <qlabel.h>
 #include <qdialog.h>
 #include <qfile.h>
 
+#include "main.h"
 #include "AboutDlg.h"
 
 CAboutDialog::CAboutDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: AboutDlg(parent,name, modal,fl)
+: QDialog(parent,name, modal,fl)
 {
-mainwnd=((CMainWindow*)parentWidget());
-mainwnd->CreateBanner(Banner,mainwnd->Icon_Key32x32,trUtf8("Keepass für Linux"));
+setupUi(this);
+createBanner(Banner,Icon_Key32x32,trUtf8("Keepass für Linux"));
 Link_Homepage=new LinkLabel(this,"Link_Homepage",trUtf8("http://keepass.de.vu"),80,143);
 Link_EMail=new LinkLabel(this,"Link_EMail",trUtf8("tarek.saidi@arcor.de"),80,163);
 Link_License=new LinkLabel(this,"Link_License",trUtf8("Lizenz"),80,183);
@@ -60,7 +60,7 @@ QDialog dlg(this,NULL,true);
 Q3ScrollView scroll(&dlg);
 QLabel label(&scroll,"License-Scroll");
 scroll.addChild(&label);
-QFile gpl(((CMainWindow*)parentWidget())->appdir+"/../share/keepass/license.txt");
+QFile gpl(AppDir+"/../share/keepass/license.txt");
 if(!gpl.exists()){
 QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Die Datei '%1' konnte nicht gefunden werden.")
 			  .arg("'license.txt'")+"\n"+trUtf8("Die Anwendung wurde möglicherweiße nicht korrekt installiert.")
@@ -89,10 +89,10 @@ delete buffer;
 }
 
 void CAboutDialog::OnHomepageClicked(){
-mainwnd->OpenURL("http://keepass.de.vu");
+openBrowser(tr("http://keepass.berlios.de/index.php"));
 }
 
 void CAboutDialog::OnEMailClicked(){
-mainwnd->OpenURL("mailto:tarek.saidi@arcor.de");
+openBrowser("mailto:tarek.saidi@arcor.de");
 }
 

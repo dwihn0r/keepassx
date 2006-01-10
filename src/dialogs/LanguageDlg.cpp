@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "mainwindow.h"
+#include "main.h"
 #include "LanguageDlg.h"
 #include <qtranslator.h>
 #include <qdir.h>
@@ -26,7 +26,8 @@
 #include <qmessagebox.h>
 //Added by qt3to4:
 #include <QShowEvent>
-#include <iostream.h>
+#include <iostream>
+using namespace std;
 
 const char* infostrings[]={
 QT_TRANSLATE_NOOP("_INFO","$TRANSL_AUTHOR"),
@@ -38,23 +39,24 @@ const char* msg[]={QT_TRANSLATE_NOOP("_MSG","Die Änderung der Sprache wird erst
 		   QT_TRANSLATE_NOOP("_MSG","Hinweis")};
 
 CLanguageDlg::CLanguageDlg(QWidget* parent, const char* name, Qt::WFlags fl)
-: LanguageDlg(parent,name,fl)
+: QDialog(parent,name,fl)
 {
-parentwnd=((CMainWindow*)parentWidget());
-parentwnd->CreateBanner(Banner,parentwnd->Icon_I18n32x32,trUtf8("Spracheinstellungen"));
+setupUi(this);
+
+createBanner(Banner,Icon_I18n32x32,trUtf8("Spracheinstellungen"));
 
 Q3ListViewItem* item;
-QString& config_lang=parentwnd->config->Language;
+QString& config_lang=config.Language;
 QStringList files;
 
-QString langdir=parentwnd->appdir+"/../share/keepass/i18n/";
+QString langdir=AppDir+"/../share/keepass/i18n/";
 QDir dir(langdir);
 if(dir.exists()){
 files=dir.entryList("*.qm",QDir::Files);
 }
 
 List->insertItem(item=new Q3ListViewItem(List,"","Deutsch","-","-"));
-if(config_lang=="_DEUTSCH_")item->setPixmap(0,*parentwnd->Icon_Ok16x16);
+if(config_lang=="_DEUTSCH_")item->setPixmap(0,*Icon_Ok16x16);
 pItems.push_back(item);
 filenames.push_back("_DEUTSCH_");
 
@@ -67,7 +69,7 @@ QTranslator translator;
 List->insertItem(item=new Q3ListViewItem(List,"",translator.translate("_INFO","$TRANSL_LANGUAGE")
 				       ,translator.translate("_INFO","$TRANSL_VERSION")
 				       ,translator.translate("_INFO","$TRANSL_AUTHOR")));
-if(config_lang==files[i])item->setPixmap(0,*parentwnd->Icon_Ok16x16);
+if(config_lang==files[i])item->setPixmap(0,*Icon_Ok16x16);
 pItems.push_back(item);
 filenames.push_back(files[i]);
 }
@@ -96,7 +98,7 @@ void CLanguageDlg::OnItemRightClick(Q3ListViewItem* item)
 void CLanguageDlg::OnItemDoubleClicked(Q3ListViewItem* item) // == Slot für Button "wählen"
 {
 int i;
-QString langdir=parentwnd->appdir+"/../share/keepass/i18n/";
+QString langdir=AppDir+"/../share/keepass/i18n/";
 
 for(i=0;i<pItems.size();i++){
  if(item==pItems[i])break;
@@ -116,10 +118,10 @@ QMessageBox::information(this,translator.translate("_MSG",msg[2])
 			     ,0,0,0);
 }
 else QMessageBox::information(this,QString::fromUtf8(msg[2]),QString::fromUtf8(msg[0]),QString::fromUtf8(msg[1]),0,0,2,1);
-parentwnd->config->Language=filenames[i];
+config.Language=filenames[i];
 
 for(int j=0;j<pItems.size();j++){
-if(j==i)pItems[j]->setPixmap(0,*parentwnd->Icon_Ok16x16);
+if(j==i)pItems[j]->setPixmap(0,*Icon_Ok16x16);
 else pItems[j]->setPixmap(0,0);}
 
 List->setColumnWidth(0,20);
