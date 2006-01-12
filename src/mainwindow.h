@@ -42,7 +42,7 @@
 
 #include "ui_MainWindow.h"
 
-#define NO_ENTRY_SELECTED
+
 
 class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 Q_OBJECT
@@ -63,9 +63,12 @@ private slots:
    void OnImportFromKWalletXml();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
-
+   void OnEntrySelectionChanged();
+   void OnGroupSelectionChanged();
 
 private:
+ enum SelectionState{NONE,SINGLE,MULTIPLE};
+ SelectionState GroupSelection, EntrySelection;
  bool FileOpen;
  bool ModFlag;
  inline void setupToolbar();
@@ -73,6 +76,8 @@ private:
  inline void setupConnections();
  void setStateFileOpen(bool);
  void setStateFileModified(bool);
+ void setStateGroupSelected(SelectionState s);
+ void setStateEntrySelected(SelectionState s);
  void openDatabase(QString filename);
  bool closeDatabase();
  void editEntry(CEntry* pEntry);

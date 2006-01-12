@@ -82,6 +82,8 @@ void KeepassMainWindow::setupConnections(){
 	   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
    connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,
 	   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
+   connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
+   connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
 }
 
 void KeepassMainWindow::setupToolbar(){
@@ -200,8 +202,28 @@ FileSaveAsAction->setEnabled(IsOpen);
 FileCloseAction->setEnabled(IsOpen);
 FileSettingsAction->setEnabled(IsOpen);
 FileChangeKeyAction->setEnabled(IsOpen);
+EditSearchAction->setEnabled(IsOpen);
 GroupView->setEnabled(IsOpen);
 EntryView->setEnabled(IsOpen);
+if(!IsOpen){
+    EditNewGroupAction->setEnabled(false);
+    EditEditGroupAction->setEnabled(false);
+    EditDeleteGroupAction->setEnabled(false);
+    EditPasswordToClipboardAction->setEnabled(false);
+    EditUsernameToClipboardAction->setEnabled(false);
+    OpenUrlAction->setEnabled(false);
+    EditSaveAttachmentAction->setEnabled(false);
+    EditNewEntryAction->setEnabled(false);
+    EditEditEntryAction->setEnabled(false);
+    EditCloneEntryAction->setEnabled(false);
+    EditDeleteEntryAction->setEnabled(false);
+    EditGroupSearchAction->setEnabled(false);
+}
+else{
+    OnGroupSelectionChanged();
+    OnEntrySelectionChanged();
+}
+
 }
 
 void KeepassMainWindow::editEntry(CEntry* pEntry){
@@ -216,6 +238,66 @@ ModFlag=mod;
 FileSaveAction->setEnabled(mod);
 }
 
+void KeepassMainWindow::setStateGroupSelected(SelectionState s){
+GroupSelection=s;
+switch(GroupSelection){
+ case NONE:
+    EditNewGroupAction->setEnabled(true);
+    EditEditGroupAction->setEnabled(false);
+    EditDeleteGroupAction->setEnabled(false);
+    EditGroupSearchAction->setEnabled(false);
+    EditNewEntryAction->setEnabled(false);
+    break;
+ case SINGLE:
+    EditNewGroupAction->setEnabled(true);
+    EditEditGroupAction->setEnabled(true);
+    EditDeleteGroupAction->setEnabled(true);
+    EditGroupSearchAction->setEnabled(true);
+    EditNewEntryAction->setEnabled(true);
+    break;
+default: Q_ASSERT(false);
+}
+}
+
+void KeepassMainWindow::setStateEntrySelected(SelectionState s){
+EntrySelection=NONE;
+switch(EntrySelection){
+ case NONE:
+    EditPasswordToClipboardAction->setEnabled(false);
+    EditUsernameToClipboardAction->setEnabled(false);
+    OpenUrlAction->setEnabled(false);
+    EditSaveAttachmentAction->setEnabled(false);
+    EditEditEntryAction->setEnabled(false);
+    EditCloneEntryAction->setEnabled(false);
+    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditDeleteEntryAction->setEnabled(false);
+    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    break;
+ case SINGLE:
+    EditPasswordToClipboardAction->setEnabled(true);
+    EditUsernameToClipboardAction->setEnabled(true);
+    OpenUrlAction->setEnabled(true);
+    EditSaveAttachmentAction->setEnabled(true);
+    EditEditEntryAction->setEnabled(true);
+    EditCloneEntryAction->setEnabled(true);
+    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditDeleteEntryAction->setEnabled(true);
+    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    break;
+ case MULTIPLE:
+    EditPasswordToClipboardAction->setEnabled(false);
+    EditUsernameToClipboardAction->setEnabled(false);
+    OpenUrlAction->setEnabled(false);
+    EditSaveAttachmentAction->setEnabled(false);
+    EditEditEntryAction->setEnabled(false);
+    EditCloneEntryAction->setEnabled(true);
+    EditCloneEntryAction->setText(trUtf8("Einträge duplizieren"));
+    EditDeleteEntryAction->setEnabled(true);
+    EditDeleteEntryAction->setText(trUtf8("Einträge löschen"));
+    break;
+ default: Q_ASSERT(false);
+}
+}
 
 bool KeepassMainWindow::OnFileSave(){
 if(db->filename==QString())
@@ -268,4 +350,22 @@ void KeepassMainWindow::OnEntryItemDoubleClicked(QTreeWidgetItem* item,int colum
 if(column) return;
 if(!config.Columns[0]) return;
 editEntry(static_cast<EntryViewItem*>(item)->pEntry);
+}
+
+void KeepassMainWindow::OnEntrySelectionChanged(){
+if(EntryView->selectedItems().size()==0)
+  setStateEntrySelected(NONE);
+if(EntryView->selectedItems().size()==1)
+  setStateEntrySelected(SINGLE);
+if(EntryView->selectedItems().size()>1)
+  setStateEntrySelected(MULTIPLE);
+
+}
+
+void KeepassMainWindow::OnGroupSelectionChanged(){
+if(GroupView->selectedItems().size()==0)
+  setStateGroupSelected(NONE);
+if(GroupView->selectedItems().size()==1)
+  setStateGroupSelected(SINGLE);
+Q_ASSERT(GroupView->selectedItems().size()<=1);
 }

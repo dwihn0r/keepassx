@@ -158,7 +158,7 @@
     <addaction name="separator" />
     <addaction name="EditPasswordToClipboardAction" />
     <addaction name="EditUsernameToClipboardAction" />
-    <addaction name="ActionOpenUrl" />
+    <addaction name="OpenUrlAction" />
     <addaction name="EditSaveAttachmentAction" />
     <addaction name="separator" />
     <addaction name="EditNewEntryAction" />
@@ -284,7 +284,7 @@
     <string>Benutzername in Zwischenablage kopieren</string>
    </property>
   </action>
-  <action name="ActionOpenUrl" >
+  <action name="OpenUrlAction" >
    <property name="text" >
     <string>URL öffnen</string>
    </property>
