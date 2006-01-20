@@ -61,6 +61,9 @@ private slots:
    void OnFileExit();
    void OnImportFromPwm();
    void OnImportFromKWalletXml();
+   void OnEditNewGroup();
+   void OnEditEditGroup();
+   void OnEditDeleteGroup();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();

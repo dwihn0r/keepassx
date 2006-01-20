@@ -104,6 +104,8 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 }
 
 void KeepassGroupView::updateItems(){
+clear();
+Items.clear();
 for(GroupItr i=db->Groups.begin();i!=db->Groups.end();i++){
 if((*i).Level==0){
  if(Items.size()) Items.push_back(new GroupViewItem(this,getLastSameLevelItem(0)));

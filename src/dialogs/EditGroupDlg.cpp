@@ -32,6 +32,8 @@ CEditGroupDialog::CEditGroupDialog(QWidget* parent, const char* name, bool modal
 {
 setupUi(this);
 IconID=0;
+connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 }
 
 CEditGroupDialog::~CEditGroupDialog()
@@ -51,14 +53,12 @@ void CEditGroupDialog::OnOK()
 {
 GroupName=EditTitle->text();
 IconID=ComboIconPicker->currentItem();
-OK=true;
-close();
+done(1);
 }
 
 void CEditGroupDialog::OnCancel()
 {
-OK=false;
-close();
+done(0);
 }
 
 

@@ -45,7 +45,6 @@ protected slots:
 public:
  int IconID;
  QString GroupName;
- bool OK;
  
 
 public slots:

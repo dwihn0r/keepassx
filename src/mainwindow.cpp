@@ -78,6 +78,11 @@ void KeepassMainWindow::setupConnections(){
    connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
    connect(FileImpPwmAction, SIGNAL(triggered()), this, SLOT(OnImportFromPwm()));
    connect(FileImpKWalletXmlAction, SIGNAL(triggered()), this,SLOT(OnImportFromKWalletXml()));
+
+   connect(EditNewGroupAction, SIGNAL(triggered()), this, SLOT(OnEditNewGroup()));
+   connect(EditEditGroupAction, SIGNAL(triggered()), this, SLOT(OnEditEditGroup()));
+   connect(EditDeleteGroupAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteGroup()));
+
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
 	   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
    connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,
@@ -368,4 +373,43 @@ if(GroupView->selectedItems().size()==0)
 if(GroupView->selectedItems().size()==1)
   setStateGroupSelected(SINGLE);
 Q_ASSERT(GroupView->selectedItems().size()<=1);
+}
+
+void KeepassMainWindow::OnEditNewGroup(){
+CGroup *pNew=NULL;
+if(GroupView->selectedItems().size())
+ pNew=db->addGroup(static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup);
+else
+ pNew=db->addGroup(NULL);
+CEditGroupDialog dlg(this,"EditGroupDlg",true);
+if(!dlg.exec()){
+ db->deleteGroup(pNew);
+ return;
+}
+pNew->Name=dlg.GroupName;
+pNew->ImageID=dlg.IconID;
+setStateFileModified(true);
+GroupView->updateItems();
+}
+
+void KeepassMainWindow::OnEditEditGroup(){
+Q_ASSERT(GroupView->selectedItems().size());
+CGroup *pGroup=static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
+CEditGroupDialog dlg(this,"EditGroupDlg",true);
+dlg.GroupName=pGroup->Name;
+dlg.IconID=pGroup->ImageID;
+if(!dlg.exec())return;
+if((pGroup->Name != dlg.GroupName) || (pGroup->ImageID != dlg.IconID)){
+  setStateFileModified(true);
+  pGroup->Name = dlg.GroupName;
+  pGroup->ImageID = dlg.IconID;
+  GroupView->updateItems();
+}
+}
+
+void KeepassMainWindow::OnEditDeleteGroup(){
+Q_ASSERT(GroupView->selectedItems().size());
+CGroup *pGroup=static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
+db->deleteGroup(pGroup);
+GroupView->updateItems();
 }
