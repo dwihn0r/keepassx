@@ -42,6 +42,7 @@ protected:
 
 private:
  QPoint DragStartPos;
+ QPixmap DragPixmap;
  GroupViewItem* LastHoverItem;
  GroupViewItem* getLastSameLevelItem(int level);
 };

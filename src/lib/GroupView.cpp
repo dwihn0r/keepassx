@@ -25,6 +25,12 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include <QFont>
+#include <QFontMetrics>
+#include <QSize>
+#include <QPixmap>
+#include <QPainter>
+#include <QPen>
+#include <QBrush>
 #include "main.h"
 #include "GroupView.h"
 
@@ -94,10 +100,20 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 	GroupViewItem* item=(GroupViewItem*)itemAt(DragStartPos);
 	if(!item)return;
 	QDrag *drag = new QDrag(this);
+	QFontMetrics fontmet(item->font(0));
+	int DragPixmHeight=16;
+	if(fontmet.height()>16)DragPixmHeight=fontmet.height();
+	DragPixmap  = QPixmap(fontmet.width(item->text(0))+19,DragPixmHeight);
+	DragPixmap.fill(QColor(255,255,255));
+	QPainter painter(&DragPixmap);
+	painter.setPen(QColor(0,0,0));
+	painter.setFont(item->font(0));
+	painter.drawPixmap(0,0,item->icon(0).pixmap());
+	painter.drawText(19,DragPixmHeight-fontmet.strikeOutPos(),item->text(0));	
         QMimeData *mimeData = new QMimeData;
 	mimeData->setData("keepass/group",QByteArray((char*)&(item->pGroup),sizeof(void*)));
         drag->setMimeData(mimeData);
-        drag->setPixmap(item->icon(0).pixmap());
+        drag->setPixmap(DragPixmap);
 	drag->start();
 
 
