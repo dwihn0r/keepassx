@@ -66,9 +66,9 @@ cout << keys[i].ascii() << endl;
 }
 QApplication::setStyle(QStyleFactory::create("slimplastic"));
 */
+QApplication* app=new QApplication(argc,argv);
 QString ArgFile,ArgCfg,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg);
-QApplication* app=new QApplication(argc,argv);
 AppDir=app->applicationDirPath();
 //Load Config
 if(ArgCfg==""){
