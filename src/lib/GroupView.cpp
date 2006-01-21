@@ -53,11 +53,17 @@ if(LastHoverItem){
   f.setBold(false);
   LastHoverItem->setFont(0,f);
 }
+
 if(item){
-  QFont f=item->font(0);
-  f.setBold(true);
-  item->setFont(0,f);
-  LastHoverItem=item;}
+ if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
+   QFont f=item->font(0);
+   f.setBold(true);
+   item->setFont(0,f);
+   LastHoverItem=item;
+   event->setAccepted(true);}
+ else 
+   event->setAccepted(false);
+ }
 else{
   LastHoverItem=NULL;}
 
@@ -96,22 +102,21 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
             return;
  if ((event->pos() - DragStartPos).manhattanLength() < QApplication::startDragDistance())
             return;
-
-	GroupViewItem* item=(GroupViewItem*)itemAt(DragStartPos);
-	if(!item)return;
+	DragItem=(GroupViewItem*)itemAt(DragStartPos);
+	if(!DragItem)return;
 	QDrag *drag = new QDrag(this);
-	QFontMetrics fontmet(item->font(0));
+	QFontMetrics fontmet(DragItem->font(0));
 	int DragPixmHeight=16;
 	if(fontmet.height()>16)DragPixmHeight=fontmet.height();
-	DragPixmap  = QPixmap(fontmet.width(item->text(0))+19,DragPixmHeight);
+	DragPixmap  = QPixmap(fontmet.width(DragItem->text(0))+19,DragPixmHeight);
 	DragPixmap.fill(QColor(255,255,255));
 	QPainter painter(&DragPixmap);
 	painter.setPen(QColor(0,0,0));
-	painter.setFont(item->font(0));
-	painter.drawPixmap(0,0,item->icon(0).pixmap());
-	painter.drawText(19,DragPixmHeight-fontmet.strikeOutPos(),item->text(0));	
+	painter.setFont(DragItem->font(0));
+	painter.drawPixmap(0,0,DragItem->icon(0).pixmap());
+	painter.drawText(19,DragPixmHeight-fontmet.strikeOutPos(),DragItem->text(0));	
         QMimeData *mimeData = new QMimeData;
-	mimeData->setData("keepass/group",QByteArray((char*)&(item->pGroup),sizeof(void*)));
+	mimeData->setData("keepass/group",QByteArray((char*)&(DragItem->pGroup),sizeof(void*)));
         drag->setMimeData(mimeData);
         drag->setPixmap(DragPixmap);
 	drag->start();

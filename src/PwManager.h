@@ -62,6 +62,7 @@ public:
  void      moveEntry(CEntry* pEntry,CGroup* pDstGroup);
  CEntry*   addEntry();
  void 	   merge(PwDatabase* db2);
+ bool	   isParentGroup(CGroup* Group,CGroup* PotenialParent);
  QString   getError();  //get first error
  QString   getErrors(); //get all errors in a \n seperated String
 

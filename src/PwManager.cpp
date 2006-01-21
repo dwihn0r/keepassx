@@ -909,6 +909,19 @@ for(int i=0;i<Entries.size();i++)
 return false;
 }
 
+bool PwDatabase::isParentGroup(CGroup* child, CGroup* parent){
+if(child==parent)return true;	//maybe a bad idea
+int ChildIndex=getGroupIndex(child->ID);
+int ParentIndex=getGroupIndex(parent->ID);
+if(ParentIndex > ChildIndex) return false;
+
+for(int i=ChildIndex; i>ParentIndex;i--){
+  if(Groups[i].Level<=parent->Level)return false;
+}
+
+return true;
+}
+
 
 Q_UINT32 PwDatabase::getNewGroupId(){
 Q_UINT32 id;
