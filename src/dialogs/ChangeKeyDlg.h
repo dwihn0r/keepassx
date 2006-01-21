@@ -31,7 +31,7 @@ class CChangeKeyDlg : public QDialog, public Ui_ChangeKeyDialog
   Q_OBJECT
 
 public:
-  CChangeKeyDlg(QWidget* parent,PwDatabase* db, const char* name = 0, bool modal = true, Qt::WFlags fl = 0 );
+  CChangeKeyDlg(QWidget* parent,PwDatabase* db, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CChangeKeyDlg();
   /*$PUBLIC_FUNCTIONS$*/
 
