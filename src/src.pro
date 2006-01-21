@@ -3,14 +3,14 @@
 # Unterordner relativ zum Projektordner: ./src
 # Das Target ist eine Anwendung:  ../bin/keepass
 
-INSTALLS += Share \
-            target 
+INSTALLS += target \
+            Share
 Share.files += ../share/keepass/* 
-unix{ Share.path = /usr/local/share/keepass
-      target.path = /usr/local/bin
+unix{ target.path = /usr/local/bin
+      Share.path = /usr/local/share/keepass
 }
-macx{ Share.path = /Applications/keepass.app/Contents
-      target.path = /Applications
+macx{ target.path = /Applications
+      Share.path = /Applications/keepass.app/Contents/share/keepass
 }
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
