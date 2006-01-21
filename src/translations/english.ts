@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Die Datei &apos;%1&apos; konnte nicht gefunden werden.</source>
-        <translation>&apos;%1&apos; - no such file or directory</translation>
+        <translation>&apos;%1&apos; - no such file or directory.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Die Anwendung wurde möglicherweiße nicht korrekt installiert.</source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation type="unfinished"></translation>
+        <translation>http://keepass.berlios.de/index.php</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@ Please check your input.</translation>
     </message>
     <message encoding="UTF-8">
         <source> ist kein gültiger Zahlenwert</source>
-        <translation> is no valid number.</translation>
+        <translation> is no valid number</translation>
     </message>
     <message encoding="UTF-8">
         <source>Die Anzahl an Verschlüsselungsrunden muss mindestens 1 betragen.</source>
@@ -212,7 +212,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     <name>CLanguageDlg</name>
     <message>
         <source>Spracheinstellungen</source>
-        <translation>Language Settings...</translation>
+        <translation>Language Settings</translation>
     </message>
     <message>
         <source>Warnung</source>
@@ -328,7 +328,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message encoding="UTF-8">
         <source>Passwort &lt;b&gt;und&lt;/b&gt; Schlüsseldatei verwenden</source>
-        <translation>Use password &lt;b&gt;and&lt;/b&gt; key file.</translation>
+        <translation type="obsolete">Use password &lt;b&gt;and&lt;/b&gt; key file.</translation>
     </message>
     <message encoding="UTF-8">
         <source>W&amp;ählen...</source>
@@ -336,7 +336,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message encoding="UTF-8">
         <source>Alt+ä</source>
-        <translation>Alt+B</translation>
+        <translation type="obsolete">Alt+B</translation>
     </message>
     <message>
         <source>...</source>
@@ -353,6 +353,14 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     <message>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Passwort UND Schlüsseldatei verwenden</source>
+        <translation>Use password AND key file</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Alt+Ä</source>
+        <translation>Alt+B</translation>
     </message>
 </context>
 <context>
@@ -443,7 +451,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message encoding="UTF-8">
         <source>läuft nicht ab</source>
-        <translation type="unfinished"></translation>
+        <translation>never expires</translation>
     </message>
 </context>
 <context>
@@ -556,7 +564,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message encoding="UTF-8">
         <source>h&amp;öhere ANSI-Zeichen</source>
-        <translation>&amp;Higher ANSI Charakters</translation>
+        <translation>&amp;Higher ANSI Characters</translation>
     </message>
     <message encoding="UTF-8">
         <source>Alt+ö</source>
@@ -564,7 +572,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>&amp;nur folgende Zeichen benutzen:</source>
-        <translation>Use onl&amp;y the following charakters:</translation>
+        <translation>Use onl&amp;y the following characters:</translation>
     </message>
     <message>
         <source>Alt+N</source>
@@ -584,7 +592,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>folgende Zeichengruppen &amp;verwenden:</source>
-        <translation>use the following &amp;charakters:</translation>
+        <translation>use the following &amp;characters:</translation>
     </message>
     <message>
         <source>Alt+V</source>
@@ -608,7 +616,7 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>S&amp;onderzeichen</source>
-        <translation>&amp;Special Charakters</translation>
+        <translation>&amp;Special Characters</translation>
     </message>
     <message>
         <source>&quot;/dev/rando&amp;m&quot; nutzen (empfohlen)</source>
@@ -623,50 +631,50 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     <name>KeepassEntryView</name>
     <message>
         <source>Titel</source>
-        <translation type="unfinished">Title</translation>
+        <translation>Title</translation>
     </message>
     <message>
         <source>Benutzername</source>
-        <translation type="unfinished">Username</translation>
+        <translation>Username</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation type="unfinished">URL</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <source>Passwort</source>
-        <translation type="unfinished">Password</translation>
+        <translation>Password</translation>
     </message>
     <message>
         <source>Kommentare</source>
-        <translation type="unfinished">Comments</translation>
+        <translation>Comments</translation>
     </message>
     <message encoding="UTF-8">
         <source>Gültig bis</source>
-        <translation type="unfinished">Expires</translation>
+        <translation>Expires</translation>
     </message>
     <message>
         <source>Erstellung</source>
-        <translation type="unfinished">Creation</translation>
+        <translation>Creation</translation>
     </message>
     <message encoding="UTF-8">
         <source>letzte Änderung</source>
-        <translation type="unfinished">last Change</translation>
+        <translation>last Change</translation>
     </message>
     <message>
         <source>letzter Zugriff</source>
-        <translation type="unfinished">last Access</translation>
+        <translation>last Access</translation>
     </message>
     <message>
         <source>Anhang</source>
-        <translation type="unfinished">Attachment</translation>
+        <translation>Attachment</translation>
     </message>
 </context>
 <context>
     <name>KeepassGroupView</name>
     <message>
         <source>Gruppen</source>
-        <translation type="unfinished">Groups</translation>
+        <translation>Groups</translation>
     </message>
 </context>
 <context>
@@ -846,11 +854,11 @@ Soll sie überschrieben werden?</source>
     </message>
     <message>
         <source>Eintrag duplizieren</source>
-        <translation type="obsolete">Duplicate Entry</translation>
+        <translation>Duplicate Entry</translation>
     </message>
     <message encoding="UTF-8">
         <source>Eintrag löschen</source>
-        <translation type="obsolete">Delete Entry</translation>
+        <translation>Delete Entry</translation>
     </message>
     <message encoding="UTF-8">
         <source>Gruppe hinzufügen...</source>
@@ -904,7 +912,8 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     <message encoding="UTF-8">
         <source>Beim öffnen der Datenbank ist ein Fehler aufgetreten:
 %1</source>
-        <translation>An error occured while opening the database:</translation>
+        <translation>An error occured while opening the database:
+%1</translation>
     </message>
     <message>
         <source>Frage</source>
@@ -930,27 +939,42 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     </message>
     <message>
         <source>unbekannter Fehler in PwDatabase::loadDatabase()</source>
-        <translation type="unfinished"></translation>
+        <translation>unknown error inPw Database::loadDatabase()</translation>
     </message>
     <message encoding="UTF-8">
         <source>Databank öffnen...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Speichern?</source>
-        <translation type="unfinished"></translation>
+        <translation>Open database...</translation>
     </message>
     <message encoding="UTF-8">
-        <source>Sollen die Änderungen an der aktuellen Datenbank gespeichert werden?</source>
-        <translation type="unfinished"></translation>
+        <source>Geänderte Datei speichern?</source>
+        <translation>Save Changes?<byte value="x9"/></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Die aktuell geöffnete Datei wurde verändert. Sollen die Änderungen vor dem Schließen gespeichert werden?</source>
+        <translation>The file has been modified. Do you wish to save your changes?</translation>
     </message>
     <message>
-        <source>Speichern fehlgeschlagen</source>
-        <translation type="unfinished"></translation>
+        <source>[neu]</source>
+        <translation>[new]</translation>
     </message>
     <message>
-        <source>Die Datei konnte nicht gespeichert werden.</source>
-        <translation type="unfinished"></translation>
+        <source>Die Datei konnte nicht gespeichert werden.
+%1</source>
+        <translation>The database could not be saved.
+%1</translation>
+    </message>
+    <message>
+        <source>Datenbank speichern unter...</source>
+        <translation>Save Database As...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Einträge duplizieren</source>
+        <translation>Duplicate Entry
+</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Einträge löschen</source>
+        <translation>Delete Entry</translation>
     </message>
 </context>
 <context>
@@ -1285,71 +1309,123 @@ active translation for Keepass.</translation>
     <name>MainWindow</name>
     <message>
         <source>Keepass Passwort-Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Keepass Password Manager</translation>
     </message>
     <message>
         <source>Ansicht</source>
-        <translation type="unfinished">View</translation>
+        <translation>View</translation>
     </message>
     <message>
         <source>Extras</source>
-        <translation type="unfinished">Extras</translation>
+        <translation>Extras</translation>
     </message>
     <message>
         <source>Hilfe</source>
-        <translation type="unfinished">Help</translation>
+        <translation>Help</translation>
     </message>
     <message>
         <source>Bearbeiten</source>
-        <translation type="unfinished">Edit</translation>
+        <translation>Edit</translation>
     </message>
     <message>
         <source>Datei</source>
-        <translation type="unfinished">File</translation>
+        <translation>File</translation>
     </message>
     <message>
         <source>Importieren aus</source>
-        <translation type="unfinished">Import From</translation>
+        <translation>Import From</translation>
     </message>
     <message>
         <source>Neue Datenbank...</source>
-        <translation type="unfinished"></translation>
+        <translation>New Database...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Datenbank öffnen...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Datenbank schließen...</source>
-        <translation type="unfinished"></translation>
+        <translation>Open Database...</translation>
     </message>
     <message>
         <source>Datenbank speichern</source>
-        <translation type="unfinished">Save Database</translation>
+        <translation>Save Database</translation>
     </message>
     <message>
         <source>Datenbank speichern unter...</source>
-        <translation type="unfinished">Save Database As...</translation>
+        <translation>Save Database As...</translation>
     </message>
     <message>
         <source>Datenbank-Einstellungen...</source>
-        <translation type="unfinished">Database Settings...</translation>
+        <translation>Database Settings...</translation>
     </message>
     <message encoding="UTF-8">
         <source>Hauptschlüssel ändern...</source>
-        <translation type="unfinished">Change Master Key...</translation>
+        <translation>Change Master Key...</translation>
     </message>
     <message>
         <source>Beenden</source>
-        <translation type="unfinished">Exit</translation>
+        <translation>Exit</translation>
     </message>
     <message>
         <source>PwManager-Datei (*.pwm)</source>
-        <translation type="unfinished"></translation>
+        <translation>PwManager File (*.pwm)</translation>
     </message>
     <message>
         <source>KWallet XML-Datei (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>KWallet XML File (*.xml)</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Datenbank schließen</source>
+        <translation>Close Database</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Neue Gruppe hinzufügen...</source>
+        <translation>New Group...</translation>
+    </message>
+    <message>
+        <source>Gruppe bearbeiten...</source>
+        <translation>Edit Group...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Gruppe löschen</source>
+        <translation>Delete Group</translation>
+    </message>
+    <message>
+        <source>Passwort in Zwischenablage kopieren</source>
+        <translation>Copy Password to Clipboard</translation>
+    </message>
+    <message>
+        <source>Benutzername in Zwischenablage kopieren</source>
+        <translation>Copy Username to Clipboard</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>URL öffnen</source>
+        <translation>Open URL</translation>
+    </message>
+    <message>
+        <source>Anhang speichern unter...</source>
+        <translation>Save Attachment As...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Neuen Eintrag hinzufügen...</source>
+        <translation>New Entry...</translation>
+    </message>
+    <message>
+        <source>Eintrag anzeigen/bearbeiten...</source>
+        <translation>Show/Edit Entry...</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Eintrag löschen</source>
+        <translation>Delete Entry</translation>
+    </message>
+    <message>
+        <source>Eintrag duplizieren</source>
+        <translation>Duplicate Entry</translation>
+    </message>
+    <message>
+        <source>In Datenbank suchen...</source>
+        <translation>Search in Database...</translation>
+    </message>
+    <message>
+        <source>In dieser Gruppe suchen...</source>
+        <translation>Search in Group...</translation>
     </message>
 </context>
 <context>
@@ -1408,23 +1484,23 @@ active translation for Keepass.</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Abbrechen</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation>Cancel</translation>
     </message>
     <message encoding="UTF-8">
         <source>Alt+Ä</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
     <message encoding="UTF-8">
         <source>Passwort UND Schlüsseldatei benutzen</source>
-        <translation type="unfinished"></translation>
+        <translation>Use password AND key file</translation>
     </message>
 </context>
 <context>
@@ -1455,14 +1531,22 @@ active translation for Keepass.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Unerwarteter Wert für &apos;crypto_size&apos;</source>
-        <translation>Unexpected &apos;crypto_size&apos; value</translation>
+        <translation type="obsolete">Unexpected &apos;crypto_size&apos; value</translation>
+    </message>
+    <message>
+        <source>unbekannter Fehler</source>
+        <translation>unknown error</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Entschlüsselung nicht möglich - der Schlüssel ist falsch oder die Datei beschädigt.</source>
+        <translation>The file could not be decrypted: wrong key or damaged file.</translation>
     </message>
 </context>
 <context encoding="UTF-8">
     <name>QObject</name>
     <message>
         <source>Fehler</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message encoding="UTF-8">
         <source>Das Datenbankformat Version 0.1 wird nicht unterstützt.</source>
@@ -1502,7 +1586,7 @@ active translation for Keepass.</translation>
     </message>
     <message>
         <source>Standardgruppe</source>
-        <translation>default</translation>
+        <translation type="obsolete">default</translation>
     </message>
     <message>
         <source>Die angegebene Datei existiert nicht.</source>
@@ -1530,7 +1614,7 @@ active translation for Keepass.</translation>
     </message>
     <message>
         <source>Komprimierte PwManager-Dateien werden nicht unterst&#xc3;&#xbc;tzt</source>
-        <translation>Compressed PwManager files are not supported.</translation>
+        <translation>Compressed PwManager files are not supported</translation>
     </message>
     <message>
         <source>Falsches Passwort</source>
@@ -1554,7 +1638,7 @@ active translation for Keepass.</translation>
     </message>
     <message encoding="UTF-8">
         <source>Datei konnte nicht geöffnet werden</source>
-        <translation>CoCould not open file.</translation>
+        <translation>Could not open file</translation>
     </message>
     <message encoding="UTF-8">
         <source>Ungültiges XML-Dokument</source>
@@ -1579,16 +1663,16 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     </message>
     <message>
         <source>dd&apos;.&apos;MM&apos;.&apos;yy&apos; &apos;hh&apos;:&apos;mm</source>
-        <translation type="unfinished"></translation>
+        <translation>dd&apos;.&apos;MM&apos;.&apos;yy&apos; &apos;hh&apos;:&apos;mm</translation>
     </message>
     <message>
         <source>Die Datei &apos;%1&apos; konnte nicht gefunden werden.</source>
-        <translation type="unfinished"></translation>
+        <translation>The file &apos;%1&apos; could not be found.</translation>
     </message>
     <message encoding="UTF-8">
         <source>ungültiger RGB-Farbwert.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>invalid RGB color value.</translation>
     </message>
 </context>
 <context>
