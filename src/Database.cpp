@@ -34,6 +34,16 @@ pBinaryData=NULL;
 
 bool CGroup::UI_ExpandByDefault=true;
 
+bool CEntry::operator==(const CEntry& e)const{
+if(sID==e.sID)return true;
+else	      return false;
+}
+
+bool CGroup::operator==(const CGroup& g)const{
+if(ID==g.ID)return true;
+else	      return false;
+}
+
 CGroup::CGroup(){
 Creation=QDateTime::currentDateTime();
 LastAccess=QDateTime::currentDateTime();

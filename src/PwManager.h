@@ -55,10 +55,13 @@ public:
  bool CalcMasterKeyByFileAndPw(QString filename, QString& password);
 
  CGroup*   addGroup(CGroup* parent);
- GroupItr  deleteGroup(CGroup* pGroup);
- GroupItr  deleteGroup(unsigned long ID);
+ void      deleteGroup(CGroup* pGroup);
+ void      deleteGroup(unsigned long ID);
+ void	   moveGroup(CGroup* group, CGroup* DstGroup);
+ int	   getGroupIndex(CGroup* group);
  int       getGroupIndex(unsigned long ID);
- EntryItr  deleteEntry(CEntry* pEntry);
+
+ void      deleteEntry(CEntry* pEntry);
  void      moveEntry(CEntry* pEntry,CGroup* pDstGroup);
  CEntry*   addEntry();
  void 	   merge(PwDatabase* db2);
@@ -69,9 +72,6 @@ public:
 
 
 private:
- EntryItr deleteEntry(vector<CEntry>::iterator i);
- EntryItr getEntryIterator(CEntry* pEntry);
- GroupItr getGroupIterator(CGroup* pGroup);
  bool IsMetaStream(CEntry& Entry);
  void transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* seed,int rounds);
  bool readHeader(char* raw);

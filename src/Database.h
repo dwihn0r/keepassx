@@ -20,7 +20,7 @@
 #ifndef _DATABASE_H_
 #define _DATABASE_H_
 
-#include <vector.h>
+#include <QList>
 #include <QDateTime>
 #include "lib/SecString.h"
 using namespace std;
@@ -47,6 +47,7 @@ Q_UINT8 *pBinaryData;
 Q_UINT32 BinaryDataLength;
 Q_UINT32 PasswordLength;
 bool ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
+bool operator==(const CEntry&) const;
 };
 
 
@@ -65,15 +66,13 @@ QDateTime Expire;
 Q_UINT16 Level;
 Q_UINT32 Flags;
 bool ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
+bool operator==(const CGroup&) const;
 
 bool 	  UI_ItemIsExpanded;
 static bool UI_ExpandByDefault;
 
 };
 
-
-typedef vector<CEntry>::iterator EntryItr;
-typedef vector<CGroup>::iterator GroupItr;
 
 
 class Database{
@@ -83,8 +82,8 @@ public:
  QString filename;
  bool modflag;
  int SearchGroupID;
- vector<CGroup>Groups;
- vector<CEntry>Entries;
+ QList<CGroup>Groups;
+ QList<CEntry>Entries;
 
 protected:
  Q_UINT8 MasterKey[32];

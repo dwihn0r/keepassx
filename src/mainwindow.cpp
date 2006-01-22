@@ -412,4 +412,5 @@ Q_ASSERT(GroupView->selectedItems().size());
 CGroup *pGroup=static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
 db->deleteGroup(pGroup);
 GroupView->updateItems();
+setStateFileModified(true);
 }

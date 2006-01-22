@@ -140,16 +140,13 @@ err=trUtf8("Hash-Test fehlgeschlage: der Schlüssl ist falsch oder die Datei ist
 return false;}
 
 
-Groups.resize(NumGroups);
-Entries.resize(NumEntries);
-
 unsigned long tmp_id=0;
 unsigned long pos = DB_HEADER_SIZE;
 Q_UINT16 FieldType;
 Q_UINT32 FieldSize;
 char* pField;
 bool bRet;
-
+CGroup group;
 
 	for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
 	{
@@ -165,8 +162,9 @@ bool bRet;
 		if(pos >= (total_size + FieldSize)) {
 		return false;}
 
-	 	bRet = Groups[CurGroup].ReadGroupField(FieldType, FieldSize, (Q_UINT8 *)pField);
+		bRet = group.ReadGroupField(FieldType, FieldSize, (Q_UINT8 *)pField);
 		if((FieldType == 0xFFFF) && (bRet == true)){
+			Groups << group;
 			CurGroup++;} // Now and ONLY now the counter gets increased
 
 		pField += FieldSize;
@@ -174,6 +172,7 @@ bool bRet;
 		if(pos >= total_size) { return false;}
 	}
 
+CEntry entry;
 
 	for(unsigned long CurEntry = 0; CurEntry < NumEntries;)
 	{
@@ -189,9 +188,10 @@ bool bRet;
 		if(pos >= (total_size + FieldSize)) {
 		return false; }
 
-		bRet = Entries[CurEntry].ReadEntryField(FieldType,FieldSize,(Q_UINT8*)pField);
-		if((FieldType == 0xFFFF) && (bRet == true)){
-			Entries[CurEntry].sID=tmp_id++;
+		bRet = entry.ReadEntryField(FieldType,FieldSize,(Q_UINT8*)pField);
+		if((FieldType == 0xFFFF) && (bRet == true)){			
+			entry.sID=tmp_id++;
+			Entries << entry;
 			CurEntry++;} // Now and ONLY now the counter gets increased
 
 		pField += FieldSize;
@@ -203,10 +203,10 @@ bool bRet;
 unsigned long CurGID, g, e, z, num;
 delete [] buffer;
 
-for(vector<CEntry>::iterator i=Entries.begin();i!=Entries.end();i++){
-if(IsMetaStream(*i)==true){
+for(int i=0;i<Entries.size();i++){
+if(IsMetaStream(Entries[i])==true){
 	///@TODO Parse Metastreams
-	deleteEntry(i);
+	deleteEntry(&Entries[i]);
 	i--;
 }
 }
@@ -387,13 +387,8 @@ delete[] PasswordKey;
 delete[] FileKey;
 }
 
-
-vector<CEntry>::iterator PwDatabase::deleteEntry(vector<CEntry>::iterator iterator){
-return Entries.erase(iterator);
-}
-
-vector<CEntry>::iterator PwDatabase::deleteEntry(CEntry* entry){
-return deleteEntry(getEntryIterator(entry));
+void PwDatabase::deleteEntry(CEntry* entry){
+Entries.removeAt(Entries.indexOf(*entry));
 }
 
 bool PwDatabase::IsMetaStream(CEntry& p){
@@ -559,6 +554,7 @@ Q_UINT8 FinalRandomSeed[16];
 Q_UINT8 ContentsHash[32];
 Q_UINT8 EncryptionIV[16];
 
+/*
 if(SearchGroupID!=-1){
  for(int i=0;i<Groups.size();i++){
   if(Groups[i].ID==SearchGroupID){
@@ -566,6 +562,8 @@ if(SearchGroupID!=-1){
    Groups.erase(getGroupIterator(&Groups[i]));}
  }
 }
+*/
+
 if(filename==QString::null)return false;
 QFile file(filename);
 unsigned int FileSize;
@@ -815,16 +813,6 @@ if(SearchGroupID!=-1)Groups.push_back(SearchGroup);
 return true;
 }
 
-GroupItr PwDatabase::getGroupIterator(CGroup* pGroup){
-//for(vector<CGroup>::iterator i=Groups.begin();i!=Groups.end();i++){
-//if((*i).ID==pGroup->ID)return i;}
-return Groups.begin()+(pGroup-&Groups[0]);
-}
-
-
-EntryItr PwDatabase::getEntryIterator(CEntry* pEntry){
-return Entries.begin()+(pEntry-&Entries[0]);
-}
 
 CGroup* PwDatabase::addGroup(CGroup* parent){
 CGroup group;
@@ -833,41 +821,51 @@ group.ImageID=0;
 group.ID=getNewGroupId();
 
 if(!Groups.size() || !parent){
-	Groups.push_back(group);
+	Groups << group;
 	return &Groups.back();
 }
-else {  GroupItr groupIt;
-	groupIt=Groups.insert(getGroupIterator(parent)+1,group);
-	return &(*groupIt);}
+else {  int i=Groups.indexOf(*parent)+1;
+	Groups.insert(i,group);
+	return &Groups[i];}
 }
 
 
-GroupItr PwDatabase::deleteGroup(unsigned long id){
+void PwDatabase::deleteGroup(unsigned long id){
 for(int i=0;i<Groups.size();i++){
 	if(Groups[i].ID==id) return deleteGroup(&Groups[i]);
 }
 }
 
-GroupItr PwDatabase::deleteGroup(CGroup* group){
-GroupItr first=getGroupIterator(group);
-GroupItr last=Groups.end();
-for(GroupItr i=getGroupIterator(group)+1; i!=Groups.end();i++){
- if((*i).Level<=group->Level){
-	last=i;
-	break;}
+void PwDatabase::deleteGroup(CGroup* group){
+int GroupIndex=Groups.indexOf(*group);
+int NumChilds;
+
+int i;
+for(i=GroupIndex+1; i<Groups.size(); i++){
+ if(Groups[i].Level<=group->Level)break;
+}
+NumChilds=i-GroupIndex-1;
+qDebug("NUMCHILDS=%i\n",NumChilds);
+//delete entries
+for(i=GroupIndex; i<=GroupIndex+NumChilds; i++){
+	for(int j=0; j<Entries.size();){
+		if(Entries[j].GroupID==Groups[i].ID)
+		 deleteEntry(&Entries[j]);
+		else
+		 j++;	
+	}
 }
 
-for(GroupItr g=first;g!=last;g++){
-   for(EntryItr e=Entries.begin();e!=Entries.end();){
-	if((*g).ID==(*e).GroupID)e=deleteEntry(e);
-	else e++;
-   }
+for(i=NumChilds; i>=0; i--){
+	Groups.removeAt(GroupIndex+i);
 }
 
-return Groups.erase(first,last);
 }
 
 
+int PwDatabase::getGroupIndex(CGroup* g){
+return getGroupIndex(g->ID);
+}
 
 
 int PwDatabase::getGroupIndex(unsigned long ID){
@@ -958,6 +956,31 @@ for(int i=0; i<64; i+=2){
 	memcpy(dst+(i/2),&bin,1);
 }
 }
+
+void PwDatabase::moveGroup(CGroup* group, CGroup* DstGroup){
+/*
+int NumSubGroups=0;
+int GroupIndex=getGroupIndex(group);
+int i;
+for(i=GroupIndex+1; i<groups.size(); i++){
+ if(groups[i].Level <= group->Level) break;
+}
+NumSubGroups=i-GroupIndex-1;
+int LevelDiff;
+if(DstGroup)
+ LevelDiff=DstGroup->Level - group->Level;
+else
+ LevelDiff=-group->Level;
+
+if(DstGroup){
+ groups.insert(pos, groups[
+
+
+}
+*/
+
+}
+
 
 void memcpyFromLEnd32(Q_UINT32* dst,char* src){
 

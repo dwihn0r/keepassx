@@ -127,29 +127,29 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 void KeepassGroupView::updateItems(){
 clear();
 Items.clear();
-for(GroupItr i=db->Groups.begin();i!=db->Groups.end();i++){
-if((*i).Level==0){
+for(int i=0; i<db->Groups.size();i++){
+if(db->Groups[i].Level==0){
  if(Items.size()) Items.push_back(new GroupViewItem(this,getLastSameLevelItem(0)));
  else 		  Items.push_back(new GroupViewItem(this));
- Items.back()->setText(0,(*i).Name);
- Items.back()->pGroup=&(*i); 
+ Items.back()->setText(0,db->Groups[i].Name);
+ Items.back()->pGroup=&db->Groups[i]; 
 }
  else{
- if((*i).Level>(*(i-1)).Level){
- Items.push_back(new GroupViewItem(Items.back(),getLastSameLevelItem((*i).Level)));
- Items.back()->setText(0,(*i).Name);
- Items.back()->pGroup=&(*i);
+ if(db->Groups[i].Level>db->Groups[i-1].Level){
+ Items.push_back(new GroupViewItem(Items.back(),getLastSameLevelItem(db->Groups[i].Level)));
+ Items.back()->setText(0,db->Groups[i].Name);
+ Items.back()->pGroup=&db->Groups[i];
  }
- if((*i).Level<=(*(i-1)).Level){
+ if(db->Groups[i].Level<=db->Groups[i-1].Level){
    GroupItemItr j;
    for(j=Items.end()-1;j!=Items.begin();j--){
-    if((*j)->pGroup->Level<(*i).Level)break;}
-     Items.push_back(new GroupViewItem((*j),getLastSameLevelItem((*i).Level)));
-     Items.back()->setText(0,(*i).Name);
-     Items.back()->pGroup=&(*i);
+    if((*j)->pGroup->Level<db->Groups[i].Level)break;}
+     Items.push_back(new GroupViewItem((*j),getLastSameLevelItem(db->Groups[i].Level)));
+     Items.back()->setText(0,db->Groups[i].Name);
+     Items.back()->pGroup=&db->Groups[i];
      }
  }
-Items.back()->setIcon(0,EntryIcons[(*i).ImageID]);
+Items.back()->setIcon(0,EntryIcons[db->Groups[i].ImageID]);
 }
 
 for(int i=0;i<Items.size();i++){

@@ -20,6 +20,7 @@
 #ifndef _SECSTRING_H_
 #define _SECSTRING_H_
 
+#include <QByteArray>
 #include <qstring.h>
 #include <qglobal.h>
 #include "crypto/rijndael.h"
@@ -42,9 +43,8 @@ public:
 private:
  static Q_UINT8 Key[32];
  QString plaintext;
- char* data;
+ QByteArray data;
  int len;
- int cryptlen;
 };
 
 

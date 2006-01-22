@@ -26,25 +26,22 @@ using namespace std;
 Q_UINT8 SecString::Key[32]={0};
 
 SecString::SecString(){
-data=NULL;
 len=0;
-cryptlen=0;
 }
 
 
 SecString::~SecString(){
-//if(data)delete [] data; ///@FIXME zerschießt den Stack, aber warum???
 overwrite(plaintext);
 }
 
 void SecString::getString(QString & str){
-if(data){
+if(data.size()){
 Rijndael aes;
 int r=aes.init(Rijndael::CBC, Rijndael::Decrypt,Key,Rijndael::Key32Bytes);
 if(r){ cout << "AES error, code " << r << endl;
        exit(-1);}
 char* out=new char[len];
-r=aes.padDecrypt((unsigned char*)data,cryptlen,(unsigned char*)out);
+r=aes.padDecrypt((unsigned char*)data.data(),data.size(),(unsigned char*)out);
 if(r!=len){ cout << "AES error in SecString::getString(), r!=length, r=" << r << endl;
        	       exit(-1);}
 str=QString::fromUtf8(out,len);
@@ -74,10 +71,8 @@ memcpy(input,str.utf8(),il);
 r=aes.padEncrypt((unsigned char*)input,il,(unsigned char*)output);
 if(r<0){ cout << "AES error, code " << r << endl;
          exit(-1);}
-cryptlen=r;
 len=il;
-if(data)delete [] data;
-data=output;
+data=QByteArray(output,r);
 overwrite(input,il);
 delete [] input;
 if(DelSrc)overwrite(str);
@@ -103,3 +98,4 @@ return len;
 void SecString::generateSessionKey(){
 getRandomBytes(Key,32,1,false);
 }
+
