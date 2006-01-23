@@ -35,6 +35,7 @@
 #include "GroupView.h"
 
 KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
+db=0;
 LastHoverItem=NULL;
 setHeaderLabels(QStringList()<<tr("Gruppen"));
 }
@@ -84,8 +85,14 @@ if(LastHoverItem){
   QFont f=LastHoverItem->font(0);
   f.setBold(false);
   LastHoverItem->setFont(0,f);
+  LastHoverItem=NULL;
 }
-
+GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
+if(item)
+  db->moveGroup(DragItem->pGroup,item->pGroup);
+else
+  db->moveGroup(DragItem->pGroup,NULL);
+updateItems();
 }
 
 

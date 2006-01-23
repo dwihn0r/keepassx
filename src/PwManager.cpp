@@ -825,6 +825,8 @@ if(!Groups.size() || !parent){
 	return &Groups.back();
 }
 else {  int i=Groups.indexOf(*parent)+1;
+	for(i;i<Groups.size();i++)
+		if(Groups[i].Level<=parent->Level)break;
 	Groups.insert(i,group);
 	return &Groups[i];}
 }
@@ -957,28 +959,63 @@ for(int i=0; i<64; i+=2){
 }
 }
 
-void PwDatabase::moveGroup(CGroup* group, CGroup* DstGroup){
-/*
+void PwDatabase::moveGroup(CGroup* group, CGroup* DstGroup, int pos){
 int NumSubGroups=0;
-int GroupIndex=getGroupIndex(group);
+int GroupIndex=Groups.indexOf(*group);
+int DstIndex;
 int i;
-for(i=GroupIndex+1; i<groups.size(); i++){
- if(groups[i].Level <= group->Level) break;
+for(i=GroupIndex+1; i<Groups.size(); i++){
+ if(Groups[i].Level <= group->Level) break;
 }
 NumSubGroups=i-GroupIndex-1;
+
 int LevelDiff;
+QList<CGroup> tmp;
+
 if(DstGroup)
- LevelDiff=DstGroup->Level - group->Level;
+ LevelDiff=DstGroup->Level - group->Level +1;
 else
  LevelDiff=-group->Level;
 
+for(i=GroupIndex; i<=GroupIndex+NumSubGroups; i++){
+	tmp << Groups[i];
+	tmp.back().Level+=LevelDiff;
+}
+for(i=0; i<=NumSubGroups; i++)
+	Groups.removeAt(GroupIndex);
+
+int NumParentSubGroups;
 if(DstGroup){
- groups.insert(pos, groups[
+	DstIndex=Groups.indexOf(*DstGroup);
+	NumParentSubGroups=getNumberOfChilds(DstGroup);}
+else{
+	DstIndex=0;
+	NumParentSubGroups=Groups.size();}
+
+if(pos==-1)DstIndex+=(NumParentSubGroups+1);
+else{	int n=0; //Counter for direct (first-level) childs
+	for(i=0; i<NumParentSubGroups;i++){
+		if(n==pos)break;
+		if(Groups[DstIndex+1+i].Level==DstGroup->Level+1)n++;
+	}
+	DstIndex+=n;
+}
+
+
+for(i=NumSubGroups; i>=0; i--)
+	Groups.insert(DstIndex,tmp[i]);
 
 
 }
-*/
 
+int PwDatabase::getNumberOfChilds(CGroup* group){
+if(!group)return Groups.size();
+int GroupIndex=Groups.indexOf(*group);
+int i;
+for(i=GroupIndex+1; i<Groups.size(); i++){
+ if(Groups[i].Level <= group->Level) break;
+}
+return (i-GroupIndex-1);
 }
 
 

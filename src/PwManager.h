@@ -57,9 +57,10 @@ public:
  CGroup*   addGroup(CGroup* parent);
  void      deleteGroup(CGroup* pGroup);
  void      deleteGroup(unsigned long ID);
- void	   moveGroup(CGroup* group, CGroup* DstGroup);
+ void	   moveGroup(CGroup* group, CGroup* DstGroup, int pos=-1);
  int	   getGroupIndex(CGroup* group);
  int       getGroupIndex(unsigned long ID);
+ int	   getNumberOfChilds(CGroup* pGroup);
 
  void      deleteEntry(CEntry* pEntry);
  void      moveEntry(CEntry* pEntry,CGroup* pDstGroup);
