@@ -22,6 +22,7 @@
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
 #include <QDropEvent>
+#include <QPaintEvent>
 #include <QMouseEvent>
 #include <QApplication>
 #include <QFont>
@@ -34,8 +35,10 @@
 #include "main.h"
 #include "GroupView.h"
 
+
 KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
-db=0;
+InsertionMarker=QLine();
+db=NULL;
 LastHoverItem=NULL;
 setHeaderLabels(QStringList()<<tr("Gruppen"));
 }
@@ -49,43 +52,61 @@ event->accept();
 
 void KeepassGroupView:: dragMoveEvent ( QDragMoveEvent * event ){
 GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
+
 if(LastHoverItem){
   QFont f=LastHoverItem->font(0);
   f.setBold(false);
   LastHoverItem->setFont(0,f);
 }
 
+InsertionMarker=QLine();
+
 if(item){
+ QRect ItemRect=visualItemRect(item);
  if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
-   QFont f=item->font(0);
-   f.setBold(true);
-   item->setFont(0,f);
-   LastHoverItem=item;
-   event->setAccepted(true);}
+   if((ItemRect.height()+ItemRect.y())-event->pos().y() > 4){
+   	QFont f=item->font(0);
+   	f.setBold(true);
+   	item->setFont(0,f);
+   	LastHoverItem=item;
+   	event->setAccepted(true);
+}
+   else{
+	LastHoverItem=NULL;
+	InsertionMarker=QLine(ItemRect.x(),ItemRect.y()+ItemRect.height(),
+			      ItemRect.x()+ItemRect.width(),ItemRect.y()+ItemRect.height());
+	}
+ }
  else 
    event->setAccepted(false);
- }
+ 
+}
 else{
-  LastHoverItem=NULL;}
+  LastHoverItem=NULL;
 
-
+}
+update();
 }
 
 void KeepassGroupView:: dragLeaveEvent ( QDragLeaveEvent * event ){
+InsertionMarker=QLine();
 if(LastHoverItem){
   QFont f=LastHoverItem->font(0);
   f.setBold(false);
   LastHoverItem->setFont(0,f);
 }
+update();
 }
 
 
 void KeepassGroupView::dropEvent( QDropEvent * event ){
+InsertionMarker=QLine();
 if(LastHoverItem){
   QFont f=LastHoverItem->font(0);
   f.setBold(false);
   LastHoverItem->setFont(0,f);
   LastHoverItem=NULL;
+  
 }
 GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
 if(item)
@@ -132,6 +153,7 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 }
 
 void KeepassGroupView::updateItems(){
+
 clear();
 Items.clear();
 for(int i=0; i<db->Groups.size();i++){
@@ -168,8 +190,21 @@ for(int i=Items.size()-1;i>=0;i--){
  if(Items[i]->pGroup->Level==level){
 return Items[i];}
 }
+
 return Items.back();
 
+}
+
+void KeepassGroupView::paintEvent(QPaintEvent* event){
+QTreeWidget::paintEvent(event);
+QPainter painter(viewport());
+QPen pen(QColor(100,100,100));
+pen.setWidth(2);
+pen.setStyle(Qt::DotLine);
+painter.setPen(pen);
+if(!InsertionMarker.isNull()){
+painter.drawLine(InsertionMarker);
+}
 }
 
 

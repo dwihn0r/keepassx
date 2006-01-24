@@ -39,12 +39,17 @@ protected:
  virtual void dropEvent ( QDropEvent * event );
  virtual void mousePressEvent(QMouseEvent *event);
  virtual void mouseMoveEvent(QMouseEvent *event);
+ virtual void paintEvent ( QPaintEvent * event );
+
 
 private:
+
+ QLine InsertionMarker;
  QPoint DragStartPos;
  QPixmap DragPixmap;
  GroupViewItem* DragItem;
  GroupViewItem* LastHoverItem;
+
  GroupViewItem* getLastSameLevelItem(int level);
 };
 

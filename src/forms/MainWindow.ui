@@ -328,16 +328,16 @@
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
