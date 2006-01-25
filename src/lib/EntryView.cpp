@@ -84,6 +84,47 @@ for(int i=0; i<Items.size();i++){
 }
 }
 
+void KeepassEntryView::refreshVisibleItems(){
+EntryViewItem *tmp=NULL;
+for(int i=0;i<Items.size();i++){
+  tmp=Items[i];
+  CEntry* entry=tmp->pEntry;
+if(entry->GroupID==CurrentGroup){
+  int j=0;
+  if(config.Columns[0]){
+    tmp->setText(j++,entry->Title);}
+  if(config.Columns[1]){
+    if(config.ListView_HideUsernames)
+      tmp->setText(j++,"******");
+    else
+      tmp->setText(j++,entry->UserName);}
+  if(config.Columns[2]){
+    tmp->setText(j++,entry->URL);}
+  if(config.Columns[3]){
+    if(config.ListView_HidePasswords)
+      tmp->setText(j++,"******");
+    else{
+      tmp->setText(j++,entry->Password.getString());
+      entry->Password.delRef();}}
+  if(config.Columns[4]){
+    tmp->setText(j++,entry->Additional.section('\n',0,0));}
+  if(config.Columns[5]){
+    tmp->setText(j++,entry->Expire.toString(DateTimeFormat));}
+  if(config.Columns[6]){
+    tmp->setText(j++,entry->Creation.toString(DateTimeFormat));}
+  if(config.Columns[7]){
+    tmp->setText(j++,entry->LastMod.toString(DateTimeFormat));}
+  if(config.Columns[8]){
+    tmp->setText(j++,entry->LastAccess.toString(DateTimeFormat));}
+  if(config.Columns[9]){
+   tmp->setText(j++,entry->BinaryDesc);}
+  tmp->setIcon(0,EntryIcons[entry->ImageID]);
+}
+}
+
+}
+
+
 void KeepassEntryView::updateColumns(){
 QStringList cols;
 if(config.Columns[0]){

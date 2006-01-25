@@ -269,7 +269,7 @@ int i=1;
 		i++; }
 	for(i; i<argc;i++){
 		if(QString(argv[i])=="-h"){
-			cout << "Keepass 0.1.3 (Alpha)" << endl;
+			cout << "Keepass 0.2.0" << endl;
 			cout << "Usage: keepass [Filename] [Options]" << endl;
 			cout << "  -h This Help" << endl;
 			cout << "  -cfg ConfigFile Use specified configuration" << endl;

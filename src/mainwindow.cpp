@@ -83,6 +83,9 @@ void KeepassMainWindow::setupConnections(){
    connect(EditEditGroupAction, SIGNAL(triggered()), this, SLOT(OnEditEditGroup()));
    connect(EditDeleteGroupAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteGroup()));
    connect(EditNewEntryAction, SIGNAL(triggered()), this, SLOT(OnEditNewEntry()));
+   connect(EditEditEntryAction, SIGNAL(triggered()), this, SLOT(OnEditEditEntry()));
+   connect(EditCloneEntryAction, SIGNAL(triggered()), this, SLOT(OnEditCloneEntry()));
+   connect(EditDeleteEntryAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteEntry()));
 
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
 		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -235,6 +238,7 @@ else{
 void KeepassMainWindow::editEntry(CEntry* pEntry){
 CEditEntryDlg dlg(db,pEntry,this,"EditEntryDialog",true);
 dlg.exec();
+EntryView->refreshVisibleItems();
 if(dlg.ModFlag)setStateFileModified(true);
 }
 
@@ -425,7 +429,31 @@ if(dlg.exec()){
  EntryView->updateItems();
  setStateFileModified(true);
 }
+}
 
+void KeepassMainWindow::OnEditEditEntry(){
+Q_ASSERT(EntryView->selectedItems().size()==1);
+editEntry(static_cast<EntryViewItem*>(EntryView->selectedItems()[0])->pEntry);
+}
+
+void KeepassMainWindow::OnEditCloneEntry(){
+Q_ASSERT(EntryView->selectedItems().size()>0);
+QList<QTreeWidgetItem*> entries=EntryView->selectedItems();
+for(int i=0; i<entries.size();i++){
+	db->cloneEntry(((EntryViewItem*)entries[i])->pEntry);
+}
+setStateFileModified(true);
+EntryView->updateItems();
+}
+
+void KeepassMainWindow::OnEditDeleteEntry(){
+Q_ASSERT(EntryView->selectedItems().size()>0);
+QList<QTreeWidgetItem*> entries=EntryView->selectedItems();
+for(int i=0; i<entries.size();i++){
+	db->deleteEntry(((EntryViewItem*)entries[i])->pEntry);
+}
+setStateFileModified(true);
+EntryView->updateItems();
 }
 
 CGroup* KeepassMainWindow::currentGroup(){

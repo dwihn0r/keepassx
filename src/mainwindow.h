@@ -65,6 +65,9 @@ private slots:
    void OnEditEditGroup();
    void OnEditDeleteGroup();
    void OnEditNewEntry();
+   void OnEditEditEntry();
+   void OnEditCloneEntry();
+   void OnEditDeleteEntry();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();

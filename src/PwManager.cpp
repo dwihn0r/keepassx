@@ -420,6 +420,17 @@ entry->GroupID=dst->ID;
 }
 
 
+CEntry* PwDatabase::cloneEntry(CEntry* entry){
+CEntry *Dolly=addEntry();
+Q_UINT8 ID[16];
+Q_UINT32 sid=Dolly->sID;
+memcpy(ID,Dolly->ID,16);
+*Dolly=*entry;
+Dolly->sID=sid;
+memcpy(Dolly->ID,ID,16);
+return Dolly;
+}
+
 
 bool CGroup::ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData)
 {

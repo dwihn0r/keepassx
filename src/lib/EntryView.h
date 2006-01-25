@@ -29,6 +29,7 @@ class KeepassEntryView:public QTreeWidget{
 public:
  KeepassEntryView(QWidget* parent=0);
  void updateItems();
+ void refreshVisibleItems();
  void setCurrentGroup(uint GroupID);
  void updateColumns();
  PwDatabase* db;

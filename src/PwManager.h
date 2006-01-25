@@ -63,6 +63,7 @@ public:
  int       getGroupIndex(unsigned long ID);
  int	   getNumberOfChilds(CGroup* pGroup);
 
+ CEntry*   cloneEntry(CEntry* pEntry);
  void      deleteEntry(CEntry* pEntry);
  void      moveEntry(CEntry* pEntry,CGroup* pDstGroup);
  CEntry*   addEntry();
