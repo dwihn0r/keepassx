@@ -608,156 +608,156 @@ int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
 
 for(int i=0; i < Groups.size(); i++){
 		FieldType = 0x0001; FieldSize = 4;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		memcpy(buffer+pos, &Groups[i].ID, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &Groups[i].ID); pos += 4;
 
 		FieldType = 0x0002; FieldSize = Groups[i].Name.utf8().length() + 1;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Groups[i].Name.utf8(),FieldSize); pos += FieldSize;
 
 		FieldType = 0x0003; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Groups[i].Creation,(unsigned char*)buffer+pos); pos += 5;
 
 		FieldType = 0x0004; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Groups[i].LastMod,(unsigned char*)buffer+pos);pos += 5;
 
 		FieldType = 0x0005; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Groups[i].LastAccess,(unsigned char*)buffer+pos);pos += 5;
 
 		FieldType = 0x0006; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Groups[i].Expire,(unsigned char*)buffer+pos);pos += 5;
 
 		FieldType = 0x0007; FieldSize = 4;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		memcpy(buffer+pos, &Groups[i].ImageID, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &Groups[i].ImageID); pos += 4;
 
 		FieldType = 0x0008; FieldSize = 2;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		memcpy(buffer+pos, &Groups[i].Level, 2); pos += 2;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd16(buffer+pos, &Groups[i].Level); pos += 2;
 
 		FieldType = 0x0009; FieldSize = 4;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		memcpy(buffer+pos, &Groups[i].Flags, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &Groups[i].Flags); pos += 4;
 
 		FieldType = 0xFFFF; FieldSize = 0;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 }
 
 for(int i = 0; i < Entries.size(); i++){
 		FieldType = 0x0001; FieldSize = 16;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, &Entries[i].ID, 16); pos += 16;
 
 		FieldType = 0x0002; FieldSize = 4;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		memcpy(buffer+pos, &Entries[i].GroupID, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &Entries[i].GroupID); pos += 4;
 
 		FieldType = 0x0003; FieldSize = 4;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
-		memcpy(buffer+pos, &Entries[i].ImageID, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &Entries[i].ImageID); pos += 4;
 
 
 		FieldType = 0x0004;
 		FieldSize = Entries[i].Title.utf8().length() + 1; // Add terminating NULL character space
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].Title.utf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0005;
 		FieldSize = Entries[i].URL.utf8().length() + 1; // Add terminating NULL character space
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].URL.utf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0006;
 		FieldSize = Entries[i].UserName.utf8().length() + 1; // Add terminating NULL character space
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].UserName.utf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0007;
 		FieldSize = Entries[i].Password.length() + 1; // Add terminating NULL character space
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].Password.getString(),FieldSize);  pos += FieldSize;
 		Entries[i].Password.delRef();
 
 		FieldType = 0x0008;
 		FieldSize = Entries[i].Additional.utf8().length() + 1; // Add terminating NULL character space
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].Additional.utf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0009; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Entries[i].Creation,(unsigned char*)buffer+pos); pos+=5;
 
 
 		FieldType = 0x000A; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Entries[i].LastMod,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000B; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Entries[i].LastAccess,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000C; FieldSize = 5;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		dateToPackedStruct5(Entries[i].Expire,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000D;
 		FieldSize = Entries[i].BinaryDesc.utf8().length() + 1; // Add terminating NULL character space
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].BinaryDesc.utf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x000E; FieldSize = Entries[i].BinaryDataLength;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		if((Entries[i].pBinaryData != NULL) && (FieldSize != 0))
 			memcpy(buffer+pos, Entries[i].pBinaryData, FieldSize);
 		pos += FieldSize;
 
 		FieldType = 0xFFFF; FieldSize = 0;
-		memcpy(buffer+pos, &FieldType, 2); pos += 2;
-		memcpy(buffer+pos, &FieldSize, 4); pos += 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 }
 sha256_context context;
 sha256_starts(&context);
 sha256_update(&context,(unsigned char*)buffer+DB_HEADER_SIZE, pos - DB_HEADER_SIZE);
 sha256_finish(&context,(unsigned char*)ContentsHash);
-memcpy(buffer,&Signature1,4);
-memcpy(buffer+4,&Signature2,4);
-memcpy(buffer+8,&Flags,4);
-memcpy(buffer+12,&Version,4);
+memcpyToLEnd32(buffer,&Signature1);
+memcpyToLEnd32(buffer+4,&Signature2);
+memcpyToLEnd32(buffer+8,&Flags);
+memcpyToLEnd32(buffer+12,&Version);
 memcpy(buffer+16,FinalRandomSeed,16);
 memcpy(buffer+32,EncryptionIV,16);
-memcpy(buffer+48,&NumGroups,4);
-memcpy(buffer+52,&NumEntries,4);
+memcpyToLEnd32(buffer+48,&NumGroups);
+memcpyToLEnd32(buffer+52,&NumEntries);
 memcpy(buffer+56,ContentsHash,32);
 memcpy(buffer+88,TrafoRandomSeed,32);
-memcpy(buffer+120,&KeyEncRounds,4);
+memcpyToLEnd32(buffer+120,&KeyEncRounds);
 transformKey(MasterKey,TransformedMasterKey,TrafoRandomSeed,KeyEncRounds);
 Q_UINT8 FinalKey[32];
 sha256_starts(&context);
@@ -787,7 +787,6 @@ EncryptedPartSize = (unsigned long)twofish.padEncrypt((Q_UINT8*)buffer+DB_HEADER
 						      pos - DB_HEADER_SIZE,
 						      (Q_UINT8*)buffer+DB_HEADER_SIZE);
 }
-
 if((EncryptedPartSize > 2147483446) || (EncryptedPartSize == 0)){
 //TODO:ERR_MSG
 delete [] buffer;
@@ -1041,6 +1040,28 @@ else
   memcpy(dst,src,2);
 }
 
+void memcpyToLEnd32(char* dst,Q_UINT32* src){
+
+if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
+  memcpy(dst+0,((char*)src)+3,1);
+  memcpy(dst+1,((char*)src)+2,1);
+  memcpy(dst+2,((char*)src)+1,1);
+  memcpy(dst+3,((char*)src)+0,1);
+}
+else
+  memcpy(dst,src,4);
+}
+
+void memcpyToLEnd16(char* dst,Q_UINT16* src){
+
+if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
+  memcpy(dst+0,((char*)src)+1,1);
+  memcpy(dst+1,((char*)src)+0,1);
+}
+else
+  memcpy(dst,src,2);
+}
+
 const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));
 
 QDateTime dateFromPackedStruct5(const unsigned char* pBytes){
@@ -1053,7 +1074,7 @@ int d = (dw3 >> 1) & 0x0000001F;
 int h = ((dw3 & 0x00000001) << 4) | (dw4 >> 4);
 int min = ((dw4 & 0x0000000F) << 2) | (dw5 >> 6);
 int s = dw5 & 0x0000003F;
-return QDateTime(QDate(y,mon,d),QTime(h,min));
+return QDateTime(QDate(y,mon,d),QTime(h,min,s));
 }
 
 
@@ -1064,3 +1085,198 @@ pBytes[2] = (Q_UINT8)((((Q_UINT32)d.date().month() & 0x00000003) << 6) | (((Q_UI
 pBytes[3] = (Q_UINT8)((((Q_UINT32)d.time().hour() & 0x0000000F) << 4) | (((Q_UINT32)d.time().minute() >> 2) & 0x0000000F));
 pBytes[4] = (Q_UINT8)((((Q_UINT32)d.time().minute() & 0x00000003) << 6) | ((Q_UINT32)d.time().second() & 0x0000003F));
 }
+
+
+class KPTestResults{
+public:
+        KPTestResults(){passed=failed=0;}
+        int passed, failed;
+};
+
+/* assumes context of failed/passed variables */
+#define kp_assert(results, x) \
+        do {\
+                if (x){\
+                        (results).passed++;\
+                }else{\
+                        (results).failed++;\
+                        cout << __FILE__ << ":" << __LINE__ << ": assert failed: " << #x << endl; \
+                }\
+        } while(0)
+
+void testDateConv(KPTestResults& results, const QDateTime& d){
+        unsigned char binDate[5];
+        dateToPackedStruct5(d, binDate);
+        kp_assert(results, d.toTime_t() == dateFromPackedStruct5(binDate).toTime_t());
+}
+
+void assertGroupsEq(KPTestResults& results, CGroup* left, CGroup* right){
+	unsigned long size = 0;
+	
+	kp_assert(results, left->ID == right->ID);
+	size += sizeof(left->ID);
+	
+	kp_assert(results, left->ImageID == right->ImageID);
+	size += sizeof(left->ImageID);
+	
+	kp_assert(results, left->Name == right->Name);
+	size += sizeof(left->Name);
+	
+	kp_assert(results, left->Creation.toTime_t() == right->Creation.toTime_t());
+	size += sizeof(left->Creation);
+	
+	kp_assert(results, left->LastMod.toTime_t() == right->LastMod.toTime_t());
+	size += sizeof(left->LastMod);
+	
+	kp_assert(results, left->LastAccess.toTime_t() == right->LastAccess.toTime_t());
+	size += sizeof(left->LastAccess);
+
+	kp_assert(results, left->Expire.toTime_t() == right->Expire.toTime_t());
+	size += sizeof(left->Expire);
+	
+	kp_assert(results, left->Level == right->Level);
+	size += sizeof(left->Level);
+	
+	kp_assert(results, left->Flags == right->Flags);
+	size += sizeof(left->Flags);
+
+	/* ignore expansion */
+	size += sizeof(left->UI_ItemIsExpanded);
+	
+	/* make sure that all members were checked */
+
+	/* CGroup is padded with two additional bytes */
+	kp_assert(results, size + 2 == sizeof(CGroup));
+	kp_assert(results, 40 == sizeof(CGroup));
+}
+
+void assertEntriesEq(KPTestResults& results, CEntry* left, CEntry* right){
+	unsigned long size = 0;
+	
+	kp_assert(results, memcmp(left->ID, right->ID, sizeof(left->ID)) == 0);
+	size += sizeof(left->ID);
+
+	kp_assert(results, left->sID == right->sID);
+	size += sizeof(left->sID);
+
+	kp_assert(results, left->GroupID == right->GroupID);
+	size += sizeof(left->GroupID);
+
+	kp_assert(results, left->ImageID == right->ImageID);
+	size += sizeof(left->ImageID);
+
+	kp_assert(results, left->Title == right->Title);
+	size += sizeof(left->Title);
+
+	kp_assert(results, left->URL == right->URL);
+	size += sizeof(left->URL);
+
+	kp_assert(results, left->UserName == right->UserName);
+	size += sizeof(left->UserName);
+
+	kp_assert(results, left->Password.getString() == right->Password.getString());
+	size += sizeof(left->Password);
+
+	kp_assert(results, left->Additional == right->Additional);
+	size += sizeof(left->Additional);
+
+	kp_assert(results, left->BinaryDesc == right->BinaryDesc);
+	size += sizeof(left->BinaryDesc);
+
+	kp_assert(results, left->Creation.toTime_t() == right->Creation.toTime_t());
+	size += sizeof(left->Creation);
+
+	kp_assert(results, left->LastMod.toTime_t() == right->LastMod.toTime_t());
+	size += sizeof(left->LastMod);
+
+	kp_assert(results, left->LastAccess.toTime_t() == right->LastAccess.toTime_t());
+	size += sizeof(left->LastAccess);
+
+	kp_assert(results, left->Expire.toTime_t() == right->Expire.toTime_t());
+	size += sizeof(left->Expire);
+	
+	kp_assert(results, left->BinaryDataLength == right->BinaryDataLength);
+	kp_assert(results, (left->pBinaryData == NULL && right->pBinaryData == NULL) ||
+		memcmp(left->pBinaryData, right->pBinaryData, left->BinaryDataLength) == 0);
+	size += sizeof(left->pBinaryData);
+	size += sizeof(left->BinaryDataLength);
+
+	kp_assert(results, size == sizeof(CEntry));
+}
+
+void assertDatabasesEq(KPTestResults& results, PwDatabase* left, PwDatabase* right){
+	/* check groups */
+	kp_assert(results, left->Groups.size() == right->Groups.size());
+	int numGroups = min(left->Groups.size(), right->Groups.size());
+	for(int i=0;i<numGroups;i++)
+		assertGroupsEq(results, &left->Groups[i], &right->Groups[i]);
+
+	/* check entries */
+	kp_assert(results, left->Entries.size() == right->Entries.size());
+	int numEntries = min(left->Entries.size(), right->Entries.size());
+	for(int j=0;j<numEntries;j++)
+		assertEntriesEq(results, &left->Entries[j], &right->Entries[j]);
+}
+
+bool testDatabase(){
+        KPTestResults results;
+
+        /* test the date/time serialization */
+        QDateTime now = QDateTime::currentDateTime();
+        testDateConv(results, now);
+        testDateConv(results, Date_Never);
+
+        QString dbPassword("keepass-db-test");
+        const QString dbPath("/tmp/keepass-db-test");
+
+        /* create a test database */
+        PwDatabase database;
+        kp_assert(results, database.CalcMasterKeyByPassword(dbPassword));
+        database.filename = dbPath;
+	database.CryptoAlgorithmus = ALGO_TWOFISH;
+		
+        CGroup* main = database.addGroup(NULL);
+        CGroup* child = database.addGroup(main);
+        child->Name = "<Subgroup>";
+
+        QString entry1pw("password");
+        CEntry* entry1 = database.addEntry();
+        database.moveEntry(entry1, main);
+        entry1->Title = "title";
+        entry1->URL = "http://keepass.berlios.de/";
+        entry1->UserName = "username";
+        entry1->Password.setString(entry1pw);
+        entry1->Additional = "additional";
+        entry1->BinaryDesc = "binarydesc";
+
+        QString entry2pw("password");
+        CEntry* entry2 = database.addEntry();
+        database.moveEntry(entry2, child);
+        entry2->Title = "TITLE";
+        entry2->URL = "http://keepass.berlios.de/";
+        entry2->UserName = "USERNAME";
+        entry2->Password.setString(entry2pw);
+        entry2->Additional = "ADDITIONAL";
+        entry2->BinaryDesc = "BINARYDESC";
+
+        /* save the database */
+        kp_assert(results, database.saveDatabase());
+
+        /* reload the database */
+        PwDatabase cloneDatabase;
+        kp_assert(results, cloneDatabase.CalcMasterKeyByPassword(dbPassword));
+        QString err;
+        bool loadedDB = cloneDatabase.loadDatabase(dbPath, err);
+        if (!loadedDB){
+                kp_assert(results, loadedDB);
+                cout << err.ascii() << endl;
+        }
+		
+	assertDatabasesEq(results, &database, &cloneDatabase);
+
+        /* compare the databases */
+        cout << results.passed << "/" << (results.passed+results.failed) << " ok" << endl;
+        return results.failed == 0;
+}
+
+

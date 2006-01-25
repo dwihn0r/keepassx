@@ -45,7 +45,7 @@ QDateTime LastAccess;
 QDateTime Expire;
 Q_UINT8 *pBinaryData;
 Q_UINT32 BinaryDataLength;
-Q_UINT32 PasswordLength;
+/*Q_UINT32 PasswordLength;*/
 bool ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
 bool operator==(const CEntry&) const;
 };
@@ -57,7 +57,7 @@ CGroup();
 ~CGroup();
 Q_UINT32 ID;
 Q_UINT32 ImageID;
-Q_UINT32 NumEntries;
+/*Q_UINT32 NumEntries;*/
 QString Name;
 QDateTime Creation;
 QDateTime LastMod;

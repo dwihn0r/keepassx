@@ -31,6 +31,7 @@
 
 #include "main.h"
 #include "PwmConfig.h"
+#include "PwManager.h"
 #include "mainwindow.h"
 using namespace std;
 
@@ -277,6 +278,10 @@ int i=1;
 		else if(QString(argv[i])=="-cfg"){
 			if(i-1==argc) cout << "No configuration file specified." << endl;
 			else{ArgCfg=QString::fromUtf8(argv[i+1]); i++;}
+			}
+		else if(QString(argv[i])=="-test"){
+				if (testDatabase()) exit(0);
+				else exit(1);
 			}
 		else{cout << "** Unrecognized argument: " << argv[i] <<  endl;
 			exit(1);}
