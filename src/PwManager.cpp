@@ -309,6 +309,12 @@ return true;
 }
 
 
+void PwDatabase::addEntry(CEntry* NewEntry){
+CEntry *entry=addEntry();
+*entry=*NewEntry;
+}
+
+
 CEntry* PwDatabase::addEntry(){
 CEntry NewEntry;
 if(Entries.size()==0){
@@ -316,7 +322,7 @@ if(Entries.size()==0){
  getRandomBytes(&NewEntry.ID,16,1,false);
  }
  else {
- NewEntry.sID=(*(Entries.end()-1)).sID+1;
+ NewEntry.sID=Entries.back().sID+1;
  while(1){
  bool used=false;
  getRandomBytes(&NewEntry.ID,16,1,false);
@@ -846,7 +852,6 @@ for(i=GroupIndex+1; i<Groups.size(); i++){
  if(Groups[i].Level<=group->Level)break;
 }
 NumChilds=i-GroupIndex-1;
-qDebug("NUMCHILDS=%i\n",NumChilds);
 //delete entries
 for(i=GroupIndex; i<=GroupIndex+NumChilds; i++){
 	for(int j=0; j<Entries.size();){

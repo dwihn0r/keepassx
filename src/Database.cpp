@@ -27,7 +27,7 @@ GroupID=0;
 Creation=QDateTime::currentDateTime();
 LastMod=QDateTime::currentDateTime();
 LastAccess=QDateTime::currentDateTime();
-Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59));
+Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59)); //Never
 BinaryDataLength=0;
 pBinaryData=NULL;
 }

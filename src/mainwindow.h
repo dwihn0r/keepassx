@@ -64,6 +64,7 @@ private slots:
    void OnEditNewGroup();
    void OnEditEditGroup();
    void OnEditDeleteGroup();
+   void OnEditNewEntry();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();
@@ -84,6 +85,7 @@ private:
  void openDatabase(QString filename);
  bool closeDatabase();
  void editEntry(CEntry* pEntry);
+ inline CGroup* currentGroup();
 
  
 

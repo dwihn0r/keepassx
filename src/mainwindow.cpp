@@ -82,11 +82,12 @@ void KeepassMainWindow::setupConnections(){
    connect(EditNewGroupAction, SIGNAL(triggered()), this, SLOT(OnEditNewGroup()));
    connect(EditEditGroupAction, SIGNAL(triggered()), this, SLOT(OnEditEditGroup()));
    connect(EditDeleteGroupAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteGroup()));
+   connect(EditNewEntryAction, SIGNAL(triggered()), this, SLOT(OnEditNewEntry()));
 
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
-	   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
    connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,
-	   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
+		   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
    connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
    connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
 }
@@ -265,7 +266,7 @@ default: Q_ASSERT(false);
 }
 
 void KeepassMainWindow::setStateEntrySelected(SelectionState s){
-EntrySelection=NONE;
+EntrySelection=s;
 switch(EntrySelection){
  case NONE:
     EditPasswordToClipboardAction->setEnabled(false);
@@ -413,4 +414,21 @@ CGroup *pGroup=static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGrou
 db->deleteGroup(pGroup);
 GroupView->updateItems();
 setStateFileModified(true);
+}
+
+void KeepassMainWindow::OnEditNewEntry(){
+CEntry NewEntry;
+NewEntry.GroupID=currentGroup()->ID;
+CEditEntryDlg dlg(db,&NewEntry,this,"EditEntryDialog",true);
+if(dlg.exec()){
+ db->addEntry(&NewEntry);
+ EntryView->updateItems();
+ setStateFileModified(true);
+}
+
+}
+
+CGroup* KeepassMainWindow::currentGroup(){
+Q_ASSERT(GroupView->selectedItems().size());
+return static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
 }

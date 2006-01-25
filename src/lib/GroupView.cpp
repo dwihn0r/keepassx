@@ -164,8 +164,6 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
         drag->setMimeData(mimeData);
         drag->setPixmap(DragPixmap);
 	drag->start();
-
-
 }
 
 void KeepassGroupView::updateItems(){

@@ -36,6 +36,7 @@ header()->setResizeMode(QHeaderView::Stretch);
 
 void KeepassEntryView::updateItems(){
 clear();
+Items.clear();
 if(!db)return;
 EntryViewItem *tmp=NULL;
 for(int i=0;i<db->Entries.size();i++){
@@ -72,9 +73,11 @@ for(int i=0;i<db->Entries.size();i++){
    tmp->setText(j++,entry->BinaryDesc);}
   Items.back()->setIcon(0,EntryIcons[entry->ImageID]);
 }
+setCurrentGroup(CurrentGroup);
 }
 
 void KeepassEntryView::setCurrentGroup(uint id){
+CurrentGroup=id;
 for(int i=0; i<Items.size();i++){
  setItemHidden(Items[i],(Items[i]->pEntry->GroupID != id));
 
