@@ -43,8 +43,7 @@ QDateTime Creation;
 QDateTime LastMod;
 QDateTime LastAccess;
 QDateTime Expire;
-Q_UINT8 *pBinaryData;
-Q_UINT32 BinaryDataLength;
+QByteArray BinaryData;
 /*Q_UINT32 PasswordLength;*/
 bool ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
 bool operator==(const CEntry&) const;

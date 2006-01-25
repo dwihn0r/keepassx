@@ -408,7 +408,7 @@ Entries.removeAt(Entries.indexOf(*entry));
 
 bool PwDatabase::IsMetaStream(CEntry& p){
 
-if(p.pBinaryData == NULL) return false;
+if(p.BinaryData.isNull()) return false;
 if(p.Additional == "") return false;
 if(p.BinaryDesc == "") return false;
 if(p.BinaryDesc != "bin-stream") return false;
@@ -546,18 +546,11 @@ switch(FieldType)
 		break;
 	case 0x000E:
 		if(FieldSize != 0)
-		{
-			///@TODO: im Destruktor löschen
-			///@TODO: im Konstruktor auf Null
-			pBinaryData = new Q_UINT8[FieldSize];
-			memcpy(pBinaryData, pData, FieldSize);
-			BinaryDataLength = FieldSize;
-		}
+			BinaryData=QByteArray((char*)pData,FieldSize);
 		else
-		{pBinaryData=0;}
+			BinaryData=QByteArray(); //=NULL
 		break;
 	case 0xFFFF:
-		///@TODO: Alle Elemente geladen - Status setzen oder so was
 		break;
 	default:
 		return false; // Field unsupported
@@ -609,7 +602,7 @@ for(int i = 0; i < Entries.size(); i++){
 	   +Entries[i].Password.length()+1
 	   +Entries[i].Additional.utf8().length()+1
 	   +Entries[i].BinaryDesc.utf8().length()+1
-	   +Entries[i].BinaryDataLength;}
+	   +Entries[i].BinaryData.length();}
 // Round up filesize to 16-byte boundary for Rijndael/Twofish
 FileSize = (FileSize + 16) - (FileSize % 16);
 char* buffer=new char[FileSize+16];
@@ -758,11 +751,11 @@ for(int i = 0; i < Entries.size(); i++){
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpy(buffer+pos, Entries[i].BinaryDesc.utf8(),FieldSize);  pos += FieldSize;
 
-		FieldType = 0x000E; FieldSize = Entries[i].BinaryDataLength;
+		FieldType = 0x000E; FieldSize = Entries[i].BinaryData.length();
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		if((Entries[i].pBinaryData != NULL) && (FieldSize != 0))
-			memcpy(buffer+pos, Entries[i].pBinaryData, FieldSize);
+		if((!Entries[i].BinaryData.isNull()) && (FieldSize != 0))
+			memcpy(buffer+pos, Entries[i].BinaryData.data(), FieldSize);
 		pos += FieldSize;
 
 		FieldType = 0xFFFF; FieldSize = 0;
@@ -1245,11 +1238,11 @@ void assertEntriesEq(KPTestResults& results, CEntry* left, CEntry* right){
 	kp_assert(results, left->Expire.toTime_t() == right->Expire.toTime_t());
 	size += sizeof(left->Expire);
 	
-	kp_assert(results, left->BinaryDataLength == right->BinaryDataLength);
-	kp_assert(results, (left->pBinaryData == NULL && right->pBinaryData == NULL) ||
-		memcmp(left->pBinaryData, right->pBinaryData, left->BinaryDataLength) == 0);
-	size += sizeof(left->pBinaryData);
-	size += sizeof(left->BinaryDataLength);
+	kp_assert(results, left->BinaryData.length() == right->BinaryData.length());
+	kp_assert(results, (left->BinaryData.isNull() && right->BinaryData.isNull()) ||
+		memcmp(left->BinaryData.data(), right->BinaryData.data(), left->BinaryData.length()) == 0);
+	size += left->BinaryData.length();
+	size += sizeof(left->BinaryData.length());
 
 	kp_assert(results, size == sizeof(CEntry));
 }

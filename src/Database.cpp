@@ -28,8 +28,7 @@ Creation=QDateTime::currentDateTime();
 LastMod=QDateTime::currentDateTime();
 LastAccess=QDateTime::currentDateTime();
 Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59)); //Never
-BinaryDataLength=0;
-pBinaryData=NULL;
+BinaryData=QByteArray();
 }
 
 bool CGroup::UI_ExpandByDefault=true;
@@ -59,9 +58,5 @@ CGroup::~CGroup(){
 }
 
 CEntry::~CEntry(){
-if(pBinaryData) {
-delete [] pBinaryData;
-}
-pBinaryData=NULL;
 
 }

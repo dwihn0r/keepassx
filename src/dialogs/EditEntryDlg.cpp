@@ -69,7 +69,7 @@ ButtonOpenAttachment->setIcon(*Icon_FileOpen);
 ButtonDeleteAttachment->setIcon(*Icon_EditDelete);
 ButtonSaveAttachment->setIcon(*Icon_FileSave);
 
-if(entry->pBinaryData==NULL){
+if(entry->BinaryData.isNull()){
   ButtonSaveAttachment->setDisabled(true);
   ButtonDeleteAttachment->setDisabled(true);}
 setCaption(entry->Title);
@@ -92,17 +92,17 @@ Edit_Attachment->setText(entry->BinaryDesc);
 Edit_Comment->setText(entry->Additional);
 InitGroupComboBox();
 InitIconComboBox();
-if(entry->BinaryDataLength==0)
+if(entry->BinaryData.length()==0)
   Label_AttachmentSize->setText("");
 else{
   QString unit;
   int faktor;
   int prec;
-  if(entry->BinaryDataLength<1000){unit=" Byte";faktor=1;prec=0;}
-  else {if(entry->BinaryDataLength<1000000){unit=" kB";faktor=1000;prec=1;}
+  if(entry->BinaryData.length()<1000){unit=" Byte";faktor=1;prec=0;}
+  else {if(entry->BinaryData.length()<1000000){unit=" kB";faktor=1000;prec=1;}
   	else{unit=" MB";faktor=1000000;prec=1;}
   }
-  Label_AttachmentSize->setText(QString::number((float)entry->BinaryDataLength/(float)faktor,'f',prec)+unit);
+  Label_AttachmentSize->setText(QString::number((float)entry->BinaryData.length()/(float)faktor,'f',prec)+unit);
 }
 if(entry->Expire==Date_Never){
   DateTime_Expire->setDisabled(true);
@@ -260,16 +260,7 @@ QMessageBox::warning(NULL,trUtf8("Fehler"),trUtf8("Datei konnte nicht geöffnet 
 return;
 }
 ModFlag=true;
-if(entry->pBinaryData)delete [] entry->pBinaryData;
-entry->pBinaryData = new Q_UINT8 [file.size()];
-
-if(entry->pBinaryData==NULL){
-file.close();
-QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Es ist nicht genügend Arbeitsspeicher für diesen Vorgang vorhanden."),"OK");
-return;
-}
-entry->BinaryDataLength=file.size();
-file.readBlock((char*)entry->pBinaryData,file.size());
+entry->BinaryData=file.readAll();
 file.close();
 QFileInfo info(filename);
 entry->BinaryDesc=info.fileName();
@@ -278,11 +269,11 @@ Edit_Attachment->setText(entry->BinaryDesc);
 QString unit;
 int faktor;
 int prec;
-  if(entry->BinaryDataLength<1000){unit=" Byte";faktor=1;prec=0;}
-  else {if(entry->BinaryDataLength<1000000){unit=" kB";faktor=1000;prec=1;}
+  if(entry->BinaryData.length()<1000){unit=" Byte";faktor=1;prec=0;}
+  else {if(entry->BinaryData.length()<1000000){unit=" kB";faktor=1000;prec=1;}
   	else{unit=" MB";faktor=1000000;prec=1;}
 	}
-Label_AttachmentSize->setText(QString::number((float)entry->BinaryDataLength/(float)faktor,'f',prec)+unit);
+Label_AttachmentSize->setText(QString::number((float)entry->BinaryData.length()/(float)faktor,'f',prec)+unit);
 ButtonOpenAttachment->setEnabled(true);
 ButtonSaveAttachment->setEnabled(true);
 ButtonDeleteAttachment->setEnabled(true);
@@ -305,13 +296,13 @@ QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht erstel
 return;
 }
 
-int r=file.writeBlock((char*)entry->pBinaryData,entry->BinaryDataLength);
+int r=file.write(entry->BinaryData);
 if(r==-1){
 file.close();
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Beim schreiben in der Datei ist ein Fehler aufgetreten."),"OK");
 return;
 }
-if(r!=entry->BinaryDataLength){
+if(r!=entry->BinaryData.length()){
 file.close();
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Die Datei konnte nicht vollständig geschrieben werden."),"OK");
 return;
@@ -324,9 +315,8 @@ void CEditEntryDlg::OnDeleteAttachment()
 int r=QMessageBox::warning(this,trUtf8("Anhang löschen?"),trUtf8("Sie sind dabei den Anhang zu löschen.\nSind Sie sicher, dass Sie dies tun wollen?"),trUtf8("Ja"),trUtf8("Nein"),NULL,1,1);
 if(r==0){
 ModFlag=true;
-delete[]entry->pBinaryData;
-entry->pBinaryData=NULL;
-entry->BinaryDataLength=0;
+entry->BinaryData.clear();
+entry->BinaryData=QByteArray();
 entry->BinaryDesc="";
 Edit_Attachment->setText("");
 Label_AttachmentSize->setText("");
