@@ -34,7 +34,7 @@
 #include <QBrush>
 #include "main.h"
 #include "GroupView.h"
-
+#define INSERT_AREA_WIDTH 4
 
 KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
 InsertionMarker=QLine();
@@ -64,7 +64,7 @@ InsertionMarker=QLine();
 if(item){
  QRect ItemRect=visualItemRect(item);
  if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
-   if((ItemRect.height()+ItemRect.y())-event->pos().y() > 4){
+   if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
    	QFont f=item->font(0);
    	f.setBold(true);
    	item->setFont(0,f);
@@ -73,8 +73,12 @@ if(item){
 }
    else{
 	LastHoverItem=NULL;
-	InsertionMarker=QLine(ItemRect.x(),ItemRect.y()+ItemRect.height(),
-			      ItemRect.x()+ItemRect.width(),ItemRect.y()+ItemRect.height());
+	if(event->pos().y() > INSERT_AREA_WIDTH)
+		InsertionMarker=QLine(ItemRect.x(),ItemRect.y()+ItemRect.height(),
+			     			  ItemRect.x()+ItemRect.width(),ItemRect.y()+ItemRect.height());
+	else
+		InsertionMarker=QLine(ItemRect.x(),0,
+			     			  ItemRect.x()+ItemRect.width(),0);
 	}
  }
  else 
@@ -109,10 +113,22 @@ if(LastHoverItem){
   
 }
 GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
-if(item)
-  db->moveGroup(DragItem->pGroup,item->pGroup);
-else
-  db->moveGroup(DragItem->pGroup,NULL);
+if(item){
+	QRect ItemRect=visualItemRect(item);
+	if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
+		db->moveGroup(DragItem->pGroup,item->pGroup);}
+	else{
+		if(event->pos().y() > INSERT_AREA_WIDTH){
+			if(db->getNumberOfChilds(item->pGroup) > 0)
+				db->moveGroup(DragItem->pGroup,item->pGroup,0);				
+			else				
+				db->moveGroupDirectly(DragItem->pGroup,item->pGroup);
+		}
+		else	db->moveGroupDirectly(DragItem->pGroup,NULL);
+		}		
+}
+else db->moveGroup(DragItem->pGroup,NULL);
+
 updateItems();
 }
 

@@ -997,15 +997,40 @@ else{	int n=0; //Counter for direct (first-level) childs
 		if(n==pos)break;
 		if(Groups[DstIndex+1+i].Level==DstGroup->Level+1)n++;
 	}
-	DstIndex+=n;
+	DstIndex+=(n+1);
 }
-
 
 for(i=NumSubGroups; i>=0; i--)
 	Groups.insert(DstIndex,tmp[i]);
-
-
 }
+
+void PwDatabase::moveGroupDirectly(CGroup* group, CGroup* DstGroup){
+int NumSubGroups=getNumberOfChilds(group);
+int GroupIndex=Groups.indexOf(*group);
+int DstIndex, LevelDiff, i;
+QList<CGroup> tmp;
+
+if(DstGroup)
+ LevelDiff=DstGroup->Level - group->Level;
+else
+ LevelDiff=-group->Level;
+
+for(i=GroupIndex; i<=GroupIndex+NumSubGroups; i++){
+	tmp << Groups[i];
+	tmp.back().Level+=LevelDiff;
+}
+for(i=0; i<=NumSubGroups; i++)
+	Groups.removeAt(GroupIndex);
+
+if(DstGroup)
+	DstIndex=Groups.indexOf(*DstGroup)+1;
+else
+	DstIndex=0;
+
+for(i=NumSubGroups; i>=0; i--)
+	Groups.insert(DstIndex,tmp[i]);
+}
+
 
 int PwDatabase::getNumberOfChilds(CGroup* group){
 if(!group)return Groups.size();

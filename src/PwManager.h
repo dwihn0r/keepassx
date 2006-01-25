@@ -58,6 +58,7 @@ public:
  void      deleteGroup(CGroup* pGroup);
  void      deleteGroup(unsigned long ID);
  void	   moveGroup(CGroup* group, CGroup* DstGroup, int pos=-1);
+ void	   moveGroupDirectly(CGroup* group, CGroup* DstGroup); //inserts group directly behind DstGroup on the same level
  int	   getGroupIndex(CGroup* group);
  int       getGroupIndex(unsigned long ID);
  int	   getNumberOfChilds(CGroup* pGroup);
