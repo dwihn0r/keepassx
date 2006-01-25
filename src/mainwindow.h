@@ -34,7 +34,8 @@
 #include <QDropEvent>
 #include <QListWidget>
 #include <QTreeWidget>
-
+#include <QClipboard>
+#include <QTimer>
 
 #include "PwManager.h"
 #include "PwmConfig.h"
@@ -68,16 +69,21 @@ private slots:
    void OnEditEditEntry();
    void OnEditCloneEntry();
    void OnEditDeleteEntry();
+   void OnEditUsernameToClipboard();
+   void OnEditPasswordToClipboard();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();
    void OnGroupSelectionChanged();
+   void OnClipboardTimeOut();
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE};
  SelectionState GroupSelection, EntrySelection;
  bool FileOpen;
  bool ModFlag;
+ QClipboard* Clipboard;
+ QTimer ClipboardTimer;
  inline void setupToolbar();
  inline void setupIcons();
  inline void setupConnections();
@@ -89,6 +95,7 @@ private:
  bool closeDatabase();
  void editEntry(CEntry* pEntry);
  inline CGroup* currentGroup();
+ inline CEntry* currentEntry();
 
  
 

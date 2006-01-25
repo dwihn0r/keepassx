@@ -65,6 +65,7 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   setupToolbar();
   setStateFileOpen(false);
   FileOpen=false;
+  Clipboard=QApplication::clipboard();
 }
 
 void KeepassMainWindow::setupConnections(){
@@ -86,7 +87,10 @@ void KeepassMainWindow::setupConnections(){
    connect(EditEditEntryAction, SIGNAL(triggered()), this, SLOT(OnEditEditEntry()));
    connect(EditCloneEntryAction, SIGNAL(triggered()), this, SLOT(OnEditCloneEntry()));
    connect(EditDeleteEntryAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteEntry()));
+   connect(EditUsernameToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditUsernameToClipboard()));
+   connect(EditPasswordToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditPasswordToClipboard()));
 
+   connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
 		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
    connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,
@@ -100,7 +104,12 @@ toolBar->addAction(FileNewAction);
 toolBar->addAction(FileOpenAction);
 toolBar->addAction(FileSaveAction);
 toolBar->addSeparator();
-
+toolBar->addAction(EditNewEntryAction);
+toolBar->addAction(EditEditEntryAction);
+toolBar->addAction(EditDeleteEntryAction);
+toolBar->addSeparator();
+toolBar->addAction(EditPasswordToClipboardAction);
+toolBar->addAction(EditUsernameToClipboardAction);
 }
 
 void KeepassMainWindow::setupIcons(){
@@ -110,6 +119,11 @@ FileSaveAction->setIcon(*Icon_FileSave);
 FileSaveAsAction->setIcon(*Icon_FileSaveAs);
 FileCloseAction->setIcon(*Icon_FileClose);
 FileExitAction->setIcon(*Icon_Exit);
+EditNewEntryAction->setIcon(*Icon_EditAdd);
+EditEditEntryAction->setIcon(*Icon_EditEdit);
+EditDeleteEntryAction->setIcon(*Icon_EditDelete);
+EditPasswordToClipboardAction->setIcon(*Icon_EditPasswordToCb);
+EditUsernameToClipboardAction->setIcon(*Icon_EditUsernameToCb);
 }
 
 
@@ -456,7 +470,30 @@ setStateFileModified(true);
 EntryView->updateItems();
 }
 
+void KeepassMainWindow::OnEditUsernameToClipboard(){
+Clipboard->setText(currentEntry()->UserName,  QClipboard::Clipboard);
+ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
+}
+
+void KeepassMainWindow::OnEditPasswordToClipboard(){
+Clipboard->setText(currentEntry()->Password.getString(),QClipboard::Clipboard);
+ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
+currentEntry()->Password.delRef();
+
+}
+
+void KeepassMainWindow::OnClipboardTimeOut(){
+Clipboard->clear(QClipboard::Clipboard);
+qDebug("Clipper cleared.");
+}
+
+
 CGroup* KeepassMainWindow::currentGroup(){
 Q_ASSERT(GroupView->selectedItems().size());
 return static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
+}
+
+CEntry* KeepassMainWindow::currentEntry(){
+Q_ASSERT(EntryView->selectedItems().size()==1);
+return static_cast<EntryViewItem*>(EntryView->selectedItems()[0])->pEntry;
 }

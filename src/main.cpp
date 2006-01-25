@@ -51,6 +51,10 @@ QIcon *Icon_FileSaveAs;
 QIcon *Icon_Exit;
 QIcon *Icon_File_Export;
 QIcon *Icon_EditDelete;
+QIcon *Icon_EditAdd;
+QIcon *Icon_EditEdit;
+QIcon *Icon_EditUsernameToCb;
+QIcon *Icon_EditPasswordToCb;
 QString DateTimeFormat("no-format-string");
 
 
@@ -256,7 +260,18 @@ Icon_Exit=new QIcon(tmpImg);
 //--------------------------
 loadImg(ThemeDir+"/actions/editdelete.png",tmpImg);
 Icon_EditDelete=new QIcon(tmpImg);
-
+//--------------------------
+loadImg(ThemeDir+"/actions/edit_add.png",tmpImg);
+Icon_EditAdd=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/edit.png",tmpImg);
+Icon_EditEdit=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/identity.png",tmpImg);
+Icon_EditUsernameToCb=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/klipper_dock.png",tmpImg);
+Icon_EditPasswordToCb=new QIcon(tmpImg);
 
 }
 

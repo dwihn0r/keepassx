@@ -51,6 +51,11 @@ extern QIcon *Icon_FileSaveAs;
 extern QIcon *Icon_Exit;
 extern QIcon *Icon_File_Export;
 extern QIcon *Icon_EditDelete;
+extern QIcon *Icon_EditAdd;
+extern QIcon *Icon_EditEdit;
+extern QIcon *Icon_EditDelete;
+extern QIcon *Icon_EditUsernameToCb;
+extern QIcon *Icon_EditPasswordToCb;
 extern QString DateTimeFormat;
 
 
