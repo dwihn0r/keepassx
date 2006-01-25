@@ -352,6 +352,15 @@ if(FileSize == 32){
 	   file.close();
 	   return false;}
 }
+else if(FileSize == 64){
+	char hex[64];
+	if(file.readBlock(hex,64) != 64){
+	  file.close();
+	  return false;}
+	file.close();
+	if(!convHexToBinaryKey(hex,(char*)FileKey)) return false;
+
+}
 else{
 sha256_starts(&sha32);
 unsigned char* buffer = new unsigned char[2048];
