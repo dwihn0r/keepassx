@@ -30,6 +30,9 @@ CSearchDlg::CSearchDlg(CGroup* pGroup,QWidget* parent, const char* name, bool mo
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
+connect( Button_Search, SIGNAL( clicked() ), this, SLOT( OnButtonSearch() ) );
+connect( Button_Close, SIGNAL( clicked() ), this, SLOT( OnButtonClose() ) );
+
 createBanner(Banner,Icon_Search32x32,tr("Suchen"));
 checkBox_Cs->setChecked(config.SearchOptions[0]);
 checkBox_regExp->setChecked(config.SearchOptions[1]);

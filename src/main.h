@@ -56,6 +56,8 @@ extern QIcon *Icon_EditEdit;
 extern QIcon *Icon_EditDelete;
 extern QIcon *Icon_EditUsernameToCb;
 extern QIcon *Icon_EditPasswordToCb;
+extern QIcon *Icon_EditClone;
+extern QIcon *Icon_EditOpenUrl;
 extern QString DateTimeFormat;
 
 

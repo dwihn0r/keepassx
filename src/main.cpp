@@ -56,6 +56,8 @@ QIcon *Icon_EditAdd;
 QIcon *Icon_EditEdit;
 QIcon *Icon_EditUsernameToCb;
 QIcon *Icon_EditPasswordToCb;
+QIcon *Icon_EditClone;
+QIcon *Icon_EditOpenUrl;
 QString DateTimeFormat("no-format-string");
 
 
@@ -263,6 +265,12 @@ Icon_EditUsernameToCb=new QIcon(tmpImg);
 //--------------------------
 loadImg(ThemeDir+"/actions/klipper_dock.png",tmpImg);
 Icon_EditPasswordToCb=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/editcopy.png",tmpImg);
+Icon_EditClone=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/run.png",tmpImg);
+Icon_EditOpenUrl=new QIcon(tmpImg);
 
 }
 

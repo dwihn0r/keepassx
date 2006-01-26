@@ -73,6 +73,8 @@ private slots:
    void OnEditPasswordToClipboard();
    void OnEditSaveAttachment();
    void OnEditOpenUrl();
+   void OnEditSearch();
+   void OnEditGroupSearch();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();
@@ -95,6 +97,7 @@ private:
  void setStateEntrySelected(SelectionState s);
  void openDatabase(QString filename);
  bool closeDatabase();
+ void search(CGroup* pGroup);
  void editEntry(CEntry* pEntry);
  inline CGroup* currentGroup();
  inline CEntry* currentEntry();

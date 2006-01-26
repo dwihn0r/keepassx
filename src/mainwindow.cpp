@@ -91,6 +91,8 @@ void KeepassMainWindow::setupConnections(){
    connect(EditPasswordToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditPasswordToClipboard()));
    connect(EditOpenUrlAction, SIGNAL(triggered()), this, SLOT(OnEditOpenUrl()));
    connect(EditSaveAttachmentAction, SIGNAL(triggered()), this, SLOT(OnEditSaveAttachment()));
+   connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnEditSearch()));
+   connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnEditGroupSearch()));
 
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
@@ -126,6 +128,12 @@ EditEditEntryAction->setIcon(*Icon_EditEdit);
 EditDeleteEntryAction->setIcon(*Icon_EditDelete);
 EditPasswordToClipboardAction->setIcon(*Icon_EditPasswordToCb);
 EditUsernameToClipboardAction->setIcon(*Icon_EditUsernameToCb);
+EditCloneEntryAction->setIcon(*Icon_EditClone);
+EditOpenUrlAction->setIcon(*Icon_EditOpenUrl);
+EditSaveAttachmentAction->setIcon(*Icon_FileSave);
+EditNewGroupAction->setIcon(*Icon_EditAdd);
+EditEditGroupAction->setIcon(*Icon_EditEdit);
+EditDeleteGroupAction->setIcon(*Icon_EditDelete);
 }
 
 
@@ -497,6 +505,24 @@ void KeepassMainWindow::OnEditOpenUrl(){
 openBrowser(currentEntry()->URL);
 }
 
+void KeepassMainWindow::search(CGroup* group){
+CSearchDlg dlg(group,this,"SearchDialog",false);
+if(dlg.exec()){
+
+}
+else
+{
+
+}
+}
+
+void KeepassMainWindow::OnEditSearch(){
+search(NULL);
+}
+
+void KeepassMainWindow::OnEditGroupSearch(){
+search(currentGroup());
+}
 
 CGroup* KeepassMainWindow::currentGroup(){
 Q_ASSERT(GroupView->selectedItems().size());
