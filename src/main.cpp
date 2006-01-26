@@ -28,6 +28,7 @@
 #include <QPainter>
 #include <QImage>
 #include <QStyleFactory>
+#include <QProcess>
 
 #include "main.h"
 #include "PwmConfig.h"
@@ -64,13 +65,6 @@ inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& Arg
 
 int main(int argc, char **argv)
 {
-/*
-QStringList keys=QStyleFactory::keys();
-for(int i=0; i<keys.size(); i++){
-cout << keys[i].ascii() << endl;
-}
-QApplication::setStyle(QStyleFactory::create("slimplastic"));
-*/
 QApplication* app=new QApplication(argc,argv);
 QString ArgFile,ArgCfg,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg);
@@ -137,10 +131,6 @@ return r;
 
 
 
-
-
-
-
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text){
 createBanner(Banner,symbol,text,config.BannerColor1
 			       ,config.BannerColor2
@@ -193,9 +183,10 @@ Banner->setPixmap(*banner_pixmap);
 
 
 void openBrowser(QString url){
-
-
-
+QProcess browser;
+QStringList args=QStringList::split(' ',config.OpenUrlCommand.arg(url));
+QString cmd=args.takeFirst();
+browser.startDetached(cmd,args);
 }
 
 

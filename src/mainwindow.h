@@ -71,6 +71,8 @@ private slots:
    void OnEditDeleteEntry();
    void OnEditUsernameToClipboard();
    void OnEditPasswordToClipboard();
+   void OnEditSaveAttachment();
+   void OnEditOpenUrl();
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();

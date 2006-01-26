@@ -56,6 +56,7 @@ bool ModFlag;
 void CreateBanner();
 void InitGroupComboBox();
 void InitIconComboBox();
+static void saveAttachment(CEntry* pEntry, QWidget* ParentWidget=NULL);
 
 
 public slots:

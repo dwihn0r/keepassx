@@ -89,6 +89,8 @@ void KeepassMainWindow::setupConnections(){
    connect(EditDeleteEntryAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteEntry()));
    connect(EditUsernameToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditUsernameToClipboard()));
    connect(EditPasswordToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditPasswordToClipboard()));
+   connect(EditOpenUrlAction, SIGNAL(triggered()), this, SLOT(OnEditOpenUrl()));
+   connect(EditSaveAttachmentAction, SIGNAL(triggered()), this, SLOT(OnEditSaveAttachment()));
 
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
@@ -234,7 +236,7 @@ if(!IsOpen){
     EditDeleteGroupAction->setEnabled(false);
     EditPasswordToClipboardAction->setEnabled(false);
     EditUsernameToClipboardAction->setEnabled(false);
-    OpenUrlAction->setEnabled(false);
+    EditOpenUrlAction->setEnabled(false);
     EditSaveAttachmentAction->setEnabled(false);
     EditNewEntryAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
@@ -289,7 +291,7 @@ switch(EntrySelection){
  case NONE:
     EditPasswordToClipboardAction->setEnabled(false);
     EditUsernameToClipboardAction->setEnabled(false);
-    OpenUrlAction->setEnabled(false);
+    EditOpenUrlAction->setEnabled(false);
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
     EditCloneEntryAction->setEnabled(false);
@@ -300,7 +302,7 @@ switch(EntrySelection){
  case SINGLE:
     EditPasswordToClipboardAction->setEnabled(true);
     EditUsernameToClipboardAction->setEnabled(true);
-    OpenUrlAction->setEnabled(true);
+    EditOpenUrlAction->setEnabled(true);
     EditSaveAttachmentAction->setEnabled(true);
     EditEditEntryAction->setEnabled(true);
     EditCloneEntryAction->setEnabled(true);
@@ -311,7 +313,7 @@ switch(EntrySelection){
  case MULTIPLE:
     EditPasswordToClipboardAction->setEnabled(false);
     EditUsernameToClipboardAction->setEnabled(false);
-    OpenUrlAction->setEnabled(false);
+    EditOpenUrlAction->setEnabled(false);
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
     EditCloneEntryAction->setEnabled(true);
@@ -485,6 +487,14 @@ currentEntry()->Password.delRef();
 void KeepassMainWindow::OnClipboardTimeOut(){
 Clipboard->clear(QClipboard::Clipboard);
 qDebug("Clipper cleared.");
+}
+
+void KeepassMainWindow::OnEditSaveAttachment(){
+CEditEntryDlg::saveAttachment(currentEntry(),this);
+}
+
+void KeepassMainWindow::OnEditOpenUrl(){
+openBrowser(currentEntry()->URL);
 }
 
 

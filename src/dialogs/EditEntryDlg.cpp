@@ -279,13 +279,17 @@ ButtonSaveAttachment->setEnabled(true);
 ButtonDeleteAttachment->setEnabled(true);
 }
 
-void CEditEntryDlg::OnSaveAttachment()
+void CEditEntryDlg::OnSaveAttachment(){
+saveAttachment(entry,this);
+}
+
+void CEditEntryDlg::saveAttachment(CEntry* pEntry, QWidget* ParentWidget)
 {
-QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Anhang speichern..."));
+QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",ParentWidget,trUtf8("Anhang speichern..."));
 if(filename=="")return;
 QFile file(filename);
 if(file.exists()){
-int r=QMessageBox::warning(this,QString::fromUtf8("Vorhandene Datei überschreiben?"),QString::fromUtf8("Unter dem gewählten Dateinamen existiert bereits eine Datei.\nSoll sie überschrieben werden?"),"Ja","Nein",NULL,1,1);
+int r=QMessageBox::warning(ParentWidget,QString::fromUtf8("Vorhandene Datei überschreiben?"),QString::fromUtf8("Unter dem gewählten Dateinamen existiert bereits eine Datei.\nSoll sie überschrieben werden?"),"Ja","Nein",NULL,1,1);
 if(r==1)return;
 if(file.remove()==false){
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht überschrieben werden."),"OK");
@@ -296,13 +300,13 @@ QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht erstel
 return;
 }
 
-int r=file.write(entry->BinaryData);
+int r=file.write(pEntry->BinaryData);
 if(r==-1){
 file.close();
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Beim schreiben in der Datei ist ein Fehler aufgetreten."),"OK");
 return;
 }
-if(r!=entry->BinaryData.length()){
+if(r!=pEntry->BinaryData.length()){
 file.close();
 QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Die Datei konnte nicht vollständig geschrieben werden."),"OK");
 return;
