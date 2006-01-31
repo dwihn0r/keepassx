@@ -41,6 +41,7 @@ InsertionMarker=QLine();
 db=NULL;
 LastHoverItem=NULL;
 setHeaderLabels(QStringList()<<tr("Gruppen"));
+ShowSearchGroup=true;
 }
 
 void KeepassGroupView:: dragEnterEvent ( QDragEnterEvent * event ){
@@ -197,7 +198,16 @@ Items.back()->setIcon(0,EntryIcons[db->Groups[i].ImageID]);
 
 for(int i=0;i<Items.size();i++){
  setItemExpanded(Items[i],Items[i]->pGroup->UI_ItemIsExpanded);
-}}
+}
+if(ShowSearchGroup){
+ 	 Items.push_back(new GroupViewItem(this));
+     Items.back()->setText(0,trUtf8("Suchergebnisse"));
+     Items.back()->pGroup=NULL;
+}
+
+}
+
+
 
 GroupViewItem* KeepassGroupView::getLastSameLevelItem(int level){
 for(int i=Items.size()-1;i>=0;i--){
@@ -221,6 +231,10 @@ painter.drawLine(InsertionMarker);
 }
 }
 
+bool KeepassGroupView::isSearchResultGroup(GroupViewItem* item){
+if(ShowSearchGroup && (item == Items.back()))return true;
+else return false;
+}
 
 
 GroupViewItem::GroupViewItem(QTreeWidget *parent):QTreeWidgetItem(parent){

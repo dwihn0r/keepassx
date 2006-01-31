@@ -27,28 +27,21 @@ class CSearchDlg : public QDialog, public Ui_Search_Dlg
 {
   Q_OBJECT
 public:
-  CSearchDlg(CGroup* pGroup=NULL,QWidget* parent = 0, const char* name = 0, 
+  CSearchDlg(PwDatabase* _db, CGroup* pGroup=NULL,QWidget* parent = 0, const char* name = 0, 
 	     bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CSearchDlg();
-  /*$PUBLIC_FUNCTIONS$*/
-
-public slots:
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
+  QList<Q_UINT32> Hits;
 
 public slots:
     virtual void OnButtonClose();
-public slots:
     virtual void OnButtonSearch();
 
 private:
   QString txt;
+  CGroup* group;
   bool regexp;
+  PwDatabase* db;
+  bool search(QString& str);
 };
 
 #endif

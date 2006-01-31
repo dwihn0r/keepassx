@@ -26,7 +26,7 @@
 #include <qregexp.h>
 #include <qmessagebox.h>
 
-CSearchDlg::CSearchDlg(CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+CSearchDlg::CSearchDlg(PwDatabase* _db,CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
@@ -42,6 +42,9 @@ checkBox_Password->setChecked(config.SearchOptions[4]);
 checkBox_Comment->setChecked(config.SearchOptions[5]);
 checkBox_URL->setChecked(config.SearchOptions[6]);
 checkBox_Attachment->setChecked(config.SearchOptions[7]);
+
+db=_db;
+group=pGroup;
 }
 
 CSearchDlg::~CSearchDlg()
@@ -63,40 +66,40 @@ done(0);
 
 void CSearchDlg::OnButtonSearch()
 {
-/*
+Hits.clear();
 txt=Edit_Search->text();
 regexp=checkBox_regExp->isChecked();
 if(txt==""){
 QMessageBox::information(this,trUtf8("Hinweis"),trUtf8("Bitte geben Sie einen Suchbegriff ein."),"OK",0,0);
 return;}
 
-for(int i=0;i<pw->Entries.size();i++){
- if(group){if(pw->Entries[i].GroupID != group->ID)continue;}
+for(int i=0;i<db->Entries.size();i++){
+ if(group){if(db->Entries[i].GroupID != group->ID)continue;}
  bool hit=false;
- if(checkBox_Title->isChecked())	hit=hit||search(pw->Entries[i].Title);
- if(checkBox_Username->isChecked())	hit=hit||search(pw->Entries[i].UserName);
- if(checkBox_URL->isChecked())		hit=hit||search(pw->Entries[i].URL);
- if(checkBox_Comment->isChecked())	hit=hit||search(pw->Entries[i].Additional);
- if(checkBox_Attachment->isChecked())	hit=hit||search(pw->Entries[i].BinaryDesc);
- if(checkBox_Password->isChecked())	hit=hit||search(pw->Entries[i].Password.getString());
- pw->Entries[i].Password.delRef();
- if(hit)hits.push_back(&pw->Entries[i]);
+ if(checkBox_Title->isChecked())	hit=hit||search(db->Entries[i].Title);
+ if(checkBox_Username->isChecked())	hit=hit||search(db->Entries[i].UserName);
+ if(checkBox_URL->isChecked())		hit=hit||search(db->Entries[i].URL);
+ if(checkBox_Comment->isChecked())	hit=hit||search(db->Entries[i].Additional);
+ if(checkBox_Attachment->isChecked())	hit=hit||search(db->Entries[i].BinaryDesc);
+ if(checkBox_Password->isChecked())	hit=hit||search(db->Entries[i].Password.getString());
+ db->Entries[i].Password.delRef();
+ if(hit)Hits.push_back(db->Entries[i].sID);
 }
-*/
+
 done(1);
 
 }
 
-/*
+
 bool CSearchDlg::search(QString& str){
+
 if(regexp){
  QRegExp exp(txt,checkBox_Cs->isChecked());
  if(str.contains(exp)==0)return false;}
 else{
  if(str.contains(txt,checkBox_Cs->isChecked())==0)return false;}
 return true;
-}*/
 
-/*$SPECIALIZATION$*/
+}
 
 

@@ -84,6 +84,11 @@ for(int i=0; i<Items.size();i++){
 }
 }
 
+void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
+
+
+}
+
 void KeepassEntryView::refreshVisibleItems(){
 EntryViewItem *tmp=NULL;
 for(int i=0;i<Items.size();i++){

@@ -32,6 +32,7 @@ public:
  void refreshVisibleItems();
  void setCurrentGroup(uint GroupID);
  void updateColumns();
+ void showSearchResults(QList<Q_UINT32>& results);
  PwDatabase* db;
  vector<EntryViewItem*>Items;
 private:

@@ -376,7 +376,10 @@ void KeepassMainWindow::OnImportFromKWalletXml(){}
 
 void KeepassMainWindow::OnCurrentGroupChanged(QTreeWidgetItem* cur,QTreeWidgetItem* prev){
 if(cur){
- EntryView->setCurrentGroup(((GroupViewItem*)cur)->pGroup->ID);
+ if(GroupView->isSearchResultGroup((GroupViewItem*)cur)){
+	EntryView->showSearchResults(SearchResults);
+ }
+ else EntryView->setCurrentGroup(((GroupViewItem*)cur)->pGroup->ID);
 }
 }
 
@@ -506,9 +509,9 @@ openBrowser(currentEntry()->URL);
 }
 
 void KeepassMainWindow::search(CGroup* group){
-CSearchDlg dlg(group,this,"SearchDialog",false);
+CSearchDlg dlg(db,group,this,"SearchDialog",false);
 if(dlg.exec()){
-
+ SearchResults=dlg.Hits;
 }
 else
 {

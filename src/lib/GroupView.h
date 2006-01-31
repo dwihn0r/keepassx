@@ -30,6 +30,7 @@ class KeepassGroupView:public QTreeWidget{
 public:
  KeepassGroupView(QWidget* parent=0);
  void updateItems();
+ bool isSearchResultGroup(GroupViewItem* item);
  PwDatabase *db;
  vector<GroupViewItem*>Items;
 protected:
@@ -49,6 +50,7 @@ private:
  QPixmap DragPixmap;
  GroupViewItem* DragItem;
  GroupViewItem* LastHoverItem;
+ bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
 
  GroupViewItem* getLastSameLevelItem(int level);
 };
