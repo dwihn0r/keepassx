@@ -512,6 +512,10 @@ void KeepassMainWindow::search(CGroup* group){
 CSearchDlg dlg(db,group,this,"SearchDialog",false);
 if(dlg.exec()){
  SearchResults=dlg.Hits;
+ GroupView->ShowSearchGroup=true;
+ GroupView->updateItems();
+ GroupView->selectSearchGroup();
+ EntryView->showSearchResults(SearchResults);
 }
 else
 {

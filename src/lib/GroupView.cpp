@@ -41,7 +41,12 @@ InsertionMarker=QLine();
 db=NULL;
 LastHoverItem=NULL;
 setHeaderLabels(QStringList()<<tr("Gruppen"));
-ShowSearchGroup=true;
+ShowSearchGroup=false;
+}
+
+void KeepassGroupView::selectSearchGroup(){
+Q_ASSERT(ShowSearchGroup);
+setItemSelected(Items.back(),true);
 }
 
 void KeepassGroupView:: dragEnterEvent ( QDragEnterEvent * event ){
@@ -61,8 +66,9 @@ if(LastHoverItem){
 }
 
 InsertionMarker=QLine();
-
-if(item){
+if(isSearchResultGroup(item))
+	event->setAccepted(false);
+else if(item){
  QRect ItemRect=visualItemRect(item);
  if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
    if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
@@ -148,6 +154,8 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
  if ((event->pos() - DragStartPos).manhattanLength() < QApplication::startDragDistance())
             return;
 	DragItem=(GroupViewItem*)itemAt(DragStartPos);
+ if (isSearchResultGroup(DragItem))
+			return;
 	if(!DragItem)return;
 	QDrag *drag = new QDrag(this);
 	QFontMetrics fontmet(DragItem->font(0));
@@ -203,6 +211,9 @@ if(ShowSearchGroup){
  	 Items.push_back(new GroupViewItem(this));
      Items.back()->setText(0,trUtf8("Suchergebnisse"));
      Items.back()->pGroup=NULL;
+     QFont f=Items.back()->font(0);
+     f.setItalic(true);
+     Items.back()->setFont(0,f);
 }
 
 }

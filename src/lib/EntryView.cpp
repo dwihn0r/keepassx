@@ -80,13 +80,17 @@ void KeepassEntryView::setCurrentGroup(uint id){
 CurrentGroup=id;
 for(int i=0; i<Items.size();i++){
  setItemHidden(Items[i],(Items[i]->pEntry->GroupID != id));
-
 }
 }
 
 void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
-
-
+setCurrentGroup(0);
+for(int j=0; j<results.size(); j++){
+	for(int i=0; i<Items.size();i++){
+		if(Items[i]->pEntry->sID == results[j])
+ 		setItemHidden(Items[i],false);
+	}
+}
 }
 
 void KeepassEntryView::refreshVisibleItems(){

@@ -31,7 +31,9 @@ public:
  KeepassGroupView(QWidget* parent=0);
  void updateItems();
  bool isSearchResultGroup(GroupViewItem* item);
+ void selectSearchGroup();
  PwDatabase *db;
+ bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
  vector<GroupViewItem*>Items;
 protected:
  virtual void dragEnterEvent ( QDragEnterEvent * event );
@@ -50,7 +52,6 @@ private:
  QPixmap DragPixmap;
  GroupViewItem* DragItem;
  GroupViewItem* LastHoverItem;
- bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
 
  GroupViewItem* getLastSameLevelItem(int level);
 };
