@@ -100,6 +100,7 @@ private:
  bool closeDatabase();
  void search(CGroup* pGroup);
  void editEntry(CEntry* pEntry);
+ void removeFromSearchResults(int sID);
  inline CGroup* currentGroup();
  inline CEntry* currentEntry();
 

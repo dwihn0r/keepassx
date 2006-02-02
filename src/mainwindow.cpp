@@ -477,11 +477,23 @@ void KeepassMainWindow::OnEditDeleteEntry(){
 Q_ASSERT(EntryView->selectedItems().size()>0);
 QList<QTreeWidgetItem*> entries=EntryView->selectedItems();
 for(int i=0; i<entries.size();i++){
+	removeFromSearchResults(((EntryViewItem*)entries[i])->pEntry->sID);
 	db->deleteEntry(((EntryViewItem*)entries[i])->pEntry);
 }
 setStateFileModified(true);
 EntryView->updateItems();
 }
+
+void KeepassMainWindow::removeFromSearchResults(int id){
+for(int i=0; i<SearchResults.size();i++){
+ if(SearchResults[i]==id){
+	SearchResults.removeAt(i);
+	return;
+ }
+}
+
+}
+
 
 void KeepassMainWindow::OnEditUsernameToClipboard(){
 Clipboard->setText(currentEntry()->UserName,  QClipboard::Clipboard);
