@@ -213,6 +213,7 @@ if(ShowSearchGroup){
      Items.back()->pGroup=NULL;
      QFont f=Items.back()->font(0);
      f.setItalic(true);
+	 f.setBold(true);
      Items.back()->setFont(0,f);
 }
 

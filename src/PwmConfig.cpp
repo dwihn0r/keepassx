@@ -39,7 +39,7 @@ BannerTextColor=ParseColorString(ini.GetValue("Options","BannerTextColor","4,0,8
 ShowPasswords=ini.GetValueB("Options","ShowPasswords",false);
 OpenUrlCommand=ini.GetValue("Options","UrlCmd","kfmclient openURL %1").c_str();
 Language=ini.GetValue("Options","LangFile","").c_str();
-ParseBoolString(ini.GetValue("Options","SearchOptions","00110111").c_str(),SearchOptions,8);
+ParseBoolString(ini.GetValue("Options","SearchOptions","001101111").c_str(),SearchOptions,9);
 ListView_HidePasswords=ini.GetValueB("UI","HidePasswords",true);
 ListView_HideUsernames=ini.GetValueB("UI","HideUsernames",false);
 ParseBoolString(ini.GetValue("Options","PwGenOptions","1111100001").c_str(),PwGenOptions,10);
@@ -65,7 +65,7 @@ ini.SetValue("Options","BannerTextColor",(const char*)CreateColorString(BannerTe
 ini.SetValueB("Options","ShowPasswords",ShowPasswords,true);
 ini.SetValue("Options","UrlCmd",(const char*)OpenUrlCommand,true);
 ini.SetValue("Options","LangFile",(const char*)Language,true);
-ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,8),true);
+ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,9),true);
 ini.SetValueB("UI","HidePasswords",ListView_HidePasswords);
 ini.SetValueB("UI","HideUsernames",ListView_HideUsernames);
 ini.SetValue("Options","PwGenOptions",(const char*)CreateBoolString(PwGenOptions,10),true);

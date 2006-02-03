@@ -106,19 +106,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>130</y>
-     <width>271</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Untergruppen einbeziehen</string>
-   </property>
-  </widget>
   <widget class="Q3GroupBox" name="groupBox1" >
    <property name="geometry" >
     <rect>
@@ -266,6 +253,19 @@
    </property>
    <property name="shortcut" >
     <string>Alt+C</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_Recursive" >
+   <property name="geometry" >
+    <rect>
+     <x>110</x>
+     <y>130</y>
+     <width>271</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Untergruppen einbeziehen</string>
    </property>
   </widget>
  </widget>

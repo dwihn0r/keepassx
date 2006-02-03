@@ -52,6 +52,18 @@ Errors.clear();
 return r;
 }
 
+QList<int> PwDatabase::getChildIds(CGroup* group){
+if(!group)return QList<int>();
+int GroupIndex=Groups.indexOf(*group);
+int i;
+QList<int> ids;
+for(i=GroupIndex+1; i<Groups.size(); i++){
+ ids << Groups[i].ID;
+ if(Groups[i].Level <= group->Level) break;
+}
+return ids;
+}
+
 bool PwDatabase::loadDatabase(QString _filename, QString& err){
 unsigned long total_size,crypto_size;
 Q_UINT32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;

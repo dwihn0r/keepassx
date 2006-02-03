@@ -62,6 +62,7 @@ public:
  int	   getGroupIndex(CGroup* group);
  int       getGroupIndex(unsigned long ID);
  int	   getNumberOfChilds(CGroup* pGroup);
+ QList<int> getChildIds(CGroup* pGroup);
 
  CEntry*   cloneEntry(CEntry* pEntry);
  void      deleteEntry(CEntry* pEntry);

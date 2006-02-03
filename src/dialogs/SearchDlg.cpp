@@ -42,6 +42,11 @@ checkBox_Password->setChecked(config.SearchOptions[4]);
 checkBox_Comment->setChecked(config.SearchOptions[5]);
 checkBox_URL->setChecked(config.SearchOptions[6]);
 checkBox_Attachment->setChecked(config.SearchOptions[7]);
+if(pGroup)
+ checkBox_Recursive->setChecked(config.SearchOptions[8]);
+else{
+ checkBox_Recursive->setChecked(false);
+ checkBox_Recursive->setEnabled(false);}
 
 db=_db;
 group=pGroup;
@@ -57,6 +62,7 @@ config.SearchOptions[4]=checkBox_Password->isChecked();
 config.SearchOptions[5]=checkBox_Comment->isChecked();
 config.SearchOptions[6]=checkBox_URL->isChecked();
 config.SearchOptions[7]=checkBox_Attachment->isChecked();
+if(group) config.SearchOptions[8]=checkBox_Recursive->isChecked();
 }
 
 void CSearchDlg::OnButtonClose()
@@ -74,8 +80,20 @@ QMessageBox::information(this,trUtf8("Hinweis"),trUtf8("Bitte geben Sie einen Su
 return;}
 
 for(int i=0;i<db->Entries.size();i++){
- if(group){if(db->Entries[i].GroupID != group->ID)continue;}
- bool hit=false;
+ if(group){
+	if(checkBox_Recursive->isChecked()){
+		QList<int> groups=db->getChildIds(group);
+		groups << group->ID;
+		bool IsInAnyGroup=false;
+		for(int j=0; j<groups.size();j++){
+			if(db->Entries[i].GroupID == groups[j]){IsInAnyGroup=true; break;}}
+		if(!IsInAnyGroup)continue;
+	}
+	else
+		if(db->Entries[i].GroupID != group->ID)continue;
+ }
+ 
+bool hit=false;
  if(checkBox_Title->isChecked())	hit=hit||search(db->Entries[i].Title);
  if(checkBox_Username->isChecked())	hit=hit||search(db->Entries[i].UserName);
  if(checkBox_URL->isChecked())		hit=hit||search(db->Entries[i].URL);

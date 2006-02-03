@@ -82,7 +82,7 @@ private slots:
    void OnClipboardTimeOut();
 
 private:
- enum SelectionState{NONE,SINGLE,MULTIPLE};
+ enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
  SelectionState GroupSelection, EntrySelection;
  bool FileOpen;
  bool ModFlag;

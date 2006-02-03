@@ -134,6 +134,8 @@ EditSaveAttachmentAction->setIcon(*Icon_FileSave);
 EditNewGroupAction->setIcon(*Icon_EditAdd);
 EditEditGroupAction->setIcon(*Icon_EditEdit);
 EditDeleteGroupAction->setIcon(*Icon_EditDelete);
+EditSearchAction->setIcon(*Icon_EditSearch);
+EditGroupSearchAction->setIcon(*Icon_EditSearch);
 }
 
 
@@ -191,6 +193,8 @@ EntryView->Items.clear();
 GroupView->db=NULL;
 GroupView->clear();
 GroupView->Items.clear();
+SearchResults.clear();
+GroupView->ShowSearchGroup=false;
 setStateFileOpen(false);
 setCaption("Keepass Passwort-Manager");
 return true;
@@ -289,12 +293,22 @@ switch(GroupSelection){
     EditGroupSearchAction->setEnabled(true);
     EditNewEntryAction->setEnabled(true);
     break;
+ case SEARCHGROUP:
+    EditNewGroupAction->setEnabled(false);
+    EditEditGroupAction->setEnabled(false);
+    EditDeleteGroupAction->setEnabled(false);
+    EditGroupSearchAction->setEnabled(false);
+    EditNewEntryAction->setEnabled(false);
+    break;
+   
+	
 default: Q_ASSERT(false);
 }
 }
 
 void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 EntrySelection=s;
+if(GroupSelection == NONE || GroupSelection == SINGLE)
 switch(EntrySelection){
  case NONE:
     EditPasswordToClipboardAction->setEnabled(false);
@@ -331,6 +345,44 @@ switch(EntrySelection){
     break;
  default: Q_ASSERT(false);
 }
+else if(GroupSelection == SEARCHGROUP)
+switch(EntrySelection){
+ case NONE:
+    EditPasswordToClipboardAction->setEnabled(false);
+    EditUsernameToClipboardAction->setEnabled(false);
+    EditOpenUrlAction->setEnabled(false);
+    EditSaveAttachmentAction->setEnabled(false);
+    EditEditEntryAction->setEnabled(false);
+    EditCloneEntryAction->setEnabled(false);
+    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditDeleteEntryAction->setEnabled(false);
+    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    break;
+ case SINGLE:
+    EditPasswordToClipboardAction->setEnabled(true);
+    EditUsernameToClipboardAction->setEnabled(true);
+    EditOpenUrlAction->setEnabled(true);
+    EditSaveAttachmentAction->setEnabled(true);
+    EditEditEntryAction->setEnabled(true);
+    EditCloneEntryAction->setEnabled(false);
+    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditDeleteEntryAction->setEnabled(true);
+    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    break;
+ case MULTIPLE:
+    EditPasswordToClipboardAction->setEnabled(false);
+    EditUsernameToClipboardAction->setEnabled(false);
+    EditOpenUrlAction->setEnabled(false);
+    EditSaveAttachmentAction->setEnabled(false);
+    EditEditEntryAction->setEnabled(false);
+    EditCloneEntryAction->setEnabled(false);
+    EditCloneEntryAction->setText(trUtf8("Einträge duplizieren"));
+    EditDeleteEntryAction->setEnabled(true);
+    EditDeleteEntryAction->setText(trUtf8("Einträge löschen"));
+    break;
+ default: Q_ASSERT(false);
+}
+else Q_ASSERT(false);
 }
 
 bool KeepassMainWindow::OnFileSave(){
@@ -400,11 +452,15 @@ if(EntryView->selectedItems().size()>1)
 }
 
 void KeepassMainWindow::OnGroupSelectionChanged(){
+Q_ASSERT(GroupView->selectedItems().size()<=1);
 if(GroupView->selectedItems().size()==0)
   setStateGroupSelected(NONE);
-if(GroupView->selectedItems().size()==1)
-  setStateGroupSelected(SINGLE);
-Q_ASSERT(GroupView->selectedItems().size()<=1);
+if(GroupView->selectedItems().size()==1){
+	if(GroupView->isSearchResultGroup((GroupViewItem*)GroupView->selectedItems()[0]))
+	 setStateGroupSelected(SEARCHGROUP);
+	else
+	 setStateGroupSelected(SINGLE);
+}
 }
 
 void KeepassMainWindow::OnEditNewGroup(){
@@ -509,7 +565,6 @@ currentEntry()->Password.delRef();
 
 void KeepassMainWindow::OnClipboardTimeOut(){
 Clipboard->clear(QClipboard::Clipboard);
-qDebug("Clipper cleared.");
 }
 
 void KeepassMainWindow::OnEditSaveAttachment(){

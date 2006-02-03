@@ -58,6 +58,7 @@ QIcon *Icon_EditUsernameToCb;
 QIcon *Icon_EditPasswordToCb;
 QIcon *Icon_EditClone;
 QIcon *Icon_EditOpenUrl;
+QIcon *Icon_EditSearch;
 QString DateTimeFormat("no-format-string");
 
 
@@ -271,6 +272,9 @@ Icon_EditClone=new QIcon(tmpImg);
 //--------------------------
 loadImg(ThemeDir+"/actions/run.png",tmpImg);
 Icon_EditOpenUrl=new QIcon(tmpImg);
+//--------------------------
+loadImg(ThemeDir+"/actions/find.png",tmpImg);
+Icon_EditSearch=new QIcon(tmpImg);
 
 }
 

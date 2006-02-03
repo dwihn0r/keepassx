@@ -38,7 +38,7 @@ public:
  bool ShowPasswords;
  QString OpenUrlCommand;
  QString Language;
- bool SearchOptions[8];
+ bool SearchOptions[9];
  bool ListView_HidePasswords;
  bool ListView_HideUsernames;
  bool PwGenOptions[10];
