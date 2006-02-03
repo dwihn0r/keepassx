@@ -103,6 +103,7 @@ private:
  void removeFromSearchResults(int sID);
  inline CGroup* currentGroup();
  inline CEntry* currentEntry();
+ QLineEdit* QuickSearchEdit;
 
  
 

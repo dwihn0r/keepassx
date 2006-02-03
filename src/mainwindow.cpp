@@ -59,7 +59,10 @@
 
 
 KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
-  setupUi(this);  
+  setupUi(this);
+  QuickSearchEdit=new QLineEdit(toolBar);
+  QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+  //QuickSearchEdit->
   setupConnections();
   setupIcons();
   setupToolbar();
@@ -114,6 +117,8 @@ toolBar->addAction(EditDeleteEntryAction);
 toolBar->addSeparator();
 toolBar->addAction(EditPasswordToClipboardAction);
 toolBar->addAction(EditUsernameToClipboardAction);
+toolBar->addSeparator();
+toolBar->addWidget(QuickSearchEdit);
 }
 
 void KeepassMainWindow::setupIcons(){
