@@ -60,6 +60,26 @@
 
 KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
   setupUi(this);
+  
+  FileNewAction->setShortcut(tr("Ctrl+N"));
+  FileOpenAction->setShortcut(tr("Ctrl+O"));
+  FileSaveAction->setShortcut(tr("Ctrl+S"));
+  EditNewGroupAction->setShortcut(tr("Ctrl+G"));
+  EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
+  EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
+  EditOpenUrlAction->setShortcut(tr("Ctrl+U"));
+  EditNewEntryAction->setShortcut(tr("Ctrl+Y"));
+  EditEditEntryAction->setShortcut(tr("Ctrl+E"));
+  EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
+  EditCloneEntryAction->setShortcut(tr("Ctrl+K"));
+  EditSearchAction->setShortcut(tr("Ctrl+F"));
+
+#ifdef Q_WS_MAC
+  FileCloseAction->setShortcut(tr("Ctrl+W"));
+  FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
+  EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
+#endif
+
   QuickSearchEdit=new QLineEdit(toolBar);
   QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
   //QuickSearchEdit->
