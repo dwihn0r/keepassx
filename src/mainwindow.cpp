@@ -80,9 +80,9 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
 #endif
 
+
   QuickSearchEdit=new QLineEdit(toolBar);
   QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-  //QuickSearchEdit->
   setupConnections();
   setupIcons();
   setupToolbar();
@@ -124,6 +124,8 @@ void KeepassMainWindow::setupConnections(){
 		   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
    connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
    connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
+   connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
+
 }
 
 void KeepassMainWindow::setupToolbar(){
@@ -267,6 +269,7 @@ FileChangeKeyAction->setEnabled(IsOpen);
 EditSearchAction->setEnabled(IsOpen);
 GroupView->setEnabled(IsOpen);
 EntryView->setEnabled(IsOpen);
+QuickSearchEdit->setEnabled(IsOpen);
 if(!IsOpen){
     EditNewGroupAction->setEnabled(false);
     EditEditGroupAction->setEnabled(false);
@@ -621,6 +624,19 @@ search(NULL);
 
 void KeepassMainWindow::OnEditGroupSearch(){
 search(currentGroup());
+}
+
+void KeepassMainWindow::OnQuickSearch(){
+// TODO: solution without a hidden CSearchDlg window-----
+	CSearchDlg dlg(db,NULL,this,"SearchDialog",false);
+	dlg.Edit_Search->setText(QuickSearchEdit->text());
+	dlg.OnButtonSearch();
+	SearchResults=dlg.Hits;
+//-------------------------------------------------------
+GroupView->ShowSearchGroup=true;
+GroupView->updateItems();
+GroupView->selectSearchGroup();
+EntryView->showSearchResults(SearchResults);
 }
 
 CGroup* KeepassMainWindow::currentGroup(){

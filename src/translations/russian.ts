@@ -390,11 +390,11 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>Hinweis</source>
-        <translation type="obsolete">Информация</translation>
+        <translation type="unfinished">Информация</translation>
     </message>
     <message>
         <source>Bitte geben Sie einen Suchbegriff ein.</source>
-        <translation type="obsolete">Пожалуйста, введите хотя-бы один символ.</translation>
+        <translation type="unfinished">Пожалуйста, введите хотя-бы один символ.</translation>
     </message>
 </context>
 <context>
@@ -484,15 +484,19 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message encoding="UTF-8">
         <source>Passwort &lt;b&gt;und&lt;/b&gt; Schlüsseldatei verwenden</source>
-        <translation>Использовать пароль &lt;b&gt;и&lt;/b&gt; ключевой файл</translation>
+        <translation type="obsolete">Использовать пароль &lt;b&gt;и&lt;/b&gt; ключевой файл</translation>
     </message>
     <message encoding="UTF-8">
         <source>W&amp;ählen...</source>
         <translation>&amp;Обзор...</translation>
     </message>
     <message encoding="UTF-8">
-        <source>Alt+ä</source>
-        <translation></translation>
+        <source>Passwort UND Schlüsseldatei verwenden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Alt+Ä</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -836,6 +840,10 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
         <source>Gruppen</source>
         <translation type="unfinished">Категории</translation>
     </message>
+    <message>
+        <source>Suchergebnisse</source>
+        <translation type="unfinished">Результаты поиска</translation>
+    </message>
 </context>
 <context>
     <name>KeepassMainWindow</name>
@@ -1016,7 +1024,7 @@ Soll sie &#xfc;berschrieben werden?</source>
     </message>
     <message>
         <source>Eintrag duplizieren</source>
-        <translation type="obsolete">Повторяющаяся запись</translation>
+        <translation type="unfinished">Повторяющаяся запись</translation>
     </message>
     <message>
         <source>Eintrag l&#xf6;schen</source>
@@ -1119,7 +1127,7 @@ Soll sie überschrieben werden?</source>
     </message>
     <message encoding="UTF-8">
         <source>Eintrag löschen</source>
-        <translation type="obsolete">Удалить запись</translation>
+        <translation type="unfinished">Удалить запись</translation>
     </message>
     <message encoding="UTF-8">
         <source>Untergruppe hinzufügen...</source>
@@ -1189,20 +1197,93 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Speichern?</source>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+K</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <source>Sollen die Änderungen an der aktuellen Datenbank gespeichert werden?</source>
+        <source>Geänderte Datei speichern?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Die aktuell geöffnete Datei wurde verändert. Sollen die Änderungen vor dem Schließen gespeichert werden?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Speichern fehlgeschlagen</source>
+        <source>[neu]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Einträge duplizieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Einträge löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Die Datei konnte nicht gespeichert werden.</source>
+        <source>Die Datei konnte nicht gespeichert werden.
+%1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Datenbank speichern unter...</source>
+        <translation type="unfinished">Сохранить базу как...</translation>
     </message>
 </context>
 <context>
@@ -1633,10 +1714,6 @@ als Übersetzung für Keepass fest.</source>
         <source>Datenbank öffnen...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Datenbank schließen...</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Datenbank speichern</source>
         <translation type="unfinished">Сохранить базу</translation>
@@ -1663,6 +1740,62 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>KWallet XML-Datei (*.xml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Datenbank schließen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Neue Gruppe hinzufügen...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gruppe bearbeiten...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Gruppe löschen</source>
+        <translation type="unfinished">Удалить группу</translation>
+    </message>
+    <message>
+        <source>Passwort in Zwischenablage kopieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Benutzername in Zwischenablage kopieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>URL öffnen</source>
+        <translation type="unfinished">Открыть URL</translation>
+    </message>
+    <message>
+        <source>Anhang speichern unter...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Neuen Eintrag hinzufügen...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eintrag anzeigen/bearbeiten...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Eintrag löschen</source>
+        <translation type="unfinished">Удалить запись</translation>
+    </message>
+    <message>
+        <source>Eintrag duplizieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In Datenbank suchen...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In dieser Gruppe suchen...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1795,8 +1928,12 @@ als Übersetzung für Keepass fest.</source>
         <source>AES-Initialisierung fehlgeschlagen</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>unbekannter Fehler</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message encoding="UTF-8">
-        <source>Unerwarteter Wert für &apos;crypto_size&apos;</source>
+        <source>Entschlüsselung nicht möglich - der Schlüssel ist falsch oder die Datei beschädigt.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1840,7 +1977,7 @@ als Übersetzung für Keepass fest.</source>
     </message>
     <message>
         <source>Standardgruppe</source>
-        <translation>по умолчанию</translation>
+        <translation type="obsolete">по умолчанию</translation>
     </message>
     <message>
         <source>Standartgruppe</source>
@@ -2049,7 +2186,7 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     </message>
     <message encoding="UTF-8">
         <source>Alt+ä</source>
-        <translation>Alt+R</translation>
+        <translation type="obsolete">Alt+R</translation>
     </message>
     <message encoding="UTF-8">
         <source>Gro&amp;ß- und Kleinschreibung beachten</source>
@@ -2058,6 +2195,14 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     <message encoding="UTF-8">
         <source>Alt+ß</source>
         <translation>Alt+S</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Alt+Ä</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untergruppen einbeziehen</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

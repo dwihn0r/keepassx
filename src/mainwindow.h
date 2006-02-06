@@ -80,6 +80,7 @@ private slots:
    void OnEntrySelectionChanged();
    void OnGroupSelectionChanged();
    void OnClipboardTimeOut();
+   void OnQuickSearch();
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};

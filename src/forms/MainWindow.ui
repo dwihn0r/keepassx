@@ -105,7 +105,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>29</height>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHilfe" >
@@ -143,11 +143,6 @@
      <string>Extras</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuAnsicht" >
-    <property name="title" >
-     <string>Ansicht</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
      <string>Bearbeiten</string>
@@ -169,6 +164,34 @@
     <addaction name="EditSearchAction" />
     <addaction name="EditGroupSearchAction" />
    </widget>
+   <widget class="QMenu" name="menuAnsicht" >
+    <property name="title" >
+     <string>Ansicht</string>
+    </property>
+    <widget class="QMenu" name="menuSpalten" >
+     <property name="title" >
+      <string>Spalten</string>
+     </property>
+     <addaction name="ViewColumnTitleAction" />
+     <addaction name="ViewColumnUsernameAction" />
+     <addaction name="ViewColumnUrlAction" />
+     <addaction name="ViewColumnPasswordAction" />
+     <addaction name="ViewColumnCommentAction" />
+     <addaction name="separator" />
+     <addaction name="ViewColumnExpireAction" />
+     <addaction name="ViewColumnCreationAction" />
+     <addaction name="ViewColumnLastChangeAction" />
+     <addaction name="ViewColumnLastAccessAction" />
+     <addaction name="ViewColumnAttachmentAction" />
+    </widget>
+    <addaction name="ViewShowToolbarAction" />
+    <addaction name="ViewShowEntryDetailsAction" />
+    <addaction name="separator" />
+    <addaction name="ViewHideUsernamesAction" />
+    <addaction name="ViewHidePasswordsAction" />
+    <addaction name="separator" />
+    <addaction name="menuSpalten" />
+   </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
    <addaction name="menuAnsicht" />
@@ -186,8 +209,8 @@
    </property>
    <property name="minimumSize" >
     <size>
-     <width>51</width>
-     <height>31</height>
+     <width>15</width>
+     <height>6</height>
     </size>
    </property>
    <property name="maximumSize" >
@@ -324,20 +347,132 @@
     <string>In dieser Gruppe suchen...</string>
    </property>
   </action>
+  <action name="ViewShowToolbarAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Werkzeugleiste anzeigen</string>
+   </property>
+  </action>
+  <action name="ViewShowEntryDetailsAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Eintragsansicht anzeigen</string>
+   </property>
+  </action>
+  <action name="ViewHideUsernamesAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Benutzernamen verbergen</string>
+   </property>
+  </action>
+  <action name="ViewHidePasswordsAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Passwörter verbergen</string>
+   </property>
+  </action>
+  <action name="ViewColumnTitleAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Titel</string>
+   </property>
+  </action>
+  <action name="ViewColumnUsernameAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Benutzername</string>
+   </property>
+  </action>
+  <action name="ViewColumnUrlAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>URL</string>
+   </property>
+  </action>
+  <action name="ViewColumnPasswordAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Passwort</string>
+   </property>
+  </action>
+  <action name="ViewColumnCommentAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Kommentar</string>
+   </property>
+  </action>
+  <action name="ViewColumnExpireAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Ablaufdatum</string>
+   </property>
+  </action>
+  <action name="ViewColumnCreationAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Erstellungsdatum</string>
+   </property>
+  </action>
+  <action name="ViewColumnLastChangeAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Letzte Änderung</string>
+   </property>
+  </action>
+  <action name="ViewColumnLastAccessAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Letzter Zugriff</string>
+   </property>
+  </action>
+  <action name="ViewColumnAttachmentAction" >
+	  <property name="checkable" >
+		  <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Anhang</string>
+   </property>
+  </action>
  </widget>
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>

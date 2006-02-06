@@ -278,11 +278,11 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
     </message>
     <message>
         <source>Hinweis</source>
-        <translation type="obsolete">Information</translation>
+        <translation type="unfinished">Information</translation>
     </message>
     <message>
         <source>Bitte geben Sie einen Suchbegriff ein.</source>
-        <translation type="obsolete">Please enter at least one charakter.</translation>
+        <translation type="unfinished">Please enter at least one charakter.</translation>
     </message>
 </context>
 <context>
@@ -676,6 +676,10 @@ Sind Sie sicher, dass Sie dies tun wollen?</source>
         <source>Gruppen</source>
         <translation>Groups</translation>
     </message>
+    <message>
+        <source>Suchergebnisse</source>
+        <translation type="unfinished">Search Results</translation>
+    </message>
 </context>
 <context>
     <name>KeepassMainWindow</name>
@@ -975,6 +979,66 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     <message encoding="UTF-8">
         <source>Einträge löschen</source>
         <translation>Delete Entry</translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+K</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift+Ctrl+F</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1755,7 +1819,7 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     </message>
     <message encoding="UTF-8">
         <source>Alt+ä</source>
-        <translation>Alt+R</translation>
+        <translation type="obsolete">Alt+R</translation>
     </message>
     <message encoding="UTF-8">
         <source>Gro&amp;ß- und Kleinschreibung beachten</source>
@@ -1764,6 +1828,14 @@ Sie Schreibrechte im Verzeichnis ~/.keepass besitzen.</source>
     <message encoding="UTF-8">
         <source>Alt+ß</source>
         <translation>Alt+S</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>Alt+Ä</source>
+        <translation type="unfinished">Alt+B</translation>
+    </message>
+    <message>
+        <source>Untergruppen einbeziehen</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
