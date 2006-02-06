@@ -73,13 +73,24 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
   EditCloneEntryAction->setShortcut(tr("Ctrl+K"));
   EditSearchAction->setShortcut(tr("Ctrl+F"));
-
 #ifdef Q_WS_MAC
   FileCloseAction->setShortcut(tr("Ctrl+W"));
   FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
   EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
 #endif
 
+  ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
+  ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
+  ViewColumnsTitleAction->setChecked(config.Columns[0]);
+  ViewColumnsUsernameAction->setChecked(config.Columns[1]);
+  ViewColumnsUrlAction->setChecked(config.Columns[2]);
+  ViewColumnsPasswordAction->setChecked(config.Columns[3]);
+  ViewColumnsCommentAction->setChecked(config.Columns[4]);
+  ViewColumnsExpireAction->setChecked(config.Columns[5]);
+  ViewColumnsCreationAction->setChecked(config.Columns[6]);
+  ViewColumnsLastChangeAction->setChecked(config.Columns[7]);
+  ViewColumnsLastAccessAction->setChecked(config.Columns[8]);
+  ViewColumnsAttachmentAction->setChecked(config.Columns[9]);
 
   QuickSearchEdit=new QLineEdit(toolBar);
   QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
@@ -116,6 +127,19 @@ void KeepassMainWindow::setupConnections(){
    connect(EditSaveAttachmentAction, SIGNAL(triggered()), this, SLOT(OnEditSaveAttachment()));
    connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnEditSearch()));
    connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnEditGroupSearch()));
+  
+   connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
+   connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
+   connect(ViewColumnsTitleAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsUsernameAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsUrlAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsPasswordAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsCommentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsExpireAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsCreationAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsLastChangeAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
 
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
@@ -647,4 +671,29 @@ return static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
 CEntry* KeepassMainWindow::currentEntry(){
 Q_ASSERT(EntryView->selectedItems().size()==1);
 return static_cast<EntryViewItem*>(EntryView->selectedItems()[0])->pEntry;
+}
+
+void KeepassMainWindow::OnColumnVisibilityChanged(bool value){
+config.Columns[0]=ViewColumnsTitleAction->isChecked();
+config.Columns[1]=ViewColumnsUsernameAction->isChecked();
+config.Columns[2]=ViewColumnsUrlAction->isChecked();
+config.Columns[3]=ViewColumnsPasswordAction->isChecked();
+config.Columns[4]=ViewColumnsCommentAction->isChecked();
+config.Columns[5]=ViewColumnsExpireAction->isChecked();
+config.Columns[6]=ViewColumnsCreationAction->isChecked();
+config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
+config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
+config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
+EntryView->updateColumns();
+EntryView->updateItems();
+}
+
+void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
+config.ListView_HidePasswords=ViewHidePasswordsAction->isChecked();
+config.ListView_HideUsernames=ViewHideUsernamesAction->isChecked();
+EntryView->updateItems();
+}
+
+void KeepassMainWindow::OnFileModified(){
+setStateFileModified(true);
 }

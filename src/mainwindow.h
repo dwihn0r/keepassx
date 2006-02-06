@@ -81,6 +81,9 @@ private slots:
    void OnGroupSelectionChanged();
    void OnClipboardTimeOut();
    void OnQuickSearch();
+   void OnColumnVisibilityChanged(bool show);
+   void OnUsernPasswVisibilityChanged(bool hide);
+   void OnFileModified();
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
@@ -93,6 +96,7 @@ private:
  inline void setupToolbar();
  inline void setupIcons();
  inline void setupConnections();
+ inline void setupMenus();
  void setStateFileOpen(bool);
  void setStateFileModified(bool);
  void setStateGroupSelected(SelectionState s);

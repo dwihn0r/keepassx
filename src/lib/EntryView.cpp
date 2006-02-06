@@ -135,6 +135,7 @@ if(entry->GroupID==CurrentGroup){
 
 
 void KeepassEntryView::updateColumns(){
+setColumnCount(0);
 QStringList cols;
 if(config.Columns[0]){
  cols << trUtf8("Titel");}
@@ -151,7 +152,7 @@ if(config.Columns[5]){
 if(config.Columns[6]){
  cols << trUtf8("Erstellung");}
 if(config.Columns[7]){
- cols << trUtf8("letzte Änderung");}
+ cols << trUtf8("letzte Ãnderung");}
 if(config.Columns[8]){
  cols << trUtf8("letzter Zugriff");}
 if(config.Columns[9]){

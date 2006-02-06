@@ -172,17 +172,17 @@
      <property name="title" >
       <string>Spalten</string>
      </property>
-     <addaction name="ViewColumnTitleAction" />
-     <addaction name="ViewColumnUsernameAction" />
-     <addaction name="ViewColumnUrlAction" />
-     <addaction name="ViewColumnPasswordAction" />
-     <addaction name="ViewColumnCommentAction" />
+     <addaction name="ViewColumnsTitleAction" />
+     <addaction name="ViewColumnsUsernameAction" />
+     <addaction name="ViewColumnsUrlAction" />
+     <addaction name="ViewColumnsPasswordAction" />
+     <addaction name="ViewColumnsCommentAction" />
      <addaction name="separator" />
-     <addaction name="ViewColumnExpireAction" />
-     <addaction name="ViewColumnCreationAction" />
-     <addaction name="ViewColumnLastChangeAction" />
-     <addaction name="ViewColumnLastAccessAction" />
-     <addaction name="ViewColumnAttachmentAction" />
+     <addaction name="ViewColumnsExpireAction" />
+     <addaction name="ViewColumnsCreationAction" />
+     <addaction name="ViewColumnsLastChangeAction" />
+     <addaction name="ViewColumnsLastAccessAction" />
+     <addaction name="ViewColumnsAttachmentAction" />
     </widget>
     <addaction name="ViewShowToolbarAction" />
     <addaction name="ViewShowEntryDetailsAction" />
@@ -379,7 +379,7 @@
     <string>Passwörter verbergen</string>
    </property>
   </action>
-  <action name="ViewColumnTitleAction" >
+  <action name="ViewColumnsTitleAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -387,7 +387,7 @@
     <string>Titel</string>
    </property>
   </action>
-  <action name="ViewColumnUsernameAction" >
+  <action name="ViewColumnsUsernameAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -395,7 +395,7 @@
     <string>Benutzername</string>
    </property>
   </action>
-  <action name="ViewColumnUrlAction" >
+  <action name="ViewColumnsUrlAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -403,7 +403,7 @@
     <string>URL</string>
    </property>
   </action>
-  <action name="ViewColumnPasswordAction" >
+  <action name="ViewColumnsPasswordAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -411,7 +411,7 @@
     <string>Passwort</string>
    </property>
   </action>
-  <action name="ViewColumnCommentAction" >
+  <action name="ViewColumnsCommentAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -419,7 +419,7 @@
     <string>Kommentar</string>
    </property>
   </action>
-  <action name="ViewColumnExpireAction" >
+  <action name="ViewColumnsExpireAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -427,7 +427,7 @@
     <string>Ablaufdatum</string>
    </property>
   </action>
-  <action name="ViewColumnCreationAction" >
+  <action name="ViewColumnsCreationAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -435,7 +435,7 @@
     <string>Erstellungsdatum</string>
    </property>
   </action>
-  <action name="ViewColumnLastChangeAction" >
+  <action name="ViewColumnsLastChangeAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -443,7 +443,7 @@
     <string>Letzte Änderung</string>
    </property>
   </action>
-  <action name="ViewColumnLastAccessAction" >
+  <action name="ViewColumnsLastAccessAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
@@ -451,7 +451,7 @@
     <string>Letzter Zugriff</string>
    </property>
   </action>
-  <action name="ViewColumnAttachmentAction" >
+  <action name="ViewColumnsAttachmentAction" >
 	  <property name="checkable" >
 		  <bool>true</bool>
    </property>
