@@ -21,12 +21,14 @@
 #define _GROUP_VIEW_H_
 
 #include <QTreeWidget>
+#include <QLine>
 #include "../PwManager.h"
 
 class GroupViewItem;
 typedef vector<GroupViewItem*>::iterator GroupItemItr;
 
 class KeepassGroupView:public QTreeWidget{
+Q_OBJECT
 public:
  KeepassGroupView(QWidget* parent=0);
  void updateItems();
@@ -35,6 +37,10 @@ public:
  PwDatabase *db;
  bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
  vector<GroupViewItem*>Items;
+
+signals:
+ void fileModified();
+
 protected:
  virtual void dragEnterEvent ( QDragEnterEvent * event );
  virtual void dragMoveEvent ( QDragMoveEvent * event );
@@ -44,15 +50,12 @@ protected:
  virtual void mouseMoveEvent(QMouseEvent *event);
  virtual void paintEvent ( QPaintEvent * event );
 
-
 private:
-
  QLine InsertionMarker;
  QPoint DragStartPos;
  QPixmap DragPixmap;
  GroupViewItem* DragItem;
  GroupViewItem* LastHoverItem;
-
  GroupViewItem* getLastSameLevelItem(int level);
 };
 

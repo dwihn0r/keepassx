@@ -148,6 +148,7 @@ void KeepassMainWindow::setupConnections(){
 		   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
    connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
    connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
+   connect(GroupView,SIGNAL(fileModified()),this,SLOT(OnFileModified()));
    connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
 
 }
@@ -231,7 +232,7 @@ Q_ASSERT(FileOpen);
 Q_ASSERT(db!=NULL);
 if(ModFlag){
  int r=QMessageBox::question(this,trUtf8("Geänderte Datei speichern?"),
-				  trUtf8("Die aktuell geöffnete Datei wurde verändert. Sollen die Änderungen vor dem Schließen gespeichert werden?"),tr("Ja"),tr("Nein"),tr("Abbrechen"),2,2);
+				  trUtf8("Die aktuell geöffnete Datei wurde verändert. Sollen die Änderungen\nvor dem Schließen gespeichert werden?"),tr("Ja"),tr("Nein"),tr("Abbrechen"),2,2);
  if(r==2)return false;			//Abbrechen
  if(r==0)				//Ja (Datei speichern)
   if(!OnFileSave())return false;
@@ -696,4 +697,15 @@ EntryView->updateItems();
 
 void KeepassMainWindow::OnFileModified(){
 setStateFileModified(true);
+}
+
+void KeepassMainWindow::closeEvent(QCloseEvent* e){
+if(FileOpen){
+ if(!closeDatabase())
+ 	e->ignore();
+ else
+	e->accept();
+}
+else
+ e->accept();
 }

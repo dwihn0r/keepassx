@@ -110,7 +110,8 @@ private:
  inline CEntry* currentEntry();
  QLineEdit* QuickSearchEdit;
 
- 
+protected:
+ void closeEvent(QCloseEvent* event);
 
 
 

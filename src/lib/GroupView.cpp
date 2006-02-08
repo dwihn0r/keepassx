@@ -111,13 +111,13 @@ update();
 
 
 void KeepassGroupView::dropEvent( QDropEvent * event ){
+emit fileModified();
 InsertionMarker=QLine();
 if(LastHoverItem){
   QFont f=LastHoverItem->font(0);
   f.setBold(false);
   LastHoverItem->setFont(0,f);
   LastHoverItem=NULL;
-  
 }
 GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
 if(item){
