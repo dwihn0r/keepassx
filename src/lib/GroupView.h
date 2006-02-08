@@ -22,6 +22,7 @@
 
 #include <QTreeWidget>
 #include <QLine>
+#include <QContextMenuEvent>
 #include "../PwManager.h"
 
 class GroupViewItem;
@@ -37,6 +38,7 @@ public:
  PwDatabase *db;
  bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
  vector<GroupViewItem*>Items;
+ QMenu *ContextMenu;
 
 signals:
  void fileModified();
@@ -49,6 +51,7 @@ protected:
  virtual void mousePressEvent(QMouseEvent *event);
  virtual void mouseMoveEvent(QMouseEvent *event);
  virtual void paintEvent ( QPaintEvent * event );
+ virtual void contextMenuEvent(QContextMenuEvent *event);
 
 private:
  QLine InsertionMarker;

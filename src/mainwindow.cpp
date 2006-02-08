@@ -60,44 +60,14 @@
 
 KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
   setupUi(this);
-  
-  FileNewAction->setShortcut(tr("Ctrl+N"));
-  FileOpenAction->setShortcut(tr("Ctrl+O"));
-  FileSaveAction->setShortcut(tr("Ctrl+S"));
-  EditNewGroupAction->setShortcut(tr("Ctrl+G"));
-  EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
-  EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
-  EditOpenUrlAction->setShortcut(tr("Ctrl+U"));
-  EditNewEntryAction->setShortcut(tr("Ctrl+Y"));
-  EditEditEntryAction->setShortcut(tr("Ctrl+E"));
-  EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
-  EditCloneEntryAction->setShortcut(tr("Ctrl+K"));
-  EditSearchAction->setShortcut(tr("Ctrl+F"));
-#ifdef Q_WS_MAC
-  FileCloseAction->setShortcut(tr("Ctrl+W"));
-  FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
-  EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
-#endif
-
-  ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
-  ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
-  ViewColumnsTitleAction->setChecked(config.Columns[0]);
-  ViewColumnsUsernameAction->setChecked(config.Columns[1]);
-  ViewColumnsUrlAction->setChecked(config.Columns[2]);
-  ViewColumnsPasswordAction->setChecked(config.Columns[3]);
-  ViewColumnsCommentAction->setChecked(config.Columns[4]);
-  ViewColumnsExpireAction->setChecked(config.Columns[5]);
-  ViewColumnsCreationAction->setChecked(config.Columns[6]);
-  ViewColumnsLastChangeAction->setChecked(config.Columns[7]);
-  ViewColumnsLastAccessAction->setChecked(config.Columns[8]);
-  ViewColumnsAttachmentAction->setChecked(config.Columns[9]);
 
   QuickSearchEdit=new QLineEdit(toolBar);
   QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-  setupConnections();
   setupIcons();
   setupToolbar();
   setStateFileOpen(false);
+  setupMenus();
+  setupConnections();
   FileOpen=false;
   Clipboard=QApplication::clipboard();
 }
@@ -154,18 +124,18 @@ void KeepassMainWindow::setupConnections(){
 }
 
 void KeepassMainWindow::setupToolbar(){
-toolBar->addAction(FileNewAction);
-toolBar->addAction(FileOpenAction);
-toolBar->addAction(FileSaveAction);
-toolBar->addSeparator();
-toolBar->addAction(EditNewEntryAction);
-toolBar->addAction(EditEditEntryAction);
-toolBar->addAction(EditDeleteEntryAction);
-toolBar->addSeparator();
-toolBar->addAction(EditPasswordToClipboardAction);
-toolBar->addAction(EditUsernameToClipboardAction);
-toolBar->addSeparator();
-toolBar->addWidget(QuickSearchEdit);
+  toolBar->addAction(FileNewAction);
+  toolBar->addAction(FileOpenAction);
+  toolBar->addAction(FileSaveAction);
+  toolBar->addSeparator();
+  toolBar->addAction(EditNewEntryAction);
+  toolBar->addAction(EditEditEntryAction);
+  toolBar->addAction(EditDeleteEntryAction);
+  toolBar->addSeparator();
+  toolBar->addAction(EditPasswordToClipboardAction);
+  toolBar->addAction(EditUsernameToClipboardAction);
+  toolBar->addSeparator();
+  toolBar->addWidget(QuickSearchEdit);
 }
 
 void KeepassMainWindow::setupIcons(){
@@ -188,6 +158,47 @@ EditEditGroupAction->setIcon(*Icon_EditEdit);
 EditDeleteGroupAction->setIcon(*Icon_EditDelete);
 EditSearchAction->setIcon(*Icon_EditSearch);
 EditGroupSearchAction->setIcon(*Icon_EditSearch);
+}
+
+void KeepassMainWindow::setupMenus(){
+  GroupView->ContextMenu->addAction(EditNewGroupAction);
+  GroupView->ContextMenu->addAction(EditEditGroupAction);
+  GroupView->ContextMenu->addAction(EditDeleteGroupAction);
+  GroupView->ContextMenu->addSeparator();
+  GroupView->ContextMenu->addAction(EditNewEntryAction);
+  GroupView->ContextMenu->addSeparator();
+  GroupView->ContextMenu->addAction(EditGroupSearchAction);
+
+  ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
+  ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
+  ViewColumnsTitleAction->setChecked(config.Columns[0]);
+  ViewColumnsUsernameAction->setChecked(config.Columns[1]);
+  ViewColumnsUrlAction->setChecked(config.Columns[2]);
+  ViewColumnsPasswordAction->setChecked(config.Columns[3]);
+  ViewColumnsCommentAction->setChecked(config.Columns[4]);
+  ViewColumnsExpireAction->setChecked(config.Columns[5]);
+  ViewColumnsCreationAction->setChecked(config.Columns[6]);
+  ViewColumnsLastChangeAction->setChecked(config.Columns[7]);
+  ViewColumnsLastAccessAction->setChecked(config.Columns[8]);
+  ViewColumnsAttachmentAction->setChecked(config.Columns[9]);
+
+  FileNewAction->setShortcut(tr("Ctrl+N"));
+  FileOpenAction->setShortcut(tr("Ctrl+O"));
+  FileSaveAction->setShortcut(tr("Ctrl+S"));
+  EditNewGroupAction->setShortcut(tr("Ctrl+G"));
+  EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
+  EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
+  EditOpenUrlAction->setShortcut(tr("Ctrl+U"));
+  EditNewEntryAction->setShortcut(tr("Ctrl+Y"));
+  EditEditEntryAction->setShortcut(tr("Ctrl+E"));
+  EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
+  EditCloneEntryAction->setShortcut(tr("Ctrl+K"));
+  EditSearchAction->setShortcut(tr("Ctrl+F"));
+#ifdef Q_WS_MAC
+  FileCloseAction->setShortcut(tr("Ctrl+W"));
+  FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
+  EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
+#endif
 }
 
 

@@ -32,6 +32,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QBrush>
+#include <QMenu>
 #include "main.h"
 #include "GroupView.h"
 #define INSERT_AREA_WIDTH 4
@@ -42,6 +43,7 @@ db=NULL;
 LastHoverItem=NULL;
 setHeaderLabels(QStringList()<<tr("Gruppen"));
 ShowSearchGroup=false;
+ContextMenu=new QMenu(this);
 }
 
 void KeepassGroupView::selectSearchGroup(){
@@ -248,6 +250,13 @@ if(ShowSearchGroup && (item == Items.back()))return true;
 else return false;
 }
 
+void KeepassGroupView::contextMenuEvent(QContextMenuEvent* e){
+if(!(GroupViewItem*)itemAt(e->pos()) && selectedItems().size()){
+	setItemSelected(selectedItems()[0],false);
+}
+e->accept();
+ContextMenu->popup(e->globalPos());
+}
 
 GroupViewItem::GroupViewItem(QTreeWidget *parent):QTreeWidgetItem(parent){
 }
@@ -260,3 +269,4 @@ GroupViewItem::GroupViewItem(QTreeWidgetItem *parent):QTreeWidgetItem(parent){
 
 GroupViewItem::GroupViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding):QTreeWidgetItem(parent,preceding){
 }
+
