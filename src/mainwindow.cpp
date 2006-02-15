@@ -146,6 +146,7 @@ FileOpenAction->setIcon(*Icon_FileOpen);
 FileSaveAction->setIcon(*Icon_FileSave);
 FileSaveAsAction->setIcon(*Icon_FileSaveAs);
 FileCloseAction->setIcon(*Icon_FileClose);
+FileSettingsAction->setIcon(*Icon_Configure);
 FileExitAction->setIcon(*Icon_Exit);
 EditNewEntryAction->setIcon(*Icon_EditAdd);
 EditEditEntryAction->setIcon(*Icon_EditEdit);
@@ -160,6 +161,7 @@ EditEditGroupAction->setIcon(*Icon_EditEdit);
 EditDeleteGroupAction->setIcon(*Icon_EditDelete);
 EditSearchAction->setIcon(*Icon_EditSearch);
 EditGroupSearchAction->setIcon(*Icon_EditSearch);
+ExtrasSettingsAction->setIcon(*Icon_Configure);
 }
 
 void KeepassMainWindow::setupMenus(){
