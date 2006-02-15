@@ -105,7 +105,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHilfe" >
@@ -137,11 +137,6 @@
     <addaction name="menuImportieren_aus" />
     <addaction name="separator" />
     <addaction name="FileExitAction" />
-   </widget>
-   <widget class="QMenu" name="menuExtras" >
-    <property name="title" >
-     <string>Extras</string>
-    </property>
    </widget>
    <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
@@ -191,6 +186,12 @@
     <addaction name="ViewHidePasswordsAction" />
     <addaction name="separator" />
     <addaction name="menuSpalten" />
+   </widget>
+   <widget class="QMenu" name="menuExtras" >
+    <property name="title" >
+     <string>Extras</string>
+    </property>
+    <addaction name="ExtrasSettingsAction" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -380,83 +381,88 @@
    </property>
   </action>
   <action name="ViewColumnsTitleAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Titel</string>
    </property>
   </action>
   <action name="ViewColumnsUsernameAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Benutzername</string>
    </property>
   </action>
   <action name="ViewColumnsUrlAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>URL</string>
    </property>
   </action>
   <action name="ViewColumnsPasswordAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Passwort</string>
    </property>
   </action>
   <action name="ViewColumnsCommentAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Kommentar</string>
    </property>
   </action>
   <action name="ViewColumnsExpireAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Ablaufdatum</string>
    </property>
   </action>
   <action name="ViewColumnsCreationAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Erstellungsdatum</string>
    </property>
   </action>
   <action name="ViewColumnsLastChangeAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Letzte Änderung</string>
    </property>
   </action>
   <action name="ViewColumnsLastAccessAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Letzter Zugriff</string>
    </property>
   </action>
   <action name="ViewColumnsAttachmentAction" >
-	  <property name="checkable" >
-		  <bool>true</bool>
+   <property name="checkable" >
+    <bool>true</bool>
    </property>
    <property name="text" >
     <string>Anhang</string>
+   </property>
+  </action>
+  <action name="ExtrasSettingsAction" >
+   <property name="text" >
+    <string>Einstellungen...</string>
    </property>
   </action>
  </widget>

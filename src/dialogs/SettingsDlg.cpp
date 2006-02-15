@@ -30,17 +30,29 @@ CSettingsDlg::CSettingsDlg(QWidget* parent, const char* name, bool modal, Qt::WF
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
+connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+connect( ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
+connect( ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
+connect( ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
 createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"));
 CheckBox_OpenLast->setChecked(config.OpenLast);
 SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
-pixmTextColor->setPixmap(*(new QPixmap(pixmTextColor->width(),pixmTextColor->height())));
-//pixmTextColor->pixmap()->fill(config.BannerTextColor);
 
-pixmColor1->setPixmap(*(new QPixmap(pixmColor1->width(),pixmColor1->height())));
-//pixmColor1->pixmap()->fill(config.BannerColor1);
+QPixmap *pxt=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
+pxt->fill(config.BannerTextColor);
+pixmTextColor->clear();
+pixmTextColor->setPixmap(*pxt);
 
-pixmColor2->setPixmap(*(new QPixmap(pixmColor2->width(),pixmColor2->height())));
-//pixmColor2->pixmap()->fill(config.BannerColor2);
+QPixmap *px1=new QPixmap(pixmColor1->width(),pixmColor1->height());
+px1->fill(config.BannerColor1);
+pixmColor1->clear();
+pixmColor1->setPixmap(*px1);
+
+QPixmap *px2=new QPixmap(pixmColor2->width(),pixmColor2->height());
+px2->fill(config.BannerColor2);
+pixmColor2->clear();
+pixmColor2->setPixmap(*px2);
 
 color1=config.BannerColor1;
 color2=config.BannerColor2;

@@ -84,6 +84,7 @@ private slots:
    void OnColumnVisibilityChanged(bool show);
    void OnUsernPasswVisibilityChanged(bool hide);
    void OnFileModified();
+   void OnExtrasSettings();
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};

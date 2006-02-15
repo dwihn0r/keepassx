@@ -111,6 +111,8 @@ void KeepassMainWindow::setupConnections(){
    connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
    connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
 
+   connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
+
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
 		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -730,3 +732,12 @@ if(FileOpen){
 else
  e->accept();
 }
+
+
+void KeepassMainWindow::OnExtrasSettings(){
+CSettingsDlg dlg(this,"SettingsDlg");
+dlg.exec();
+
+}
+
+
