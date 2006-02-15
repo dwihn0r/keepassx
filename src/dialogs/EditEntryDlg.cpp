@@ -132,7 +132,7 @@ if(event->spontaneous()==false){
 }
 
 void CEditEntryDlg::InitIconComboBox(){
-for(int i=0;i<52;i++){
+for(int i=0;i<NUM_CLIENT_ICONS;i++){
 Combo_IconPicker->insertItem(EntryIcons[i],"",i);
 }
 Combo_IconPicker->setCurrentItem(entry->ImageID);
@@ -229,7 +229,7 @@ if(QString::compare(Edit_Password_w->text(),Edit_Password->text().mid(0,(Edit_Pa
 Edit_Password_w->setPaletteBackgroundColor(QColor(255,125,125));
 }else
 {
-Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Standart-Hintergrundfarbe nicht weiß
+Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Standard-Hintergrundfarbe nicht weiß
 }
 
 
@@ -243,7 +243,7 @@ Edit_Password_w->setPaletteBackgroundColor(QColor(255,125,125));
 }
 else
 {
-Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Standart-Hintergrundfarbe nicht weiß
+Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Standard-Hintergrundfarbe nicht weiß
 }
 
 

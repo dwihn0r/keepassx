@@ -211,7 +211,7 @@ QPixmap tmpImg;
 //-----------------------
 loadImg("clientic.png",tmpImg);
 EntryIcons=new QPixmap[NUM_CLIENT_ICONS];
-for(int i=0;i<52;i++){
+for(int i=0;i<NUM_CLIENT_ICONS;i++){
 EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
 //--------------------------
 loadImg("key.png",tmpImg);

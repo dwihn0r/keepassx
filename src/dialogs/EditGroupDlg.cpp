@@ -43,7 +43,7 @@ CEditGroupDialog::~CEditGroupDialog()
 void CEditGroupDialog::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
 EditTitle->setText(GroupName);
-for(int i=0;i<52;i++){
+for(int i=0;i<NUM_CLIENT_ICONS;i++){
 ComboIconPicker->insertItem(EntryIcons[i],"",i);
 }
 ComboIconPicker->setCurrentItem(IconID);

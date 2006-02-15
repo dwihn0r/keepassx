@@ -28,7 +28,7 @@
 #include "PwmConfig.h"
 
 #define KEEPASS_VERSION "0.2.0"
-#define NUM_CLIENT_ICONS 52
+#define NUM_CLIENT_ICONS 62
 
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text);
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text,QColor color1,QColor color2,QColor textcolor);
