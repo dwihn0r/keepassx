@@ -32,7 +32,38 @@ KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 CurrentGroup=0;
 updateColumns();
 header()->setResizeMode(QHeaderView::Stretch);
+ContextMenu=new QMenu(this);
 }
+
+
+void KeepassEntryView::contextMenuEvent(QContextMenuEvent* e){
+if(itemAt(e->pos())){
+	EntryViewItem* item=(EntryViewItem*)itemAt(e->pos());
+	if(selectedItems().size()==0){
+		setItemSelected(item,true);}
+	else{
+		bool AlreadySelected=false;
+		for(int i=0;i<selectedItems().size();i++){
+			if(selectedItems()[i]==item){AlreadySelected=true; break;}
+		}
+		if(!AlreadySelected){
+			while(selectedItems().size()){
+				setItemSelected(selectedItems()[0],false);
+			}
+			setItemSelected(item,true);
+		}
+	}
+}
+else
+{while(selectedItems().size()){
+	setItemSelected(selectedItems()[0],false);}
+}
+
+e->accept();
+ContextMenu->popup(e->globalPos());
+}
+
+
 
 void KeepassEntryView::updateItems(){
 clear();

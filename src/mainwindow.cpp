@@ -169,6 +169,16 @@ void KeepassMainWindow::setupMenus(){
   GroupView->ContextMenu->addSeparator();
   GroupView->ContextMenu->addAction(EditGroupSearchAction);
 
+  EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
+  EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
+  EntryView->ContextMenu->addAction(EditOpenUrlAction);
+  EntryView->ContextMenu->addAction(EditSaveAttachmentAction);
+  EntryView->ContextMenu->addSeparator();
+  EntryView->ContextMenu->addAction(EditNewEntryAction);
+  EntryView->ContextMenu->addAction(EditEditEntryAction);
+  EntryView->ContextMenu->addAction(EditCloneEntryAction);
+  EntryView->ContextMenu->addAction(EditDeleteEntryAction);
+
   ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
   ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
   ViewColumnsTitleAction->setChecked(config.Columns[0]);

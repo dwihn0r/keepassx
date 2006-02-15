@@ -20,7 +20,9 @@
 #ifndef _ENTRY_VIEW_H_
 #define _ENTRY_VIEW_H_
 
+#include <QMenu>
 #include <QTreeWidget>
+#include <QContextMenuEvent>
 #include "../PwManager.h"
 
 class EntryViewItem;
@@ -35,8 +37,11 @@ public:
  void showSearchResults(QList<Q_UINT32>& results);
  PwDatabase* db;
  vector<EntryViewItem*>Items;
+ QMenu *ContextMenu;
 private:
  int CurrentGroup;
+protected:
+ virtual void contextMenuEvent(QContextMenuEvent *event);
 };
 
 
