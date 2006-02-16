@@ -75,6 +75,8 @@ private slots:
    void OnEditOpenUrl();
    void OnEditSearch();
    void OnEditGroupSearch();
+   void OnViewShowToolbar(bool);
+   void OnViewShowEntryDetails(bool);
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();
@@ -107,6 +109,7 @@ private:
  void search(CGroup* pGroup);
  void editEntry(CEntry* pEntry);
  void removeFromSearchResults(int sID);
+ void updateDetailView();
  inline CGroup* currentGroup();
  inline CEntry* currentEntry();
  QLineEdit* QuickSearchEdit;

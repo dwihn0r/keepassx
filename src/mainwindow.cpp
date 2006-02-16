@@ -98,6 +98,8 @@ void KeepassMainWindow::setupConnections(){
    connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnEditSearch()));
    connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnEditGroupSearch()));
   
+   connect(ViewShowToolbarAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowToolbar(bool)));
+   connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
    connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
    connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
    connect(ViewColumnsTitleAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
@@ -183,6 +185,8 @@ void KeepassMainWindow::setupMenus(){
   EntryView->ContextMenu->addAction(EditCloneEntryAction);
   EntryView->ContextMenu->addAction(EditDeleteEntryAction);
 
+  ViewShowToolbarAction->setChecked(config.Toolbar);
+  ViewShowEntryDetailsAction->setChecked(config.EntryDetails);
   ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
   ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
   ViewColumnsTitleAction->setChecked(config.Columns[0]);
@@ -319,6 +323,7 @@ FileChangeKeyAction->setEnabled(IsOpen);
 EditSearchAction->setEnabled(IsOpen);
 GroupView->setEnabled(IsOpen);
 EntryView->setEnabled(IsOpen);
+DetailView->setEnabled(IsOpen);
 QuickSearchEdit->setEnabled(IsOpen);
 if(!IsOpen){
     EditNewGroupAction->setEnabled(false);
@@ -383,6 +388,33 @@ switch(GroupSelection){
 default: Q_ASSERT(false);
 }
 }
+
+void KeepassMainWindow::updateDetailView(){
+if(EntryView->selectedItems().size()!=1){
+ DetailView->setText("");
+ return;}
+
+CEntry& entry=*((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry;
+QString str=trUtf8("<B>Gruppe: </B>%1  <B>Titel: </B>%2  <B>Benutzername: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Passwort: </B>%5  <B>Erstellt: </B>%6  <B>letzte Änderung: </B>%7  <B>letzter Zugriff: </B>%8  <B>gültig bis: </B>%9");
+str=str.arg(currentGroup()->Name).arg(entry.Title);
+
+if(!config.ListView_HideUsernames)	str=str.arg(entry.UserName);
+else str=str.arg("****");
+
+str=str.arg(entry.URL);
+
+if(!config.ListView_HidePasswords)	str=str.arg(entry.Password.getString());
+else	str=str.arg("****");
+
+str=str.arg(entry.Creation.toString(Qt::LocalDate))
+	  .arg(entry.LastMod.toString(Qt::LocalDate))
+	  .arg(entry.LastAccess.toString(Qt::LocalDate))
+	  .arg(entry.Expire.toString(Qt::LocalDate));
+DetailView->setHtml(str);
+entry.Password.delRef();
+
+}
+
 
 void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 EntrySelection=s;
@@ -520,13 +552,13 @@ editEntry(static_cast<EntryViewItem*>(item)->pEntry);
 }
 
 void KeepassMainWindow::OnEntrySelectionChanged(){
+updateDetailView();
 if(EntryView->selectedItems().size()==0)
   setStateEntrySelected(NONE);
 if(EntryView->selectedItems().size()==1)
   setStateEntrySelected(SINGLE);
 if(EntryView->selectedItems().size()>1)
   setStateEntrySelected(MULTIPLE);
-
 }
 
 void KeepassMainWindow::OnGroupSelectionChanged(){
@@ -711,7 +743,7 @@ config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
 config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
 config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
 EntryView->updateColumns();
-EntryView->updateItems();
+if(FileOpen) EntryView->updateItems();
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
@@ -742,4 +774,12 @@ dlg.exec();
 
 }
 
+void KeepassMainWindow::OnViewShowToolbar(bool show){
+config.Toolbar=show;
+toolBar->setVisible(config.Toolbar);
+}
 
+void KeepassMainWindow::OnViewShowEntryDetails(bool show){
+config.EntryDetails=show;
+DetailView->setVisible(config.EntryDetails);
+}
