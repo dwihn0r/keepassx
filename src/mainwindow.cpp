@@ -242,8 +242,7 @@ if(db->loadDatabase(filename,err)==true){
 //SUCCESS
 setCaption(tr("Keepass - %1").arg(filename));
 GroupView->updateItems();
-EntryView->updateItems();
-EntryView->setCurrentGroup(0);
+EntryView->updateItems(0);
 setStateFileOpen(true);
 setStateFileModified(false);
 }
@@ -292,8 +291,7 @@ setCaption(tr("Keepass - %1").arg(tr("[neu]")));
 GroupView->db=db;
 EntryView->db=db;
 GroupView->updateItems();
-EntryView->updateItems();
-EntryView->setCurrentGroup(0);
+EntryView->updateItems(0);
 setStateFileOpen(true);
 setStateFileModified(true);
 FileOpen=true;
@@ -349,7 +347,7 @@ else{
 void KeepassMainWindow::editEntry(CEntry* pEntry){
 CEditEntryDlg dlg(db,pEntry,this,"EditEntryDialog",true);
 dlg.exec();
-EntryView->refreshVisibleItems();
+EntryView->refreshItems();
 if(dlg.ModFlag)setStateFileModified(true);
 }
 
@@ -541,7 +539,7 @@ if(cur){
  if(GroupView->isSearchResultGroup((GroupViewItem*)cur)){
 	EntryView->showSearchResults(SearchResults);
  }
- else EntryView->setCurrentGroup(((GroupViewItem*)cur)->pGroup->ID);
+ else EntryView->updateItems(((GroupViewItem*)cur)->pGroup->ID);
 }
 }
 
@@ -623,7 +621,7 @@ NewEntry.GroupID=currentGroup()->ID;
 CEditEntryDlg dlg(db,&NewEntry,this,"EditEntryDialog",true);
 if(dlg.exec()){
  db->addEntry(&NewEntry);
- EntryView->updateItems();
+ EntryView->updateItems(currentGroup()->ID);
  setStateFileModified(true);
 }
 }
@@ -640,7 +638,7 @@ for(int i=0; i<entries.size();i++){
 	db->cloneEntry(((EntryViewItem*)entries[i])->pEntry);
 }
 setStateFileModified(true);
-EntryView->updateItems();
+EntryView->updateItems(currentGroup()->ID);
 }
 
 void KeepassMainWindow::OnEditDeleteEntry(){
@@ -651,7 +649,7 @@ for(int i=0; i<entries.size();i++){
 	db->deleteEntry(((EntryViewItem*)entries[i])->pEntry);
 }
 setStateFileModified(true);
-EntryView->updateItems();
+EntryView->updateItems(currentGroup()->ID);
 }
 
 void KeepassMainWindow::removeFromSearchResults(int id){
@@ -747,13 +745,13 @@ config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
 config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
 config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
 EntryView->updateColumns();
-if(FileOpen) EntryView->updateItems();
+if(FileOpen) EntryView->refreshItems();
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
 config.ListView_HidePasswords=ViewHidePasswordsAction->isChecked();
 config.ListView_HideUsernames=ViewHideUsernamesAction->isChecked();
-EntryView->updateItems();
+EntryView->refreshItems();
 }
 
 void KeepassMainWindow::OnFileModified(){

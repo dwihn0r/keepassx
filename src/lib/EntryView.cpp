@@ -25,8 +25,11 @@
 #include <QDropEvent>
 #include <QMouseEvent>
 #include <QHeaderView>
+#include <QTime>
 #include "main.h"
 #include "EntryView.h"
+
+
 
 KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 CurrentGroup=0;
@@ -65,13 +68,15 @@ ContextMenu->popup(e->globalPos());
 
 
 
-void KeepassEntryView::updateItems(){
+void KeepassEntryView::updateItems(unsigned int GroupID){
 clear();
 Items.clear();
 if(!db)return;
+if(!GroupID)return;
 EntryViewItem *tmp=NULL;
 for(int i=0;i<db->Entries.size();i++){
   CEntry* entry=&db->Entries[i];
+  if(entry->GroupID==GroupID){
   Items.push_back(tmp=new EntryViewItem(this));
   Items.back()->pEntry=entry;
   int j=0;
@@ -103,19 +108,11 @@ for(int i=0;i<db->Entries.size();i++){
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
   Items.back()->setIcon(0,EntryIcons[entry->ImageID]);
-}
-setCurrentGroup(CurrentGroup);
-}
-
-void KeepassEntryView::setCurrentGroup(uint id){
-CurrentGroup=id;
-for(int i=0; i<Items.size();i++){
- setItemHidden(Items[i],(Items[i]->pEntry->GroupID != id));
-}
+}}
 }
 
 void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
-setCurrentGroup(0);
+updateItems(0);
 for(int j=0; j<results.size(); j++){
 	for(int i=0; i<Items.size();i++){
 		if(Items[i]->pEntry->sID == results[j])
@@ -124,12 +121,12 @@ for(int j=0; j<results.size(); j++){
 }
 }
 
-void KeepassEntryView::refreshVisibleItems(){
+void KeepassEntryView::refreshItems(){
 EntryViewItem *tmp=NULL;
 for(int i=0;i<Items.size();i++){
   tmp=Items[i];
   CEntry* entry=tmp->pEntry;
-if(entry->GroupID==CurrentGroup){
+
   int j=0;
   if(config.Columns[0]){
     tmp->setText(j++,entry->Title);}
@@ -162,8 +159,6 @@ if(entry->GroupID==CurrentGroup){
 }
 }
 
-}
-
 
 void KeepassEntryView::updateColumns(){
 setColumnCount(0);
@@ -191,7 +186,9 @@ if(config.Columns[9]){
 setHeaderLabels(cols);
 }
 
-
+void KeepassEntryView::paintEvent(QPaintEvent * event){
+QTreeWidget::paintEvent(event);
+}
 
 EntryViewItem::EntryViewItem(QTreeWidget *parent):QTreeWidgetItem(parent){
 

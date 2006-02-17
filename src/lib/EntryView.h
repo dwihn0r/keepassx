@@ -30,9 +30,8 @@ class EntryViewItem;
 class KeepassEntryView:public QTreeWidget{
 public:
  KeepassEntryView(QWidget* parent=0);
- void updateItems();
- void refreshVisibleItems();
- void setCurrentGroup(uint GroupID);
+ void updateItems(unsigned int group);
+ void refreshItems();
  void updateColumns();
  void showSearchResults(QList<Q_UINT32>& results);
  PwDatabase* db;
@@ -42,6 +41,7 @@ private:
  int CurrentGroup;
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);
+ virtual void paintEvent ( QPaintEvent * event );
 };
 
 
