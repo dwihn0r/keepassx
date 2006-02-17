@@ -16,6 +16,7 @@
 #define BLOWFISH_H
 
 #include "global.h"
+#include <qglobal.h>
 //#include <stdint.h>
 #include <string>
 using std::string;
@@ -24,7 +25,10 @@ using std::string;
 #define BLOWFISH_ROUNDS		16
 #define CIPHER_ALGO_BLOWFISH	4	/* blowfish 128 bit key */
 
-typedef uint8_t	byte;
+#define uint8_t Q_UINT8
+#define uint16_t Q_UINT16
+#define uint32_t Q_UINT32
+#define byte Q_UINT8
 
 /** blowfish encryption algorithm.
   * Derived from libgcrypt-1.1.12

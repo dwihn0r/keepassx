@@ -17,8 +17,6 @@
 #include <fstream>
 #include <strstream>
 
-using namespace std;
-
 // C Includes
 #include <stdio.h>
 #include <stdarg.h>

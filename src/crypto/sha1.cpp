@@ -26,11 +26,7 @@
 
 // Rotate x bits to the left
 #ifndef ROL32
-#ifdef _MSC_VER
-#define ROL32(_val32, _nBits) _rotl(_val32, _nBits)
-#else
-#define ROL32(_val32, _nBits) (((_val32)<<(_nBits))|((_val32)>>(32-(_nBits))))
-#endif
+ #define ROL32(_val32, _nBits) (((_val32)<<(_nBits))|((_val32)>>(32-(_nBits))))
 #endif
 
 #ifdef KEEPASS_LITTLE_ENDIAN

@@ -13,13 +13,15 @@
 
 #ifndef CIniFile_H
 #define CIniFile_H
-using namespace std;
+
 // C++ Includes
 #include <string>
 #include <vector>
 
 // C Includes
 #include <stdlib.h>
+
+using namespace std;
 
 #define MAX_KEYNAME    128
 #define MAX_VALUENAME  128
