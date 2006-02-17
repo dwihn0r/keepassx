@@ -78,6 +78,7 @@ public:
 
 private:
  bool IsMetaStream(CEntry& Entry);
+ bool parseMetaStream(const CEntry& Entry);
  void transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* seed,int rounds);
  bool readHeader(char* raw);
  bool isGroupIdInUse(Q_UINT32 GroupID);
@@ -86,6 +87,7 @@ private:
  Q_UINT32 getNewEntrySid();
  bool convHexToBinaryKey(char* HexKey, char* dst);
  QStringList Errors;
+ QList<CEntry> UnkownMetaStreams;
 };
 
 

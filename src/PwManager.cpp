@@ -217,7 +217,8 @@ delete [] buffer;
 
 for(int i=0;i<Entries.size();i++){
 if(IsMetaStream(Entries[i])==true){
-	///@TODO Parse Metastreams
+	if(!parseMetaStream(Entries[i]))
+		UnkownMetaStreams << Entries[i];
 	deleteEntry(&Entries[i]);
 	i--;
 }
@@ -225,6 +226,10 @@ if(IsMetaStream(Entries[i])==true){
 return true;
 }
 
+bool PwDatabase::parseMetaStream(const CEntry& entry){
+//return true for known MetaStreams
+return false;
+}
 
 void PwDatabase::transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* KeySeed,int rounds){
 Q_UINT8* tmp=new Q_UINT8[32];
@@ -585,21 +590,12 @@ Q_UINT8 FinalRandomSeed[16];
 Q_UINT8 ContentsHash[32];
 Q_UINT8 EncryptionIV[16];
 
-/*
-if(SearchGroupID!=-1){
- for(int i=0;i<Groups.size();i++){
-  if(Groups[i].ID==SearchGroupID){
-   SearchGroup=Groups[i];
-   Groups.erase(getGroupIterator(&Groups[i]));}
- }
-}
-*/
-
 if(filename==QString::null)return false;
 QFile file(filename);
 unsigned int FileSize;
 
-//->Add Metastreams
+Entries+=UnkownMetaStreams; ///@FIXME ID conflicts???
+
 FileSize=DB_HEADER_SIZE;
 // Get the size of all groups (94 Byte + length of the name string)
 for(int i = 0; i < Groups.size(); i++){

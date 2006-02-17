@@ -563,6 +563,10 @@ if(EntryView->selectedItems().size()>1)
 
 void KeepassMainWindow::OnGroupSelectionChanged(){
 Q_ASSERT(GroupView->selectedItems().size()<=1);
+
+while(EntryView->selectedItems().size()){
+	EntryView->setItemSelected(EntryView->selectedItems()[0],false);}
+
 if(GroupView->selectedItems().size()==0)
   setStateGroupSelected(NONE);
 if(GroupView->selectedItems().size()==1){
