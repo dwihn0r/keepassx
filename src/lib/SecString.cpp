@@ -19,83 +19,89 @@
  ***************************************************************************/
 
 #include "SecString.h"
-#include <qmessagebox.h>
 #include <iostream>
+#include "crypto/arcfour.h"
 #include "random.h"
 using namespace std;
-Q_UINT8 SecString::Key[32]={0};
+CArcFour SecString::RC4;
+
+SecString::operator QString(){
+return string();
+}
 
 SecString::SecString(){
-len=0;
+locked=true;
 }
 
+int SecString::length(){
+return crypt.size();
+}
 
 SecString::~SecString(){
-overwrite(plaintext);
+lock();
 }
 
-void SecString::getString(QString & str){
-if(data.size()){
-Rijndael aes;
-int r=aes.init(Rijndael::CBC, Rijndael::Decrypt,Key,Rijndael::Key32Bytes);
-if(r){ cout << "AES error, code " << r << endl;
-       exit(-1);}
-char* out=new char[len];
-r=aes.padDecrypt((unsigned char*)data.data(),data.size(),(unsigned char*)out);
-if(r!=len){ cout << "AES error in SecString::getString(), r!=length, r=" << r << endl;
-       	       exit(-1);}
-str=QString::fromUtf8(out,len);
-overwrite(out,len);
-delete [] out;
-}
+void SecString::lock(){
+locked=true;
+overwrite(plain);
+plain=QString();
 }
 
-QString& SecString::getString(){
-getString(plaintext);
-return plaintext;
+void SecString::unlock(){
+locked=false;
+plain=QString();
+if(!crypt.length()){return;}
+const unsigned char* buffer=new unsigned char[crypt.length()];
+SecString::RC4.decrypt((byte*)crypt.data(),(unsigned char*)buffer,crypt.length());
+plain=QString::fromUtf8((const char*)buffer,crypt.size());
+overwrite((unsigned char*)buffer,crypt.size());
+delete [] buffer;
 }
 
-void SecString::delRef(){
-overwrite(plaintext);
+
+const QString& SecString::string(){
+if(locked){
+ printf("Error in function SecString::string(): string is locked\n");
+ return QString(">SEC_STRING_ERROR<");
+}
+return plain;
 }
 
-void SecString::setString(QString& str,bool DelSrc){
-Rijndael aes;
-int r=aes.init(Rijndael::CBC, Rijndael::Encrypt,Key,Rijndael::Key32Bytes);
-if(r){ cout << "AES error, code " << r << endl;
-       exit(-1);}
-int il=str.length();
-char* input=new char[il];
-char* output=new char[il+16];
-memcpy(input,str.utf8(),il);
-r=aes.padEncrypt((unsigned char*)input,il,(unsigned char*)output);
-if(r<0){ cout << "AES error, code " << r << endl;
-         exit(-1);}
-len=il;
-data=QByteArray(output,r);
-overwrite(input,il);
-delete [] input;
-if(DelSrc)overwrite(str);
+
+void SecString::setString(QString& str,bool DeleteSource){
+QByteArray StrData=str.toUtf8();
+int len=StrData.size();
+unsigned char* buffer=new unsigned char[len];
+SecString::RC4.encrypt((const unsigned char*)StrData.data(),buffer,len);
+crypt=QByteArray((const char*)buffer,len);
+overwrite(buffer,len);
+overwrite((unsigned char*)StrData.data(),len);
+delete [] buffer;
+if(DeleteSource){
+  overwrite(str);
+  str=QString();}
+lock();
 }
 
-void SecString::overwrite(char* str,int strlen){
+void SecString::overwrite(unsigned char* str,int strlen){
 if(strlen==0 || str==NULL)return;
-getRandomBytes(str,strlen,1,false);
+for(int i=0; i<strlen; i++){
+	str[i]=0;
+}
 }
 
 void SecString::overwrite(QString &str){
 if(str.length()==0)return;
-char* tmp=new char[str.length()];
-getRandomBytes(tmp,str.length(),1,false);
-str=tmp;
-delete [] tmp;
+for(int i=0; i<str.length(); i++){
+	((char*)str.data())[i]=0;
+}
 }
 
-int SecString::length(){
-return len;
-}
 
 void SecString::generateSessionKey(){
-getRandomBytes(Key,32,1,false);
+CArcFour arc;
+unsigned char* sessionkey=new unsigned char[32];
+getRandomBytes(sessionkey,32,1,false);
+RC4.setKey(sessionkey,32);
+delete [] sessionkey;
 }
-

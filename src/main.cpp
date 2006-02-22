@@ -123,6 +123,8 @@ if(config.Language!="_DEUTSCH_"){
 DateTimeFormat=QObject::trUtf8("dd'.'MM'.'yy' 'hh':'mm");
 loadImages();
 
+SecString::generateSessionKey();
+
 KeepassMainWindow *mainWin = new KeepassMainWindow();
 mainWin->show();
 int r=app->exec();

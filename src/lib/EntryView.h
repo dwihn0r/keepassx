@@ -38,6 +38,7 @@ public:
  vector<EntryViewItem*>Items;
  QMenu *ContextMenu;
 private:
+ void setEntry(CEntry* entry);
  int CurrentGroup;
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);

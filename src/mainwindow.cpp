@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -303,8 +303,9 @@ void KeepassMainWindow::OnFileOpen(){
 if(FileOpen)
  if(!closeDatabase())return;
 QString filename=QFileDialog::getOpenFileName(this,trUtf8("Databank öffnen..."),QDir::homePath(),"*.kdb");
-if(filename!=QString::null)
+if(filename!=QString::null){
  openDatabase(filename);
+}
 }
 
 void KeepassMainWindow::OnFileClose(){
@@ -394,22 +395,26 @@ if(EntryView->selectedItems().size()!=1){
 
 CEntry& entry=*((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry;
 QString str=trUtf8("<B>Gruppe: </B>%1  <B>Titel: </B>%2  <B>Benutzername: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Passwort: </B>%5  <B>Erstellt: </B>%6  <B>letzte Änderung: </B>%7  <B>letzter Zugriff: </B>%8  <B>gültig bis: </B>%9");
-str=str.arg(currentGroup()->Name).arg(entry.Title);
+//todo: a "CGroup* PwDatabase::getGroup(CEntry*)" method would be a good idea
+str=str.arg(db->Groups[db->getGroupIndex(entry.GroupID)].Name).arg(entry.Title);
 
 if(!config.ListView_HideUsernames)	str=str.arg(entry.UserName);
 else str=str.arg("****");
 
 str=str.arg(entry.URL);
 
-if(!config.ListView_HidePasswords)	str=str.arg(entry.Password.getString());
+entry.Password.unlock();
+if(!config.ListView_HidePasswords)	str=str.arg(entry.Password.string());
 else	str=str.arg("****");
+
+entry.Password.lock();
 
 str=str.arg(entry.Creation.toString(Qt::LocalDate))
 	  .arg(entry.LastMod.toString(Qt::LocalDate))
 	  .arg(entry.LastAccess.toString(Qt::LocalDate))
 	  .arg(entry.Expire.toString(Qt::LocalDate));
 DetailView->setHtml(str);
-entry.Password.delRef();
+
 
 }
 
@@ -669,9 +674,10 @@ ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
 }
 
 void KeepassMainWindow::OnEditPasswordToClipboard(){
-Clipboard->setText(currentEntry()->Password.getString(),QClipboard::Clipboard);
+currentEntry()->Password.unlock();
+Clipboard->setText(currentEntry()->Password.string(),QClipboard::Clipboard);
 ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
-currentEntry()->Password.delRef();
+currentEntry()->Password.lock();
 
 }
 

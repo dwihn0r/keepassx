@@ -77,9 +77,10 @@ setIcon(EntryIcons[entry->ImageID]);
 Edit_Title->setText(entry->Title);
 Edit_UserName->setText(entry->UserName);
 Edit_URL->setText(entry->URL);
-Edit_Password->setText(entry->Password.getString());
-Edit_Password_w->setText(entry->Password.getString());
-entry->Password.delRef();
+entry->Password.unlock();
+Edit_Password->setText(entry->Password.string());
+Edit_Password_w->setText(entry->Password.string());
+entry->Password.lock();
 if(!config.ShowPasswords)
   ChangeEchoMode();
 OnPasswordwLostFocus();
@@ -171,10 +172,10 @@ if(entry->URL!=Edit_URL->text())
 	ModFlag=true;
 if(entry->Additional!=Edit_Comment->text())
 	ModFlag=true;
-QString& passw=entry->Password.getString();
-if(passw!=Edit_Password->text())
+entry->Password.unlock();
+if(entry->Password.string()!=Edit_Password->text())
 	ModFlag=true;
-entry->Password.delRef();
+entry->Password.lock();
 
 entry->Expire=DateTime_Expire->dateTime();
 entry->LastAccess=QDateTime::currentDateTime();

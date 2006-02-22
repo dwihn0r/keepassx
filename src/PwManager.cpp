@@ -201,6 +201,7 @@ CEntry entry;
 		return false; }
 
 		bRet = entry.ReadEntryField(FieldType,FieldSize,(Q_UINT8*)pField);
+
 		if((FieldType == 0xFFFF) && (bRet == true)){			
 			entry.sID=tmp_id++;
 			Entries << entry;
@@ -272,14 +273,14 @@ if(paKey == NULL) return false;
 KeyLen = strlen(paKey);
 
 if(KeyLen == 0) {
-SecString::overwrite(paKey,Password.length() + 1);
+SecString::overwrite((unsigned char*)paKey,Password.length() + 1);
 delete [] paKey;
 return false; }
 
 sha256_starts(&sha32);
 sha256_update(&sha32,(unsigned char*) paKey, KeyLen);
 sha256_finish(&sha32,MasterKey);
-SecString::overwrite(paKey,Password.length() + 1);
+SecString::overwrite((unsigned char*)paKey,Password.length() + 1);
 delete [] paKey;
 return true;
  }
@@ -530,7 +531,6 @@ switch(FieldType)
 		memcpyFromLEnd32(&ImageID, (char*)pData);
 		break;
 	case 0x0004:
-		//Title=(char*)pData;
 		Title=QString::fromUtf8((char*)pData);
 		break;
 	case 0x0005:
@@ -723,8 +723,9 @@ for(int i = 0; i < Entries.size(); i++){
 		FieldSize = Entries[i].Password.length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Entries[i].Password.getString(),FieldSize);  pos += FieldSize;
-		Entries[i].Password.delRef();
+		Entries[i].Password.unlock();
+		memcpy(buffer+pos, Entries[i].Password.string(),FieldSize);  pos += FieldSize;
+		Entries[i].Password.lock();
 
 		FieldType = 0x0008;
 		FieldSize = Entries[i].Additional.utf8().length() + 1; // Add terminating NULL character space
@@ -1225,8 +1226,12 @@ void assertEntriesEq(KPTestResults& results, CEntry* left, CEntry* right){
 	kp_assert(results, left->UserName == right->UserName);
 	size += sizeof(left->UserName);
 
-	kp_assert(results, left->Password.getString() == right->Password.getString());
+	left->Password.unlock();
+	right->Password.unlock();
+	kp_assert(results, left->Password.string() == right->Password.string());
 	size += sizeof(left->Password);
+	left->Password.lock();
+	right->Password.lock();
 
 	kp_assert(results, left->Additional == right->Additional);
 	size += sizeof(left->Additional);

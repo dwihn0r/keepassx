@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,35 +17,28 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef _SECSTRING_H_
-#define _SECSTRING_H_
 
-#include <QByteArray>
-#include <qstring.h>
-#include <qglobal.h>
-#include "crypto/arcfour.h"
+#ifndef _ARCFOUR_H_
+#define _ARCFOUR_H_
 
-class SecString{
+#ifndef byte
+#define byte unsigned char
+#endif
+
+class CArcFour{
 public:
- SecString();
- ~SecString();
- void setString(QString& str, bool DelSrc=false);
- void lock();
- void unlock();
- const QString& string();
- operator QString();
- int length();
-
- static void overwrite(unsigned char* str,int len);
- static void overwrite(QString& str);
- static void generateSessionKey();
-
+ void encrypt(const byte* src, byte* dst,int length);
+ inline void decrypt(const byte* src, byte* dst,int length){encrypt(src,dst,length);} //just for readability
+ void setKey(byte* key, int length);
+ QByteArray RawKey;
 private:
- bool locked;
- static CArcFour RC4;
- QByteArray crypt;
- QString plain;
+ void prepareKey();
 
+ typedef struct rc4_key{      
+   byte state[256];      
+   byte x;        
+   byte y;}rc4_key;
+ rc4_key key;
 };
 
 

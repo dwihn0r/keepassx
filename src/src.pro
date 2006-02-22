@@ -3,15 +3,8 @@
 # Unterordner relativ zum Projektordner: ./src
 # Das Target ist eine Anwendung:  ../bin/keepass
 
-INSTALLS += target \
-            Share
+INSTALLS += Share 
 Share.files += ../share/keepass/* 
-unix{ target.path = /usr/local/bin
-      Share.path = /usr/local/share/keepass
-}
-macx{ target.path = /Applications
-      Share.path = /Applications/keepass.app/Contents/share/keepass
-}
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
          forms/AboutDlg.ui \
@@ -57,7 +50,8 @@ HEADERS += lib/IniReader.h \
            global.h \
            main.h \
            lib/GroupView.h \
-           lib/EntryView.h 
+           lib/EntryView.h \
+           crypto/arcfour.h 
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
@@ -88,7 +82,8 @@ SOURCES += lib/IniReader.cpp \
            Database.cpp \
            lib/KdePlugin.cpp \
            lib/GroupView.cpp \
-           lib/EntryView.cpp 
+           lib/EntryView.cpp \
+           crypto/arcfour.cpp 
 QT += xml \
 qt3support
 MOC_DIR = ../build/moc
@@ -103,3 +98,11 @@ thread \
 exceptions \
 stl
 TEMPLATE = app
+unix{
+   target.path = /usr/local/bin
+  Share.path = /usr/local/share/keepass
+}
+macx{
+   target.path = /Applications
+  Share.path = /Applications/keepass.app/Contents/share/keepass
+}

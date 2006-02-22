@@ -69,14 +69,31 @@ ContextMenu->popup(e->globalPos());
 
 
 void KeepassEntryView::updateItems(unsigned int GroupID){
+
 clear();
 Items.clear();
 if(!db)return;
 if(!GroupID)return;
-EntryViewItem *tmp=NULL;
 for(int i=0;i<db->Entries.size();i++){
-  CEntry* entry=&db->Entries[i];
-  if(entry->GroupID==GroupID){
+  if(db->Entries[i].GroupID==GroupID)
+  	setEntry(&db->Entries[i]);
+}
+
+}
+
+void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
+clear();
+Items.clear();
+for(int j=0; j<results.size(); j++){
+	for(int i=0; i<db->Entries.size();i++){
+		if(db->Entries[i].sID == results[j])
+ 		setEntry(&db->Entries[i]);
+	}
+}
+}
+
+void KeepassEntryView::setEntry(CEntry* entry){
+  EntryViewItem* tmp=NULL;
   Items.push_back(tmp=new EntryViewItem(this));
   Items.back()->pEntry=entry;
   int j=0;
@@ -93,8 +110,9 @@ for(int i=0;i<db->Entries.size();i++){
     if(config.ListView_HidePasswords)
       tmp->setText(j++,"******");
     else{
-      tmp->setText(j++,entry->Password.getString());
-      entry->Password.delRef();}}
+	  entry->Password.unlock();
+      tmp->setText(j++,entry->Password.string());
+      entry->Password.lock();}}
   if(config.Columns[4]){
     tmp->setText(j++,entry->Additional.section('\n',0,0));}
   if(config.Columns[5]){
@@ -108,17 +126,6 @@ for(int i=0;i<db->Entries.size();i++){
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
   Items.back()->setIcon(0,EntryIcons[entry->ImageID]);
-}}
-}
-
-void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
-updateItems(0);
-for(int j=0; j<results.size(); j++){
-	for(int i=0; i<Items.size();i++){
-		if(Items[i]->pEntry->sID == results[j])
- 		setItemHidden(Items[i],false);
-	}
-}
 }
 
 void KeepassEntryView::refreshItems(){
@@ -141,8 +148,9 @@ for(int i=0;i<Items.size();i++){
     if(config.ListView_HidePasswords)
       tmp->setText(j++,"******");
     else{
-      tmp->setText(j++,entry->Password.getString());
-      entry->Password.delRef();}}
+      entry->Password.unlock();
+      tmp->setText(j++,entry->Password.string());
+      entry->Password.lock();}}
   if(config.Columns[4]){
     tmp->setText(j++,entry->Additional.section('\n',0,0));}
   if(config.Columns[5]){

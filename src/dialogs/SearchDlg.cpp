@@ -92,15 +92,16 @@ for(int i=0;i<db->Entries.size();i++){
 	else
 		if(db->Entries[i].GroupID != group->ID)continue;
  }
- 
+
 bool hit=false;
  if(checkBox_Title->isChecked())	hit=hit||search(db->Entries[i].Title);
  if(checkBox_Username->isChecked())	hit=hit||search(db->Entries[i].UserName);
  if(checkBox_URL->isChecked())		hit=hit||search(db->Entries[i].URL);
  if(checkBox_Comment->isChecked())	hit=hit||search(db->Entries[i].Additional);
  if(checkBox_Attachment->isChecked())	hit=hit||search(db->Entries[i].BinaryDesc);
- if(checkBox_Password->isChecked())	hit=hit||search(db->Entries[i].Password.getString());
- db->Entries[i].Password.delRef();
+ db->Entries[i].Password.unlock();
+ if(checkBox_Password->isChecked())	hit=hit||search(db->Entries[i].Password.string());
+ db->Entries[i].Password.lock();
  if(hit)Hits.push_back(db->Entries[i].sID);
 }
 
@@ -109,7 +110,7 @@ done(1);
 }
 
 
-bool CSearchDlg::search(QString& str){
+bool CSearchDlg::search(const QString& str){
 
 if(regexp){
  QRegExp exp(txt,checkBox_Cs->isChecked());

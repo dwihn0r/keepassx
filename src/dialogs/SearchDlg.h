@@ -41,7 +41,7 @@ private:
   CGroup* group;
   bool regexp;
   PwDatabase* db;
-  bool search(QString& str);
+  bool search(const QString& str);
 };
 
 #endif
