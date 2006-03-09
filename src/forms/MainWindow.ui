@@ -90,10 +90,16 @@
       <property name="sizePolicy" >
        <sizepolicy>
         <hsizetype>7</hsizetype>
-        <vsizetype>7</vsizetype>
+        <vsizetype>4</vsizetype>
         <horstretch>0</horstretch>
         <verstretch>10</verstretch>
        </sizepolicy>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>16777215</width>
+        <height>60</height>
+       </size>
       </property>
      </widget>
     </item>
@@ -105,7 +111,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>30</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHilfe" >
@@ -469,16 +475,16 @@
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>

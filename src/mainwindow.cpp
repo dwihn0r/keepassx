@@ -60,7 +60,8 @@
 
 KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
   setupUi(this);
-
+  setGeometry(geometry().x(),geometry().y(),config.MainWinWidth,config.MainWinHeight);
+  splitter->setSizes(QList<int>() << config.MainWinSplit1 << config.MainWinSplit2);
   QuickSearchEdit=new QLineEdit(toolBar);
   QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
   setupIcons();
@@ -530,8 +531,6 @@ if(dlg.exec()) setStateFileModified(true);
 }
 
 void KeepassMainWindow::OnFileExit(){
-if(FileOpen)
- if(!closeDatabase())return;
 close();
 }
 
@@ -765,6 +764,11 @@ setStateFileModified(true);
 }
 
 void KeepassMainWindow::closeEvent(QCloseEvent* e){
+config.MainWinHeight=geometry().height();
+config.MainWinWidth=geometry().width();
+config.MainWinSplit1=splitter->sizes()[0];
+config.MainWinSplit2=splitter->sizes()[1];
+
 if(FileOpen){
  if(!closeDatabase())
  	e->ignore();

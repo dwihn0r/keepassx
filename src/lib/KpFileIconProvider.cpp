@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,45 +17,3 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef _ENTRY_VIEW_H_
-#define _ENTRY_VIEW_H_
-
-#include <QMenu>
-#include <QTreeWidget>
-#include <QContextMenuEvent>
-#include "../PwManager.h"
-
-class EntryViewItem;
-
-class KeepassEntryView:public QTreeWidget{
-public:
- KeepassEntryView(QWidget* parent=0);
- void updateItems(unsigned int group);
- void refreshItems();
- void updateColumns();
- void showSearchResults(QList<Q_UINT32>& results);
- PwDatabase* db;
- vector<EntryViewItem*>Items;
- QMenu *ContextMenu;
-private:
- void setEntry(CEntry* entry);
- int CurrentGroup;
- QList<float>ColumnSizes;
-protected:
- virtual void contextMenuEvent(QContextMenuEvent *event);
- virtual void paintEvent(QPaintEvent* event);
- virtual void resizeEvent(QResizeEvent* event);
-};
-
-
-class EntryViewItem:public QTreeWidgetItem{
-public:
-EntryViewItem(QTreeWidget *parent);
-EntryViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
-EntryViewItem(QTreeWidgetItem *parent);
-EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
-CEntry* pEntry;
-};
-
-
-#endif

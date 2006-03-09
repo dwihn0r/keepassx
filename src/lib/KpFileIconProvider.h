@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   mail@tarek-saidi.de                                                   *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,54 +17,12 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef _PWMCONFIG_H_
-#define _PWMCONFIG_H_
 
-#include "lib/IniReader.h"
-#include <qcolor.h>
+#include <QFileIconProvider>
+#include <QIcon>
 
-class CConfig{
+class KpFileIconProvider : public QFileIconProvider{
 public:
- int TimeFormat;
- int ClipboardTimeOut;
- bool Toolbar;
- bool EntryDetails;
- QString LastFile;
- bool OpenLast;
- bool Columns[10];
- QColor BannerColor1;
- QColor BannerColor2;
- QColor BannerTextColor;
- bool ShowPasswords;
- QString OpenUrlCommand;
- QString Language;
- bool SearchOptions[9];
- bool ListView_HidePasswords;
- bool ListView_HideUsernames;
- bool PwGenOptions[10];
- int PwGenLength;
- QString PwGenCharList;
- bool ExpandGroupTree;
- bool EnableKdePlugin;
- int MainWinHeight;
- int MainWinWidth;
- int MainWinSplit1;
- int MainWinSplit2;
- int ColumnSizes[10];
-
- bool loadFromIni(QString filename);
- bool saveToIni(QString filename);
-
-private:
- CIniFile ini;
- void ParseColumnString(QString str, bool* dst);
- void ParseBoolString(const QString &str,bool* dst, int count);
- void ParseIntString(const QString &str,int* dst, int count);
- QString CreateBoolString(bool* src, int count);
- QColor ParseColorString(QString str);
- QString CreateColumnString();
- QString CreateColorString(QColor);
- QString CreateIntString(int* src, int count);
+ virtual QIcon icon(IconType type) const;
+ virtual QIcon icon(const QFileInfo& info) const;
 };
-
-#endif

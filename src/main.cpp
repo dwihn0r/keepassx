@@ -88,6 +88,7 @@ else{
  config.loadFromIni(IniFilename);}
 
 
+
 //Internationalization
 QLocale loc=QLocale::system();
 QTranslator* translator = 0;
@@ -207,15 +208,21 @@ if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
 }
 
 
+#define _loadIcon(_VAR,_NAME)\
+	_VAR=new QIcon(ThemeDir+_NAME);
+
 
 void loadImages(){
-QString ThemeDir="nuvola/32x32";
+bool small=true;
+QString ThemeDir=AppDir+"/../share/keepass/icons/nuvola/32x32";
 QPixmap tmpImg;
+
 //-----------------------
 loadImg("clientic.png",tmpImg);
 EntryIcons=new QPixmap[NUM_CLIENT_ICONS];
 for(int i=0;i<NUM_CLIENT_ICONS;i++){
 EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
+
 //--------------------------
 loadImg("key.png",tmpImg);
 Icon_Key32x32=new QPixmap;
@@ -237,50 +244,23 @@ loadImg("search.png",tmpImg);
 Icon_Search32x32=new QPixmap;
 *Icon_Search32x32=tmpImg;
 //--------------------------
-loadImg(ThemeDir+"/actions/filenew.png",tmpImg);
-Icon_FileNew=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/fileopen.png",tmpImg);
-Icon_FileOpen=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/filesave.png",tmpImg);
-Icon_FileSave=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/filesaveas.png",tmpImg);
-Icon_FileSaveAs=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/fileclose.png",tmpImg);
-Icon_FileClose=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/exit.png",tmpImg);
-Icon_Exit=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/editdelete.png",tmpImg);
-Icon_EditDelete=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/edit_add.png",tmpImg);
-Icon_EditAdd=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/edit.png",tmpImg);
-Icon_EditEdit=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/identity.png",tmpImg);
-Icon_EditUsernameToCb=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/klipper_dock.png",tmpImg);
-Icon_EditPasswordToCb=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/editcopy.png",tmpImg);
-Icon_EditClone=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/run.png",tmpImg);
-Icon_EditOpenUrl=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/find.png",tmpImg);
-Icon_EditSearch=new QIcon(tmpImg);
-//--------------------------
-loadImg(ThemeDir+"/actions/configure.png",tmpImg);
-Icon_Configure=new QIcon(tmpImg);
+
+
+_loadIcon(Icon_FileNew,"/actions/filenew.png");
+_loadIcon(Icon_FileOpen,"/actions/fileopen.png");
+_loadIcon(Icon_FileSave,"/actions/filesave.png");
+_loadIcon(Icon_FileSaveAs,"/actions/filesaveas.png");
+_loadIcon(Icon_FileClose,"/actions/fileclose.png");
+_loadIcon(Icon_Exit,"/actions/exit.png");
+_loadIcon(Icon_EditDelete,"/actions/editdelete.png");
+_loadIcon(Icon_EditAdd,"/actions/edit_add.png");
+_loadIcon(Icon_EditEdit,"/actions/edit.png");
+_loadIcon(Icon_EditUsernameToCb,"/actions/identity.png");
+_loadIcon(Icon_EditPasswordToCb,"/actions/klipper_dock.png");
+_loadIcon(Icon_EditClone,"/actions/editcopy.png");
+_loadIcon(Icon_EditOpenUrl,"/actions/run.png");
+_loadIcon(Icon_EditSearch,"/actions/find.png");
+_loadIcon(Icon_Configure,"/actions/configure.png");
 
 }
 

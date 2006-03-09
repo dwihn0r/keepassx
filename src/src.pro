@@ -51,7 +51,8 @@ HEADERS += lib/IniReader.h \
            main.h \
            lib/GroupView.h \
            lib/EntryView.h \
-           crypto/arcfour.h 
+           crypto/arcfour.h \
+           lib/KpFileIconProvider.h 
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
@@ -83,7 +84,8 @@ SOURCES += lib/IniReader.cpp \
            lib/KdePlugin.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
-           crypto/arcfour.cpp 
+           crypto/arcfour.cpp \
+           lib/KpFileIconProvider.cpp 
 QT += xml \
 qt3support
 MOC_DIR = ../build/moc
@@ -99,10 +101,10 @@ exceptions \
 stl
 TEMPLATE = app
 unix{
-   target.path = /usr/local/bin
+  target.path = /usr/local/bin
   Share.path = /usr/local/share/keepass
 }
 macx{
-   target.path = /Applications
+  target.path = /Applications
   Share.path = /Applications/keepass.app/Contents/share/keepass
 }

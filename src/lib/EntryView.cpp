@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                 *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -34,8 +34,10 @@
 KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 CurrentGroup=0;
 updateColumns();
-header()->setResizeMode(QHeaderView::Stretch);
+header()->setResizeMode(QHeaderView::Interactive);
+header()->setStretchLastSection(false);
 ContextMenu=new QMenu(this);
+
 }
 
 
@@ -66,6 +68,10 @@ e->accept();
 ContextMenu->popup(e->globalPos());
 }
 
+void KeepassEntryView::resizeEvent(QResizeEvent* e){
+
+e->accept();
+}
 
 
 void KeepassEntryView::updateItems(unsigned int GroupID){

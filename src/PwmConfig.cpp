@@ -25,7 +25,7 @@
 using namespace std;
 
 bool CConfig::loadFromIni(QString filename){
-CIniFile ini((char*)filename.data());
+ini.SetPath((const char*)filename);
 ini.ReadFile();
 ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
 Toolbar=ini.GetValueB("UI","ShowToolbar",true);
@@ -47,12 +47,15 @@ PwGenLength=ini.GetValueI("Options","PwGenLength",25);
 PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
 ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
 EnableKdePlugin=ini.GetValueB("KDE Plugin","Enabled",false);
+MainWinHeight=ini.GetValueI("UI","MainWinHeight",550);
+MainWinWidth=ini.GetValueI("UI","MainWinWidth",900);
+MainWinSplit1=ini.GetValueI("UI","MainWinSplit1",100);
+MainWinSplit2=ini.GetValueI("UI","MainWinSplit2",300);
+ParseIntString(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10").c_str(),ColumnSizes,10);
 return true;
 }
 
 bool CConfig::saveToIni(QString filename){
-CIniFile ini((const char*)filename);
-ini.ReadFile();
 ini.SetValueI("Options","ClipboardTimeOut",ClipboardTimeOut);
 ini.SetValueB("UI","ShowToolbar",Toolbar);
 ini.SetValueB("UI","ShowEntryDetails",EntryDetails);
@@ -73,6 +76,11 @@ ini.SetValueI("Options","PwGenLength",PwGenLength,true);
 ini.SetValue("Options","PwGenCharList",(const char*)PwGenCharList,true);
 ini.SetValueB("Options","ExpandGroupTree",ExpandGroupTree,true);
 ini.SetValueB("KDE Plugin","Enabled",EnableKdePlugin,true);
+ini.SetValueI("UI","MainWinHeight",MainWinHeight);
+ini.SetValueI("UI","MainWinWidth",MainWinWidth);
+ini.SetValueI("UI","MainWinSplit1",MainWinSplit1);
+ini.SetValueI("UI","MainWinSplit2",MainWinSplit2);
+ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10),true);
 if(!ini.WriteFile())return false;
 else return true;
 }
@@ -133,6 +141,37 @@ QString str="";
 for(int i=0;i<count;i++){
 if(src[i])str+="1";
 else	  str+="0";
+}
+return str;
+}
+
+#define DEFAULT_INT_VAL 20
+
+void CConfig::ParseIntString(const QString &str,int* dst, int count){
+QStringList lst=str.split(",");
+if(lst.size()!=count)
+	qWarning("Warnig: CConfig::ParseIntString(): unexpected item count.\n");
+int* values=new int[count];
+bool err;
+for(int i=0;i<lst.size() && i<count;i++){
+	values[i]=lst[i].toUInt(&err);
+	if(!err){
+		qWarning("Warnig: CConfig::ParseIntString(): invalid int value.\n");
+		values[i]=DEFAULT_INT_VAL;}
+}
+if(count > lst.size()){
+	for(int i=lst.size(); i<count; i++)
+		values[i]=DEFAULT_INT_VAL;}
+
+memcpy(dst,values,count);
+delete [] values;
+}
+
+QString CConfig::CreateIntString(int* src, int count){
+QString str;
+for(int i=0;i<count;i++){
+	str+=QString::number(src[i]);
+	if(i<(count-1))str+=",";
 }
 return str;
 }
