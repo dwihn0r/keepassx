@@ -23,13 +23,19 @@
 #include <QMenu>
 #include <QTreeWidget>
 #include <QContextMenuEvent>
+#include <QHeaderView>
 #include "../PwManager.h"
+
+#define NUM_COLUMNS 10
 
 class EntryViewItem;
 
+
 class KeepassEntryView:public QTreeWidget{
+Q_OBJECT
 public:
  KeepassEntryView(QWidget* parent=0);
+ ~KeepassEntryView();
  void updateItems(unsigned int group);
  void refreshItems();
  void updateColumns();
@@ -41,10 +47,14 @@ private:
  void setEntry(CEntry* entry);
  int CurrentGroup;
  QList<float>ColumnSizes;
+ void resizeColumns();
+ bool AutoResizeColumns;
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);
  virtual void paintEvent(QPaintEvent* event);
  virtual void resizeEvent(QResizeEvent* event);
+public slots:
+ void OnColumnResized(int index,int OldSize, int NewSize);
 };
 
 

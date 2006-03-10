@@ -3,8 +3,15 @@
 # Unterordner relativ zum Projektordner: ./src
 # Das Target ist eine Anwendung:  ../bin/keepass
 
-INSTALLS += Share 
+INSTALLS += target \
+            Share
 Share.files += ../share/keepass/* 
+unix{ target.path = /usr/local/bin
+      Share.path = /usr/local/share/keepass
+}
+macx{ target.path = /Applications
+      Share.path = /Applications/keepass.app/Contents/share/keepass
+}
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
          forms/AboutDlg.ui \
@@ -100,11 +107,3 @@ thread \
 exceptions \
 stl
 TEMPLATE = app
-unix{
-  target.path = /usr/local/bin
-  Share.path = /usr/local/share/keepass
-}
-macx{
-  target.path = /Applications
-  Share.path = /Applications/keepass.app/Contents/share/keepass
-}

@@ -113,6 +113,8 @@ private:
  inline CGroup* currentGroup();
  inline CEntry* currentEntry();
  QLineEdit* QuickSearchEdit;
+ QLabel* StatusBarGeneral;
+ QLabel* StatusBarSelection;
 
 protected:
  void closeEvent(QCloseEvent* event);

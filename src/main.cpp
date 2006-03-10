@@ -129,6 +129,7 @@ SecString::generateSessionKey();
 KeepassMainWindow *mainWin = new KeepassMainWindow();
 mainWin->show();
 int r=app->exec();
+delete mainWin;
 if(!config.saveToIni(IniFilename))
 	QMessageBox::warning(NULL,QObject::tr("Warnung"),QObject::trUtf8("Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass\nSie Schreibrechte im Verzeichnis ~/.keepass besitzen."),QObject::tr("OK"),"","",0.0);
 delete app;

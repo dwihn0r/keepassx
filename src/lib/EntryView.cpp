@@ -18,7 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
+#include <math.h>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
@@ -32,12 +32,26 @@
 
 
 KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
+AutoResizeColumns=true;
+int sum=0;
+for(int i=0;i<NUM_COLUMNS;i++)
+	sum+=config.ColumnSizes[i];
+for(int i=0;i<NUM_COLUMNS;i++)
+	ColumnSizes << (float)config.ColumnSizes[i]/(float)sum;
+
 CurrentGroup=0;
 updateColumns();
 header()->setResizeMode(QHeaderView::Interactive);
 header()->setStretchLastSection(false);
+connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized(int,int,int)));
 ContextMenu=new QMenu(this);
 
+}
+
+KeepassEntryView::~KeepassEntryView(){
+for(int i=0;i<ColumnSizes.size();i++){
+	config.ColumnSizes[i]=round(ColumnSizes[i]*10000.0f);
+}
 }
 
 
@@ -69,7 +83,7 @@ ContextMenu->popup(e->globalPos());
 }
 
 void KeepassEntryView::resizeEvent(QResizeEvent* e){
-
+resizeColumns();
 e->accept();
 }
 
@@ -198,7 +212,80 @@ if(config.Columns[8]){
 if(config.Columns[9]){
  cols << trUtf8("Anhang");}
 setHeaderLabels(cols);
+resizeColumns();
 }
+
+void KeepassEntryView::resizeColumns(){
+
+AutoResizeColumns=false;
+
+for(int i=0;i<NUM_COLUMNS;i++)
+	if(!config.Columns[i])ColumnSizes[i]=0;
+
+for(int i=0;i<NUM_COLUMNS;i++)
+	if(config.Columns[i] && ColumnSizes[i]==0)ColumnSizes[i]=0.1f;
+
+float sum=0;
+for(int i=0;i<NUM_COLUMNS;i++)
+	sum+=ColumnSizes[i];
+
+for(int i=0;i<NUM_COLUMNS;i++)
+	ColumnSizes[i]/=sum;
+
+int w=viewport()->width();
+int wx=0; int j=0;
+
+
+for(int i=0;i<NUM_COLUMNS;i++){
+	if(!config.Columns[i])continue;
+	int NewWidth=round(ColumnSizes[i]*(float)w);
+	wx+=NewWidth;
+	header()->resizeSection(j++,NewWidth);
+	//add rounding difference (w-wx) to the last column
+	if(j==header()->count()){
+		header()->resizeSection(j-1,header()->sectionSize(j-1)+(w-wx));
+	}
+}
+
+AutoResizeColumns=true;
+
+}
+
+
+void KeepassEntryView::OnColumnResized(int index,int Old, int New){
+if(!AutoResizeColumns)return;
+
+int i=0; int c=-1;
+for(i;i<ColumnSizes.size();i++){
+	if(config.Columns[i])c++;
+	if(c==index)break;
+}
+
+int j=0; c=-1; bool IsLastColumn=true;
+for(j;j<ColumnSizes.size();j++){
+	if(config.Columns[j])c++;
+	if(c==(index+1)){IsLastColumn=false; break;}
+}
+
+if(IsLastColumn){
+	j=0; c=-1;
+	for(j;j<ColumnSizes.size();j++){
+		if(config.Columns[j])c++;
+		if(c==(index-1))break;
+	}
+}
+
+int w=viewport()->width();
+float div=(float)(New-Old)/(float)w;
+
+if(((ColumnSizes[j]-div)*w > 2)){
+	ColumnSizes[j]-=div;
+	ColumnSizes[i]+=div;
+}
+resizeColumns();
+}
+
+
 
 void KeepassEntryView::paintEvent(QPaintEvent * event){
 QTreeWidget::paintEvent(event);

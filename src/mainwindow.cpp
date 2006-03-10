@@ -36,6 +36,7 @@
 #include <QShowEvent>
 #include <QWidget>
 #include <QFileDialog>
+#include <QStatusBar>
 
 #include "lib/random.h"
 #include "lib/IniReader.h"
@@ -71,6 +72,11 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   setupConnections();
   FileOpen=false;
   Clipboard=QApplication::clipboard();
+  setStatusBar(new QStatusBar(this));
+  StatusBarGeneral=new QLabel(tr("Bereit"),statusBar());
+  StatusBarSelection=new QLabel(statusBar());
+  statusBar()->addWidget(StatusBarGeneral,30);
+  statusBar()->addWidget(StatusBarSelection,70);
 }
 
 void KeepassMainWindow::setupConnections(){

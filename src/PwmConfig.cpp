@@ -163,7 +163,7 @@ if(count > lst.size()){
 	for(int i=lst.size(); i<count; i++)
 		values[i]=DEFAULT_INT_VAL;}
 
-memcpy(dst,values,count);
+memcpy(dst,values,count*sizeof(int));
 delete [] values;
 }
 
