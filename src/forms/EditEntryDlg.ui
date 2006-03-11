@@ -1,5 +1,5 @@
 <ui version="4.0" >
- <author></author>
+ <author>Tarek Saidi</author>
  <comment></comment>
  <exportmacro></exportmacro>
  <class>EditEntryDialog</class>
@@ -33,7 +33,7 @@
    </size>
   </property>
   <property name="windowTitle" >
-   <string>Eintrag bearbeiten</string>
+   <string>Edit Entry</string>
   </property>
   <property name="modal" >
    <bool>true</bool>
@@ -108,7 +108,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Benutzername:</string>
+    <string>Username:</string>
    </property>
   </widget>
   <widget class="QLabel" name="textLabel8" >
@@ -121,7 +121,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Passwort Wdhlg.:</string>
+    <string>Password Repet.:</string>
    </property>
   </widget>
   <widget class="QLabel" name="textLabel4" >
@@ -134,7 +134,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Titel:</string>
+    <string>Title:</string>
    </property>
   </widget>
   <widget class="QLabel" name="textLabel7" >
@@ -160,7 +160,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Passwort:</string>
+    <string>Password:</string>
    </property>
   </widget>
   <widget class="QLabel" name="textLabel9" >
@@ -173,7 +173,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Qualität:</string>
+    <string>Quality:</string>
    </property>
   </widget>
   <widget class="QLabel" name="textLabel10" >
@@ -186,7 +186,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Kommentar:</string>
+    <string>Comment:</string>
    </property>
   </widget>
   <widget class="QLabel" name="textLabel11" >
@@ -199,7 +199,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>gültig bis:</string>
+    <string>Expires:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="Edit_URL" >
@@ -222,7 +222,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Gruppe:</string>
+    <string>Group:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="ButtonCancel" >
@@ -235,7 +235,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Abbre&amp;chen</string>
+    <string>&amp;Cancel</string>
    </property>
    <property name="shortcut" >
     <string>Alt+C</string>
@@ -251,7 +251,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>5,30 MB</string>
+    <string>%1</string>
    </property>
   </widget>
   <widget class="QLabel" name="Banner" >
@@ -298,7 +298,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>120 Bits</string>
+    <string>% Bit</string>
    </property>
   </widget>
   <widget class="QToolButton" name="ButtonGenPw" >
@@ -373,7 +373,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>läuft nicht ab</string>
+    <string>Never</string>
    </property>
   </widget>
   <widget class="QProgressBar" name="Progress_Quali" >
@@ -405,7 +405,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Anhang:</string>
+    <string>Attachment:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="Edit_Attachment" >

@@ -15,7 +15,6 @@ macx{ target.path = /Applications
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
          forms/AboutDlg.ui \
-         forms/LanguageDlg.ui \
          forms/SettingsDlg.ui \
          forms/ChangeKeyDlg.ui \
          forms/MainWindow.ui \
@@ -24,8 +23,9 @@ FORMS += forms/EditGroupDlg.ui \
          forms/PasswordDlg.ui \
          forms/EditEntryDlg.ui \
          forms/PasswordGenDlg.ui 
-TRANSLATIONS += translations/english.ts \
-                translations/russian.ts 
+TRANSLATIONS += translations/keepass-de_DE.ts \
+		translations/keepass-ru_Ru.ts \
+                translations/keepass-xx_XX.ts
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \
            mainwindow.h \
@@ -44,7 +44,6 @@ HEADERS += lib/IniReader.h \
            dialogs/EditGroupDlg.h \
            dialogs/SearchDlg.h \
            dialogs/ChangeKeyDlg.h \
-           dialogs/LanguageDlg.h \
            dialogs/SettingsDlg.h \
            dialogs/DatabaseSettingsDlg.h \
            dialogs/PasswordDlg.h \
@@ -79,7 +78,6 @@ SOURCES += lib/IniReader.cpp \
            dialogs/EditGroupDlg.cpp \
            dialogs/SearchDlg.cpp \
            dialogs/ChangeKeyDlg.cpp \
-           dialogs/LanguageDlg.cpp \
            dialogs/SettingsDlg.cpp \
            dialogs/DatabaseSettingsDlg.cpp \
            dialogs/PasswordDlg.cpp \

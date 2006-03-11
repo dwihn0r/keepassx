@@ -1,384 +1,384 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
- <class>SettingsDialog</class>
- <widget class="QDialog" name="SettingsDialog" >
-  <property name="geometry" >
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>571</width>
-    <height>341</height>
-   </rect>
-  </property>
-  <property name="minimumSize" >
-   <size>
-    <width>571</width>
-    <height>341</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>571</width>
-    <height>341</height>
-   </size>
-  </property>
-  <property name="windowTitle" >
-   <string>Einstellungen</string>
-  </property>
-  <widget class="QLabel" name="Banner" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>570</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="pixmap" >
-    <pixmap/>
-   </property>
-   <property name="scaledContents" >
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QTabWidget" name="tabWidget4" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>550</width>
-     <height>241</height>
-    </rect>
-   </property>
-   <widget class="QWidget" name="tab" >
-    <attribute name="title" >
-     <string>Sicherhei&amp;t</string>
-    </attribute>
-    <widget class="QLabel" name="textLabel1" >
-     <property name="geometry" >
+  <author/>
+  <comment/>
+  <exportmacro/>
+  <class>SettingsDialog</class>
+  <widget class="QDialog" name="SettingsDialog" >
+    <property name="geometry" >
       <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>231</width>
-       <height>20</height>
+        <x>0</x>
+        <y>0</y>
+        <width>571</width>
+        <height>341</height>
       </rect>
-     </property>
-     <property name="text" >
-      <string>Zwischenablage löschen nach:</string>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="SpinBox_ClipboardTime" >
-     <property name="geometry" >
-      <rect>
-       <x>250</x>
-       <y>20</y>
-       <width>80</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="textLabel2" >
-     <property name="geometry" >
-      <rect>
-       <x>340</x>
-       <y>20</y>
-       <width>100</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Sekunden</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>420</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Passw&amp;örter standardmäßig in Klartext anzeigen</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="TabPage" >
-    <attribute name="title" >
-     <string>E&amp;rscheinungsbild</string>
-    </attribute>
-    <widget class="Q3GroupBox" name="groupBox1" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>520</width>
-       <height>90</height>
-      </rect>
-     </property>
-     <property name="title" >
-      <string>Bannerfarbverlauf</string>
-     </property>
-     <widget class="QLabel" name="textLabel1_3" >
+    </property>
+    <property name="minimumSize" >
+      <size>
+        <width>571</width>
+        <height>341</height>
+      </size>
+    </property>
+    <property name="maximumSize" >
+      <size>
+        <width>571</width>
+        <height>341</height>
+      </size>
+    </property>
+    <property name="windowTitle" >
+      <string>Settings</string>
+    </property>
+    <widget class="QLabel" name="Banner" >
       <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>53</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Farbe 1</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="pixmColor1" >
-      <property name="geometry" >
-       <rect>
-        <x>70</x>
-        <y>20</y>
-        <width>22</width>
-        <height>22</height>
-       </rect>
+        <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>570</width>
+          <height>50</height>
+        </rect>
       </property>
       <property name="pixmap" >
-       <pixmap/>
+        <pixmap/>
       </property>
       <property name="scaledContents" >
-       <bool>true</bool>
+        <bool>true</bool>
       </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonColor1" >
+    </widget>
+    <widget class="QTabWidget" name="tabWidget4" >
       <property name="geometry" >
-       <rect>
-        <x>100</x>
-        <y>20</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
+        <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>550</width>
+          <height>241</height>
+        </rect>
+      </property>
+      <widget class="QWidget" name="tab" >
+        <attribute name="title" >
+          <string>Securi&amp;try</string>
+        </attribute>
+        <widget class="QLabel" name="textLabel1" >
+          <property name="geometry" >
+            <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>231</width>
+              <height>20</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Clear clipboard after:</string>
+          </property>
+        </widget>
+        <widget class="QSpinBox" name="SpinBox_ClipboardTime" >
+          <property name="geometry" >
+            <rect>
+              <x>250</x>
+              <y>20</y>
+              <width>80</width>
+              <height>20</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLabel" name="textLabel2" >
+          <property name="geometry" >
+            <rect>
+              <x>340</x>
+              <y>20</y>
+              <width>100</width>
+              <height>20</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Seconds</string>
+          </property>
+        </widget>
+        <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
+          <property name="geometry" >
+            <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>420</width>
+              <height>20</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Sh&amp;ow passwords in plain text by default</string>
+          </property>
+          <property name="shortcut" >
+            <string>Alt+O</string>
+          </property>
+        </widget>
+      </widget>
+      <widget class="QWidget" name="TabPage" >
+        <attribute name="title" >
+          <string>Appea&amp;rance</string>
+        </attribute>
+        <widget class="Q3GroupBox" name="groupBox1" >
+          <property name="geometry" >
+            <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>520</width>
+              <height>90</height>
+            </rect>
+          </property>
+          <property name="title" >
+            <string>Banner Color</string>
+          </property>
+          <widget class="QLabel" name="textLabel1_3" >
+            <property name="geometry" >
+              <rect>
+                <x>10</x>
+                <y>20</y>
+                <width>53</width>
+                <height>20</height>
+              </rect>
+            </property>
+            <property name="text" >
+              <string>Color 1</string>
+            </property>
+          </widget>
+          <widget class="QLabel" name="pixmColor1" >
+            <property name="geometry" >
+              <rect>
+                <x>70</x>
+                <y>20</y>
+                <width>22</width>
+                <height>22</height>
+              </rect>
+            </property>
+            <property name="pixmap" >
+              <pixmap/>
+            </property>
+            <property name="scaledContents" >
+              <bool>true</bool>
+            </property>
+          </widget>
+          <widget class="QPushButton" name="ButtonColor1" >
+            <property name="geometry" >
+              <rect>
+                <x>100</x>
+                <y>20</y>
+                <width>60</width>
+                <height>23</height>
+              </rect>
+            </property>
+            <property name="text" >
+              <string>C&amp;hange...</string>
+            </property>
+            <property name="shortcut" >
+              <string>Alt+H</string>
+            </property>
+          </widget>
+          <widget class="QLabel" name="textLabel3" >
+            <property name="geometry" >
+              <rect>
+                <x>190</x>
+                <y>20</y>
+                <width>60</width>
+                <height>20</height>
+              </rect>
+            </property>
+            <property name="text" >
+              <string>Color 2</string>
+            </property>
+          </widget>
+          <widget class="QLabel" name="pixmTextColor" >
+            <property name="geometry" >
+              <rect>
+                <x>70</x>
+                <y>50</y>
+                <width>22</width>
+                <height>22</height>
+              </rect>
+            </property>
+            <property name="pixmap" >
+              <pixmap/>
+            </property>
+            <property name="scaledContents" >
+              <bool>true</bool>
+            </property>
+          </widget>
+          <widget class="QPushButton" name="ButtonTextColor" >
+            <property name="geometry" >
+              <rect>
+                <x>100</x>
+                <y>50</y>
+                <width>60</width>
+                <height>23</height>
+              </rect>
+            </property>
+            <property name="text" >
+              <string>Change...</string>
+            </property>
+            <property name="shortcut" >
+              <string/>
+            </property>
+          </widget>
+          <widget class="QLabel" name="textLabel2_2" >
+            <property name="geometry" >
+              <rect>
+                <x>10</x>
+                <y>50</y>
+                <width>54</width>
+                <height>20</height>
+              </rect>
+            </property>
+            <property name="text" >
+              <string>Text Color</string>
+            </property>
+          </widget>
+          <widget class="QLabel" name="pixmColor2" >
+            <property name="geometry" >
+              <rect>
+                <x>250</x>
+                <y>20</y>
+                <width>22</width>
+                <height>22</height>
+              </rect>
+            </property>
+            <property name="pixmap" >
+              <pixmap/>
+            </property>
+            <property name="scaledContents" >
+              <bool>true</bool>
+            </property>
+          </widget>
+          <widget class="QPushButton" name="ButtonColor2" >
+            <property name="geometry" >
+              <rect>
+                <x>280</x>
+                <y>20</y>
+                <width>60</width>
+                <height>23</height>
+              </rect>
+            </property>
+            <property name="text" >
+              <string>Change...</string>
+            </property>
+            <property name="shortcut" >
+              <string/>
+            </property>
+          </widget>
+        </widget>
+        <widget class="QCheckBox" name="CheckBox_ExpandGroupTree" >
+          <property name="geometry" >
+            <rect>
+              <x>10</x>
+              <y>110</y>
+              <width>380</width>
+              <height>20</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Expand group tree when opening a database</string>
+          </property>
+          <property name="shortcut" >
+            <string>Alt+Ö</string>
+          </property>
+        </widget>
+      </widget>
+      <widget class="QWidget" name="tab" >
+        <attribute name="title" >
+          <string>&amp;Other</string>
+        </attribute>
+        <widget class="QCheckBox" name="CheckBox_OpenLast" >
+          <property name="geometry" >
+            <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>380</width>
+              <height>20</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Remember last opend file</string>
+          </property>
+          <property name="shortcut" >
+            <string>Alt+Ö</string>
+          </property>
+        </widget>
+        <widget class="QLabel" name="textLabel1_4" >
+          <property name="geometry" >
+            <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>110</width>
+              <height>20</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Browser Command:</string>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Edit_BrowserCmd" >
+          <property name="geometry" >
+            <rect>
+              <x>120</x>
+              <y>50</y>
+              <width>190</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+      </widget>
+    </widget>
+    <widget class="QPushButton" name="ButtonOK" >
+      <property name="geometry" >
+        <rect>
+          <x>380</x>
+          <y>310</y>
+          <width>80</width>
+          <height>23</height>
+        </rect>
       </property>
       <property name="text" >
-       <string>&amp;ändern...</string>
+        <string>O&amp;K</string>
       </property>
       <property name="shortcut" >
-       <string>Alt+Ä</string>
+        <string>Alt+K</string>
       </property>
-     </widget>
-     <widget class="QLabel" name="textLabel3" >
+    </widget>
+    <widget class="QPushButton" name="ButtonCancel" >
       <property name="geometry" >
-       <rect>
-        <x>190</x>
-        <y>20</y>
-        <width>60</width>
-        <height>20</height>
-       </rect>
+        <rect>
+          <x>470</x>
+          <y>310</y>
+          <width>90</width>
+          <height>23</height>
+        </rect>
       </property>
       <property name="text" >
-       <string>Farbe 2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="pixmTextColor" >
-      <property name="geometry" >
-       <rect>
-        <x>70</x>
-        <y>50</y>
-        <width>22</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="pixmap" >
-       <pixmap/>
-      </property>
-      <property name="scaledContents" >
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonTextColor" >
-      <property name="geometry" >
-       <rect>
-        <x>100</x>
-        <y>50</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>ändern...</string>
+        <string>&amp;Cancel</string>
       </property>
       <property name="shortcut" >
-       <string/>
+        <string>Alt+C</string>
       </property>
-     </widget>
-     <widget class="QLabel" name="textLabel2_2" >
-      <property name="geometry" >
-       <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>54</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>Textfarbe</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="pixmColor2" >
-      <property name="geometry" >
-       <rect>
-        <x>250</x>
-        <y>20</y>
-        <width>22</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="pixmap" >
-       <pixmap/>
-      </property>
-      <property name="scaledContents" >
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ButtonColor2" >
-      <property name="geometry" >
-       <rect>
-        <x>280</x>
-        <y>20</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text" >
-       <string>ändern...</string>
-      </property>
-      <property name="shortcut" >
-       <string/>
-      </property>
-     </widget>
     </widget>
-    <widget class="QCheckBox" name="CheckBox_ExpandGroupTree" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>380</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Gruppenbaum beim &amp;Öffnen aufklappen</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tab" >
-    <attribute name="title" >
-     <string>S&amp;onstiges</string>
-    </attribute>
-    <widget class="QCheckBox" name="CheckBox_OpenLast" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>380</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>zuletzt geöffnete Datei bei Programmstart &amp;öffnen</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="textLabel1_4" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>110</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Browseraufruf:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="Edit_BrowserCmd" >
-     <property name="geometry" >
-      <rect>
-       <x>120</x>
-       <y>50</y>
-       <width>190</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
   </widget>
-  <widget class="QPushButton" name="ButtonOK" >
-   <property name="geometry" >
-    <rect>
-     <x>380</x>
-     <y>310</y>
-     <width>80</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>O&amp;K</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+K</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="ButtonCancel" >
-   <property name="geometry" >
-    <rect>
-     <x>470</x>
-     <y>310</y>
-     <width>90</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Abbre&amp;chen</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+C</string>
-   </property>
-  </widget>
- </widget>
- <layoutdefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends></extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-   <pixmap></pixmap>
-  </customwidget>
- </customwidgets>
- <tabstops>
-  <tabstop>tabWidget4</tabstop>
-  <tabstop>SpinBox_ClipboardTime</tabstop>
-  <tabstop>CheckBox_ShowPasswords</tabstop>
-  <tabstop>ButtonColor1</tabstop>
-  <tabstop>ButtonTextColor</tabstop>
-  <tabstop>ButtonColor2</tabstop>
-  <tabstop>CheckBox_OpenLast</tabstop>
-  <tabstop>Edit_BrowserCmd</tabstop>
-  <tabstop>ButtonOK</tabstop>
-  <tabstop>ButtonCancel</tabstop>
- </tabstops>
- <resources/>
- <connections/>
+  <layoutdefault spacing="6" margin="11" />
+  <pixmapfunction/>
+  <customwidgets>
+    <customwidget>
+      <class>Q3GroupBox</class>
+      <extends/>
+      <header>Qt3Support/Q3GroupBox</header>
+      <container>1</container>
+      <pixmap/>
+    </customwidget>
+  </customwidgets>
+  <tabstops>
+    <tabstop>tabWidget4</tabstop>
+    <tabstop>SpinBox_ClipboardTime</tabstop>
+    <tabstop>CheckBox_ShowPasswords</tabstop>
+    <tabstop>ButtonColor1</tabstop>
+    <tabstop>ButtonTextColor</tabstop>
+    <tabstop>ButtonColor2</tabstop>
+    <tabstop>CheckBox_OpenLast</tabstop>
+    <tabstop>Edit_BrowserCmd</tabstop>
+    <tabstop>ButtonOK</tabstop>
+    <tabstop>ButtonCancel</tabstop>
+  </tabstops>
+  <resources/>
+  <connections/>
 </ui>

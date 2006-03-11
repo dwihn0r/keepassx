@@ -35,7 +35,7 @@ connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 connect( ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 connect( ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
 connect( ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
-createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"));
+createBanner(Banner,Icon_Settings32x32,tr("Settings"));
 CheckBox_OpenLast->setChecked(config.OpenLast);
 SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
 
@@ -95,7 +95,7 @@ QPixmap *px=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
 px->fill(c);
 pixmTextColor->clear();
 pixmTextColor->setPixmap(*px);
-createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);}
+createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);}
 }
 
 
@@ -108,7 +108,7 @@ QPixmap *px=new QPixmap(pixmColor2->width(),pixmColor2->height());
 px->fill(c);
 pixmColor2->clear();
 pixmColor2->setPixmap(*px);
-createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);}
+createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);}
 }
 
 
@@ -121,7 +121,7 @@ QPixmap *px=new QPixmap(pixmColor1->width(),pixmColor1->height());
 px->fill(c);
 pixmColor1->clear();
 pixmColor1->setPixmap(*px);
-createBanner(Banner,Icon_Settings32x32,trUtf8("Einstellungen"),color1,color2,textcolor);
+createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
 }
 }
 

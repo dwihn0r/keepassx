@@ -1,298 +1,298 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
- <class>Search_Dlg</class>
- <widget class="QDialog" name="Search_Dlg" >
-  <property name="geometry" >
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>390</width>
-    <height>260</height>
-   </rect>
-  </property>
-  <property name="sizePolicy" >
-   <sizepolicy>
-    <hsizetype>0</hsizetype>
-    <vsizetype>0</vsizetype>
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
-  <property name="minimumSize" >
-   <size>
-    <width>390</width>
-    <height>260</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>390</width>
-    <height>260</height>
-   </size>
-  </property>
-  <property name="windowTitle" >
-   <string>Suche...</string>
-  </property>
-  <widget class="QLabel" name="textLabel1" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>90</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Suchbegriff:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="Edit_Search" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>60</y>
-     <width>270</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_regExp" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>110</y>
-     <width>170</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>regul&amp;ärer Ausdruck</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+Ä</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_Cs" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>90</y>
-     <width>250</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Gro&amp;ß- und Kleinschreibung beachten</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+ß</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Banner" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>390</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="pixmap" >
-    <pixmap/>
-   </property>
-   <property name="scaledContents" >
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="Q3GroupBox" name="groupBox1" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>150</y>
-     <width>370</width>
-     <height>70</height>
-    </rect>
-   </property>
-   <property name="title" >
-    <string>Suche nach</string>
-   </property>
-   <property name="orientation" >
-    <enum>Qt::Vertical</enum>
-   </property>
-   <widget class="QCheckBox" name="checkBox_Title" >
+  <author/>
+  <comment/>
+  <exportmacro/>
+  <class>Search_Dlg</class>
+  <widget class="QDialog" name="Search_Dlg" >
     <property name="geometry" >
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>110</width>
-      <height>20</height>
-     </rect>
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>390</width>
+        <height>260</height>
+      </rect>
     </property>
-    <property name="text" >
-     <string>&amp;Titel</string>
+    <property name="sizePolicy" >
+      <sizepolicy>
+        <hsizetype>0</hsizetype>
+        <vsizetype>0</vsizetype>
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+      </sizepolicy>
     </property>
-    <property name="shortcut" >
-     <string>Alt+T</string>
+    <property name="minimumSize" >
+      <size>
+        <width>390</width>
+        <height>260</height>
+      </size>
     </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_Username" >
-    <property name="geometry" >
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>110</width>
-      <height>20</height>
-     </rect>
+    <property name="maximumSize" >
+      <size>
+        <width>390</width>
+        <height>260</height>
+      </size>
     </property>
-    <property name="text" >
-     <string>Benut&amp;zername</string>
+    <property name="windowTitle" >
+      <string>Search...</string>
     </property>
-    <property name="shortcut" >
-     <string>Alt+Z</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_Comment" >
-    <property name="geometry" >
-     <rect>
-      <x>140</x>
-      <y>40</y>
-      <width>120</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>&amp;Kommentar</string>
-    </property>
-    <property name="shortcut" >
-     <string>Alt+K</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_URL" >
-    <property name="geometry" >
-     <rect>
-      <x>260</x>
-      <y>20</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>&amp;URL</string>
-    </property>
-    <property name="shortcut" >
-     <string>Alt+U</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_Attachment" >
-    <property name="geometry" >
-     <rect>
-      <x>260</x>
-      <y>40</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>A&amp;nhang</string>
-    </property>
-    <property name="shortcut" >
-     <string>Alt+N</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_Password" >
-    <property name="geometry" >
-     <rect>
-      <x>140</x>
-      <y>20</y>
-      <width>110</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Pass&amp;wort</string>
-    </property>
-    <property name="shortcut" >
-     <string>Alt+W</string>
-    </property>
-   </widget>
+    <widget class="QLabel" name="textLabel1" >
+      <property name="geometry" >
+        <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>90</width>
+          <height>20</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Search For:</string>
+      </property>
+    </widget>
+    <widget class="QLineEdit" name="Edit_Search" >
+      <property name="geometry" >
+        <rect>
+          <x>110</x>
+          <y>60</y>
+          <width>270</width>
+          <height>21</height>
+        </rect>
+      </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_regExp" >
+      <property name="geometry" >
+        <rect>
+          <x>110</x>
+          <y>110</y>
+          <width>170</width>
+          <height>20</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Regular E&amp;xpression</string>
+      </property>
+      <property name="shortcut" >
+        <string>Alt+X</string>
+      </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_Cs" >
+      <property name="geometry" >
+        <rect>
+          <x>110</x>
+          <y>90</y>
+          <width>250</width>
+          <height>20</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>&amp;Case Sensitive</string>
+      </property>
+      <property name="shortcut" >
+        <string>Alt+C</string>
+      </property>
+    </widget>
+    <widget class="QLabel" name="Banner" >
+      <property name="geometry" >
+        <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>390</width>
+          <height>50</height>
+        </rect>
+      </property>
+      <property name="pixmap" >
+        <pixmap/>
+      </property>
+      <property name="scaledContents" >
+        <bool>true</bool>
+      </property>
+    </widget>
+    <widget class="Q3GroupBox" name="groupBox1" >
+      <property name="geometry" >
+        <rect>
+          <x>10</x>
+          <y>150</y>
+          <width>370</width>
+          <height>70</height>
+        </rect>
+      </property>
+      <property name="title" >
+        <string>Include:</string>
+      </property>
+      <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QCheckBox" name="checkBox_Title" >
+        <property name="geometry" >
+          <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>110</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>&amp;Titles</string>
+        </property>
+        <property name="shortcut" >
+          <string>Alt+T</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Username" >
+        <property name="geometry" >
+          <rect>
+            <x>20</x>
+            <y>40</y>
+            <width>110</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>&amp;Usernames</string>
+        </property>
+        <property name="shortcut" >
+          <string>Alt+U</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Comment" >
+        <property name="geometry" >
+          <rect>
+            <x>140</x>
+            <y>40</y>
+            <width>120</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>C&amp;omments</string>
+        </property>
+        <property name="shortcut" >
+          <string>Alt+O</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_URL" >
+        <property name="geometry" >
+          <rect>
+            <x>260</x>
+            <y>20</y>
+            <width>100</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>U&amp;RLs</string>
+        </property>
+        <property name="shortcut" >
+          <string>Alt+R</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Attachment" >
+        <property name="geometry" >
+          <rect>
+            <x>260</x>
+            <y>40</y>
+            <width>100</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>A&amp;nhang</string>
+        </property>
+        <property name="shortcut" >
+          <string>Alt+N</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_Password" >
+        <property name="geometry" >
+          <rect>
+            <x>140</x>
+            <y>20</y>
+            <width>110</width>
+            <height>20</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Pass&amp;words</string>
+        </property>
+        <property name="shortcut" >
+          <string>Alt+W</string>
+        </property>
+      </widget>
+    </widget>
+    <widget class="QPushButton" name="Button_Search" >
+      <property name="geometry" >
+        <rect>
+          <x>170</x>
+          <y>230</y>
+          <width>97</width>
+          <height>23</height>
+        </rect>
+      </property>
+      <property name="sizePolicy" >
+        <sizepolicy>
+          <hsizetype>0</hsizetype>
+          <vsizetype>0</vsizetype>
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+        </sizepolicy>
+      </property>
+      <property name="text" >
+        <string>Search</string>
+      </property>
+    </widget>
+    <widget class="QPushButton" name="Button_Close" >
+      <property name="geometry" >
+        <rect>
+          <x>280</x>
+          <y>230</y>
+          <width>97</width>
+          <height>23</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Clo&amp;se</string>
+      </property>
+      <property name="shortcut" >
+        <string>Alt+S</string>
+      </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_Recursive" >
+      <property name="geometry" >
+        <rect>
+          <x>110</x>
+          <y>130</y>
+          <width>271</width>
+          <height>22</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Include Subgroups (recursive)</string>
+      </property>
+    </widget>
   </widget>
-  <widget class="QPushButton" name="Button_Search" >
-   <property name="geometry" >
-    <rect>
-     <x>170</x>
-     <y>230</y>
-     <width>97</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="sizePolicy" >
-    <sizepolicy>
-     <hsizetype>0</hsizetype>
-     <vsizetype>0</vsizetype>
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="text" >
-    <string>Suchen</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Button_Close" >
-   <property name="geometry" >
-    <rect>
-     <x>280</x>
-     <y>230</y>
-     <width>97</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>S&amp;chließen</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+C</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_Recursive" >
-   <property name="geometry" >
-    <rect>
-     <x>110</x>
-     <y>130</y>
-     <width>271</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>Untergruppen einbeziehen</string>
-   </property>
-  </widget>
- </widget>
- <layoutdefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends></extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-   <pixmap></pixmap>
-  </customwidget>
- </customwidgets>
- <tabstops>
-  <tabstop>Edit_Search</tabstop>
-  <tabstop>checkBox_Cs</tabstop>
-  <tabstop>checkBox_regExp</tabstop>
-  <tabstop>checkBox_Title</tabstop>
-  <tabstop>checkBox_Username</tabstop>
-  <tabstop>checkBox_Password</tabstop>
-  <tabstop>checkBox_Comment</tabstop>
-  <tabstop>checkBox_URL</tabstop>
-  <tabstop>checkBox_Attachment</tabstop>
-  <tabstop>Button_Search</tabstop>
-  <tabstop>Button_Close</tabstop>
- </tabstops>
- <resources/>
- <connections/>
+  <layoutdefault spacing="6" margin="11" />
+  <pixmapfunction/>
+  <customwidgets>
+    <customwidget>
+      <class>Q3GroupBox</class>
+      <extends/>
+      <header>Qt3Support/Q3GroupBox</header>
+      <container>1</container>
+      <pixmap/>
+    </customwidget>
+  </customwidgets>
+  <tabstops>
+    <tabstop>Edit_Search</tabstop>
+    <tabstop>checkBox_Cs</tabstop>
+    <tabstop>checkBox_regExp</tabstop>
+    <tabstop>checkBox_Title</tabstop>
+    <tabstop>checkBox_Username</tabstop>
+    <tabstop>checkBox_Password</tabstop>
+    <tabstop>checkBox_Comment</tabstop>
+    <tabstop>checkBox_URL</tabstop>
+    <tabstop>checkBox_Attachment</tabstop>
+    <tabstop>Button_Search</tabstop>
+    <tabstop>Button_Close</tabstop>
+  </tabstops>
+  <resources/>
+  <connections/>
 </ui>

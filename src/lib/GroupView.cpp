@@ -211,7 +211,7 @@ for(int i=0;i<Items.size();i++){
 }
 if(ShowSearchGroup){
  	 Items.push_back(new GroupViewItem(this));
-     Items.back()->setText(0,trUtf8("Suchergebnisse"));
+     Items.back()->setText(0,tr("Search Results"));
      Items.back()->pGroup=NULL;
      QFont f=Items.back()->font(0);
      f.setItalic(true);

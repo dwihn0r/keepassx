@@ -47,7 +47,6 @@
 #include "dialogs/EditGroupDlg.h"
 #include "dialogs/SearchDlg.h"
 #include "dialogs/ChangeKeyDlg.h"
-#include "dialogs/LanguageDlg.h"
 #include "dialogs/SettingsDlg.h"
 #include "dialogs/DatabaseSettingsDlg.h"
 #include "dialogs/PasswordDlg.h"
@@ -73,7 +72,7 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   FileOpen=false;
   Clipboard=QApplication::clipboard();
   setStatusBar(new QStatusBar(this));
-  StatusBarGeneral=new QLabel(tr("Bereit"),statusBar());
+  StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
   StatusBarSelection=new QLabel(statusBar());
   statusBar()->addWidget(StatusBarGeneral,30);
   statusBar()->addWidget(StatusBarSelection,70);
@@ -121,6 +120,8 @@ void KeepassMainWindow::setupConnections(){
    connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
 
    connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
+
+   connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
 
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
@@ -256,9 +257,10 @@ setStateFileModified(false);
 else{
 //ERROR
 delete db;
-if(err=="")err=trUtf8("unbekannter Fehler in PwDatabase::loadDatabase()");
-QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Beim öffnen der Datenbank ist ein Fehler aufgetreten:\n%1")
-				 .arg(err),trUtf8("OK"));
+if(err=="")err=tr("Unknown error in PwDatabase::loadDatabase()");
+QMessageBox::critical(this,tr("Error")
+						  ,tr("The following error occured while opening the database:\n%1")
+				 		  .arg(err),tr("OK"));
 }
 }
 
@@ -266,8 +268,8 @@ bool KeepassMainWindow::closeDatabase(){
 Q_ASSERT(FileOpen);
 Q_ASSERT(db!=NULL);
 if(ModFlag){
- int r=QMessageBox::question(this,trUtf8("Geänderte Datei speichern?"),
-				  trUtf8("Die aktuell geöffnete Datei wurde verändert. Sollen die Änderungen\nvor dem Schließen gespeichert werden?"),tr("Ja"),tr("Nein"),tr("Abbrechen"),2,2);
+ int r=QMessageBox::question(this,tr("Save modified file?"),
+				  tr("The current file was modified. Do you want\nto save the changes?"),tr("Yes"),tr("No"),tr("Cancel"),2,2);
  if(r==2)return false;			//Abbrechen
  if(r==0)				//Ja (Datei speichern)
   if(!OnFileSave())return false;
@@ -283,7 +285,7 @@ GroupView->Items.clear();
 SearchResults.clear();
 GroupView->ShowSearchGroup=false;
 setStateFileOpen(false);
-setCaption("Keepass Passwort-Manager");
+setCaption("KeePassX Password Manager");
 return true;
 }
 
@@ -294,7 +296,7 @@ if(FileOpen)
 db=new PwDatabase();
 CChangeKeyDlg dlg(this,db);
 if(dlg.exec()==1){
-setCaption(tr("Keepass - %1").arg(tr("[neu]")));
+setCaption(tr("KeePassX - %1").arg(tr("[neu]")));
 GroupView->db=db;
 EntryView->db=db;
 GroupView->updateItems();
@@ -309,7 +311,7 @@ else delete db;
 void KeepassMainWindow::OnFileOpen(){
 if(FileOpen)
  if(!closeDatabase())return;
-QString filename=QFileDialog::getOpenFileName(this,trUtf8("Databank öffnen..."),QDir::homePath(),"*.kdb");
+QString filename=QFileDialog::getOpenFileName(this,tr("Databank öffnen..."),QDir::homePath(),"*.kdb");
 if(filename!=QString::null){
  openDatabase(filename);
 }
@@ -401,7 +403,7 @@ if(EntryView->selectedItems().size()!=1){
  return;}
 
 CEntry& entry=*((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry;
-QString str=trUtf8("<B>Gruppe: </B>%1  <B>Titel: </B>%2  <B>Benutzername: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Passwort: </B>%5  <B>Erstellt: </B>%6  <B>letzte Änderung: </B>%7  <B>letzter Zugriff: </B>%8  <B>gültig bis: </B>%9");
+QString str=tr("<B>Group: </B>%1  <B>Title: </B>%2  <B>Username: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Password: </B>%5  <B>Creation: </B>%6  <B>Last Change: </B>%7  <B>LastAccess: </B>%8  <B>Expires: </B>%9");
 //todo: a "CGroup* PwDatabase::getGroup(CEntry*)" method would be a good idea
 str=str.arg(db->Groups[db->getGroupIndex(entry.GroupID)].Name).arg(entry.Title);
 
@@ -437,9 +439,9 @@ switch(EntrySelection){
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
     EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(false);
-    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    EditDeleteEntryAction->setText(tr("Delete Entry"));
     break;
  case SINGLE:
     EditPasswordToClipboardAction->setEnabled(true);
@@ -448,9 +450,9 @@ switch(EntrySelection){
     EditSaveAttachmentAction->setEnabled(true);
     EditEditEntryAction->setEnabled(true);
     EditCloneEntryAction->setEnabled(true);
-    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    EditDeleteEntryAction->setText(tr("Delete Entry"));
     break;
  case MULTIPLE:
     EditPasswordToClipboardAction->setEnabled(false);
@@ -459,9 +461,9 @@ switch(EntrySelection){
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
     EditCloneEntryAction->setEnabled(true);
-    EditCloneEntryAction->setText(trUtf8("Einträge duplizieren"));
+    EditCloneEntryAction->setText(tr("Clone Entries"));
     EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(trUtf8("Einträge löschen"));
+    EditDeleteEntryAction->setText(tr("Delete Entries"));
     break;
  default: Q_ASSERT(false);
 }
@@ -474,9 +476,9 @@ switch(EntrySelection){
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
     EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(false);
-    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    EditDeleteEntryAction->setText(tr("Delete Entry"));
     break;
  case SINGLE:
     EditPasswordToClipboardAction->setEnabled(true);
@@ -485,9 +487,9 @@ switch(EntrySelection){
     EditSaveAttachmentAction->setEnabled(true);
     EditEditEntryAction->setEnabled(true);
     EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(trUtf8("Eintrag duplizieren"));
+    EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(trUtf8("Eintrag löschen"));
+    EditDeleteEntryAction->setText(tr("Delete Entry"));
     break;
  case MULTIPLE:
     EditPasswordToClipboardAction->setEnabled(false);
@@ -496,9 +498,9 @@ switch(EntrySelection){
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
     EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(trUtf8("Einträge duplizieren"));
+    EditCloneEntryAction->setText(tr("Clone Entries"));
     EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(trUtf8("Einträge löschen"));
+    EditDeleteEntryAction->setText(tr("Delete Entries"));
     break;
  default: Q_ASSERT(false);
 }
@@ -511,17 +513,17 @@ if(db->filename==QString())
 if(db->saveDatabase())
   setStateFileModified(false);
 else{
-  showErrMsg(trUtf8("Die Datei konnte nicht gespeichert werden.\n%1").arg(db->getError()));
+  showErrMsg(tr("File could not be saved.\n%1").arg(db->getError()));
   return false;  
 }
 return true;
 }
 
 bool KeepassMainWindow::OnFileSaveAs(){
-QString filename=QFileDialog::getSaveFileName(this,trUtf8("Datenbank speichern unter..."),QDir::homePath(),"*.kdb"); 
+QString filename=QFileDialog::getSaveFileName(this,tr("Save Database As..."),QDir::homePath(),"*.kdb"); 
 if(filename==QString()) return false;
 db->filename=filename;
-setCaption(tr("Keepass - %1").arg(db->filename));
+setCaption(tr("KeePassX - %1").arg(db->filename));
 return OnFileSave();
 }
 
@@ -789,7 +791,11 @@ else
 void KeepassMainWindow::OnExtrasSettings(){
 CSettingsDlg dlg(this,"SettingsDlg");
 dlg.exec();
+}
 
+void KeepassMainWindow::OnHelpAbout(){
+CAboutDialog dlg(this,"AboutDlg");
+dlg.exec();
 }
 
 void KeepassMainWindow::OnViewShowToolbar(bool show){

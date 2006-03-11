@@ -28,28 +28,16 @@
 class CAboutDialog : public QDialog, public Ui_AboutDlg
 {
   Q_OBJECT
-
-  LinkLabel *Link_Homepage,*Link_EMail,*Link_License;
 public:
   CAboutDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CAboutDialog();
-
-  /*$PUBLIC_FUNCTIONS$*/
-
-public slots:
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
 
 public slots:
     virtual void OnClose();
     void OnHomepageClicked();
     void OnEMailClicked();
-    void OnLicenseClicked();
+private:
+	inline void loadLicFromFile();
 };
 
 #endif

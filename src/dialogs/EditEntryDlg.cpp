@@ -51,7 +51,7 @@ Q_ASSERT(_entry);
 entry=_entry;
 db=_db;
 setupUi(this);
-createBanner(Banner,Icon_Key32x32,trUtf8("Eintrag bearbeiten"));
+createBanner(Banner,Icon_Key32x32,tr("Eintrag bearbeiten"));
 ModFlag=false;
 connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
 connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
@@ -155,7 +155,7 @@ Combo_Group->setCurrentItem(db->getGroupIndex(entry->GroupID));
 void CEditEntryDlg::OnButtonOK()
 {
 if(QString::compare(Edit_Password->text(),Edit_Password_w->text())!=0){
-QMessageBox::warning(NULL,"Stopp",QString::fromUtf8("Passwort und Passwortwiederholung stimmen\nnicht überein."),"OK");
+QMessageBox::warning(NULL,tr("Warning"),tr("Password and password repetition are not equal.\nPlease check your input."),tr("OK"));
 return;
 }
 
@@ -257,7 +257,7 @@ if(filename=="")return;
 QFile file(filename);
 if(file.open(QIODevice::ReadOnly)==false){
 file.close();
-QMessageBox::warning(NULL,trUtf8("Fehler"),trUtf8("Datei konnte nicht geöffnet werden."),"OK");
+QMessageBox::warning(NULL,tr("Fehler"),tr("Datei konnte nicht geöffnet werden."),"OK");
 return;
 }
 ModFlag=true;
@@ -286,30 +286,30 @@ saveAttachment(entry,this);
 
 void CEditEntryDlg::saveAttachment(CEntry* pEntry, QWidget* ParentWidget)
 {
-QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",ParentWidget,trUtf8("Anhang speichern..."));
+QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",ParentWidget,tr("Save Attachment..."));
 if(filename=="")return;
 QFile file(filename);
 if(file.exists()){
-int r=QMessageBox::warning(ParentWidget,QString::fromUtf8("Vorhandene Datei überschreiben?"),QString::fromUtf8("Unter dem gewählten Dateinamen existiert bereits eine Datei.\nSoll sie überschrieben werden?"),"Ja","Nein",NULL,1,1);
+int r=QMessageBox::warning(ParentWidget,tr("Overwrite?"),tr("A file with this name already exists.\nDo you want to replace it?"),tr("Yes"),tr("No"),NULL,1,1);
 if(r==1)return;
 if(file.remove()==false){
-QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht überschrieben werden."),"OK");
+QMessageBox::critical(NULL,tr("Error"),tr("Could not remove old file."),tr("OK"));
 return;}
 }
 if(file.open(QIODevice::WriteOnly)==false){
-QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Datei konnte nicht erstellt werden."),"OK");
+QMessageBox::critical(NULL,tr("Error"),tr("Could not create new file."),tr("OK"));
 return;
 }
 
 int r=file.write(pEntry->BinaryData);
 if(r==-1){
 file.close();
-QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Beim schreiben in der Datei ist ein Fehler aufgetreten."),"OK");
+QMessageBox::critical(NULL,tr("Error"),tr("Error while writing the file."),"OK");
 return;
 }
 if(r!=pEntry->BinaryData.length()){
 file.close();
-QMessageBox::critical(NULL,"Fehler",QString::fromUtf8("Die Datei konnte nicht vollständig geschrieben werden."),"OK");
+QMessageBox::critical(NULL,tr("Error"),tr("Error while writing the file."),tr("OK"));
 return;
 }
 file.close();
@@ -317,7 +317,7 @@ file.close();
 
 void CEditEntryDlg::OnDeleteAttachment()
 {
-int r=QMessageBox::warning(this,trUtf8("Anhang löschen?"),trUtf8("Sie sind dabei den Anhang zu löschen.\nSind Sie sicher, dass Sie dies tun wollen?"),trUtf8("Ja"),trUtf8("Nein"),NULL,1,1);
+int r=QMessageBox::warning(this,tr("Delete Attachment?"),tr("You are about to delete the attachment of this entry.\nAre you sure?"),tr("Yes"),tr("No, Cancel"),NULL,1,1);
 if(r==0){
 ModFlag=true;
 entry->BinaryData.clear();

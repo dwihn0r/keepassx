@@ -87,12 +87,15 @@ else{
 void CGenPwDialog::OnGeneratePw()
 {
 /*
-Großbuchstaben 65...90
-Kleinbuchstaben 97...122
-Zahlen 48...57
-Sonderzeichen 33...47;58...64;91...96;123...126
-Minus 45
-Unterstrich 95
+-------
+ ASCII
+-------
+"A...Z" 65...90
+"a...z" 97...122
+"0...9" 48...57
+Special Charakters 33...47;58...64;91...96;123...126
+"-" 45
+"_" 95
 ANSI >127
 */
 
@@ -147,8 +150,8 @@ num++;
 }
 }
 if(num==0){
-if(Radio_2->isChecked())QMessageBox::information(this,"Hinweis",QString::fromUtf8("Es wird mindestens ein Zeichen benötigt"),"OK");
-else QMessageBox::information(this,"Hinweis",QString::fromUtf8("Es muss mindestens ein Gruppe von Zeichen gewählt werden"),"OK");
+if(Radio_2->isChecked())QMessageBox::information(this,tr("Notice"),tr("You need to enter at least one character"),tr("OK"));
+else QMessageBox::information(this,tr("Notice"),QString::fromUtf8("You need to select at least one character group."),"OK");
 return;
 }
 int length=Spin_Num->value();
@@ -161,7 +164,7 @@ else
 {dev_random = fopen("/dev/urandom","r");}
 
 if (dev_random==NULL){
-QMessageBox::critical(this,"Fehler",QString::fromUtf8("'/dev/random' bzw. '/dev/urandom' konnte nicht zum lesen geöffnet werden."),"OK");
+QMessageBox::critical(this,tr("Error"),tr("Could not open '/dev/random' or '/dev/urandom'."),tr("OK"));
 return;
 }
 unsigned char tmp;

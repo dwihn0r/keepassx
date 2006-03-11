@@ -1,5 +1,5 @@
 <ui version="4.0" >
- <author></author>
+ <author>Tarek Saidi</author>
  <comment></comment>
  <exportmacro></exportmacro>
  <class>MainWindow</class>
@@ -16,7 +16,7 @@
    <bool>true</bool>
   </property>
   <property name="windowTitle" >
-   <string>Keepass Passwort-Manager</string>
+   <string>KeePassX</string>
   </property>
   <widget class="QWidget" name="centralWidget" >
    <layout class="QVBoxLayout" >
@@ -114,18 +114,13 @@
      <height>29</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHilfe" >
-    <property name="title" >
-     <string>Hilfe</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuDatei" >
     <property name="title" >
-     <string>Datei</string>
+     <string>File</string>
     </property>
     <widget class="QMenu" name="menuImportieren_aus" >
      <property name="title" >
-      <string>Importieren aus</string>
+      <string>Import from...</string>
      </property>
      <addaction name="FileImpPwmAction" />
      <addaction name="FileImpKWalletXmlAction" />
@@ -146,7 +141,7 @@
    </widget>
    <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
-     <string>Bearbeiten</string>
+     <string>Edit</string>
     </property>
     <addaction name="EditNewGroupAction" />
     <addaction name="EditEditGroupAction" />
@@ -167,11 +162,11 @@
    </widget>
    <widget class="QMenu" name="menuAnsicht" >
     <property name="title" >
-     <string>Ansicht</string>
+     <string>View</string>
     </property>
     <widget class="QMenu" name="menuSpalten" >
      <property name="title" >
-      <string>Spalten</string>
+      <string>Columns</string>
      </property>
      <addaction name="ViewColumnsTitleAction" />
      <addaction name="ViewColumnsUsernameAction" />
@@ -198,6 +193,12 @@
      <string>Extras</string>
     </property>
     <addaction name="ExtrasSettingsAction" />
+   </widget>
+   <widget class="QMenu" name="menuHilfe" >
+    <property name="title" >
+     <string>Help</string>
+    </property>
+    <addaction name="HelpAboutAction" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -241,117 +242,117 @@
   </widget>
   <action name="FileNewAction" >
    <property name="text" >
-    <string>Neue Datenbank...</string>
+    <string>New Database...</string>
    </property>
   </action>
   <action name="FileOpenAction" >
    <property name="text" >
-    <string>Datenbank öffnen...</string>
+    <string>Open Database...</string>
    </property>
   </action>
   <action name="FileCloseAction" >
    <property name="text" >
-    <string>Datenbank schließen</string>
+    <string>Close Database</string>
    </property>
   </action>
   <action name="FileSaveAction" >
    <property name="text" >
-    <string>Datenbank speichern</string>
+    <string>Save Database</string>
    </property>
   </action>
   <action name="FileSaveAsAction" >
    <property name="text" >
-    <string>Datenbank speichern unter...</string>
+    <string>Save Database As...</string>
    </property>
   </action>
   <action name="FileSettingsAction" >
    <property name="text" >
-    <string>Datenbank-Einstellungen...</string>
+    <string>Database Settings...</string>
    </property>
   </action>
   <action name="FileChangeKeyAction" >
    <property name="text" >
-    <string>Hauptschlüssel ändern...</string>
+    <string>Change Master Key...</string>
    </property>
   </action>
   <action name="FileExitAction" >
    <property name="text" >
-    <string>Beenden</string>
+    <string>Exit</string>
    </property>
   </action>
   <action name="FileImpPwmAction" >
    <property name="text" >
-    <string>PwManager-Datei (*.pwm)</string>
+    <string>PwManager File (*.pwm)</string>
    </property>
   </action>
   <action name="FileImpKWalletXmlAction" >
    <property name="text" >
-    <string>KWallet XML-Datei (*.xml)</string>
+    <string>KWallet XML-File (*.xml)</string>
    </property>
   </action>
   <action name="EditNewGroupAction" >
    <property name="text" >
-    <string>Neue Gruppe hinzufügen...</string>
+    <string>Add New Group...</string>
    </property>
   </action>
   <action name="EditEditGroupAction" >
    <property name="text" >
-    <string>Gruppe bearbeiten...</string>
+    <string>Edit Group...</string>
    </property>
   </action>
   <action name="EditDeleteGroupAction" >
    <property name="text" >
-    <string>Gruppe löschen</string>
+    <string>Delete Group</string>
    </property>
   </action>
   <action name="EditPasswordToClipboardAction" >
    <property name="text" >
-    <string>Passwort in Zwischenablage kopieren</string>
+    <string>Copy Password to Clipboard</string>
    </property>
   </action>
   <action name="EditUsernameToClipboardAction" >
    <property name="text" >
-    <string>Benutzername in Zwischenablage kopieren</string>
+    <string>Copy Username to Clipboard</string>
    </property>
   </action>
   <action name="EditOpenUrlAction" >
    <property name="text" >
-    <string>URL öffnen</string>
+    <string>Open URL</string>
    </property>
   </action>
   <action name="EditSaveAttachmentAction" >
    <property name="text" >
-    <string>Anhang speichern unter...</string>
+    <string>Save Attachment As...</string>
    </property>
   </action>
   <action name="EditNewEntryAction" >
    <property name="text" >
-    <string>Neuen Eintrag hinzufügen...</string>
+    <string>Add New Entry...</string>
    </property>
   </action>
   <action name="EditEditEntryAction" >
    <property name="text" >
-    <string>Eintrag anzeigen/bearbeiten...</string>
+    <string>View/Edit Entry...</string>
    </property>
   </action>
   <action name="EditDeleteEntryAction" >
    <property name="text" >
-    <string>Eintrag löschen</string>
+    <string>Delete Entry</string>
    </property>
   </action>
   <action name="EditCloneEntryAction" >
    <property name="text" >
-    <string>Eintrag duplizieren</string>
+    <string>Clone Entry</string>
    </property>
   </action>
   <action name="EditSearchAction" >
    <property name="text" >
-    <string>In Datenbank suchen...</string>
+    <string>Search In Database...</string>
    </property>
   </action>
   <action name="EditGroupSearchAction" >
    <property name="text" >
-    <string>In dieser Gruppe suchen...</string>
+    <string>Search in this group...</string>
    </property>
   </action>
   <action name="ViewShowToolbarAction" >
@@ -359,7 +360,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Werkzeugleiste anzeigen</string>
+    <string>Show Toolbar</string>
    </property>
   </action>
   <action name="ViewShowEntryDetailsAction" >
@@ -367,7 +368,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Eintragsansicht anzeigen</string>
+    <string>Show Entry Details</string>
    </property>
   </action>
   <action name="ViewHideUsernamesAction" >
@@ -375,7 +376,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Benutzernamen verbergen</string>
+    <string>Hide Usernames</string>
    </property>
   </action>
   <action name="ViewHidePasswordsAction" >
@@ -383,7 +384,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Passwörter verbergen</string>
+    <string>Hide Passwords</string>
    </property>
   </action>
   <action name="ViewColumnsTitleAction" >
@@ -391,7 +392,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Titel</string>
+    <string>Title</string>
    </property>
   </action>
   <action name="ViewColumnsUsernameAction" >
@@ -399,7 +400,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Benutzername</string>
+    <string>Username</string>
    </property>
   </action>
   <action name="ViewColumnsUrlAction" >
@@ -415,7 +416,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Passwort</string>
+    <string>Password</string>
    </property>
   </action>
   <action name="ViewColumnsCommentAction" >
@@ -423,7 +424,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Kommentar</string>
+    <string>Comment</string>
    </property>
   </action>
   <action name="ViewColumnsExpireAction" >
@@ -431,7 +432,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Ablaufdatum</string>
+    <string>Expires</string>
    </property>
   </action>
   <action name="ViewColumnsCreationAction" >
@@ -439,7 +440,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Erstellungsdatum</string>
+    <string>Creation</string>
    </property>
   </action>
   <action name="ViewColumnsLastChangeAction" >
@@ -447,7 +448,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Letzte Änderung</string>
+    <string>Last Change</string>
    </property>
   </action>
   <action name="ViewColumnsLastAccessAction" >
@@ -455,7 +456,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Letzter Zugriff</string>
+    <string>Last Access</string>
    </property>
   </action>
   <action name="ViewColumnsAttachmentAction" >
@@ -463,28 +464,33 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Anhang</string>
+    <string>Attachment</string>
    </property>
   </action>
   <action name="ExtrasSettingsAction" >
    <property name="text" >
-    <string>Einstellungen...</string>
+    <string>Settings...</string>
+   </property>
+  </action>
+  <action name="HelpAboutAction" >
+   <property name="text" >
+    <string>About...</string>
    </property>
   </action>
  </widget>
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>

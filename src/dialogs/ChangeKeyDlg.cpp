@@ -46,7 +46,7 @@ connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBoxChang
 connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
 
 db=_db;
-createBanner(Banner,Icon_Key32x32,trUtf8("Hauptschlüssel ändern"));
+createBanner(Banner,Icon_Key32x32,tr("Change Master Key"));
 if(!config.ShowPasswords)ChangeEchoMode();
 ///@PlatformSpecific
 QDir media("/media");
@@ -73,17 +73,17 @@ CChangeKeyDlg::~CChangeKeyDlg()
 void CChangeKeyDlg::OnOK()
 {
 if(CheckBox_Both->isChecked()){
- if(password==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Bitte geben Sie ein Passwort ein.")
-                                      ,trUtf8("OK"),"","",0,0);
+ if(password==""){QMessageBox::warning(this,tr("Error"),tr("Please enter a password.")
+                                      ,tr("OK"),"","",0,0);
 			return;}
- if(keyfile==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Bitte wählen Sie eine Schlüsseldatei.")
-                                      ,trUtf8("OK"),"","",0,0);
+ if(keyfile==""){QMessageBox::warning(this,tr("Error"),tr("Please choose a key file.")
+                                      ,tr("OK"),"","",0,0);
 			return;}
 }
 else
 {
- if(password=="" && keyfile==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Geben Sie bitte ein Passwort ein oder wählen Sie eine Schlüsseldatei.")
-                                      ,trUtf8("OK"),"","",0,0);
+ if(password=="" && keyfile==""){QMessageBox::warning(this,tr("Error"),tr("Please select a key file or enter a password.")
+                                      ,tr("OK"),"","",0,0);
 			return;}
 }
 
@@ -93,16 +93,16 @@ Q_UINT8 pw_key[32]={0};
 if(keyfile!=""){
 QFile file(keyfile);
 if(file.exists()){
-int r=QMessageBox::warning(this,trUtf8("Vorhandene Datei überschreiben?"),trUtf8("Unter dem gewählten Dateinamen existiert bereits eine Datei.\nSoll sie überschrieben werden?"),"Ja","Nein",NULL,1,1);
+int r=QMessageBox::warning(this,tr("Overwrite?"),tr("A file with this name already exists.\nDo you want to replace it?"),"Yes","No",NULL,1,1);
 if(r==1)return;}
 getRandomBytes(file_key,1,32,true);
 if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)==false){
-QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Schlüsseldatei konnte nicht geöffnet werden."),"OK",0,0,2,1);
+QMessageBox::critical(this,tr("Error"),tr("Could not open key file for writing."),"OK",0,0,2,1);
 return;
 }
 if(file.writeBlock((char*)file_key,32)!=32){
 file.close();
-QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Das Schreiben der Schlüsseldatei ist fehlgeschlagen."),"OK",0,0,2,1);
+QMessageBox::critical(this,tr("Error"),tr("Key file could not be written."),"OK",0,0,2,1);
 return;
 }
 file.close();
@@ -110,7 +110,7 @@ file.close();
 
 if(CheckBox_Both->isChecked() || keyfile==""){
 	if(password!=Edit_Password_2->text()){
-		QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Passwort und Passwortwiederholung stimmen nicht überein.\nBitte prüfen Sie Ihre Eingabe."),"OK",0,0,2,1);
+		QMessageBox::critical(this,tr("Error"),tr("Password and password repetition are not equal.\nPlease check your input."));
 		return;}}
 
 if(CheckBox_Both->isChecked())db->CalcMasterKeyByFileAndPw(keyfile, password);
@@ -123,7 +123,7 @@ done(1);
 void CChangeKeyDlg::OnSelect()
 {
 if(Button_Browse->isEnabled()){
-keyfile=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",this,trUtf8("Schlüsseldatei öffnen"));
+keyfile=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",this,tr("Open key file"));
 if(keyfile=="")return;
 Combo_Dirs->insertItem(keyfile);
 Combo_Dirs->setCurrentItem(Combo_Dirs->count()-1);
@@ -140,7 +140,7 @@ IsFile.append(true);
 
 void CChangeKeyDlg::OnBrowse()
 {
-QString dir=Q3FileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,trUtf8("Verzeichnis wählen"));
+QString dir=Q3FileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,tr("Choose Directory"));
 if(dir=="")return;
 keyfile=dir+"/pwsafe.key";
 Combo_Dirs->insertItem(dir);

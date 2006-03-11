@@ -87,6 +87,7 @@ private slots:
    void OnUsernPasswVisibilityChanged(bool hide);
    void OnFileModified();
    void OnExtrasSettings();
+   void OnHelpAbout();
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};

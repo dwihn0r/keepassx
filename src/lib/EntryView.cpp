@@ -192,25 +192,25 @@ void KeepassEntryView::updateColumns(){
 setColumnCount(0);
 QStringList cols;
 if(config.Columns[0]){
- cols << trUtf8("Titel");}
+ cols << tr("Title");}
 if(config.Columns[1]){
- cols << trUtf8("Benutzername");}
+ cols << tr("Username");}
 if(config.Columns[2]){
- cols << trUtf8("URL");}
+ cols << tr("URL");}
 if(config.Columns[3]){
- cols << trUtf8("Passwort");}
+ cols << tr("Password");}
 if(config.Columns[4]){
- cols << trUtf8("Kommentare");}
+ cols << tr("Comments");}
 if(config.Columns[5]){
- cols << trUtf8("Gültig bis");}
+ cols << tr("Expires");}
 if(config.Columns[6]){
- cols << trUtf8("Erstellung");}
+ cols << tr("Creation");}
 if(config.Columns[7]){
- cols << trUtf8("letzte Ãnderung");}
+ cols << tr("Last Change");}
 if(config.Columns[8]){
- cols << trUtf8("letzter Zugriff");}
+ cols << tr("Last Access");}
 if(config.Columns[9]){
- cols << trUtf8("Anhang");}
+ cols << tr("Attachment");}
 setHeaderLabels(cols);
 resizeColumns();
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 #include <qmessagebox.h>
-#include <q3scrollview.h>
 #include <qlabel.h>
 #include <qdialog.h>
 #include <qfile.h>
@@ -31,22 +30,13 @@ CAboutDialog::CAboutDialog(QWidget* parent, const char* name, bool modal, Qt::WF
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
-createBanner(Banner,Icon_Key32x32,trUtf8("Keepass für Linux"));
-Link_Homepage=new LinkLabel(this,"Link_Homepage",trUtf8("http://keepass.de.vu"),80,143);
-Link_EMail=new LinkLabel(this,"Link_EMail",trUtf8("tarek.saidi@arcor.de"),80,163);
-Link_License=new LinkLabel(this,"Link_License",trUtf8("Lizenz"),80,183);
-connect(Link_License,SIGNAL(clicked()),this,SLOT(OnLicenseClicked()));
-connect(Link_EMail,SIGNAL(clicked()),this,SLOT(OnEMailClicked()));
-connect(Link_Homepage,SIGNAL(clicked()),this,SLOT(OnHomepageClicked()));
-Label0->setText(Label0->text().arg(KEEPASS_VERSION));
-
+createBanner(Banner,Icon_Key32x32,tr("KeePassX %1").arg(KEEPASS_VERSION));
+loadLicFromFile();
 }
 
 CAboutDialog::~CAboutDialog()
 {
-delete Link_Homepage;
-delete Link_EMail;
-delete Link_License;
+
 }
 
 void CAboutDialog::OnClose()
@@ -54,38 +44,28 @@ void CAboutDialog::OnClose()
 close();
 }
 
-void CAboutDialog::OnLicenseClicked(){
+void CAboutDialog::loadLicFromFile(){
 
-QDialog dlg(this,NULL,true);
-Q3ScrollView scroll(&dlg);
-QLabel label(&scroll,"License-Scroll");
-scroll.addChild(&label);
-QFile gpl(AppDir+"/../share/keepass/license.txt");
+QFile gpl(AppDir+"/../share/keepass/license.html");
 if(!gpl.exists()){
-QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Die Datei '%1' konnte nicht gefunden werden.")
-			  .arg("'license.txt'")+"\n"+trUtf8("Die Anwendung wurde möglicherweiße nicht korrekt installiert.")
-			  ,trUtf8("OK"),0,0,2,1);
+QMessageBox::critical(this,tr("Error"),tr("File '%1' could not be found.")
+			  .arg("'license.html'")+"\n"+tr("Make sure that the program is installed correctly.")
+			  ,tr("OK"),0,0,2,1);
 return;
 }
 
 if(!gpl.open(QIODevice::ReadOnly)){
-QMessageBox::critical(this,trUtf8("Fehler"),trUtf8("Die Datei '%1' konnte nicht geöffnet werden.")
-			  .arg("'license.txt'")+trUtf8("Es trat folgender Fehler auf:\n%1").arg(gpl.errorString())			 
-			  ,trUtf8("OK"),0,0,2,1);
+QMessageBox::critical(this,tr("Fehler"),tr("Could not open file '%1'")
+			  .arg("'license.txt'")+tr("The following error occured:\n%1").arg(gpl.errorString())			 
+			  ,tr("OK"),0,0,2,1);
 return;
 }
+
 char* buffer=new char[gpl.size()];
 long l=gpl.readBlock(buffer,gpl.size());
 gpl.close();
-label.setText(QString::fromUtf8(buffer,l));
-label.setGeometry(0,0,500,800);
-dlg.setFixedWidth(500);
-dlg.setFixedHeight(400);
-dlg.setCaption(trUtf8("Lizenz"));
-scroll.setGeometry(0,0,500,400);
-dlg.exec();
+Edit_License->setText(QString::fromUtf8(buffer,l));
 delete buffer;
-
 }
 
 void CAboutDialog::OnHomepageClicked(){

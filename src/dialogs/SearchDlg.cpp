@@ -33,7 +33,7 @@ setupUi(this);
 connect( Button_Search, SIGNAL( clicked() ), this, SLOT( OnButtonSearch() ) );
 connect( Button_Close, SIGNAL( clicked() ), this, SLOT( OnButtonClose() ) );
 
-createBanner(Banner,Icon_Search32x32,tr("Suchen"));
+createBanner(Banner,Icon_Search32x32,tr("Search"));
 checkBox_Cs->setChecked(config.SearchOptions[0]);
 checkBox_regExp->setChecked(config.SearchOptions[1]);
 checkBox_Title->setChecked(config.SearchOptions[2]);
@@ -76,7 +76,7 @@ Hits.clear();
 txt=Edit_Search->text();
 regexp=checkBox_regExp->isChecked();
 if(txt==""){
-QMessageBox::information(this,trUtf8("Hinweis"),trUtf8("Bitte geben Sie einen Suchbegriff ein."),"OK",0,0);
+QMessageBox::information(this,tr("Notice"),tr("Please enter a search string."),tr("OK"));
 return;}
 
 for(int i=0;i<db->Entries.size();i++){

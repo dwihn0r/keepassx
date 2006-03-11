@@ -33,33 +33,33 @@ QFile file(filename);
 char* buffer=NULL;
 int offset=0;
 int len=0;
-if(!file.exists()){err+=QObject::trUtf8("Die angegebene Datei existiert nicht."); return false;}
-if(!file.open(QIODevice::ReadOnly)){err+=QObject::trUtf8("Datei konnte nicht geöffnet werden."); return false;}
+if(!file.exists()){err+=QObject::tr("File not found."); return false;}
+if(!file.open(QIODevice::ReadOnly)){err+=QObject::tr("Could not open file."); return false;}
 if(len=file.size()) buffer=new char[len];
-else {err+=QObject::trUtf8("Datei ist leer"); return false;}
+else {err+=QObject::tr("Datei ist leer"); return false;}
 file.readBlock(buffer,len);
 file.close();
 if(QString::fromAscii(buffer,17)!="PWM_PASSWORD_FILE")
-  {err+=QObject::trUtf8("Keine gültige PwManager-Datei"); return false;}
+  {err+=QObject::tr("File is no valid PwManager file."); return false;}
 offset+=17;
 if(buffer[offset]!=0x05)
- {err+=QObject::trUtf8("Nicht unterstützte Version"); return false;}
+ {err+=QObject::tr("Unsupported file version."); return false;}
 offset++;
 if(buffer[offset]!=0x01)
- {err+=QObject::trUtf8("Nicht unterstützter Hash-Algorithmus"); return false;}
+ {err+=QObject::tr("Unsupported hash algorithm."); return false;}
 offset++;
 if(buffer[offset]!=0x01)
- {err+=QObject::trUtf8("Nicht unterstützter Hash-Algorithmus"); return false;}
+ {err+=QObject::tr("Unsupported hash algorithm."); return false;}
 offset++;
 if(buffer[offset]!=0x01)
- {err+=QObject::trUtf8("Nicht unterstützter Verschlüsselungs-Algorithmus"); return false;}
+ {err+=QObject::tr("Unsupported encryption algorithm."); return false;}
 offset++;
 if(buffer[offset]==0x00)Compression=0;
 if(buffer[offset]==0x01)Compression=1;
 if(buffer[offset]==0x02)Compression=2;
   ///@TODO Compression
   if(buffer[offset])
-  {err+=QObject::trUtf8("Komprimierte PwManager-Dateien werden nicht unterstützt"); return false;}
+  {err+=QObject::tr("Compressed files are not supported yet."); return false;}
 offset++;
 if(buffer[offset]==0x00)KeyFlag=true;
 else KeyFlag=false;
@@ -84,7 +84,7 @@ memcpy(Key,password.ascii(),pwlen);
   sha.GetHash((unsigned char*)key_hash);
   if(memcmp(key_hash,KeyHash,20)){
 	delete[] Key; delete [] key_hash; delete [] buffer;
-	err+=QObject::trUtf8("Falsches Passwort");
+	err+=QObject::tr("Wrong password.");
 	return false;
 }
 delete [] key_hash;
@@ -99,14 +99,14 @@ delete [] buffer;
   sha.GetHash((unsigned char*)content_hash);
   if(memcmp(content_hash,DataHash,20)){
 	delete [] content_hash; delete [] xml;
-	err+=QObject::trUtf8("Dateiinhalt ungültig (Hash-Test fehlgeschlagen)");
+	err+=QObject::tr("File is damaged (hash test failed).");
 	return false;
 }
 delete[] content_hash;
 
 if(!parseXmlContent((char*)xml)){
 	delete [] xml;
-	err+=QObject::trUtf8("Ungültiger XML-Inhalt"); return false;}
+	err+=QObject::tr("Invalid XML data (see stdout for details)."); return false;}
 return true;
 }
 
@@ -120,7 +120,7 @@ if(!db.setContent(QString::fromUtf8(content,strlen(content)-1),false,&err,&line,
 	return false;}
 QDomElement root=db.documentElement();
 if(root.tagName()!="P")return false;
-//Kommentar und Kategorie haben das selbe Tag "c"
+//Achtung! Kommentare und Kategorien haben das selbe Tag "c"
 if(!root.elementsByTagName("c").item(0).isElement())return false;
 QDomElement groups=root.elementsByTagName("c").item(0).toElement();
 

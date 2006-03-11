@@ -37,8 +37,8 @@ CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, 
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
-createBanner(Banner,Icon_Key32x32,trUtf8("Datenbank öffnen"));
-Label_select=new LinkLabel((QWidget*)groupframe,"Select",trUtf8("Datei manuell wählen..."),410,100);
+createBanner(Banner,Icon_Key32x32,tr("Datenbank öffnen"));
+Label_select=new LinkLabel((QWidget*)groupframe,"Select",tr("Datei manuell wählen..."),410,100);
 connect( Combo_Dirs, SIGNAL( activated(int) ), this, SLOT( OnComboSelectionChanged(int) ) );
 connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
 connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
@@ -48,7 +48,7 @@ connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_Both
 connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
 connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 
-///@PlatformSpecific
+
 QDir media("/media");
 if(media.exists()){
 Paths=media.entryList("*",QDir::Dirs);
@@ -58,7 +58,7 @@ Paths.erase(Paths.begin()); // delete ".."
 for(int i=0;i<Paths.count();i++){
 Paths[i]="/media/"+Paths[i];
 }
-Paths.prepend(trUtf8("< keiner >"));
+Paths.prepend(tr("< keiner >"));
 }
 for(int i=0;i<Paths.count();i++){
 Combo_Dirs->insertItem(0,Paths[i]);
@@ -92,20 +92,21 @@ Edit_Password->setText("");
 Edit_Password->setDisabled(true);}
 return;
 }
-QMessageBox::warning(this,"Datei nicht gefunden",QString::fromUtf8("Im gewählten Verzeichnis konnte keine Schlüsseldatei gefunden werden.\nStellen Sie sicher, dass der Schlüssel-Datenträger ordnungsgemäß eingehängt (mounted) ist.\nSollte die Schlüsseldatei nicht den Dateinamen 'pwsafe.key' haben, nutzen Sie bitte die manuelle Dateiauswahl."),"OK","","",0,0);
+QMessageBox::warning(this,tr("No key file found"),tr(
+"No key file could be found in the chosen directory.\n\
+Make sure that the volume is mounted correctly.\n\
+Please use the manual file selection for key files with a filename other than 'pwsafe.key'.")
+,tr("OK"),"","",0,0);
 Edit_Password->setEnabled(true);
 Combo_Dirs->setCurrentItem(0);
-
 return;
 }
 
 
 void CPasswordDialog::OnButtonBrowse()
 {
-///@PlatformSpecific
-QString dir=Q3FileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,QString::fromUtf8("Verzeichnis wählen"));
+QString dir=Q3FileDialog::getExistingDirectory(QDir::homeDirPath(),NULL,tr("Browse..."));
 if(dir=="")return;
-
 QFile file(dir+"/pwsafe.key");
 if(file.exists()){
 keyfile=dir+"/pwsafe.key";
@@ -119,13 +120,17 @@ if(!CheckBox_Both->isChecked()){
 Paths.append(dir);
 IsFile.append(false);
 return;}
-QMessageBox::warning(this,"Datei nicht gefunden",QString::fromUtf8("Im gewählten Verzeichnis konnte keine Schlüsseldatei gefunden werden.\nStellen Sie sicher, dass der Schlüssel-Datenträger ordnungsgemäß eingehängt (mounted) ist.\nSollte die Schlüsseldatei nicht den Dateinamen 'pwsafe.key' haben, nutzen Sie bitte die manuelle Dateiauswahl."),"OK","","",0,0);
+QMessageBox::warning(this,tr("No key file found"),tr(
+"No key file could be found in the chosen directory.\n\
+Make sure that the volume is mounted correctly.\n\
+Please use the manual file selection for key files with a filename other than 'pwsafe.key'.")
+,tr("OK"),"","",0,0);
 }
 
 void CPasswordDialog::OnSelectClicked()
 {
 if(ButtonBrowse->isEnabled()){
-keyfile=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Schlüsseldatei öffnen"));
+keyfile=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"",this,tr("Open Key File"));
 if(keyfile=="")return;
 Combo_Dirs->insertItem(keyfile);
 Combo_Dirs->setCurrentItem(Combo_Dirs->count()-1);
@@ -148,17 +153,18 @@ void CPasswordDialog::OnOK()
 {
 
 if(CheckBox_Both->isChecked()){
- if(password==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Bitte geben Sie ein Passwort ein.")
-                                      ,trUtf8("OK"),"","",0,0);
+ if(password==""){QMessageBox::warning(this,tr("Error"),tr("Please enter a Password.")
+                                      ,tr("OK"),"","",0,0);
 			return;}
- if(keyfile==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Bitte wählen Sie eine Schlüsseldatei.")
-                                      ,trUtf8("OK"),"","",0,0);
+ if(keyfile==""){QMessageBox::warning(this,tr("Error"),tr("Please choose a key file.")
+                                      ,tr("OK"),"","",0,0);
 			return;}
 }
 else
 {
- if(password=="" && keyfile==""){QMessageBox::warning(this,trUtf8("Fehler"),trUtf8("Geben Sie bitte ein Passwort ein oder wählen Sie eine Schlüsseldatei.")
-                                      ,trUtf8("OK"),"","",0,0);
+ if(password=="" && keyfile==""){QMessageBox::warning(this,tr("Error")
+									,tr("Please enter a Password or select a key file.")
+                                    ,tr("OK"),"","",0,0);
 			return;}
 }
 done(1);

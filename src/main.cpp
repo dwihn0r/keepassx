@@ -121,7 +121,7 @@ if(config.Language!="_DEUTSCH_"){
   else app->installTranslator(translator);
 }
 
-DateTimeFormat=QObject::trUtf8("dd'.'MM'.'yy' 'hh':'mm");
+DateTimeFormat=QObject::tr("dd'.'MM'.'yy' 'hh':'mm");
 loadImages();
 
 SecString::generateSessionKey();
@@ -131,7 +131,7 @@ mainWin->show();
 int r=app->exec();
 delete mainWin;
 if(!config.saveToIni(IniFilename))
-	QMessageBox::warning(NULL,QObject::tr("Warnung"),QObject::trUtf8("Die Konfigurationsdatei konnte nicht gespeichert werden.Stellen Sie sicher, dass\nSie Schreibrechte im Verzeichnis ~/.keepass besitzen."),QObject::tr("OK"),"","",0.0);
+	QMessageBox::warning(NULL,QObject::tr("Warning"),QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),QObject::tr("OK"),"","",0.0);
 delete app;
 return r;
 }
@@ -201,7 +201,7 @@ browser.startDetached(cmd,args);
 void loadImg(QString name,QPixmap& Img){
 if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
  if(Img.load(AppDir+"/share/"+name)==false){
- QMessageBox::critical(0,QObject::trUtf8("Fehler"),QObject::trUtf8("Die Datei '%1' konnte nicht gefunden werden.")
+ QMessageBox::critical(0,QObject::tr("Fehler"),QObject::tr("File '%1' could not be found.")
 				   .arg(name),QObject::tr("OK"),0,0,2,1);
  exit(1);
 }}

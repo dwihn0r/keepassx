@@ -41,9 +41,9 @@ CDbSettingsDlg::~CDbSettingsDlg()
 
 void CDbSettingsDlg::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
-createBanner(Banner,Icon_Settings32x32,"Einstellungen");
-ComboAlgo->insertItem(trUtf8("AES(Rijndael):  256 Bit   (Standard)"),0);
-ComboAlgo->insertItem(trUtf8("Twofish:  256 Bit"),1);
+createBanner(Banner,Icon_Settings32x32,"Settings");
+ComboAlgo->insertItem(tr("AES(Rijndael):  256 Bit   (default)"),0);
+ComboAlgo->insertItem(tr("Twofish:  256 Bit"),1);
 ComboAlgo->setCurrentItem(database->CryptoAlgorithmus); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
 EditRounds->setText(QString::number(database->KeyEncRounds));
 
@@ -59,17 +59,17 @@ done(0);
 void CDbSettingsDlg::OnOK()
 {
 if(EditRounds->text()==""){
-QMessageBox::warning(NULL,trUtf8("Fehler"),trUtf8("Geben Sie bitte die Anzahl der Verschlüsselungsrunden an."),trUtf8("OK"));
+QMessageBox::warning(NULL,tr("Warning"),tr("Please determine the number of encryption rounds."),tr("OK"));
 return;
 }
 bool valid;
 int rounds=EditRounds->text().toUInt(&valid,10);
 if(valid==false){
-QMessageBox::warning(NULL,trUtf8("Fehler"),EditRounds->text()+trUtf8(" ist kein gültiger Zahlenwert"),trUtf8("OK"));
+QMessageBox::warning(NULL,tr("Error"),tr("'%1' is not valid integer value.").arg(EditRounds->text()),tr("OK"));
 return;
 }
 if(rounds==0){
-QMessageBox::warning(NULL,trUtf8("Fehler"),trUtf8("Die Anzahl an Verschlüsselungsrunden muss mindestens 1 betragen."),trUtf8("OK"));
+QMessageBox::warning(NULL,tr("Error"),tr("The number of encryption rounds have to be greater than 0."),tr("OK"));
 return;
 }
 database->KeyEncRounds=rounds;

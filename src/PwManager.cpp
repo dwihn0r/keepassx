@@ -39,7 +39,7 @@ QString r=Errors.front();
 Errors.pop_front();
 return r;
 }
-else return QString(trUtf8("unbekannter Fehler"));
+else return QString(tr("Unknown Error"));
 }
 
 QString PwDatabase::getErrors(){
@@ -81,7 +81,7 @@ file.readBlock(buffer,total_size);
 file.close();
 
 if(total_size < DB_HEADER_SIZE){
-err=trUtf8("Unerwartete Dateigröße (Dateigröße < DB_HEADER_SIZE)");
+err=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
 return false; }
 
 memcpyFromLEnd32(&Signature1,buffer);
@@ -97,18 +97,18 @@ memcpy(TrafoRandomSeed,buffer+88,32);
 memcpyFromLEnd32(&KeyEncRounds,buffer+120);
 
 if((Signature1!=PWM_DBSIG_1) || (Signature2!=PWM_DBSIG_2)){
-err=trUtf8("Falsche Signatur");
+err=tr("Wrong Signature");
 return false;}
 
 
 if((Version & 0xFFFFFF00) != (PWM_DBVER_DW & 0xFFFFFF00)){
-	err=trUtf8("Nicht unterstüzte Dateiversion");
+	err=tr("Unsupported File Version");
 	return false;}
 
 if(Flags & PWM_FLAG_RIJNDAEL) CryptoAlgorithmus = ALGO_AES;
 else if(Flags & PWM_FLAG_TWOFISH) CryptoAlgorithmus = ALGO_TWOFISH;
 else {
- err=trUtf8("Unbekannter Verschlüsselungsalgorithmus");
+ err=tr("Unknown Encryption Algorithm");
  return false;
  }
 
@@ -126,7 +126,7 @@ if(CryptoAlgorithmus == ALGO_AES)
 		// Initialize Rijndael algorithm
 		if(aes.init(Rijndael::CBC, Rijndael::Decrypt, FinalKey,
 			Rijndael::Key32Bytes, EncryptionIV) != RIJNDAEL_SUCCESS)
-			{err=trUtf8("AES-Initialisierung fehlgeschlagen");
+			{err=tr("AES-Init Failed");
 			 return false;}
 		// Decrypt! The first bytes aren't encrypted (that's the header)
 		crypto_size = (unsigned long)aes.padDecrypt((Q_UINT8 *)buffer + DB_HEADER_SIZE,
@@ -140,7 +140,7 @@ else if(CryptoAlgorithmus == ALGO_TWOFISH)
 			total_size - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 
-if((crypto_size > 2147483446) || (crypto_size == 0)){err=trUtf8("Entschlüsselung nicht möglich - der Schlüssel ist falsch oder die Datei beschädigt."); return false;}
+if((crypto_size > 2147483446) || (crypto_size == 0)){err=tr("Decryption failed.\nThe key is wrong or the file is damaged"); return false;}
 
 sha256_starts(&sha32);
 sha256_update(&sha32,(unsigned char *)buffer + DB_HEADER_SIZE,crypto_size);
@@ -148,7 +148,7 @@ sha256_finish(&sha32,(unsigned char *)FinalKey);
 
 if(memcmp(ContentsHash, FinalKey, 32) != 0)
 {
-err=trUtf8("Hash-Test fehlgeschlage: der Schlüssl ist falsch oder die Datei ist beschädigt.");
+err=tr("Hash test failed.\nThe key is wrong or the file is damaged");
 return false;}
 
 
@@ -167,11 +167,13 @@ CGroup group;
 		memcpyFromLEnd16(&FieldType, pField);
 		pField += 2; pos += 2;
 		if(pos >= total_size) {
+		 err=tr("Unexpected error: Offset is out of range. [G1]");
 		 return false; }
 
 		memcpyFromLEnd32(&FieldSize, pField);
 		pField += 4; pos += 4;
-		if(pos >= (total_size + FieldSize)) {
+		if(pos >= (total_size + FieldSize)){
+		 err=tr("Unexpected error: Offset is out of range. [G2]");
 		return false;}
 
 		bRet = group.ReadGroupField(FieldType, FieldSize, (Q_UINT8 *)pField);
@@ -181,7 +183,9 @@ CGroup group;
 
 		pField += FieldSize;
 		pos += FieldSize;
-		if(pos >= total_size) { return false;}
+		if(pos >= total_size) {
+		 err=tr("Unexpected error: Offset is out of range. [G1]");
+		 return false;}
 	}
 
 CEntry entry;
@@ -193,12 +197,14 @@ CEntry entry;
 		memcpyFromLEnd16(&FieldType, pField);
 		pField += 2; pos += 2;
 		if(pos >= total_size){
+		 err=tr("Unexpected error: Offset is out of range. [E1]");
 		 return false;}
 
 		memcpyFromLEnd32(&FieldSize, pField);
 		pField += 4; pos += 4;
 		if(pos >= (total_size + FieldSize)) {
-		return false; }
+		 err=tr("Unexpected error: Offset is out of range. [E2]");
+		 return false; }
 
 		bRet = entry.ReadEntryField(FieldType,FieldSize,(Q_UINT8*)pField);
 
@@ -210,7 +216,8 @@ CEntry entry;
 		pField += FieldSize;
 		pos += FieldSize;
 		if(pos >= total_size) {
-		return false; }
+		 err=tr("Unexpected error: Offset is out of range. [E3]");
+		 return false; }
 	}
 
 unsigned long CurGID, g, e, z, num;
