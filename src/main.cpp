@@ -60,8 +60,7 @@ QIcon *Icon_EditClone;
 QIcon *Icon_EditOpenUrl;
 QIcon *Icon_EditSearch;
 QIcon *Icon_Configure;
-QString DateTimeFormat("no-format-string");
-
+QIcon *Icon_Help;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg);
@@ -91,47 +90,36 @@ else{
 
 //Internationalization
 QLocale loc=QLocale::system();
-QTranslator* translator = 0;
-translator =new QTranslator;
-if(config.Language==""){
- switch(loc.language()){
-   case QLocale::German:
-	config.Language="_DEUTSCH_";
-	break;
-   case QLocale::Russian:
-	config.Language="russian.qm";
-	break;
-   case QLocale::English:
-	config.Language="english.qm";
-	break;
-   default:
-	config.Language="english.qm";
-	break;}
+QTranslator* translator = NULL;
+translator=new QTranslator;
+bool TrFound=true;
+if(!translator->load("keepass-"+loc.name(),app->applicationDirPath()+"/../share/keepass/i18n/")){
+	if(!translator->load("keepass-"+loc.name(),QDir::homeDirPath()+"/.keepass/")){
+		qWarning(QString("No Translation found for %1 (%2)")
+				.arg(QLocale::languageToString(loc.language()))
+				.arg(QLocale::countryToString(loc.country())));
+		TrFound=false;
+	}
 }
 
-if(config.Language!="_DEUTSCH_"){
-  if(!translator->load(app->applicationDirPath()+"/../share/keepass/i18n/"+config.Language)){
-   if(!translator->load(app->applicationDirPath()+"/share/i18n/"+config.Language)){
-    config.Language="_DEUTSCH_";
-    QMessageBox::warning(NULL,"Warning",
-			 QString("Translation file '%1' could not be loaded.")
-			 .arg(config.Language),"OK",0,0,2,1);
-    delete translator;
-   translator=NULL;}}
-  else app->installTranslator(translator);
-}
+if(TrFound)
+	app->installTranslator(translator);
+else 
+	delete translator;
 
-DateTimeFormat=QObject::tr("dd'.'MM'.'yy' 'hh':'mm");
 loadImages();
-
 SecString::generateSessionKey();
-
+int r=0;
 KeepassMainWindow *mainWin = new KeepassMainWindow();
-mainWin->show();
-int r=app->exec();
+if(mainWin->Start){
+	mainWin->show();
+	r=app->exec();
+}
 delete mainWin;
 if(!config.saveToIni(IniFilename))
-	QMessageBox::warning(NULL,QObject::tr("Warning"),QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),QObject::tr("OK"),"","",0.0);
+	QMessageBox::warning(NULL,QObject::tr("Warning"),
+			QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),
+			QObject::tr("OK"),"","",0.0);
 delete app;
 return r;
 }
@@ -201,19 +189,31 @@ browser.startDetached(cmd,args);
 void loadImg(QString name,QPixmap& Img){
 if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
  if(Img.load(AppDir+"/share/"+name)==false){
- QMessageBox::critical(0,QObject::tr("Fehler"),QObject::tr("File '%1' could not be found.")
+ QMessageBox::critical(0,QObject::tr("Error"),QObject::tr("File '%1' could not be found.")
 				   .arg(name),QObject::tr("OK"),0,0,2,1);
  exit(1);
 }}
 
 }
 
-
-#define _loadIcon(_VAR,_NAME)\
-	_VAR=new QIcon(ThemeDir+_NAME);
-
+#ifndef Q_WS_X11
+#define _loadIcon(Icon,PATH)\
+	{QImage img(ThemeDir+PATH);\
+	 Icon=new QIcon();\
+	 /*Icon->addPixmap(QPixmap::fromImage(img));*/\
+	 Icon->addPixmap(QPixmap::fromImage(img.scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));\
+	}
+#else
+#define _loadIcon(Icon,PATH)\
+	{QImage img(ThemeDir+PATH);\
+	 Icon=new QIcon();\
+	 Icon->addPixmap(QPixmap::fromImage(img));\
+	 Icon->addPixmap(QPixmap::fromImage(img.scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));\
+	}
+#endif
 
 void loadImages(){
+
 bool small=true;
 QString ThemeDir=AppDir+"/../share/keepass/icons/nuvola/32x32";
 QPixmap tmpImg;
@@ -246,7 +246,6 @@ Icon_Search32x32=new QPixmap;
 *Icon_Search32x32=tmpImg;
 //--------------------------
 
-
 _loadIcon(Icon_FileNew,"/actions/filenew.png");
 _loadIcon(Icon_FileOpen,"/actions/fileopen.png");
 _loadIcon(Icon_FileSave,"/actions/filesave.png");
@@ -262,7 +261,7 @@ _loadIcon(Icon_EditClone,"/actions/editcopy.png");
 _loadIcon(Icon_EditOpenUrl,"/actions/run.png");
 _loadIcon(Icon_EditSearch,"/actions/find.png");
 _loadIcon(Icon_Configure,"/actions/configure.png");
-
+_loadIcon(Icon_Help,"/actions/help.png");
 }
 
 
@@ -295,5 +294,5 @@ int i=1;
 }
 
 void showErrMsg(const QString& msg,QWidget* parent){
-QMessageBox::critical(parent,QObject::tr("Fehler"),msg,QObject::tr("OK"));
+QMessageBox::critical(parent,QObject::tr("Error"),msg,QObject::tr("OK"));
 }

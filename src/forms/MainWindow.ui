@@ -114,31 +114,6 @@
      <height>29</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuDatei" >
-    <property name="title" >
-     <string>File</string>
-    </property>
-    <widget class="QMenu" name="menuImportieren_aus" >
-     <property name="title" >
-      <string>Import from...</string>
-     </property>
-     <addaction name="FileImpPwmAction" />
-     <addaction name="FileImpKWalletXmlAction" />
-    </widget>
-    <addaction name="FileNewAction" />
-    <addaction name="FileOpenAction" />
-    <addaction name="FileCloseAction" />
-    <addaction name="separator" />
-    <addaction name="FileSaveAction" />
-    <addaction name="FileSaveAsAction" />
-    <addaction name="separator" />
-    <addaction name="FileSettingsAction" />
-    <addaction name="FileChangeKeyAction" />
-    <addaction name="separator" />
-    <addaction name="menuImportieren_aus" />
-    <addaction name="separator" />
-    <addaction name="FileExitAction" />
-   </widget>
    <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
      <string>Edit</string>
@@ -182,11 +157,44 @@
     </widget>
     <addaction name="ViewShowToolbarAction" />
     <addaction name="ViewShowEntryDetailsAction" />
+    <addaction name="ViewShowStatusbarAction" />
     <addaction name="separator" />
     <addaction name="ViewHideUsernamesAction" />
     <addaction name="ViewHidePasswordsAction" />
     <addaction name="separator" />
     <addaction name="menuSpalten" />
+   </widget>
+   <widget class="QMenu" name="menuDatei" >
+    <property name="title" >
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuImportieren_aus" >
+     <property name="title" >
+      <string>Import from...</string>
+     </property>
+     <addaction name="FileImpPwmAction" />
+     <addaction name="FileImpKWalletXmlAction" />
+    </widget>
+    <widget class="QMenu" name="menuExport_to" >
+     <property name="title" >
+      <string>Export to...</string>
+     </property>
+     <addaction name="FileExpPlainTextAction" />
+    </widget>
+    <addaction name="FileNewAction" />
+    <addaction name="FileOpenAction" />
+    <addaction name="FileCloseAction" />
+    <addaction name="separator" />
+    <addaction name="FileSaveAction" />
+    <addaction name="FileSaveAsAction" />
+    <addaction name="separator" />
+    <addaction name="FileSettingsAction" />
+    <addaction name="FileChangeKeyAction" />
+    <addaction name="separator" />
+    <addaction name="menuImportieren_aus" />
+    <addaction name="menuExport_to" />
+    <addaction name="separator" />
+    <addaction name="FileExitAction" />
    </widget>
    <widget class="QMenu" name="menuExtras" >
     <property name="title" >
@@ -198,6 +206,8 @@
     <property name="title" >
      <string>Help</string>
     </property>
+    <addaction name="HelpHandbookAction" />
+    <addaction name="separator" />
     <addaction name="HelpAboutAction" />
    </widget>
    <addaction name="menuDatei" />
@@ -477,20 +487,38 @@
     <string>About...</string>
    </property>
   </action>
+  <action name="ViewShowStatusbarAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show Statusbar</string>
+   </property>
+  </action>
+  <action name="HelpHandbookAction" >
+   <property name="text" >
+    <string>KeePassX Handbook...</string>
+   </property>
+  </action>
+  <action name="FileExpPlainTextAction" >
+   <property name="text" >
+    <string>Plain Text (*.txt)</string>
+   </property>
+  </action>
  </widget>
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>

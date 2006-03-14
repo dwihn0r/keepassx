@@ -51,6 +51,8 @@ public:
  int MainWinSplit1;
  int MainWinSplit2;
  int ColumnSizes[10];
+ bool ShowStatusbar;
+ bool AlternatingRowColors;
 
  bool loadFromIni(QString filename);
  bool saveToIni(QString filename);

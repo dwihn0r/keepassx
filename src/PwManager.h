@@ -75,7 +75,6 @@ public:
  QString   getErrors(); //get all errors in a \n seperated String
 
 
-
 private:
  bool IsMetaStream(CEntry& Entry);
  bool parseMetaStream(const CEntry& Entry);

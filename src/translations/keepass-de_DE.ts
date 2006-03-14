@@ -3,79 +3,76 @@
     <name>AboutDlg</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Homepage:</source>
-        <translation type="unfinished"></translation>
+        <translation>Homepage:</translation>
     </message>
     <message>
         <source>KeePassX - Cross Platform Password Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>KeePassX - Cross-Platform Passwort Manager</translation>
     </message>
     <message>
         <source>Email:</source>
-        <translation type="unfinished"></translation>
+        <translation>EMail:</translation>
     </message>
     <message>
         <source>Copyright (C) 2005-2006 Tarek Saidi</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (C) 2005-2006 Tarek Saidi</translation>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Mattias Miller&lt;/span&gt; (www.outofhanwell.com)&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;  Mac OS X Support&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Übersetzung</source>
-        <translation type="unfinished"></translation>
+        <translation>Dank An</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenz</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Translation</source>
+        <translation>Übersetzung</translation>
     </message>
 </context>
 <context>
     <name>CAboutDialog</name>
     <message>
         <source>KeePassX %1</source>
-        <translation type="unfinished"></translation>
+        <translation>KeePassX %1</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stellen Sie sicher, dass das Programm korrekt installiert wurde.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fehler</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>The following error occured:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Folgender Fehler ist aufgetreten:
+%1</translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation type="unfinished"></translation>
+        <translation>http://keepass.berlios.de/index.php</translation>
     </message>
 </context>
 <context>
@@ -86,7 +83,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Please enter a password.</source>
@@ -94,7 +91,7 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Please choose a key file.</source>
@@ -155,11 +152,11 @@ Please check your input.</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>&apos;%1&apos; is not valid integer value.</source>
@@ -173,10 +170,6 @@ Please check your input.</source>
 <context>
     <name>CEditEntryDlg</name>
     <message>
-        <source>Eintrag bearbeiten</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -187,15 +180,7 @@ Please check your input.</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fehler</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Datei konnte nicht geöffnet werden.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Save Attachment...</source>
@@ -220,7 +205,7 @@ Do you want to replace it?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Could not remove old file.</source>
@@ -247,6 +232,14 @@ Are you sure?</source>
         <source>No, Cancel</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Entry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CGenPwDialog</name>
@@ -260,11 +253,11 @@ Are you sure?</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
@@ -273,18 +266,6 @@ Are you sure?</source>
 </context>
 <context>
     <name>CPasswordDialog</name>
-    <message encoding="UTF-8">
-        <source>Datenbank öffnen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Datei manuell wählen...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt; keiner &gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>No key file found</source>
         <translation type="unfinished"></translation>
@@ -297,7 +278,7 @@ Please use the manual file selection for key files with a filename other than &a
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -309,7 +290,7 @@ Please use the manual file selection for key files with a filename other than &a
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Please enter a Password.</source>
@@ -323,13 +304,21 @@ Please use the manual file selection for key files with a filename other than &a
         <source>Please enter a Password or select a key file.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select File Manually...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt; none &gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSearchDlg</name>
-    <message>
-        <source>Suchen</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Notice</source>
         <translation type="unfinished"></translation>
@@ -340,6 +329,10 @@ Please use the manual file selection for key files with a filename other than &a
     </message>
     <message>
         <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -530,83 +523,7 @@ Please use the manual file selection for key files with a filename other than &a
 <context>
     <name>GenPwDlg</name>
     <message>
-        <source>Passwort Generator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Akzep&amp;tieren</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abbre&amp;chen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Generieren</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neues Passwort:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Qualität:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Optionen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gro&amp;ßbuchstaben</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Alt+ß</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Kleinbuchstaben</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+K</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Zahlen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S&amp;onderzeichen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bindestriche</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Unterstriche</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>h&amp;öhere ANSI-Zeichen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Alt+ö</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;nur folgende Zeichen benutzen:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -614,31 +531,103 @@ Please use the manual file selection for key files with a filename other than &a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zeichenanzahl:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&quot;/dev/rando&amp;m&quot; nutzen (empfohlen)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>folgende Zeichengruppen &amp;verwenden:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+V</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Leerzeichen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+L</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password Generator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accep&amp;t</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Upper Letters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Lower Letters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Special Characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U&amp;nderline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h&amp;igher ANSI-Characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &amp;only following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &quot;/dev/rando&amp;m&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use follo&amp;wing character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White &amp;Spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+S</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -688,20 +677,16 @@ Please use the manual file selection for key files with a filename other than &a
 <context>
     <name>KeepassGroupView</name>
     <message>
-        <source>Gruppen</source>
+        <source>Search Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search Results</source>
+        <source>Groups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>KeepassMainWindow</name>
-    <message>
-        <source>Bereit</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
@@ -772,7 +757,7 @@ Please use the manual file selection for key files with a filename other than &a
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>The following error occured while opening the database:
@@ -781,7 +766,7 @@ Please use the manual file selection for key files with a filename other than &a
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Save modified file?</source>
@@ -806,14 +791,6 @@ to save the changes?</source>
     </message>
     <message>
         <source>KeePassX - %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[neu]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Databank öffnen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -845,6 +822,18 @@ to save the changes?</source>
         <source>Save Database As...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[new]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -858,10 +847,6 @@ to save the changes?</source>
     </message>
     <message>
         <source>Import from...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bearbeiten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1036,6 +1021,14 @@ to save the changes?</source>
         <source>About...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Statusbar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -1045,42 +1038,42 @@ to save the changes?</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abbrechen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Geben Sie das Passwort ein oder wählen Sie eine Schlüsseldatei.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Schlüssel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Passwort:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Schlüsseldatei oder Datenträger:</source>
+    <message>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>W&amp;ählen...</source>
+    <message>
+        <source>Enter a Password and/or choose a key file.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Alt+Ä</source>
+    <message>
+        <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Passwort UND Schlüsseldatei benutzen</source>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key file or directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Password AND Key File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1144,10 +1137,6 @@ The key is wrong or the file is damaged</source>
 <context>
     <name>QObject</name>
     <message>
-        <source>dd&apos;.&apos;MM&apos;.&apos;yy&apos; &apos;hh&apos;:&apos;mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1158,15 +1147,11 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fehler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>File not found.</source>
@@ -1237,63 +1222,15 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
 </context>
 <context>
     <name>Search_Dlg</name>
     <message>
-        <source>Suche...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suchbegriff:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>regul&amp;ärer Ausdruck</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Alt+Ä</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gro&amp;ß- und Kleinschreibung beachten</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Alt+ß</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suche nach</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Titel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+T</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Benut&amp;zername</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Kommentar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+K</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1309,19 +1246,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pass&amp;wort</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suchen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>S&amp;chließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1329,82 +1254,78 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Untergruppen einbeziehen</source>
+        <source>Search...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search For:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular E&amp;xpression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Case Sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Titles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Usernames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;omments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U&amp;RLs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pass&amp;words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clo&amp;se</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Include Subgroups (recursive)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>SettingsDialog</name>
-    <message>
-        <source>Einstellungen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sicherhei&amp;t</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Zwischenablage löschen nach:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sekunden</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Passw&amp;örter standardmäßig in Klartext anzeigen</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message encoding="UTF-8">
         <source>Alt+Ö</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E&amp;rscheinungsbild</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bannerfarbverlauf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Farbe 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>&amp;ändern...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Alt+Ä</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Farbe 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>ändern...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Textfarbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gruppenbaum beim &amp;Öffnen aufklappen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S&amp;onstiges</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>zuletzt geöffnete Datei bei Programmstart &amp;öffnen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browseraufruf:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1416,34 +1337,94 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Abbre&amp;chen</source>
+        <source>Alt+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alt+C</source>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Securi&amp;try</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear clipboard after:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sh&amp;ow passwords in plain text by default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appea&amp;rance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Banner Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color 2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;hange...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expand group tree when opening a database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remember last opend file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browser Command:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SimplePasswordDialog</name>
     <message>
-        <source>Passworteingabe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Passwort:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>O&amp;K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abbre&amp;chen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1452,6 +1433,18 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter your Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

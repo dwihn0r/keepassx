@@ -474,9 +474,10 @@
 
 #endif
 
-#include <qmessagebox.h>
+
 void Twofish_fatal(char* msg){
-QMessageBox::critical(0,"Interner Fehler",msg,"OK","Cancel",0,2,1);
+	qCritical("Twofish: Fatal Error");
+	exit(1);
 }
 
 

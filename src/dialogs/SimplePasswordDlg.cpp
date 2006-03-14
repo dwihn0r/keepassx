@@ -18,16 +18,16 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-#include "SimplePasswordDlg.h"
 #include <qlineedit.h>
 #include <qpushbutton.h>
+#include "main.h"
+#include "SimplePasswordDlg.h"
 
-CSimplePasswordDialog::CSimplePasswordDialog(bool HidePw,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+CSimplePasswordDialog::CSimplePasswordDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
-if(HidePw)Button_HidePassword->toggle();
+if(!config.ShowPasswords)Button_HidePassword->toggle();
 }
 
 CSimplePasswordDialog::~CSimplePasswordDialog()

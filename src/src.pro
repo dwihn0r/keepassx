@@ -24,7 +24,7 @@ FORMS += forms/EditGroupDlg.ui \
          forms/EditEntryDlg.ui \
          forms/PasswordGenDlg.ui 
 TRANSLATIONS += translations/keepass-de_DE.ts \
-		translations/keepass-ru_Ru.ts \
+		translations/keepass-ru_RU.ts \
                 translations/keepass-xx_XX.ts
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \
@@ -91,8 +91,8 @@ SOURCES += lib/IniReader.cpp \
            lib/EntryView.cpp \
            crypto/arcfour.cpp \
            lib/KpFileIconProvider.cpp 
-QT += xml \
-qt3support
+QT += xml qt3support
+QT -= network sql
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/

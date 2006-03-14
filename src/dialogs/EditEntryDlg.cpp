@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -51,7 +51,7 @@ Q_ASSERT(_entry);
 entry=_entry;
 db=_db;
 setupUi(this);
-createBanner(Banner,Icon_Key32x32,tr("Eintrag bearbeiten"));
+createBanner(Banner,Icon_Key32x32,tr("Edit Entry"));
 ModFlag=false;
 connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
 connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
@@ -257,7 +257,7 @@ if(filename=="")return;
 QFile file(filename);
 if(file.open(QIODevice::ReadOnly)==false){
 file.close();
-QMessageBox::warning(NULL,tr("Fehler"),tr("Datei konnte nicht geöffnet werden."),"OK");
+QMessageBox::warning(NULL,tr("Error"),tr("Could not open file."),tr("OK"));
 return;
 }
 ModFlag=true;

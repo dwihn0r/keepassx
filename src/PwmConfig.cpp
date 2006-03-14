@@ -52,6 +52,8 @@ MainWinWidth=ini.GetValueI("UI","MainWinWidth",900);
 MainWinSplit1=ini.GetValueI("UI","MainWinSplit1",100);
 MainWinSplit2=ini.GetValueI("UI","MainWinSplit2",300);
 ParseIntString(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10").c_str(),ColumnSizes,10);
+ShowStatusbar=ini.GetValueB("UI","ShowStatusbar",true);
+AlternatingRowColors=ini.GetValueB("Options","AlternatingRowColors",true);
 return true;
 }
 
@@ -81,6 +83,8 @@ ini.SetValueI("UI","MainWinWidth",MainWinWidth);
 ini.SetValueI("UI","MainWinSplit1",MainWinSplit1);
 ini.SetValueI("UI","MainWinSplit2",MainWinSplit2);
 ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10),true);
+ini.SetValueB("UI","ShowStatusbar",ShowStatusbar);
+ini.SetValueB("Options","AlternatingRowColors",AlternatingRowColors);
 if(!ini.WriteFile())return false;
 else return true;
 }

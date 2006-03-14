@@ -33,12 +33,13 @@
 
 
 
-CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, bool ShowExitButton, Qt::WFlags fl)
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
-createBanner(Banner,Icon_Key32x32,tr("Datenbank öffnen"));
-Label_select=new LinkLabel((QWidget*)groupframe,"Select",tr("Datei manuell wählen..."),410,100);
+ButtonExit->setVisible(ShowExitButton);
+createBanner(Banner,Icon_Key32x32,tr("Open Database"));
+Label_select=new LinkLabel((QWidget*)groupframe,"Select",tr("Select File Manually..."),410,100);
 connect( Combo_Dirs, SIGNAL( activated(int) ), this, SLOT( OnComboSelectionChanged(int) ) );
 connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
 connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
@@ -47,7 +48,7 @@ connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPas
 connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
 connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
 connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
-
+connect( ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
 
 QDir media("/media");
 if(media.exists()){
@@ -58,7 +59,7 @@ Paths.erase(Paths.begin()); // delete ".."
 for(int i=0;i<Paths.count();i++){
 Paths[i]="/media/"+Paths[i];
 }
-Paths.prepend(tr("< keiner >"));
+Paths.prepend(tr("< none >"));
 }
 for(int i=0;i<Paths.count();i++){
 Combo_Dirs->insertItem(0,Paths[i]);
@@ -208,11 +209,7 @@ Edit_Password->setEchoMode(QLineEdit::Normal);
 }
 
 
-
-
-
-/*$SPECIALIZATION$*/
-
-
-//#include "passworddialog.moc"
+void CPasswordDialog::OnButtonExit(){
+	done(2);
+}
 

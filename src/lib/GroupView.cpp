@@ -34,6 +34,7 @@
 #include <QBrush>
 #include <QMenu>
 #include "main.h"
+#include "EntryView.h"
 #include "GroupView.h"
 #define INSERT_AREA_WIDTH 4
 
@@ -41,7 +42,7 @@ KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
 InsertionMarker=QLine();
 db=NULL;
 LastHoverItem=NULL;
-setHeaderLabels(QStringList()<<tr("Gruppen"));
+setHeaderLabels(QStringList()<<tr("Groups"));
 ShowSearchGroup=false;
 ContextMenu=new QMenu(this);
 }
@@ -52,52 +53,70 @@ setItemSelected(Items.back(),true);
 }
 
 void KeepassGroupView:: dragEnterEvent ( QDragEnterEvent * event ){
-if(event->mimeData()->hasFormat("keepass/group") || 
-   event->mimeData()->hasFormat("keepass/entry")){
-event->accept();
+if(event->mimeData()->hasFormat("keepass/group")){
+	DragType=GROUP;
+	event->accept();
+	return;
+}
+if(event->mimeData()->hasFormat("keepass/entry")){
+	DragType=ENTRY;
+	event->accept();
+	return;
 }
 }
 
-void KeepassGroupView:: dragMoveEvent ( QDragMoveEvent * event ){
+void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
 GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
-
 if(LastHoverItem){
-  QFont f=LastHoverItem->font(0);
-  f.setBold(false);
-  LastHoverItem->setFont(0,f);
+	QFont f=LastHoverItem->font(0);
+	f.setBold(false);
+	LastHoverItem->setFont(0,f);
 }
 
 InsertionMarker=QLine();
 if(isSearchResultGroup(item))
 	event->setAccepted(false);
-else if(item){
- QRect ItemRect=visualItemRect(item);
- if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
-   if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
-   	QFont f=item->font(0);
-   	f.setBold(true);
-   	item->setFont(0,f);
-   	LastHoverItem=item;
-   	event->setAccepted(true);
-}
-   else{
-	LastHoverItem=NULL;
-	if(event->pos().y() > INSERT_AREA_WIDTH)
-		InsertionMarker=QLine(ItemRect.x(),ItemRect.y()+ItemRect.height(),
-			     			  ItemRect.x()+ItemRect.width(),ItemRect.y()+ItemRect.height());
-	else
-		InsertionMarker=QLine(ItemRect.x(),0,
-			     			  ItemRect.x()+ItemRect.width(),0);
+else 
+if(DragType==GROUP){
+	if(item){
+	QRect ItemRect=visualItemRect(item);
+		if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
+			if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
+				QFont f=item->font(0);
+				f.setBold(true);
+				item->setFont(0,f);
+				LastHoverItem=item;
+				event->setAccepted(true);
+			}
+			else{
+				LastHoverItem=NULL;
+				if(event->pos().y() > INSERT_AREA_WIDTH)
+					InsertionMarker=QLine(ItemRect.x(),ItemRect.y()+ItemRect.height()
+										,ItemRect.x()+ItemRect.width(),ItemRect.y()+ItemRect.height());
+				else
+					InsertionMarker=QLine(ItemRect.x(),0,ItemRect.x()+ItemRect.width(),0);
+			}
+		}
+		else 
+			event->setAccepted(false);
 	}
- }
- else 
-   event->setAccepted(false);
- 
+else
+  LastHoverItem=NULL;
 }
 else{
-  LastHoverItem=NULL;
-
+	if(item){
+		QFont f=item->font(0);
+		f.setBold(true);
+		item->setFont(0,f);
+		LastHoverItem=item;
+		event->setAccepted(true);
+	}
+	else{
+		event->setAccepted(false);
+		LastHoverItem=NULL;
+	}
 }
+
 update();
 }
 
@@ -122,21 +141,32 @@ if(LastHoverItem){
   LastHoverItem=NULL;
 }
 GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
-if(item){
-	QRect ItemRect=visualItemRect(item);
-	if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
-		db->moveGroup(DragItem->pGroup,item->pGroup);}
-	else{
-		if(event->pos().y() > INSERT_AREA_WIDTH){
-			if(db->getNumberOfChilds(item->pGroup) > 0)
-				db->moveGroup(DragItem->pGroup,item->pGroup,0);				
-			else				
-				db->moveGroupDirectly(DragItem->pGroup,item->pGroup);
-		}
-		else	db->moveGroupDirectly(DragItem->pGroup,NULL);
-		}		
+if(DragType==GROUP){
+	if(item){
+		QRect ItemRect=visualItemRect(item);
+		if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
+			db->moveGroup(DragItem->pGroup,item->pGroup);}
+		else{
+			if(event->pos().y() > INSERT_AREA_WIDTH){
+				if(db->getNumberOfChilds(item->pGroup) > 0)
+					db->moveGroup(DragItem->pGroup,item->pGroup,0);				
+				else				
+					db->moveGroupDirectly(DragItem->pGroup,item->pGroup);
+			}
+			else	db->moveGroupDirectly(DragItem->pGroup,NULL);
+			}		
+	}
+	else db->moveGroup(DragItem->pGroup,NULL);
+}else{
+	Q_ASSERT(item);
+	QList<QTreeWidgetItem*>* pDragItems=(QList<QTreeWidgetItem*>*)*((QList<QTreeWidgetItem*>**)event->mimeData()->data("keepass/entry").data());
+	for(int i=0;i<pDragItems->size();i++){
+		db->moveEntry(((EntryViewItem*)(*pDragItems)[i])->pEntry,item->pGroup);
+	}
+
+
 }
-else db->moveGroup(DragItem->pGroup,NULL);
+
 
 updateItems();
 }

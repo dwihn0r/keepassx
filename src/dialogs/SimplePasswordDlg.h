@@ -28,7 +28,7 @@ class CSimplePasswordDialog : public QDialog, public Ui_SimplePasswordDialog
   Q_OBJECT
 
 public:
-  CSimplePasswordDialog(bool HidePw,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
+  CSimplePasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CSimplePasswordDialog();
   /*$PUBLIC_FUNCTIONS$*/
 

@@ -60,6 +60,8 @@ private:
  GroupViewItem* DragItem;
  GroupViewItem* LastHoverItem;
  GroupViewItem* getLastSameLevelItem(int level);
+ enum tDragType{GROUP,ENTRY};
+ tDragType DragType;
 };
 
 

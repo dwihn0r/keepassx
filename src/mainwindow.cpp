@@ -59,6 +59,7 @@
 
 
 KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
+  Start=true;
   setupUi(this);
   setGeometry(geometry().x(),geometry().y(),config.MainWinWidth,config.MainWinHeight);
   splitter->setSizes(QList<int>() << config.MainWinSplit1 << config.MainWinSplit2);
@@ -68,14 +69,22 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   setupToolbar();
   setStateFileOpen(false);
   setupMenus();
-  setupConnections();
-  FileOpen=false;
-  Clipboard=QApplication::clipboard();
   setStatusBar(new QStatusBar(this));
   StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
   StatusBarSelection=new QLabel(statusBar());
-  statusBar()->addWidget(StatusBarGeneral,30);
-  statusBar()->addWidget(StatusBarSelection,70);
+  statusBar()->addWidget(StatusBarGeneral,15);
+  statusBar()->addWidget(StatusBarSelection,85);
+  statusBar()->setVisible(config.ShowStatusbar);
+  setupConnections();
+  FileOpen=false;
+  Clipboard=QApplication::clipboard();
+  if(config.OpenLast && (config.LastFile!=QString()) ){
+	QFileInfo file(config.LastFile);
+	if(file.exists())
+		openDatabase(config.LastFile,true);
+	else
+		config.LastFile=QString();	
+  }
 }
 
 void KeepassMainWindow::setupConnections(){
@@ -118,6 +127,7 @@ void KeepassMainWindow::setupConnections(){
    connect(ViewColumnsLastChangeAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
    connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
    connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+   connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
 
    connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
 
@@ -172,6 +182,7 @@ EditDeleteGroupAction->setIcon(*Icon_EditDelete);
 EditSearchAction->setIcon(*Icon_EditSearch);
 EditGroupSearchAction->setIcon(*Icon_EditSearch);
 ExtrasSettingsAction->setIcon(*Icon_Configure);
+HelpHandbookAction->setIcon(*Icon_Help);
 }
 
 void KeepassMainWindow::setupMenus(){
@@ -207,6 +218,7 @@ void KeepassMainWindow::setupMenus(){
   ViewColumnsLastChangeAction->setChecked(config.Columns[7]);
   ViewColumnsLastAccessAction->setChecked(config.Columns[8]);
   ViewColumnsAttachmentAction->setChecked(config.Columns[9]);
+  ViewShowStatusbarAction->setChecked(config.ShowStatusbar);
 
   FileNewAction->setShortcut(tr("Ctrl+N"));
   FileOpenAction->setShortcut(tr("Ctrl+O"));
@@ -228,11 +240,14 @@ void KeepassMainWindow::setupMenus(){
 }
 
 
-void KeepassMainWindow::openDatabase(QString filename){
+void KeepassMainWindow::openDatabase(QString filename,bool s){
 Q_ASSERT(!FileOpen);
-CPasswordDialog PasswordDlg(this,"Password Dialog",true);
+CPasswordDialog PasswordDlg(this,"Password Dialog",true,s);
 PasswordDlg.setCaption(filename);
-if(!PasswordDlg.exec()) return;
+int r=PasswordDlg.exec();
+if(r==0) return;
+if(r==2) {Start=false; close(); return;}
+Q_ASSERT(r==1);
 db = new PwDatabase();
 GroupView->db=db;
 EntryView->db=db;
@@ -246,8 +261,10 @@ if(PasswordDlg.password!="" && PasswordDlg.keyfile!=""){
 db->CalcMasterKeyByFileAndPw(PasswordDlg.keyfile,PasswordDlg.password);
 }
 QString err;
+StatusBarGeneral->setText(tr("Loading Database..."));
 if(db->loadDatabase(filename,err)==true){
 //SUCCESS
+if(config.OpenLast)config.LastFile=filename;
 setCaption(tr("Keepass - %1").arg(filename));
 GroupView->updateItems();
 EntryView->updateItems(0);
@@ -257,11 +274,13 @@ setStateFileModified(false);
 else{
 //ERROR
 delete db;
+StatusBarGeneral->setText(tr("Loading Failed"));
 if(err=="")err=tr("Unknown error in PwDatabase::loadDatabase()");
 QMessageBox::critical(this,tr("Error")
 						  ,tr("The following error occured while opening the database:\n%1")
 				 		  .arg(err),tr("OK"));
 }
+StatusBarGeneral->setText(tr("Ready"));
 }
 
 bool KeepassMainWindow::closeDatabase(){
@@ -296,7 +315,7 @@ if(FileOpen)
 db=new PwDatabase();
 CChangeKeyDlg dlg(this,db);
 if(dlg.exec()==1){
-setCaption(tr("KeePassX - %1").arg(tr("[neu]")));
+setCaption(tr("KeePassX - %1").arg(tr("[new]")));
 GroupView->db=db;
 EntryView->db=db;
 GroupView->updateItems();
@@ -311,7 +330,7 @@ else delete db;
 void KeepassMainWindow::OnFileOpen(){
 if(FileOpen)
  if(!closeDatabase())return;
-QString filename=QFileDialog::getOpenFileName(this,tr("Databank öffnen..."),QDir::homePath(),"*.kdb");
+QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.kdb");
 if(filename!=QString::null){
  openDatabase(filename);
 }
@@ -542,9 +561,77 @@ void KeepassMainWindow::OnFileExit(){
 close();
 }
 
-void KeepassMainWindow::OnImportFromPwm(){}
+void KeepassMainWindow::OnImportFromPwm(){
+if(FileOpen)
+ if(!closeDatabase())return;
+QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.pwm");
+if(filename!=QString::null){
+	Q_ASSERT(!FileOpen);
+	db = new PwDatabase();
+	CSimplePasswordDialog dlg(this,"SimplePasswordDlg",true);
+	if(!dlg.exec()){
+		delete db;
+		db=NULL;
+		StatusBarGeneral->setText(tr("Ready"));
+	}
+	GroupView->db=db;
+	EntryView->db=db;
+	QString err;
+	StatusBarGeneral->setText(tr("Loading Database..."));
+	Import_PwManager import;
+	if(import.importFile(filename,dlg.password,db,err)==true){
+		//SUCCESS
+		setCaption(tr("KeePassX [new]"));
+		GroupView->updateItems();
+		EntryView->updateItems(0);
+		setStateFileOpen(true);
+		setStateFileModified(true);
+	}
+	else{
+		//ERROR
+		delete db;
+		StatusBarGeneral->setText(tr("Loading Failed"));
+		if(err=="")err=tr("Unknown error in Import_PwManager::importFile()()");
+		QMessageBox::critical(this,tr("Error")
+								,tr("The following error occured while opening the database:\n%1")
+								.arg(err),tr("OK"));
+	}
+	StatusBarGeneral->setText(tr("Ready"));
+	}
+}
 
-void KeepassMainWindow::OnImportFromKWalletXml(){}
+void KeepassMainWindow::OnImportFromKWalletXml(){
+if(FileOpen)
+ if(!closeDatabase())return;
+QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.pwm");
+if(filename!=QString::null){
+	Q_ASSERT(!FileOpen);
+	db = new PwDatabase();
+	GroupView->db=db;
+	EntryView->db=db;
+	QString err;
+	StatusBarGeneral->setText(tr("Loading Database..."));
+	Import_KWalletXml import;
+	if(import.importFile(filename,db,err)==true){
+		//SUCCESS
+		setCaption(tr("KeePassX [new]"));
+		GroupView->updateItems();
+		EntryView->updateItems(0);
+		setStateFileOpen(true);
+		setStateFileModified(true);
+	}
+	else{
+		//ERROR
+		delete db;
+		StatusBarGeneral->setText(tr("Loading Failed"));
+		if(err=="")err=tr("Unknown error in Import_KWalletXml::importFile()");
+		QMessageBox::critical(this,tr("Error")
+								,tr("The following error occured while opening the database:\n%1")
+								.arg(err),tr("OK"));
+	}
+	StatusBarGeneral->setText(tr("Ready"));
+	}
+}
 
 void KeepassMainWindow::OnCurrentGroupChanged(QTreeWidgetItem* cur,QTreeWidgetItem* prev){
 if(cur){
@@ -776,6 +863,7 @@ config.MainWinHeight=geometry().height();
 config.MainWinWidth=geometry().width();
 config.MainWinSplit1=splitter->sizes()[0];
 config.MainWinSplit2=splitter->sizes()[1];
+config.ShowStatusbar=statusBar()->isVisible();
 
 if(FileOpen){
  if(!closeDatabase())
@@ -791,6 +879,7 @@ else
 void KeepassMainWindow::OnExtrasSettings(){
 CSettingsDlg dlg(this,"SettingsDlg");
 dlg.exec();
+EntryView->setAlternatingRowColors(config.AlternatingRowColors);
 }
 
 void KeepassMainWindow::OnHelpAbout(){

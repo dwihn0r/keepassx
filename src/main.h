@@ -60,7 +60,7 @@ extern QIcon *Icon_EditClone;
 extern QIcon *Icon_EditOpenUrl;
 extern QIcon *Icon_EditSearch;
 extern QIcon *Icon_Configure;
-extern QString DateTimeFormat;
+extern QIcon *Icon_Help;
 
 
 #endif

@@ -44,26 +44,20 @@ QString password;
 
 
 public:
-  CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
+  CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = false,
+								bool ShowExitButton = false,  Qt::WFlags fl = 0 );
   ~CPasswordDialog();
-  /*$PUBLIC_FUNCTIONS$*/
 
 public slots:
-  /*$PUBLIC_SLOTS$*/
     virtual void OnOK();
     virtual void OnCancel();
     virtual void OnSelectClicked();
     virtual void OnButtonBrowse();
+    virtual void OnButtonExit();
     virtual void OnComboSelectionChanged(int);
     virtual void OnPasswordChanged(const QString &txt);
     virtual void OnCheckBox_BothChanged(int state);
     virtual void ChangeEchoMode();
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
-
 
 };
 

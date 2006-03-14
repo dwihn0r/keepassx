@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -50,6 +50,7 @@ Q_OBJECT
 public:
  KeepassMainWindow (QWidget *parent=0, Qt::WFlags flags=0);
  PwDatabase* db;
+ bool Start;
 
 private slots:
    void OnFileNew();
@@ -105,7 +106,7 @@ private:
  void setStateFileModified(bool);
  void setStateGroupSelected(SelectionState s);
  void setStateEntrySelected(SelectionState s);
- void openDatabase(QString filename);
+ void openDatabase(QString filename,bool IsStart=false);
  bool closeDatabase();
  void search(CGroup* pGroup);
  void editEntry(CEntry* pEntry);

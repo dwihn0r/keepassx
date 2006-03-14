@@ -26,6 +26,8 @@
 #include <QMouseEvent>
 #include <QHeaderView>
 #include <QTime>
+#include <QApplication>
+#include <QPainter>
 #include "main.h"
 #include "EntryView.h"
 
@@ -45,7 +47,7 @@ header()->setResizeMode(QHeaderView::Interactive);
 header()->setStretchLastSection(false);
 connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized(int,int,int)));
 ContextMenu=new QMenu(this);
-
+setAlternatingRowColors(config.AlternatingRowColors);
 }
 
 KeepassEntryView::~KeepassEntryView(){
@@ -136,13 +138,13 @@ void KeepassEntryView::setEntry(CEntry* entry){
   if(config.Columns[4]){
     tmp->setText(j++,entry->Additional.section('\n',0,0));}
   if(config.Columns[5]){
-    tmp->setText(j++,entry->Expire.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->Expire.date().toString(Qt::LocalDate));}
   if(config.Columns[6]){
-    tmp->setText(j++,entry->Creation.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->Creation.date().toString(Qt::LocalDate));}
   if(config.Columns[7]){
-    tmp->setText(j++,entry->LastMod.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->LastMod.date().toString(Qt::LocalDate));}
   if(config.Columns[8]){
-    tmp->setText(j++,entry->LastAccess.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->LastAccess.date().toString(Qt::LocalDate));}
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
   Items.back()->setIcon(0,EntryIcons[entry->ImageID]);
@@ -174,13 +176,13 @@ for(int i=0;i<Items.size();i++){
   if(config.Columns[4]){
     tmp->setText(j++,entry->Additional.section('\n',0,0));}
   if(config.Columns[5]){
-    tmp->setText(j++,entry->Expire.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->Expire.date().toString(Qt::LocalDate));}
   if(config.Columns[6]){
-    tmp->setText(j++,entry->Creation.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->Creation.date().toString(Qt::LocalDate));}
   if(config.Columns[7]){
-    tmp->setText(j++,entry->LastMod.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->LastMod.date().toString(Qt::LocalDate));}
   if(config.Columns[8]){
-    tmp->setText(j++,entry->LastAccess.toString(DateTimeFormat));}
+    tmp->setText(j++,entry->LastAccess.date().toString(Qt::LocalDate));}
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
   tmp->setIcon(0,EntryIcons[entry->ImageID]);
@@ -284,6 +286,66 @@ if(((ColumnSizes[j]-div)*w > 2)){
 }
 resizeColumns();
 }
+
+void KeepassEntryView::mousePressEvent(QMouseEvent *event){
+//save event position - maybe this is the start of a drag
+if (event->button() == Qt::LeftButton)
+            DragStartPos = event->pos();
+//call base function
+QTreeWidget::mousePressEvent(event);
+}
+
+void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
+if (!(event->buttons() & Qt::LeftButton))
+	return;
+if ((event->pos() - DragStartPos).manhattanLength() < QApplication::startDragDistance())
+	return;
+
+DragItems.clear();
+EntryViewItem* DragStartItem=(EntryViewItem*)itemAt(DragStartPos);
+if(!DragStartItem){
+	while(selectedItems().size()){
+		setItemSelected(selectedItems()[0],false);}
+	return;
+}
+if(selectedItems().size()==0){
+		setItemSelected(DragStartItem,true);}
+else{
+	bool AlreadySelected=false;
+	for(int i=0;i<selectedItems().size();i++){
+		if(selectedItems()[i]==DragStartItem){AlreadySelected=true; break;}
+	}
+	if(!AlreadySelected){
+		while(selectedItems().size()){
+			setItemSelected(selectedItems()[0],false);
+		}
+		setItemSelected(DragStartItem,true);
+	}
+}
+
+DragItems=selectedItems();
+QDrag *drag = new QDrag(this);
+QFontMetrics fontmet(DragStartItem->font(0));
+int DragPixmHeight=16;
+if(fontmet.height()>16)DragPixmHeight=fontmet.height();
+QString DragText;
+if(DragItems.size()>1)DragText=QString(tr("%1 items")).arg(DragItems.size());
+else DragText=((EntryViewItem*)DragItems[0])->pEntry->Title;
+DragPixmap  = QPixmap(fontmet.width(DragText)+19,DragPixmHeight);
+DragPixmap.fill(QColor(255,255,255));
+QPainter painter(&DragPixmap);
+painter.setPen(QColor(0,0,0));
+painter.setFont(DragItems[0]->font(0));
+painter.drawPixmap(0,0,DragItems[0]->icon(0).pixmap());
+painter.drawText(19,DragPixmHeight-fontmet.strikeOutPos(),DragText);	
+QMimeData *mimeData = new QMimeData;
+void* pDragItems=&DragItems;
+mimeData->setData("keepass/entry",QByteArray((char*)&pDragItems,sizeof(void*)));
+drag->setMimeData(mimeData);
+drag->setPixmap(DragPixmap);
+drag->start();
+}
+
 
 
 

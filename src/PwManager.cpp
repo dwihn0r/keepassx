@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -148,7 +148,7 @@ sha256_finish(&sha32,(unsigned char *)FinalKey);
 
 if(memcmp(ContentsHash, FinalKey, 32) != 0)
 {
-err=tr("Hash test failed.\nThe key is wrong or the file is damaged");
+err=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
 return false;}
 
 

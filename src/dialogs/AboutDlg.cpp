@@ -55,7 +55,7 @@ return;
 }
 
 if(!gpl.open(QIODevice::ReadOnly)){
-QMessageBox::critical(this,tr("Fehler"),tr("Could not open file '%1'")
+QMessageBox::critical(this,tr("Error"),tr("Could not open file '%1'")
 			  .arg("'license.txt'")+tr("The following error occured:\n%1").arg(gpl.errorString())			 
 			  ,tr("OK"),0,0,2,1);
 return;

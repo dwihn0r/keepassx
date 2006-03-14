@@ -61,6 +61,7 @@ textcolor=config.BannerTextColor;
 CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
 Edit_BrowserCmd->setText(config.OpenUrlCommand);
 CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
+CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
 
 }
 
@@ -78,6 +79,7 @@ config.BannerTextColor=textcolor;
 config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
 config.OpenUrlCommand=Edit_BrowserCmd->text();
 config.ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
+config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
 close();
 }
 
