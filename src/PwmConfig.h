@@ -20,6 +20,7 @@
 #ifndef _PWMCONFIG_H_
 #define _PWMCONFIG_H_
 
+#include "main.h"
 #include "lib/IniReader.h"
 #include <qcolor.h>
 
@@ -53,6 +54,10 @@ public:
  int ColumnSizes[10];
  bool ShowStatusbar;
  bool AlternatingRowColors;
+ QString MountDir;
+ bool RememberLastKey; //location and type, not the key itself
+ tKeyType LastKeyType;
+ QString LastKeyLocation; 
 
  bool loadFromIni(QString filename);
  bool saveToIni(QString filename);

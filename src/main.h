@@ -25,10 +25,12 @@
 #include <QString>
 #include <QColor>
 #include <QIcon>
-#include "PwmConfig.h"
 
 #define KEEPASS_VERSION "0.2.0"
 #define NUM_CLIENT_ICONS 62
+
+typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
+class CConfig;
 
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text);
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text,QColor color1,QColor color2,QColor textcolor);

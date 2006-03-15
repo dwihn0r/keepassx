@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "main.h"
+#include "PwmConfig.h"
 #include "PwManager.h"
 #include "SearchDlg.h"
 #include <qlineedit.h>

@@ -22,43 +22,36 @@
 #define PASSWORDDIALOG_H
 #include "lib/UrlLabel.h"
 #include "ui_PasswordDlg.h"
-//Added by qt3to4:
-#include <Q3ValueList>
 
 class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 {
   Q_OBJECT
 
 private:
-int NumComboEntries;
-QStringList Paths;
-Q3ValueList<bool> IsFile;
-LinkLabel* Label_select;
-
+bool Mode_Set; //true = Set, false = Get
+void setStatePasswordOnly();
+void setStateKeyFileOnly();
+void setStateBoth();
 
 public:
-
 QString keyfile;
 QString password;
+tKeyType KeyType;
 
-
-
-public:
-  CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = false,
-								bool ShowExitButton = false,  Qt::WFlags fl = 0 );
-  ~CPasswordDialog();
+CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = false,
+								bool ShowExitButton = false, bool KeyMode_Set=false,  Qt::WFlags fl = 0 );
 
 public slots:
-    virtual void OnOK();
-    virtual void OnCancel();
-    virtual void OnSelectClicked();
-    virtual void OnButtonBrowse();
-    virtual void OnButtonExit();
-    virtual void OnComboSelectionChanged(int);
-    virtual void OnPasswordChanged(const QString &txt);
-    virtual void OnCheckBox_BothChanged(int state);
-    virtual void ChangeEchoMode();
-
+    void OnOK();
+	void OnOK_Set();
+    void OnCancel();
+    void OnButtonBrowse();
+	void OnButtonBrowse_Set();
+    void OnButtonExit();
+    void OnPasswordChanged(const QString &txt);
+    void OnCheckBox_BothChanged(int state);
+    void ChangeEchoMode();
+    void OnComboTextChanged(const QString&);
 };
 
 #endif

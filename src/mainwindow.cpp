@@ -246,7 +246,7 @@ CPasswordDialog PasswordDlg(this,"Password Dialog",true,s);
 PasswordDlg.setCaption(filename);
 int r=PasswordDlg.exec();
 if(r==0) return;
-if(r==2) {Start=false; close(); return;}
+if(r==2) {Start=false; return;}
 Q_ASSERT(r==1);
 db = new PwDatabase();
 GroupView->db=db;

@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+
 #include <math.h>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
@@ -29,6 +30,7 @@
 #include <QApplication>
 #include <QPainter>
 #include "main.h"
+#include "PwmConfig.h"
 #include "EntryView.h"
 
 

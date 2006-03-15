@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "main.h"
+#include "PwmConfig.h"
 #include <qpixmap.h>
 #include <qcheckbox.h>
 #include <qspinbox.h>
@@ -62,6 +63,7 @@ CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
 Edit_BrowserCmd->setText(config.OpenUrlCommand);
 CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
 CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
+Edit_MountDir->setText(config.MountDir);
 
 }
 
@@ -80,6 +82,9 @@ config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
 config.OpenUrlCommand=Edit_BrowserCmd->text();
 config.ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
 config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
+config.MountDir=Edit_MountDir->text();
+if(config.MountDir!="" && config.MountDir.right(1)!="/")
+	config.MountDir+="/";
 close();
 }
 

@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "main.h"
+#include "PwmConfig.h"
 #include "PwManager.h"
 #include "../lib/random.h"
 #include "ChangeKeyDlg.h"
@@ -93,7 +94,7 @@ Q_UINT8 pw_key[32]={0};
 if(keyfile!=""){
 QFile file(keyfile);
 if(file.exists()){
-int r=QMessageBox::warning(this,tr("Overwrite?"),tr("A file with this name already exists.\nDo you want to replace it?"),"Yes","No",NULL,1,1);
+int r=QMessageBox::warning(this,tr("Overwrite?"),tr("A key file with this name already exists.\nDo you want to replace it?"),"Yes","No",NULL,1,1);
 if(r==1)return;}
 getRandomBytes(file_key,1,32,true);
 if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)==false){

@@ -24,6 +24,17 @@
 #include <iostream>
 using namespace std;
 
+#ifdef Q_WS_MAC
+	#define DEFAULT_MOUNT_DIR "/Volumes/"
+#endif
+#ifdef Q_WS_X11
+	#define DEFAULT_MOUNT_DIR "/media/"
+#endif
+#ifdef Q_WS_WIN
+	#define DEFAULT_MOUNT_DIR "/"
+#endif
+
+
 bool CConfig::loadFromIni(QString filename){
 ini.SetPath((const char*)filename);
 ini.ReadFile();
@@ -54,6 +65,11 @@ MainWinSplit2=ini.GetValueI("UI","MainWinSplit2",300);
 ParseIntString(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10").c_str(),ColumnSizes,10);
 ShowStatusbar=ini.GetValueB("UI","ShowStatusbar",true);
 AlternatingRowColors=ini.GetValueB("Options","AlternatingRowColors",true);
+MountDir=ini.GetValue("Options","MountDir",DEFAULT_MOUNT_DIR).c_str();
+RememberLastKey=ini.GetValueB("Options","RememberLastKey",true);
+LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
+LastKeyType=(tKeyType)ini.GetValueI("Option","LastKeyType",(int)PASSWORD);
+if(!OpenLast)RememberLastKey=false;
 return true;
 }
 
@@ -85,6 +101,14 @@ ini.SetValueI("UI","MainWinSplit2",MainWinSplit2);
 ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10),true);
 ini.SetValueB("UI","ShowStatusbar",ShowStatusbar);
 ini.SetValueB("Options","AlternatingRowColors",AlternatingRowColors);
+ini.SetValue("Options","MountDir",(const char*)MountDir);
+ini.SetValueB("Options","RememberLastKey",RememberLastKey);
+if(RememberLastKey){
+	ini.SetValue("Options","LastKeyLocation",(const char*)LastKeyLocation);
+	ini.SetValueI("Options","LastKeyType",LastKeyType);}
+else{
+	ini.SetValue("Options","LastKeyLocation","");
+	ini.SetValueI("Options","LastKeyType",0);}
 if(!ini.WriteFile())return false;
 else return true;
 }

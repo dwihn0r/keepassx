@@ -18,7 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "main.h"
-
+#include "PwmConfig.h"
 #include <qpushbutton.h>
 #include <qpalette.h>
 #include <qfont.h>
