@@ -196,9 +196,35 @@ done(1);
 }
 
 void CPasswordDialog::OnOK_Set(){
+password=Edit_Password->text();
+keyfile=Combo_Dirs->currentText();
+if(password=="" && keyfile==""){
+	QMessageBox::warning(this,tr("Error"),tr("Please enter a Password or select a key file."),tr("OK"),"","",0,0);
+	return;}
 
-
-
+QFile file(keyfile);
+if(QFileInfo(file).isDir()){
+	if(keyfile.right(1)!="/")keyfile+="/";
+	QFile file(keyfile+"pwsafe.key");
+	if(file.exists()){
+		int r=QMessageBox::warning(this,tr("Warning"),tr("A file with the name 'pwsafe.key' already exisits in the given directory.\nDo you want to replace it?"),tr("Yes"),tr("No"),"",1,1);
+		if(r)return;
+		if(!QFileInfo(file).isWritable()){
+			QMessageBox::warning(this,tr("Error"),tr("The exisiting file is not writable."),tr("OK"),"","",0,0);
+			return;}
+	}
+	keyfile+="pwsafe.key";
+}else{
+	QFile file(keyfile);
+	if(file.exists()){
+		int r=QMessageBox::warning(this,tr("Warning"),tr("A file with the this name already exisits.\nDo you want to replace it?"),tr("Yes"),tr("No"),"",1,1);
+		if(r)return;
+		if(!QFileInfo(file).isWritable()){
+			QMessageBox::warning(this,tr("Error"),tr("The exisiting file is not writable."),tr("OK"),"","",0,0);
+			return;}
+	}
+}
+done(1);
 }
 
 void CPasswordDialog::OnPasswordChanged(const QString &txt){

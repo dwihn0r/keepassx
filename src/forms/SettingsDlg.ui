@@ -86,7 +86,7 @@
    </property>
    <widget class="QWidget" name="tab" >
     <attribute name="title" >
-     <string>Securi&amp;try</string>
+     <string>Securi&amp;ty</string>
     </attribute>
     <widget class="QWidget" name="widget" >
      <property name="geometry" >
@@ -448,27 +448,11 @@
     <attribute name="title" >
      <string>&amp;Other</string>
     </attribute>
-    <widget class="QCheckBox" name="CheckBox_OpenLast" >
+    <widget class="QWidget" name="widget" >
      <property name="geometry" >
       <rect>
        <x>10</x>
-       <y>20</y>
-       <width>380</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Remember last opend file</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>50</y>
+       <y>70</y>
        <width>531</width>
        <height>58</height>
       </rect>
@@ -508,6 +492,35 @@
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QCheckBox" name="CheckBox_OpenLast" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>521</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Remember last opend file</string>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+Ö</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="CheckBox_RememberKey" >
+     <property name="geometry" >
+      <rect>
+       <x>30</x>
+       <y>40</y>
+       <width>501</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Remember last key type and location</string>
+     </property>
     </widget>
    </widget>
   </widget>

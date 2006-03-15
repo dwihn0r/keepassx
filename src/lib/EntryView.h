@@ -38,8 +38,8 @@ public:
  KeepassEntryView(QWidget* parent=0);
  ~KeepassEntryView();
  void updateItems(unsigned int group);
- void refreshItems();
  void updateColumns();
+ void refreshItems();
  void showSearchResults(QList<Q_UINT32>& results);
  PwDatabase* db;
  vector<EntryViewItem*>Items;
@@ -57,14 +57,11 @@ protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);
  virtual void paintEvent(QPaintEvent* event);
  virtual void resizeEvent(QResizeEvent* event);
-// virtual void dragEnterEvent ( QDragEnterEvent * event );
-// virtual void dragMoveEvent ( QDragMoveEvent * event );
-// virtual void dragLeaveEvent ( QDragLeaveEvent * event );
-// virtual void dropEvent ( QDropEvent * event );
  virtual void mousePressEvent(QMouseEvent *event);
  virtual void mouseMoveEvent(QMouseEvent *event);
 public slots:
  void OnColumnResized(int index,int OldSize, int NewSize);
+ void updateItems();
 };
 
 

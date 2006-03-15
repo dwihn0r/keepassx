@@ -16,7 +16,6 @@ FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
          forms/AboutDlg.ui \
          forms/SettingsDlg.ui \
-         forms/ChangeKeyDlg.ui \
          forms/MainWindow.ui \
          forms/SimplePasswordDlg.ui \
          forms/DatabaseSettingsDlg.ui \
@@ -43,7 +42,6 @@ HEADERS += lib/IniReader.h \
            dialogs/AboutDlg.h \
            dialogs/EditGroupDlg.h \
            dialogs/SearchDlg.h \
-           dialogs/ChangeKeyDlg.h \
            dialogs/SettingsDlg.h \
            dialogs/DatabaseSettingsDlg.h \
            dialogs/PasswordDlg.h \
@@ -77,7 +75,6 @@ SOURCES += lib/IniReader.cpp \
            dialogs/AboutDlg.cpp \
            dialogs/EditGroupDlg.cpp \
            dialogs/SearchDlg.cpp \
-           dialogs/ChangeKeyDlg.cpp \
            dialogs/SettingsDlg.cpp \
            dialogs/DatabaseSettingsDlg.cpp \
            dialogs/PasswordDlg.cpp \

@@ -46,7 +46,6 @@
 #include "dialogs/AboutDlg.h"
 #include "dialogs/EditGroupDlg.h"
 #include "dialogs/SearchDlg.h"
-#include "dialogs/ChangeKeyDlg.h"
 #include "dialogs/SettingsDlg.h"
 #include "dialogs/DatabaseSettingsDlg.h"
 #include "dialogs/PasswordDlg.h"
@@ -133,6 +132,7 @@ void KeepassMainWindow::setupConnections(){
 
    connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
 
+   connect(GroupView,SIGNAL(entryDropped()),EntryView,SLOT(updateItems()));
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
 		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -251,15 +251,12 @@ Q_ASSERT(r==1);
 db = new PwDatabase();
 GroupView->db=db;
 EntryView->db=db;
-if(PasswordDlg.password!="" && PasswordDlg.keyfile==""){
-db->CalcMasterKeyByPassword(PasswordDlg.password);
-}
-if(PasswordDlg.password=="" && PasswordDlg.keyfile!=""){
-db->CalcMasterKeyByFile(PasswordDlg.keyfile);
-}
-if(PasswordDlg.password!="" && PasswordDlg.keyfile!=""){
-db->CalcMasterKeyByFileAndPw(PasswordDlg.keyfile,PasswordDlg.password);
-}
+if(PasswordDlg.password!="" && PasswordDlg.keyfile=="")
+	db->CalcMasterKeyByPassword(PasswordDlg.password);
+if(PasswordDlg.password=="" && PasswordDlg.keyfile!="")
+	db->CalcMasterKeyByFile(PasswordDlg.keyfile);
+if(PasswordDlg.password!="" && PasswordDlg.keyfile!="")
+	db->CalcMasterKeyByFileAndPw(PasswordDlg.keyfile,PasswordDlg.password);
 QString err;
 StatusBarGeneral->setText(tr("Loading Database..."));
 if(db->loadDatabase(filename,err)==true){
@@ -312,17 +309,31 @@ return true;
 void KeepassMainWindow::OnFileNew(){
 if(FileOpen)
  if(!closeDatabase())return;
+CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
+dlg.setCaption("New Database");
 db=new PwDatabase();
-CChangeKeyDlg dlg(this,db);
 if(dlg.exec()==1){
-setCaption(tr("KeePassX - %1").arg(tr("[new]")));
-GroupView->db=db;
-EntryView->db=db;
-GroupView->updateItems();
-EntryView->updateItems(0);
-setStateFileOpen(true);
-setStateFileModified(true);
-FileOpen=true;
+	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
+		if(!db->createKeyFile(dlg.keyfile)){
+			QMessageBox::warning(this,tr("Error"),tr("Could not create key file. The following error occured:\n%1").arg(db->getError()),tr("OK"),"","",0,0);
+			delete db; db=NULL;
+			return;
+		}
+	}	
+	if(dlg.password!="" && dlg.keyfile=="")
+		db->CalcMasterKeyByPassword(dlg.password);
+	if(dlg.password=="" && dlg.keyfile!="")
+		db->CalcMasterKeyByFile(dlg.keyfile);
+	if(dlg.password!="" && dlg.keyfile!="")
+		db->CalcMasterKeyByFileAndPw(dlg.keyfile,dlg.password);
+	setCaption(tr("KeePassX - %1").arg(tr("[new]")));
+	GroupView->db=db;
+	EntryView->db=db;
+	GroupView->updateItems();
+	EntryView->updateItems(0);
+	setStateFileOpen(true);
+	setStateFileModified(true);
+	FileOpen=true;
 }
 else delete db;
 }
@@ -552,8 +563,23 @@ if(dlg.exec())setStateFileModified(true);
 }
 
 void KeepassMainWindow::OnFileChangeKey(){
-CChangeKeyDlg dlg(this,db,"ChangeKeyDialog");
-if(dlg.exec()) setStateFileModified(true);
+CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
+dlg.setCaption(db->filename);
+if(dlg.exec()==1){
+	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
+		if(!db->createKeyFile(dlg.keyfile)){
+			QMessageBox::warning(this,tr("Error"),tr("Could not create key file. The following error occured:\n%1").arg(db->getError()),tr("OK"),"","",0,0);
+			return;
+		}
+	}	
+	if(dlg.password!="" && dlg.keyfile=="")
+		db->CalcMasterKeyByPassword(dlg.password);
+	if(dlg.password=="" && dlg.keyfile!="")
+		db->CalcMasterKeyByFile(dlg.keyfile);
+	if(dlg.password!="" && dlg.keyfile!="")
+		db->CalcMasterKeyByFileAndPw(dlg.keyfile,dlg.password);
+	setStateFileModified(true);
+}
 
 }
 

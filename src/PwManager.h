@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -53,6 +53,7 @@ public:
  bool CalcMasterKeyByPassword(QString& password);
  bool CalcMasterKeyByFile(QString filename);
  bool CalcMasterKeyByFileAndPw(QString filename, QString& password);
+ bool createKeyFile(const QString& filename);
 
  CGroup*   addGroup(CGroup* parent);
  void      deleteGroup(CGroup* pGroup);

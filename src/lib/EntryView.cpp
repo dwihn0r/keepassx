@@ -91,18 +91,21 @@ resizeColumns();
 e->accept();
 }
 
+void KeepassEntryView::updateItems(){
+updateItems(CurrentGroup);
+}
+
 
 void KeepassEntryView::updateItems(unsigned int GroupID){
-
 clear();
 Items.clear();
 if(!db)return;
 if(!GroupID)return;
+CurrentGroup=GroupID;
 for(int i=0;i<db->Entries.size();i++){
   if(db->Entries[i].GroupID==GroupID)
   	setEntry(&db->Entries[i]);
 }
-
 }
 
 void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){

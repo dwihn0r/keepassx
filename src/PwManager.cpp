@@ -1065,6 +1065,22 @@ for(i=NumSubGroups; i>=0; i--)
 	Groups.insert(DstIndex,tmp[i]);
 }
 
+bool PwDatabase::createKeyFile(const QString& filename){
+QFile file(filename);
+if(!file.open(QIODevice::WriteOnly | QIODevice::Truncate)){
+	Errors << tr("Could not open key file.");
+	return false;}
+char* pKeyData=new char[32];
+getRandomBytes(pKeyData,32);
+if(file.write(pKeyData,32)!=32){
+	Errors << tr("Key file could not be written.");
+	file.close();
+	return false;
+}
+file.close();
+return true;
+
+}
 
 int PwDatabase::getNumberOfChilds(CGroup* group){
 if(!group)return Groups.size();

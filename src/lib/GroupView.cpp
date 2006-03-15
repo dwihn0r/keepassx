@@ -157,18 +157,15 @@ if(DragType==GROUP){
 			}		
 	}
 	else db->moveGroup(DragItem->pGroup,NULL);
+	updateItems();
 }else{
 	Q_ASSERT(item);
 	QList<QTreeWidgetItem*>* pDragItems=(QList<QTreeWidgetItem*>*)*((QList<QTreeWidgetItem*>**)event->mimeData()->data("keepass/entry").data());
 	for(int i=0;i<pDragItems->size();i++){
 		db->moveEntry(((EntryViewItem*)(*pDragItems)[i])->pEntry,item->pGroup);
 	}
-
-
+	emit entryDropped();
 }
-
-
-updateItems();
 }
 
 

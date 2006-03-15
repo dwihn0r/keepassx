@@ -42,6 +42,7 @@ public:
 
 signals:
  void fileModified();
+ void entryDropped();
 
 protected:
  virtual void dragEnterEvent ( QDragEnterEvent * event );

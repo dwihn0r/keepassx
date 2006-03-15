@@ -21,6 +21,7 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include "main.h"
+#include "PwmConfig.h"
 #include "SimplePasswordDlg.h"
 
 CSimplePasswordDialog::CSimplePasswordDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
