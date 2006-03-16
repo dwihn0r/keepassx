@@ -31,11 +31,12 @@ CSettingsDlg::CSettingsDlg(QWidget* parent, const char* name, bool modal, Qt::WF
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
-connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
-connect( ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
-connect( ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
-connect( ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
+connect(ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+connect(ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
+connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
+connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
+connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCeckBoxOpenLastChanged(int)));
 createBanner(Banner,Icon_Settings32x32,tr("Settings"));
 CheckBox_OpenLast->setChecked(config.OpenLast);
 SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
@@ -58,13 +59,12 @@ pixmColor2->setPixmap(*px2);
 color1=config.BannerColor1;
 color2=config.BannerColor2;
 textcolor=config.BannerTextColor;
-
 CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
 Edit_BrowserCmd->setText(config.OpenUrlCommand);
 CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
 CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
 Edit_MountDir->setText(config.MountDir);
-
+CheckBox_RememberLastKey->setChecked(config.RememberLastKey);
 }
 
 CSettingsDlg::~CSettingsDlg()
@@ -85,6 +85,7 @@ config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
 config.MountDir=Edit_MountDir->text();
 if(config.MountDir!="" && config.MountDir.right(1)!="/")
 	config.MountDir+="/";
+config.RememberLastKey=CheckBox_RememberLastKey->isChecked();
 close();
 }
 
@@ -132,7 +133,14 @@ createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
 }
 }
 
-
+void CSettingsDlg::OnCeckBoxOpenLastChanged(int state){
+if(state==Qt::Checked){
+	CheckBox_RememberLastKey->setEnabled(true);
+}else{
+	CheckBox_RememberLastKey->setEnabled(false);
+	CheckBox_RememberLastKey->setChecked(false);
+}
+}
 
 
 /*$SPECIALIZATION$*/

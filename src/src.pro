@@ -35,6 +35,7 @@ HEADERS += lib/IniReader.h \
            crypto/twoclass.h \
            crypto/twofish.h \
            import/Import_PwManager.h \
+           export/Export_Txt.h \
            crypto/blowfish.h \
            crypto/sha1.h \
            import/Import_KWalletXml.h \
@@ -68,6 +69,7 @@ SOURCES += lib/IniReader.cpp \
            crypto/twoclass.cpp \
            crypto/twofish.cpp \
            import/Import_PwManager.cpp \
+           export/Export_Txt.cpp \
            crypto/blowfish.cpp \
            crypto/sha1.cpp \
            import/Import_KWalletXml.cpp \

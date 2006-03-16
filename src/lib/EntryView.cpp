@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                 *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -37,6 +37,7 @@
 
 KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 AutoResizeColumns=true;
+IsSearchGroup=false;
 int sum=0;
 for(int i=0;i<NUM_COLUMNS;i++)
 	sum+=config.ColumnSizes[i];
@@ -97,6 +98,7 @@ updateItems(CurrentGroup);
 
 
 void KeepassEntryView::updateItems(unsigned int GroupID){
+IsSearchGroup=false;
 clear();
 Items.clear();
 if(!db)return;
@@ -109,6 +111,7 @@ for(int i=0;i<db->Entries.size();i++){
 }
 
 void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
+IsSearchGroup=true;
 clear();
 Items.clear();
 for(int j=0; j<results.size(); j++){
@@ -301,6 +304,8 @@ QTreeWidget::mousePressEvent(event);
 }
 
 void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
+if(IsSearchGroup)
+	return;
 if (!(event->buttons() & Qt::LeftButton))
 	return;
 if ((event->pos() - DragStartPos).manhattanLength() < QApplication::startDragDistance())

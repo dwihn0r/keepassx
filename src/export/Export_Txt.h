@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                 *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,31 +17,15 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "main.h"
-#ifndef SETTINGSDLG_H
-#define SETTINGSDLG_H
-#include "ui_SettingsDlg.h"
-#include <qcolor.h>
+#ifndef _EXPORT_TXT_H_
+#define _EXPORT_TXT_H_
+#include <QObject>
+#include "PwManager.h"
 
-class CSettingsDlg : public QDialog, public Ui_SettingsDialog
-{
-  Q_OBJECT
-
+class Export_Txt:public QObject{
 public:
-  CSettingsDlg(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
-  ~CSettingsDlg();
+	bool exportFile(const QString& filename,PwDatabase* db,QString& err);
 
-public slots:
-    virtual void OnCancel();
-    virtual void OnOK();
-    virtual void OnTextColor();
-    virtual void OnColor2();
-    virtual void OnColor1();
-	void OnCeckBoxOpenLastChanged(int state);
-
-private:
- QColor color1,color2,textcolor;
 };
 
 #endif
-

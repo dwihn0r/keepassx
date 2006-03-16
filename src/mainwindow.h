@@ -63,6 +63,7 @@ private slots:
    void OnFileExit();
    void OnImportFromPwm();
    void OnImportFromKWalletXml();
+   void OnExportToTxt();
    void OnEditNewGroup();
    void OnEditEditGroup();
    void OnEditDeleteGroup();

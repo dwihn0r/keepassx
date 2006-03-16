@@ -41,7 +41,7 @@ ini.ReadFile();
 ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
 Toolbar=ini.GetValueB("UI","ShowToolbar",true);
 EntryDetails=ini.GetValueB("UI","ShowEntryDetails",true);
-OpenLast=ini.GetValueB("Options","OpenLast",true);
+OpenLast=ini.GetValueB("Options","RememberLastFile",true);
 LastFile=ini.GetValue("Options","LastFile","").c_str();
 ParseColumnString(ini.GetValue("UI","Columns","1111100000").c_str(),Columns);
 BannerColor1=ParseColorString(ini.GetValue("Options","BannerColor1","0,104,176").c_str());
@@ -68,7 +68,7 @@ AlternatingRowColors=ini.GetValueB("Options","AlternatingRowColors",true);
 MountDir=ini.GetValue("Options","MountDir",DEFAULT_MOUNT_DIR).c_str();
 RememberLastKey=ini.GetValueB("Options","RememberLastKey",true);
 LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
-LastKeyType=(tKeyType)ini.GetValueI("Option","LastKeyType",(int)PASSWORD);
+LastKeyType=(tKeyType)ini.GetValueI("Options","LastKeyType",(int)PASSWORD);
 if(!OpenLast)RememberLastKey=false;
 return true;
 }
@@ -77,6 +77,7 @@ bool CConfig::saveToIni(QString filename){
 ini.SetValueI("Options","ClipboardTimeOut",ClipboardTimeOut);
 ini.SetValueB("UI","ShowToolbar",Toolbar);
 ini.SetValueB("UI","ShowEntryDetails",EntryDetails);
+ini.SetValueB("Options","RememberLastFile",OpenLast);
  if(OpenLast)ini.SetValue("Options","LastFile",(const char*)LastFile);
  else	     ini.SetValue("Options","LastFile","");
 ini.SetValue("UI","Columns",(const char*)CreateColumnString(),true);

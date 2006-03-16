@@ -509,7 +509,7 @@
       <string>Alt+Ö</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="CheckBox_RememberKey" >
+    <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
      <property name="geometry" >
       <rect>
        <x>30</x>

@@ -36,6 +36,32 @@ CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, 
 {
 setupUi(this);
 createBanner(Banner,Icon_Key32x32,tr("Database Key"));
+
+QDir media(config.MountDir);
+if(media.exists()){
+	QStringList Paths;
+	Paths=media.entryList("*",QDir::Dirs);
+	Paths.erase(Paths.begin()); // delete "."
+	Paths.erase(Paths.begin()); // delete ".."
+	for(int i=0;i<Paths.count();i++)
+		Combo_Dirs->addItem(config.MountDir+Paths[i]);
+}
+
+Combo_Dirs->setEditText(QString());
+if(config.RememberLastKey){
+	switch(config.LastKeyType){
+		case PASSWORD:	setStatePasswordOnly(); break;
+		case KEYFILE:	setStateKeyFileOnly();
+						Combo_Dirs->setEditText(config.LastKeyLocation);
+						break;
+		case BOTH:		setStateBoth();
+						CheckBox_Both->setChecked(true);
+						Combo_Dirs->setEditText(config.LastKeyLocation);
+						break;
+	}
+}
+
+
 connect( Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
 connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
@@ -56,19 +82,6 @@ if(!ChangeKeyMode){
 	connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse_Set() ) );
 }
 
-
-
-QDir media(config.MountDir);
-if(media.exists()){
-	QStringList Paths;
-	Paths=media.entryList("*",QDir::Dirs);
-	Paths.erase(Paths.begin()); // delete "."
-	Paths.erase(Paths.begin()); // delete ".."
-	for(int i=0;i<Paths.count();i++)
-		Combo_Dirs->addItem(config.MountDir+Paths[i]);
-}
-
-Combo_Dirs->setEditText(QString());
 if(!config.ShowPasswords)ChangeEchoMode();
 }
 
@@ -79,6 +92,7 @@ ButtonBrowse->setEnabled(false);
 Label_KeyFile->setEnabled(false);
 Label_Password->setEnabled(true);
 Edit_Password->setEnabled(true);
+Edit_PasswordRep->setEnabled(true);
 ButtonChangeEchoMode->setEnabled(true);
 KeyType=PASSWORD;
 }
@@ -90,6 +104,7 @@ ButtonBrowse->setEnabled(true);
 Label_KeyFile->setEnabled(true);
 Label_Password->setEnabled(false);
 Edit_Password->setEnabled(false);
+Edit_PasswordRep->setEnabled(false);
 ButtonChangeEchoMode->setEnabled(false);
 KeyType=KEYFILE;
 }
@@ -101,6 +116,7 @@ ButtonBrowse->setEnabled(true);
 Label_KeyFile->setEnabled(true);
 Label_Password->setEnabled(true);
 Edit_Password->setEnabled(true);
+Edit_PasswordRep->setEnabled(true);
 ButtonChangeEchoMode->setEnabled(true);
 KeyType=BOTH;
 }
@@ -192,14 +208,22 @@ if(KeyType==BOTH || KeyType==KEYFILE){
 		return;}
 	}
 }
+
+if(config.RememberLastKey){
+	config.LastKeyLocation=keyfile;
+	config.LastKeyType=KeyType;
+}
 done(1);
 }
 
 void CPasswordDialog::OnOK_Set(){
 password=Edit_Password->text();
+if(password!=Edit_PasswordRep->text()){
+	QMessageBox::warning(this,tr("Warning"),tr("Password an password repetition are not equal.\nPlease check your input."),tr("OK"),"","",0,0);
+	return;}
 keyfile=Combo_Dirs->currentText();
 if(password=="" && keyfile==""){
-	QMessageBox::warning(this,tr("Error"),tr("Please enter a Password or select a key file."),tr("OK"),"","",0,0);
+	QMessageBox::warning(this,tr("Error"),tr("Please enter a password or select a key file."),tr("OK"),"","",0,0);
 	return;}
 
 QFile file(keyfile);
@@ -224,10 +248,15 @@ if(QFileInfo(file).isDir()){
 			return;}
 	}
 }
+if(config.RememberLastKey){
+	config.LastKeyLocation=keyfile;
+	config.LastKeyType=KeyType;
+}
 done(1);
 }
 
 void CPasswordDialog::OnPasswordChanged(const QString &txt){
+Edit_PasswordRep->setText("");
 if(CheckBox_Both->isChecked() || txt==QString())
 	setStateBoth();
 else
@@ -263,10 +292,12 @@ if(state==Qt::Unchecked){
 }
 
 void CPasswordDialog::ChangeEchoMode(){
-if(Edit_Password->echoMode()==QLineEdit::Normal)
+if(Edit_Password->echoMode()==QLineEdit::Normal){
 	Edit_Password->setEchoMode(QLineEdit::Password);
-else
+	Edit_PasswordRep->setEchoMode(QLineEdit::Password);}
+else{
 	Edit_Password->setEchoMode(QLineEdit::Normal);
+	Edit_PasswordRep->setEchoMode(QLineEdit::Normal);}
 }
 
 

@@ -53,6 +53,7 @@ private:
  QPoint DragStartPos;
  QList<QTreeWidgetItem*> DragItems;
  QPixmap DragPixmap;
+ bool IsSearchGroup;
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);
  virtual void paintEvent(QPaintEvent* event);

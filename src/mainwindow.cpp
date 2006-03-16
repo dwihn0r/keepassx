@@ -42,6 +42,7 @@
 #include "lib/IniReader.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
+#include "export/Export_Txt.h"
 
 #include "dialogs/AboutDlg.h"
 #include "dialogs/EditGroupDlg.h"
@@ -97,6 +98,7 @@ void KeepassMainWindow::setupConnections(){
    connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
    connect(FileImpPwmAction, SIGNAL(triggered()), this, SLOT(OnImportFromPwm()));
    connect(FileImpKWalletXmlAction, SIGNAL(triggered()), this,SLOT(OnImportFromKWalletXml()));
+   connect(FileExpPlainTextAction,SIGNAL(triggered()),this,SLOT(OnExportToTxt()));
 
    connect(EditNewGroupAction, SIGNAL(triggered()), this, SLOT(OnEditNewGroup()));
    connect(EditEditGroupAction, SIGNAL(triggered()), this, SLOT(OnEditEditGroup()));
@@ -587,6 +589,15 @@ void KeepassMainWindow::OnFileExit(){
 close();
 }
 
+void KeepassMainWindow::OnExportToTxt(){
+QString filename=QFileDialog::getSaveFileName(this,tr("Export To..."),QDir::homePath(),"*.txt");
+if(filename==QString())return;
+Export_Txt exp;
+QString err;
+exp.exportFile(filename,db,err);
+
+}
+
 void KeepassMainWindow::OnImportFromPwm(){
 if(FileOpen)
  if(!closeDatabase())return;
@@ -669,9 +680,24 @@ if(cur){
 }
 
 void KeepassMainWindow::OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column){
-if(column) return;
-if(!config.Columns[0]) return;
-editEntry(static_cast<EntryViewItem*>(item)->pEntry);
+int i=0;
+int c=-1;
+for(i;i<NUM_COLUMNS;i++){
+	if(config.Columns[i])c++;
+	if(c==column)break;
+}
+if(c==-1)return;
+CEntry* entry=static_cast<EntryViewItem*>(item)->pEntry;
+switch(i){
+	case 0:	editEntry(entry);
+			break;
+	case 1: OnEditUsernameToClipboard();
+			break;
+	case 2: OnEditOpenUrl();
+			break;
+	case 3:	OnEditPasswordToClipboard();
+			break;
+}
 }
 
 void KeepassMainWindow::OnEntrySelectionChanged(){
