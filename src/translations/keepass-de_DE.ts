@@ -1,5 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name></name>
+    <message>
+        <source>Could not open file (FileError=%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AboutDlg</name>
     <message>
         <source>About</source>
@@ -31,7 +38,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translation</source>
@@ -74,62 +81,40 @@
         <source>http://keepass.berlios.de/index.php</source>
         <translation>http://keepass.berlios.de/index.php</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
+        <comment>Please replace &apos;None&apos; with the language of your translation</comment>
+        <translation>&lt;b&gt;Aktuelle Übersetzung: Deutsch&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
+        <translation>&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>$TRANSALTION_AUTHOR</source>
+        <translation>Tarek Saidi</translation>
+    </message>
+    <message>
+        <source>$TRANSLATION_AUTHOR_EMAIL</source>
+        <comment>Here you can enter your email or homepage if you want.</comment>
+        <translation>tarek.saidi@arcor.de</translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepass.berlios.de/translation-howto.html</source>
+        <translation type="unfinished">Informationen wie Sie eine Übersetztung für KeePassX machen können finden Sie unter:
+http://keepass.berlios.de/translation-howto.html</translation>
+    </message>
 </context>
 <context>
     <name>CChangeKeyDlg</name>
     <message>
-        <source>Change Master Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
-    </message>
-    <message>
-        <source>Please enter a password.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Fehler</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <source>Please choose a key file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please select a key file or enter a password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Overwrite?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A file with this name already exists.
-Do you want to replace it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not open key file for writing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key file could not be written.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password and password repetition are not equal.
-Please check your input.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open key file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">OK</translation>
     </message>
 </context>
 <context>
@@ -267,26 +252,8 @@ Are you sure?</source>
 <context>
     <name>CPasswordDialog</name>
     <message>
-        <source>No key file found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No key file could be found in the chosen directory.
-Make sure that the volume is mounted correctly.
-Please use the manual file selection for key files with a filename other than &apos;pwsafe.key&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Key File</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
@@ -305,15 +272,86 @@ Please use the manual file selection for key files with a filename other than &a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open Database</source>
+        <source>Database Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select File Manually...</source>
+        <source>Select a Key File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt; none &gt;</source>
+        <source>*.key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unexpected Error: File does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected key file or directory does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected key file or directory is not readable
+.Please check your permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The given directory does not contain any key files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The given directory contains more then one key file.
+Please specify the key file directly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The key file found in the given directory is not readable.
+Please check your permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key file could not be found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key file is not readable.
+Please check your permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password an password repetition are not equal.
+Please check your input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a password or select a key file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A file with the name &apos;pwsafe.key&apos; already exisits in the given directory.
+Do you want to replace it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The exisiting file is not writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A file with the this name already exisits.
+Do you want to replace it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -342,63 +380,8 @@ Please use the manual file selection for key files with a filename other than &a
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>ChangeKeyDialog</name>
     <message>
-        <source>Change Master Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use password AND key file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key file or directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password Repetition:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter a Password and/or choose a key file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>O&amp;K</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+K</source>
+        <source>Select a directory...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -673,6 +656,10 @@ Please use the manual file selection for key files with a filename other than &a
         <source>Attachment</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KeepassGroupView</name>
@@ -832,6 +819,35 @@ to save the changes?</source>
     </message>
     <message>
         <source>Open Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not create key file. The following error occured:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export To...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KeePassX [new]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error in Import_PwManager::importFile()()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error in Import_KWalletXml::importFile()</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1029,6 +1045,18 @@ to save the changes?</source>
         <source>Show Statusbar</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export to...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KeePassX Handbook...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain Text (*.txt)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -1076,6 +1104,14 @@ to save the changes?</source>
         <source>Use Password AND Key File</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password Repet.:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PwDatabase</name>
@@ -1109,11 +1145,6 @@ The key is wrong or the file is damaged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hash test failed.
-The key is wrong or the file is damaged</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unexpected error: Offset is out of range. [G1]</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1131,6 +1162,19 @@ The key is wrong or the file is damaged</source>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E3]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hash test failed.
+The key is wrong or the file is damaged.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open key file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key file could not be written.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1349,10 +1393,6 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Securi&amp;try</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clear clipboard after:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1414,6 +1454,26 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Browser Command:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Securi&amp;ty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alternating Row Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remember last key type and location</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

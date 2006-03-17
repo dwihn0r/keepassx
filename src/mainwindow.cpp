@@ -63,8 +63,6 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   setupUi(this);
   setGeometry(geometry().x(),geometry().y(),config.MainWinWidth,config.MainWinHeight);
   splitter->setSizes(QList<int>() << config.MainWinSplit1 << config.MainWinSplit2);
-  QuickSearchEdit=new QLineEdit(toolBar);
-  QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
   setupIcons();
   setupToolbar();
   setStateFileOpen(false);
@@ -75,6 +73,7 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   statusBar()->addWidget(StatusBarGeneral,15);
   statusBar()->addWidget(StatusBarSelection,85);
   statusBar()->setVisible(config.ShowStatusbar);
+  CGroup::UI_ExpandByDefault=config.ExpandGroupTree;
   setupConnections();
   FileOpen=false;
   Clipboard=QApplication::clipboard();
@@ -138,6 +137,8 @@ void KeepassMainWindow::setupConnections(){
    connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
    connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
 		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+   connect(GroupView,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
+   connect(GroupView,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollaped(QTreeWidgetItem*)));
    connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,
 		   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
    connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
@@ -148,6 +149,9 @@ void KeepassMainWindow::setupConnections(){
 }
 
 void KeepassMainWindow::setupToolbar(){
+  toolBar=new QToolBar(this);
+  addToolBar(toolBar);
+  toolBar->setIconSize(QSize(16,16));
   toolBar->addAction(FileNewAction);
   toolBar->addAction(FileOpenAction);
   toolBar->addAction(FileSaveAction);
@@ -159,6 +163,8 @@ void KeepassMainWindow::setupToolbar(){
   toolBar->addAction(EditPasswordToClipboardAction);
   toolBar->addAction(EditUsernameToClipboardAction);
   toolBar->addSeparator();
+  QuickSearchEdit=new QLineEdit(toolBar);
+  QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
   toolBar->addWidget(QuickSearchEdit);
 }
 
@@ -261,7 +267,7 @@ if(PasswordDlg.password!="" && PasswordDlg.keyfile!="")
 	db->CalcMasterKeyByFileAndPw(PasswordDlg.keyfile,PasswordDlg.password);
 QString err;
 StatusBarGeneral->setText(tr("Loading Database..."));
-if(db->loadDatabase(filename,err)==true){
+if(db->openDatabase(filename,err)==true){
 //SUCCESS
 if(config.OpenLast)config.LastFile=filename;
 setCaption(tr("Keepass - %1").arg(filename));
@@ -274,7 +280,7 @@ else{
 //ERROR
 delete db;
 StatusBarGeneral->setText(tr("Loading Failed"));
-if(err=="")err=tr("Unknown error in PwDatabase::loadDatabase()");
+if(err=="")err=tr("Unknown error in PwDatabase::openDatabase()");
 QMessageBox::critical(this,tr("Error")
 						  ,tr("The following error occured while opening the database:\n%1")
 				 		  .arg(err),tr("OK"));
@@ -315,6 +321,7 @@ CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
 dlg.setCaption("New Database");
 db=new PwDatabase();
 if(dlg.exec()==1){
+	db->newDatabase();
 	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
 		if(!db->createKeyFile(dlg.keyfile)){
 			QMessageBox::warning(this,tr("Error"),tr("Could not create key file. The following error occured:\n%1").arg(db->getError()),tr("OK"),"","",0,0);
@@ -344,7 +351,7 @@ void KeepassMainWindow::OnFileOpen(){
 if(FileOpen)
  if(!closeDatabase())return;
 QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.kdb");
-if(filename!=QString::null){
+if(filename!=QString()){
  openDatabase(filename);
 }
 }
@@ -540,7 +547,7 @@ else Q_ASSERT(false);
 }
 
 bool KeepassMainWindow::OnFileSave(){
-if(db->filename==QString())
+if(db->file->fileName()==QString())
  return OnFileSaveAs();
 if(db->saveDatabase())
   setStateFileModified(false);
@@ -554,8 +561,11 @@ return true;
 bool KeepassMainWindow::OnFileSaveAs(){
 QString filename=QFileDialog::getSaveFileName(this,tr("Save Database As..."),QDir::homePath(),"*.kdb"); 
 if(filename==QString()) return false;
-db->filename=filename;
-setCaption(tr("KeePassX - %1").arg(db->filename));
+Q_ASSERT(db->file);
+if(db->file->isOpen()) db->file->close();
+
+db->file->setFileName(filename);
+setCaption(tr("KeePassX - %1").arg(filename));
 return OnFileSave();
 }
 
@@ -566,7 +576,7 @@ if(dlg.exec())setStateFileModified(true);
 
 void KeepassMainWindow::OnFileChangeKey(){
 CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
-dlg.setCaption(db->filename);
+dlg.setCaption(db->file->fileName());
 if(dlg.exec()==1){
 	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
 		if(!db->createKeyFile(dlg.keyfile)){
@@ -810,9 +820,7 @@ for(int i=0; i<SearchResults.size();i++){
 	return;
  }
 }
-
 }
-
 
 void KeepassMainWindow::OnEditUsernameToClipboard(){
 Clipboard->setText(currentEntry()->UserName,  QClipboard::Clipboard);
@@ -932,6 +940,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 CSettingsDlg dlg(this,"SettingsDlg");
 dlg.exec();
 EntryView->setAlternatingRowColors(config.AlternatingRowColors);
+CGroup::UI_ExpandByDefault=config.ExpandGroupTree;
 }
 
 void KeepassMainWindow::OnHelpAbout(){
@@ -948,3 +957,12 @@ void KeepassMainWindow::OnViewShowEntryDetails(bool show){
 config.EntryDetails=show;
 DetailView->setVisible(config.EntryDetails);
 }
+
+void KeepassMainWindow::OnItemExpanded(QTreeWidgetItem* item){
+((GroupViewItem*)item)->pGroup->UI_ItemIsExpanded=true;
+}
+
+void KeepassMainWindow::OnItemCollaped(QTreeWidgetItem* item){
+((GroupViewItem*)item)->pGroup->UI_ItemIsExpanded=false;
+}
+

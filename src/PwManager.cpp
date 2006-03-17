@@ -33,6 +33,8 @@
 using namespace std;
 #include "PwManager.h"
 
+#define _ERROR Errors << QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
+
 QString PwDatabase::getError(){
 if(Errors.size()){
 QString r=Errors.front();
@@ -64,7 +66,7 @@ for(i=GroupIndex+1; i<Groups.size(); i++){
 return ids;
 }
 
-bool PwDatabase::loadDatabase(QString _filename, QString& err){
+bool PwDatabase::openDatabase(QString filename, QString& err){
 unsigned long total_size,crypto_size;
 Q_UINT32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
 Q_UINT8 TrafoRandomSeed[32];
@@ -72,13 +74,18 @@ Q_UINT8 FinalRandomSeed[16];
 Q_UINT8 ContentsHash[32];
 Q_UINT8 EncryptionIV[16];
 
-filename=_filename;
-QFile file(filename);
-file.open(QIODevice::ReadOnly);
-total_size=file.size();
+file=new QFile(filename);
+if(!file->open(QIODevice::ReadWrite)){
+	if(!file->open(QIODevice::ReadOnly)){
+		Errors << tr("Could not open file.");
+		delete file;
+		file=NULL;
+		return false;
+	}
+}
+total_size=file->size();
 char* buffer = new char[total_size];
-file.readBlock(buffer,total_size);
-file.close();
+file->readBlock(buffer,total_size);
 
 if(total_size < DB_HEADER_SIZE){
 err=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
@@ -383,8 +390,7 @@ else if(FileSize == 64){
 	  file.close();
 	  return false;}
 	file.close();
-	if(!convHexToBinaryKey(hex,(char*)FileKey)) return false;
-
+	if(!convHexToBinaryKey(hex,(char*)FileKey)){return false;}
 }
 else{
 sha256_starts(&sha32);
@@ -519,6 +525,9 @@ PwDatabase::~PwDatabase(){
 
 }
 
+void PwDatabase::newDatabase(){
+	file=new QFile();
+}
 
 bool CEntry::ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData){
 
@@ -586,8 +595,12 @@ switch(FieldType)
 bool PwDatabase::closeDatabase(){
 Groups.clear();
 Entries.clear();
+file->close();
+delete file;
+file=NULL;
 return true;
 }
+
 
 bool PwDatabase::saveDatabase(){
 CGroup SearchGroup;
@@ -597,10 +610,18 @@ Q_UINT8 FinalRandomSeed[16];
 Q_UINT8 ContentsHash[32];
 Q_UINT8 EncryptionIV[16];
 
-if(filename==QString::null)return false;
-QFile file(filename);
-unsigned int FileSize;
+Q_ASSERT(file);
+if(!(file->openMode() & QIODevice::WriteOnly)){
+	file->close();
+}
+if(!file->isOpen()){
+	if(!file->open(QIODevice::ReadWrite)){
+		Errors << tr("Could not open file for writing.");
+		return false;
+	}
+}
 
+unsigned int FileSize;
 Entries+=UnkownMetaStreams; ///@FIXME ID conflicts???
 
 FileSize=DB_HEADER_SIZE;
@@ -806,7 +827,7 @@ if(CryptoAlgorithmus == ALGO_AES){
 Rijndael aes;
 // Initialize Rijndael/AES
   if(aes.init(Rijndael::CBC, Rijndael::Encrypt, FinalKey,Rijndael::Key32Bytes, EncryptionIV) != RIJNDAEL_SUCCESS){
-	//TODO:ERR_MSG
+	_ERROR
 	delete [] buffer;
 	return false;}
 EncryptedPartSize = (unsigned long)aes.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZE,
@@ -815,7 +836,7 @@ EncryptedPartSize = (unsigned long)aes.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZ
 }else if(CryptoAlgorithmus == ALGO_TWOFISH){
 CTwofish twofish;
 if(twofish.init(FinalKey, 32, EncryptionIV) == false){
-//TODO:ERR_MSG
+_ERROR
 delete [] buffer;
 return false;}
 EncryptedPartSize = (unsigned long)twofish.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZE,
@@ -823,27 +844,20 @@ EncryptedPartSize = (unsigned long)twofish.padEncrypt((Q_UINT8*)buffer+DB_HEADER
 						      (Q_UINT8*)buffer+DB_HEADER_SIZE);
 }
 if((EncryptedPartSize > 2147483446) || (EncryptedPartSize == 0)){
-//TODO:ERR_MSG
+_ERROR
 delete [] buffer;
 return false;
 }
 
-if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)==false){
-//TODO:ERR_MSG
+file->resize(0); //truncate
+if(file->writeBlock(buffer,EncryptedPartSize+DB_HEADER_SIZE)!=EncryptedPartSize+DB_HEADER_SIZE){
 delete [] buffer;
 return false;
 }
+file->flush();
 
-if(file.writeBlock(buffer,EncryptedPartSize+DB_HEADER_SIZE)!=EncryptedPartSize+DB_HEADER_SIZE){
-//TODO:ERR_MSG
-file.close();
 delete [] buffer;
-return false;
-}
-
-file.close();
-delete [] buffer;
-if(SearchGroupID!=-1)Groups.push_back(SearchGroup);
+//if(SearchGroupID!=-1)Groups.push_back(SearchGroup);
 return true;
 }
 
@@ -990,6 +1004,7 @@ for(int i=0; i<64; i+=2){
 		return false;}
 	memcpy(dst+(i/2),&bin,1);
 }
+return true;
 }
 
 void PwDatabase::moveGroup(CGroup* group, CGroup* DstGroup, int pos){
@@ -1026,7 +1041,7 @@ else{
 	NumParentSubGroups=Groups.size();}
 
 if(pos==-1)DstIndex+=(NumParentSubGroups+1);
-else{	int n=0; //Counter for direct (first-level) childs
+else{	int n=0; //counter for direct (first-level) childs
 	for(i=0; i<NumParentSubGroups;i++){
 		if(n==pos)break;
 		if(Groups[DstIndex+1+i].Level==DstGroup->Level+1)n++;
@@ -1311,8 +1326,8 @@ bool testDatabase(){
         /* create a test database */
         PwDatabase database;
         kp_assert(results, database.CalcMasterKeyByPassword(dbPassword));
-        database.filename = dbPath;
-	database.CryptoAlgorithmus = ALGO_TWOFISH;
+        database.file = new QFile(dbPath);
+		database.CryptoAlgorithmus = ALGO_TWOFISH;
 		
         CGroup* main = database.addGroup(NULL);
         CGroup* child = database.addGroup(main);
@@ -1345,7 +1360,7 @@ bool testDatabase(){
         PwDatabase cloneDatabase;
         kp_assert(results, cloneDatabase.CalcMasterKeyByPassword(dbPassword));
         QString err;
-        bool loadedDB = cloneDatabase.loadDatabase(dbPath, err);
+        bool loadedDB = cloneDatabase.openDatabase(dbPath, err);
         if (!loadedDB){
                 kp_assert(results, loadedDB);
                 cout << err.ascii() << endl;

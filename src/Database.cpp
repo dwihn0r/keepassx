@@ -60,3 +60,9 @@ CGroup::~CGroup(){
 CEntry::~CEntry(){
 
 }
+
+Database::Database(){
+file=NULL;
+KeyEncRounds=6000;
+CryptoAlgorithmus=ALGO_AES;
+}

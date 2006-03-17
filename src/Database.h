@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   mail@tarek-saidi.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -22,6 +22,7 @@
 
 #include <QList>
 #include <QDateTime>
+#include <QFile>
 #include "lib/SecString.h"
 using namespace std;
 
@@ -72,13 +73,15 @@ static bool UI_ExpandByDefault;
 
 };
 
-
+#define ALGO_AES         		0
+#define ALGO_TWOFISH			1
 
 class Database{
 public:
+ Database();
  Q_UINT32 CryptoAlgorithmus;
  Q_UINT32 KeyEncRounds;
- QString filename;
+ QFile* file;
  bool modflag;
  int SearchGroupID;
  QList<CGroup>Groups;

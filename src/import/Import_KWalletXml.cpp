@@ -72,7 +72,7 @@ for(int i=0;i<groups.length();i++){
 		NewEntry->Password.setString(pw,true);
 		}
 }
-pwm->filename="";
+pwm->file=NULL;
 pwm->SearchGroupID=-1;
 pwm->CryptoAlgorithmus=ALGO_AES;
 pwm->KeyEncRounds=6000;

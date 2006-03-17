@@ -38,6 +38,7 @@ public slots:
     virtual void OnColor2();
     virtual void OnColor1();
 	void OnCeckBoxOpenLastChanged(int state);
+	void OnMountDirBrowse();
 
 private:
  QColor color1,color2,textcolor;

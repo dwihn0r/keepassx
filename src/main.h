@@ -39,6 +39,7 @@ void showErrMsg(const QString& msg,QWidget* parent=NULL);
 
 extern CConfig  config;
 extern QString  AppDir;
+extern bool TrActive;
 extern QPixmap *EntryIcons;
 extern QPixmap *Icon_Key32x32;
 extern QPixmap *Icon_Settings32x32;

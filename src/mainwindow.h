@@ -90,6 +90,8 @@ private slots:
    void OnFileModified();
    void OnExtrasSettings();
    void OnHelpAbout();
+   void OnItemExpanded(QTreeWidgetItem*);
+   void OnItemCollaped(QTreeWidgetItem*);
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
@@ -118,6 +120,7 @@ private:
  QLineEdit* QuickSearchEdit;
  QLabel* StatusBarGeneral;
  QLabel* StatusBarSelection;
+ QToolBar* toolBar;
 
 protected:
  void closeEvent(QCloseEvent* event);

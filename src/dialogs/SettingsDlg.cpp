@@ -24,6 +24,8 @@
 #include <qspinbox.h>
 #include <qcolordialog.h>
 #include <qlineedit.h>
+#include <QFileDialog>
+#include <QDir>
 #include "SettingsDlg.h"
 
 
@@ -37,6 +39,7 @@ connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
 connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
 connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCeckBoxOpenLastChanged(int)));
+connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
 createBanner(Banner,Icon_Settings32x32,tr("Settings"));
 CheckBox_OpenLast->setChecked(config.OpenLast);
 SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
@@ -142,9 +145,9 @@ if(state==Qt::Checked){
 }
 }
 
-
-/*$SPECIALIZATION$*/
-
-
-//#include "settingsdlg.moc"
-
+void CSettingsDlg::OnMountDirBrowse(){
+QString dir=QFileDialog::getExistingDirectory(this,tr("Select a directory..."),"/");
+if(dir!=QString()){
+	Edit_MountDir->setText(dir);
+}
+}

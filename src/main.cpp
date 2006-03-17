@@ -38,6 +38,7 @@ using namespace std;
 
 CConfig config;
 QString  AppDir;
+bool TrActive;
 QPixmap *Icon_Key32x32;
 QPixmap *Icon_Settings32x32;
 QPixmap *Icon_Search32x32;
@@ -61,6 +62,7 @@ QIcon *Icon_EditOpenUrl;
 QIcon *Icon_EditSearch;
 QIcon *Icon_Configure;
 QIcon *Icon_Help;
+
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg);
@@ -107,6 +109,7 @@ if(TrFound)
 else 
 	delete translator;
 
+TrActive=TrFound;
 loadImages();
 SecString::generateSessionKey();
 int r=0;
@@ -196,21 +199,10 @@ if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
 
 }
 
-#ifndef Q_WS_X11
+
 #define _loadIcon(Icon,PATH)\
-	{QImage img(ThemeDir+PATH);\
-	 Icon=new QIcon();\
-	 /*Icon->addPixmap(QPixmap::fromImage(img));*/\
-	 Icon->addPixmap(QPixmap::fromImage(img.scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));\
-	}
-#else
-#define _loadIcon(Icon,PATH)\
-	{QImage img(ThemeDir+PATH);\
-	 Icon=new QIcon();\
-	 Icon->addPixmap(QPixmap::fromImage(img));\
-	 Icon->addPixmap(QPixmap::fromImage(img.scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));\
-	}
-#endif
+	Icon=new QIcon(ThemeDir+PATH);
+
 
 void loadImages(){
 
@@ -246,6 +238,7 @@ Icon_Search32x32=new QPixmap;
 *Icon_Search32x32=tmpImg;
 //--------------------------
 
+
 _loadIcon(Icon_FileNew,"/actions/filenew.png");
 _loadIcon(Icon_FileOpen,"/actions/fileopen.png");
 _loadIcon(Icon_FileSave,"/actions/filesave.png");
@@ -262,6 +255,7 @@ _loadIcon(Icon_EditOpenUrl,"/actions/run.png");
 _loadIcon(Icon_EditSearch,"/actions/find.png");
 _loadIcon(Icon_Configure,"/actions/configure.png");
 _loadIcon(Icon_Help,"/actions/help.png");
+
 }
 
 

@@ -32,6 +32,24 @@ CAboutDialog::CAboutDialog(QWidget* parent, const char* name, bool modal, Qt::WF
 setupUi(this);
 createBanner(Banner,Icon_Key32x32,tr("KeePassX %1").arg(KEEPASS_VERSION));
 loadLicFromFile();
+
+QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
+if(TrActive){
+	AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSALTION_AUTHOR"));
+	QString mail=tr("$TRANSLATION_AUTHOR_EMAIL","Here you can enter your email or homepage if you want.");
+	if(mail!=QString()){
+		AboutTr+=mail+"<br>";
+	}
+	AboutTr+="<br>";
+}
+Edit_Translation->setText(AboutTr+tr("\
+Information on how to translate KeePassX can be found under:\n\
+http://keepass.berlios.de/translation-howto.html"));
+
+QString ThanksTemplate=QString("<div style='margin-left:0px;'><b>%1</b></div><div style='margin-left:10px;'>%2</div><br><br>");
+
+Edit_Thanks->setText(ThanksTemplate.arg(tr("Matthias Miller")).arg(tr("http://www.outofhanwell.com/<br>Mac OS X Support")));
+//Edit_Thanks->setText(Edit_Thanks->text()+ThanksTemplate.arg(tr("  ")).arg(tr("  ")));
 }
 
 CAboutDialog::~CAboutDialog()

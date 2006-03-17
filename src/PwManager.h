@@ -29,8 +29,6 @@
  #define PWM_FLAG_ARCFOUR		4
  #define PWM_FLAG_TWOFISH		8
  #define PWM_STD_KEYENCROUNDS 	6000
- #define ALGO_AES         		0
- #define ALGO_TWOFISH			1
 
 #include <qcolor.h>
 #include <qobject.h>
@@ -47,9 +45,10 @@ class PwDatabase:QObject,public Database{
 public:
  PwDatabase();
  ~ PwDatabase();
- bool loadDatabase(QString filename, QString& err);
+ bool openDatabase(QString filename, QString& err);
  bool saveDatabase();
  bool closeDatabase();
+ void newDatabase();
  bool CalcMasterKeyByPassword(QString& password);
  bool CalcMasterKeyByFile(QString filename);
  bool CalcMasterKeyByFileAndPw(QString filename, QString& password);
