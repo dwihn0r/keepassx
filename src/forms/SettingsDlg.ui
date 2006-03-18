@@ -234,6 +234,18 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>16777215</width>
+           <height>23</height>
+          </size>
+         </property>
          <property name="text" >
           <string>Change...</string>
          </property>
@@ -324,6 +336,18 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>16777215</width>
+           <height>23</height>
+          </size>
+         </property>
          <property name="text" >
           <string>Change...</string>
          </property>
@@ -371,6 +395,18 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>16777215</width>
+           <height>23</height>
+          </size>
          </property>
          <property name="text" >
           <string>C&amp;hange...</string>
@@ -466,6 +502,18 @@
       </property>
       <item row="1" column="2" >
        <widget class="QPushButton" name="Button_MountDirBrowse" >
+        <property name="minimumSize" >
+         <size>
+          <width>0</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>16777215</width>
+          <height>23</height>
+         </size>
+        </property>
         <property name="text" >
          <string>Browse...</string>
         </property>
@@ -487,7 +535,7 @@
       <item row="1" column="0" >
        <widget class="QLabel" name="label_2" >
         <property name="text" >
-         <string>Media Directory:</string>
+         <string>Mounting Root:</string>
         </property>
        </widget>
       </item>

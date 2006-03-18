@@ -13,22 +13,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Homepage:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>KeePassX - Cross Platform Password Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Email:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copyright (C) 2005-2006 Tarek Saidi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Thanks To</source>
         <translation type="unfinished"></translation>
     </message>
@@ -38,6 +22,24 @@
     </message>
     <message>
         <source>Translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2005 - 2006 Tarek Saidi 
+KeePassX is distributed under the terms of the 
+General Public License (GPL) version 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tarek.saidi@arcor.de</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>http://keepass.berlios.de/</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -99,9 +101,14 @@
 http://keepass.berlios.de/translation-howto.html</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>CChangeKeyDlg</name>
+    <message>
+        <source>Matthias Miller</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CDbSettingsDlg</name>
@@ -278,11 +285,6 @@ Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The selected key file or directory is not readable
-.Please check your permissions.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The given directory does not contain any key files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -340,6 +342,11 @@ Do you want to replace it?</source>
 Do you want to replace it?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The selected key file or directory is not readable.
+Please check your permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CSearchDlg</name>
@@ -370,9 +377,6 @@ Do you want to replace it?</source>
         <source>Select a directory...</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>ChangeKeyDialog</name>
 </context>
 <context>
     <name>EditEntryDialog</name>
@@ -728,10 +732,6 @@ Do you want to replace it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown error in PwDatabase::loadDatabase()</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -837,6 +837,10 @@ to save the changes?</source>
     </message>
     <message>
         <source>Unknown error in Import_KWalletXml::importFile()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error in PwDatabase::openDatabase()</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1046,6 +1050,10 @@ to save the changes?</source>
         <source>Plain Text (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -1117,20 +1125,7 @@ to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unsupported File Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown Encryption Algorithm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AES-Init Failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decryption failed.
-The key is wrong or the file is damaged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1166,6 +1161,27 @@ The key is wrong or the file is damaged.</source>
         <source>Key file could not be written.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not open file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open file for writing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported File Version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown Encryption Algorithm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decryption failed.
+The key is wrong or the file is damaged.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -1192,10 +1208,6 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Datei ist leer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1247,16 +1259,16 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Warnung:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>ungültiger RGB-Farbwert.
-</source>
+        <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
+        <source>Warning:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid RGB color value.
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1458,11 +1470,11 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Media Directory:</source>
+        <source>Remember last key type and location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remember last key type and location</source>
+        <source>Mounting Root:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

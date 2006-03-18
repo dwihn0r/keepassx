@@ -52,7 +52,7 @@ for(int g=0;g<db->Groups.size();g++){
 									.arg(db->Entries[e].UserName)
 									.arg(db->Entries[e].URL)
 									.arg(db->Entries[e].Password.string())
-									.arg(db->Entries[e].Additional)
+									.arg(db->Entries[e].Additional.replace('\n',"\n            "))
 									.utf8());
 			db->Entries[e].Password.lock();
 		}

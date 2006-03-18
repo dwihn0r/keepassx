@@ -92,6 +92,7 @@ private slots:
    void OnHelpAbout();
    void OnItemExpanded(QTreeWidgetItem*);
    void OnItemCollaped(QTreeWidgetItem*);
+   void OnHideSearchGroup();
 
 private:
  enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};

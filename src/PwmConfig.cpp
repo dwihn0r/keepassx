@@ -140,14 +140,14 @@ return str;
 QColor CConfig::ParseColorString(QString str){
 QStringList lst=QStringList::split(',',str);
 if(lst.size()!=3){
-  qWarning(QObject::tr("Warnung:")+" CConfig::ParseColorString(QString):"+QObject::tr("ungültiger RGB-Farbwert.\n"));
+  qWarning(QObject::tr("Warning:")+" CConfig::ParseColorString(QString):"+QObject::tr("Invalid RGB color value.\n"));
   return QColor(0,0,0);}
 bool err[3];
 int r=lst[0].toUInt(err);
 int g=lst[1].toUInt(err+1);
 int b=lst[2].toUInt(err+2);
 if(!err[0] || !err[1] || !err[2]){
-  qWarning(QObject::tr("Warnung:")+" CConfig::ParseColorString(QString):"+QObject::tr("ungültiger RGB-Farbwert.\n"));
+  qWarning(QObject::tr("Warning:")+" CConfig::ParseColorString(QString):"+QObject::tr("Invalid RGB color value.\n"));
   return QColor(0,0,0);}
 return QColor(r,g,b);
 }

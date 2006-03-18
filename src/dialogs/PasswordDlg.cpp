@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek@linux                                                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -36,7 +36,6 @@ CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, 
 {
 setupUi(this);
 createBanner(Banner,Icon_Key32x32,tr("Database Key"));
-
 QDir media(config.MountDir);
 if(media.exists()){
 	QStringList Paths;
@@ -68,6 +67,7 @@ connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPas
 connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
 connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
 connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
+connect( Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 connect( ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
 
 ButtonExit->setVisible(ShowExitButton);
@@ -170,7 +170,7 @@ if(KeyType==BOTH || KeyType==KEYFILE){
 		return;
 	}
 	if(!fileinfo.isReadable()){
-		QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory is not readable\n.Please check your permissions."),tr("OK"),"","",0,0);
+		QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
 		return;
 	}
 	if(fileinfo.isDir()){

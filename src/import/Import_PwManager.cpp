@@ -36,7 +36,7 @@ int len=0;
 if(!file.exists()){err+=QObject::tr("File not found."); return false;}
 if(!file.open(QIODevice::ReadOnly)){err+=QObject::tr("Could not open file."); return false;}
 if(len=file.size()) buffer=new char[len];
-else {err+=QObject::tr("Datei ist leer"); return false;}
+else {err+=QObject::tr("File is empty."); return false;}
 file.readBlock(buffer,len);
 file.close();
 if(QString::fromAscii(buffer,17)!="PWM_PASSWORD_FILE")
@@ -107,6 +107,7 @@ delete[] content_hash;
 if(!parseXmlContent((char*)xml)){
 	delete [] xml;
 	err+=QObject::tr("Invalid XML data (see stdout for details)."); return false;}
+database->CalcMasterKeyByPassword(password);
 return true;
 }
 

@@ -45,6 +45,7 @@ LastHoverItem=NULL;
 setHeaderLabels(QStringList()<<tr("Groups"));
 ShowSearchGroup=false;
 ContextMenu=new QMenu(this);
+ContextMenuSearchGroup=new QMenu(this);
 }
 
 void KeepassGroupView::selectSearchGroup(){
@@ -282,7 +283,10 @@ if(!(GroupViewItem*)itemAt(e->pos()) && selectedItems().size()){
 	setItemSelected(selectedItems()[0],false);
 }
 e->accept();
-ContextMenu->popup(e->globalPos());
+if(isSearchResultGroup((GroupViewItem*)itemAt(e->pos())))
+	ContextMenuSearchGroup->popup(e->globalPos());
+else
+	ContextMenu->popup(e->globalPos());
 }
 
 GroupViewItem::GroupViewItem(QTreeWidget *parent):QTreeWidgetItem(parent){

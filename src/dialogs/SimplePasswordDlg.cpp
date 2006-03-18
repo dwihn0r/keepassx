@@ -29,6 +29,9 @@ CSimplePasswordDialog::CSimplePasswordDialog(QWidget* parent, const char* name, 
 {
 setupUi(this);
 if(!config.ShowPasswords)Button_HidePassword->toggle();
+connect(ButtonOK,SIGNAL(clicked()),this,SLOT(OnOK()));
+connect(ButtonCancel,SIGNAL(clicked()),this,SLOT(OnCancel()));
+connect(Button_HidePassword,SIGNAL(toggled(bool)),this,SLOT(OnHidePasswordToggled(bool)));
 }
 
 CSimplePasswordDialog::~CSimplePasswordDialog()

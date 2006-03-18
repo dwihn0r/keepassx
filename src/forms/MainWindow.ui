@@ -477,6 +477,11 @@
     <string>Plain Text (*.txt)</string>
    </property>
   </action>
+  <action name="HideSearchResultsAction" >
+   <property name="text" >
+    <string>Hide</string>
+   </property>
+  </action>
  </widget>
  <pixmapfunction></pixmapfunction>
  <customwidgets>

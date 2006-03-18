@@ -39,6 +39,7 @@ public:
  bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
  vector<GroupViewItem*>Items;
  QMenu *ContextMenu;
+ QMenu *ContextMenuSearchGroup;
 
 signals:
  void fileModified();

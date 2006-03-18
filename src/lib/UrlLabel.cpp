@@ -20,11 +20,11 @@
 
 
 #include "UrlLabel.h"
+#include "main.h"
 #include <qfont.h>
 #include <qcolor.h>
 #include <qcursor.h>
 #include <qfontmetrics.h>
-//Added by qt3to4:
 #include <QMouseEvent>
 #include <QLabel>
 
@@ -41,15 +41,22 @@ LinkLabel::~LinkLabel(){
 
 }
 
+QString LinkLabel::url(){
+if(URL!=QString())return URL;
+if(text().contains("@"))
+	return QString("mailto:")+text();
+else return text();
+}
+
 void LinkLabel::mouseReleaseEvent(QMouseEvent* event){
 if(event->button()==Qt::LeftButton)
-clicked();
+emit clicked();
+openBrowser(url());
 }
 
 void LinkLabel::setPos(int x,int y){
 QFontMetrics fm(font());
 setGeometry(x,y,fm.width(text()),fm.height());
-
 }
 
 void LinkLabel::setText(const QString& text){

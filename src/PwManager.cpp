@@ -109,13 +109,13 @@ return false;}
 
 
 if((Version & 0xFFFFFF00) != (PWM_DBVER_DW & 0xFFFFFF00)){
-	err=tr("Unsupported File Version");
+	err=tr("Unsupported File Version.");
 	return false;}
 
 if(Flags & PWM_FLAG_RIJNDAEL) CryptoAlgorithmus = ALGO_AES;
 else if(Flags & PWM_FLAG_TWOFISH) CryptoAlgorithmus = ALGO_TWOFISH;
 else {
- err=tr("Unknown Encryption Algorithm");
+ err=tr("Unknown Encryption Algorithm.");
  return false;
  }
 
@@ -147,7 +147,7 @@ else if(CryptoAlgorithmus == ALGO_TWOFISH)
 			total_size - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 
-if((crypto_size > 2147483446) || (crypto_size == 0)){err=tr("Decryption failed.\nThe key is wrong or the file is damaged"); return false;}
+if((crypto_size > 2147483446) || (crypto_size == 0)){err=tr("Decryption failed.\nThe key is wrong or the file is damaged."); return false;}
 
 sha256_starts(&sha32);
 sha256_update(&sha32,(unsigned char *)buffer + DB_HEADER_SIZE,crypto_size);
@@ -252,7 +252,7 @@ Rijndael rijndael;
 sha256_context sha2;
 if(rijndael.init(Rijndael::ECB, Rijndael::Encrypt, (const Q_UINT8 *)KeySeed,
                  Rijndael::Key32Bytes, 0) != RIJNDAEL_SUCCESS){
-  cout << QString("unexpected error in %1, line %2").arg(__FILE__).arg(__LINE__).ascii() << endl;
+  _ERROR
   exit(1);}
 
 memcpy(tmp,src,32);
@@ -341,9 +341,24 @@ return true;
 }
 
 
-void PwDatabase::addEntry(CEntry* NewEntry){
-CEntry *entry=addEntry();
-*entry=*NewEntry;
+CEntry* PwDatabase::addEntry(CEntry* NewEntry){
+if(Entries.size()==0){
+ NewEntry->sID=0;
+ getRandomBytes(&NewEntry->ID,16,1,false);
+ }
+ else {
+ NewEntry->sID=Entries.back().sID+1;
+ while(1){
+ bool used=false;
+ getRandomBytes(&NewEntry->ID,16,1,false);
+  for(int j=0;j<Entries.size();j++){
+	int k;
+	for(k=0;k<16;k++){if(Entries[j].ID[k]!=NewEntry->ID[k])k=0;break;}
+	if(k==15)used=true;}
+ if(used==false)break;
+ }}
+Entries.push_back(*NewEntry);
+return &Entries.back();
 }
 
 

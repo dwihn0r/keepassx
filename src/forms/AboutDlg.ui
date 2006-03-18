@@ -64,56 +64,61 @@
     <attribute name="title" >
      <string>About</string>
     </attribute>
-    <widget class="QLabel" name="Label3" >
+    <widget class="QLabel" name="label" >
      <property name="geometry" >
       <rect>
        <x>20</x>
-       <y>40</y>
-       <width>81</width>
-       <height>20</height>
+       <y>20</y>
+       <width>351</width>
+       <height>17</height>
       </rect>
      </property>
      <property name="text" >
-      <string>Homepage:</string>
+      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;/head>&lt;body style=" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;">&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-size:12pt; font-weight:600;">KeePassX&lt;/span> - Cross Platform Password Manager&lt;/p>&lt;/body>&lt;/html></string>
      </property>
     </widget>
-    <widget class="QLabel" name="Label0" >
+    <widget class="QLabel" name="label_4" >
      <property name="geometry" >
       <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>281</width>
-       <height>20</height>
+       <x>30</x>
+       <y>110</y>
+       <width>341</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="text" >
-      <string>KeePassX - Cross Platform Password Manager</string>
+      <string>Copyright (C) 2005 - 2006 Tarek Saidi 
+KeePassX is distributed under the terms of the 
+General Public License (GPL) version 2.</string>
      </property>
     </widget>
-    <widget class="QLabel" name="Label4" >
+    <widget class="LinkLabel" name="label_3" >
      <property name="geometry" >
       <rect>
-       <x>20</x>
-       <y>70</y>
-       <width>111</width>
-       <height>20</height>
+       <x>30</x>
+       <y>80</y>
+       <width>351</width>
+       <height>17</height>
       </rect>
      </property>
      <property name="text" >
-      <string>Email:</string>
+      <string>tarek.saidi@arcor.de</string>
      </property>
     </widget>
-    <widget class="QLabel" name="Label1" >
+    <widget class="LinkLabel" name="label_2" >
      <property name="geometry" >
       <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>301</width>
-       <height>20</height>
+       <x>30</x>
+       <y>50</y>
+       <width>351</width>
+       <height>17</height>
       </rect>
      </property>
      <property name="text" >
-      <string>Copyright (C) 2005-2006 Tarek Saidi</string>
+      <string>http://keepass.berlios.de/</string>
+     </property>
+     <property name="buddy" >
+      <cstring></cstring>
      </property>
     </widget>
    </widget>
@@ -175,6 +180,15 @@
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>LinkLabel</class>
+   <extends>QLabel</extends>
+   <header>../../src/lib/UrlLabel.h</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

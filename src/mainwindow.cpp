@@ -145,6 +145,7 @@ void KeepassMainWindow::setupConnections(){
    connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
    connect(GroupView,SIGNAL(fileModified()),this,SLOT(OnFileModified()));
    connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
+   connect(HideSearchResultsAction,SIGNAL(triggered()),this, SLOT(OnHideSearchGroup()));
 
 }
 
@@ -201,6 +202,7 @@ void KeepassMainWindow::setupMenus(){
   GroupView->ContextMenu->addAction(EditNewEntryAction);
   GroupView->ContextMenu->addSeparator();
   GroupView->ContextMenu->addAction(EditGroupSearchAction);
+  GroupView->ContextMenuSearchGroup->addAction(HideSearchResultsAction);
 
   EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
   EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
@@ -367,6 +369,9 @@ FileSaveAsAction->setEnabled(IsOpen);
 FileCloseAction->setEnabled(IsOpen);
 FileSettingsAction->setEnabled(IsOpen);
 FileChangeKeyAction->setEnabled(IsOpen);
+FileExpPlainTextAction->setEnabled(IsOpen);
+
+
 EditSearchAction->setEnabled(IsOpen);
 GroupView->setEnabled(IsOpen);
 EntryView->setEnabled(IsOpen);
@@ -615,6 +620,7 @@ QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::
 if(filename!=QString::null){
 	Q_ASSERT(!FileOpen);
 	db = new PwDatabase();
+	db->newDatabase();
 	CSimplePasswordDialog dlg(this,"SimplePasswordDlg",true);
 	if(!dlg.exec()){
 		delete db;
@@ -654,6 +660,7 @@ QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::
 if(filename!=QString::null){
 	Q_ASSERT(!FileOpen);
 	db = new PwDatabase();
+	db->newDatabase();
 	GroupView->db=db;
 	EntryView->db=db;
 	QString err;
@@ -810,7 +817,10 @@ for(int i=0; i<entries.size();i++){
 	db->deleteEntry(((EntryViewItem*)entries[i])->pEntry);
 }
 setStateFileModified(true);
-EntryView->updateItems(currentGroup()->ID);
+if(GroupView->isSearchResultGroup((GroupViewItem*)(GroupView->selectedItems()[0])))
+	EntryView->showSearchResults(SearchResults);
+else
+	EntryView->updateItems(currentGroup()->ID);
 }
 
 void KeepassMainWindow::removeFromSearchResults(int id){
@@ -885,7 +895,7 @@ EntryView->showSearchResults(SearchResults);
 
 CGroup* KeepassMainWindow::currentGroup(){
 Q_ASSERT(GroupView->selectedItems().size());
-return static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
+return ((GroupViewItem*)(GroupView->selectedItems()[0]))->pGroup;
 }
 
 CEntry* KeepassMainWindow::currentEntry(){
@@ -933,6 +943,13 @@ if(FileOpen){
 }
 else
  e->accept();
+}
+
+void KeepassMainWindow::OnHideSearchGroup(){
+GroupView->ShowSearchGroup=false;
+GroupView->updateItems();
+EntryView->updateItems(0);
+SearchResults.clear();
 }
 
 
