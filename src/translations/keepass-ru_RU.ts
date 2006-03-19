@@ -3,26 +3,26 @@
     <name></name>
     <message>
         <source>Could not open file (FileError=%1)</source>
-        <translation>No se pudo abrir el archivo (FileError=%1)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AboutDlg</name>
     <message>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation>Agradecimientos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Licencia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Translation</source>
-        <translation>Traducción</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -47,61 +47,59 @@ General Public License (GPL) version 2.</source>
     <name>CAboutDialog</name>
     <message>
         <source>KeePassX %1</source>
-        <translation>KeePassX %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation>Archivo &apos;%1&apos; no encontrado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation>Asegúrese de que el programa está instalado correctamente.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation>No se pudo abrir fichero &apos;%1&apos;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The following error occured:
 %1</source>
-        <translation>Ha ocurrido el siguiente error:
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation>http://keepass.berlios.de/index.php</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation>&lt;b&gt;Traducción actual: Español&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation>&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>$TRANSALTION_AUTHOR</source>
-        <translation>Jaroslaw Filiochowski</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation>jarfil@jarfil.net</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/translation-howto.html</source>
-        <translation>Puede encontrar información sobre cómo traducir KeePassX en esta dirección:
-http://keepass.berlios.de/translation-howto.html</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Matthias Miller</source>
@@ -116,242 +114,233 @@ http://keepass.berlios.de/translation-howto.html</translation>
     <name>CDbSettingsDlg</name>
     <message>
         <source>AES(Rijndael):  256 Bit   (default)</source>
-        <translation>AES(Rijndael):  256 Bits   (por defecto)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Twofish:  256 Bit</source>
-        <translation>Twofish:  256 Bits</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Aviso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please determine the number of encryption rounds.</source>
-        <translation>Defina el número de iteraciones de cifrado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&apos;%1&apos; is not valid integer value.</source>
-        <translation>&apos;%1&apos; no es un valor entero válido.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The number of encryption rounds have to be greater than 0.</source>
-        <translation>El númer de iteraciones de cifrado debe ser mayor que 0.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CEditEntryDlg</name>
     <message>
         <source>Warning</source>
-        <translation>Aviso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password and password repetition are not equal.
 Please check your input.</source>
-        <translation>Las contraseñas no coinciden.
-Compruebe que las ha introducido correctamente.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Attachment...</source>
-        <translation>Guardar Adjunto...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Overwrite?</source>
-        <translation>Sobreescribir?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A file with this name already exists.
 Do you want to replace it?</source>
-        <translation>Ya existe un archivo con este nombre.
-¿Desea reemplazarlo?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not remove old file.</source>
-        <translation>No se pudo eliminar el archivo anterior.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not create new file.</source>
-        <translation>No se pudo crear el nuevo archivo.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error while writing the file.</source>
-        <translation>Error al escribir el archivo.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete Attachment?</source>
-        <translation>Eliminar Adjunto?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
-        <translation>Está a punto de eliminar el adjunto de esta entrada.
-¿Está seguro?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No, Cancel</source>
-        <translation>No, Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Editar Entrada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>No se pudo abrir el archivo.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CGenPwDialog</name>
     <message>
         <source>Notice</source>
-        <translation>Notificación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You need to enter at least one character</source>
-        <translation>Debe introducir al menos un carácter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
-        <translation>No se pudo abrir &apos;/dev/random&apos; o &apos;/dev/urandom&apos;.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CPasswordDialog</name>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please enter a Password.</source>
-        <translation>Introduzca una Contraseña.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please choose a key file.</source>
-        <translation>Seleccione un archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please enter a Password or select a key file.</source>
-        <translation>Introduzca una Contraseña o seleccione un archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Database Key</source>
-        <translation>Contraseña de la Base de Datos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a Key File</source>
-        <translation>Seleccione un Archivo de Clave</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>*.key</source>
-        <translation>*.key</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected Error: File does not exist.</source>
-        <translation>Error Inesperado: Archivo no existe.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The selected key file or directory does not exist.</source>
-        <translation>El archivo de clave seleccionado o el directorio no existen.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The given directory does not contain any key files.</source>
-        <translation>El directorio no contiene ningún archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The given directory contains more then one key file.
 Please specify the key file directly.</source>
-        <translation>El directorio contiene más de un archivo de clave.
-Especifique un archivo de clave concreto.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The key file found in the given directory is not readable.
 Please check your permissions.</source>
-        <translation>El archivo de clave encontrado en el directorio no se puede leer.
-Compruebe sus permisos de acceso.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key file could not be found.</source>
-        <translation>Archivo de clave no encontrado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key file is not readable.
 Please check your permissions.</source>
-        <translation>Archivo de clave no se puede leer.
-Compruebe sus permisos de acceso.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password an password repetition are not equal.
 Please check your input.</source>
-        <translation>Las contraseñas no coinciden.
-Compruebe que las ha introducido correctamente.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please enter a password or select a key file.</source>
-        <translation>Introduzca una contraseña o seleccione un archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A file with the name &apos;pwsafe.key&apos; already exisits in the given directory.
 Do you want to replace it?</source>
-        <translation>El archivo &apos;pwsafe.key&apos; ya existe en el directorio.
-¿Desea reemplazarlo?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The exisiting file is not writable.</source>
-        <translation>El archivo existente no se puede escribir.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A file with the this name already exisits.
 Do you want to replace it?</source>
-        <translation>Existe un archivo con ese nombre.
-¿Desea reemplazarlo?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The selected key file or directory is not readable.
@@ -363,219 +352,219 @@ Please check your permissions.</source>
     <name>CSearchDlg</name>
     <message>
         <source>Notice</source>
-        <translation>Aviso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please enter a search string.</source>
-        <translation>Introduzca una cadena de búsqueda.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CSettingsDlg</name>
     <message>
         <source>Settings</source>
-        <translation>Preferencias</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a directory...</source>
-        <translation>Seleccione un directorio...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditEntryDialog</name>
     <message>
         <source>Edit Entry</source>
-        <translation>Editar Entrada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Usuario:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Contraseña (repetida):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Título:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation>URL:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Contraseña:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Calidad:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Comentario:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expires:</source>
-        <translation>Expira:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation>Grupo:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1</source>
-        <translation>%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Icono:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>% Bit</source>
-        <translation>% Bits</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ge&amp;n.</source>
-        <translation>Ge&amp;n.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>&amp;Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation>Alt+A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Never</source>
-        <translation>Nunca</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Attachment:</source>
-        <translation>Adjunto:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EditGroupDialog</name>
     <message>
         <source>Group Properties</source>
-        <translation>Propiedades del Grupo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Título:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Icono:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>&amp;Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation>Alt+A</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GenPwDlg</name>
     <message>
         <source>Alt+U</source>
-        <translation>Alt+U</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+N</source>
-        <translation>Alt+N</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+L</source>
-        <translation>Alt+L</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password Generator</source>
-        <translation>Generador de Contraseña</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Accep&amp;t</source>
-        <translation>&amp;Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Generar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Password:</source>
-        <translation>Nueva Contraseña:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Calidad:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opciones</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Upper Letters</source>
-        <translation>Mayúsc&amp;ulas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
-        <translation>Minúscu&amp;las</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
-        <translation>&amp;Números</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Special Characters</source>
-        <translation>Carácteres E&amp;speciales</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Minus</source>
-        <translation>Guión</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>U&amp;nderline</source>
-        <translation>S&amp;ubrayado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>h&amp;igher ANSI-Characters</source>
@@ -583,97 +572,97 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Alt+H</source>
-        <translation type="unfinished">Alt+M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Usar sól&amp;o carácteres siguientes:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+O</source>
-        <translation>Alt+O</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Longitud:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &quot;/dev/rando&amp;m&quot;</source>
-        <translation>Usar &quot;/dev/rando&amp;m&quot;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Usar &amp;grupos de carácteres siguientes:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation>Alt+G</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>White &amp;Spaces</source>
-        <translation>E&amp;spacios</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation>Alt+S</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>KeepassEntryView</name>
     <message>
         <source>Title</source>
-        <translation>Título</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Usuario</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Contraseña</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation>Comentarios</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Expira</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Creación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Último Cambio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Último Acceso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Adjunto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 items</source>
-        <translation>%1 elementos</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>KeepassGroupView</name>
     <message>
         <source>Search Results</source>
-        <translation>Resultados de Búsqueda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Grupos</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -696,7 +685,7 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation type="unfinished">Ctrl+C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+B</source>
@@ -720,7 +709,7 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Ctrl+K</source>
-        <translation type="unfinished">Ctrl+A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+F</source>
@@ -740,119 +729,115 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Keepass - %1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The following error occured while opening the database:
 %1</source>
-        <translation>Ocurrió el siguiente error al intentar abrir la base de datos:
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save modified file?</source>
-        <translation>¿Guardar archivo modificado?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The current file was modified. Do you want
 to save the changes?</source>
-        <translation>El archivo actual ha sido modificado.
-¿Desea guardar los cambios?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>KeePassX - %1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;B&gt;Group: &lt;/B&gt;%1  &lt;B&gt;Title: &lt;/B&gt;%2  &lt;B&gt;Username: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Password: &lt;/B&gt;%5  &lt;B&gt;Creation: &lt;/B&gt;%6  &lt;B&gt;Last Change: &lt;/B&gt;%7  &lt;B&gt;LastAccess: &lt;/B&gt;%8  &lt;B&gt;Expires: &lt;/B&gt;%9</source>
-        <translation>&lt;b&gt;Grupo: &lt;/b&gt;%1  &lt;b&gt;Título: &lt;/b&gt;%2  &lt;b&gt;Usuario: &lt;/b&gt;%3  &lt;b&gt;URL: &lt;/b&gt;&lt;a href=&quot;%4&quot;&gt;%4&lt;/a&gt;  &lt;b&gt;Contraseña: &lt;/b&gt;%5  &lt;b&gt;Creación: &lt;/b&gt;%6  &lt;b&gt;Último Cambio: &lt;/b&gt;%7  &lt;b&gt;Último Acceso: &lt;/b&gt;%8  &lt;b&gt;Expira: &lt;/b&gt;%9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Duplicar Entrada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Eliminar Entrada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clone Entries</source>
-        <translation>Duplicar Entradas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete Entries</source>
-        <translation>Eliminar Entradas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File could not be saved.
 %1</source>
-        <translation>Archivo no ha podido ser guardado.
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Database As...</source>
-        <translation>Guardar Base de Datos Como...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Listo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>[new]</source>
-        <translation type="unfinished">[nuevo]</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Abrir Base de Datos...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Loading Database...</source>
-        <translation>Cargando Base de Datos...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Loading Failed</source>
-        <translation>Carga Fallida</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not create key file. The following error occured:
 %1</source>
-        <translation>No se ha podido crear archivo de clave. Ha ocurrido el siguiente error:
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export To...</source>
-        <translation>Exportar A...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>KeePassX [new]</source>
-        <translation type="unfinished">KeePassX [nuevo]</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unknown error in Import_PwManager::importFile()()</source>
-        <translation>Error desconocido en Import_PwManager::importFile()()</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unknown error in Import_KWalletXml::importFile()</source>
-        <translation>Error desconocido en Import_KWalletXml::importFile()</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unknown error in PwDatabase::openDatabase()</source>
@@ -863,207 +848,207 @@ to save the changes?</source>
     <name>MainWindow</name>
     <message>
         <source>KeePassX</source>
-        <translation>KeePassX</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Archivo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Import from...</source>
-        <translation>Importar desde...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ver</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation>Columnas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Extras</source>
-        <translation>Preferencias</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Ayuda</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Database...</source>
-        <translation>Nueva Base de Datos...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Abrir Base de Datos...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close Database</source>
-        <translation>Cerrar Base de Datos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Database</source>
-        <translation>Guardar Base de Datos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Database As...</source>
-        <translation>Guardar Base de Datos Como...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Database Settings...</source>
-        <translation>Preferencias de Base de Datos...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Change Master Key...</source>
-        <translation>Cambiar Clave Maestra...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PwManager File (*.pwm)</source>
-        <translation>PwManager (*.pwm)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>KWallet XML-File (*.xml)</source>
-        <translation>KWallet, archivo XML (*.xml)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add New Group...</source>
-        <translation>Añadir Nuevo Grupo...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Group...</source>
-        <translation>Editar Grupo...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete Group</source>
-        <translation>Eliminar Grupo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copy Password to Clipboard</source>
-        <translation>Copiar Contraseña al Portapapeles</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copy Username to Clipboard</source>
-        <translation>Copiar Usuario al Portapapeles</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>Abrir URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save Attachment As...</source>
-        <translation>Guardar Adjunto Como...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add New Entry...</source>
-        <translation>Añadir Nueva Entrada...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>View/Edit Entry...</source>
-        <translation>Ver/Editar Entrada...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Eliminar Entrada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Duplicar Entrada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search In Database...</source>
-        <translation>Buscar en Base de Datos...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search in this group...</source>
-        <translation>Buscar en este grupo...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Toolbar</source>
-        <translation>Mostrar Barra de herramientas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Entry Details</source>
-        <translation>Mostrar Detalles de Entradas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hide Usernames</source>
-        <translation>Ocultar Usuarios</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hide Passwords</source>
-        <translation>Ocultar Contraseñas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Título</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Usuario</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Contraseña</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Comentario</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Expira</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Creación</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Último Cambio</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Último Acceso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Adjunto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation>Preferencias...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>About...</source>
-        <translation>Acerca de...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Statusbar</source>
-        <translation>Mostrar Barra de estado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export to...</source>
-        <translation>Exportar a...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>KeePassX Handbook...</source>
-        <translation>Manual de KeePassX...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Plain Text (*.txt)</source>
-        <translation>Texto Plano (*.txt)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hide</source>
@@ -1078,70 +1063,70 @@ to save the changes?</source>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter a Password and/or choose a key file.</source>
-        <translation>Introduzca una Contraseña y/o seleccione un archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Clave</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Contraseña:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key file or directory:</source>
-        <translation>Archivo o directorio de clave:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Browse...</source>
-        <translation>&amp;Navegar...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+B</source>
-        <translation>Alt+N</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use Password AND Key File</source>
-        <translation>Usar Contraseña Y Archivo de Clave</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Salir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Contraseña (repetida):</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PwDatabase</name>
     <message>
         <source>Unknown Error</source>
-        <translation>Error Desconocido</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
-        <translation>Tamaño de fichero inesperado (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wrong Signature</source>
-        <translation>Firma Incorrecta</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>AES-Init Failed</source>
-        <translation>Falló inicialización de AES</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [G1]</source>
@@ -1166,20 +1151,23 @@ to save the changes?</source>
     <message>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
-        <translation>Comprobación hash fallida.
-La clave es incorecta o el fichero está dañado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not open key file.</source>
-        <translation>No se pudo abrir archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key file could not be written.</source>
-        <translation>No se pudo escribir archivo de clave.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation type="unfinished">No se pudo abrir el archivo.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open file for writing.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
@@ -1194,90 +1182,85 @@ La clave es incorecta o el fichero está dañado.</translation>
 The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Could not open file for writing.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not save configuration file.
 Make sure you have write access to &apos;~/.keepass&apos;.</source>
-        <translation>No se pudo guardar el archivo de configuración.
-Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation>Archivo &apos;%1&apos; no encontrado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File not found.</source>
-        <translation>Archivo no encontrado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>No se pudo abrir el archivo.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File is no valid PwManager file.</source>
-        <translation>El archivo no es un archivo PwManager válido.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unsupported file version.</source>
-        <translation>Version de archivo no soportada.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unsupported hash algorithm.</source>
-        <translation>Algoritmo hash no soportado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unsupported encryption algorithm.</source>
-        <translation>Algoritmo de cifrado no soportado.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Compressed files are not supported yet.</source>
-        <translation>Los archivos comprimidos todavía no están soportados.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wrong password.</source>
-        <translation>Contraseña incorrecta.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File is damaged (hash test failed).</source>
-        <translation>El archivo está dañado (comprobación hash fallida).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
-        <translation>Datos XML no válidos (ver stdout para más detalles).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File is empty.</source>
-        <translation>Archivo vacío.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid XML file (see stdout for details).</source>
-        <translation>Archivo XML no válido (ver stdout para más detalles).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid XML file.</source>
-        <translation>Archivo XML no válido.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Document does not contain data.</source>
-        <translation>El documento no contiene datos.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Warning:</source>
@@ -1293,95 +1276,95 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     <name>Search_Dlg</name>
     <message>
         <source>Alt+T</source>
-        <translation>Alt+T</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+U</source>
-        <translation>Alt+U</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A&amp;nhang</source>
-        <translation>&amp;Adjunto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+N</source>
-        <translation>Alt+A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation>Alt+C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search...</source>
-        <translation>Buscar...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search For:</source>
-        <translation>Buscar:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation>E&amp;xpresión Regular</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+X</source>
-        <translation>Alt+X</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation>Distinguir &amp;Mayúsculas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Include:</source>
-        <translation>Incluir:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Titles</source>
-        <translation>&amp;Títulos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Usernames</source>
-        <translation>&amp;Usuarios</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C&amp;omments</source>
-        <translation>C&amp;omentarios</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+O</source>
-        <translation>Alt+O</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>U&amp;RLs</source>
-        <translation>U&amp;RLs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+R</source>
-        <translation>Alt+R</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pass&amp;words</source>
-        <translation>&amp;Contraseñas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clo&amp;se</source>
-        <translation>C&amp;errar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation>Alt+E</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Include Subgroups (recursive)</source>
-        <translation>Incluir Subgrupos (recursivo)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1392,43 +1375,43 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>&amp;Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation>Alt+A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Preferencias</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear clipboard after:</source>
-        <translation>Borrar portapapeles después de:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Seconds</source>
-        <translation>Segundos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sh&amp;ow passwords in plain text by default</source>
-        <translation>M&amp;ostrar contraseñas en texto plano por defecto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+O</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Appea&amp;rance</source>
-        <translation>Apa&amp;riencia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Banner Color</source>
@@ -1436,59 +1419,59 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     </message>
     <message>
         <source>Text Color:</source>
-        <translation>Color de Texto:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Change...</source>
-        <translation>Cambiar...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color 2:</source>
-        <translation>Color 2:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C&amp;hange...</source>
-        <translation>Ca&amp;mbiar...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+H</source>
-        <translation>Alt+M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color 1:</source>
-        <translation>Color 1:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expand group tree when opening a database</source>
-        <translation>Expandir árbol de grupo al abrir la base de datos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Other</source>
-        <translation>&amp;Otros</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remember last opend file</source>
-        <translation>Recordar último archivo abierto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Browser Command:</source>
-        <translation>Comando del Navegador:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Securi&amp;ty</source>
-        <translation>Seguri&amp;dad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alternating Row Colors</source>
-        <translation>Alternar Colores de Columna</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Navegar...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remember last key type and location</source>
-        <translation>Recordar último tipo de clave y localización</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mounting Root:</source>
@@ -1499,70 +1482,70 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     <name>SimplePasswordDialog</name>
     <message>
         <source>O&amp;K</source>
-        <translation>&amp;Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation>Alt+A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter your Password</source>
-        <translation>Introduzca su Contraseña</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Contraseña:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>dbsettingdlg_base</name>
     <message>
         <source>Database Settings</source>
-        <translation>Preferencias de Base de Datos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation>Cifrado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Algorithm:</source>
-        <translation>Algoritmo:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>?</source>
-        <translation>?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Encryption Rounds:</source>
-        <translation>Iteraciones de Cifrado:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>&amp;Aceptar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+K</source>
-        <translation>Ctrl+A</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation>Ctrl+C</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

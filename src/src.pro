@@ -24,6 +24,7 @@ FORMS += forms/EditGroupDlg.ui \
          forms/PasswordGenDlg.ui 
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
+		translations/keepass-es_ES.ts \
                 translations/keepass-xx_XX.ts
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \
