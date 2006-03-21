@@ -154,6 +154,7 @@ Combo_Group->setCurrentItem(db->getGroupIndex(entry->GroupID));
 
 void CEditEntryDlg::OnButtonOK()
 {
+bool EntryMoved=false;
 if(QString::compare(Edit_Password->text(),Edit_Password_w->text())!=0){
 QMessageBox::warning(NULL,tr("Warning"),tr("Password and password repetition are not equal.\nPlease check your input."),tr("OK"));
 return;
@@ -176,6 +177,8 @@ entry->Password.unlock();
 if(entry->Password.string()!=Edit_Password->text())
 	ModFlag=true;
 entry->Password.lock();
+if(entry->ImageID!=Combo_IconPicker->currentItem())
+	ModFlag=true;
 
 entry->Expire=DateTime_Expire->dateTime();
 entry->LastAccess=QDateTime::currentDateTime();
@@ -187,10 +190,14 @@ QString s=Edit_Password->text();
 entry->Password.setString(s,true);
 entry->Additional=Edit_Comment->text();
 if(Combo_Group->currentItem()!=db->getGroupIndex(entry->GroupID)){
-db->moveEntry(entry,&db->Groups[Combo_Group->currentItem()]);
+	db->moveEntry(entry,&db->Groups[Combo_Group->currentItem()]);
+	EntryMoved=true; ModFlag=true;
 }
 entry->ImageID=Combo_IconPicker->currentItem();
-done(1);
+
+if(ModFlag&&EntryMoved)done(2);
+else if(ModFlag)done(1);
+else done(0);
 }
 
 void CEditEntryDlg::OnButtonCancel()

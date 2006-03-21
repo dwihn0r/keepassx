@@ -147,7 +147,7 @@ else if(CryptoAlgorithmus == ALGO_TWOFISH)
 			total_size - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
 	}
 
-if((crypto_size > 2147483446) || (crypto_size == 0)){err=tr("Decryption failed.\nThe key is wrong or the file is damaged."); return false;}
+if((crypto_size > 2147483446) || (!crypto_size && NumGroups)){err=tr("Decryption failed.\nThe key is wrong or the file is damaged."); return false;}
 
 sha256_starts(&sha32);
 sha256_update(&sha32,(unsigned char *)buffer + DB_HEADER_SIZE,crypto_size);
@@ -858,7 +858,7 @@ EncryptedPartSize = (unsigned long)twofish.padEncrypt((Q_UINT8*)buffer+DB_HEADER
 						      pos - DB_HEADER_SIZE,
 						      (Q_UINT8*)buffer+DB_HEADER_SIZE);
 }
-if((EncryptedPartSize > 2147483446) || (EncryptedPartSize == 0)){
+if((EncryptedPartSize > 2147483446) || (!EncryptedPartSize && Groups.size())){
 _ERROR
 delete [] buffer;
 return false;

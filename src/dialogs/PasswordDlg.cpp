@@ -49,7 +49,7 @@ if(media.exists()){
 Combo_Dirs->setEditText(QString());
 if(config.RememberLastKey){
 	switch(config.LastKeyType){
-		case PASSWORD:	setStatePasswordOnly(); break;
+		//case PASSWORD:	setStatePasswordOnly(); break; //Password-Only is already the default
 		case KEYFILE:	setStateKeyFileOnly();
 						Combo_Dirs->setEditText(config.LastKeyLocation);
 						break;

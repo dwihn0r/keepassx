@@ -57,7 +57,6 @@
 
 
 
-
 KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
   Start=true;
   setupUi(this);
@@ -250,9 +249,12 @@ void KeepassMainWindow::setupMenus(){
 }
 
 
-void KeepassMainWindow::openDatabase(QString filename,bool s){
+void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 Q_ASSERT(!FileOpen);
-CPasswordDialog PasswordDlg(this,"Password Dialog",true,s);
+if(!IsAuto){
+	config.LastKeyLocation=QString();
+	config.LastKeyType=PASSWORD;}
+CPasswordDialog PasswordDlg(this,"Password Dialog",true,IsAuto);
 PasswordDlg.setCaption(filename);
 int r=PasswordDlg.exec();
 if(r==0) return;
@@ -400,9 +402,18 @@ else{
 
 void KeepassMainWindow::editEntry(CEntry* pEntry){
 CEditEntryDlg dlg(db,pEntry,this,"EditEntryDialog",true);
-dlg.exec();
-EntryView->refreshItems();
-if(dlg.ModFlag)setStateFileModified(true);
+switch(dlg.exec()){
+	case 0: //canceled or no changes
+			break;
+	case 1: //modifications but same group
+			EntryView->refreshItems();
+			setStateFileModified(true);
+			break;
+	case 2: //entry moved to another group
+			EntryView->updateItems(currentGroup()->ID);
+			setStateFileModified(true);
+			break;
+}
 }
 
 void KeepassMainWindow::setStateFileModified(bool mod){
@@ -554,6 +565,7 @@ else Q_ASSERT(false);
 bool KeepassMainWindow::OnFileSave(){
 if(db->file->fileName()==QString())
  return OnFileSaveAs();
+config.LastFile=db->file->fileName();
 if(db->saveDatabase())
   setStateFileModified(false);
 else{

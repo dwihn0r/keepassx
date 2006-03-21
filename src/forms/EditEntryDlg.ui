@@ -8,7 +8,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>493</width>
+    <width>500</width>
     <height>526</height>
    </rect>
   </property>
@@ -22,13 +22,13 @@
   </property>
   <property name="minimumSize" >
    <size>
-    <width>493</width>
+    <width>500</width>
     <height>526</height>
    </size>
   </property>
   <property name="maximumSize" >
    <size>
-    <width>493</width>
+    <width>500</width>
     <height>526</height>
    </size>
   </property>
@@ -70,28 +70,7 @@
     <string>Alt+C</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Banner" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>493</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="sizePolicy" >
-    <sizepolicy>
-     <hsizetype>7</hsizetype>
-     <vsizetype>5</vsizetype>
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="scaledContents" >
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QWidget" name="" >
+  <widget class="QWidget" name="layoutWidget" >
    <property name="geometry" >
     <rect>
      <x>10</x>
@@ -383,6 +362,27 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="Banner" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>500</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="sizePolicy" >
+    <sizepolicy>
+     <hsizetype>7</hsizetype>
+     <vsizetype>5</vsizetype>
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="scaledContents" >
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11" />

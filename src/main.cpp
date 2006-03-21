@@ -29,6 +29,7 @@
 #include <QImage>
 #include <QStyleFactory>
 #include <QProcess>
+#include <QLibraryInfo>
 
 #include "main.h"
 #include "PwmConfig.h"
@@ -93,11 +94,13 @@ else{
 //Internationalization
 QLocale loc=QLocale::system();
 QTranslator* translator = NULL;
+QTranslator* qtTranslator=NULL;
 translator=new QTranslator;
+qtTranslator=new QTranslator;
 bool TrFound=true;
 if(!translator->load("keepass-"+loc.name(),app->applicationDirPath()+"/../share/keepass/i18n/")){
 	if(!translator->load("keepass-"+loc.name(),QDir::homeDirPath()+"/.keepass/")){
-		qWarning(QString("No Translation found for %1 (%2)")
+		qWarning(QString("KeePassX: No Translation found for language '%1 (%2)'")
 				.arg(QLocale::languageToString(loc.language()))
 				.arg(QLocale::countryToString(loc.country())));
 		TrFound=false;
@@ -108,6 +111,18 @@ if(TrFound)
 	app->installTranslator(translator);
 else 
 	delete translator;
+
+
+if(!qtTranslator->load("qt_"+loc.name().left(2),QLibraryInfo::location(QLibraryInfo::TranslationsPath))){
+	qWarning(QString("Qt: No Translation found for '%1 (%2)'")
+			.arg(QLocale::languageToString(loc.language()))
+			.arg(QLocale::countryToString(loc.country())));
+	delete qtTranslator;
+}else{
+	app->installTranslator(qtTranslator);
+}
+
+
 
 TrActive=TrFound;
 loadImages();
