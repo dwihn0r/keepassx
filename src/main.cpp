@@ -76,7 +76,7 @@ QString ArgFile,ArgCfg,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg);
 AppDir=app->applicationDirPath();
 //Load Config
-if(ArgCfg==""){
+if(ArgCfg==QString()){
  if(!QDir(QDir::homeDirPath()+"/.keepass").exists()){
 	QDir conf(QDir::homeDirPath());
 	if(!conf.mkdir(".keepass")){
@@ -128,7 +128,7 @@ TrActive=TrFound;
 loadImages();
 SecString::generateSessionKey();
 int r=0;
-KeepassMainWindow *mainWin = new KeepassMainWindow();
+KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile);
 if(mainWin->Start){
 	mainWin->show();
 	r=app->exec();

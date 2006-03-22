@@ -48,9 +48,12 @@
 class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 Q_OBJECT
 public:
- KeepassMainWindow (QWidget *parent=0, Qt::WFlags flags=0);
+ KeepassMainWindow (const QString& ArgFile,QWidget *parent=0, Qt::WFlags flags=0);
  PwDatabase* db;
  bool Start;
+
+signals:
+   void entryChanged();
 
 private slots:
    void OnFileNew();
@@ -90,6 +93,7 @@ private slots:
    void OnFileModified();
    void OnExtrasSettings();
    void OnHelpAbout();
+   void OnHelpHandbook();
    void OnItemExpanded(QTreeWidgetItem*);
    void OnItemCollaped(QTreeWidgetItem*);
    void OnHideSearchGroup();

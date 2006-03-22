@@ -57,7 +57,7 @@
 
 
 
-KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
+KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
   Start=true;
   setupUi(this);
   setGeometry(geometry().x(),geometry().y(),config.MainWinWidth,config.MainWinHeight);
@@ -76,75 +76,79 @@ KeepassMainWindow::KeepassMainWindow(QWidget *parent, Qt::WFlags flags):QMainWin
   setupConnections();
   FileOpen=false;
   Clipboard=QApplication::clipboard();
-  if(config.OpenLast && (config.LastFile!=QString()) ){
-	QFileInfo file(config.LastFile);
-	if(file.exists())
-		openDatabase(config.LastFile,true);
-	else
-		config.LastFile=QString();	
-  }
+  if(ArgFile!=QString())
+	openDatabase(ArgFile,false);
+  else if(config.OpenLast && (config.LastFile!=QString()) ){
+		QFileInfo file(config.LastFile);
+		if(file.exists())
+			openDatabase(config.LastFile,true);
+		else
+			config.LastFile=QString();	
+  		}
 }
 
 void KeepassMainWindow::setupConnections(){
-   connect(FileNewAction, SIGNAL(triggered()), this, SLOT(OnFileNew()));
-   connect(FileOpenAction, SIGNAL(triggered()), this, SLOT(OnFileOpen()));
-   connect(FileCloseAction, SIGNAL(triggered()), this, SLOT(OnFileClose()));
-   connect(FileSaveAction, SIGNAL(triggered()), this, SLOT(OnFileSave()));
-   connect(FileSaveAsAction, SIGNAL(triggered()), this, SLOT(OnFileSaveAs()));
-   connect(FileSettingsAction, SIGNAL(triggered()), this, SLOT(OnFileSettings()));
-   connect(FileChangeKeyAction, SIGNAL(triggered()), this, SLOT(OnFileChangeKey()));
-   connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
-   connect(FileImpPwmAction, SIGNAL(triggered()), this, SLOT(OnImportFromPwm()));
-   connect(FileImpKWalletXmlAction, SIGNAL(triggered()), this,SLOT(OnImportFromKWalletXml()));
-   connect(FileExpPlainTextAction,SIGNAL(triggered()),this,SLOT(OnExportToTxt()));
-
-   connect(EditNewGroupAction, SIGNAL(triggered()), this, SLOT(OnEditNewGroup()));
-   connect(EditEditGroupAction, SIGNAL(triggered()), this, SLOT(OnEditEditGroup()));
-   connect(EditDeleteGroupAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteGroup()));
-   connect(EditNewEntryAction, SIGNAL(triggered()), this, SLOT(OnEditNewEntry()));
-   connect(EditEditEntryAction, SIGNAL(triggered()), this, SLOT(OnEditEditEntry()));
-   connect(EditCloneEntryAction, SIGNAL(triggered()), this, SLOT(OnEditCloneEntry()));
-   connect(EditDeleteEntryAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteEntry()));
-   connect(EditUsernameToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditUsernameToClipboard()));
-   connect(EditPasswordToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditPasswordToClipboard()));
-   connect(EditOpenUrlAction, SIGNAL(triggered()), this, SLOT(OnEditOpenUrl()));
-   connect(EditSaveAttachmentAction, SIGNAL(triggered()), this, SLOT(OnEditSaveAttachment()));
-   connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnEditSearch()));
-   connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnEditGroupSearch()));
-  
-   connect(ViewShowToolbarAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowToolbar(bool)));
-   connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
-   connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
-   connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
-   connect(ViewColumnsTitleAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsUsernameAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsUrlAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsPasswordAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsCommentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsExpireAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsCreationAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsLastChangeAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-   connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
-
-   connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
-
-   connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
-
-   connect(GroupView,SIGNAL(entryDropped()),EntryView,SLOT(updateItems()));
-   connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
-   connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
-		   SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
-   connect(GroupView,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
-   connect(GroupView,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollaped(QTreeWidgetItem*)));
-   connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,
-		   SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
-   connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
-   connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
-   connect(GroupView,SIGNAL(fileModified()),this,SLOT(OnFileModified()));
-   connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
-   connect(HideSearchResultsAction,SIGNAL(triggered()),this, SLOT(OnHideSearchGroup()));
+	connect(FileNewAction, SIGNAL(triggered()), this, SLOT(OnFileNew()));
+	connect(FileOpenAction, SIGNAL(triggered()), this, SLOT(OnFileOpen()));
+	connect(FileCloseAction, SIGNAL(triggered()), this, SLOT(OnFileClose()));
+	connect(FileSaveAction, SIGNAL(triggered()), this, SLOT(OnFileSave()));
+	connect(FileSaveAsAction, SIGNAL(triggered()), this, SLOT(OnFileSaveAs()));
+	connect(FileSettingsAction, SIGNAL(triggered()), this, SLOT(OnFileSettings()));
+	connect(FileChangeKeyAction, SIGNAL(triggered()), this, SLOT(OnFileChangeKey()));
+	connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
+	connect(FileImpPwmAction, SIGNAL(triggered()), this, SLOT(OnImportFromPwm()));
+	connect(FileImpKWalletXmlAction, SIGNAL(triggered()), this,SLOT(OnImportFromKWalletXml()));
+	connect(FileExpPlainTextAction,SIGNAL(triggered()),this,SLOT(OnExportToTxt()));
+	
+	connect(EditNewGroupAction, SIGNAL(triggered()), this, SLOT(OnEditNewGroup()));
+	connect(EditEditGroupAction, SIGNAL(triggered()), this, SLOT(OnEditEditGroup()));
+	connect(EditDeleteGroupAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteGroup()));
+	connect(EditNewEntryAction, SIGNAL(triggered()), this, SLOT(OnEditNewEntry()));
+	connect(EditEditEntryAction, SIGNAL(triggered()), this, SLOT(OnEditEditEntry()));
+	connect(EditCloneEntryAction, SIGNAL(triggered()), this, SLOT(OnEditCloneEntry()));
+	connect(EditDeleteEntryAction, SIGNAL(triggered()), this, SLOT(OnEditDeleteEntry()));
+	connect(EditUsernameToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditUsernameToClipboard()));
+	connect(EditPasswordToClipboardAction, SIGNAL(triggered()), this, SLOT(OnEditPasswordToClipboard()));
+	connect(EditOpenUrlAction, SIGNAL(triggered()), this, SLOT(OnEditOpenUrl()));
+	connect(EditSaveAttachmentAction, SIGNAL(triggered()), this, SLOT(OnEditSaveAttachment()));
+	connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnEditSearch()));
+	connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnEditGroupSearch()));
+	
+	connect(ViewShowToolbarAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowToolbar(bool)));
+	connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
+	connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
+	connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
+	connect(ViewColumnsTitleAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsUsernameAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsUrlAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsPasswordAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsCommentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsExpireAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsCreationAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsLastChangeAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
+	
+	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
+	
+	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
+	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
+	
+	connect(GroupView,SIGNAL(entryDropped()),EntryView,SLOT(updateItems()));
+	connect(this,SIGNAL(entryChanged()),EntryView,SLOT(updateItems()),Qt::QueuedConnection);
+	connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
+	connect(GroupView,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,
+			SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+	connect(GroupView,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
+	connect(GroupView,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollaped(QTreeWidgetItem*)));
+	connect(EntryView,SIGNAL(itemActivated(QTreeWidgetItem*,int)),this,
+			SLOT(OnEntryItemDoubleClicked(QTreeWidgetItem*,int)));
+	connect(EntryView,SIGNAL(itemSelectionChanged()), this, SLOT(OnEntrySelectionChanged()));
+	connect(GroupView,SIGNAL(itemSelectionChanged()), this, SLOT(OnGroupSelectionChanged()));
+	connect(GroupView,SIGNAL(fileModified()),this,SLOT(OnFileModified()));
+	connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
+	connect(HideSearchResultsAction,SIGNAL(triggered()),this, SLOT(OnHideSearchGroup()));
 
 }
 
@@ -410,7 +414,7 @@ switch(dlg.exec()){
 			setStateFileModified(true);
 			break;
 	case 2: //entry moved to another group
-			EntryView->updateItems(currentGroup()->ID);
+			emit entryChanged(); //a direct call of updateItems() would cause a SegFault because of the TreeView base class slots
 			setStateFileModified(true);
 			break;
 }
@@ -975,6 +979,10 @@ CGroup::UI_ExpandByDefault=config.ExpandGroupTree;
 void KeepassMainWindow::OnHelpAbout(){
 CAboutDialog dlg(this,"AboutDlg");
 dlg.exec();
+}
+
+void KeepassMainWindow::OnHelpHandbook(){
+openBrowser(AppDir+"/../share/doc/keepass/index.html");
 }
 
 void KeepassMainWindow::OnViewShowToolbar(bool show){
