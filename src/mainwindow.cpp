@@ -464,7 +464,7 @@ if(EntryView->selectedItems().size()!=1){
 CEntry& entry=*((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry;
 QString str=tr("<B>Group: </B>%1  <B>Title: </B>%2  <B>Username: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Password: </B>%5  <B>Creation: </B>%6  <B>Last Change: </B>%7  <B>LastAccess: </B>%8  <B>Expires: </B>%9");
 //todo: a "CGroup* PwDatabase::getGroup(CEntry*)" method would be a good idea
-str=str.arg(db->Groups[db->getGroupIndex(entry.GroupID)].Name).arg(entry.Title);
+str=str.arg(db->group(db->getGroupIndex(entry.GroupID)).Name).arg(entry.Title);
 
 if(!config.ListView_HideUsernames)	str=str.arg(entry.UserName);
 else str=str.arg("****");
@@ -626,7 +626,6 @@ if(filename==QString())return;
 Export_Txt exp;
 QString err;
 exp.exportFile(filename,db,err);
-
 }
 
 void KeepassMainWindow::OnImportFromPwm(){

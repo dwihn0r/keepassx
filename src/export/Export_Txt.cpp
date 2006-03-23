@@ -36,25 +36,25 @@ QString GroupTemplate=QString("\n\
 *** Group: %1 ***\n\
 ");
 
-bool Export_Txt::exportFile(const QString& filename,PwDatabase* db,QString& err){
+bool Export_Txt::exportFile(const QString& filename,Database* db,QString& err){
 QFile file(filename);
 if(!file.open(QIODevice::Truncate | QIODevice::WriteOnly)){
 	err+=tr("Could not open file (FileError=%1)").arg(file.error());
 	return false;
 }
 
-for(int g=0;g<db->Groups.size();g++){
-	file.write(GroupTemplate.arg(db->Groups[g].Name).utf8());
-	for(int e=0;e<db->Entries.size();e++){
-		if(db->Groups[g].ID==db->Entries[e].GroupID){
-			db->Entries[e].Password.unlock();
-			file.write(EntryTemplate.arg(db->Entries[e].Title)
-									.arg(db->Entries[e].UserName)
-									.arg(db->Entries[e].URL)
-									.arg(db->Entries[e].Password.string())
-									.arg(db->Entries[e].Additional.replace('\n',"\n            "))
+for(int g=0;g<db->numGroups();g++){
+	file.write(GroupTemplate.arg(db->group(g).Name).utf8());
+	for(int e=0;e<db->numEntries();e++){
+		if(db->group(g).ID==db->entry(e).GroupID){
+			db->entry(e).Password.unlock();
+			file.write(EntryTemplate.arg(db->entry(e).Title)
+									.arg(db->entry(e).UserName)
+									.arg(db->entry(e).URL)
+									.arg(db->entry(e).Password.string())
+									.arg(db->entry(e).Additional.replace('\n',"\n            "))
 									.utf8());
-			db->Entries[e].Password.lock();
+			db->entry(e).Password.lock();
 		}
 	}
 }

@@ -35,7 +35,7 @@ public:
  void updateItems();
  bool isSearchResultGroup(GroupViewItem* item);
  void selectSearchGroup();
- PwDatabase *db;
+ Database *db;
  bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
  vector<GroupViewItem*>Items;
  QMenu *ContextMenu;

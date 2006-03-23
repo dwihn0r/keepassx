@@ -24,7 +24,7 @@
 
 class Import_KWalletXml{
 public:
-  bool importFile(QString FileName,PwDatabase* db,QString& err);
+  bool importFile(QString FileName,Database* db,QString& err);
 private:
 
 };

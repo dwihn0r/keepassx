@@ -44,7 +44,6 @@ class PwDatabase:QObject,public Database{
  Q_OBJECT
 public:
  PwDatabase();
- ~ PwDatabase();
  bool openDatabase(QString filename, QString& err);
  bool saveDatabase();
  bool closeDatabase();
@@ -54,6 +53,9 @@ public:
  bool CalcMasterKeyByFileAndPw(QString filename, QString& password);
  bool createKeyFile(const QString& filename);
 
+ CGroup&   group(unsigned long index);
+ void	   setGroup(unsigned long index,CGroup& group);
+ int	   numGroups();
  CGroup*   addGroup(CGroup* parent);
  void      deleteGroup(CGroup* pGroup);
  void      deleteGroup(unsigned long ID);
@@ -64,17 +66,21 @@ public:
  int	   getNumberOfChilds(CGroup* pGroup);
  QList<int> getChildIds(CGroup* pGroup);
 
+ CEntry&   entry(unsigned long index);
+ void	   setEntry(unsigned long index,CEntry& Entry);
+ int	   numEntries();
  CEntry*   cloneEntry(CEntry* pEntry);
  void      deleteEntry(CEntry* pEntry);
  void      moveEntry(CEntry* pEntry,CGroup* pDstGroup);
  CEntry*   addEntry();
  CEntry*   addEntry(CEntry* NewEntry);
- void 	   merge(PwDatabase* db2);
+ void 	   merge(Database* db2);
  bool	   isParentGroup(CGroup* Group,CGroup* PotenialParent);
  QString   getError();  //get first error
  QString   getErrors(); //get all errors in a \n seperated String
 
-
+ QList<CGroup>Groups;
+ QList<CEntry>Entries;
 private:
  bool IsMetaStream(CEntry& Entry);
  bool parseMetaStream(const CEntry& Entry);
@@ -87,6 +93,7 @@ private:
  bool convHexToBinaryKey(char* HexKey, char* dst);
  QStringList Errors;
  QList<CEntry> UnkownMetaStreams;
+
 };
 
 

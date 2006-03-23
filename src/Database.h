@@ -79,17 +79,53 @@ static bool UI_ExpandByDefault;
 class Database{
 public:
  Database();
+ virtual ~Database(){};
+ virtual bool openDatabase(QString filename, QString& err)=0;
+ virtual bool saveDatabase()=0;
+ virtual bool closeDatabase()=0;
+ virtual void newDatabase()=0;
+
+ virtual bool CalcMasterKeyByPassword(QString& password)=0;
+ virtual bool CalcMasterKeyByFile(QString filename)=0;
+ virtual bool CalcMasterKeyByFileAndPw(QString filename, QString& password)=0;
+ virtual bool createKeyFile(const QString& filename)=0;
+
+ virtual CGroup&   group(unsigned long index)=0;
+ virtual void	   setGroup(unsigned long index,CGroup& group)=0;
+ virtual int	   numGroups()=0;
+ virtual CGroup*   addGroup(CGroup* parent)=0;
+ virtual void      deleteGroup(CGroup* pGroup)=0;
+ virtual void      deleteGroup(unsigned long ID)=0;
+ virtual void	   moveGroup(CGroup* group, CGroup* DstGroup, int pos=-1)=0;
+ virtual void	   moveGroupDirectly(CGroup* group, CGroup* DstGroup)=0; //inserts group directly behind DstGroup on the same level
+ virtual int	   getGroupIndex(CGroup* group)=0;
+ virtual int       getGroupIndex(unsigned long ID)=0;
+ virtual int	   getNumberOfChilds(CGroup* pGroup)=0;
+ virtual QList<int> getChildIds(CGroup* pGroup)=0;
+
+ virtual CEntry&   entry(unsigned long index)=0;
+ virtual void	   setEntry(unsigned long index,CEntry& Entry)=0;
+ virtual int	   numEntries()=0;
+ virtual CEntry*   cloneEntry(CEntry* pEntry)=0;
+ virtual void      deleteEntry(CEntry* pEntry)=0;
+ virtual void      moveEntry(CEntry* pEntry,CGroup* pDstGroup)=0;
+ virtual CEntry*   addEntry()=0;
+ virtual CEntry*   addEntry(CEntry* NewEntry)=0;
+ virtual void 	   merge(Database* db2)=0;
+ virtual bool	   isParentGroup(CGroup* Group,CGroup* PotenialParent)=0;
+ virtual QString   getError()=0;  //get first error
+ virtual QString   getErrors()=0; //get all errors in a \n seperated String
+
  Q_UINT32 CryptoAlgorithmus;
  Q_UINT32 KeyEncRounds;
  QFile* file;
  bool modflag;
  int SearchGroupID;
- QList<CGroup>Groups;
- QList<CEntry>Entries;
 
 protected:
  Q_UINT8 MasterKey[32];
  Q_UINT8 TransformedMasterKey[32];
+
 };
 
 #endif

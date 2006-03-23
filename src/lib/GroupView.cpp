@@ -209,29 +209,29 @@ void KeepassGroupView::updateItems(){
 
 clear();
 Items.clear();
-for(int i=0; i<db->Groups.size();i++){
-if(db->Groups[i].Level==0){
+for(int i=0; i<db->numGroups();i++){
+if(db->group(i).Level==0){
  if(Items.size()) Items.push_back(new GroupViewItem(this,getLastSameLevelItem(0)));
  else 		  Items.push_back(new GroupViewItem(this));
- Items.back()->setText(0,db->Groups[i].Name);
- Items.back()->pGroup=&db->Groups[i]; 
+ Items.back()->setText(0,db->group(i).Name);
+ Items.back()->pGroup=&db->group(i); 
 }
  else{
- if(db->Groups[i].Level>db->Groups[i-1].Level){
- Items.push_back(new GroupViewItem(Items.back(),getLastSameLevelItem(db->Groups[i].Level)));
- Items.back()->setText(0,db->Groups[i].Name);
- Items.back()->pGroup=&db->Groups[i];
+ if(db->group(i).Level>db->group(i-1).Level){
+ Items.push_back(new GroupViewItem(Items.back(),getLastSameLevelItem(db->group(i).Level)));
+ Items.back()->setText(0,db->group(i).Name);
+ Items.back()->pGroup=&db->group(i);
  }
- if(db->Groups[i].Level<=db->Groups[i-1].Level){
+ if(db->group(i).Level<=db->group(i-1).Level){
    GroupItemItr j;
    for(j=Items.end()-1;j!=Items.begin();j--){
-    if((*j)->pGroup->Level<db->Groups[i].Level)break;}
-     Items.push_back(new GroupViewItem((*j),getLastSameLevelItem(db->Groups[i].Level)));
-     Items.back()->setText(0,db->Groups[i].Name);
-     Items.back()->pGroup=&db->Groups[i];
+    if((*j)->pGroup->Level<db->group(i).Level)break;}
+     Items.push_back(new GroupViewItem((*j),getLastSameLevelItem(db->group(i).Level)));
+     Items.back()->setText(0,db->group(i).Name);
+     Items.back()->pGroup=&db->group(i);
      }
  }
-Items.back()->setIcon(0,EntryIcons[db->Groups[i].ImageID]);
+Items.back()->setIcon(0,EntryIcons[db->group(i).ImageID]);
 }
 
 for(int i=0;i<Items.size();i++){

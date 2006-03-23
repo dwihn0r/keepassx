@@ -49,7 +49,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 Q_OBJECT
 public:
  KeepassMainWindow (const QString& ArgFile,QWidget *parent=0, Qt::WFlags flags=0);
- PwDatabase* db;
+ Database* db;
  bool Start;
 
 signals:

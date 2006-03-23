@@ -26,13 +26,13 @@
 
 class Import_PwManager{
 public:
-bool importFile(QString FileName, QString Password,PwDatabase* db,QString& err);
+bool importFile(QString FileName, QString Password,Database* db,QString& err);
 private:
  bool KeyFlag; // true=Password, false=Chipcard
  int Compression; // 0=none, 1=gzip, 2=bzip2
  unsigned char KeyHash[20];
  unsigned char DataHash[20];
- PwDatabase* database;
+ Database* database;
 
  bool parseXmlContent(char* content);
  bool xml_parseEntryAttributes(QDomElement* EntryTag,CGroup* parent);

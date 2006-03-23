@@ -43,7 +43,7 @@
 
 
 
-CEditEntryDlg::CEditEntryDlg(PwDatabase* _db, CEntry* _entry,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+CEditEntryDlg::CEditEntryDlg(Database* _db, CEntry* _entry,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : QDialog(parent,name, modal,fl)
 {
 Q_ASSERT(_db);
@@ -143,11 +143,11 @@ Combo_IconPicker->setCurrentItem(entry->ImageID);
 void CEditEntryDlg::InitGroupComboBox(){
 QString tmp;
 int i;
-for(i=0;i!=db->Groups.size();i++){
+for(i=0;i!=db->numGroups();i++){
 tmp="";
-  for(int j=0;j<db->Groups[i].Level;j++)tmp+="  ";
-Combo_Group->insertItem(EntryIcons[db->Groups[i].ImageID],
- 			tmp+db->Groups[i].Name,i);
+  for(int j=0;j<db->group(i).Level;j++)tmp+="  ";
+Combo_Group->insertItem(EntryIcons[db->group(i).ImageID],
+ 			tmp+db->group(i).Name,i);
 }
 Combo_Group->setCurrentItem(db->getGroupIndex(entry->GroupID));
 }
@@ -190,7 +190,7 @@ QString s=Edit_Password->text();
 entry->Password.setString(s,true);
 entry->Additional=Edit_Comment->text();
 if(Combo_Group->currentItem()!=db->getGroupIndex(entry->GroupID)){
-	db->moveEntry(entry,&db->Groups[Combo_Group->currentItem()]);
+	db->moveEntry(entry,&db->group(Combo_Group->currentItem()));
 	EntryMoved=true; ModFlag=true;
 }
 entry->ImageID=Combo_IconPicker->currentItem();

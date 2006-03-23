@@ -27,7 +27,7 @@
 #include <qregexp.h>
 #include <qmessagebox.h>
 
-CSearchDlg::CSearchDlg(PwDatabase* _db,CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+CSearchDlg::CSearchDlg(Database* _db,CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
@@ -80,30 +80,30 @@ if(txt==""){
 QMessageBox::information(this,tr("Notice"),tr("Please enter a search string."),tr("OK"));
 return;}
 
-for(int i=0;i<db->Entries.size();i++){
+for(int i=0;i<db->numEntries();i++){
  if(group){
 	if(checkBox_Recursive->isChecked()){
 		QList<int> groups=db->getChildIds(group);
 		groups << group->ID;
 		bool IsInAnyGroup=false;
 		for(int j=0; j<groups.size();j++){
-			if(db->Entries[i].GroupID == groups[j]){IsInAnyGroup=true; break;}}
+			if(db->entry(i).GroupID == groups[j]){IsInAnyGroup=true; break;}}
 		if(!IsInAnyGroup)continue;
 	}
 	else
-		if(db->Entries[i].GroupID != group->ID)continue;
+		if(db->entry(i).GroupID != group->ID)continue;
  }
 
 bool hit=false;
- if(checkBox_Title->isChecked())	hit=hit||search(db->Entries[i].Title);
- if(checkBox_Username->isChecked())	hit=hit||search(db->Entries[i].UserName);
- if(checkBox_URL->isChecked())		hit=hit||search(db->Entries[i].URL);
- if(checkBox_Comment->isChecked())	hit=hit||search(db->Entries[i].Additional);
- if(checkBox_Attachment->isChecked())	hit=hit||search(db->Entries[i].BinaryDesc);
- db->Entries[i].Password.unlock();
- if(checkBox_Password->isChecked())	hit=hit||search(db->Entries[i].Password.string());
- db->Entries[i].Password.lock();
- if(hit)Hits.push_back(db->Entries[i].sID);
+ if(checkBox_Title->isChecked())	hit=hit||search(db->entry(i).Title);
+ if(checkBox_Username->isChecked())	hit=hit||search(db->entry(i).UserName);
+ if(checkBox_URL->isChecked())		hit=hit||search(db->entry(i).URL);
+ if(checkBox_Comment->isChecked())	hit=hit||search(db->entry(i).Additional);
+ if(checkBox_Attachment->isChecked())	hit=hit||search(db->entry(i).BinaryDesc);
+ db->entry(i).Password.unlock();
+ if(checkBox_Password->isChecked())	hit=hit||search(db->entry(i).Password.string());
+ db->entry(i).Password.lock();
+ if(hit)Hits.push_back(db->entry(i).sID);
 }
 
 done(1);

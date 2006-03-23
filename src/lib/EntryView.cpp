@@ -104,9 +104,9 @@ Items.clear();
 if(!db)return;
 if(!GroupID)return;
 CurrentGroup=GroupID;
-for(int i=0;i<db->Entries.size();i++){
-  if(db->Entries[i].GroupID==GroupID)
-  	setEntry(&db->Entries[i]);
+for(int i=0;i<db->numEntries();i++){
+  if(db->entry(i).GroupID==GroupID)
+  	setEntry(&db->entry(i));
 }
 }
 
@@ -115,9 +115,9 @@ IsSearchGroup=true;
 clear();
 Items.clear();
 for(int j=0; j<results.size(); j++){
-	for(int i=0; i<db->Entries.size();i++){
-		if(db->Entries[i].sID == results[j])
- 		setEntry(&db->Entries[i]);
+	for(int i=0; i<db->numEntries();i++){
+		if(db->entry(i).sID == results[j])
+ 		setEntry(&db->entry(i));
 	}
 }
 }

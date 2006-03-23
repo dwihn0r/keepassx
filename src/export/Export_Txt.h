@@ -24,7 +24,7 @@
 
 class Export_Txt:public QObject{
 public:
-	bool exportFile(const QString& filename,PwDatabase* db,QString& err);
+	bool exportFile(const QString& filename,Database* db,QString& err);
 
 };
 

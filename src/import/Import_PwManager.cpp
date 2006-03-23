@@ -27,7 +27,7 @@
 #include "Import_PwManager.h"
 using namespace std;
 
-bool Import_PwManager::importFile(QString filename, QString password, PwDatabase* db, QString& err){
+bool Import_PwManager::importFile(QString filename, QString password, Database* db, QString& err){
 database=db;
 QFile file(filename);
 char* buffer=NULL;

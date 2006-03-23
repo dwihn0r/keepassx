@@ -25,7 +25,7 @@
 #include <qdom.h>
 using namespace std;
 
-bool Import_KWalletXml::importFile(QString FileName,PwDatabase* pwm,QString& err){
+bool Import_KWalletXml::importFile(QString FileName,Database* pwm,QString& err){
 QFile file(FileName);
 if(!file.exists()){
 	err+=QObject::tr("File not found.");

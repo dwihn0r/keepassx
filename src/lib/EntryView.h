@@ -41,7 +41,7 @@ public:
  void updateColumns();
  void refreshItems();
  void showSearchResults(QList<Q_UINT32>& results);
- PwDatabase* db;
+ Database* db;
  vector<EntryViewItem*>Items;
  QMenu *ContextMenu;
 private:

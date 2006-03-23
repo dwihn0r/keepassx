@@ -536,10 +536,6 @@ PwDatabase::PwDatabase(){
 SearchGroupID=-1;
 }
 
-PwDatabase::~PwDatabase(){
-
-}
-
 void PwDatabase::newDatabase(){
 	file=new QFile();
 }
@@ -941,18 +937,18 @@ return i;
 }
 
 
-void PwDatabase::merge(PwDatabase* db){
-for(int i=0;i<db->Groups.size();i++){
+void PwDatabase::merge(Database* db){
+for(int i=0;i<db->numGroups();i++){
 	int NewGroupID;
-	if(isGroupIdInUse(db->Groups[i].ID)==true) NewGroupID=getNewGroupId();
-	else NewGroupID=db->Groups[i].ID;
-	for(int j=0;j<db->Entries.size();j++){
-		if(db->Entries[j].GroupID==db->Groups[i].ID){
-			Entries.push_back(db->Entries[j]);
+	if(isGroupIdInUse(db->group(i).ID)==true) NewGroupID=getNewGroupId();
+	else NewGroupID=db->group(i).ID;
+	for(int j=0;j<db->numEntries();j++){
+		if(db->entry(j).GroupID==db->group(i).ID){
+			Entries.push_back(db->entry(j));
 			Entries.back().GroupID=NewGroupID;
 			Entries.back().sID=getNewEntrySid();}
 	}
-	Groups.push_back(db->Groups[i]);
+	Groups.push_back(db->group(i));
 	Groups.back().ID=NewGroupID;
 }
 }
@@ -1122,6 +1118,24 @@ for(i=GroupIndex+1; i<Groups.size(); i++){
 return (i-GroupIndex-1);
 }
 
+CGroup& PwDatabase::group(unsigned long index){
+	return Groups[index];}
+
+void PwDatabase::setGroup(unsigned long index,CGroup& group){
+	Groups[index]=group;}
+
+int PwDatabase::numGroups(){
+	return Groups.size();
+}
+
+CEntry& PwDatabase::entry(unsigned long index){
+	return Entries[index];}
+
+void PwDatabase::setEntry(unsigned long index,CEntry& entry){
+	Entries[index]=entry;}
+
+int PwDatabase::numEntries(){
+	return Entries.size();}
 
 void memcpyFromLEnd32(Q_UINT32* dst,char* src){
 
