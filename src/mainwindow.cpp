@@ -278,7 +278,7 @@ StatusBarGeneral->setText(tr("Loading Database..."));
 if(db->openDatabase(filename,err)==true){
 //SUCCESS
 if(config.OpenLast)config.LastFile=filename;
-setCaption(tr("Keepass - %1").arg(filename));
+setCaption(tr("KeePassX - %1").arg(filename));
 GroupView->updateItems();
 EntryView->updateItems(0);
 setStateFileOpen(true);
@@ -764,7 +764,7 @@ if(GroupView->selectedItems().size())
  pNew=db->addGroup(static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup);
 else
  pNew=db->addGroup(NULL);
-CEditGroupDialog dlg(this,"EditGroupDlg",true);
+CEditGroupDialog dlg(db,this,"EditGroupDlg",true);
 if(!dlg.exec()){
  db->deleteGroup(pNew);
  return;
@@ -778,7 +778,7 @@ GroupView->updateItems();
 void KeepassMainWindow::OnEditEditGroup(){
 Q_ASSERT(GroupView->selectedItems().size());
 CGroup *pGroup=static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
-CEditGroupDialog dlg(this,"EditGroupDlg",true);
+CEditGroupDialog dlg(db,this,"EditGroupDlg",true);
 dlg.GroupName=pGroup->Name;
 dlg.IconID=pGroup->ImageID;
 if(!dlg.exec())return;

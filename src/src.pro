@@ -3,15 +3,24 @@
 # Unterordner relativ zum Projektordner: ./src
 # Das Target ist eine Anwendung:  ../bin/keepass
 
-INSTALLS += target \
-            Share
-Share.files += ../share/keepass/* 
-unix{ target.path = /usr/local/bin
-      Share.path = /usr/local/share/keepass
+
+INSTALLS += target data
+data.files += ../share/keepass/* 
+TARGET = ../bin/keepass
+
+unix{
+	isEmpty(PREFIX){
+		PREFIX=/usr/local
+	}
+	target.path = $${PREFIX}/bin
+	data.path = $${PREFIX}/share/keepass
 }
-macx{ target.path = /Applications
-      Share.path = /Applications/keepass.app/Contents/share/keepass
+
+macx{ 
+	target.path = /Applications
+	data.path = /Applications/keepass.app/Contents/share/keepass
 }
+
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
          forms/AboutDlg.ui \
@@ -21,7 +30,8 @@ FORMS += forms/EditGroupDlg.ui \
          forms/DatabaseSettingsDlg.ui \
          forms/PasswordDlg.ui \
          forms/EditEntryDlg.ui \
-         forms/PasswordGenDlg.ui 
+         forms/PasswordGenDlg.ui \
+	 forms/SelectIconDlg.ui
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
 		translations/keepass-es_ES.ts \
@@ -50,6 +60,7 @@ HEADERS += lib/IniReader.h \
            dialogs/SimplePasswordDlg.h \
            dialogs/EditEntryDlg.h \
            dialogs/PasswordGenDlg.h \
+	   dialogs/SelectIconDlg.h \
            lib/random.h \
            Database.h \
            lib/KdePlugin.h \
@@ -84,6 +95,7 @@ SOURCES += lib/IniReader.cpp \
            dialogs/SimplePasswordDlg.cpp \
            dialogs/EditEntryDlg.cpp \
            dialogs/PasswordGenDlg.cpp \
+	   dialogs/SelectIconDlg.cpp \
            lib/random.cpp \
            Database.cpp \
            lib/KdePlugin.cpp \
@@ -96,7 +108,6 @@ QT -= network sql
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/
-TARGET = ../bin/keepass
 INCLUDEPATH += ./
 CONFIG += debug \
 warn_off \

@@ -22,18 +22,20 @@
 
 #include <qcombobox.h>
 #include <qlineedit.h>
-//Added by qt3to4:
 #include <QShowEvent>
 #include "EditGroupDlg.h"
+#include "SelectIconDlg.h"
 
 
-CEditGroupDialog::CEditGroupDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+CEditGroupDialog::CEditGroupDialog(Database* database,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
+db=database;
 IconID=0;
 connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
 connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
 }
 
 CEditGroupDialog::~CEditGroupDialog()
@@ -62,10 +64,7 @@ done(0);
 }
 
 
-
-
-/*$SPECIALIZATION$*/
-
-
-//#include "editgroupdlg.moc"
-
+void CEditGroupDialog::OnIconDlg(){
+CSelectIconDlg dlg(db,this);
+dlg.exec();
+}

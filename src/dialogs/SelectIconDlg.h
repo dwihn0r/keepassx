@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,34 +18,23 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef EDITGROUPDLG_H
-#define EDITGROUPDLG_H
+#ifndef _SELECT_ICON_DLG_
+#define _SELECT_ICON_DLG_
 
-#include "ui_EditGroupDlg.h"
-#include <qstring.h>
-#include <QShowEvent>
+#include "main.h"
 #include "Database.h"
+#include "ui_SelectIconDlg.h"
 
-class CEditGroupDialog : public QDialog, public Ui_EditGroupDialog
-{
-  Q_OBJECT
-
+class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
+ Q_OBJECT
 public:
-  CEditGroupDialog(Database*,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
-  ~CEditGroupDialog();
-virtual void showEvent(QShowEvent *event);
- int IconID;
- QString GroupName;
+ CSelectIconDlg(Database* db,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
 
 private:
  Database* db;
- 
 
-public slots:
-    virtual void OnOK();
-    virtual void OnCancel();
-    virtual void OnIconDlg();
+
 };
 
-#endif
 
+#endif

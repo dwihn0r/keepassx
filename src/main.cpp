@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
  *   tarek@linux                                                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -282,7 +282,7 @@ int i=1;
 		i++; }
 	for(i; i<argc;i++){
 		if(QString(argv[i])=="-h"){
-			cout << "Keepass 0.2.0" << endl;
+			cout << "KeePassX" << KEEPASS_VERSION << endl;
 			cout << "Usage: keepass [Filename] [Options]" << endl;
 			cout << "  -h This Help" << endl;
 			cout << "  -cfg ConfigFile Use specified configuration" << endl;

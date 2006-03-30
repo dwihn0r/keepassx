@@ -49,6 +49,7 @@ http://keepass.berlios.de/translation-howto.html"));
 QString ThanksTemplate=QString("<div style='margin-left:0px;'><b>%1</b></div><div style='margin-left:10px;'>%2</div><br><br>");
 
 Edit_Thanks->setText(ThanksTemplate.arg(tr("Matthias Miller")).arg(tr("http://www.outofhanwell.com/<br>Mac OS X Support")));
+Edit_Thanks->setText(Edit_Thanks->text()+ThanksTemplate.arg(tr("Eugen Gorschenin")).arg(tr("geugen@users.berlios.de<br>New Website")));
 //Edit_Thanks->setText(Edit_Thanks->text()+ThanksTemplate.arg(tr("  ")).arg(tr("  ")));
 }
 

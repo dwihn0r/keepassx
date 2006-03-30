@@ -84,6 +84,7 @@ public:
 private:
  bool IsMetaStream(CEntry& Entry);
  bool parseMetaStream(const CEntry& Entry);
+ bool parseCustomIconsMetaStream(const QByteArray& data);
  void transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* seed,int rounds);
  bool readHeader(char* raw);
  bool isGroupIdInUse(Q_UINT32 GroupID);
@@ -98,10 +99,10 @@ private:
 
 
  extern const QDateTime Date_Never;
- void memcpyFromLEnd32(Q_UINT32* dst,char* src);
- void memcpyFromLEnd16(Q_UINT16* dst,char* src);
- void memcpyToLEnd32(char* src,Q_UINT32* dst);
- void memcpyToLEnd16(char* src,Q_UINT16* dst);
+ void memcpyFromLEnd32(Q_UINT32* dst,const char* src);
+ void memcpyFromLEnd16(Q_UINT16* dst,const char* src);
+ void memcpyToLEnd32(char* src,const Q_UINT32* dst);
+ void memcpyToLEnd16(char* src,const Q_UINT16* dst);
  QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
  void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
 

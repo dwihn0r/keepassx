@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,35 +17,14 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-
-#ifndef EDITGROUPDLG_H
-#define EDITGROUPDLG_H
-
-#include "ui_EditGroupDlg.h"
-#include <qstring.h>
-#include <QShowEvent>
-#include "Database.h"
-
-class CEditGroupDialog : public QDialog, public Ui_EditGroupDialog
-{
-  Q_OBJECT
-
-public:
-  CEditGroupDialog(Database*,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
-  ~CEditGroupDialog();
-virtual void showEvent(QShowEvent *event);
- int IconID;
- QString GroupName;
-
-private:
- Database* db;
  
+#include "SelectIconDlg.h"
 
-public slots:
-    virtual void OnOK();
-    virtual void OnCancel();
-    virtual void OnIconDlg();
-};
 
-#endif
-
+CSelectIconDlg::CSelectIconDlg(Database* database,QWidget* parent,const char* name, bool modal, Qt::WFlags fl):QDialog(parent,name,modal,fl){
+setupUi(this);
+db=database;
+for(int i=0; i<NUM_CLIENT_ICONS; i++){
+	List->addItem(new QListWidgetItem(QIcon(EntryIcons[i]),QString::number(i)));
+}
+}

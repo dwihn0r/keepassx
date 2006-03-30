@@ -242,8 +242,21 @@ return true;
 }
 
 bool PwDatabase::parseMetaStream(const CEntry& entry){
-//return true for known MetaStreams
-return false;
+if(entry.Additional=="KPX_CUSTOM_ICONS")
+	return parseCustomIconsMetaStream(entry.BinaryData);
+
+
+return false; //unknown MetaStreams
+}
+
+bool PwDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
+Q_UINT32 NumIcons,NumEntries,offset;
+memcpyFromLEnd32(&NumIcons,dta.data());
+memcpyFromLEnd32(&NumEntries,dta.data()+4);
+offset+=4;
+
+
+return true;
 }
 
 void PwDatabase::transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* KeySeed,int rounds){
@@ -1137,7 +1150,7 @@ void PwDatabase::setEntry(unsigned long index,CEntry& entry){
 int PwDatabase::numEntries(){
 	return Entries.size();}
 
-void memcpyFromLEnd32(Q_UINT32* dst,char* src){
+void memcpyFromLEnd32(Q_UINT32* dst,const char* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(((char*)dst)+3,src+0,1);
@@ -1149,7 +1162,7 @@ else
   memcpy(dst,src,4);
 }
 
-void memcpyFromLEnd16(Q_UINT16* dst,char* src){
+void memcpyFromLEnd16(Q_UINT16* dst,const char* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(((char*)dst)+1,src+0,1);
@@ -1159,7 +1172,7 @@ else
   memcpy(dst,src,2);
 }
 
-void memcpyToLEnd32(char* dst,Q_UINT32* src){
+void memcpyToLEnd32(char* dst,const Q_UINT32* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(dst+0,((char*)src)+3,1);
@@ -1171,7 +1184,7 @@ else
   memcpy(dst,src,4);
 }
 
-void memcpyToLEnd16(char* dst,Q_UINT16* src){
+void memcpyToLEnd16(char* dst,const Q_UINT16* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(dst+0,((char*)src)+1,1);

@@ -1,0 +1,26 @@
+---------------
+    0.2.1
+---------------
+
+---------------
+    0.2.0
+---------------
+-ported whole application from Qt3 to Qt4
+(better performance, less memory usage, ready for KDE4)
+-improved Mac OS X support
+-added Drag&Drop support
+-multiple seclection mode for entries
+-improved loading performance for large databases
+-faster in-memory encryption
+-search field in toolbar now works
+-mainwindow size, splitter position and column sizes are restored at start-up
+-added option for alternating row colors
+-improved key/password dialog
+-removed language dialog - program now uses system's default language
+-loading translation files for Qt (e.g. file dialogs)
+-added text export function
+-added option "Never" for expire dates.
+-fixed problem with hex. key files
+-fixed problem with damaged file attachments after various entry operations
+-fixed segmentation fault when using new icons with higher index
+-fixed error when saving empty databases
