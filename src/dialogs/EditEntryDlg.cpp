@@ -133,10 +133,10 @@ if(event->spontaneous()==false){
 }
 
 void CEditEntryDlg::InitIconComboBox(){
-for(int i=0;i<NUM_CLIENT_ICONS;i++){
-Combo_IconPicker->insertItem(EntryIcons[i],"",i);
+for(int i=0;i<db->numIcons();i++){
+	Combo_IconPicker->insertItem(db->icon(i),"",i);
 }
-Combo_IconPicker->setCurrentItem(entry->ImageID);
+	Combo_IconPicker->setCurrentItem(entry->ImageID);
 }
 
 

@@ -155,7 +155,7 @@ void KeepassEntryView::setEntry(CEntry* entry){
     tmp->setText(j++,entry->LastAccess.date().toString(Qt::LocalDate));}
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
-  Items.back()->setIcon(0,EntryIcons[entry->ImageID]);
+  Items.back()->setIcon(0,db->icon(entry->ImageID));
 }
 
 void KeepassEntryView::refreshItems(){
@@ -193,7 +193,7 @@ for(int i=0;i<Items.size();i++){
     tmp->setText(j++,entry->LastAccess.date().toString(Qt::LocalDate));}
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
-  tmp->setIcon(0,EntryIcons[entry->ImageID]);
+  tmp->setIcon(0,db->icon(entry->ImageID));
 }
 }
 

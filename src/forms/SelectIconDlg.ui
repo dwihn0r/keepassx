@@ -72,7 +72,7 @@
      <number>6</number>
     </property>
     <item>
-     <widget class="QPushButton" name="pushButton" >
+     <widget class="QPushButton" name="Button_AddIcon" >
       <property name="text" >
        <string>Add Custom Icon...</string>
       </property>
@@ -92,7 +92,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="Button_Ok" >
+     <widget class="QPushButton" name="Button_PickIcon" >
       <property name="text" >
        <string>Pick</string>
       </property>
@@ -112,7 +112,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>Button_Ok</sender>
+   <sender>Button_PickIcon</sender>
    <signal>clicked()</signal>
    <receiver>SelectIconDlg</receiver>
    <slot>accept()</slot>

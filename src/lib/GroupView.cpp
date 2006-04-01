@@ -231,7 +231,7 @@ if(db->group(i).Level==0){
      Items.back()->pGroup=&db->group(i);
      }
  }
-Items.back()->setIcon(0,EntryIcons[db->group(i).ImageID]);
+Items.back()->setIcon(0,db->icon(db->group(i).ImageID));
 }
 
 for(int i=0;i<Items.size();i++){

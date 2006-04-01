@@ -26,12 +26,14 @@
 #include <qobject.h>
 #include <qdatetime.h>
 #include <QSysInfo>
+#include <QBuffer>
 #include "crypto/sha256.h"
 #include "crypto/rijndael.h"
 #include "crypto/twoclass.h"
 #include "lib/random.h"
 using namespace std;
 #include "PwManager.h"
+#include "main.h"
 
 #define _ERROR Errors << QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 
@@ -253,11 +255,96 @@ bool PwDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
 Q_UINT32 NumIcons,NumEntries,offset;
 memcpyFromLEnd32(&NumIcons,dta.data());
 memcpyFromLEnd32(&NumEntries,dta.data()+4);
-offset+=4;
-
-
+offset=8;
+CustomIcons.clear();
+for(int i=0;i<NumIcons;i++){
+	CustomIcons << QPixmap();
+	Q_UINT32 Size;
+	memcpyFromLEnd32(&Size,dta.data()+offset);
+	if(offset+Size > dta.size()){
+		CustomIcons.clear();
+		return false;}
+	offset+=4;
+	if(!CustomIcons.back().loadFromData((const unsigned char*)dta.data()+offset,Size,"PNG")){
+		CustomIcons.clear();
+		return false;}
+	offset+=Size;
+	if(offset > dta.size()){
+		CustomIcons.clear();
+		return false;}
+}
+for(int i=0;i<NumEntries;i++){
+	Q_UINT32 Entry,Icon;
+	memcpyFromLEnd32(&Entry,dta.data()+offset);
+	offset+=4;
+	memcpyFromLEnd32(&Icon,dta.data()+offset);
+	offset+=4;
+	Entries[Entry].ImageID=Icon;
+}
 return true;
 }
+
+void PwDatabase::createCustomIconsMetaStream(CEntry* e){
+e->BinaryDesc="bin-stream";
+e->Title="Meta-Info";
+e->UserName="SYSTEM";
+e->Additional="KPX_CUSTOM_ICONS";
+e->URL="$";
+e->ImageID=0;
+int Size=8;
+Q_UINT32 NumEntries=0;
+for(int i=0;i<Entries.size();i++){
+	if(Entries[i].ImageID >= BUILTIN_ICONS){ Size+=8; NumEntries++;}  
+}
+Size+=CustomIcons.size()*1000; // 1KB 
+e->BinaryData.reserve(Size);
+e->BinaryData.resize(8);
+Q_UINT32 NumIcons=CustomIcons.size();
+
+memcpyToLEnd32(e->BinaryData.data(),&NumIcons);
+memcpyToLEnd32(e->BinaryData.data()+4,&NumEntries);
+for(int i=0;i<CustomIcons.size();i++){
+	Q_UINT32 ImgSize;
+	char ImgSizeBin[4];
+	QByteArray png;
+	png.reserve(1000);
+	QBuffer buffer(&png);
+	CustomIcons[i].save(&buffer,"PNG",0);
+	ImgSize=png.size();
+	memcpyToLEnd32(ImgSizeBin,&ImgSize);
+	e->BinaryData.append(QByteArray::fromRawData(ImgSizeBin,4));
+	e->BinaryData.append(png);
+}
+for(Q_UINT32 i=0;i<Entries.size();i++){
+	if(Entries[i].ImageID >= BUILTIN_ICONS){
+		char Bin[8];
+		memcpyToLEnd32(Bin,&i);
+		Q_UINT32 id=Entries[i].ImageID-BUILTIN_ICONS;
+		memcpyToLEnd32(Bin+4,&id);
+		e->BinaryData.append(QByteArray::fromRawData(Bin,8));
+	}  
+}
+
+
+}
+
+
+int PwDatabase::numIcons(){
+return BUILTIN_ICONS+CustomIcons.size();
+}
+
+QPixmap& PwDatabase::icon(int i){
+if(i>=BUILTIN_ICONS+CustomIcons.size())
+	return EntryIcons[0];
+if(i<BUILTIN_ICONS)
+	return EntryIcons[i];
+return CustomIcons[i-BUILTIN_ICONS];
+}
+
+void PwDatabase::addIcon(const QPixmap& icon){
+CustomIcons << icon;
+}
+
 
 void PwDatabase::transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* KeySeed,int rounds){
 Q_UINT8* tmp=new Q_UINT8[32];
@@ -466,16 +553,11 @@ Entries.removeAt(Entries.indexOf(*entry));
 }
 
 bool PwDatabase::IsMetaStream(CEntry& p){
-
 if(p.BinaryData.isNull()) return false;
 if(p.Additional == "") return false;
-if(p.BinaryDesc == "") return false;
 if(p.BinaryDesc != "bin-stream") return false;
-if(p.Title == "") return false;
 if(p.Title != "Meta-Info") return false;
-if(p.UserName == "") return false;
 if(p.UserName != "SYSTEM") return false;
-if(p.URL == "") return false;
 if(p.URL != "$") return false;
 if(p.ImageID != 0) return false;
 return true;
@@ -646,7 +728,14 @@ if(!file->isOpen()){
 }
 
 unsigned int FileSize;
-Entries+=UnkownMetaStreams; ///@FIXME ID conflicts???
+
+QList<CEntry*> MetaStreams;
+for(int i=0; i<UnkownMetaStreams.size();i++){
+	MetaStreams << &UnkownMetaStreams[i];
+}
+CEntry CustomIconsMetaStream;
+createCustomIconsMetaStream(&CustomIconsMetaStream);
+MetaStreams << &CustomIconsMetaStream;
 
 FileSize=DB_HEADER_SIZE;
 // Get the size of all groups (94 Byte + length of the name string)
@@ -655,14 +744,23 @@ for(int i = 0; i < Groups.size(); i++){
 }
 // Get the size of all entries
 for(int i = 0; i < Entries.size(); i++){
-  FileSize += 134
-	   +Entries[i].Title.utf8().length()+1
-	   +Entries[i].UserName.utf8().length()+1
-	   +Entries[i].URL.utf8().length()+1
-	   +Entries[i].Password.length()+1
-	   +Entries[i].Additional.utf8().length()+1
-	   +Entries[i].BinaryDesc.utf8().length()+1
-	   +Entries[i].BinaryData.length();}
+  FileSize	+= 134
+			+Entries[i].Title.utf8().length()+1
+			+Entries[i].UserName.utf8().length()+1
+			+Entries[i].URL.utf8().length()+1
+			+Entries[i].Password.length()+1
+			+Entries[i].Additional.utf8().length()+1
+			+Entries[i].BinaryDesc.utf8().length()+1
+			+Entries[i].BinaryData.length();	
+}
+
+for(int i=0; i < MetaStreams.size(); i++){
+  FileSize	+=164
+			+MetaStreams[i]->Additional.utf8().length()+1
+			+MetaStreams[i]->BinaryData.length();
+}
+
+
 // Round up filesize to 16-byte boundary for Rijndael/Twofish
 FileSize = (FileSize + 16) - (FileSize % 16);
 char* buffer=new char[FileSize+16];
@@ -674,8 +772,8 @@ Flags = PWM_FLAG_SHA2;
 if(CryptoAlgorithmus == ALGO_AES) Flags |= PWM_FLAG_RIJNDAEL;
 else if(CryptoAlgorithmus == ALGO_TWOFISH) Flags |= PWM_FLAG_TWOFISH;
 Version = PWM_DBVER_DW;
-NumGroups = Groups.size(); //-> (+MetaStreams)
-NumEntries = Entries.size();
+NumGroups = Groups.size();
+NumEntries = Entries.size()+MetaStreams.size();
 
 getRandomBytes(FinalRandomSeed,1,16,false);
 getRandomBytes(TrafoRandomSeed,1,32,false);
@@ -750,7 +848,9 @@ for(int i = 0; i < Entries.size(); i++){
 		FieldType = 0x0003; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpyToLEnd32(buffer+pos, &Entries[i].ImageID); pos += 4;
+		Q_UINT32 ImgID=Entries[i].ImageID;
+		if(ImgID>=BUILTIN_ICONS)ImgID=0;
+		memcpyToLEnd32(buffer+pos,&ImgID); pos += 4;
 
 
 		FieldType = 0x0004;
@@ -823,6 +923,95 @@ for(int i = 0; i < Entries.size(); i++){
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 }
+
+for(int i = 0; i < MetaStreams.size(); i++){
+		FieldType = 0x0001; FieldSize = 16;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpy(buffer+pos, &MetaStreams[i]->ID, 16); pos += 16;
+
+		FieldType = 0x0002; FieldSize = 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &MetaStreams[i]->GroupID); pos += 4;
+
+		FieldType = 0x0003; FieldSize = 4;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpyToLEnd32(buffer+pos, &MetaStreams[i]->ImageID); pos += 4;
+
+
+		FieldType = 0x0004;
+		FieldSize = MetaStreams[i]->Title.utf8().length() + 1; // Add terminating NULL character space
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpy(buffer+pos, MetaStreams[i]->Title.utf8(),FieldSize);  pos += FieldSize;
+
+		FieldType = 0x0005;
+		FieldSize = MetaStreams[i]->URL.utf8().length() + 1; // Add terminating NULL character space
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpy(buffer+pos, MetaStreams[i]->URL.utf8(),FieldSize);  pos += FieldSize;
+
+		FieldType = 0x0006;
+		FieldSize = MetaStreams[i]->UserName.utf8().length() + 1; // Add terminating NULL character space
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpy(buffer+pos, MetaStreams[i]->UserName.utf8(),FieldSize);  pos += FieldSize;
+
+		FieldType = 0x0007;
+		FieldSize = MetaStreams[i]->Password.length() + 1; // Add terminating NULL character space
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		MetaStreams[i]->Password.unlock();
+		memcpy(buffer+pos, MetaStreams[i]->Password.string(),FieldSize);  pos += FieldSize;
+		MetaStreams[i]->Password.lock();
+
+		FieldType = 0x0008;
+		FieldSize = MetaStreams[i]->Additional.utf8().length() + 1; // Add terminating NULL character space
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpy(buffer+pos, MetaStreams[i]->Additional.utf8(),FieldSize);  pos += FieldSize;
+
+		FieldType = 0x0009; FieldSize = 5;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		dateToPackedStruct5(MetaStreams[i]->Creation,(unsigned char*)buffer+pos); pos+=5;
+
+
+		FieldType = 0x000A; FieldSize = 5;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		dateToPackedStruct5(MetaStreams[i]->LastMod,(unsigned char*)buffer+pos); pos+=5;
+
+		FieldType = 0x000B; FieldSize = 5;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		dateToPackedStruct5(MetaStreams[i]->LastAccess,(unsigned char*)buffer+pos); pos+=5;
+
+		FieldType = 0x000C; FieldSize = 5;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		dateToPackedStruct5(MetaStreams[i]->Expire,(unsigned char*)buffer+pos); pos+=5;
+
+		FieldType = 0x000D;
+		FieldSize = MetaStreams[i]->BinaryDesc.utf8().length() + 1; // Add terminating NULL character space
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		memcpy(buffer+pos, MetaStreams[i]->BinaryDesc.utf8(),FieldSize);  pos += FieldSize;
+
+		FieldType = 0x000E; FieldSize = MetaStreams[i]->BinaryData.length();
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+		if((!MetaStreams[i]->BinaryData.isNull()) && (FieldSize != 0))
+			memcpy(buffer+pos, MetaStreams[i]->BinaryData.data(), FieldSize);
+		pos += FieldSize;
+
+		FieldType = 0xFFFF; FieldSize = 0;
+		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
+		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
+}
+
 sha256_context context;
 sha256_starts(&context);
 sha256_update(&context,(unsigned char*)buffer+DB_HEADER_SIZE, pos - DB_HEADER_SIZE);

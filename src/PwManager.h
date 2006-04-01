@@ -36,6 +36,7 @@
 #include <QDate>
 #include <QTime>
 #include <QStringList>
+#include <QPixmap>
 #include "lib/SecString.h"
 #include "Database.h"
 
@@ -76,8 +77,12 @@ public:
  CEntry*   addEntry(CEntry* NewEntry);
  void 	   merge(Database* db2);
  bool	   isParentGroup(CGroup* Group,CGroup* PotenialParent);
+
  QString   getError();  //get first error
  QString   getErrors(); //get all errors in a \n seperated String
+ QPixmap&  icon(int index);
+ int	   numIcons();
+ void	   addIcon(const QPixmap& icon);
 
  QList<CGroup>Groups;
  QList<CEntry>Entries;
@@ -85,6 +90,7 @@ private:
  bool IsMetaStream(CEntry& Entry);
  bool parseMetaStream(const CEntry& Entry);
  bool parseCustomIconsMetaStream(const QByteArray& data);
+ void createCustomIconsMetaStream(CEntry* dst);
  void transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* seed,int rounds);
  bool readHeader(char* raw);
  bool isGroupIdInUse(Q_UINT32 GroupID);
@@ -93,6 +99,7 @@ private:
  Q_UINT32 getNewEntrySid();
  bool convHexToBinaryKey(char* HexKey, char* dst);
  QStringList Errors;
+ QList<QPixmap> CustomIcons;
  QList<CEntry> UnkownMetaStreams;
 
 };

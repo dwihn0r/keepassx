@@ -23,6 +23,7 @@
 #include <QList>
 #include <QDateTime>
 #include <QFile>
+#include <QPixmap>
 #include "lib/SecString.h"
 using namespace std;
 
@@ -115,6 +116,9 @@ public:
  virtual bool	   isParentGroup(CGroup* Group,CGroup* PotenialParent)=0;
  virtual QString   getError()=0;  //get first error
  virtual QString   getErrors()=0; //get all errors in a \n seperated String
+ virtual QPixmap&  icon(int index)=0;
+ virtual int	   numIcons()=0;
+ virtual void	   addIcon(const QPixmap& icon)=0;
 
  Q_UINT32 CryptoAlgorithmus;
  Q_UINT32 KeyEncRounds;

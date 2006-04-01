@@ -30,6 +30,9 @@ class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
 public:
  CSelectIconDlg(Database* db,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
 
+public slots:
+ void OnAddIcon();
+
 private:
  Database* db;
 
