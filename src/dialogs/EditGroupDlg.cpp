@@ -67,5 +67,12 @@ done(0);
 
 void CEditGroupDialog::OnIconDlg(){
 CSelectIconDlg dlg(db,this);
-dlg.exec();
+int r=dlg.exec();
+if(r!=-1){
+	ComboIconPicker->clear();
+	for(int i=0;i<db->numIcons();i++)
+		ComboIconPicker->insertItem(db->icon(i),"",i);
+	IconID=r;
+	ComboIconPicker->setCurrentItem(IconID);
+}
 }

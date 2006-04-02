@@ -41,7 +41,7 @@
 #include "Database.h"
 
 
-class PwDatabase:QObject,public Database{
+class PwDatabase:public Database{
  Q_OBJECT
 public:
  PwDatabase();
@@ -101,6 +101,9 @@ private:
  QStringList Errors;
  QList<QPixmap> CustomIcons;
  QList<CEntry> UnkownMetaStreams;
+
+signals:
+void modified();
 
 };
 

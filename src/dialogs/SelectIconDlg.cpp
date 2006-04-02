@@ -31,14 +31,24 @@
 CSelectIconDlg::CSelectIconDlg(Database* database,QWidget* parent,const char* name, bool modal, Qt::WFlags fl):QDialog(parent,name,modal,fl){
 setupUi(this);
 db=database;
-
 connect(Button_AddIcon, SIGNAL(clicked()), this, SLOT(OnAddIcon()));
+connect(Button_PickIcon, SIGNAL(clicked()), this, SLOT(OnPickIcon()));
+connect(Button_Cancel, SIGNAL(clicked()), this, SLOT(OnCancel()));
+CtxMenu=new QMenu(this);
+DeleteAction=CtxMenu->addAction(*Icon_EditDelete,tr("Delete"));
+CustomIconsModified=false;
+updateView();
+}
 
+void CSelectIconDlg::updateView(){
+List->clear();
 for(int i=0; i<db->numIcons(); i++){
+	QListWidgetItem* item;
 	if(i<BUILTIN_ICONS)
-		List->addItem(new QListWidgetItem(QIcon(db->icon(i)),QString::number(i)));
+		List->addItem(item=new QListWidgetItem(QIcon(db->icon(i)),QString::number(i)));
 	else
-		List->addItem(new QListWidgetItem(QIcon(db->icon(i)),"["+QString::number(i)+"]"));
+		List->addItem(item=new QListWidgetItem(QIcon(db->icon(i)),"["+QString::number(i)+"]"));
+	item->setData(32,i);
 }
 }
 
@@ -55,4 +65,27 @@ for(int i=0;i<filenames.size();i++){
 }
 if(errors.size())
 	QMessageBox::warning(this,tr("Error"),tr("An error occured while loading the icon(s):\n"));
+CustomIconsModified=true;
+updateView();
+}
+
+void CSelectIconDlg::contextMenuEvent(QContextMenuEvent *event){
+
+QListWidgetItem* item=List->itemAt(List->mapFromParent(event->pos()));
+
+if(!item)return;
+if(item->data(32).toInt()<BUILTIN_ICONS)
+	DeleteAction->setDisabled(true);
+else
+	DeleteAction->setDisabled(false);
+event->accept();
+CtxMenu->popup(event->globalPos());
+}
+
+void CSelectIconDlg::OnPickIcon(){
+done(List->currentItem()->data(32).toInt());
+}
+
+void CSelectIconDlg::OnCancel(){
+done(-1);
 }

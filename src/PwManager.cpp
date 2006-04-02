@@ -343,6 +343,7 @@ return CustomIcons[i-BUILTIN_ICONS];
 
 void PwDatabase::addIcon(const QPixmap& icon){
 CustomIcons << icon;
+emit modified();
 }
 
 

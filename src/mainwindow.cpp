@@ -267,6 +267,7 @@ Q_ASSERT(r==1);
 db = new PwDatabase();
 GroupView->db=db;
 EntryView->db=db;
+connect(db,SIGNAL(modified()),this,SLOT(OnFileModified()));
 if(PasswordDlg.password!="" && PasswordDlg.keyfile=="")
 	db->CalcMasterKeyByPassword(PasswordDlg.password);
 if(PasswordDlg.password=="" && PasswordDlg.keyfile!="")

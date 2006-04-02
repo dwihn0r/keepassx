@@ -21,6 +21,9 @@
 #ifndef _SELECT_ICON_DLG_
 #define _SELECT_ICON_DLG_
 
+#include <QContextMenuEvent>
+#include <QMenu>
+#include <QAction>
 #include "main.h"
 #include "Database.h"
 #include "ui_SelectIconDlg.h"
@@ -29,13 +32,22 @@ class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
  Q_OBJECT
 public:
  CSelectIconDlg(Database* db,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
+ bool CustomIconsModified;
 
 public slots:
  void OnAddIcon();
+ void OnPickIcon();
+ void OnCancel();
+
 
 private:
  Database* db;
+ void updateView();
+ QMenu* CtxMenu;
+ QAction* DeleteAction;
 
+protected:
+ virtual void contextMenuEvent(QContextMenuEvent *event);
 
 };
 

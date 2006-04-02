@@ -77,7 +77,7 @@ static bool UI_ExpandByDefault;
 #define ALGO_AES         		0
 #define ALGO_TWOFISH			1
 
-class Database{
+class Database:public QObject{
 public:
  Database();
  virtual ~Database(){};
