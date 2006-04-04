@@ -63,16 +63,6 @@
     <string>Icon:</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="ComboIconPicker" >
-   <property name="geometry" >
-    <rect>
-     <x>70</x>
-     <y>40</y>
-     <width>50</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="ButtonCancel" >
    <property name="geometry" >
     <rect>
@@ -87,6 +77,22 @@
    </property>
    <property name="shortcut" >
     <string>Alt+C</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ButtonOK" >
+   <property name="geometry" >
+    <rect>
+     <x>147</x>
+     <y>77</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>O&amp;K</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+K</string>
    </property>
   </widget>
   <widget class="Line" name="line1" >
@@ -108,20 +114,14 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="ButtonOK" >
+  <widget class="QComboBox" name="ComboIconPicker" >
    <property name="geometry" >
     <rect>
-     <x>147</x>
-     <y>77</y>
-     <width>70</width>
-     <height>24</height>
+     <x>70</x>
+     <y>40</y>
+     <width>50</width>
+     <height>21</height>
     </rect>
-   </property>
-   <property name="text" >
-    <string>O&amp;K</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+K</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Button_Icon" >
@@ -130,7 +130,7 @@
      <x>123</x>
      <y>39</y>
      <width>21</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="text" >

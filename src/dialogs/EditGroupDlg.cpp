@@ -66,7 +66,7 @@ done(0);
 
 
 void CEditGroupDialog::OnIconDlg(){
-CSelectIconDlg dlg(db,this);
+CSelectIconDlg dlg(db,IconID,this);
 int r=dlg.exec();
 if(r!=-1){
 	ComboIconPicker->clear();

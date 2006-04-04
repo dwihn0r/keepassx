@@ -146,7 +146,7 @@ int i;
 for(i=0;i!=db->numGroups();i++){
 tmp="";
   for(int j=0;j<db->group(i).Level;j++)tmp+="  ";
-Combo_Group->insertItem(EntryIcons[db->group(i).ImageID],
+Combo_Group->insertItem(db->icon(db->group(i).ImageID),
  			tmp+db->group(i).Name,i);
 }
 Combo_Group->setCurrentItem(db->getGroupIndex(entry->GroupID));

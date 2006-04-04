@@ -119,6 +119,7 @@ public:
  virtual QPixmap&  icon(int index)=0;
  virtual int	   numIcons()=0;
  virtual void	   addIcon(const QPixmap& icon)=0;
+ virtual void	   removeIcon(int Id)=0;
 
  Q_UINT32 CryptoAlgorithmus;
  Q_UINT32 KeyEncRounds;

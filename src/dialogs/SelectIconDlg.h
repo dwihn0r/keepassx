@@ -31,14 +31,15 @@
 class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
  Q_OBJECT
 public:
- CSelectIconDlg(Database* db,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
+ CSelectIconDlg(Database* db,int,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
  bool CustomIconsModified;
 
 public slots:
  void OnAddIcon();
  void OnPickIcon();
  void OnCancel();
-
+ void OnDelete();
+ void OnSelectionChanged(QListWidgetItem*,QListWidgetItem*);
 
 private:
  Database* db;

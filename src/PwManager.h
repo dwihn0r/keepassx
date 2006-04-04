@@ -83,6 +83,7 @@ public:
  QPixmap&  icon(int index);
  int	   numIcons();
  void	   addIcon(const QPixmap& icon);
+ void	   removeIcon(int Id);
 
  QList<CGroup>Groups;
  QList<CEntry>Entries;

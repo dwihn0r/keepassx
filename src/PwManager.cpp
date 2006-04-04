@@ -252,10 +252,11 @@ return false; //unknown MetaStreams
 }
 
 bool PwDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
-Q_UINT32 NumIcons,NumEntries,offset;
+Q_UINT32 NumIcons,NumEntries,NumGroups,offset;
 memcpyFromLEnd32(&NumIcons,dta.data());
 memcpyFromLEnd32(&NumEntries,dta.data()+4);
-offset=8;
+memcpyFromLEnd32(&NumGroups,dta.data()+8);
+offset=12;
 CustomIcons.clear();
 for(int i=0;i<NumIcons;i++){
 	CustomIcons << QPixmap();
@@ -281,6 +282,14 @@ for(int i=0;i<NumEntries;i++){
 	offset+=4;
 	Entries[Entry].ImageID=Icon;
 }
+for(int i=0;i<NumGroups;i++){
+	Q_UINT32 Group,Icon;
+	memcpyFromLEnd32(&Group,dta.data()+offset);
+	offset+=4;
+	memcpyFromLEnd32(&Icon,dta.data()+offset);
+	offset+=4;
+	Groups[Group].ImageID=Icon;
+}
 return true;
 }
 
@@ -291,18 +300,18 @@ e->UserName="SYSTEM";
 e->Additional="KPX_CUSTOM_ICONS";
 e->URL="$";
 e->ImageID=0;
-int Size=8;
-Q_UINT32 NumEntries=0;
-for(int i=0;i<Entries.size();i++){
-	if(Entries[i].ImageID >= BUILTIN_ICONS){ Size+=8; NumEntries++;}  
-}
+int Size=12;
+Q_UINT32 NumEntries=Entries.size();
+Q_UINT32 NumGroups=Groups.size();
+Size+=8*(NumEntries+NumGroups);
 Size+=CustomIcons.size()*1000; // 1KB 
 e->BinaryData.reserve(Size);
-e->BinaryData.resize(8);
+e->BinaryData.resize(12);
 Q_UINT32 NumIcons=CustomIcons.size();
 
 memcpyToLEnd32(e->BinaryData.data(),&NumIcons);
 memcpyToLEnd32(e->BinaryData.data()+4,&NumEntries);
+memcpyToLEnd32(e->BinaryData.data()+8,&NumGroups);
 for(int i=0;i<CustomIcons.size();i++){
 	Q_UINT32 ImgSize;
 	char ImgSizeBin[4];
@@ -316,16 +325,19 @@ for(int i=0;i<CustomIcons.size();i++){
 	e->BinaryData.append(png);
 }
 for(Q_UINT32 i=0;i<Entries.size();i++){
-	if(Entries[i].ImageID >= BUILTIN_ICONS){
 		char Bin[8];
 		memcpyToLEnd32(Bin,&i);
-		Q_UINT32 id=Entries[i].ImageID-BUILTIN_ICONS;
+		Q_UINT32 id=Entries[i].ImageID;
 		memcpyToLEnd32(Bin+4,&id);
 		e->BinaryData.append(QByteArray::fromRawData(Bin,8));
-	}  
 }
-
-
+for(Q_UINT32 i=0;i<Groups.size();i++){
+		char Bin[8];
+		memcpyToLEnd32(Bin,&i);
+		Q_UINT32 id=Groups[i].ImageID;
+		memcpyToLEnd32(Bin+4,&id);
+		e->BinaryData.append(QByteArray::fromRawData(Bin,8));
+}
 }
 
 
@@ -346,6 +358,24 @@ CustomIcons << icon;
 emit modified();
 }
 
+void PwDatabase::removeIcon(int id){
+id-=BUILTIN_ICONS;
+if(id < 0 ) return;
+if(id >= CustomIcons.size()) return;
+CustomIcons.removeAt(id); // .isNull()==true
+for(int i=0;i<Entries.size();i++){
+	if(Entries[i].ImageID == id+BUILTIN_ICONS)
+		Entries[i].ImageID=0;
+	if(Entries[i].ImageID>id+BUILTIN_ICONS)
+		Entries[i].ImageID--;
+}
+for(int i=0;i<Groups.size();i++){
+	if(Groups[i].ImageID == id+BUILTIN_ICONS)
+		Groups[i].ImageID=0;
+	if(Groups[i].ImageID>id+BUILTIN_ICONS)
+		Groups[i].ImageID--;
+}
+}
 
 void PwDatabase::transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* KeySeed,int rounds){
 Q_UINT8* tmp=new Q_UINT8[32];
@@ -818,7 +848,9 @@ for(int i=0; i < Groups.size(); i++){
 		FieldType = 0x0007; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpyToLEnd32(buffer+pos, &Groups[i].ImageID); pos += 4;
+		Q_UINT32 ImgID=Groups[i].ImageID;
+		if(ImgID>=BUILTIN_ICONS)ImgID=0;
+		memcpyToLEnd32(buffer+pos, &ImgID); pos += 4;
 
 		FieldType = 0x0008; FieldSize = 2;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
