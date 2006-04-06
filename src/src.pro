@@ -14,6 +14,7 @@ unix{
 	}
 	target.path = $${PREFIX}/bin
 	data.path = $${PREFIX}/share/keepass
+	LIBS+=-lXtst
 }
 
 macx{ 
@@ -64,6 +65,7 @@ HEADERS += lib/IniReader.h \
            lib/random.h \
            Database.h \
            lib/KdePlugin.h \
+	   lib/AutoType.h \
            global.h \
            main.h \
            lib/GroupView.h \
@@ -101,10 +103,10 @@ SOURCES += lib/IniReader.cpp \
            lib/KdePlugin.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
+	   lib/AutoType.cpp \
            crypto/arcfour.cpp \
            lib/KpFileIconProvider.cpp 
 QT += xml qt3support
-QT -= network sql
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/

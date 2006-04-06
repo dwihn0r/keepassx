@@ -120,26 +120,19 @@
      <height>29</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuBearbeiten" >
+   <widget class="QMenu" name="menuExtras" >
     <property name="title" >
-     <string>Edit</string>
+     <string>Extras</string>
     </property>
-    <addaction name="EditNewGroupAction" />
-    <addaction name="EditEditGroupAction" />
-    <addaction name="EditDeleteGroupAction" />
+    <addaction name="ExtrasSettingsAction" />
+   </widget>
+   <widget class="QMenu" name="menuHilfe" >
+    <property name="title" >
+     <string>Help</string>
+    </property>
+    <addaction name="HelpHandbookAction" />
     <addaction name="separator" />
-    <addaction name="EditPasswordToClipboardAction" />
-    <addaction name="EditUsernameToClipboardAction" />
-    <addaction name="EditOpenUrlAction" />
-    <addaction name="EditSaveAttachmentAction" />
-    <addaction name="separator" />
-    <addaction name="EditNewEntryAction" />
-    <addaction name="EditEditEntryAction" />
-    <addaction name="EditCloneEntryAction" />
-    <addaction name="EditDeleteEntryAction" />
-    <addaction name="separator" />
-    <addaction name="EditSearchAction" />
-    <addaction name="EditGroupSearchAction" />
+    <addaction name="HelpAboutAction" />
    </widget>
    <widget class="QMenu" name="menuAnsicht" >
     <property name="title" >
@@ -202,19 +195,27 @@
     <addaction name="separator" />
     <addaction name="FileExitAction" />
    </widget>
-   <widget class="QMenu" name="menuExtras" >
+   <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
-     <string>Extras</string>
+     <string>Edit</string>
     </property>
-    <addaction name="ExtrasSettingsAction" />
-   </widget>
-   <widget class="QMenu" name="menuHilfe" >
-    <property name="title" >
-     <string>Help</string>
-    </property>
-    <addaction name="HelpHandbookAction" />
+    <addaction name="EditNewGroupAction" />
+    <addaction name="EditEditGroupAction" />
+    <addaction name="EditDeleteGroupAction" />
     <addaction name="separator" />
-    <addaction name="HelpAboutAction" />
+    <addaction name="EditPasswordToClipboardAction" />
+    <addaction name="EditUsernameToClipboardAction" />
+    <addaction name="EditOpenUrlAction" />
+    <addaction name="EditSaveAttachmentAction" />
+    <addaction name="separator" />
+    <addaction name="EditNewEntryAction" />
+    <addaction name="EditEditEntryAction" />
+    <addaction name="EditCloneEntryAction" />
+    <addaction name="EditDeleteEntryAction" />
+    <addaction name="EditAutoTypeAction" />
+    <addaction name="separator" />
+    <addaction name="EditSearchAction" />
+    <addaction name="EditGroupSearchAction" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -482,20 +483,25 @@
     <string>Hide</string>
    </property>
   </action>
+  <action name="EditAutoTypeAction" >
+   <property name="text" >
+    <string>Perform AutoType</string>
+   </property>
+  </action>
  </widget>
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>

@@ -111,6 +111,14 @@ http://keepass.berlios.de/translation-howto.html</translation>
         <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Eugen Gorschenin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>geugen@users.berlios.de&lt;br&gt;New Website</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CDbSettingsDlg</name>
@@ -379,6 +387,35 @@ Please check your permissions.</source>
     </message>
 </context>
 <context>
+    <name>CSelectIconDlg</name>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Icons...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: File could not be loaded.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>An error occured while loading the icon(s):
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CSettingsDlg</name>
     <message>
         <source>Settings</source>
@@ -475,6 +512,10 @@ Please check your permissions.</source>
         <source>Attachment:</source>
         <translation>Adjunto:</translation>
     </message>
+    <message>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditGroupDialog</name>
@@ -505,6 +546,10 @@ Please check your permissions.</source>
     <message>
         <source>Alt+K</source>
         <translation>Alt+A</translation>
+    </message>
+    <message>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -737,10 +782,6 @@ Please check your permissions.</source>
     <message>
         <source>Shift+Ctrl+F</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Keepass - %1</source>
-        <translation></translation>
     </message>
     <message>
         <source>Error</source>
@@ -1069,6 +1110,10 @@ to save the changes?</source>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Perform AutoType</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -1382,6 +1427,25 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     <message>
         <source>Include Subgroups (recursive)</source>
         <translation>Incluir Subgrupos (recursivo)</translation>
+    </message>
+</context>
+<context>
+    <name>SelectIconDlg</name>
+    <message>
+        <source>Icon Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Custom Icon...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
     </message>
 </context>
 <context>

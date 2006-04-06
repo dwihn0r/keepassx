@@ -37,6 +37,15 @@
 #include "mainwindow.h"
 using namespace std;
 
+#ifdef Q_WS_X11
+	#include <X11/extensions/XTest.h>
+	#define XK_LATIN1
+	#define XK_MISCELLANY 
+	#define XK_XKB_KEYS
+	#include <X11/keysymdef.h>
+	#include <X11/Xlib.h>
+#endif
+
 CConfig config;
 QString  AppDir;
 bool TrActive;
@@ -71,6 +80,7 @@ inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& Arg
 
 int main(int argc, char **argv)
 {
+
 QApplication* app=new QApplication(argc,argv);
 QString ArgFile,ArgCfg,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg);

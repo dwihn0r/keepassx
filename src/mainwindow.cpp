@@ -40,6 +40,7 @@
 
 #include "lib/random.h"
 #include "lib/IniReader.h"
+#include "lib/AutoType.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 #include "export/Export_Txt.h"
@@ -55,11 +56,10 @@
 #include "dialogs/PasswordGenDlg.h"
 
 
-
-
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
   Start=true;
   setupUi(this);
+  AutoType::MainWin=this;
   setGeometry(geometry().x(),geometry().y(),config.MainWinWidth,config.MainWinHeight);
   splitter->setSizes(QList<int>() << config.MainWinSplit1 << config.MainWinSplit2);
   setupIcons();
@@ -324,6 +324,8 @@ return true;
 
 
 void KeepassMainWindow::OnFileNew(){
+AutoType::perform("");
+return;
 if(FileOpen)
  if(!closeDatabase())return;
 CPasswordDialog dlg(this,"PasswordDlg",true,false,true);

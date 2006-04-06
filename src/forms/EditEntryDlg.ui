@@ -70,6 +70,27 @@
     <string>Alt+C</string>
    </property>
   </widget>
+  <widget class="QLabel" name="Banner" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>500</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="sizePolicy" >
+    <sizepolicy>
+     <hsizetype>7</hsizetype>
+     <vsizetype>5</vsizetype>
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="scaledContents" >
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QWidget" name="layoutWidget" >
    <property name="geometry" >
     <rect>
@@ -269,9 +290,6 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="5" >
-     <widget class="QComboBox" name="Combo_IconPicker" />
-    </item>
     <item row="9" column="4" colspan="2" >
      <layout class="QHBoxLayout" >
       <property name="margin" >
@@ -312,16 +330,6 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="4" >
-     <widget class="QLabel" name="textLabel1" >
-      <property name="text" >
-       <string>Icon:</string>
-      </property>
-      <property name="alignment" >
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
     <item row="8" column="2" colspan="4" >
      <widget class="QCheckBox" name="CheckBox_ExpiresNever" >
       <property name="text" >
@@ -361,28 +369,27 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="3" >
+     <widget class="QLabel" name="textLabel1" >
+      <property name="text" >
+       <string>Icon:</string>
+      </property>
+      <property name="alignment" >
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4" >
+     <widget class="QComboBox" name="Combo_IconPicker" />
+    </item>
+    <item row="0" column="5" >
+     <widget class="QToolButton" name="toolButton" >
+      <property name="text" >
+       <string>></string>
+      </property>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="Banner" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>500</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="sizePolicy" >
-    <sizepolicy>
-     <hsizetype>7</hsizetype>
-     <vsizetype>5</vsizetype>
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="scaledContents" >
-    <bool>true</bool>
-   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11" />

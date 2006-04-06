@@ -113,6 +113,14 @@ http://keepass.berlios.de/translation-howto.html</translation>
         <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
         <translation>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Unterstützung</translation>
     </message>
+    <message>
+        <source>Eugen Gorschenin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>geugen@users.berlios.de&lt;br&gt;New Website</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CDbSettingsDlg</name>
@@ -384,6 +392,35 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
 </context>
 <context>
+    <name>CSelectIconDlg</name>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Icons...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: File could not be loaded.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>An error occured while loading the icon(s):
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CSettingsDlg</name>
     <message>
         <source>Settings</source>
@@ -480,6 +517,10 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
         <source>Attachment:</source>
         <translation>Anhang:</translation>
     </message>
+    <message>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditGroupDialog</name>
@@ -510,6 +551,10 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     <message>
         <source>Alt+K</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -741,10 +786,6 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>Shift+Ctrl+F</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Keepass - %1</source>
         <translation></translation>
     </message>
     <message>
@@ -1074,6 +1115,10 @@ die Änderungen speichern?</translation>
         <source>Hide</source>
         <translation>Verbergen</translation>
     </message>
+    <message>
+        <source>Perform AutoType</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -1388,6 +1433,25 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <source>Include Subgroups (recursive)</source>
         <translation>Untergruppen einbeziehen (rekursiv)</translation>
+    </message>
+</context>
+<context>
+    <name>SelectIconDlg</name>
+    <message>
+        <source>Icon Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Custom Icon...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
 </context>
 <context>
