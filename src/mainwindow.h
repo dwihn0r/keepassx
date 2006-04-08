@@ -80,6 +80,7 @@ private slots:
    void OnEditOpenUrl();
    void OnEditSearch();
    void OnEditGroupSearch();
+   void OnEditAutoType();
    void OnViewShowToolbar(bool);
    void OnViewShowEntryDetails(bool);
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);

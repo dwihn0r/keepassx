@@ -21,6 +21,7 @@
 #ifndef _AUTOTYPE_H_
 #define _AUTOTYPE_H_
 
+#include <QObject>
 #include <QWidget>
 #include <QString>
 #ifdef Q_WS_X11
@@ -30,16 +31,17 @@
 	#include <X11/keysymdef.h>
 	#include <X11/Xlib.h>
 #endif
+#include "Database.h"
 
 typedef struct tKeysymMap{
 	Q_UINT16 keysym;
   	Q_UINT16 unicode;
 };
 
-class AutoType{
+class AutoType:public QObject{
 public:
  static QWidget* MainWin;
- static void perform(const QString& KeePassAutoTypeString);
+ static void perform(CEntry* entry,QString& errors);
 private:
  static tKeysymMap KeysymMap[];
  static Q_UINT16 getKeysym(const QChar& unicode);

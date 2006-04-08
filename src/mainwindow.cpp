@@ -113,6 +113,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditSaveAttachmentAction, SIGNAL(triggered()), this, SLOT(OnEditSaveAttachment()));
 	connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnEditSearch()));
 	connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnEditGroupSearch()));
+	connect(EditAutoTypeAction,SIGNAL(triggered()),this,SLOT(OnEditAutoType()));
 	
 	connect(ViewShowToolbarAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowToolbar(bool)));
 	connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
@@ -194,6 +195,7 @@ EditDeleteGroupAction->setIcon(*Icon_EditDelete);
 EditSearchAction->setIcon(*Icon_EditSearch);
 EditGroupSearchAction->setIcon(*Icon_EditSearch);
 ExtrasSettingsAction->setIcon(*Icon_Configure);
+EditAutoTypeAction->setIcon(*Icon_AutoType);
 HelpHandbookAction->setIcon(*Icon_Help);
 }
 
@@ -211,6 +213,7 @@ void KeepassMainWindow::setupMenus(){
   EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
   EntryView->ContextMenu->addAction(EditOpenUrlAction);
   EntryView->ContextMenu->addAction(EditSaveAttachmentAction);
+  EntryView->ContextMenu->addAction(EditAutoTypeAction);
   EntryView->ContextMenu->addSeparator();
   EntryView->ContextMenu->addAction(EditNewEntryAction);
   EntryView->ContextMenu->addAction(EditEditEntryAction);
@@ -245,6 +248,7 @@ void KeepassMainWindow::setupMenus(){
   EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
   EditCloneEntryAction->setShortcut(tr("Ctrl+K"));
   EditSearchAction->setShortcut(tr("Ctrl+F"));
+  EditAutoTypeAction->setShortcut(tr("Ctrl+V"));
 #ifdef Q_WS_MAC
   FileCloseAction->setShortcut(tr("Ctrl+W"));
   FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
@@ -502,6 +506,7 @@ switch(EntrySelection){
     EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(false);
     EditDeleteEntryAction->setText(tr("Delete Entry"));
+	EditAutoTypeAction->setEnabled(false);
     break;
  case SINGLE:
     EditPasswordToClipboardAction->setEnabled(true);
@@ -513,6 +518,7 @@ switch(EntrySelection){
     EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(true);
     EditDeleteEntryAction->setText(tr("Delete Entry"));
+	EditAutoTypeAction->setEnabled(true);
     break;
  case MULTIPLE:
     EditPasswordToClipboardAction->setEnabled(false);
@@ -524,6 +530,7 @@ switch(EntrySelection){
     EditCloneEntryAction->setText(tr("Clone Entries"));
     EditDeleteEntryAction->setEnabled(true);
     EditDeleteEntryAction->setText(tr("Delete Entries"));
+	EditAutoTypeAction->setEnabled(false);
     break;
  default: Q_ASSERT(false);
 }
@@ -539,6 +546,7 @@ switch(EntrySelection){
     EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(false);
     EditDeleteEntryAction->setText(tr("Delete Entry"));
+	EditAutoTypeAction->setEnabled(false);
     break;
  case SINGLE:
     EditPasswordToClipboardAction->setEnabled(true);
@@ -550,6 +558,7 @@ switch(EntrySelection){
     EditCloneEntryAction->setText(tr("Clone Entry"));
     EditDeleteEntryAction->setEnabled(true);
     EditDeleteEntryAction->setText(tr("Delete Entry"));
+	EditAutoTypeAction->setEnabled(true);
     break;
  case MULTIPLE:
     EditPasswordToClipboardAction->setEnabled(false);
@@ -561,6 +570,7 @@ switch(EntrySelection){
     EditCloneEntryAction->setText(tr("Clone Entries"));
     EditDeleteEntryAction->setEnabled(true);
     EditDeleteEntryAction->setText(tr("Delete Entries"));
+	EditAutoTypeAction->setEnabled(false);
     break;
  default: Q_ASSERT(false);
 }
@@ -1003,3 +1013,8 @@ void KeepassMainWindow::OnItemCollaped(QTreeWidgetItem* item){
 ((GroupViewItem*)item)->pGroup->UI_ItemIsExpanded=false;
 }
 
+void KeepassMainWindow::OnEditAutoType(){
+Q_ASSERT(EntryView->selectedItems().size()==1);
+QString error;
+AutoType::perform(((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry,error);
+}

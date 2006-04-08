@@ -60,9 +60,24 @@ switch(mods){
 }
 
 
-void AutoType::perform(const QString& string){
-QString str=string;
-//replace all {..} string templates
+void AutoType::perform(CEntry* entry, QString& err){
+QString str;
+int c=entry->Additional.count("Auto-Type:");
+if(c>1){
+	err=tr("More than one 'Auto-Type:' key sequence found.\nAllowed is only one per entry.");
+	return;}
+if(c==1){
+	int start=entry->Additional.indexOf("Auto-Type:")+10;
+	int len;
+	if(entry->Additional.size()==10)return;
+	for(len=0;len<entry->Additional.size();len++){
+		if(entry->Additional.size()==(start+len))break;
+		if(entry->Additional.at(start+len)==QChar('\n'))break;}
+	if(!len)return;
+	str=entry->Additional.mid(start,len);
+}
+else
+	str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
 
 QList<Q_UINT16> Keys;
 for(int i=0;i<str.length();i++){

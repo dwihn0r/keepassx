@@ -44,6 +44,14 @@ General Public License (GPL) version 2.</source>
     </message>
 </context>
 <context>
+    <name>AutoType</name>
+    <message>
+        <source>More than one &apos;Auto-Type:&apos; key sequence found.
+Allowed is only one per entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CAboutDialog</name>
     <message>
         <source>KeePassX %1</source>
@@ -897,6 +905,10 @@ to save the changes?</source>
     </message>
     <message>
         <source>Unknown error in PwDatabase::openDatabase()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

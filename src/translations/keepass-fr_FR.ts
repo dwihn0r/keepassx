@@ -3,46 +3,46 @@
     <name></name>
     <message>
         <source>Could not open file (FileError=%1)</source>
-        <translation>Datei konnte nicht geöffnet werden. (FileError=%1)</translation>
+        <translation>Ne peut ouvrir le fichier (FileError=%1)</translation>
     </message>
 </context>
 <context>
     <name>AboutDlg</name>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>À propos </translation>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation>Dank An</translation>
+        <translation>Merci à</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <source>Translation</source>
-        <translation>Übersetzung</translation>
+        <translation>Traduction</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Copyright (C) 2005 - 2006 Tarek Saidi 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
-        <translation>Copyright (C) 2005 - 2006 Tarek Saidi 
-KeePassX steht unter der
-General Public License (GPL) Version 2.</translation>
+        <translation>Copyright (C) 2005 - 2006 Tarek Saidi
+KeePassX est distribué sous les terme de la
+Licence Publique Générale version 2  (GNU GPL v2) .</translation>
     </message>
     <message>
         <source>tarek.saidi@arcor.de</source>
-        <translation>tarek.saidi@arcor.de</translation>
+        <translation></translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/</source>
-        <translation>http://keepass.berlios.de/</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -61,28 +61,28 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation>Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
+        <translation>Le fichier &apos;%1&apos; n&apos;a pu être  trouvé.</translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation>Stellen Sie sicher, dass das Programm korrekt installiert wurde.</translation>
+        <translation>Être sûr que le programme soit correctement installé.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation>Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
+        <translation>Ne  peut ouvrir le fichier &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The following error occured:
 %1</source>
-        <translation>Folgender Fehler ist aufgetreten:
+        <translation>L&apos;erreur suivant est survenue:
 %1</translation>
     </message>
     <message>
@@ -92,34 +92,34 @@ Allowed is only one per entry.</source>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation>&lt;b&gt;Aktuelle Übersetzung: Deutsch&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;la courante traduction: Française&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation>&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Auteur:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>$TRANSALTION_AUTHOR</source>
-        <translation>Tarek Saidi</translation>
+        <translation>Djellel DIDA</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation>tarek.saidi@arcor.de</translation>
+        <translation>djellel@free.fr</translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/translation-howto.html</source>
-        <translation>Informationen wie Sie eine Übersetztung für KeePassX  erstellen können finden Sie unter:
+        <translation>L&apos;information sur la méthode de traduction pour KeePassX peut être trouvé à l&apos;adresse suivante:
 http://keepass.berlios.de/translation-howto.html</translation>
     </message>
     <message>
         <source>Matthias Miller</source>
-        <translation>Matthias Miller</translation>
+        <translation></translation>
     </message>
     <message>
         <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
-        <translation>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Unterstützung</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Eugen Gorschenin</source>
@@ -134,167 +134,166 @@ http://keepass.berlios.de/translation-howto.html</translation>
     <name>CDbSettingsDlg</name>
     <message>
         <source>AES(Rijndael):  256 Bit   (default)</source>
-        <translation>AES(Rijndael):  256 Bit   (Standard)</translation>
+        <translation>AES(Rijndael):  256 Bits   (défaut)</translation>
     </message>
     <message>
         <source>Twofish:  256 Bit</source>
-        <translation>Twofish:  256 Bit</translation>
+        <translation>Twofish: 256 Bits</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Warnung</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Please determine the number of encryption rounds.</source>
-        <translation>Bitte geben Sie die Zahl der Verschlüsselungsrunden an.</translation>
+        <translation>Définiser le nombre de passes.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>&apos;%1&apos; is not valid integer value.</source>
-        <translation>&apos;%1&apos; ist kein gültiger Ganzzahlwert.</translation>
+        <translation>&apos;%1&apos; n&apos;est pas un nombre entier valide.</translation>
     </message>
     <message>
         <source>The number of encryption rounds have to be greater than 0.</source>
-        <translation>Die Anzahl an Verschlüsselungsrunden muss mindestens Eins betragen.</translation>
+        <translation>Le nombre de passes doit être supérieur à 0.</translation>
     </message>
 </context>
 <context>
     <name>CEditEntryDlg</name>
     <message>
         <source>Warning</source>
-        <translation>Warnung</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Password and password repetition are not equal.
 Please check your input.</source>
-        <translation>Passwort und Passwortwiederholung stimmen nicht überein.
-Bitte prüfen Sie Ihre Eingabe.</translation>
+        <translation>Le mot de passe et sa confirmation ne sont pas identiques !
+S&apos;il vous plait, vérifier votre saisie.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Save Attachment...</source>
-        <translation>Anhang Speichern...</translation>
+        <translation>Enregistrer l&apos;attachement...</translation>
     </message>
     <message>
         <source>Overwrite?</source>
-        <translation>Überschreiben?</translation>
+        <translation>Écraser ?</translation>
     </message>
     <message>
         <source>A file with this name already exists.
 Do you want to replace it?</source>
-        <translation>Eine Datei mit diesem Namen existiert bereits.
-Möchten Sie diese ersetzen.</translation>
+        <translation>Un fichier ayant le même nom existe déjà.
+Voulez-vous le remplacer ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nein</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Could not remove old file.</source>
-        <translation>Alte Datei konnte nicht entfernt werden.</translation>
+        <translation>Ne peut enlever l&apos;ancien fichier.</translation>
     </message>
     <message>
         <source>Could not create new file.</source>
-        <translation>Neue Datei konnte nicht angelegt werden.</translation>
+        <translation>Ne peut créer un nouveau fichier.</translation>
     </message>
     <message>
         <source>Error while writing the file.</source>
-        <translation>Beim Schreiben der Datei ist ein Fehler aufgetreten.</translation>
+        <translation>Erreur lors de l&apos;écriture du fichier.</translation>
     </message>
     <message>
         <source>Delete Attachment?</source>
-        <translation>Anhang löschen?</translation>
+        <translation>Supprimer l&apos;attachement ?</translation>
     </message>
     <message>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
-        <translation>Sie sind dabei den Dateianhang dieses Eintrages zu löschen.
-Sind Sie sicher?</translation>
+        <translation>Vous êtes sur le point de supprimer l&apos;attachement de cette entrée.
+En êtes-vous sûr ?</translation>
     </message>
     <message>
         <source>No, Cancel</source>
-        <translation>Nein, Abbrechen</translation>
+        <translation>Non, annuler</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Eintrag bearbeiten</translation>
+        <translation>Modifier l&apos;Entrée</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Datei konnte nicht geöffnet werden.</translation>
+        <translation>Ne peut ouvrir le fichier.</translation>
     </message>
 </context>
 <context>
     <name>CGenPwDialog</name>
     <message>
         <source>Notice</source>
-        <translation>Hinweis</translation>
+        <translation>Notification</translation>
     </message>
     <message>
         <source>You need to enter at least one character</source>
-        <translation>Sie müssen mindestens ein Zeichen angeben.</translation>
+        <translation>Vous devez au moins entrer un caractère</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
-        <translation>&apos;/dev/random&apos; oder &apos;/dev/urandom&apos; konnte nicht geöffnet werden.</translation>
+        <translation>Ne peut ouvrir &apos;/dev/random&apos; ou &apos;/dev/urandom&apos;.</translation>
     </message>
 </context>
 <context>
     <name>CPasswordDialog</name>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Please enter a Password.</source>
-        <translation>Bitte geben Sie ein Passwort ein.</translation>
+        <translation>Entrer un mot de passe.</translation>
     </message>
     <message>
         <source>Please choose a key file.</source>
-        <translation>Bitte wählen Sie eine Schlüsseldatei.</translation>
+        <translation>Sélectionner un trousseau de clés.</translation>
     </message>
     <message>
         <source>Please enter a Password or select a key file.</source>
-        <translation>Bitte geben Sie ein Passwort ein oder wählen
-Sie eine Schlüsseldatei.</translation>
+        <translation>Entrer un mot de passe ou sélectionner un trousseau de clés.</translation>
     </message>
     <message>
         <source>Database Key</source>
-        <translation>Datenbankschlüssel</translation>
+        <translation>Base de données des clés</translation>
     </message>
     <message>
         <source>Select a Key File</source>
-        <translation>Schlüsseldatei wählen</translation>
+        <translation>Selectionner  un trousseau de clés</translation>
     </message>
     <message>
         <source>*.key</source>
@@ -302,101 +301,100 @@ Sie eine Schlüsseldatei.</translation>
     </message>
     <message>
         <source>Unexpected Error: File does not exist.</source>
-        <translation>Unerwarteter Fehler: Datei existiert nicht.</translation>
+        <translation>Erreur inattendue: Le fichier n&apos;existe pas.</translation>
     </message>
     <message>
         <source>The selected key file or directory does not exist.</source>
-        <translation>Die gewählte Schlüsseldatei bzw. das gewählte Verzeichnis existiert nicht.</translation>
+        <translation>Le trousseau de clés ou le répertoire n&apos;existe pas.</translation>
     </message>
     <message>
         <source>The given directory does not contain any key files.</source>
-        <translation>Das angegebene Verzeichnis enthält keine Schlüsseldatei.</translation>
+        <translation>Le répertoire désigné ne contient aucun trousseau de clés.</translation>
     </message>
     <message>
         <source>The given directory contains more then one key file.
 Please specify the key file directly.</source>
-        <translation>Das angegebene Verzeichnis enthält mehrere Schlüsseldateien.
-Bitte geben Sie die gewünschte Schlüsseldatei direkt an.</translation>
+        <translation>Le répertoire désigné contient plus d&apos;un trousseau de clés.
+Pourriez-vous sélectionner le trousseau de clés désiré.</translation>
     </message>
     <message>
         <source>The key file found in the given directory is not readable.
 Please check your permissions.</source>
-        <translation>Die im angegebenen Verzeichnis gefundene Schlüsseldatei ist nicht lesbar.
-Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
+        <translation>Le trousseau de clés choisi dans le répertoire n&apos;est pas lisible.
+S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Key file could not be found.</source>
-        <translation>Schlüsseldatei konnte nicht gefunden werden.</translation>
+        <translation>Le trousseau de clés n&apos;a pu être trouvé.</translation>
     </message>
     <message>
         <source>Key file is not readable.
 Please check your permissions.</source>
-        <translation>Die angegebene Schlüsseldatei ist nicht lesbar.
-Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
+        <translation>Le trousseau de clés n&apos;est pas lisible.
+S&apos;il vous plait vérifier vos permissions..</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Warnung</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Password an password repetition are not equal.
 Please check your input.</source>
-        <translation>Passwort und Passwortwiederholung stimmen nicht überein.
-Bitte prüfen Sie Ihre Eingabe.</translation>
+        <translation>Le mot de passe et sa confirmation ne sont pas identiques !
+S&apos;il vous plait, vérifier votre saisie.</translation>
     </message>
     <message>
         <source>Please enter a password or select a key file.</source>
-        <translation>Bitte geben Sie ein Passwort ein oder wählen
-Sie eine Schlüsseldatei.</translation>
+        <translation>Entrer un mot de passe ou sélectionner un trousseau de clés.</translation>
     </message>
     <message>
         <source>A file with the name &apos;pwsafe.key&apos; already exisits in the given directory.
 Do you want to replace it?</source>
-        <translation>Im angegebenen Verzeichnis existiert bereits eine Datei mit dem Namen &apos;pwsafe.key&apos;.
-Möchten Sie diese ersetzen? </translation>
+        <translation>Un fichier avec le nom &apos;pwsafe.key&apos; existe déjà dans le répertoire selectionné.
+Voulez-vous le remplacer ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nein</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>The exisiting file is not writable.</source>
-        <translation>Die exisitierende Datei ist nicht überschreibbar.</translation>
+        <translation>L&apos;existant fichier est protégé en écriture .</translation>
     </message>
     <message>
         <source>A file with the this name already exisits.
 Do you want to replace it?</source>
-        <translation>Eine Datei mit diesem Namen existiert bereits.
-Möchten Sie diese ersetzen.</translation>
+        <translation>Un fichier avec un même nom existe déjà.
+Désirez-vous le remplacer ?</translation>
     </message>
     <message>
         <source>The selected key file or directory is not readable.
 Please check your permissions.</source>
-        <translation>Das angegebene Verzeichnis oder die angegebene Schlüsseldatei ist nicht lesbar.
-Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
+        <translation>Le trousseau de clés choisi n&apos;est pas lisible.
+S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
 </context>
 <context>
     <name>CSearchDlg</name>
     <message>
         <source>Notice</source>
-        <translation>Hinweis</translation>
+        <translation>Notification</translation>
     </message>
     <message>
         <source>Please enter a search string.</source>
-        <translation>Bitte geben Sie einen Suchbegriff ein.</translation>
+        <translation>Saisissez une recherche.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>Chercher</translation>
     </message>
 </context>
 <context>
@@ -420,7 +418,7 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation type="unfinished">Erreur</translation>
     </message>
     <message>
         <source>An error occured while loading the icon(s):
@@ -432,30 +430,30 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     <name>CSettingsDlg</name>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Select a directory...</source>
-        <translation>Verzeichnis wählen...</translation>
+        <translation>Sélectionner un répertoire....</translation>
     </message>
 </context>
 <context>
     <name>EditEntryDialog</name>
     <message>
         <source>Edit Entry</source>
-        <translation>Eintrag bearbeiten</translation>
+        <translation>Modifier l&apos;entrée</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Benutzername:</translation>
+        <translation>Utilisateur:</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Passwort Wdhlg.:</translation>
+        <translation>Confirmation:</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titel:</translation>
+        <translation>Títre:</translation>
     </message>
     <message>
         <source>URL:</source>
@@ -463,31 +461,31 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Passwort:</translation>
+        <translation>Mot de passe:</translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Qualität:</translation>
+        <translation>Qualité</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Kommentar:</translation>
+        <translation>Commentaire:</translation>
     </message>
     <message>
         <source>Expires:</source>
-        <translation>Läuft ab:</translation>
+        <translation>Expire le:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation>Gruppe:</translation>
+        <translation>Groupe:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+A</translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>%1</source>
@@ -495,11 +493,11 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Symbol:</translation>
+        <translation>Icône:</translation>
     </message>
     <message>
         <source>% Bit</source>
-        <translation>% Bit</translation>
+        <translation>% Bits</translation>
     </message>
     <message>
         <source>Ge&amp;n.</source>
@@ -511,180 +509,180 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>O&amp;K</translation>
+        <translation>&amp;Accepter</translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation>Alt+K</translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Never</source>
-        <translation>Nie</translation>
+        <translation>Jamais</translation>
     </message>
     <message>
         <source>Attachment:</source>
-        <translation>Anhang:</translation>
+        <translation>Attachement:</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>EditGroupDialog</name>
     <message>
         <source>Group Properties</source>
-        <translation>Gruppen-Eigenschaften</translation>
+        <translation>Propriétés du groupe</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titel:</translation>
+        <translation>Títre:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Symbol:</translation>
+        <translation>Icône:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Abbre&amp;chen</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+C</translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>O&amp;K</translation>
+        <translation>&amp;Accepter</translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation></translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>GenPwDlg</name>
     <message>
         <source>Alt+U</source>
-        <translation></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>Alt+N</source>
-        <translation></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation></translation>
+        <translation>Alt+M</translation>
     </message>
     <message>
         <source>Alt+L</source>
-        <translation></translation>
+        <translation>Alt+L</translation>
     </message>
     <message>
         <source>Password Generator</source>
-        <translation>Passwortgenerator</translation>
+        <translation>Générateur de mots de passe</translation>
     </message>
     <message>
         <source>Accep&amp;t</source>
-        <translation>Annehmen</translation>
+        <translation>Accep&amp;ter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Abbre&amp;chen</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Generieren</translation>
+        <translation>Générer</translation>
     </message>
     <message>
         <source>New Password:</source>
-        <translation>Neues Passwort:</translation>
+        <translation>Nouveau mot de passe:</translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Qualität:</translation>
+        <translation>Qualité:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>&amp;Upper Letters</source>
-        <translation>Großbuchstaben:</translation>
+        <translation>Majusc&amp;ules</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
-        <translation>Kleinbuchstaben:</translation>
+        <translation>Minuscu&amp;les</translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
-        <translation>Zahlen</translation>
+        <translation>&amp;Numéros</translation>
     </message>
     <message>
         <source>&amp;Special Characters</source>
-        <translation>Sonderzeichen</translation>
+        <translation>Caractères &amp;Spéciaux</translation>
     </message>
     <message>
         <source>Minus</source>
-        <translation>Minus</translation>
+        <translation>Moins</translation>
     </message>
     <message>
         <source>U&amp;nderline</source>
-        <translation>Unterstrich</translation>
+        <translation>Soulig&amp;né</translation>
     </message>
     <message>
         <source>h&amp;igher ANSI-Characters</source>
-        <translation>höhere ANSI-Zeichen</translation>
+        <translation>ANSI &amp;hauts</translation>
     </message>
     <message>
         <source>Alt+H</source>
-        <translation></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Nur folgende Zeichen benutzen:</translation>
+        <translation>Utiliser s&amp;eulement les caractères suivant:</translation>
     </message>
     <message>
         <source>Alt+O</source>
-        <translation></translation>
+        <translation>Alt+E</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Länge:</translation>
+        <translation>Longueur:</translation>
     </message>
     <message>
         <source>Use &quot;/dev/rando&amp;m&quot;</source>
-        <translation>&apos;/dev/random&apos; benutzen</translation>
+        <translation>Utiliser &quot;/dev/rando&amp;m&quot;</translation>
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Folgende Zeichengruppen nutzen:</translation>
+        <translation>Utiliser le &amp;groupe de caractères suivant:</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation></translation>
+        <translation>Alt+G</translation>
     </message>
     <message>
         <source>White &amp;Spaces</source>
-        <translation>Leerzeichen</translation>
+        <translation>E&amp;space</translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation></translation>
+        <translation>Alt+S</translation>
     </message>
 </context>
 <context>
     <name>KeepassEntryView</name>
     <message>
         <source>Title</source>
-        <translation>Titel</translation>
+        <translation>Títre</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Benutzername</translation>
+        <translation>Utilisateur</translation>
     </message>
     <message>
         <source>URL</source>
@@ -692,225 +690,225 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>Mot de passe</translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaires</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Expire le</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Erstellung</translation>
+        <translation>Création</translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Letzte Änderung</translation>
+        <translation>Dernier changement</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Letzter Zugriff</translation>
+        <translation>Dernier accès</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Anhang</translation>
+        <translation>Attachement</translation>
     </message>
     <message>
         <source>%1 items</source>
-        <translation>%1 Elemente</translation>
+        <translation>%1 élements</translation>
     </message>
 </context>
 <context>
     <name>KeepassGroupView</name>
     <message>
         <source>Search Results</source>
-        <translation>Suchergebnisse</translation>
+        <translation>Resultats de la recherche</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Gruppen</translation>
+        <translation>Groupes</translation>
     </message>
 </context>
 <context>
     <name>KeepassMainWindow</name>
     <message>
         <source>Ctrl+N</source>
-        <translation></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <source>Ctrl+G</source>
-        <translation></translation>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <source>Ctrl+B</source>
-        <translation></translation>
+        <translation>Ctrl+B</translation>
     </message>
     <message>
         <source>Ctrl+U</source>
-        <translation></translation>
+        <translation>Ctrl+U</translation>
     </message>
     <message>
         <source>Ctrl+Y</source>
-        <translation></translation>
+        <translation>Ctrl+Y</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <source>Ctrl+D</source>
-        <translation></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <source>Ctrl+K</source>
-        <translation></translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <source>Ctrl+W</source>
-        <translation></translation>
+        <translation>Ctrl+W</translation>
     </message>
     <message>
         <source>Shift+Ctrl+S</source>
-        <translation></translation>
+        <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
         <source>Shift+Ctrl+F</source>
-        <translation></translation>
+        <translation>Shift+Ctrl+F</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>The following error occured while opening the database:
 %1</source>
-        <translation>Beim Öffnen der Datenbank ist folgender Fehler aufgetreten:
+        <translation>l&apos;erreur suivante est survenue à l&apos;ouverture de la base de données:
 %1</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Save modified file?</source>
-        <translation>Geändete Datei speichern?</translation>
+        <translation>Enregistrer le fichier modifié ?</translation>
     </message>
     <message>
         <source>The current file was modified. Do you want
 to save the changes?</source>
-        <translation>Die aktuelle Datei wurde verändert. Möchten Sie
-die Änderungen speichern?</translation>
+        <translation>Le courant fichier a été modifié.
+Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nein</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>KeePassX - %1</source>
-        <translation></translation>
+        <translation>KeePassX - %1</translation>
     </message>
     <message>
         <source>&lt;B&gt;Group: &lt;/B&gt;%1  &lt;B&gt;Title: &lt;/B&gt;%2  &lt;B&gt;Username: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Password: &lt;/B&gt;%5  &lt;B&gt;Creation: &lt;/B&gt;%6  &lt;B&gt;Last Change: &lt;/B&gt;%7  &lt;B&gt;LastAccess: &lt;/B&gt;%8  &lt;B&gt;Expires: &lt;/B&gt;%9</source>
-        <translation>&lt;B&gt;Gruppe: &lt;/B&gt;%1  &lt;B&gt;Titel: &lt;/B&gt;%2  &lt;B&gt;Benutzername: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Passwort: &lt;/B&gt;%5  &lt;B&gt;Erstellung: &lt;/B&gt;%6  &lt;B&gt;Letzte Änderung: &lt;/B&gt;%7  &lt;B&gt;Letzter Zugriff: &lt;/B&gt;%8  &lt;B&gt;Läuft ab: &lt;/B&gt;%9</translation>
+        <translation>&lt;B&gt;Groupe: &lt;/B&gt;%1  &lt;B&gt;Titre: &lt;/B&gt;%2   &lt;B&gt;Utilisateur: &lt;/B&gt;%3   &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;   &lt;B&gt;Mot de passe: &lt;/B&gt;%5   &lt;B&gt;Création: &lt;/B&gt;%6  &lt;B&gt;Dernier changement: &lt;/B&gt;%7  &lt;B&gt;Dernier accès &lt;/B&gt;%8  &lt;B&gt;Expire le: &lt;/B&gt;%9</translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Eintrag duplizieren</translation>
+        <translation>Dupliquer l&apos;entrée</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Eintrag löschen</translation>
+        <translation>Supprimer l&apos;entrée</translation>
     </message>
     <message>
         <source>Clone Entries</source>
-        <translation>Einträge duplizieren</translation>
+        <translation>Dupliquer les entrées</translation>
     </message>
     <message>
         <source>Delete Entries</source>
-        <translation>Einträge löschen</translation>
+        <translation>Supprimer les entrées</translation>
     </message>
     <message>
         <source>File could not be saved.
 %1</source>
-        <translation>Datei konnte nicht gespeichert werden.
+        <translation>Le fichier ne peut être enregistré.
 %1</translation>
     </message>
     <message>
         <source>Save Database As...</source>
-        <translation>Datenbank speichern unter...</translation>
+        <translation>Enregistrer la BD sous...</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Bereit</translation>
+        <translation>Prêt</translation>
     </message>
     <message>
         <source>[new]</source>
-        <translation>[neu]</translation>
+        <translation>[nouveau]</translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Datenbank öffnen...</translation>
+        <translation>Ouvrir la BD...</translation>
     </message>
     <message>
         <source>Loading Database...</source>
-        <translation>Lade Datenbank...</translation>
+        <translation>Chargement de la BD...</translation>
     </message>
     <message>
         <source>Loading Failed</source>
-        <translation>Laden fehlgeschlagen</translation>
+        <translation>Le chargement a échoué</translation>
     </message>
     <message>
         <source>Could not create key file. The following error occured:
 %1</source>
-        <translation>Datei konnte nicht angelegt werden. Der folgende Fehler trat auf:
+        <translation>Ne peut créer le trousseau de clés. L&apos;erreur suivant est survenue:
 %1</translation>
     </message>
     <message>
         <source>Export To...</source>
-        <translation>Exportieren nach...</translation>
+        <translation>Exporter vers...</translation>
     </message>
     <message>
         <source>KeePassX [new]</source>
-        <translation>KeePassX [neu]</translation>
+        <translation>KeePassX [nouveau]</translation>
     </message>
     <message>
         <source>Unknown error in Import_PwManager::importFile()()</source>
-        <translation>Unbekannter Fehler in Import_PwManager::importFile()()</translation>
+        <translation>Erreur inconnue dans Import_PwManager::importFile()()</translation>
     </message>
     <message>
         <source>Unknown error in Import_KWalletXml::importFile()</source>
-        <translation>Unbekannter Fehler in Import_KWalletXml::importFile()</translation>
+        <translation>Erreur inconnue dans Import_KWalletXml::importFile()</translation>
     </message>
     <message>
         <source>Unknown error in PwDatabase::openDatabase()</source>
-        <translation>Unbekannter Fehler in PwDatabase::openDatabase()</translation>
+        <translation>Erreur inconnue dans PwDatabase::openDatabase()</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
@@ -925,19 +923,19 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Datei</translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>Import from...</source>
-        <translation>Importieren aus...</translation>
+        <translation>Importer de...</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ansicht</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation>Spalten</translation>
+        <translation>Colonnes</translation>
     </message>
     <message>
         <source>Extras</source>
@@ -945,123 +943,123 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>New Database...</source>
-        <translation>Neue Datenbank...</translation>
+        <translation>Nouvelle BD...</translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Datenbank öffnen...</translation>
+        <translation>Ouvrir une BD...</translation>
     </message>
     <message>
         <source>Close Database</source>
-        <translation>Datenbank schließen</translation>
+        <translation>Fermer la BD</translation>
     </message>
     <message>
         <source>Save Database</source>
-        <translation>Datenbank speichern</translation>
+        <translation>Enregistrer la BD</translation>
     </message>
     <message>
         <source>Save Database As...</source>
-        <translation>Datenbank speichern unter...</translation>
+        <translation>Enregistrer la BD sous...</translation>
     </message>
     <message>
         <source>Database Settings...</source>
-        <translation>Datenbankeinstellungen...</translation>
+        <translation>Paramétrage de la BD...</translation>
     </message>
     <message>
         <source>Change Master Key...</source>
-        <translation>Hauptschlüssel ändern...</translation>
+        <translation>Changer la clé maitresse...</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Beenden</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <source>PwManager File (*.pwm)</source>
-        <translation>PwManager-Datei (*.pwm)</translation>
+        <translation>Fichier PwManager (*.pwm)</translation>
     </message>
     <message>
         <source>KWallet XML-File (*.xml)</source>
-        <translation>KWallet XML-Datei (*.xml)</translation>
+        <translation>Fichier XML, KWallet (*.xml)</translation>
     </message>
     <message>
         <source>Add New Group...</source>
-        <translation>Neu Gruppe hinzufügen...</translation>
+        <translation>Ajouter un nouveau groupe...</translation>
     </message>
     <message>
         <source>Edit Group...</source>
-        <translation>Gruppe bearbeiten...</translation>
+        <translation>Modifier le groupe...</translation>
     </message>
     <message>
         <source>Delete Group</source>
-        <translation>Gruppe löschen</translation>
+        <translation>Supprimer le groupe</translation>
     </message>
     <message>
         <source>Copy Password to Clipboard</source>
-        <translation>Passwort in Zwischenablage kopieren</translation>
+        <translation>Copier le mot de passe dans le presse-papier</translation>
     </message>
     <message>
         <source>Copy Username to Clipboard</source>
-        <translation>Benutzername in Zwischenablage kopieren</translation>
+        <translation>Copier l&apos;utilisateur dans le presse-papier</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>URL öffnen</translation>
+        <translation>Ouvrir l&apos;URL</translation>
     </message>
     <message>
         <source>Save Attachment As...</source>
-        <translation>Anhang speichern unter...</translation>
+        <translation>Enregistrer l&apos;attachement sous...</translation>
     </message>
     <message>
         <source>Add New Entry...</source>
-        <translation>Neuen Eintrag hinzufügen...</translation>
+        <translation>Ajouter une nouvelle entrée...</translation>
     </message>
     <message>
         <source>View/Edit Entry...</source>
-        <translation>Eintrag anzeigen/bearbeiten...</translation>
+        <translation>Modifier/afficher l&apos;entrée...</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Eintrag löschen</translation>
+        <translation>Supprimer l&apos;entrée</translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Eintrag duplizieren</translation>
+        <translation>Dupliquer l&apos;entrée</translation>
     </message>
     <message>
         <source>Search In Database...</source>
-        <translation>In Datenbank suchen...</translation>
+        <translation>Recherche dans la BD...</translation>
     </message>
     <message>
         <source>Search in this group...</source>
-        <translation>In dieser Gruppe suchen...</translation>
+        <translation>Rechercher dans ce groupe...</translation>
     </message>
     <message>
         <source>Show Toolbar</source>
-        <translation>Werkzeugleiste anzeigen</translation>
+        <translation>Afficher la barre outils</translation>
     </message>
     <message>
         <source>Show Entry Details</source>
-        <translation>Eintragsdetails anzeigen</translation>
+        <translation>Afficher les détails de l&apos;entrée</translation>
     </message>
     <message>
         <source>Hide Usernames</source>
-        <translation>Benutzernamen verbergen</translation>
+        <translation>Cacher l&apos;utilisateur</translation>
     </message>
     <message>
         <source>Hide Passwords</source>
-        <translation>Passwörter verbergen</translation>
+        <translation>Cacher les mots de passe</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Titel</translation>
+        <translation>Títre</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Benutzername</translation>
+        <translation>Utilisateur</translation>
     </message>
     <message>
         <source>URL</source>
@@ -1069,63 +1067,63 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>Mot de passe</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaire</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Läuft ab</translation>
+        <translation>Expire le</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Erstellung</translation>
+        <translation>Création</translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Letzte Änderung</translation>
+        <translation>Dernier changement</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Letzter Zugriff</translation>
+        <translation>Dernier accès</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Anhang</translation>
+        <translation>Attachement</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation>Einstellungen...</translation>
+        <translation>Préférences...</translation>
     </message>
     <message>
         <source>About...</source>
-        <translation>Über...</translation>
+        <translation>À propos...</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Édition</translation>
     </message>
     <message>
         <source>Show Statusbar</source>
-        <translation>Statusleiste anzeigen</translation>
+        <translation>Afficher la barre  de statuts</translation>
     </message>
     <message>
         <source>Export to...</source>
-        <translation>Exportieren nach...</translation>
+        <translation>Exporter vers...</translation>
     </message>
     <message>
         <source>KeePassX Handbook...</source>
-        <translation>KeePassX Handbuch...</translation>
+        <translation>Le manuel de KeePassX...</translation>
     </message>
     <message>
         <source>Plain Text (*.txt)</source>
-        <translation>Klartext (*.txt)</translation>
+        <translation>Plein texte (*.txt)</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Verbergen</translation>
+        <translation>Cacher</translation>
     </message>
     <message>
         <source>Perform AutoType</source>
@@ -1140,7 +1138,7 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>...</source>
@@ -1148,303 +1146,303 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Enter a Password and/or choose a key file.</source>
-        <translation>Geben Sie ein Passwort ein oder wählen Sie eine Schlüsseldatei.</translation>
+        <translation>Entrer un mot de passe et/ou sélectionner un trousseau de clés.</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Schlüssel</translation>
+        <translation>Clé Maitresse</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Passwort:</translation>
+        <translation>Mot de passe:</translation>
     </message>
     <message>
         <source>Key file or directory:</source>
-        <translation>Schlüsseldatei oder Datenträger:</translation>
+        <translation>Trousseau de clés ou répertoire:</translation>
     </message>
     <message>
         <source>&amp;Browse...</source>
-        <translation>Durchsuchen...</translation>
+        <translation>&amp;Parcourir...</translation>
     </message>
     <message>
         <source>Alt+B</source>
-        <translation></translation>
+        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Use Password AND Key File</source>
-        <translation>Passwort UND Schlüsseldatei verwenden</translation>
+        <translation>Utiliser  un mot de passe ET un trousseau de clés</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Beenden</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Passwort Wdhlg.:</translation>
+        <translation>Confirmation:</translation>
     </message>
 </context>
 <context>
     <name>PwDatabase</name>
     <message>
         <source>Unknown Error</source>
-        <translation>Unbekannter Fehler</translation>
+        <translation>Erreur inconnue</translation>
     </message>
     <message>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
-        <translation>Unerwartete Dateigrößen (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
+        <translation>Taille de fichier inattendue (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
         <source>Wrong Signature</source>
-        <translation>Falsche Signatur</translation>
+        <translation>Mauvaise signature</translation>
     </message>
     <message>
         <source>AES-Init Failed</source>
-        <translation>AES Initialisierung fehlgeschlagen</translation>
+        <translation>L&apos;initialisation de AES a échoué</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [G1]</source>
-        <translation></translation>
+        <translation>Erreur inattendue: Le décalage est hors limites.[G1]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [G2]</source>
-        <translation></translation>
+        <translation>Erreur inattendue: Le décalage est hors limites.[G2]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E1]</source>
-        <translation></translation>
+        <translation>Erreur inattendue: Le décalage est hors limites.[E1]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E2]</source>
-        <translation></translation>
+        <translation>Erreur inattendue: Le décalage est hors limites.[E2]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E3]</source>
-        <translation></translation>
+        <translation>Erreur inattendue: Le décalage est hors limites.[E3]</translation>
     </message>
     <message>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
-        <translation>Hash-Test fehlgeschlagen.
-Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
+        <translation>Le test de hachage a échoué.
+La clé est mauvaise ou le fichier est endommagé.</translation>
     </message>
     <message>
         <source>Could not open key file.</source>
-        <translation>Schlüsseldatei konnte nicht geöffnet werden.</translation>
+        <translation>Ne peut ouvrir le trousseau de clés.</translation>
     </message>
     <message>
         <source>Key file could not be written.</source>
-        <translation>Schlüsseldatei konnte nicht geschrieben werden.</translation>
+        <translation>Le trousseau de clés n&apos;a pas pu être écrit.</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Datei konnte nicht geöffnet werden.</translation>
-    </message>
-    <message>
-        <source>Could not open file for writing.</source>
-        <translation>Datei konnte nicht zum Schreiben geöffnent werden.</translation>
+        <translation>Ne peut ouvrir le fichier.</translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
-        <translation>Nicht unterstützte Dateiversion.</translation>
+        <translation>Version de fichier non supportée.</translation>
     </message>
     <message>
         <source>Unknown Encryption Algorithm.</source>
-        <translation>Unbekannter bzw. nicht unterstüzter Verschlüsselungsalgorithmus.</translation>
+        <translation>Algorithme d&apos;encryption inconnu.</translation>
     </message>
     <message>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
-        <translation>Entschlüsselung fehlgeschlagen.
-Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
+        <translation>Le décryptage a échoué.
+La clé est mauvaise ou le fichier est endommagé.</translation>
+    </message>
+    <message>
+        <source>Could not open file for writing.</source>
+        <translation>Ne peut ouvrir le fichier pour écriture.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Warning</source>
-        <translation>Warnung</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Could not save configuration file.
 Make sure you have write access to &apos;~/.keepass&apos;.</source>
-        <translation>Konfigurationsdatei konnte nicht gespeichert werden.
-Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</translation>
+        <translation>Ne peut enregistrer le fichier de configuration.
+Étes-vous sûr de posséder le droit en écriture sur &apos;~/.keepass&apos;.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation>Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
+        <translation>Le fichier &apos;%1&apos; n&apos;a pu être trouvé.</translation>
     </message>
     <message>
         <source>File not found.</source>
-        <translation>Datei nicht gefunden.</translation>
+        <translation>Fichier non trouvé.</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Datei konnte nicht geöffnet werden.</translation>
+        <translation>Ne peut ouvrir le fichier.</translation>
     </message>
     <message>
         <source>File is no valid PwManager file.</source>
-        <translation>Datei ist keine gültige PwManager-Datei.</translation>
+        <translation>Le fichier n&apos;est pas un fichier PwManager valide.</translation>
     </message>
     <message>
         <source>Unsupported file version.</source>
-        <translation>Nicht unterstützte Dateiversion.</translation>
+        <translation>Version de fichier non supportée.</translation>
     </message>
     <message>
         <source>Unsupported hash algorithm.</source>
-        <translation>Nicht unterstützter Hash-Algorithmus.</translation>
+        <translation>L&apos;algorithme de hachage non supporté. </translation>
     </message>
     <message>
         <source>Unsupported encryption algorithm.</source>
-        <translation>Unbekannter bzw. nicht unterstüzter Verschlüsselungsalgorithmus.</translation>
+        <translation>Algorithme d&apos;encryption non supporté.</translation>
     </message>
     <message>
         <source>Compressed files are not supported yet.</source>
-        <translation>Komprimierte Dateien werden noch nicht unterstützt.</translation>
+        <translation>Fichers de compression non supportés encore.</translation>
     </message>
     <message>
         <source>Wrong password.</source>
-        <translation>Falsches Passwort.</translation>
+        <translation>Mauvais mot de passe.</translation>
     </message>
     <message>
         <source>File is damaged (hash test failed).</source>
-        <translation>Datei ist beschädigt (Hash-Test fehlgeschlagen).</translation>
+        <translation>Fichier endommagé (test de hachage a échoué).</translation>
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
-        <translation>Ungültige XML-Daten (siehe stdout für Fehlerbeschreibung).</translation>
+        <translation>Donnée XML invalide (voir &apos;stdout pour plus de détails).</translation>
     </message>
     <message>
         <source>File is empty.</source>
-        <translation>Datei ist leer.</translation>
+        <translation>Fichier vide.</translation>
     </message>
     <message>
         <source>Invalid XML file (see stdout for details).</source>
-        <translation>Ungültige XML-Daten (siehe stdout für Fehlerbeschreibung).</translation>
+        <translation>Fichier XML invalide (voir &apos;stdout&apos; pour plus de détails).</translation>
     </message>
     <message>
         <source>Invalid XML file.</source>
-        <translation>Ungültige XML-Datei.</translation>
+        <translation>Fichier XML invalide.</translation>
     </message>
     <message>
         <source>Document does not contain data.</source>
-        <translation>Dokument enthält keine Daten.</translation>
+        <translation>Le document  ne contient pas de donnée.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Warning:</source>
-        <translation>Warnung:</translation>
+        <translation>Avertissement:</translation>
     </message>
     <message>
         <source>Invalid RGB color value.
 </source>
-        <translation>Ungültiger RGB-Farbwert.</translation>
+        <translation>Valeur de la couleur RGB  invalide.</translation>
     </message>
 </context>
 <context>
     <name>Search_Dlg</name>
     <message>
         <source>Alt+T</source>
-        <translation></translation>
+        <translation>Alt+T</translation>
     </message>
     <message>
         <source>Alt+U</source>
-        <translation></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>A&amp;nhang</source>
-        <translation></translation>
+        <translation>&amp;Annexe</translation>
     </message>
     <message>
         <source>Alt+N</source>
-        <translation></translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation></translation>
+        <translation>Alt+P</translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation></translation>
+        <translation>Alt+M</translation>
     </message>
     <message>
         <source>Search...</source>
-        <translation>Suche...</translation>
+        <translation>Chercher...</translation>
     </message>
     <message>
         <source>Search For:</source>
-        <translation>Suche nach:</translation>
+        <translation>Chercher:</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation>regulärer Ausdruck</translation>
+        <translation>E&amp;xpression Régulière</translation>
     </message>
     <message>
         <source>Alt+X</source>
-        <translation></translation>
+        <translation>Alt+X</translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation>Groß- und Kleinschreibung beachten</translation>
+        <translation>Respecter la &amp;casse</translation>
     </message>
     <message>
         <source>Include:</source>
-        <translation>Einbeziehen:</translation>
+        <translation>Inclure:</translation>
     </message>
     <message>
         <source>&amp;Titles</source>
-        <translation>Titel</translation>
+        <translation>&amp;Títres</translation>
     </message>
     <message>
         <source>&amp;Usernames</source>
-        <translation>Benutzernamen</translation>
+        <translation>&amp;Utilisateurs</translation>
     </message>
     <message>
         <source>C&amp;omments</source>
-        <translation>Kommentare</translation>
+        <translation>C&amp;ommentaires</translation>
     </message>
     <message>
         <source>Alt+O</source>
-        <translation></translation>
+        <translation>Alt+O</translation>
     </message>
     <message>
         <source>U&amp;RLs</source>
-        <translation>URLs</translation>
+        <translation>U&amp;RLs</translation>
     </message>
     <message>
         <source>Alt+R</source>
-        <translation></translation>
+        <translation>Alt+R</translation>
     </message>
     <message>
         <source>Pass&amp;words</source>
-        <translation>Passwörter</translation>
+        <translation>Mot de &amp;passe</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>Chercher</translation>
     </message>
     <message>
         <source>Clo&amp;se</source>
-        <translation>Schließen</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation></translation>
+        <translation>Alt+Q</translation>
     </message>
     <message>
         <source>Include Subgroups (recursive)</source>
-        <translation>Untergruppen einbeziehen (rekursiv)</translation>
+        <translation>Inclure les sous-groupes (récursive)</translation>
     </message>
 </context>
 <context>
@@ -1463,133 +1461,133 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation type="unfinished">Annuler</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
     <message encoding="UTF-8">
         <source>Alt+Ö</source>
-        <translation></translation>
+        <translation>Alt+R</translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>O&amp;K</translation>
+        <translation>&amp;Accepter</translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation></translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Clear clipboard after:</source>
-        <translation>Zwischenablage löschen nach:</translation>
+        <translation>Effacer le presse-papier après:</translation>
     </message>
     <message>
         <source>Seconds</source>
-        <translation>Sekunden</translation>
+        <translation>Secondes</translation>
     </message>
     <message>
         <source>Sh&amp;ow passwords in plain text by default</source>
-        <translation>Passwort standardmäßig im Klartext anzeigen</translation>
+        <translation>A&amp;fficher le mot de passe en clair par défaut</translation>
     </message>
     <message>
         <source>Alt+O</source>
-        <translation></translation>
+        <translation>Alt+F</translation>
     </message>
     <message>
         <source>Appea&amp;rance</source>
-        <translation>Erscheinungsbild</translation>
+        <translation>Appa&amp;rence</translation>
     </message>
     <message>
         <source>Banner Color</source>
-        <translation>Bannerfarbe</translation>
+        <translation>Couleur du bandeau</translation>
     </message>
     <message>
         <source>Text Color:</source>
-        <translation>Textfarbe</translation>
+        <translation>Couleur du texte:</translation>
     </message>
     <message>
         <source>Change...</source>
-        <translation>Ändern...</translation>
+        <translation>Changer...</translation>
     </message>
     <message>
         <source>Color 2:</source>
-        <translation>Farbe 2:</translation>
+        <translation>Couleur 2:</translation>
     </message>
     <message>
         <source>C&amp;hange...</source>
-        <translation>Ändern...</translation>
+        <translation>C&amp;hanger...</translation>
     </message>
     <message>
         <source>Alt+H</source>
-        <translation></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <source>Color 1:</source>
-        <translation>Farbe 1:</translation>
+        <translation>Couleur 1:</translation>
     </message>
     <message>
         <source>Expand group tree when opening a database</source>
-        <translation>Gruppenbaum beim Öffnen aufklappen</translation>
+        <translation>Développer l&apos;arborescence du groupe à l&apos;ouverture de la base de données</translation>
     </message>
     <message>
         <source>&amp;Other</source>
-        <translation>Sonstiges</translation>
+        <translation>Au&amp;tre</translation>
     </message>
     <message>
         <source>Remember last opend file</source>
-        <translation>Zuletzt geöffnete Datei beim Starten öffnen</translation>
+        <translation>Se souvenir du dernier fichier ouvert</translation>
     </message>
     <message>
         <source>Browser Command:</source>
-        <translation>Browser Befehl:</translation>
+        <translation>Commande du navigateur:</translation>
     </message>
     <message>
         <source>Securi&amp;ty</source>
-        <translation>Sicherheit</translation>
+        <translation>Sécuri&amp;té</translation>
     </message>
     <message>
         <source>Alternating Row Colors</source>
-        <translation>Abwechselnde Zeilenfarben</translation>
+        <translation>Couleurs alternées pour les rangées </translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Durchsuchen...</translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <source>Remember last key type and location</source>
-        <translation>Art und Ort des Schlüssels der letzten Datenbank merken</translation>
+        <translation>Se souvenir du dernier  type de clé et  du dernier emplacement</translation>
     </message>
     <message>
         <source>Mounting Root:</source>
-        <translation>Datenträgerwurzelverzeichnis:</translation>
+        <translation>Point de montage:</translation>
     </message>
 </context>
 <context>
     <name>SimplePasswordDialog</name>
     <message>
         <source>O&amp;K</source>
-        <translation>O&amp;K</translation>
+        <translation>A&amp;ccepter</translation>
     </message>
     <message>
         <source>Alt+K</source>
-        <translation></translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>...</source>
@@ -1597,30 +1595,30 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Enter your Password</source>
-        <translation></translation>
+        <translation>Entrer votre mot de passe</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Passwort:</translation>
+        <translation>Mot de passe:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
 </context>
 <context>
     <name>dbsettingdlg_base</name>
     <message>
         <source>Database Settings</source>
-        <translation>Datenbankeinstellungen</translation>
+        <translation>Préférences de la BD</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation>Verschlüsselung</translation>
+        <translation>Encryptage</translation>
     </message>
     <message>
         <source>Algorithm:</source>
-        <translation>Algorithmus:</translation>
+        <translation>Algorithme:</translation>
     </message>
     <message>
         <source>?</source>
@@ -1628,23 +1626,23 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Encryption Rounds:</source>
-        <translation>Verschlüsselungsrunden:</translation>
+        <translation>Nombre de passes:</translation>
     </message>
     <message>
         <source>O&amp;K</source>
-        <translation>O&amp;K</translation>
+        <translation>&amp;Accepter</translation>
     </message>
     <message>
         <source>Ctrl+K</source>
-        <translation></translation>
+        <translation>Ctrl+A<byte value="x9"/></translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation></translation>
+        <translation>Ctrl+N</translation>
     </message>
 </context>
 </TS>

@@ -36,6 +36,7 @@ FORMS += forms/EditGroupDlg.ui \
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
 		translations/keepass-es_ES.ts \
+		translations/keepass-fr_FR.ts \
                 translations/keepass-xx_XX.ts
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \

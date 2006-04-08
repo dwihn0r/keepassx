@@ -72,7 +72,7 @@ QIcon *Icon_EditOpenUrl;
 QIcon *Icon_EditSearch;
 QIcon *Icon_Configure;
 QIcon *Icon_Help;
-
+QIcon *Icon_AutoType;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg);
@@ -280,6 +280,7 @@ _loadIcon(Icon_EditOpenUrl,"/actions/run.png");
 _loadIcon(Icon_EditSearch,"/actions/find.png");
 _loadIcon(Icon_Configure,"/actions/configure.png");
 _loadIcon(Icon_Help,"/actions/help.png");
+_loadIcon(Icon_AutoType,"/apps/ktouch.png");
 
 }
 
