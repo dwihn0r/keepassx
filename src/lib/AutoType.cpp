@@ -21,35 +21,70 @@
 #include "AutoType.h"
 #include <QList>
 #include <QChar>
-#ifdef Q_WS_X11
-	#include <X11/extensions/XTest.h>
-	#include <X11/Xlib.h>
-#endif
-
+/*  { 0x05c7, 0x0627 },                  Arabic_alef ا ARABIC LETTER ALEF */
 
 QWidget* AutoType::MainWin=NULL; 
 
-void AutoType::perform(const QString& string){
-QList<QChar> Chars;
-QString str("Fragezeichen ? Umlaute öäü Euro €");
-for(int i=0;i<str.length();i++){
-	Chars << str.at(i);
+int AutoType::getModifiers(Display *d,KeySym keysym, int keycode){
+int SymsPerKey;
+KeySym* Syms=XGetKeyboardMapping(d,keycode,1,&SymsPerKey);
+int c=-1;
+for(int i=0;i<4;i++)
+	if(Syms[i]==keysym){
+		c=i; break;}
+Q_ASSERT(c!=-1);
+XFree(Syms);
+return c;
 }
 
+void AutoType::releaseModifiers(Display* d,int mods){
+pressModifiers(d,mods,False);
+}
+
+void AutoType::pressModifiers(Display* d,int mods,bool press){
+int keycode;
+switch(mods){
+	case 0: //no modifier
+			break;
+	case 1: //Shift
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,5);
+			break;
+	case 2: //AltGr
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,5);
+			break;
+	case 3: //Shift+AltGr
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,5);
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,5);
+			break;
+}
+}
+
+
+void AutoType::perform(const QString& string){
+QString str=string;
+//replace all {..} string templates
+
+QList<Q_UINT16> Keys;
+for(int i=0;i<str.length();i++){
+	Keys << getKeysym(str.at(i));
+}
 
 MainWin->hide();
-
 Display* pDisplay = XOpenDisplay( NULL );
-for(int i=0;i<Chars.size();i++){
-XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,getKeysym(Chars[i])),True,CurrentTime);
-XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,getKeysym(Chars[i])),False,CurrentTime);
+for(int i=0;i<Keys.size();i++){
+	int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
+	int mods=getModifiers(pDisplay,Keys[i],keycode);
+	pressModifiers(pDisplay,mods);
+	XTestFakeKeyEvent(pDisplay,keycode,True,5);
+	XTestFakeKeyEvent(pDisplay,keycode,False,5);
+	releaseModifiers(pDisplay,mods);
 }
 XCloseDisplay(pDisplay);
-
-
 MainWin->show();
-
 }
+
+
+
 
 
 tKeysymMap AutoType::KeysymMap[] =
@@ -829,10 +864,9 @@ tKeysymMap AutoType::KeysymMap[] =
   { 0x20ac, 0x20ac }, /*                    EuroSign € EURO SIGN */
 };
 
-unsigned long AutoType::getKeysym(const QChar& c){
+Q_UINT16 AutoType::getKeysym(const QChar& c){
 int MapSize=sizeof(KeysymMap);
 Q_UINT16 unicode=c.unicode();
-
 /* first check for Latin-1 characters (1:1 mapping) */
 if ((unicode >= 0x0020 && unicode <= 0x007e) ||
 	(unicode >= 0x00a0 && unicode <= 0x00ff))

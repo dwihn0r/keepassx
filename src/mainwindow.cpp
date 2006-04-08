@@ -324,8 +324,6 @@ return true;
 
 
 void KeepassMainWindow::OnFileNew(){
-AutoType::perform("");
-return;
 if(FileOpen)
  if(!closeDatabase())return;
 CPasswordDialog dlg(this,"PasswordDlg",true,false,true);

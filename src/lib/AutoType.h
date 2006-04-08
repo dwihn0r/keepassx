@@ -23,6 +23,13 @@
 
 #include <QWidget>
 #include <QString>
+#ifdef Q_WS_X11
+	#define XK_MISCELLANY
+	#define XK_XKB_KEYS
+	#include <X11/extensions/XTest.h>
+	#include <X11/keysymdef.h>
+	#include <X11/Xlib.h>
+#endif
 
 typedef struct tKeysymMap{
 	Q_UINT16 keysym;
@@ -35,7 +42,10 @@ public:
  static void perform(const QString& KeePassAutoTypeString);
 private:
  static tKeysymMap KeysymMap[];
- static unsigned long getKeysym(const QChar& unicode);
+ static Q_UINT16 getKeysym(const QChar& unicode);
+ static int getModifiers(Display*,KeySym,int);
+ static void pressModifiers(Display*,int,bool Press=true);
+ static void releaseModifiers(Display*,int);
  
 
 
