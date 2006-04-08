@@ -257,6 +257,10 @@ Are you sure?</source>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Password Generator</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPasswordDialog</name>

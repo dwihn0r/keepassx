@@ -31,7 +31,7 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, const char* name, bool modal, Qt::WF
 : QDialog(parent,name, modal,fl)
 {
 setupUi(this);
-createBanner(Banner,Icon_Key32x32,QString::fromUtf8("Password Generator"));
+createBanner(Banner,Icon_Key32x32,tr("Password Generator"));
 Radio_1->setChecked(true);
 Edit_chars->setDisabled(true);
 connect(ButtonGenerate,SIGNAL(clicked()),this,SLOT(OnGeneratePw()));

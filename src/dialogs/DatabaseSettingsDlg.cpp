@@ -41,7 +41,7 @@ CDbSettingsDlg::~CDbSettingsDlg()
 
 void CDbSettingsDlg::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
-createBanner(Banner,Icon_Settings32x32,"Settings");
+createBanner(Banner,Icon_Settings32x32,tr("Settings"));
 ComboAlgo->insertItem(tr("AES(Rijndael):  256 Bit   (default)"),0);
 ComboAlgo->insertItem(tr("Twofish:  256 Bit"),1);
 ComboAlgo->setCurrentItem(database->CryptoAlgorithmus); //Achtung: AlgoID muss gleich dem ComboBox Index sein!

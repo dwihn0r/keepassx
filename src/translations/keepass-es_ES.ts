@@ -262,6 +262,10 @@ Are you sure?</source>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
         <translation>No se pudo abrir &apos;/dev/random&apos; o &apos;/dev/urandom&apos;.</translation>
     </message>
+    <message>
+        <source>Password Generator</source>
+        <translation type="unfinished">Generador de Contraseña</translation>
+    </message>
 </context>
 <context>
     <name>CPasswordDialog</name>
