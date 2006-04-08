@@ -164,6 +164,10 @@ http://keepass.berlios.de/translation-howto.html</translation>
         <source>The number of encryption rounds have to be greater than 0.</source>
         <translation>Le nombre de passes doit être supérieur à 0.</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Préférences</translation>
+    </message>
 </context>
 <context>
     <name>CEditEntryDlg</name>
@@ -241,6 +245,10 @@ En êtes-vous sûr ?</translation>
         <source>Could not open file.</source>
         <translation>Ne peut ouvrir le fichier.</translation>
     </message>
+    <message>
+        <source>%1 Bit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CGenPwDialog</name>
@@ -267,6 +275,10 @@ En êtes-vous sûr ?</translation>
     <message>
         <source>Password Generator</source>
         <translation type="unfinished">Générateur de mots de passe</translation>
+    </message>
+    <message>
+        <source>%1 Bit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -501,7 +513,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>% Bit</source>
-        <translation>% Bits</translation>
+        <translation type="obsolete">% Bits</translation>
     </message>
     <message>
         <source>Ge&amp;n.</source>
@@ -530,6 +542,10 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     <message>
         <source>&gt;</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>%1 Bit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

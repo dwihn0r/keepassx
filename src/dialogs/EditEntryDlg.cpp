@@ -86,7 +86,7 @@ if(!config.ShowPasswords)
   ChangeEchoMode();
 OnPasswordwLostFocus();
 int bits=(entry->Password.length()*8);
-Label_Bits->setText(QString::number(bits)+" Bit");
+Label_Bits->setText(tr("%1 Bit").arg(QString::number(bits)));
 if(bits>128)
   bits=128;
 Progress_Quali->setValue(100*bits/128);

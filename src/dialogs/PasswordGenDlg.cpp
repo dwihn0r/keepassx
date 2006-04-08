@@ -185,7 +185,7 @@ fclose(dev_random);
 int bits;
 if(checkBox8->isChecked())bits=length*8;
 else bits=length*7;
-Label_Bits->setText(QString::number(bits)+" Bit");
+Label_Bits->setText(tr("%1 Bit").arg(QString::number(bits)));
 if(bits>128)bits=128;
 Progress_Quali->setProgress(bits,128);
 Progress_Quali->setPercentageVisible(false);
