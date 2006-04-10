@@ -79,6 +79,27 @@ if(c==1){
 else
 	str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
 
+/*
+KeePass/Win template compatibility:
+only supported syntax is:{TEMPLATE-NAME}
+%TEMPLATE-NAME% syntax is not supported!
+*/
+
+str.replace("{TITLE}",entry->Title,Qt::CaseInsensitive);
+str.replace("{USERNAME}",entry->UserName,Qt::CaseInsensitive);
+entry->Password.unlock();
+str.replace("{PASSWORD}",entry->Password.string(),Qt::CaseInsensitive);
+entry->Password.lock();
+str.replace("{URL}",entry->URL,Qt::CaseInsensitive);
+str.replace("{SPACE}",QString(" "),Qt::CaseInsensitive);
+str.replace("{ADD}",QString("+"),Qt::CaseInsensitive);
+str.replace("{SUBTRACT}",QString("-"),Qt::CaseInsensitive);
+str.replace("{DIVIDE}",QString("/"),Qt::CaseInsensitive);
+str.replace("{MULTIPLY}",QString("*"),Qt::CaseInsensitive);
+str.replace("{PLUS}",QString("+"),Qt::CaseInsensitive);
+
+
+
 QList<Q_UINT16> Keys;
 for(int i=0;i<str.length();i++){
 	Keys << getKeysym(str.at(i));

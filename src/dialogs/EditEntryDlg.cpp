@@ -32,7 +32,7 @@
 #include <qcombobox.h>
 #include <qpainter.h>
 #include <qpen.h>
-#include <q3filedialog.h>
+#include <QFileDialog>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
 //Added by qt3to4:
@@ -260,7 +260,7 @@ Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Stand
 
 void CEditEntryDlg::OnNewAttachment()
 {
-QString filename=Q3FileDialog::getOpenFileName(QDir::homeDirPath(),"",this,QString::fromUtf8("Anhang hinzufügen..."));
+QString filename=QFileDialog::getOpenFileName(this,tr("Add Attachment..."),QDir::homeDirPath());
 if(filename=="")return;
 QFile file(filename);
 if(file.open(QIODevice::ReadOnly)==false){
@@ -294,8 +294,11 @@ saveAttachment(entry,this);
 
 void CEditEntryDlg::saveAttachment(CEntry* pEntry, QWidget* ParentWidget)
 {
-QString filename=Q3FileDialog::getSaveFileName(QDir::homeDirPath(),"",ParentWidget,tr("Save Attachment..."));
-if(filename=="")return;
+QFileDialog FileDlg(ParentWidget,tr("Save Attachment..."),QDir::homeDirPath());
+FileDlg.selectFile(pEntry->BinaryDesc);
+FileDlg.setAcceptMode(QFileDialog::AcceptSave);
+if(!FileDlg.exec())return;
+QString filename=FileDlg.selectedFiles()[0];
 QFile file(filename);
 if(file.exists()){
 int r=QMessageBox::warning(ParentWidget,tr("Overwrite?"),tr("A file with this name already exists.\nDo you want to replace it?"),tr("Yes"),tr("No"),NULL,1,1);
