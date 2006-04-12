@@ -51,6 +51,8 @@ header()->setStretchLastSection(false);
 connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized(int,int,int)));
 ContextMenu=new QMenu(this);
 setAlternatingRowColors(config.AlternatingRowColors);
+disconnect(header(),SIGNAL(sectionClicked(int)),this,SLOT(sortByColumn(int)));
+//TODO: connect with custom sort function
 }
 
 KeepassEntryView::~KeepassEntryView(){
@@ -356,12 +358,13 @@ drag->setPixmap(DragPixmap);
 drag->start();
 }
 
-
+void KeepassEntryView::sortItems(int column,Qt::SortOrder order){};
 
 
 void KeepassEntryView::paintEvent(QPaintEvent * event){
 QTreeWidget::paintEvent(event);
 }
+
 
 EntryViewItem::EntryViewItem(QTreeWidget *parent):QTreeWidgetItem(parent){
 
@@ -377,4 +380,12 @@ EntryViewItem::EntryViewItem(QTreeWidgetItem *parent):QTreeWidgetItem(parent){
 
 EntryViewItem::EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding):QTreeWidgetItem(parent,preceding){
 
+}
+
+
+bool EntryViewItem::operator<(EntryViewItem& other){
+if(QString::localeAwareCompare(	text(treeWidget()->sortColumn()),other.text(treeWidget()->sortColumn())) < 0)
+	return true;
+else 
+	return false;
 }
