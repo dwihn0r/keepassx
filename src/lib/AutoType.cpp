@@ -47,14 +47,14 @@ switch(mods){
 	case 0: //no modifier
 			break;
 	case 1: //Shift
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,5);
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
 			break;
 	case 2: //AltGr
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,5);
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
 			break;
 	case 3: //Shift+AltGr
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,5);
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,5);
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
+			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
 			break;
 }
 }
@@ -79,31 +79,29 @@ if(c==1){
 else
 	str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
 
-/*
-KeePass/Win template compatibility:
-only supported syntax is:{TEMPLATE-NAME}
-%TEMPLATE-NAME% syntax is not supported!
-*/
-
-str.replace("{TITLE}",entry->Title,Qt::CaseInsensitive);
-str.replace("{USERNAME}",entry->UserName,Qt::CaseInsensitive);
-entry->Password.unlock();
-str.replace("{PASSWORD}",entry->Password.string(),Qt::CaseInsensitive);
-entry->Password.lock();
-str.replace("{URL}",entry->URL,Qt::CaseInsensitive);
-str.replace("{SPACE}",QString(" "),Qt::CaseInsensitive);
-str.replace("{ADD}",QString("+"),Qt::CaseInsensitive);
-str.replace("{SUBTRACT}",QString("-"),Qt::CaseInsensitive);
-str.replace("{DIVIDE}",QString("/"),Qt::CaseInsensitive);
-str.replace("{MULTIPLY}",QString("*"),Qt::CaseInsensitive);
-str.replace("{PLUS}",QString("+"),Qt::CaseInsensitive);
-
-
-
 QList<Q_UINT16> Keys;
-for(int i=0;i<str.length();i++){
-	Keys << getKeysym(str.at(i));
+for(int i=0;i<str.size();i++){
+	if(str[i]=='{'){
+		int start=i;
+		QString tmpl;
+		i++;
+		while(str[i]!='}' && i<str.size()){
+			tmpl += str[i];
+			i++;
+		}
+		if(i>=str.size()){
+			err=tr("Syntax Error in Auto-Type sequence near character %1\n\
+					Found '{' without closing '}'").arg(i+10);
+			return;
+		}
+		templateToKeysyms(tmpl.lower(),Keys,entry);
+		continue;
+	}
+	else
+		Keys << getKeysym(str[i]);
 }
+
+
 
 MainWin->hide();
 Display* pDisplay = XOpenDisplay( NULL );
@@ -111,14 +109,72 @@ for(int i=0;i<Keys.size();i++){
 	int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
 	int mods=getModifiers(pDisplay,Keys[i],keycode);
 	pressModifiers(pDisplay,mods);
-	XTestFakeKeyEvent(pDisplay,keycode,True,5);
-	XTestFakeKeyEvent(pDisplay,keycode,False,5);
+	XTestFakeKeyEvent(pDisplay,keycode,True,0);
+	XTestFakeKeyEvent(pDisplay,keycode,False,1);
 	releaseModifiers(pDisplay,mods);
 }
 XCloseDisplay(pDisplay);
 MainWin->show();
 }
 
+void AutoType::templateToKeysyms(const QString& tmpl, QList<quint16>& keys,CEntry* entry){
+//tmpl must be lower case!!!
+if(!tmpl.compare("title")){
+	stringToKeysyms(entry->Title,keys);
+	return;}
+if(!tmpl.compare("username")){
+	stringToKeysyms(entry->UserName,keys);
+	return;}
+if(!tmpl.compare("url")){
+	stringToKeysyms(entry->URL,keys);
+	return;}
+if(!tmpl.compare("password")){
+	entry->Password.unlock();
+	stringToKeysyms(entry->Password.string(),keys);
+	entry->Password.lock();
+	return;
+}
+if(!tmpl.compare("space")){
+	keys << getKeysym(' ');
+	return;}
+
+if(!tmpl.compare("backspace") || !tmpl.compare("bs") || !tmpl.compare("bksp")){
+	keys << XK_BackSpace;
+	return;}
+
+if(!tmpl.compare("break")){
+	keys << XK_Break;
+	return;}
+
+if(!tmpl.compare("capslock")){
+	keys << XK_Caps_Lock;
+	return;}
+
+if(!tmpl.compare("del") || !tmpl.compare("delete")){
+	keys << XK_Delete;
+	return;}
+
+if(!tmpl.compare("end")){
+	keys << XK_End;
+	return;}
+
+if(!tmpl.compare("enter")){
+	keys << XK_Return;
+	return;}
+
+if(!tmpl.compare("esc")){
+	keys << XK_Escape;
+	return;}
+
+if(!tmpl.compare("help")){
+	keys << XK_Help;
+	return;}
+}
+
+void AutoType::stringToKeysyms(const QString& string,QList<quint16>& KeySymList){
+for(int i=0; i<string.length();i++)
+	KeySymList << getKeysym(string[i]);
+}
 
 
 

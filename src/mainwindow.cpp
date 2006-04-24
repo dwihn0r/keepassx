@@ -174,6 +174,7 @@ void KeepassMainWindow::setupToolbar(){
 }
 
 void KeepassMainWindow::setupIcons(){
+setWindowIcon(QIcon(AppDir+"/../share/keepass/icons/keepassx.png"));
 FileNewAction->setIcon(*Icon_FileNew);
 FileOpenAction->setIcon(*Icon_FileOpen);
 FileSaveAction->setIcon(*Icon_FileSave);

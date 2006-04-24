@@ -233,6 +233,8 @@ void loadImages(){
 
 bool small=true;
 QString ThemeDir=AppDir+"/../share/keepass/icons/nuvola/32x32";
+
+
 QPixmap tmpImg;
 
 //-----------------------

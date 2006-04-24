@@ -48,6 +48,8 @@ private:
  static int getModifiers(Display*,KeySym,int);
  static void pressModifiers(Display*,int,bool Press=true);
  static void releaseModifiers(Display*,int);
+ static void templateToKeysyms(const QString& Template, QList<quint16>& KeySymList,CEntry* entry);
+ static void stringToKeysyms(const QString& string,QList<quint16>& KeySymList);
  
 
 
