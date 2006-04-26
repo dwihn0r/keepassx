@@ -21,7 +21,7 @@
 #include "AutoType.h"
 #include <QList>
 #include <QChar>
-/*  { 0x05c7, 0x0627 },                  Arabic_alef ا ARABIC LETTER ALEF */
+
 
 QWidget* AutoType::MainWin=NULL; 
 
@@ -102,13 +102,13 @@ for(int i=0;i<str.size();i++){
 }
 
 
-
 MainWin->hide();
 Display* pDisplay = XOpenDisplay( NULL );
 for(int i=0;i<Keys.size();i++){
 	int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
 	int mods=getModifiers(pDisplay,Keys[i],keycode);
 	pressModifiers(pDisplay,mods);
+	qDebug("[%i]: Keysym=%i, KeyCode=%i, Mod=%i",i,(int)Keys[i],keycode,mods);
 	XTestFakeKeyEvent(pDisplay,keycode,True,0);
 	XTestFakeKeyEvent(pDisplay,keycode,False,1);
 	releaseModifiers(pDisplay,mods);
@@ -168,6 +168,50 @@ if(!tmpl.compare("esc")){
 
 if(!tmpl.compare("help")){
 	keys << XK_Help;
+	return;}
+
+if(!tmpl.compare("home")){
+	keys << XK_Home;
+	return;}
+
+if(!tmpl.compare("ins")){
+	keys << XK_Insert;
+	return;}
+
+if(!tmpl.compare("numlock")){
+	keys << XK_Num_Lock;
+	return;}
+
+if(!tmpl.compare("scroll")){
+	keys << XK_Scroll_Lock;
+	return;}
+
+if(!tmpl.compare("pgdn")){
+	keys << XK_Page_Down;
+	return;}
+
+if(!tmpl.compare("pgup")){
+	keys << XK_Page_Up;
+	return;}
+
+if(!tmpl.compare("prtsc")){
+	keys << XK_3270_PrintScreen;
+	return;}
+
+if(!tmpl.compare("up")){
+	keys << XK_Up;
+	return;}
+
+if(!tmpl.compare("down")){
+	keys << XK_Down;
+	return;}
+
+if(!tmpl.compare("left")){
+	keys << XK_Left;
+	return;}
+
+if(!tmpl.compare("right")){
+	keys << XK_Right;
 	return;}
 }
 

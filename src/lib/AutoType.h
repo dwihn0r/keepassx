@@ -27,6 +27,7 @@
 #ifdef Q_WS_X11
 	#define XK_MISCELLANY
 	#define XK_XKB_KEYS
+	#define XK_3270
 	#include <X11/extensions/XTest.h>
 	#include <X11/keysymdef.h>
 	#include <X11/Xlib.h>

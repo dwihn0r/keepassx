@@ -75,15 +75,15 @@ QIcon *Icon_Help;
 QIcon *Icon_AutoType;
 
 inline void loadImages();
-inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg);
+inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
 
 
 int main(int argc, char **argv)
 {
 
 QApplication* app=new QApplication(argc,argv);
-QString ArgFile,ArgCfg,IniFilename;
-parseCmdLineArgs(argc,argv,ArgFile,ArgCfg);
+QString ArgFile,ArgCfg,ArgLang,IniFilename;
+parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
 AppDir=app->applicationDirPath();
 //Load Config
 if(ArgCfg==QString()){
@@ -102,15 +102,23 @@ else{
 
 
 //Internationalization
-QLocale loc=QLocale::system();
+QLocale loc;
+if(!ArgLang.size())
+	loc=QLocale::system();
+else
+	loc=QLocale(ArgLang);
+
 QTranslator* translator = NULL;
 QTranslator* qtTranslator=NULL;
 translator=new QTranslator;
 qtTranslator=new QTranslator;
 bool TrFound=true;
+QString locname;
+
 if(!translator->load("keepass-"+loc.name(),app->applicationDirPath()+"/../share/keepass/i18n/")){
 	if(!translator->load("keepass-"+loc.name(),QDir::homeDirPath()+"/.keepass/")){
-		qWarning(QString("KeePassX: No Translation found for language '%1 (%2)'")
+		if(loc.name()!="en_US")
+		qWarning(QString("KeePassX: No Translation found language '%1 (%2)' using 'English (UnitedStates)'")
 				.arg(QLocale::languageToString(loc.language()))
 				.arg(QLocale::countryToString(loc.country())));
 		TrFound=false;
@@ -124,7 +132,8 @@ else
 
 
 if(!qtTranslator->load("qt_"+loc.name().left(2),QLibraryInfo::location(QLibraryInfo::TranslationsPath))){
-	qWarning(QString("Qt: No Translation found for '%1 (%2)'")
+	if(loc.name()!="en_US")
+	qWarning(QString("Qt: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
 			.arg(QLocale::languageToString(loc.language()))
 			.arg(QLocale::countryToString(loc.country())));
 	delete qtTranslator;
@@ -287,7 +296,7 @@ _loadIcon(Icon_AutoType,"/apps/ktouch.png");
 }
 
 
-void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg){
+void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang){
 if(argc>1){
 int i=1;
 	if(argv[i][0]!='-'){
@@ -298,12 +307,21 @@ int i=1;
 			cout << "KeePassX" << KEEPASS_VERSION << endl;
 			cout << "Usage: keepass [Filename] [Options]" << endl;
 			cout << "  -h This Help" << endl;
-			cout << "  -cfg ConfigFile Use specified configuration" << endl;
+			cout << "  -cfg <ConfigFile> Use specified configuration." << endl;
+			cout << "  -lang <LOCALE>    Use specified language instead of system default." << endl;
+			cout << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
+			cout << "                    Examples: de     German" << endl;
+			cout << "                              de_CH  German(Switzerland)"<<endl;
+			cout << "                              pt_BR  Portuguese(Brazil)"<<endl;
 			exit(0);
 			}
 		else if(QString(argv[i])=="-cfg"){
-			if(i-1==argc) cout << "No configuration file specified." << endl;
+			if(i-1==argc){ cout << "Missing argument for -cfg" << endl; exit(1);}
 			else{ArgCfg=QString::fromUtf8(argv[i+1]); i++;}
+			}
+		else if(QString(argv[i])=="-lang"){
+			if(i-1==argc) cout << "Missing argument for -lang" << endl;
+			else{ArgLang=QString::fromUtf8(argv[i+1]); i++;}
 			}
 		else if(QString(argv[i])=="-test"){
 				if (testDatabase()) exit(0);
