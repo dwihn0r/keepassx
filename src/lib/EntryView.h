@@ -41,7 +41,6 @@ public:
  void updateColumns();
  void refreshItems();
  void showSearchResults(QList<Q_UINT32>& results);
- virtual void sortItems(int column,Qt::SortOrder order);
  Database* db;
  vector<EntryViewItem*>Items;
  QMenu *ContextMenu;
@@ -74,7 +73,7 @@ EntryViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
 EntryViewItem(QTreeWidgetItem *parent);
 EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
 CEntry* pEntry;
-virtual bool operator<(EntryViewItem& other);
+virtual bool operator<(const QTreeWidgetItem& other)const;
 };
 
 
