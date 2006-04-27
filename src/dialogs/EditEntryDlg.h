@@ -70,6 +70,7 @@ public slots:
     void OnSaveAttachment();
     void OnButtonGenPw();
     void OnCheckBoxExpiresNeverChanged(int state);
+	void OnCustomIcons();
 
 };
 

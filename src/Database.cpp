@@ -20,9 +20,20 @@
 
 #include "Database.h"
 
+QString KpxDateTime::toString(Qt::DateFormat format) const{
+if(*this==Date_Never)return QObject::tr("Never");
+else return QDateTime::toString(format);
+}
+
+QString KpxDateTime::dateToString(Qt::DateFormat format) const{
+if(*this==Date_Never)return QObject::tr("Never");
+else return date().toString(format);
+}
+
 
 CEntry::CEntry(){
 ImageID=0;
+OldImgID=0;
 GroupID=0;
 Creation=QDateTime::currentDateTime();
 LastMod=QDateTime::currentDateTime();
@@ -50,6 +61,7 @@ LastMod=QDateTime::currentDateTime();
 Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59));
 Level=0;
 ImageID=0;
+OldImgID=0;
 Name="<Group>";
 UI_ItemIsExpanded=UI_ExpandByDefault;
 }

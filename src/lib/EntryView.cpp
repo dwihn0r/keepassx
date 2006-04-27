@@ -101,6 +101,10 @@ updateItems(CurrentGroup);
 
 
 void KeepassEntryView::updateItems(unsigned int GroupID){
+QList<QTreeWidgetItem*> ItemSelec=selectedItems();
+QList<quint32> SelectionIDs;
+for(int i=0; i<ItemSelec.size(); i++)
+	SelectionIDs << ((EntryViewItem*)ItemSelec[i])->pEntry->sID;
 IsSearchGroup=false;
 clear();
 Items.clear();
@@ -111,6 +115,11 @@ for(int i=0;i<db->numEntries();i++){
   if(db->entry(i).GroupID==GroupID)
   	setEntry(&db->entry(i));
 }
+if(SelectionIDs.size())
+	for(int i=0;i<Items.size();i++){
+		for(int j=0; j<SelectionIDs.size();j++){
+			if(Items[i]->pEntry->sID==SelectionIDs[j]) setItemSelected(Items[i],true);}
+	}
 }
 
 void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
@@ -149,13 +158,13 @@ void KeepassEntryView::setEntry(CEntry* entry){
   if(config.Columns[4]){
     tmp->setText(j++,entry->Additional.section('\n',0,0));}
   if(config.Columns[5]){
-    tmp->setText(j++,entry->Expire.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->Expire.dateToString(Qt::LocalDate));}
   if(config.Columns[6]){
-    tmp->setText(j++,entry->Creation.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->Creation.dateToString(Qt::LocalDate));}
   if(config.Columns[7]){
-    tmp->setText(j++,entry->LastMod.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->LastMod.dateToString(Qt::LocalDate));}
   if(config.Columns[8]){
-    tmp->setText(j++,entry->LastAccess.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->LastAccess.dateToString(Qt::LocalDate));}
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
   Items.back()->setIcon(0,db->icon(entry->ImageID));
@@ -187,13 +196,13 @@ for(int i=0;i<Items.size();i++){
   if(config.Columns[4]){
     tmp->setText(j++,entry->Additional.section('\n',0,0));}
   if(config.Columns[5]){
-    tmp->setText(j++,entry->Expire.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->Expire.dateToString(Qt::LocalDate));}
   if(config.Columns[6]){
-    tmp->setText(j++,entry->Creation.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->Creation.dateToString(Qt::LocalDate));}
   if(config.Columns[7]){
-    tmp->setText(j++,entry->LastMod.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->LastMod.dateToString(Qt::LocalDate));}
   if(config.Columns[8]){
-    tmp->setText(j++,entry->LastAccess.date().toString(Qt::LocalDate));}
+    tmp->setText(j++,entry->LastAccess.dateToString(Qt::LocalDate));}
   if(config.Columns[9]){
    tmp->setText(j++,entry->BinaryDesc);}
   tmp->setIcon(0,db->icon(entry->ImageID));
@@ -229,8 +238,8 @@ resizeColumns();
 }
 
 void KeepassEntryView::resizeColumns(){
-
 AutoResizeColumns=false;
+if(!header()->count())return;
 
 for(int i=0;i<NUM_COLUMNS;i++)
 	if(!config.Columns[i])ColumnSizes[i]=0;

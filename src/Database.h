@@ -27,6 +27,17 @@
 #include "lib/SecString.h"
 using namespace std;
 
+extern const QDateTime Date_Never;
+class KpxDateTime:public QDateTime{
+public:
+KpxDateTime(){};
+KpxDateTime ( const QDate & date ):QDateTime(date){};
+KpxDateTime ( const QDate & date, const QTime & time, Qt::TimeSpec spec = Qt::LocalTime):QDateTime(date,time,spec){};
+KpxDateTime ( const QDateTime & other ):QDateTime(other){};
+virtual QString toString(Qt::DateFormat format = Qt::TextDate ) const;
+QString dateToString(Qt::DateFormat format = Qt::TextDate)const;
+};
+
 class CEntry{
 public:
 CEntry();
@@ -35,16 +46,17 @@ Q_UINT8 ID[16];
 Q_UINT32 sID;
 Q_UINT32 GroupID;
 Q_UINT32 ImageID;
+quint32 OldImgID;
 QString Title;
 QString URL;
 QString UserName;
 SecString Password;
 QString Additional;
 QString BinaryDesc;
-QDateTime Creation;
-QDateTime LastMod;
-QDateTime LastAccess;
-QDateTime Expire;
+KpxDateTime Creation;
+KpxDateTime LastMod;
+KpxDateTime LastAccess;
+KpxDateTime Expire;
 QByteArray BinaryData;
 /*Q_UINT32 PasswordLength;*/
 bool ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
@@ -58,7 +70,7 @@ CGroup();
 ~CGroup();
 Q_UINT32 ID;
 Q_UINT32 ImageID;
-/*Q_UINT32 NumEntries;*/
+quint32 OldImgID;
 QString Name;
 QDateTime Creation;
 QDateTime LastMod;

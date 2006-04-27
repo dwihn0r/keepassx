@@ -38,7 +38,7 @@
 //Added by qt3to4:
 #include <QShowEvent>
 
-
+#include "SelectIconDlg.h"
 #include "PasswordGenDlg.h"
 #include "EditEntryDlg.h"
 
@@ -65,6 +65,7 @@ connect(ButtonSaveAttachment, SIGNAL(clicked()), this, SLOT( OnSaveAttachment())
 connect(ButtonGenPw, SIGNAL(clicked()), this, SLOT( OnButtonGenPw()));
 connect(ButtonOK, SIGNAL(clicked()),this,SLOT(OnButtonOK()));
 connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
+connect(Button_CustomIcons,SIGNAL(clicked()),this,SLOT(OnCustomIcons()));
 
 ButtonOpenAttachment->setIcon(*Icon_FileOpen);
 ButtonDeleteAttachment->setIcon(*Icon_EditDelete);
@@ -74,7 +75,7 @@ if(entry->BinaryData.isNull()){
   ButtonSaveAttachment->setDisabled(true);
   ButtonDeleteAttachment->setDisabled(true);}
 setCaption(entry->Title);
-setIcon(EntryIcons[entry->ImageID]);
+setIcon(db->icon(entry->ImageID));
 Edit_Title->setText(entry->Title);
 Edit_UserName->setText(entry->UserName);
 Edit_URL->setText(entry->URL);
@@ -194,6 +195,8 @@ if(Combo_Group->currentItem()!=db->getGroupIndex(entry->GroupID)){
 	db->moveEntry(entry,&db->group(Combo_Group->currentItem()));
 	EntryMoved=true; ModFlag=true;
 }
+if(entry->ImageID<BUILTIN_ICONS && Combo_IconPicker->currentItem()>=BUILTIN_ICONS)
+	entry->OldImgID=entry->ImageID;
 entry->ImageID=Combo_IconPicker->currentItem();
 
 if(ModFlag&&EntryMoved)done(2);
@@ -359,8 +362,17 @@ else
 }
 }
 
-
-
+void CEditEntryDlg::OnCustomIcons(){
+CSelectIconDlg dlg(db,Combo_IconPicker->currentItem(),this);
+int r=dlg.exec();
+if(dlg.ModFlag)ModFlag=true;
+if(r!=-1){
+	Combo_IconPicker->clear();
+	for(int i=0;i<db->numIcons();i++)
+		Combo_IconPicker->insertItem(db->icon(i),"",i);
+	Combo_IconPicker->setCurrentItem(r);
+}
+}
 
 
 

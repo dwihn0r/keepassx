@@ -794,9 +794,11 @@ CEditGroupDialog dlg(db,this,"EditGroupDlg",true);
 dlg.GroupName=pGroup->Name;
 dlg.IconID=pGroup->ImageID;
 if(!dlg.exec())return;
-if((pGroup->Name != dlg.GroupName) || (pGroup->ImageID != dlg.IconID)){
+if((pGroup->Name != dlg.GroupName) || (pGroup->ImageID != dlg.IconID) || dlg.ModFlag){
   setStateFileModified(true);
   pGroup->Name = dlg.GroupName;
+  if(pGroup->ImageID<BUILTIN_ICONS && dlg.IconID>=BUILTIN_ICONS)
+	pGroup->OldImgID=pGroup->ImageID;
   pGroup->ImageID = dlg.IconID;
   GroupView->updateItems();
 }
@@ -942,7 +944,7 @@ config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
 config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
 config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
 EntryView->updateColumns();
-if(FileOpen) EntryView->refreshItems();
+if(FileOpen) EntryView->updateItems();
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){

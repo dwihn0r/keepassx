@@ -280,6 +280,7 @@ for(int i=0;i<NumEntries;i++){
 	offset+=4;
 	memcpyFromLEnd32(&Icon,dta.data()+offset);
 	offset+=4;
+	Entries[Entry].OldImgID=Entries[Entry].ImageID;
 	Entries[Entry].ImageID=Icon;
 }
 for(int i=0;i<NumGroups;i++){
@@ -288,6 +289,7 @@ for(int i=0;i<NumGroups;i++){
 	offset+=4;
 	memcpyFromLEnd32(&Icon,dta.data()+offset);
 	offset+=4;
+	Groups[Group].OldImgID=Groups[Group].ImageID;
 	Groups[Group].ImageID=Icon;
 }
 return true;
@@ -848,9 +850,7 @@ for(int i=0; i < Groups.size(); i++){
 		FieldType = 0x0007; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		Q_UINT32 ImgID=Groups[i].ImageID;
-		if(ImgID>=BUILTIN_ICONS)ImgID=0;
-		memcpyToLEnd32(buffer+pos, &ImgID); pos += 4;
+		memcpyToLEnd32(buffer+pos, &Groups[i].OldImgID); pos += 4;
 
 		FieldType = 0x0008; FieldSize = 2;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -881,9 +881,7 @@ for(int i = 0; i < Entries.size(); i++){
 		FieldType = 0x0003; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		Q_UINT32 ImgID=Entries[i].ImageID;
-		if(ImgID>=BUILTIN_ICONS)ImgID=0;
-		memcpyToLEnd32(buffer+pos,&ImgID); pos += 4;
+		memcpyToLEnd32(buffer+pos,&Entries[i].OldImgID); pos += 4;
 
 
 		FieldType = 0x0004;

@@ -36,6 +36,7 @@ IconID=0;
 connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
 connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
+ModFlag=false;
 }
 
 CEditGroupDialog::~CEditGroupDialog()
@@ -68,6 +69,7 @@ done(0);
 void CEditGroupDialog::OnIconDlg(){
 CSelectIconDlg dlg(db,IconID,this);
 int r=dlg.exec();
+if(dlg.ModFlag)ModFlag=true;
 if(r!=-1){
 	ComboIconPicker->clear();
 	for(int i=0;i<db->numIcons();i++)

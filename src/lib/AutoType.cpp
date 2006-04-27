@@ -101,7 +101,6 @@ for(int i=0;i<str.size();i++){
 		Keys << getKeysym(str[i]);
 }
 
-
 MainWin->hide();
 Display* pDisplay = XOpenDisplay( NULL );
 for(int i=0;i<Keys.size();i++){
@@ -213,7 +212,139 @@ if(!tmpl.compare("left")){
 if(!tmpl.compare("right")){
 	keys << XK_Right;
 	return;}
+
+if(!tmpl.compare("f1")){
+	keys << XK_F1;
+	return;}
+
+if(!tmpl.compare("f2")){
+	keys << XK_F2;
+	return;}
+
+if(!tmpl.compare("f3")){
+	keys << XK_F3;
+	return;}
+
+if(!tmpl.compare("f4")){
+	keys << XK_F4;
+	return;}
+
+if(!tmpl.compare("f5")){
+	keys << XK_F5;
+	return;}
+
+if(!tmpl.compare("f6")){
+	keys << XK_F6;
+	return;}
+
+if(!tmpl.compare("f7")){
+	keys << XK_F7;
+	return;}
+
+if(!tmpl.compare("f8")){
+	keys << XK_F8;
+	return;}
+
+if(!tmpl.compare("f9")){
+	keys << XK_F9;
+	return;}
+
+if(!tmpl.compare("f10")){
+	keys << XK_F10;
+	return;}
+
+if(!tmpl.compare("f11")){
+	keys << XK_F11;
+	return;}
+
+if(!tmpl.compare("f12")){
+	keys << XK_F12;
+	return;}
+
+if(!tmpl.compare("f13")){
+	keys << XK_F13;
+	return;}
+
+if(!tmpl.compare("f14")){
+	keys << XK_F14;
+	return;}
+
+if(!tmpl.compare("f15")){
+	keys << XK_F15;
+	return;}
+
+if(!tmpl.compare("f16")){
+	keys << XK_F16;
+	return;}
+
+if(!tmpl.compare("add") || !tmpl.compare("plus")){
+	keys << getKeysym('+');
+	return;}
+
+if(!tmpl.compare("subtract")){
+	keys << getKeysym('-');
+	return;}
+
+if(!tmpl.compare("multiply")){
+	keys << getKeysym('+');
+	return;}
+
+if(!tmpl.compare("divide")){
+	keys << getKeysym('/');
+	return;}
+
+if(!tmpl.compare("at")){
+	keys << getKeysym('@');
+	return;}
+
+if(!tmpl.compare("percent")){
+	keys << getKeysym('%');
+	return;}
+
+if(!tmpl.compare("caret")){
+	keys << getKeysym('^');
+	return;}
+
+if(!tmpl.compare("tilde")){
+	keys << getKeysym('~');
+	return;}
+
+if(!tmpl.compare("leftbrace")){
+	keys << getKeysym('{');
+	return;}
+
+if(!tmpl.compare("rightbrace")){
+	keys << getKeysym('}');
+	return;}
+
+if(!tmpl.compare("leftparen")){
+	keys << getKeysym('(');
+	return;}
+
+if(!tmpl.compare("rightparen")){
+	keys << getKeysym(')');
+	return;}
+
+if(!tmpl.compare("winl")){
+	keys << XK_Super_L;
+	return;}
+
+if(!tmpl.compare("winr")){
+	keys << XK_Super_R;
+	return;}
+
+if(!tmpl.compare("win")){
+	keys << XK_Super_L;
+	return;}
+
+if(!tmpl.compare("tab")){
+	keys << XK_Tab;
+	return;}
 }
+
+
+
+
 
 void AutoType::stringToKeysyms(const QString& string,QList<quint16>& KeySymList){
 for(int i=0; i<string.length();i++)

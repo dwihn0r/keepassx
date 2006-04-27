@@ -32,7 +32,7 @@ class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
  Q_OBJECT
 public:
  CSelectIconDlg(Database* db,int,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
- bool CustomIconsModified;
+ bool ModFlag;
 
 public slots:
  void OnAddIcon();

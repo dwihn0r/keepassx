@@ -109,7 +109,7 @@ void modified();
 };
 
 
- extern const QDateTime Date_Never;
+
  void memcpyFromLEnd32(Q_UINT32* dst,const char* src);
  void memcpyFromLEnd16(Q_UINT16* dst,const char* src);
  void memcpyToLEnd32(char* src,const Q_UINT32* dst);

@@ -33,7 +33,6 @@ setupUi(this);
 db=database;
 CtxMenu=new QMenu(this);
 DeleteAction=CtxMenu->addAction(*Icon_EditDelete,tr("Delete"));
-CustomIconsModified=false;
 connect(Button_AddIcon, SIGNAL(clicked()), this, SLOT(OnAddIcon()));
 connect(Button_PickIcon, SIGNAL(clicked()), this, SLOT(OnPickIcon()));
 connect(Button_Cancel, SIGNAL(clicked()), this, SLOT(OnCancel()));
@@ -41,6 +40,7 @@ connect(DeleteAction,SIGNAL(triggered()),this,SLOT(OnDelete()));
 connect(List,SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),this,SLOT(OnSelectionChanged(QListWidgetItem*,QListWidgetItem*)));
 updateView();
 List->setCurrentItem(List->item(CurrentID));
+ModFlag=false;
 }
 
 void CSelectIconDlg::updateView(){
@@ -70,7 +70,7 @@ for(int i=0;i<filenames.size();i++){
 }
 if(errors.size())
 	QMessageBox::warning(this,tr("Error"),tr("An error occured while loading the icon(s):\n"));
-CustomIconsModified=true;
+ModFlag=true;
 updateView();
 List->setCurrentItem(List->item(List->count()-1));
 }
@@ -89,8 +89,10 @@ CtxMenu->popup(event->globalPos());
 }
 
 void CSelectIconDlg::OnDelete(){
+ModFlag=true;
 db->removeIcon(List->currentItem()->data(32).toInt());
 updateView();
+List->setCurrentItem(List->item(0));
 }
 
 void CSelectIconDlg::OnPickIcon(){
