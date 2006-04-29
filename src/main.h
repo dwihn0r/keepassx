@@ -65,6 +65,7 @@ extern QIcon *Icon_EditSearch;
 extern QIcon *Icon_Configure;
 extern QIcon *Icon_Help;
 extern QIcon *Icon_AutoType;
+extern QIcon *Icon_Swap;
 
 
 #endif

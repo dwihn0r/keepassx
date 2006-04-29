@@ -25,10 +25,10 @@ using std::string;
 #define BLOWFISH_ROUNDS		16
 #define CIPHER_ALGO_BLOWFISH	4	/* blowfish 128 bit key */
 
-#define uint8_t Q_UINT8
-#define uint16_t Q_UINT16
-#define uint32_t Q_UINT32
-#define byte Q_UINT8
+#define uint8_t quint8
+#define uint16_t quint16
+#define uint32_t quint32
+#define byte quint8
 
 /** blowfish encryption algorithm.
   * Derived from libgcrypt-1.1.12

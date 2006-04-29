@@ -79,7 +79,7 @@ if(c==1){
 else
 	str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
 
-QList<Q_UINT16> Keys;
+QList<quint16> Keys;
 for(int i=0;i<str.size();i++){
 	if(str[i]=='{'){
 		int start=i;
@@ -1131,9 +1131,9 @@ tKeysymMap AutoType::KeysymMap[] =
   { 0x20ac, 0x20ac }, /*                    EuroSign € EURO SIGN */
 };
 
-Q_UINT16 AutoType::getKeysym(const QChar& c){
+quint16 AutoType::getKeysym(const QChar& c){
 int MapSize=sizeof(KeysymMap);
-Q_UINT16 unicode=c.unicode();
+quint16 unicode=c.unicode();
 /* first check for Latin-1 characters (1:1 mapping) */
 if ((unicode >= 0x0020 && unicode <= 0x007e) ||
 	(unicode >= 0x00a0 && unicode <= 0x00ff))

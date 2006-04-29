@@ -106,7 +106,7 @@ private:
  bool ModFlag;
  QClipboard* Clipboard;
  QTimer ClipboardTimer;
- QList<Q_UINT32> SearchResults;
+ QList<quint32> SearchResults;
  inline void setupToolbar();
  inline void setupIcons();
  inline void setupConnections();

@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 
-#include <math.h>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDragLeaveEvent>
@@ -58,7 +57,7 @@ setAlternatingRowColors(config.AlternatingRowColors);
 
 KeepassEntryView::~KeepassEntryView(){
 for(int i=0;i<ColumnSizes.size();i++){
-	config.ColumnSizes[i]=round(ColumnSizes[i]*10000.0f);
+	config.ColumnSizes[i]=(int)(ColumnSizes[i]*10000.0f);
 }
 }
 
@@ -122,7 +121,7 @@ if(SelectionIDs.size())
 	}
 }
 
-void KeepassEntryView::showSearchResults(QList<Q_UINT32>& results){
+void KeepassEntryView::showSearchResults(QList<quint32>& results){
 IsSearchGroup=true;
 clear();
 Items.clear();
@@ -260,7 +259,7 @@ int wx=0; int j=0;
 
 for(int i=0;i<NUM_COLUMNS;i++){
 	if(!config.Columns[i])continue;
-	int NewWidth=round(ColumnSizes[i]*(float)w);
+	int NewWidth=(int)(ColumnSizes[i]*(float)w);
 	wx+=NewWidth;
 	header()->resizeSection(j++,NewWidth);
 	//add rounding difference (w-wx) to the last column
@@ -392,8 +391,30 @@ EntryViewItem::EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding
 
 
 bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
-if(QString::localeAwareCompare(	text(treeWidget()->sortColumn()),other.text(treeWidget()->sortColumn())) < 0)
-	return true;
-else 
-	return false;
+int SortCol=treeWidget()->sortColumn();
+if(SortCol < 5 || SortCol==9){ //columns with string values (Title, Username, Password, URL, Comment)
+	if(QString::localeAwareCompare(text(SortCol),other.text(SortCol)) < 0)
+		return true;
+	else 
+		return false;
+}
+QDateTime *DateThis;
+QDateTime *DateOther;
+
+switch(SortCol){
+	case 5: DateThis=&pEntry->Expire;
+			DateOther=&((EntryViewItem&)other).pEntry->Expire;
+			break;
+	case 6: DateThis=&pEntry->Creation;
+			DateOther=&((EntryViewItem&)other).pEntry->Creation;
+			break;
+	case 7: DateThis=&pEntry->LastMod;
+			DateOther=&((EntryViewItem&)other).pEntry->LastMod;
+			break;
+	case 8: DateThis=&pEntry->LastAccess;
+			DateOther=&((EntryViewItem&)other).pEntry->LastAccess;
+			break;
+	default:Q_ASSERT(false);
+}
+return *DateThis < *DateOther;
 }

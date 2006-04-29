@@ -35,8 +35,8 @@
 #include "Database.h"
 
 typedef struct tKeysymMap{
-	Q_UINT16 keysym;
-  	Q_UINT16 unicode;
+	quint16 keysym;
+  	quint16 unicode;
 };
 
 class AutoType:public QObject{
@@ -45,7 +45,7 @@ public:
  static void perform(CEntry* entry,QString& errors);
 private:
  static tKeysymMap KeysymMap[];
- static Q_UINT16 getKeysym(const QChar& unicode);
+ static quint16 getKeysym(const QChar& unicode);
  static int getModifiers(Display*,KeySym,int);
  static void pressModifiers(Display*,int,bool Press=true);
  static void releaseModifiers(Display*,int);

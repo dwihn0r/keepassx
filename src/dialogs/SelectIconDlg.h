@@ -32,13 +32,13 @@ class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
  Q_OBJECT
 public:
  CSelectIconDlg(Database* db,int,QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
- bool ModFlag;
 
 public slots:
  void OnAddIcon();
  void OnPickIcon();
  void OnCancel();
  void OnDelete();
+ void OnReplace();
  void OnSelectionChanged(QListWidgetItem*,QListWidgetItem*);
 
 private:
@@ -46,6 +46,7 @@ private:
  void updateView();
  QMenu* CtxMenu;
  QAction* DeleteAction;
+ QAction* ReplaceAction;
 
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);

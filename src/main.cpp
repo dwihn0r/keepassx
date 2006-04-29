@@ -73,6 +73,7 @@ QIcon *Icon_EditSearch;
 QIcon *Icon_Configure;
 QIcon *Icon_Help;
 QIcon *Icon_AutoType;
+QIcon *Icon_Swap;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
@@ -292,7 +293,7 @@ _loadIcon(Icon_EditSearch,"/actions/find.png");
 _loadIcon(Icon_Configure,"/actions/configure.png");
 _loadIcon(Icon_Help,"/actions/help.png");
 _loadIcon(Icon_AutoType,"/apps/ktouch.png");
-
+_loadIcon(Icon_Swap,"/actions/reload.png");
 }
 
 
@@ -303,12 +304,12 @@ int i=1;
 		ArgFile=QString::fromUtf8(argv[i]);
 		i++; }
 	for(i; i<argc;i++){
-		if(QString(argv[i])=="-h"){
+		if(QString(argv[i])=="-help"){
 			cout << "KeePassX" << KEEPASS_VERSION << endl;
 			cout << "Usage: keepass [Filename] [Options]" << endl;
-			cout << "  -h This Help" << endl;
-			cout << "  -cfg <ConfigFile> Use specified configuration." << endl;
-			cout << "  -lang <LOCALE>    Use specified language instead of system default." << endl;
+			cout << "  -help             This Help" << endl;
+			cout << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
+			cout << "  -lang <LOCALE>    Use specified language instead of systems default." << endl;
 			cout << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
 			cout << "                    Examples: de     German" << endl;
 			cout << "                              de_CH  German(Switzerland)"<<endl;

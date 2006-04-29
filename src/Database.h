@@ -42,10 +42,10 @@ class CEntry{
 public:
 CEntry();
 ~CEntry();
-Q_UINT8 ID[16];
-Q_UINT32 sID;
-Q_UINT32 GroupID;
-Q_UINT32 ImageID;
+quint8 ID[16];
+quint32 sID;
+quint32 GroupID;
+quint32 ImageID;
 quint32 OldImgID;
 QString Title;
 QString URL;
@@ -58,8 +58,8 @@ KpxDateTime LastMod;
 KpxDateTime LastAccess;
 KpxDateTime Expire;
 QByteArray BinaryData;
-/*Q_UINT32 PasswordLength;*/
-bool ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
+/*quint32 PasswordLength;*/
+bool ReadEntryField(quint16 FieldType, quint32 FieldSize, quint8 *pData);
 bool operator==(const CEntry&) const;
 };
 
@@ -68,17 +68,17 @@ class CGroup{
 public:
 CGroup();
 ~CGroup();
-Q_UINT32 ID;
-Q_UINT32 ImageID;
+quint32 ID;
+quint32 ImageID;
 quint32 OldImgID;
 QString Name;
 QDateTime Creation;
 QDateTime LastMod;
 QDateTime LastAccess;
 QDateTime Expire;
-Q_UINT16 Level;
-Q_UINT32 Flags;
-bool ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData);
+quint16 Level;
+quint32 Flags;
+bool ReadGroupField(quint16 FieldType, quint32 FieldSize, quint8 *pData);
 bool operator==(const CGroup&) const;
 
 bool 	  UI_ItemIsExpanded;
@@ -132,16 +132,17 @@ public:
  virtual int	   numIcons()=0;
  virtual void	   addIcon(const QPixmap& icon)=0;
  virtual void	   removeIcon(int Id)=0;
+ virtual void	   replaceIcon(int Id,const QPixmap& icon)=0;
 
- Q_UINT32 CryptoAlgorithmus;
- Q_UINT32 KeyEncRounds;
+ quint32 CryptoAlgorithmus;
+ quint32 KeyEncRounds;
  QFile* file;
  bool modflag;
  int SearchGroupID;
 
 protected:
- Q_UINT8 MasterKey[32];
- Q_UINT8 TransformedMasterKey[32];
+ quint8 MasterKey[32];
+ quint8 TransformedMasterKey[32];
 
 };
 

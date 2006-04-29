@@ -34,8 +34,8 @@ dev_random = fopen("/dev/urandom","r");}
 if (dev_random==NULL){
  srand(QTime(0,0,0).secsTo(QTime::currentTime()));
  for(int i=0;i<NumBlocks*BlockSize;i++){
-	Q_UINT8 rnd=rand()%256;
-	((Q_UINT8*)buffer)[i]=rnd;
+	quint8 rnd=rand()%256;
+	((quint8*)buffer)[i]=rnd;
 	}
  return;
 }

@@ -365,7 +365,6 @@ else
 void CEditEntryDlg::OnCustomIcons(){
 CSelectIconDlg dlg(db,Combo_IconPicker->currentItem(),this);
 int r=dlg.exec();
-if(dlg.ModFlag)ModFlag=true;
 if(r!=-1){
 	Combo_IconPicker->clear();
 	for(int i=0;i<db->numIcons();i++)

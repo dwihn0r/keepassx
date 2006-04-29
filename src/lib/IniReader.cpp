@@ -24,8 +24,9 @@
 
 // Local Includes
 #include "IniReader.h"
+#include <qglobal.h>
 
-#if defined(WIN32)
+#if defined(Q_WS_WIN)
 #define iniEOL endl
 #else
 #define iniEOL '\r' << endl

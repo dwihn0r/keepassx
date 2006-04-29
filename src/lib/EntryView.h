@@ -40,7 +40,7 @@ public:
  void updateItems(unsigned int group);
  void updateColumns();
  void refreshItems();
- void showSearchResults(QList<Q_UINT32>& results);
+ void showSearchResults(QList<quint32>& results);
  Database* db;
  vector<EntryViewItem*>Items;
  QMenu *ContextMenu;

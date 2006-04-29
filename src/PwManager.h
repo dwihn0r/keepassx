@@ -84,6 +84,7 @@ public:
  int	   numIcons();
  void	   addIcon(const QPixmap& icon);
  void	   removeIcon(int Id);
+ void	   replaceIcon(int Id,const QPixmap& icon);
 
  QList<CGroup>Groups;
  QList<CEntry>Entries;
@@ -92,12 +93,12 @@ private:
  bool parseMetaStream(const CEntry& Entry);
  bool parseCustomIconsMetaStream(const QByteArray& data);
  void createCustomIconsMetaStream(CEntry* dst);
- void transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* seed,int rounds);
+ void transformKey(quint8* src,quint8* dst,quint8* seed,int rounds);
  bool readHeader(char* raw);
- bool isGroupIdInUse(Q_UINT32 GroupID);
- bool isEntrySidInUse(Q_UINT32 sID);
- Q_UINT32 getNewGroupId();
- Q_UINT32 getNewEntrySid();
+ bool isGroupIdInUse(quint32 GroupID);
+ bool isEntrySidInUse(quint32 sID);
+ quint32 getNewGroupId();
+ quint32 getNewEntrySid();
  bool convHexToBinaryKey(char* HexKey, char* dst);
  QStringList Errors;
  QList<QPixmap> CustomIcons;
@@ -110,10 +111,10 @@ void modified();
 
 
 
- void memcpyFromLEnd32(Q_UINT32* dst,const char* src);
- void memcpyFromLEnd16(Q_UINT16* dst,const char* src);
- void memcpyToLEnd32(char* src,const Q_UINT32* dst);
- void memcpyToLEnd16(char* src,const Q_UINT16* dst);
+ void memcpyFromLEnd32(quint32* dst,const char* src);
+ void memcpyFromLEnd16(quint16* dst,const char* src);
+ void memcpyToLEnd32(char* src,const quint32* dst);
+ void memcpyToLEnd16(char* src,const quint16* dst);
  QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
  void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
 

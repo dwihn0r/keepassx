@@ -70,11 +70,11 @@ return ids;
 
 bool PwDatabase::openDatabase(QString filename, QString& err){
 unsigned long total_size,crypto_size;
-Q_UINT32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
-Q_UINT8 TrafoRandomSeed[32];
-Q_UINT8 FinalRandomSeed[16];
-Q_UINT8 ContentsHash[32];
-Q_UINT8 EncryptionIV[16];
+quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
+quint8 TrafoRandomSeed[32];
+quint8 FinalRandomSeed[16];
+quint8 ContentsHash[32];
+quint8 EncryptionIV[16];
 
 file=new QFile(filename);
 if(!file->open(QIODevice::ReadWrite)){
@@ -122,7 +122,7 @@ else {
  }
 
 transformKey(MasterKey,TransformedMasterKey,TrafoRandomSeed,KeyEncRounds);
-Q_UINT8 FinalKey[32];
+quint8 FinalKey[32];
 sha256_context sha32;
 sha256_starts(&sha32);
 sha256_update(&sha32,FinalRandomSeed, 16);
@@ -138,15 +138,15 @@ if(CryptoAlgorithmus == ALGO_AES)
 			{err=tr("AES-Init Failed");
 			 return false;}
 		// Decrypt! The first bytes aren't encrypted (that's the header)
-		crypto_size = (unsigned long)aes.padDecrypt((Q_UINT8 *)buffer + DB_HEADER_SIZE,
-			total_size  - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
+		crypto_size = (unsigned long)aes.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
+			total_size  - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
 	}
 else if(CryptoAlgorithmus == ALGO_TWOFISH)
 	{
 		CTwofish twofish;
 		if(twofish.init(FinalKey, 32, EncryptionIV) != true){return false;}
-		crypto_size = (unsigned long)twofish.padDecrypt((Q_UINT8 *)buffer + DB_HEADER_SIZE,
-			total_size - DB_HEADER_SIZE, (Q_UINT8 *)buffer + DB_HEADER_SIZE);
+		crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
+			total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
 	}
 
 if((crypto_size > 2147483446) || (!crypto_size && NumGroups)){err=tr("Decryption failed.\nThe key is wrong or the file is damaged."); return false;}
@@ -163,8 +163,8 @@ return false;}
 
 unsigned long tmp_id=0;
 unsigned long pos = DB_HEADER_SIZE;
-Q_UINT16 FieldType;
-Q_UINT32 FieldSize;
+quint16 FieldType;
+quint32 FieldSize;
 char* pField;
 bool bRet;
 CGroup group;
@@ -185,7 +185,7 @@ CGroup group;
 		 err=tr("Unexpected error: Offset is out of range. [G2]");
 		return false;}
 
-		bRet = group.ReadGroupField(FieldType, FieldSize, (Q_UINT8 *)pField);
+		bRet = group.ReadGroupField(FieldType, FieldSize, (quint8 *)pField);
 		if((FieldType == 0xFFFF) && (bRet == true)){
 			Groups << group;
 			CurGroup++;} // Now and ONLY now the counter gets increased
@@ -215,7 +215,7 @@ CEntry entry;
 		 err=tr("Unexpected error: Offset is out of range. [E2]");
 		 return false; }
 
-		bRet = entry.ReadEntryField(FieldType,FieldSize,(Q_UINT8*)pField);
+		bRet = entry.ReadEntryField(FieldType,FieldSize,(quint8*)pField);
 
 		if((FieldType == 0xFFFF) && (bRet == true)){			
 			entry.sID=tmp_id++;
@@ -252,7 +252,7 @@ return false; //unknown MetaStreams
 }
 
 bool PwDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
-Q_UINT32 NumIcons,NumEntries,NumGroups,offset;
+quint32 NumIcons,NumEntries,NumGroups,offset;
 memcpyFromLEnd32(&NumIcons,dta.data());
 memcpyFromLEnd32(&NumEntries,dta.data()+4);
 memcpyFromLEnd32(&NumGroups,dta.data()+8);
@@ -260,7 +260,7 @@ offset=12;
 CustomIcons.clear();
 for(int i=0;i<NumIcons;i++){
 	CustomIcons << QPixmap();
-	Q_UINT32 Size;
+	quint32 Size;
 	memcpyFromLEnd32(&Size,dta.data()+offset);
 	if(offset+Size > dta.size()){
 		CustomIcons.clear();
@@ -275,7 +275,7 @@ for(int i=0;i<NumIcons;i++){
 		return false;}
 }
 for(int i=0;i<NumEntries;i++){
-	Q_UINT32 Entry,Icon;
+	quint32 Entry,Icon;
 	memcpyFromLEnd32(&Entry,dta.data()+offset);
 	offset+=4;
 	memcpyFromLEnd32(&Icon,dta.data()+offset);
@@ -284,7 +284,7 @@ for(int i=0;i<NumEntries;i++){
 	Entries[Entry].ImageID=Icon;
 }
 for(int i=0;i<NumGroups;i++){
-	Q_UINT32 Group,Icon;
+	quint32 Group,Icon;
 	memcpyFromLEnd32(&Group,dta.data()+offset);
 	offset+=4;
 	memcpyFromLEnd32(&Icon,dta.data()+offset);
@@ -303,19 +303,19 @@ e->Additional="KPX_CUSTOM_ICONS";
 e->URL="$";
 e->ImageID=0;
 int Size=12;
-Q_UINT32 NumEntries=Entries.size();
-Q_UINT32 NumGroups=Groups.size();
+quint32 NumEntries=Entries.size();
+quint32 NumGroups=Groups.size();
 Size+=8*(NumEntries+NumGroups);
 Size+=CustomIcons.size()*1000; // 1KB 
 e->BinaryData.reserve(Size);
 e->BinaryData.resize(12);
-Q_UINT32 NumIcons=CustomIcons.size();
+quint32 NumIcons=CustomIcons.size();
 
 memcpyToLEnd32(e->BinaryData.data(),&NumIcons);
 memcpyToLEnd32(e->BinaryData.data()+4,&NumEntries);
 memcpyToLEnd32(e->BinaryData.data()+8,&NumGroups);
 for(int i=0;i<CustomIcons.size();i++){
-	Q_UINT32 ImgSize;
+	quint32 ImgSize;
 	char ImgSizeBin[4];
 	QByteArray png;
 	png.reserve(1000);
@@ -326,17 +326,17 @@ for(int i=0;i<CustomIcons.size();i++){
 	e->BinaryData.append(QByteArray::fromRawData(ImgSizeBin,4));
 	e->BinaryData.append(png);
 }
-for(Q_UINT32 i=0;i<Entries.size();i++){
+for(quint32 i=0;i<Entries.size();i++){
 		char Bin[8];
 		memcpyToLEnd32(Bin,&i);
-		Q_UINT32 id=Entries[i].ImageID;
+		quint32 id=Entries[i].ImageID;
 		memcpyToLEnd32(Bin+4,&id);
 		e->BinaryData.append(QByteArray::fromRawData(Bin,8));
 }
-for(Q_UINT32 i=0;i<Groups.size();i++){
+for(quint32 i=0;i<Groups.size();i++){
 		char Bin[8];
 		memcpyToLEnd32(Bin,&i);
-		Q_UINT32 id=Groups[i].ImageID;
+		quint32 id=Groups[i].ImageID;
 		memcpyToLEnd32(Bin+4,&id);
 		e->BinaryData.append(QByteArray::fromRawData(Bin,8));
 }
@@ -367,30 +367,37 @@ if(id >= CustomIcons.size()) return;
 CustomIcons.removeAt(id); // .isNull()==true
 for(int i=0;i<Entries.size();i++){
 	if(Entries[i].ImageID == id+BUILTIN_ICONS)
-		Entries[i].ImageID=0;
+		Entries[i].ImageID=Entries[i].OldImgID;
 	if(Entries[i].ImageID>id+BUILTIN_ICONS)
 		Entries[i].ImageID--;
 }
 for(int i=0;i<Groups.size();i++){
 	if(Groups[i].ImageID == id+BUILTIN_ICONS)
-		Groups[i].ImageID=0;
+		Groups[i].ImageID=Groups[i].OldImgID;
 	if(Groups[i].ImageID>id+BUILTIN_ICONS)
 		Groups[i].ImageID--;
 }
+emit modified();
 }
 
-void PwDatabase::transformKey(Q_UINT8* src,Q_UINT8* dst,Q_UINT8* KeySeed,int rounds){
-Q_UINT8* tmp=new Q_UINT8[32];
+void PwDatabase::replaceIcon(int id,const QPixmap& icon){
+if(id<BUILTIN_ICONS)return;
+CustomIcons[id-BUILTIN_ICONS]=icon;
+emit modified();
+}
+
+void PwDatabase::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int rounds){
+quint8* tmp=new quint8[32];
 Rijndael rijndael;
 sha256_context sha2;
-if(rijndael.init(Rijndael::ECB, Rijndael::Encrypt, (const Q_UINT8 *)KeySeed,
+if(rijndael.init(Rijndael::ECB, Rijndael::Encrypt, (const quint8 *)KeySeed,
                  Rijndael::Key32Bytes, 0) != RIJNDAEL_SUCCESS){
   _ERROR
   exit(1);}
 
 memcpy(tmp,src,32);
 for(int i=0;i<rounds;i++){
- rijndael.blockEncrypt((const Q_UINT8 *)tmp, 256, (Q_UINT8 *)tmp);
+ rijndael.blockEncrypt((const quint8 *)tmp, 256, (quint8 *)tmp);
 }
 
 sha256_starts(&sha2);
@@ -518,10 +525,10 @@ return &Entries.back();
 
 
 bool PwDatabase::CalcMasterKeyByFileAndPw(QString filename, QString& Password){
-Q_UINT8* FileKey;
-Q_UINT8* PasswordKey;
-PasswordKey=new Q_UINT8[32];
-FileKey=new Q_UINT8[32];
+quint8* FileKey;
+quint8* PasswordKey;
+PasswordKey=new quint8[32];
+FileKey=new quint8[32];
 sha256_context sha32;
 /////////////////////////
 QFile file(filename);
@@ -605,8 +612,8 @@ entry->GroupID=dst->ID;
 
 CEntry* PwDatabase::cloneEntry(CEntry* entry){
 CEntry *Dolly=addEntry();
-Q_UINT8 ID[16];
-Q_UINT32 sid=Dolly->sID;
+quint8 ID[16];
+quint32 sid=Dolly->sID;
 memcpy(ID,Dolly->ID,16);
 *Dolly=*entry;
 Dolly->sID=sid;
@@ -615,7 +622,7 @@ return Dolly;
 }
 
 
-bool CGroup::ReadGroupField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData)
+bool CGroup::ReadGroupField(quint16 FieldType, quint32 FieldSize, quint8 *pData)
 {
 
 	switch(FieldType)
@@ -668,7 +675,7 @@ void PwDatabase::newDatabase(){
 	file=new QFile();
 }
 
-bool CEntry::ReadEntryField(Q_UINT16 FieldType, Q_UINT32 FieldSize, Q_UINT8 *pData){
+bool CEntry::ReadEntryField(quint16 FieldType, quint32 FieldSize, quint8 *pData){
 
 
 switch(FieldType)
@@ -743,11 +750,11 @@ return true;
 
 bool PwDatabase::saveDatabase(){
 CGroup SearchGroup;
-Q_UINT32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
-Q_UINT8 TrafoRandomSeed[32];
-Q_UINT8 FinalRandomSeed[16];
-Q_UINT8 ContentsHash[32];
-Q_UINT8 EncryptionIV[16];
+quint32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
+quint8 TrafoRandomSeed[32];
+quint8 FinalRandomSeed[16];
+quint8 ContentsHash[32];
+quint8 EncryptionIV[16];
 
 Q_ASSERT(file);
 if(!(file->openMode() & QIODevice::WriteOnly)){
@@ -812,8 +819,8 @@ getRandomBytes(FinalRandomSeed,1,16,false);
 getRandomBytes(TrafoRandomSeed,1,32,false);
 getRandomBytes(EncryptionIV,1,16,false);
 
-Q_UINT16 FieldType;
-Q_UINT32 FieldSize;
+quint16 FieldType;
+quint32 FieldSize;
 int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
 
 for(int i=0; i < Groups.size(); i++){
@@ -1059,7 +1066,7 @@ memcpy(buffer+56,ContentsHash,32);
 memcpy(buffer+88,TrafoRandomSeed,32);
 memcpyToLEnd32(buffer+120,&KeyEncRounds);
 transformKey(MasterKey,TransformedMasterKey,TrafoRandomSeed,KeyEncRounds);
-Q_UINT8 FinalKey[32];
+quint8 FinalKey[32];
 sha256_starts(&context);
 sha256_update(&context,FinalRandomSeed, 16);
 sha256_update(&context,TransformedMasterKey, 32);
@@ -1074,18 +1081,18 @@ Rijndael aes;
 	_ERROR
 	delete [] buffer;
 	return false;}
-EncryptedPartSize = (unsigned long)aes.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZE,
+EncryptedPartSize = (unsigned long)aes.padEncrypt((quint8*)buffer+DB_HEADER_SIZE,
 						  pos - DB_HEADER_SIZE,
-						  (Q_UINT8*)buffer+DB_HEADER_SIZE);
+						  (quint8*)buffer+DB_HEADER_SIZE);
 }else if(CryptoAlgorithmus == ALGO_TWOFISH){
 CTwofish twofish;
 if(twofish.init(FinalKey, 32, EncryptionIV) == false){
 _ERROR
 delete [] buffer;
 return false;}
-EncryptedPartSize = (unsigned long)twofish.padEncrypt((Q_UINT8*)buffer+DB_HEADER_SIZE,
+EncryptedPartSize = (unsigned long)twofish.padEncrypt((quint8*)buffer+DB_HEADER_SIZE,
 						      pos - DB_HEADER_SIZE,
-						      (Q_UINT8*)buffer+DB_HEADER_SIZE);
+						      (quint8*)buffer+DB_HEADER_SIZE);
 }
 if((EncryptedPartSize > 2147483446) || (!EncryptedPartSize && Groups.size())){
 _ERROR
@@ -1186,14 +1193,14 @@ for(int i=0;i<db->numGroups();i++){
 }
 }
 
-bool PwDatabase::isGroupIdInUse(Q_UINT32 id){
+bool PwDatabase::isGroupIdInUse(quint32 id){
 for(int i=0;i<Groups.size();i++)
  if(Groups[i].ID==id)return true;
 
 return false;
 }
 
-bool PwDatabase::isEntrySidInUse(Q_UINT32 sid){
+bool PwDatabase::isEntrySidInUse(quint32 sid){
 for(int i=0;i<Entries.size();i++)
  if(Entries[i].sID==sid)return true;
 
@@ -1214,8 +1221,8 @@ return true;
 }
 
 
-Q_UINT32 PwDatabase::getNewGroupId(){
-Q_UINT32 id;
+quint32 PwDatabase::getNewGroupId(){
+quint32 id;
 bool used;
 while(1){
 used=false;
@@ -1227,8 +1234,8 @@ if(used==false)break;}
 return id;
 }
 
-Q_UINT32 PwDatabase::getNewEntrySid(){
-Q_UINT32 sid;
+quint32 PwDatabase::getNewEntrySid(){
+quint32 sid;
 while(1){
 getRandomBytes(&sid,4,1,false);
 if(!sid)continue;
@@ -1241,7 +1248,7 @@ bool PwDatabase::convHexToBinaryKey(char* HexKey, char* dst){
 QString hex=QString::fromAscii(HexKey,64);
 for(int i=0; i<64; i+=2){
 	bool err;
-	Q_UINT8 bin;
+	quint8 bin;
 	bin=hex.mid(i,2).toUInt(&err,16);
 	if(!err){
 		qWarning("Invalid Hex Key\n");
@@ -1370,7 +1377,7 @@ void PwDatabase::setEntry(unsigned long index,CEntry& entry){
 int PwDatabase::numEntries(){
 	return Entries.size();}
 
-void memcpyFromLEnd32(Q_UINT32* dst,const char* src){
+void memcpyFromLEnd32(quint32* dst,const char* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(((char*)dst)+3,src+0,1);
@@ -1382,7 +1389,7 @@ else
   memcpy(dst,src,4);
 }
 
-void memcpyFromLEnd16(Q_UINT16* dst,const char* src){
+void memcpyFromLEnd16(quint16* dst,const char* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(((char*)dst)+1,src+0,1);
@@ -1392,7 +1399,7 @@ else
   memcpy(dst,src,2);
 }
 
-void memcpyToLEnd32(char* dst,const Q_UINT32* src){
+void memcpyToLEnd32(char* dst,const quint32* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(dst+0,((char*)src)+3,1);
@@ -1404,7 +1411,7 @@ else
   memcpy(dst,src,4);
 }
 
-void memcpyToLEnd16(char* dst,const Q_UINT16* src){
+void memcpyToLEnd16(char* dst,const quint16* src){
 
 if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
   memcpy(dst+0,((char*)src)+1,1);
@@ -1417,9 +1424,9 @@ else
 const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));
 
 QDateTime dateFromPackedStruct5(const unsigned char* pBytes){
-Q_UINT32 dw1, dw2, dw3, dw4, dw5;
-dw1 = (Q_UINT32)pBytes[0]; dw2 = (Q_UINT32)pBytes[1]; dw3 = (Q_UINT32)pBytes[2];
-dw4 = (Q_UINT32)pBytes[3]; dw5 = (Q_UINT32)pBytes[4];
+quint32 dw1, dw2, dw3, dw4, dw5;
+dw1 = (quint32)pBytes[0]; dw2 = (quint32)pBytes[1]; dw3 = (quint32)pBytes[2];
+dw4 = (quint32)pBytes[3]; dw5 = (quint32)pBytes[4];
 int y = (dw1 << 6) | (dw2 >> 2);
 int mon = ((dw2 & 0x00000003) << 2) | (dw3 >> 6);
 int d = (dw3 >> 1) & 0x0000001F;
@@ -1431,11 +1438,11 @@ return QDateTime(QDate(y,mon,d),QTime(h,min,s));
 
 
 void dateToPackedStruct5(const QDateTime& d,unsigned char* pBytes){
-pBytes[0] = (Q_UINT8)(((Q_UINT32)d.date().year() >> 6) & 0x0000003F);
-pBytes[1] = (Q_UINT8)((((Q_UINT32)d.date().year() & 0x0000003F) << 2) | (((Q_UINT32)d.date().month() >> 2) & 0x00000003));
-pBytes[2] = (Q_UINT8)((((Q_UINT32)d.date().month() & 0x00000003) << 6) | (((Q_UINT32)d.date().day() & 0x0000001F) << 1) | (((Q_UINT32)d.time().hour() >> 4) & 0x00000001));
-pBytes[3] = (Q_UINT8)((((Q_UINT32)d.time().hour() & 0x0000000F) << 4) | (((Q_UINT32)d.time().minute() >> 2) & 0x0000000F));
-pBytes[4] = (Q_UINT8)((((Q_UINT32)d.time().minute() & 0x00000003) << 6) | ((Q_UINT32)d.time().second() & 0x0000003F));
+pBytes[0] = (quint8)(((quint32)d.date().year() >> 6) & 0x0000003F);
+pBytes[1] = (quint8)((((quint32)d.date().year() & 0x0000003F) << 2) | (((quint32)d.date().month() >> 2) & 0x00000003));
+pBytes[2] = (quint8)((((quint32)d.date().month() & 0x00000003) << 6) | (((quint32)d.date().day() & 0x0000001F) << 1) | (((quint32)d.time().hour() >> 4) & 0x00000001));
+pBytes[3] = (quint8)((((quint32)d.time().hour() & 0x0000000F) << 4) | (((quint32)d.time().minute() >> 2) & 0x0000000F));
+pBytes[4] = (quint8)((((quint32)d.time().minute() & 0x00000003) << 6) | ((quint32)d.time().second() & 0x0000003F));
 }
 
 

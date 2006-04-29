@@ -38,12 +38,12 @@
 /////////////////////////////////////////////////////////////////////////////
 // Define 8- and 32-bit variables
 
-#ifndef Q_UINT_32
- #define Q_UINT_8 unsigned char
+#ifndef quint_32
+ #define quint_8 unsigned char
  #if (ULONG_MAX == 0xFFFFFFFF)
-  #define Q_UINT_32 unsigned long
+  #define quint_32 unsigned long
  #else
-  #define Q_UINT_32 unsigned int
+  #define quint_32 unsigned int
  #endif
 #endif
 
@@ -53,8 +53,8 @@
 
 typedef union
 {
-	Q_UINT_8  c[64];
-	Q_UINT_32 l[16];
+	quint_8  c[64];
+	quint_32 l[16];
 } SHA1_WORKSPACE_BLOCK;
 
 class CSHA1
@@ -71,10 +71,10 @@ public:
 	CSHA1();
 	~CSHA1();
 
-	Q_UINT_32 m_state[5];
-	Q_UINT_32 m_count[2];
-	Q_UINT_8  m_buffer[64];
-	Q_UINT_8  m_digest[20];
+	quint_32 m_state[5];
+	quint_32 m_count[2];
+	quint_8  m_buffer[64];
+	quint_8  m_digest[20];
 
 	void Reset();
 
@@ -85,14 +85,14 @@ public:
 	// Finalize hash and report
 	void Final();
 	void ReportHash(char *szReport, unsigned char uReportType = REPORT_HEX);
-	void GetHash(Q_UINT_8 *puDest);
+	void GetHash(quint_8 *puDest);
 
 private:
 	// Private SHA-1 transformation
-	void Transform(Q_UINT_32 *state, Q_UINT_8 *buffer);
+	void Transform(quint_32 *state, quint_8 *buffer);
 
 	// Member variables
-	Q_UINT_8 m_workspace[64];
+	quint_8 m_workspace[64];
 	SHA1_WORKSPACE_BLOCK *m_block; // SHA1 pointer to the byte array above
 };
 

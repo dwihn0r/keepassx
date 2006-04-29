@@ -22,7 +22,7 @@
 
 #include "sha256.h"
 
-#define GET_Q_UINT32(n,b,i)                       \
+#define GET_quint32(n,b,i)                       \
 {                                               \
     (n) = ( (uint32) (b)[(i)    ] << 24 )       \
         | ( (uint32) (b)[(i) + 1] << 16 )       \
@@ -30,7 +30,7 @@
         | ( (uint32) (b)[(i) + 3]       );      \
 }
 
-#define PUT_Q_UINT32(n,b,i)                       \
+#define PUT_quint32(n,b,i)                       \
 {                                               \
     (b)[(i)    ] = (uint8) ( (n) >> 24 );       \
     (b)[(i) + 1] = (uint8) ( (n) >> 16 );       \
@@ -58,22 +58,22 @@ void sha256_process( sha256_context *ctx, uint8 data[64] )
     uint32 temp1, temp2, W[64];
     uint32 A, B, C, D, E, F, G, H;
 
-    GET_Q_UINT32( W[0],  data,  0 );
-    GET_Q_UINT32( W[1],  data,  4 );
-    GET_Q_UINT32( W[2],  data,  8 );
-    GET_Q_UINT32( W[3],  data, 12 );
-    GET_Q_UINT32( W[4],  data, 16 );
-    GET_Q_UINT32( W[5],  data, 20 );
-    GET_Q_UINT32( W[6],  data, 24 );
-    GET_Q_UINT32( W[7],  data, 28 );
-    GET_Q_UINT32( W[8],  data, 32 );
-    GET_Q_UINT32( W[9],  data, 36 );
-    GET_Q_UINT32( W[10], data, 40 );
-    GET_Q_UINT32( W[11], data, 44 );
-    GET_Q_UINT32( W[12], data, 48 );
-    GET_Q_UINT32( W[13], data, 52 );
-    GET_Q_UINT32( W[14], data, 56 );
-    GET_Q_UINT32( W[15], data, 60 );
+    GET_quint32( W[0],  data,  0 );
+    GET_quint32( W[1],  data,  4 );
+    GET_quint32( W[2],  data,  8 );
+    GET_quint32( W[3],  data, 12 );
+    GET_quint32( W[4],  data, 16 );
+    GET_quint32( W[5],  data, 20 );
+    GET_quint32( W[6],  data, 24 );
+    GET_quint32( W[7],  data, 28 );
+    GET_quint32( W[8],  data, 32 );
+    GET_quint32( W[9],  data, 36 );
+    GET_quint32( W[10], data, 40 );
+    GET_quint32( W[11], data, 44 );
+    GET_quint32( W[12], data, 48 );
+    GET_quint32( W[13], data, 52 );
+    GET_quint32( W[14], data, 56 );
+    GET_quint32( W[15], data, 60 );
 
 #define  SHR(x,n) ((x & 0xFFFFFFFF) >> n)
 #define ROTR(x,n) (SHR(x,n) | (x << (32 - n)))
@@ -241,8 +241,8 @@ void sha256_finish( sha256_context *ctx, uint8 digest[32] )
          | ( ctx->total[1] <<  3 );
     low  = ( ctx->total[0] <<  3 );
 
-    PUT_Q_UINT32( high, msglen, 0 );
-    PUT_Q_UINT32( low,  msglen, 4 );
+    PUT_quint32( high, msglen, 0 );
+    PUT_quint32( low,  msglen, 4 );
 
     last = ctx->total[0] & 0x3F;
     padn = ( last < 56 ) ? ( 56 - last ) : ( 120 - last );
@@ -250,14 +250,14 @@ void sha256_finish( sha256_context *ctx, uint8 digest[32] )
     sha256_update( ctx, sha256_padding, padn );
     sha256_update( ctx, msglen, 8 );
 
-    PUT_Q_UINT32( ctx->state[0], digest,  0 );
-    PUT_Q_UINT32( ctx->state[1], digest,  4 );
-    PUT_Q_UINT32( ctx->state[2], digest,  8 );
-    PUT_Q_UINT32( ctx->state[3], digest, 12 );
-    PUT_Q_UINT32( ctx->state[4], digest, 16 );
-    PUT_Q_UINT32( ctx->state[5], digest, 20 );
-    PUT_Q_UINT32( ctx->state[6], digest, 24 );
-    PUT_Q_UINT32( ctx->state[7], digest, 28 );
+    PUT_quint32( ctx->state[0], digest,  0 );
+    PUT_quint32( ctx->state[1], digest,  4 );
+    PUT_quint32( ctx->state[2], digest,  8 );
+    PUT_quint32( ctx->state[3], digest, 12 );
+    PUT_quint32( ctx->state[4], digest, 16 );
+    PUT_quint32( ctx->state[5], digest, 20 );
+    PUT_quint32( ctx->state[6], digest, 24 );
+    PUT_quint32( ctx->state[7], digest, 28 );
 }
 
 #ifdef TEST

@@ -72,7 +72,7 @@ void CSHA1::Reset()
 }
 void CSHA1::Update(unsigned char* data, int len){
 
-	Q_UINT_32 i, j;
+	quint_32 i, j;
 
 	j = (m_count[0] >> 3) & 63;
 
@@ -98,10 +98,10 @@ void CSHA1::Update(unsigned char* data, int len){
 }
 
 
-void CSHA1::Transform(Q_UINT_32 *state, Q_UINT_8 *buffer)
+void CSHA1::Transform(quint_32 *state, quint_8 *buffer)
 {
 	// Copy state[] to working vars
-	Q_UINT_32 a = state[0], b = state[1], c = state[2], d = state[3], e = state[4];
+	quint_32 a = state[0], b = state[1], c = state[2], d = state[3], e = state[4];
 
 	memcpy(m_block, buffer, 64);
 
@@ -146,7 +146,7 @@ bool CSHA1::HashFile(char *szFileName)
 {
 	unsigned long ulFileSize, ulRest, ulBlocks;
 	unsigned long i;
-	Q_UINT_8 uData[SHA1_MAX_FILE_BUFFER];
+	quint_8 uData[SHA1_MAX_FILE_BUFFER];
 	FILE *fIn;
 
 	if(szFileName == NULL) return false;
@@ -172,13 +172,13 @@ bool CSHA1::HashFile(char *szFileName)
 	for(i = 0; i < ulBlocks; i++)
 	{
 		fread(uData, 1, SHA1_MAX_FILE_BUFFER, fIn);
-		Update((Q_UINT_8 *)uData, SHA1_MAX_FILE_BUFFER);
+		Update((quint_8 *)uData, SHA1_MAX_FILE_BUFFER);
 	}
 
 	if(ulRest != 0)
 	{
 		fread(uData, 1, ulRest, fIn);
-		Update((Q_UINT_8 *)uData, ulRest);
+		Update((quint_8 *)uData, ulRest);
 	}
 
 	fclose(fIn); fIn = NULL;
@@ -187,23 +187,23 @@ bool CSHA1::HashFile(char *szFileName)
 
 void CSHA1::Final()
 {
-	Q_UINT_32 i;
-	Q_UINT_8 finalcount[8];
+	quint_32 i;
+	quint_8 finalcount[8];
 
 	for(i = 0; i < 8; i++)
-		finalcount[i] = (Q_UINT_8)((m_count[((i >= 4) ? 0 : 1)]
+		finalcount[i] = (quint_8)((m_count[((i >= 4) ? 0 : 1)]
 			>> ((3 - (i & 3)) * 8) ) & 255); // Endian independent
 
-	Update((Q_UINT_8 *)"\200", 1);
+	Update((quint_8 *)"\200", 1);
 
 	while ((m_count[0] & 504) != 448)
-		Update((Q_UINT_8 *)"\0", 1);
+		Update((quint_8 *)"\0", 1);
 
 	Update(finalcount, 8); // Cause a SHA1Transform()
 
 	for(i = 0; i < 20; i++)
 	{
-		m_digest[i] = (Q_UINT_8)((m_state[i >> 2] >> ((3 - (i & 3)) * 8) ) & 255);
+		m_digest[i] = (quint_8)((m_state[i >> 2] >> ((3 - (i & 3)) * 8) ) & 255);
 	}
 
 	// Wipe variables for security reasons
@@ -251,7 +251,7 @@ void CSHA1::ReportHash(char *szReport, unsigned char uReportType)
 }
 
 // Get the raw message digest
-void CSHA1::GetHash(Q_UINT_8 *puDest)
+void CSHA1::GetHash(quint_8 *puDest)
 {
 	memcpy(puDest, m_digest, 20);
 }

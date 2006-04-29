@@ -30,7 +30,7 @@ public:
   CSearchDlg(Database* _db, CGroup* pGroup=NULL,QWidget* parent = 0, const char* name = 0, 
 	     bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CSearchDlg();
-  QList<Q_UINT32> Hits;
+  QList<quint32> Hits;
 
 public slots:
     virtual void OnButtonClose();

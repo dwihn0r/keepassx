@@ -37,7 +37,7 @@ int len=file.size();
 if(len==0){
 	err+=QObject::tr("File is empty.");
 	return false;}
-Q_UINT8* buffer=new Q_UINT8[len];
+quint8* buffer=new quint8[len];
 file.readBlock((char*)buffer,len);
 file.close();
 QDomDocument doc;
