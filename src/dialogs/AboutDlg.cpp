@@ -35,7 +35,7 @@ loadLicFromFile();
 
 QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
 if(TrActive){
-	AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSALTION_AUTHOR"));
+	AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSLATION_AUTHOR"));
 	QString mail=tr("$TRANSLATION_AUTHOR_EMAIL","Here you can enter your email or homepage if you want.");
 	if(mail!=QString()){
 		AboutTr+=mail+"<br>";
@@ -44,13 +44,18 @@ if(TrActive){
 }
 Edit_Translation->setText(AboutTr+tr("\
 Information on how to translate KeePassX can be found under:\n\
-http://keepass.berlios.de/translation-howto.html"));
-
-QString ThanksTemplate=QString("<div style='margin-left:0px;'><b>%1</b></div><div style='margin-left:10px;'>%2</div><br><br>");
-
-Edit_Thanks->setText(ThanksTemplate.arg(tr("Matthias Miller")).arg(tr("http://www.outofhanwell.com/<br>Mac OS X Support")));
-Edit_Thanks->setText(Edit_Thanks->text()+ThanksTemplate.arg(tr("Eugen Gorschenin")).arg(tr("geugen@users.berlios.de<br>New Website")));
-//Edit_Thanks->setText(Edit_Thanks->text()+ThanksTemplate.arg(tr("  ")).arg(tr("  ")));
+http://keepass.berlios.de/"));
+QString str;
+str+="<b>"+tr("Team")+"</b><br>";
+str+="<div style='margin-left:10px;'>";
+str+="<u>"+tr("Tarek Saidi")+"</u><br>"+tr("Developer, Project Admin")+"<br>"+tr("tariq@users.berlios.de")+"<br>";
+str+="<br>";
+str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.berlios.de")+"<br>";
+str+="</div><br><div style='margin-left:0px;'>";
+str+="<b>"+tr("Thanks To")+"</b>";
+str+="</div><div style='margin-left:10px;'>";
+str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
+Edit_Thanks->setText(str);
 }
 
 CAboutDialog::~CAboutDialog()

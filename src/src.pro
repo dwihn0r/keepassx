@@ -15,11 +15,19 @@ unix{
 	target.path = $${PREFIX}/bin
 	data.path = $${PREFIX}/share/keepass
 	LIBS+=-lXtst
+	SOURCES+=lib/AutoType_X11.cpp
 }
 
 macx{ 
 	target.path = /Applications
 	data.path = /Applications/keepass.app/Contents/share/keepass
+	SOURCES+=lib/AutoType_X11.cpp
+}
+
+win{
+	SOURCES+=lib/AutoType_Win.cpp
+
+
 }
 
 FORMS += forms/EditGroupDlg.ui \
@@ -104,7 +112,6 @@ SOURCES += lib/IniReader.cpp \
            lib/KdePlugin.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
-	   lib/AutoType.cpp \
            crypto/arcfour.cpp \
            lib/KpFileIconProvider.cpp 
 QT += xml qt3support

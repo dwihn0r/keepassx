@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>Thanks To</source>
-        <translation>Merci à</translation>
+        <translation type="obsolete">Remerciement à</translation>
     </message>
     <message>
         <source>License</source>
@@ -26,23 +26,26 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:200; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt;&lt;B&gt; - Gestionnaire de Mots de Passe Multiplateforme &lt;/B&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copyright (C) 2005 - 2006 Tarek Saidi 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
-        <translation>Copyright (C) 2005 - 2006 Tarek Saidi
-KeePassX est distribué sous les terme de la
-Licence Publique Générale version 2  (GNU GPL v2) .</translation>
+        <translation>&lt;B&gt;Copyright ©     2005 - 2006     Tarek Saidi &lt;B&gt;&lt;br&gt;
+&lt;B&gt;KeePassX  est  distribué  sous  les  termes  de  la licence GNU GPL v2.&lt;B&gt;</translation>
     </message>
     <message>
         <source>tarek.saidi@arcor.de</source>
-        <translation></translation>
+        <translation>tarek.saidi@arcor.de</translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/</source>
-        <translation></translation>
+        <translation>http://keepass.berlios.de/</translation>
+    </message>
+    <message>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -50,7 +53,17 @@ Licence Publique Générale version 2  (GNU GPL v2) .</translation>
     <message>
         <source>More than one &apos;Auto-Type:&apos; key sequence found.
 Allowed is only one per entry.</source>
+        <translation>Plus d&apos;une auto-saisie: Séquence clé trouvée.
+Seulement une par entrée est autorisée. </translation>
+    </message>
+    <message>
+        <source>Syntax Error in Auto-Type sequence near character %1
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
     </message>
 </context>
 <context>
@@ -87,46 +100,95 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation>http://keepass.berlios.de/index.php</translation>
+        <translation>http://keepass.berlios.de/index.php </translation>
     </message>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation>&lt;b&gt;la courante traduction: Française&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;La présente traduction française&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation>&lt;b&gt;Auteur:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation>&lt;b&gt; A pour auteur:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>$TRANSALTION_AUTHOR</source>
-        <translation>Djellel DIDA</translation>
+        <translation type="obsolete">&lt;br&gt;Djellel DIDA</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation>djellel@free.fr</translation>
+        <translation>&lt;b&gt; Adresse électronique: &lt;/b&gt;  &lt;br&gt;djellel@free.fr
+</translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/translation-howto.html</source>
-        <translation>L&apos;information sur la méthode de traduction pour KeePassX peut être trouvé à l&apos;adresse suivante:
-http://keepass.berlios.de/translation-howto.html</translation>
+        <translation type="obsolete">Les informations concernant la méthode de traduction de KeePassX peut être trouvé à l&apos;adresse suivante:&lt;br&gt;
+ &lt;ADDRESS&gt;http://keepass.berlios.de/translation-howto.html&lt;/ADDRESS&gt;</translation>
     </message>
     <message>
         <source>Matthias Miller</source>
-        <translation></translation>
+        <translation>&lt;B&gt;   Matthias Miller&lt;/B&gt;&lt;br&gt;
+Pour l&apos;aide apportée dans le portage de KeePass vers  Mac OS X.</translation>
     </message>
     <message>
         <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
-        <translation></translation>
+        <translation type="obsolete">&lt;ADDRESS&gt;http://www.outofhanwell.com &lt;/ADDRESS&gt;</translation>
     </message>
     <message>
         <source>Eugen Gorschenin</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Eugen Gorschenin&lt;/B&gt;&lt;br&gt;
+Pour le nouveau site Internet.
+</translation>
     </message>
     <message>
         <source>geugen@users.berlios.de&lt;br&gt;New Website</source>
+        <translation type="obsolete">&lt;ADDRESS&gt;geugen@users.berlios.de&lt;/ADDRESS&gt;</translation>
+    </message>
+    <message>
+        <source>$TRANSLATION_AUTHOR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepass.berlios.de/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Team</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tarek Saidi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Developer, Project Admin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tariq@users.berlios.de</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Web Designer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>geugen@users.berlios.de</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thanks To</source>
+        <translation type="unfinished">Remerciement à</translation>
+    </message>
+    <message>
+        <source>Patches for better MacOS X support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>www.outofhanwell.com</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -166,7 +228,7 @@ http://keepass.berlios.de/translation-howto.html</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation>Préférences</translation>
     </message>
 </context>
 <context>
@@ -213,11 +275,11 @@ Voulez-vous le remplacer ?</translation>
     </message>
     <message>
         <source>Could not remove old file.</source>
-        <translation>Ne peut enlever l&apos;ancien fichier.</translation>
+        <translation>N&apos;a pas pu enlever l&apos;ancien fichier.</translation>
     </message>
     <message>
         <source>Could not create new file.</source>
-        <translation>Ne peut créer un nouveau fichier.</translation>
+        <translation>N&apos;a pas pu créer un nouveau fichier.</translation>
     </message>
     <message>
         <source>Error while writing the file.</source>
@@ -239,14 +301,18 @@ En êtes-vous sûr ?</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Modifier l&apos;Entrée</translation>
+        <translation>Édition de l&apos;entrée</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Ne peut ouvrir le fichier.</translation>
+        <translation>N&apos;a pas pu ouvrir le fichier.</translation>
     </message>
     <message>
         <source>%1 Bit</source>
+        <translation>%1 Bits</translation>
+    </message>
+    <message>
+        <source>Add Attachment...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -270,15 +336,15 @@ En êtes-vous sûr ?</translation>
     </message>
     <message>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
-        <translation>Ne peut ouvrir &apos;/dev/random&apos; ou &apos;/dev/urandom&apos;.</translation>
+        <translation>N&apos;a pas pu ouvrir &apos;/dev/random&apos; ou &apos;/dev/urandom&apos;.</translation>
     </message>
     <message>
         <source>Password Generator</source>
-        <translation type="unfinished">Générateur de mots de passe</translation>
+        <translation>Générateur de mots de passe</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Bits</translation>
     </message>
 </context>
 <context>
@@ -337,7 +403,7 @@ Pourriez-vous sélectionner le trousseau de clés désiré.</translation>
         <source>The key file found in the given directory is not readable.
 Please check your permissions.</source>
         <translation>Le trousseau de clés choisi dans le répertoire n&apos;est pas lisible.
-S&apos;il vous plait vérifier vos permissions.</translation>
+S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Key file could not be found.</source>
@@ -347,7 +413,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
         <source>Key file is not readable.
 Please check your permissions.</source>
         <translation>Le trousseau de clés n&apos;est pas lisible.
-S&apos;il vous plait vérifier vos permissions..</translation>
+S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -391,7 +457,7 @@ Désirez-vous le remplacer ?</translation>
         <source>The selected key file or directory is not readable.
 Please check your permissions.</source>
         <translation>Le trousseau de clés choisi n&apos;est pas lisible.
-S&apos;il vous plait vérifier vos permissions.</translation>
+S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
 </context>
 <context>
@@ -410,35 +476,48 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Chercher</translation>
+        <translation>Recherche</translation>
     </message>
 </context>
 <context>
     <name>CSelectIconDlg</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Add Icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une icône...</translation>
     </message>
     <message>
         <source>Images (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Images (%1)</translation>
     </message>
     <message>
         <source>%1: File could not be loaded.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Le fichier n&apos;a pu être chargé.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>An error occured while loading the icon(s):
 </source>
+        <translation type="obsolete">Une erreur est survenue lors du chargement (des) de l&apos;icône(s):</translation>
+    </message>
+    <message>
+        <source>Replace...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An error occured while loading the icon(s):
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An error occured while loading the icon.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -457,11 +536,11 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     <name>EditEntryDialog</name>
     <message>
         <source>Edit Entry</source>
-        <translation>Modifier l&apos;entrée</translation>
+        <translation>Édition de l&apos;entrée</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Utilisateur:</translation>
+        <translation>Nom d&apos;utilisateur:</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
@@ -541,11 +620,11 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation></translation>
+        <translation>&gt;</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Bits</translation>
     </message>
 </context>
 <context>
@@ -580,7 +659,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation></translation>
+        <translation>&gt;</translation>
     </message>
 </context>
 <context>
@@ -631,15 +710,15 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>&amp;Upper Letters</source>
-        <translation>Majusc&amp;ules</translation>
+        <translation>Lettres majusc&amp;ules</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
-        <translation>Minuscu&amp;les</translation>
+        <translation>Lettres minuscu&amp;les</translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
-        <translation>&amp;Numéros</translation>
+        <translation>&amp;Nombres</translation>
     </message>
     <message>
         <source>&amp;Special Characters</source>
@@ -655,7 +734,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>h&amp;igher ANSI-Characters</source>
-        <translation>ANSI &amp;hauts</translation>
+        <translation>Caractères ANS&amp;I étendus</translation>
     </message>
     <message>
         <source>Alt+H</source>
@@ -702,7 +781,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Utilisateur</translation>
+        <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
         <source>URL</source>
@@ -722,7 +801,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Création</translation>
+        <translation>Créé le</translation>
     </message>
     <message>
         <source>Last Change</source>
@@ -745,7 +824,7 @@ S&apos;il vous plait vérifier vos permissions.</translation>
     <name>KeepassGroupView</name>
     <message>
         <source>Search Results</source>
-        <translation>Resultats de la recherche</translation>
+        <translation>Résultats de la recherche</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -856,7 +935,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>&lt;B&gt;Group: &lt;/B&gt;%1  &lt;B&gt;Title: &lt;/B&gt;%2  &lt;B&gt;Username: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Password: &lt;/B&gt;%5  &lt;B&gt;Creation: &lt;/B&gt;%6  &lt;B&gt;Last Change: &lt;/B&gt;%7  &lt;B&gt;LastAccess: &lt;/B&gt;%8  &lt;B&gt;Expires: &lt;/B&gt;%9</source>
-        <translation>&lt;B&gt;Groupe: &lt;/B&gt;%1  &lt;B&gt;Titre: &lt;/B&gt;%2   &lt;B&gt;Utilisateur: &lt;/B&gt;%3   &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;   &lt;B&gt;Mot de passe: &lt;/B&gt;%5   &lt;B&gt;Création: &lt;/B&gt;%6  &lt;B&gt;Dernier changement: &lt;/B&gt;%7  &lt;B&gt;Dernier accès &lt;/B&gt;%8  &lt;B&gt;Expire le: &lt;/B&gt;%9</translation>
+        <translation>&lt;B&gt;Groupe: &lt;/B&gt;%1  &lt;B&gt;Titre:  &lt;/B&gt;%2   &lt;B&gt;Nom d&apos;utilisateur:  &lt;/B&gt;%3   &lt;B&gt;URL:   &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;   &lt;B&gt;Mot de passe:  &lt;/B&gt;%5   &lt;B&gt;Date de création:   &lt;/B&gt;%6  &lt;B&gt;Dernier changement:   &lt;/B&gt;%7  &lt;B&gt;Dernier accès:   &lt;/B&gt;%8  &lt;B&gt;Date d&apos;expiration:   &lt;/B&gt;%9</translation>
     </message>
     <message>
         <source>Clone Entry</source>
@@ -877,7 +956,7 @@ Désirez-vous enregistrer le changement ?</translation>
     <message>
         <source>File could not be saved.
 %1</source>
-        <translation>Le fichier ne peut être enregistré.
+        <translation>Le fichier n&apos;a pu être enregistré.
 %1</translation>
     </message>
     <message>
@@ -907,7 +986,7 @@ Désirez-vous enregistrer le changement ?</translation>
     <message>
         <source>Could not create key file. The following error occured:
 %1</source>
-        <translation>Ne peut créer le trousseau de clés. L&apos;erreur suivant est survenue:
+        <translation>N&apos;a pu créer le trousseau de clés. L&apos;erreur suivante est survenue:
 %1</translation>
     </message>
     <message>
@@ -932,7 +1011,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+V</translation>
     </message>
 </context>
 <context>
@@ -947,7 +1026,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Import from...</source>
-        <translation>Importer de...</translation>
+        <translation>Importer d&apos;un...</translation>
     </message>
     <message>
         <source>View</source>
@@ -1051,7 +1130,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Search In Database...</source>
-        <translation>Recherche dans la BD...</translation>
+        <translation>Rechercher dans la BD...</translation>
     </message>
     <message>
         <source>Search in this group...</source>
@@ -1079,7 +1158,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Utilisateur</translation>
+        <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
         <source>URL</source>
@@ -1095,11 +1174,11 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Expire le</translation>
+        <translation>Date d&apos;expiration</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Création</translation>
+        <translation>Date de création</translation>
     </message>
     <message>
         <source>Last Change</source>
@@ -1139,7 +1218,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Plain Text (*.txt)</source>
-        <translation>Plein texte (*.txt)</translation>
+        <translation>Un fichier plein texte (*.txt)</translation>
     </message>
     <message>
         <source>Hide</source>
@@ -1147,6 +1226,26 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Perform AutoType</source>
+        <translation>Exécuter l&apos;auto-saisie</translation>
+    </message>
+    <message>
+        <source>Type Here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar Icon Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16x16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>22x22</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>28x28</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1174,7 +1273,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Clé Maitresse</translation>
+        <translation>Clé maitresse</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -1251,7 +1350,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
     </message>
     <message>
         <source>Could not open key file.</source>
-        <translation>Ne peut ouvrir le trousseau de clés.</translation>
+        <translation>N&apos;a pu ouvrir le trousseau de clés.</translation>
     </message>
     <message>
         <source>Key file could not be written.</source>
@@ -1259,7 +1358,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Ne peut ouvrir le fichier.</translation>
+        <translation>N&apos;a pu ouvrir le fichier.</translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
@@ -1267,7 +1366,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
     </message>
     <message>
         <source>Unknown Encryption Algorithm.</source>
-        <translation>Algorithme d&apos;encryption inconnu.</translation>
+        <translation>Algorithme d&apos;encryptage inconnu.</translation>
     </message>
     <message>
         <source>Decryption failed.
@@ -1277,7 +1376,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
     </message>
     <message>
         <source>Could not open file for writing.</source>
-        <translation>Ne peut ouvrir le fichier pour écriture.</translation>
+        <translation>N&apos;a pu ouvrir le fichier pour écriture.</translation>
     </message>
 </context>
 <context>
@@ -1289,7 +1388,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
     <message>
         <source>Could not save configuration file.
 Make sure you have write access to &apos;~/.keepass&apos;.</source>
-        <translation>Ne peut enregistrer le fichier de configuration.
+        <translation>N&apos;a pu enregistrer le fichier de configuration.
 Étes-vous sûr de posséder le droit en écriture sur &apos;~/.keepass&apos;.</translation>
     </message>
     <message>
@@ -1306,7 +1405,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Ne peut ouvrir le fichier.</translation>
+        <translation>N&apos;a pu ouvrir le fichier.</translation>
     </message>
     <message>
         <source>File is no valid PwManager file.</source>
@@ -1322,11 +1421,11 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Unsupported encryption algorithm.</source>
-        <translation>Algorithme d&apos;encryption non supporté.</translation>
+        <translation>Algorithme d&apos;encryptage non supporté.</translation>
     </message>
     <message>
         <source>Compressed files are not supported yet.</source>
-        <translation>Fichers de compression non supportés encore.</translation>
+        <translation>Fichiers de compression non supportés encore.</translation>
     </message>
     <message>
         <source>Wrong password.</source>
@@ -1334,7 +1433,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>File is damaged (hash test failed).</source>
-        <translation>Fichier endommagé (test de hachage a échoué).</translation>
+        <translation>Le fichier est endommagé (Le test de hachage a échoué).</translation>
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
@@ -1342,7 +1441,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>File is empty.</source>
-        <translation>Fichier vide.</translation>
+        <translation>Le fichier est vide.</translation>
     </message>
     <message>
         <source>Invalid XML file (see stdout for details).</source>
@@ -1369,6 +1468,10 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
 </source>
         <translation>Valeur de la couleur RGB  invalide.</translation>
     </message>
+    <message>
+        <source>Never</source>
+        <translation type="unfinished">Jamais</translation>
+    </message>
 </context>
 <context>
     <name>Search_Dlg</name>
@@ -1382,11 +1485,11 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>A&amp;nhang</source>
-        <translation>&amp;Annexe</translation>
+        <translation>A&amp;nnexe</translation>
     </message>
     <message>
         <source>Alt+N</source>
-        <translation>Alt+A</translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -1394,15 +1497,15 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Alt+C</source>
-        <translation>Alt+M</translation>
+        <translation>Alt+C</translation>
     </message>
     <message>
         <source>Search...</source>
-        <translation>Chercher...</translation>
+        <translation>Rechercher...</translation>
     </message>
     <message>
         <source>Search For:</source>
-        <translation>Chercher:</translation>
+        <translation>Recherche de:</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
@@ -1426,7 +1529,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>&amp;Usernames</source>
-        <translation>&amp;Utilisateurs</translation>
+        <translation>Nom d&apos;&amp;utilisateurs</translation>
     </message>
     <message>
         <source>C&amp;omments</source>
@@ -1469,19 +1572,19 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     <name>SelectIconDlg</name>
     <message>
         <source>Icon Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Choix d&apos;icônes</translation>
     </message>
     <message>
         <source>Add Custom Icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une icône... </translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -1588,7 +1691,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Remember last key type and location</source>
-        <translation>Se souvenir du dernier  type de clé et  du dernier emplacement</translation>
+        <translation>Se souvenir de la dernière  saisie de clé et  du dernier emplacement</translation>
     </message>
     <message>
         <source>Mounting Root:</source>
@@ -1599,7 +1702,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     <name>SimplePasswordDialog</name>
     <message>
         <source>O&amp;K</source>
-        <translation>A&amp;ccepter</translation>
+        <translation>&amp;Accepter</translation>
     </message>
     <message>
         <source>Alt+K</source>
@@ -1630,7 +1733,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     <name>dbsettingdlg_base</name>
     <message>
         <source>Database Settings</source>
-        <translation>Préférences de la BD</translation>
+        <translation>Préférences de la Base de Données</translation>
     </message>
     <message>
         <source>Encryption</source>

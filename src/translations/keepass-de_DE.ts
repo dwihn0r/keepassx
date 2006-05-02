@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>Thanks To</source>
-        <translation>Dank An</translation>
+        <translation type="obsolete">Dank An</translation>
     </message>
     <message>
         <source>License</source>
@@ -44,6 +44,10 @@ General Public License (GPL) Version 2.</translation>
         <source>http://keepass.berlios.de/</source>
         <translation>http://keepass.berlios.de/</translation>
     </message>
+    <message>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AutoType</name>
@@ -51,6 +55,15 @@ General Public License (GPL) Version 2.</translation>
         <source>More than one &apos;Auto-Type:&apos; key sequence found.
 Allowed is only one per entry.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Syntax Error in Auto-Type sequence near character %1
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
     </message>
 </context>
 <context>
@@ -100,7 +113,7 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>$TRANSALTION_AUTHOR</source>
-        <translation>Tarek Saidi</translation>
+        <translation type="obsolete">Tarek Saidi</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
@@ -110,7 +123,7 @@ Allowed is only one per entry.</source>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/translation-howto.html</source>
-        <translation>Informationen wie Sie eine Übersetztung für KeePassX  erstellen können finden Sie unter:
+        <translation type="obsolete">Informationen wie Sie eine Übersetztung für KeePassX  erstellen können finden Sie unter:
 http://keepass.berlios.de/translation-howto.html</translation>
     </message>
     <message>
@@ -119,14 +132,55 @@ http://keepass.berlios.de/translation-howto.html</translation>
     </message>
     <message>
         <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
-        <translation>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Unterstützung</translation>
+        <translation type="obsolete">http://www.outofhanwell.com/&lt;br&gt;Mac OS X Unterstützung</translation>
     </message>
     <message>
         <source>Eugen Gorschenin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>geugen@users.berlios.de&lt;br&gt;New Website</source>
+        <source>$TRANSLATION_AUTHOR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepass.berlios.de/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Team</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tarek Saidi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Developer, Project Admin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tariq@users.berlios.de</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Web Designer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>geugen@users.berlios.de</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thanks To</source>
+        <translation type="unfinished">Dank An</translation>
+    </message>
+    <message>
+        <source>Patches for better MacOS X support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>www.outofhanwell.com</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -247,6 +301,10 @@ Sind Sie sicher?</translation>
     </message>
     <message>
         <source>%1 Bit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Attachment...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -439,8 +497,16 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
+        <source>Replace...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>An error occured while loading the icon(s):
-</source>
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An error occured while loading the icon.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1151,6 +1217,26 @@ die Änderungen speichern?</translation>
         <source>Perform AutoType</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Type Here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar Icon Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>16x16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>22x22</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>28x28</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PasswordDlg</name>
@@ -1370,6 +1456,10 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
         <source>Invalid RGB color value.
 </source>
         <translation>Ungültiger RGB-Farbwert.</translation>
+    </message>
+    <message>
+        <source>Never</source>
+        <translation type="unfinished">Nie</translation>
     </message>
 </context>
 <context>
