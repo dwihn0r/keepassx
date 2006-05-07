@@ -70,6 +70,7 @@ RememberLastKey=ini.GetValueB("Options","RememberLastKey",true);
 LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
 LastKeyType=(tKeyType)ini.GetValueI("Options","LastKeyType",(int)PASSWORD);
 if(!OpenLast)RememberLastKey=false;
+ToolbarIconSize=ini.GetValueI("UI","ToolbarIconSize",16);
 return true;
 }
 
@@ -110,6 +111,7 @@ if(RememberLastKey){
 else{
 	ini.SetValue("Options","LastKeyLocation","");
 	ini.SetValueI("Options","LastKeyType",0);}
+ini.SetValueI("UI","ToolbarIconSize",ToolbarIconSize,true);
 if(!ini.WriteFile())return false;
 else return true;
 }

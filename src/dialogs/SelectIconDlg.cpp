@@ -107,6 +107,7 @@ if(!icon.load(filename)){
 	return;
 }
 db->replaceIcon(List->currentItem()->data(32).toInt(),icon.scaled(16,16,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+List->currentItem()->setIcon(QIcon(db->icon(List->currentItem()->data(32).toInt())));
 }
 
 void CSelectIconDlg::OnPickIcon(){

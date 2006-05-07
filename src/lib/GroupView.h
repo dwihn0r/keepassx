@@ -32,7 +32,6 @@ class KeepassGroupView:public QTreeWidget{
 Q_OBJECT
 public:
  KeepassGroupView(QWidget* parent=0);
- void updateItems();
  bool isSearchResultGroup(GroupViewItem* item);
  void selectSearchGroup();
  Database *db;
@@ -40,6 +39,9 @@ public:
  vector<GroupViewItem*>Items;
  QMenu *ContextMenu;
  QMenu *ContextMenuSearchGroup;
+
+public slots:
+ void updateItems();
 
 signals:
  void fileModified();

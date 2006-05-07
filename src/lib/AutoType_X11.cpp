@@ -22,8 +22,11 @@
 #include <QList>
 #include <QChar>
 
-
 QWidget* AutoType::MainWin=NULL; 
+
+
+#ifdef Q_WS_X11
+
 
 int AutoType::getModifiers(Display *d,KeySym keysym, int keycode){
 int SymsPerKey;
@@ -1149,3 +1152,11 @@ for(int i=0; i<MapSize;i++){
 //Q_ASSERT(false);
 return 0;
 }
+
+#endif // X11
+
+#ifdef Q_WS_MAC
+void AutoType::perform(CEntry* entry, QString& err){
+QMessageBox::warnig(NULL,"AutoType","Sorry, but Auto-Type does not work under Mac OS X yet.","OK");
+}
+#endif

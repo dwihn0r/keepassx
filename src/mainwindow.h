@@ -83,6 +83,9 @@ private slots:
    void OnEditAutoType();
    void OnViewShowToolbar(bool);
    void OnViewShowEntryDetails(bool);
+   void OnViewToolbarIconSize16(bool);
+   void OnViewToolbarIconSize22(bool);
+   void OnViewToolbarIconSize28(bool);
    void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
    void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
    void OnEntrySelectionChanged();
@@ -116,6 +119,7 @@ private:
  void setStateGroupSelected(SelectionState s);
  void setStateEntrySelected(SelectionState s);
  void openDatabase(QString filename,bool IsStart=false);
+ void setupDatabaseConnections(Database* DB);
  bool closeDatabase();
  void search(CGroup* pGroup);
  void editEntry(CEntry* pEntry);

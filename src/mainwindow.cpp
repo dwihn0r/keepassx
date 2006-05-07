@@ -129,6 +129,9 @@ void KeepassMainWindow::setupConnections(){
 	connect(ViewColumnsLastChangeAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
 	connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
 	connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	connect(ViewToolButtonSize16Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize16(bool)));
+	connect(ViewToolButtonSize22Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize22(bool)));
+	connect(ViewToolButtonSize28Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize28(bool)));
 	connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
 	
 	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
@@ -156,7 +159,7 @@ void KeepassMainWindow::setupConnections(){
 void KeepassMainWindow::setupToolbar(){
   toolBar=new QToolBar(this);
   addToolBar(toolBar);
-  toolBar->setIconSize(QSize(16,16));
+  toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
   toolBar->addAction(FileNewAction);
   toolBar->addAction(FileOpenAction);
   toolBar->addAction(FileSaveAction);
@@ -237,6 +240,12 @@ void KeepassMainWindow::setupMenus(){
   ViewColumnsAttachmentAction->setChecked(config.Columns[9]);
   ViewShowStatusbarAction->setChecked(config.ShowStatusbar);
 
+  switch(config.ToolbarIconSize){
+	case 16: ViewToolButtonSize16Action->setChecked(true); break;
+	case 22: ViewToolButtonSize22Action->setChecked(true); break;
+	case 28: ViewToolButtonSize28Action->setChecked(true); break;
+  }
+
   FileNewAction->setShortcut(tr("Ctrl+N"));
   FileOpenAction->setShortcut(tr("Ctrl+O"));
   FileSaveAction->setShortcut(tr("Ctrl+S"));
@@ -257,6 +266,12 @@ void KeepassMainWindow::setupMenus(){
 #endif
 }
 
+void KeepassMainWindow::setupDatabaseConnections(Database* DB){
+connect(DB,SIGNAL(iconsModified()),this,SLOT(OnFileModified()));
+connect(DB,SIGNAL(iconsModified()),EntryView,SLOT(updateItems()));
+connect(DB,SIGNAL(iconsModified()),GroupView,SLOT(updateItems()));
+}
+
 
 void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 Q_ASSERT(!FileOpen);
@@ -272,7 +287,7 @@ Q_ASSERT(r==1);
 db = new PwDatabase();
 GroupView->db=db;
 EntryView->db=db;
-connect(db,SIGNAL(modified()),this,SLOT(OnFileModified()));
+setupDatabaseConnections(db);
 if(PasswordDlg.password!="" && PasswordDlg.keyfile=="")
 	db->CalcMasterKeyByPassword(PasswordDlg.password);
 if(PasswordDlg.password=="" && PasswordDlg.keyfile!="")
@@ -357,6 +372,7 @@ if(dlg.exec()==1){
 	setStateFileOpen(true);
 	setStateFileModified(true);
 	FileOpen=true;
+	setupDatabaseConnections(db);
 }
 else delete db;
 }
@@ -402,6 +418,7 @@ if(!IsOpen){
     EditCloneEntryAction->setEnabled(false);
     EditDeleteEntryAction->setEnabled(false);
     EditGroupSearchAction->setEnabled(false);
+	EditAutoTypeAction->setEnabled(false);
 }
 else{
     OnGroupSelectionChanged();
@@ -1020,4 +1037,28 @@ void KeepassMainWindow::OnEditAutoType(){
 Q_ASSERT(EntryView->selectedItems().size()==1);
 QString error;
 AutoType::perform(((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry,error);
+}
+
+void KeepassMainWindow::OnViewToolbarIconSize16(bool state){
+if(!state)return;
+ViewToolButtonSize22Action->setChecked(false);
+ViewToolButtonSize28Action->setChecked(false);
+config.ToolbarIconSize=16;
+toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+}
+
+void KeepassMainWindow::OnViewToolbarIconSize22(bool state){
+if(!state)return;
+ViewToolButtonSize16Action->setChecked(false);
+ViewToolButtonSize28Action->setChecked(false);
+config.ToolbarIconSize=22;
+toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+}
+
+void KeepassMainWindow::OnViewToolbarIconSize28(bool state){
+if(!state)return;
+ViewToolButtonSize16Action->setChecked(false);
+ViewToolButtonSize22Action->setChecked(false);
+config.ToolbarIconSize=28;
+toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
 }

@@ -57,7 +57,8 @@ public:
  QString MountDir;
  bool RememberLastKey; //location and type, not the key itself
  tKeyType LastKeyType;
- QString LastKeyLocation; 
+ QString LastKeyLocation;
+ int ToolbarIconSize;
 
  bool loadFromIni(QString filename);
  bool saveToIni(QString filename);

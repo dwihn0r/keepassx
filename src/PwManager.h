@@ -105,7 +105,7 @@ private:
  QList<CEntry> UnkownMetaStreams;
 
 signals:
-void modified();
+void iconsModified();
 
 };
 

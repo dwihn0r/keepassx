@@ -1,7 +1,7 @@
 ---------------
     0.2.1
 ---------------
--added AutoType feature
+-added AutoType feature (experimental!)
 -added custom icons feature
 -new command line option for manual language selection (-lang <LOCALE-CODE>)
 -when saving an attachment the original filename is adopted by the file dialog
@@ -9,6 +9,7 @@
 -sorting by dates now works as expected
 -the 'Expires' column and the detailed entry view now also show the string 'never' for entries which don't expire
 -entry view now gets updated after changing the column setup
+-added menu entry to change the size of the toolbar icons
 ---------------
     0.2.0
 ---------------

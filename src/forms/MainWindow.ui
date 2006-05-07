@@ -503,16 +503,25 @@
    </property>
   </action>
   <action name="ViewToolButtonSize16Action" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
    <property name="text" >
     <string>16x16</string>
    </property>
   </action>
   <action name="ViewToolButtonSize22Action" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
    <property name="text" >
     <string>22x22</string>
    </property>
   </action>
   <action name="ViewToolButtonSize28Action" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
    <property name="text" >
     <string>28x28</string>
    </property>

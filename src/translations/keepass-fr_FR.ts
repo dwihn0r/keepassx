@@ -26,14 +26,14 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:200; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt;&lt;B&gt; - Gestionnaire de Mots de Passe Multiplateforme &lt;/B&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Copyright (C) 2005 - 2006 Tarek Saidi 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
-        <translation>&lt;B&gt;Copyright ©     2005 - 2006     Tarek Saidi &lt;B&gt;&lt;br&gt;
-&lt;B&gt;KeePassX  est  distribué  sous  les  termes  de  la licence GNU GPL v2.&lt;B&gt;</translation>
+        <translation>&lt;span style=&quot; font-size:9pt; font-weight:400;&quot;&gt;Copyright (c) 2005 - 2006     Tarek Saidi &lt;br&gt;
+KeePassX  est  distribué  sous  les  termes  de  la&lt;br&gt; Licence Publique Générale GNU v2  (GPL v2).&lt;/span&gt;</translation>
     </message>
     <message>
         <source>tarek.saidi@arcor.de</source>
@@ -45,7 +45,7 @@ General Public License (GPL) version 2.</source>
     </message>
     <message>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Crédits </translation>
     </message>
 </context>
 <context>
@@ -59,11 +59,12 @@ Seulement une par entrée est autorisée. </translation>
     <message>
         <source>Syntax Error in Auto-Type sequence near character %1
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de syntaxe à l&apos;intérieur de la séquence d&apos;auto-saisie près du caractère %1
+     Trouvé &apos;{&apos;  sans accolade fermante &apos;}&apos;</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
 </context>
 <context>
@@ -118,7 +119,7 @@ Seulement une par entrée est autorisée. </translation>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation>&lt;b&gt; Adresse électronique: &lt;/b&gt;  &lt;br&gt;djellel@free.fr
+        <translation>&lt;b&gt; Courriel: &lt;/b&gt;  &lt;br&gt;djellel@free.fr
 </translation>
     </message>
     <message>
@@ -129,8 +130,7 @@ http://keepass.berlios.de/translation-howto.html</source>
     </message>
     <message>
         <source>Matthias Miller</source>
-        <translation>&lt;B&gt;   Matthias Miller&lt;/B&gt;&lt;br&gt;
-Pour l&apos;aide apportée dans le portage de KeePass vers  Mac OS X.</translation>
+        <translation>Matthias Miller</translation>
     </message>
     <message>
         <source>http://www.outofhanwell.com/&lt;br&gt;Mac OS X Support</source>
@@ -138,8 +138,7 @@ Pour l&apos;aide apportée dans le portage de KeePass vers  Mac OS X.</translati
     </message>
     <message>
         <source>Eugen Gorschenin</source>
-        <translation>&lt;B&gt;Eugen Gorschenin&lt;/B&gt;&lt;br&gt;
-Pour le nouveau site Internet.
+        <translation>Eugen Gorschenin
 </translation>
     </message>
     <message>
@@ -148,48 +147,49 @@ Pour le nouveau site Internet.
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Djellel DIDA</translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les informations concernant la méthode pour traduire KeePassX peuvent être obtenues à l&apos;adresse suivante:&lt;br&gt;
+&lt;ADDRESS&gt;http://keepass.berlios.de/&lt;ADDRESS&gt;</translation>
     </message>
     <message>
         <source>Team</source>
-        <translation type="unfinished"></translation>
+        <translation>Equipe</translation>
     </message>
     <message>
         <source>Tarek Saidi</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarek Saidi</translation>
     </message>
     <message>
         <source>Developer, Project Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Développeur et Administrateur du Projet</translation>
     </message>
     <message>
         <source>tariq@users.berlios.de</source>
-        <translation type="unfinished"></translation>
+        <translation>tariq@users.berlios.de</translation>
     </message>
     <message>
         <source>Web Designer</source>
-        <translation type="unfinished"></translation>
+        <translation>Concepteur du site Internet</translation>
     </message>
     <message>
         <source>geugen@users.berlios.de</source>
-        <translation type="unfinished"></translation>
+        <translation>geugen@users.berlios.de</translation>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation type="unfinished">Remerciement à</translation>
+        <translation>Remerciement à</translation>
     </message>
     <message>
         <source>Patches for better MacOS X support</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour les rustines ayant permis un meilleur support de MacOS X</translation>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ADDRESS&gt;www.outofhanwell.com&lt;ADDRESS&gt;</translation>
     </message>
 </context>
 <context>
@@ -249,7 +249,7 @@ S&apos;il vous plait, vérifier votre saisie.</translation>
     </message>
     <message>
         <source>Save Attachment...</source>
-        <translation>Enregistrer l&apos;attachement...</translation>
+        <translation>Enregistrer la pièce jointe...</translation>
     </message>
     <message>
         <source>Overwrite?</source>
@@ -287,12 +287,12 @@ Voulez-vous le remplacer ?</translation>
     </message>
     <message>
         <source>Delete Attachment?</source>
-        <translation>Supprimer l&apos;attachement ?</translation>
+        <translation>Supprimer la pièce jointe ?</translation>
     </message>
     <message>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
-        <translation>Vous êtes sur le point de supprimer l&apos;attachement de cette entrée.
+        <translation>Vous êtes sur le point de supprimer la pièce jointe de cette entrée.
 En êtes-vous sûr ?</translation>
     </message>
     <message>
@@ -313,7 +313,7 @@ En êtes-vous sûr ?</translation>
     </message>
     <message>
         <source>Add Attachment...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une pièce jointe...</translation>
     </message>
 </context>
 <context>
@@ -509,16 +509,16 @@ S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Replace...</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacez... </translation>
     </message>
     <message>
         <source>An error occured while loading the icon(s):
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur est survenue lors du chargement (des) de l&apos;icône(s): %1</translation>
     </message>
     <message>
         <source>An error occured while loading the icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur est survenue lors du chargement de l&apos;icône.</translation>
     </message>
 </context>
 <context>
@@ -616,7 +616,7 @@ S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Attachment:</source>
-        <translation>Attachement:</translation>
+        <translation>Pièce jointe:</translation>
     </message>
     <message>
         <source>&gt;</source>
@@ -813,7 +813,7 @@ S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Attachement</translation>
+        <translation>Pièce jointe</translation>
     </message>
     <message>
         <source>%1 items</source>
@@ -1110,7 +1110,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Save Attachment As...</source>
-        <translation>Enregistrer l&apos;attachement sous...</translation>
+        <translation>Enregistrer la pièce jointe sous...</translation>
     </message>
     <message>
         <source>Add New Entry...</source>
@@ -1190,7 +1190,7 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Attachement</translation>
+        <translation>Pièce jointe</translation>
     </message>
     <message>
         <source>Settings...</source>
@@ -1230,23 +1230,23 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Type Here</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisir ici</translation>
     </message>
     <message>
         <source>Toolbar Icon Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille des icônes de la barre d&apos;outils</translation>
     </message>
     <message>
         <source>16x16</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>22x22</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>28x28</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1470,7 +1470,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Never</source>
-        <translation type="unfinished">Jamais</translation>
+        <translation>Jamais</translation>
     </message>
 </context>
 <context>

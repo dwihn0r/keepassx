@@ -24,14 +24,14 @@
 #include <QObject>
 #include <QWidget>
 #include <QString>
-//#ifdef Q_WS_X11
+#ifdef Q_WS_X11
 	#define XK_MISCELLANY
 	#define XK_XKB_KEYS
 	#define XK_3270
 	#include <X11/extensions/XTest.h>
 	#include <X11/keysymdef.h>
 	#include <X11/Xlib.h>
-//#endif
+#endif
 #include "Database.h"
 
 typedef struct tKeysymMap{
@@ -44,7 +44,7 @@ public:
  static QWidget* MainWin;
  static void perform(CEntry* entry,QString& errors);
 private:
-//#ifdef Q_WS_X11
+#ifdef Q_WS_X11
  static tKeysymMap KeysymMap[];
  static quint16 getKeysym(const QChar& unicode);
  static int getModifiers(Display*,KeySym,int);
@@ -52,7 +52,7 @@ private:
  static void releaseModifiers(Display*,int);
  static void templateToKeysyms(const QString& Template, QList<quint16>& KeySymList,CEntry* entry);
  static void stringToKeysyms(const QString& string,QList<quint16>& KeySymList);
-//#endif
+#endif
 
 
 

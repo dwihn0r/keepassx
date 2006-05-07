@@ -46,7 +46,7 @@ General Public License (GPL) Version 2.</translation>
     </message>
     <message>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -54,16 +54,18 @@ General Public License (GPL) Version 2.</translation>
     <message>
         <source>More than one &apos;Auto-Type:&apos; key sequence found.
 Allowed is only one per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wurde mehr als eine &apos;Auto-Type:&apos;-Zeichenkette gefunden.
+Erlaubt ist nur eine pro Eintrag.</translation>
     </message>
     <message>
         <source>Syntax Error in Auto-Type sequence near character %1
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntaxfehler in Auto-Type-Zeichenkette bei Zeichen %1
+Öffnende Klammer &apos;{&apos; ohne Gegenstück gefunden.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
@@ -136,52 +138,53 @@ http://keepass.berlios.de/translation-howto.html</translation>
     </message>
     <message>
         <source>Eugen Gorschenin</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarek Saidi</translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen über das Erstellen eine Übersetztung für KeePassX sind hier zu finden:
+http://keepass.berlios.de</translation>
     </message>
     <message>
         <source>Team</source>
-        <translation type="unfinished"></translation>
+        <translation>Team</translation>
     </message>
     <message>
         <source>Tarek Saidi</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Developer, Project Admin</source>
-        <translation type="unfinished"></translation>
+        <translation>Entwickler und Projektadministrator</translation>
     </message>
     <message>
         <source>tariq@users.berlios.de</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Web Designer</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>geugen@users.berlios.de</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation type="unfinished">Dank An</translation>
+        <translation>Dank An</translation>
     </message>
     <message>
         <source>Patches for better MacOS X support</source>
-        <translation type="unfinished"></translation>
+        <translation>Patches für bessere MacOS X Unterstützung</translation>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -220,7 +223,7 @@ http://keepass.berlios.de/</source>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -301,11 +304,11 @@ Sind Sie sicher?</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add Attachment...</source>
-        <translation type="unfinished"></translation>
+        <translation>Anhang hinzufügen...</translation>
     </message>
 </context>
 <context>
@@ -332,11 +335,11 @@ Sind Sie sicher?</translation>
     </message>
     <message>
         <source>Password Generator</source>
-        <translation type="unfinished">Passwortgenerator</translation>
+        <translation>Passwortgenerator</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -477,37 +480,38 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     <name>CSelectIconDlg</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Add Icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol hinzufügen...</translation>
     </message>
     <message>
         <source>Images (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole (%1)</translation>
     </message>
     <message>
         <source>%1: File could not be loaded.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1: Datei konnte nicht geladen werden.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Replace...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetzen...</translation>
     </message>
     <message>
         <source>An error occured while loading the icon(s):
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Laden der Symbole traten Fehler auf:
+%1</translation>
     </message>
     <message>
         <source>An error occured while loading the icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Laden des Symbols ist ein Fehler aufgetreten.</translation>
     </message>
 </context>
 <context>
@@ -609,11 +613,11 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -648,7 +652,7 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
     <message>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1000,7 +1004,7 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1215,27 +1219,27 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Perform AutoType</source>
-        <translation type="unfinished"></translation>
+        <translation>AutoType ausführen</translation>
     </message>
     <message>
         <source>Type Here</source>
-        <translation type="unfinished"></translation>
+        <translation>Type Here</translation>
     </message>
     <message>
         <source>Toolbar Icon Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolleistengröße</translation>
     </message>
     <message>
         <source>16x16</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>22x22</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>28x28</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1459,7 +1463,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Never</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
 </context>
 <context>
@@ -1561,19 +1565,19 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <name>SelectIconDlg</name>
     <message>
         <source>Icon Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolauswahl</translation>
     </message>
     <message>
         <source>Add Custom Icon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenes Symbol hinzufügen...</translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>

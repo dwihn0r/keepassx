@@ -357,7 +357,7 @@ return CustomIcons[i-BUILTIN_ICONS];
 
 void PwDatabase::addIcon(const QPixmap& icon){
 CustomIcons << icon;
-emit modified();
+emit iconsModified();
 }
 
 void PwDatabase::removeIcon(int id){
@@ -377,13 +377,13 @@ for(int i=0;i<Groups.size();i++){
 	if(Groups[i].ImageID>id+BUILTIN_ICONS)
 		Groups[i].ImageID--;
 }
-emit modified();
+emit iconsModified();
 }
 
 void PwDatabase::replaceIcon(int id,const QPixmap& icon){
 if(id<BUILTIN_ICONS)return;
 CustomIcons[id-BUILTIN_ICONS]=icon;
-emit modified();
+emit iconsModified();
 }
 
 void PwDatabase::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int rounds){
