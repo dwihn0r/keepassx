@@ -1156,7 +1156,8 @@ return 0;
 #endif // X11
 
 #ifdef Q_WS_MAC
+#include <QMessageBox>
 void AutoType::perform(CEntry* entry, QString& err){
-QMessageBox::warnig(NULL,"AutoType","Sorry, but Auto-Type does not work under Mac OS X yet.","OK");
+QMessageBox::warning(NULL,"AutoType","Sorry, but Auto-Type does not work under Mac OS X yet.","OK");
 }
 #endif

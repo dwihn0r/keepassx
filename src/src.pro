@@ -8,7 +8,7 @@ INSTALLS += target data
 data.files += ../share/keepass/* 
 TARGET = ../bin/keepass
 
-unix{
+unix:!macx{
 	isEmpty(PREFIX){
 		PREFIX=/usr/local
 	}
