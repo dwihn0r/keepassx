@@ -36,6 +36,8 @@ using namespace std;
 
 
 bool CConfig::loadFromIni(QString filename){
+QString defaultSearchOptions = "001101111";
+QString defaultPwGenOptions = "1111100001";
 ini.SetPath((const char*)filename);
 ini.ReadFile();
 ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
@@ -50,10 +52,10 @@ BannerTextColor=ParseColorString(ini.GetValue("Options","BannerTextColor","222,2
 ShowPasswords=ini.GetValueB("Options","ShowPasswords",false);
 OpenUrlCommand=ini.GetValue("Options","UrlCmd","kfmclient openURL %1").c_str();
 Language=ini.GetValue("Options","LangFile","").c_str();
-ParseBoolString(ini.GetValue("Options","SearchOptions","001101111").c_str(),SearchOptions,9);
+ParseBoolString(ini.GetValue("Options","SearchOptions",defaultSearchOptions.ascii()).c_str(),defaultSearchOptions,SearchOptions,9);
 ListView_HidePasswords=ini.GetValueB("UI","HidePasswords",true);
 ListView_HideUsernames=ini.GetValueB("UI","HideUsernames",false);
-ParseBoolString(ini.GetValue("Options","PwGenOptions","1111100001").c_str(),PwGenOptions,10);
+ParseBoolString(ini.GetValue("Options","PwGenOptions",defaultPwGenOptions.ascii()).c_str(),defaultPwGenOptions,PwGenOptions,10);
 PwGenLength=ini.GetValueI("Options","PwGenLength",25);
 PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
 ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
@@ -158,12 +160,17 @@ QString CConfig::CreateColorString(QColor c){
 return (QString::number(c.red())+","+QString::number(c.green())+","+QString::number(c.blue()));
 }
 
-void CConfig::ParseBoolString(const QString &str,bool* dst, int count){
+void CConfig::ParseBoolString(const QString &str,const QString &defaults,bool* dst, int count){
+Q_ASSERT(defaults.count() == count);
 for(int i=0; i<count; i++){
-if(str[i]==QChar('0'))
- *(dst+i)=false;
-else
- *(dst+i)=true;
+ QChar setting;
+ if(i < str.count()) setting = str[i];
+ else setting = defaults[i];
+
+ if(setting==QChar('0'))
+  *(dst+i)=false;
+ else
+  *(dst+i)=true;
 }
 }
 

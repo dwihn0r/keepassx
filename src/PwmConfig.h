@@ -66,7 +66,7 @@ public:
 private:
  CIniFile ini;
  void ParseColumnString(QString str, bool* dst);
- void ParseBoolString(const QString &str,bool* dst, int count);
+ void ParseBoolString(const QString &str,const QString &defaults,bool* dst, int count);
  void ParseIntString(const QString &str,int* dst, int count);
  QString CreateBoolString(bool* src, int count);
  QColor ParseColorString(QString str);
