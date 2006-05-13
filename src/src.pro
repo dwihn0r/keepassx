@@ -24,9 +24,10 @@ macx{
 	SOURCES+=lib/AutoType_X11.cpp
 }
 
-win{
+win32{
 	SOURCES+=lib/AutoType_Win.cpp
-
+	TARGET=../$$TARGET
+	QMAKE_LINK_OBJECT_SCRIPT=../build/$$QMAKE_LINK_OBJECT_SCRIPT
 
 }
 

@@ -21,9 +21,11 @@
 #include <QMessageBox>
 #include "AutoType.h"
 
+QWidget* AutoType::MainWin=NULL; 
+
 void AutoType::perform(CEntry* entry, QString& err){
 QString str;
-QMessageBox(NULL,tr("Error"),"This feature is not available under Windows");
+QMessageBox::warning(NULL,tr("Error"),"This feature is not available under Windows");
 
 
 }
