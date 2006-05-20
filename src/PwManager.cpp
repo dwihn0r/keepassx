@@ -651,6 +651,7 @@ bool CGroup::ReadGroupField(quint16 FieldType, quint32 FieldSize, quint8 *pData)
 		break;
 	case 0x0007:
 		memcpyFromLEnd32(&ImageID, (char*)pData);
+		OldImgID=ImageID;
 		break;
 	case 0x0008:
 		memcpyFromLEnd16(&Level, (char*)pData);
@@ -691,6 +692,7 @@ switch(FieldType)
 		break;
 	case 0x0003:
 		memcpyFromLEnd32(&ImageID, (char*)pData);
+		OldImgID=ImageID;
 		break;
 	case 0x0004:
 		Title=QString::fromUtf8((char*)pData);

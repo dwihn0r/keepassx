@@ -1,4 +1,12 @@
 ---------------
+    0.2.2
+---------------
+-fixed crash when parsing config file under Win32
+-fixed loss of entry icons when saving a database which 
+ was not created with KeePassX (no KPX_CUSTOM_ICONS metastream)
+
+
+---------------
     0.2.1
 ---------------
 -added AutoType feature (experimental!)
