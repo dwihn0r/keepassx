@@ -29,8 +29,8 @@
 #include "SettingsDlg.h"
 
 
-CSettingsDlg::CSettingsDlg(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CSettingsDlg::CSettingsDlg(QWidget* parent)
+: QDialog(parent,Qt::Dialog)
 {
 setupUi(this);
 connect(ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );

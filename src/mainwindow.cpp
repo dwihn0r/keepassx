@@ -344,12 +344,12 @@ return true;
 
 
 void KeepassMainWindow::OnFileNew(){
-if(FileOpen)
- if(!closeDatabase())return;
 CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
 dlg.setCaption("New Database");
-db=new PwDatabase();
 if(dlg.exec()==1){
+	if(FileOpen)
+		if(!closeDatabase())return;
+	db=new PwDatabase();
 	db->newDatabase();
 	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
 		if(!db->createKeyFile(dlg.keyfile)){
@@ -374,15 +374,14 @@ if(dlg.exec()==1){
 	FileOpen=true;
 	setupDatabaseConnections(db);
 }
-else delete db;
 }
 
 void KeepassMainWindow::OnFileOpen(){
-if(FileOpen)
- if(!closeDatabase())return;
 QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.kdb");
 if(filename!=QString()){
- openDatabase(filename);
+	if(FileOpen)
+ 		if(!closeDatabase())return;
+	openDatabase(filename);
 }
 }
 
@@ -1000,7 +999,7 @@ SearchResults.clear();
 
 
 void KeepassMainWindow::OnExtrasSettings(){
-CSettingsDlg dlg(this,"SettingsDlg");
+CSettingsDlg dlg(this);
 dlg.exec();
 EntryView->setAlternatingRowColors(config.AlternatingRowColors);
 CGroup::UI_ExpandByDefault=config.ExpandGroupTree;

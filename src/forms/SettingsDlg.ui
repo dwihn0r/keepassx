@@ -27,6 +27,9 @@
   <property name="windowTitle" >
    <string>Settings</string>
   </property>
+  <property name="modal" >
+   <bool>true</bool>
+  </property>
   <widget class="QPushButton" name="ButtonCancel" >
    <property name="geometry" >
     <rect>
@@ -541,22 +544,6 @@
       </item>
      </layout>
     </widget>
-    <widget class="QCheckBox" name="CheckBox_OpenLast" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>521</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Remember last opend file</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
     <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
      <property name="geometry" >
       <rect>
@@ -568,6 +555,22 @@
      </property>
      <property name="text" >
       <string>Remember last key type and location</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="CheckBox_OpenLast" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>521</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Remember last opened file</string>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+Ö</string>
      </property>
     </widget>
    </widget>

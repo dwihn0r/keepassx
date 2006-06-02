@@ -2,9 +2,11 @@
     0.2.2
 ---------------
 -fixed crash when parsing config file under Win32
--fixed loss of entry icons when saving a database which 
- was not created with KeePassX (no KPX_CUSTOM_ICONS metastream)
-
+-fixed loss of entry icons when saving a database which was not created 
+ with KeePassX (no KPX_CUSTOM_ICONS metastream)
+-when canceling the file dialog for the opening of an existing database a already
+ openend database will not longer be closed
+-same for the creation of a new database
 
 ---------------
     0.2.1
@@ -15,7 +17,8 @@
 -when saving an attachment the original filename is adopted by the file dialog
 -fixed strange sorting behavior of entries (Bug #7083)
 -sorting by dates now works as expected
--the 'Expires' column and the detailed entry view now also show the string 'never' for entries which don't expire
+-the 'Expires' column and the detailed entry view now also show the string 'never' 
+ for entries which don't expire
 -entry view now gets updated after changing the column setup
 -added menu entry to change the size of the toolbar icons
 ---------------

@@ -3,7 +3,7 @@
     <name></name>
     <message>
         <source>Could not open file (FileError=%1)</source>
-        <translation>Datei konnte nicht geöffnet werden. (FileError=%1)</translation>
+        <translation type="obsolete">Datei konnte nicht geöffnet werden. (FileError=%1)</translation>
     </message>
 </context>
 <context>
@@ -656,6 +656,13 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     </message>
 </context>
 <context>
+    <name>Export_Txt</name>
+    <message>
+        <source>Could not open file (FileError=%1)</source>
+        <translation>Datei konnte nicht geöffnet werden. (FileError=%1)</translation>
+    </message>
+</context>
+<context>
     <name>GenPwDlg</name>
     <message>
         <source>Alt+U</source>
@@ -1015,15 +1022,15 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Datei</translation>
+        <translation type="obsolete">Datei</translation>
     </message>
     <message>
         <source>Import from...</source>
-        <translation>Importieren aus...</translation>
+        <translation type="obsolete">Importieren aus...</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ansicht</translation>
+        <translation type="obsolete">Ansicht</translation>
     </message>
     <message>
         <source>Columns</source>
@@ -1031,43 +1038,43 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Extras</source>
-        <translation>Extras</translation>
+        <translation type="obsolete">Extras</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
         <source>New Database...</source>
-        <translation>Neue Datenbank...</translation>
+        <translation type="obsolete">Neue Datenbank...</translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Datenbank öffnen...</translation>
+        <translation type="obsolete">Datenbank öffnen...</translation>
     </message>
     <message>
         <source>Close Database</source>
-        <translation>Datenbank schließen</translation>
+        <translation type="obsolete">Datenbank schließen</translation>
     </message>
     <message>
         <source>Save Database</source>
-        <translation>Datenbank speichern</translation>
+        <translation type="obsolete">Datenbank speichern</translation>
     </message>
     <message>
         <source>Save Database As...</source>
-        <translation>Datenbank speichern unter...</translation>
+        <translation type="obsolete">Datenbank speichern unter...</translation>
     </message>
     <message>
         <source>Database Settings...</source>
-        <translation>Datenbankeinstellungen...</translation>
+        <translation type="obsolete">Datenbankeinstellungen...</translation>
     </message>
     <message>
         <source>Change Master Key...</source>
-        <translation>Hauptschlüssel ändern...</translation>
+        <translation type="obsolete">Hauptschlüssel ändern...</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Beenden</translation>
+        <translation type="obsolete">Beenden</translation>
     </message>
     <message>
         <source>PwManager File (*.pwm)</source>
@@ -1187,15 +1194,15 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation>Einstellungen...</translation>
+        <translation type="obsolete">Einstellungen...</translation>
     </message>
     <message>
         <source>About...</source>
-        <translation>Über...</translation>
+        <translation type="obsolete">Über...</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation type="obsolete">Bearbeiten</translation>
     </message>
     <message>
         <source>Show Statusbar</source>
@@ -1203,11 +1210,11 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Export to...</source>
-        <translation>Exportieren nach...</translation>
+        <translation type="obsolete">Exportieren nach...</translation>
     </message>
     <message>
         <source>KeePassX Handbook...</source>
-        <translation>KeePassX Handbuch...</translation>
+        <translation type="obsolete">KeePassX Handbuch...</translation>
     </message>
     <message>
         <source>Plain Text (*.txt)</source>
@@ -1240,6 +1247,78 @@ die Änderungen speichern?</translation>
     <message>
         <source>28x28</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>Ansicht</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">Datei</translation>
+    </message>
+    <message>
+        <source>&amp;Import from...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export to...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xtras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Database &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Database Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change &amp;Master Key...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;KeePassX Handbook...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1664,7 +1743,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Remember last opend file</source>
-        <translation>Zuletzt geöffnete Datei beim Starten öffnen</translation>
+        <translation type="obsolete">Zuletzt geöffnete Datei beim Starten öffnen</translation>
     </message>
     <message>
         <source>Browser Command:</source>
@@ -1689,6 +1768,10 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <source>Mounting Root:</source>
         <translation>Datenträgerwurzelverzeichnis:</translation>
+    </message>
+    <message>
+        <source>Remember last opened file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

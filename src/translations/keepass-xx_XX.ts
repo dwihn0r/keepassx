@@ -1,10 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
     <name></name>
-    <message>
-        <source>Could not open file (FileError=%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AboutDlg</name>
@@ -615,6 +611,13 @@ Please check your permissions.</source>
     </message>
 </context>
 <context>
+    <name>Export_Txt</name>
+    <message>
+        <source>Could not open file (FileError=%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GenPwDlg</name>
     <message>
         <source>Alt+U</source>
@@ -969,59 +972,7 @@ to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import from...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Extras</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Database...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Database...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close Database</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save Database</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save Database As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Database Settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Master Key...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1141,27 +1092,7 @@ to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show Statusbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export to...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>KeePassX Handbook...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1194,6 +1125,78 @@ to save the changes?</source>
     </message>
     <message>
         <source>28x28</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import from...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Export to...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xtras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open Database...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Database &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Database Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change &amp;Master Key...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;KeePassX Handbook...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1615,10 +1618,6 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remember last opend file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Browser Command:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1640,6 +1639,10 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Mounting Root:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remember last opened file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -769,6 +769,20 @@ if(!file->isOpen()){
 	}
 }
 
+
+/*	This is only a fix for a bug in the implementation of the metastream creation
+	in KeePassX 0.2.1. to restore lost icons.
+	It should be removed after a while.
+	--------------------------------------------------*/
+	for(int i=0;i<Groups.size();i++){
+		if(Groups[i].ImageID<BUILTIN_ICONS)
+			Groups[i].OldImgID=Groups[i].ImageID;}
+	for(int i=0;i<Entries.size();i++){
+		if(Entries[i].ImageID<BUILTIN_ICONS)
+			Entries[i].OldImgID=Entries[i].ImageID;}
+/*  --------------------------------------------------*/
+
+
 unsigned int FileSize;
 
 QList<CEntry*> MetaStreams;
