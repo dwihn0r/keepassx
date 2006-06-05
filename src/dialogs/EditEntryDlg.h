@@ -31,7 +31,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
   Q_OBJECT
 
 public:
-  CEditEntryDlg(Database* _db, CEntry* _entry,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+  CEditEntryDlg(Database* _db, CEntry* _entry,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0);
   ~CEditEntryDlg();
   virtual void showEvent(QShowEvent *);
   /*$PUBLIC_FUNCTIONS$*/

@@ -21,17 +21,20 @@
 
 #include "UrlLabel.h"
 #include "main.h"
-#include <qfont.h>
-#include <qcolor.h>
-#include <qcursor.h>
-#include <qfontmetrics.h>
+#include <QFont>
+#include <QColor>
+#include <QCursor>
+#include <QFontMetrics>
 #include <QMouseEvent>
 #include <QLabel>
+#include <QPalette>
 
-LinkLabel::LinkLabel(QWidget *parent, const char* name,const QString& text, int x, int y,Qt::WFlags f) : QLabel(parent,name,f){
+LinkLabel::LinkLabel(QWidget *parent,const QString& text, int x, int y,Qt::WFlags f) : QLabel(parent,f){
 QFont font(parentWidget()->font()); font.setUnderline(true);
 setFont(font);
-setPaletteForegroundColor(QColor(20,20,255));
+QPalette palette;
+palette.setColor(foregroundRole(),QColor(20,20,255));
+setPalette(palette);
 setCursor(Qt::PointingHandCursor);
 setText(text);
 setPos(x,y);

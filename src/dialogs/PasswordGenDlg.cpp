@@ -27,8 +27,8 @@
 #include <qcheckbox.h>
 #include <QProgressBar>
 
-CGenPwDialog::CGenPwDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CGenPwDialog::CGenPwDialog(QWidget* parent,  bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 createBanner(Banner,Icon_Key32x32,tr("Password Generator"));
@@ -187,8 +187,9 @@ if(checkBox8->isChecked())bits=length*8;
 else bits=length*7;
 Label_Bits->setText(tr("%1 Bit").arg(QString::number(bits)));
 if(bits>128)bits=128;
-Progress_Quali->setProgress(bits,128);
-Progress_Quali->setPercentageVisible(false);
+Progress_Quali->setRange(0,128);
+Progress_Quali->setValue(bits);
+Progress_Quali->setTextVisible(false);
 }
 
 int CGenPwDialog::AddToAssoctable(char* table,int start,int end,int pos){

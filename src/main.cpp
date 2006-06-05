@@ -88,12 +88,12 @@ parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
 AppDir=app->applicationDirPath();
 //Load Config
 if(ArgCfg==QString()){
- if(!QDir(QDir::homeDirPath()+"/.keepass").exists()){
-	QDir conf(QDir::homeDirPath());
+ if(!QDir(QDir::homePath()+"/.keepass").exists()){
+	QDir conf(QDir::homePath());
 	if(!conf.mkdir(".keepass")){
 		cout << "Warning: Could not create directory '~/.keepass'." << endl;}
  }
- IniFilename=QDir::homeDirPath()+"/.keepass/config";
+ IniFilename=QDir::homePath()+"/.keepass/config";
  config.loadFromIni(IniFilename);
 }
 else{
@@ -117,11 +117,11 @@ bool TrFound=true;
 QString locname;
 
 if(!translator->load("keepass-"+loc.name(),app->applicationDirPath()+"/../share/keepass/i18n/")){
-	if(!translator->load("keepass-"+loc.name(),QDir::homeDirPath()+"/.keepass/")){
+	if(!translator->load("keepass-"+loc.name(),QDir::homePath()+"/.keepass/")){
 		if(loc.name()!="en_US")
 		qWarning(QString("KeePassX: No Translation found language '%1 (%2)' using 'English (UnitedStates)'")
 				.arg(QLocale::languageToString(loc.language()))
-				.arg(QLocale::countryToString(loc.country())));
+				.arg(QLocale::countryToString(loc.country())).toAscii());
 		TrFound=false;
 	}
 }
@@ -136,7 +136,7 @@ if(!qtTranslator->load("qt_"+loc.name().left(2),QLibraryInfo::location(QLibraryI
 	if(loc.name()!="en_US")
 	qWarning(QString("Qt: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
 			.arg(QLocale::languageToString(loc.language()))
-			.arg(QLocale::countryToString(loc.country())));
+			.arg(QLocale::countryToString(loc.country())).toAscii());
 	delete qtTranslator;
 }else{
 	app->installTranslator(qtTranslator);
@@ -218,7 +218,7 @@ Banner->setPixmap(*banner_pixmap);
 
 void openBrowser(QString url){
 QProcess browser;
-QStringList args=QStringList::split(' ',config.OpenUrlCommand.arg(url));
+QStringList args=config.OpenUrlCommand.arg(url).split(' ');
 QString cmd=args.takeFirst();
 browser.startDetached(cmd,args);
 }

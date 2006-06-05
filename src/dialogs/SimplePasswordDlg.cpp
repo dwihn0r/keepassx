@@ -24,8 +24,8 @@
 #include "PwmConfig.h"
 #include "SimplePasswordDlg.h"
 
-CSimplePasswordDialog::CSimplePasswordDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CSimplePasswordDialog::CSimplePasswordDialog(QWidget* parent,  bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 if(!config.ShowPasswords)Button_HidePassword->toggle();

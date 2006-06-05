@@ -20,14 +20,13 @@
 
 #ifndef _LINKLABEL_H_
 #define _LINKLABEL_H_
-#include <qlabel.h>
-#include <q3signal.h>
+#include <QLabel>
 #include <QMouseEvent>
 
 class LinkLabel : public QLabel{
 Q_OBJECT
 public:
-LinkLabel(QWidget *parent, const char* name = 0,const QString& text=QString::null, int x=0, int y=0,Qt::WFlags f=0);
+LinkLabel(QWidget *parent,const QString& text=QString::null, int x=0, int y=0,Qt::WFlags f=0);
 ~LinkLabel();
 void setPos(int x,int y);
 QString url();

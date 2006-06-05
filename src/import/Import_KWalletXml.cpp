@@ -38,14 +38,14 @@ if(len==0){
 	err+=QObject::tr("File is empty.");
 	return false;}
 quint8* buffer=new quint8[len];
-file.readBlock((char*)buffer,len);
+file.read((char*)buffer,len);
 file.close();
 QDomDocument doc;
 QString xmlerr;
 int col,line;
 if(!doc.setContent(QString::fromUtf8((char*)buffer,len),false,&xmlerr,&line,&col)){
-	cout << "Import_PwManager::parseXmlContent():" << endl;
-	cout << (xmlerr+" (Line:%1 Column:%2)").arg(line).arg(col).ascii() << endl;
+	qWarning("Import_PwManager::parseXmlContent():\n");
+	qWarning(((xmlerr+" (Line:%1 Column:%2)").arg(line).arg(col)+QString('\n')).toAscii());
 	err+=QObject::tr("Invalid XML file (see stdout for details).");
 	delete [] buffer;
 	return false;}

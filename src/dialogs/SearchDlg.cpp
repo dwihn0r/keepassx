@@ -27,8 +27,8 @@
 #include <qregexp.h>
 #include <qmessagebox.h>
 
-CSearchDlg::CSearchDlg(Database* _db,CGroup* pGroup,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CSearchDlg::CSearchDlg(Database* _db,CGroup* pGroup,QWidget* parent,  bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 connect( Button_Search, SIGNAL( clicked() ), this, SLOT( OnButtonSearch() ) );
@@ -114,10 +114,10 @@ done(1);
 bool CSearchDlg::search(const QString& str){
 
 if(regexp){
- QRegExp exp(txt,checkBox_Cs->isChecked());
+ QRegExp exp(txt,checkBox_Cs->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
  if(str.contains(exp)==0)return false;}
 else{
- if(str.contains(txt,checkBox_Cs->isChecked())==0)return false;}
+ if(str.contains(txt,checkBox_Cs->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive)==0)return false;}
 return true;
 
 }

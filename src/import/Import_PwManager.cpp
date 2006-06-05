@@ -37,7 +37,7 @@ if(!file.exists()){err+=QObject::tr("File not found."); return false;}
 if(!file.open(QIODevice::ReadOnly)){err+=QObject::tr("Could not open file."); return false;}
 if(len=file.size()) buffer=new char[len];
 else {err+=QObject::tr("File is empty."); return false;}
-file.readBlock(buffer,len);
+file.read(buffer,len);
 file.close();
 if(QString::fromAscii(buffer,17)!="PWM_PASSWORD_FILE")
   {err+=QObject::tr("File is no valid PwManager file."); return false;}
@@ -76,7 +76,7 @@ int pwlen=password.length();
 byte* Key=new byte[pwlen];
 byte* xml=new byte[len-offset+1];
 xml[len-offset]=0;
-memcpy(Key,password.ascii(),pwlen);
+memcpy(Key,password.toAscii(),pwlen);
   char* key_hash=new char[20];
   CSHA1 sha;
   sha.Update(Key,pwlen);
@@ -116,8 +116,8 @@ QDomDocument db;
 QString err;
 int col,line;
 if(!db.setContent(QString::fromUtf8(content,strlen(content)-1),false,&err,&line,&col)){
-	cout << "Import_PwManager::parseXmlContent():" << endl;
-	cout << (err+" (Line:%1 Column:%2)").arg(line).arg(col).ascii() << endl;
+	qWarning("Import_PwManager::parseXmlContent():\n");
+	qWarning(((err+" (Line:%1 Column:%2)").arg(line).arg(col)+QString('\n')).toAscii());
 	return false;}
 QDomElement root=db.documentElement();
 if(root.tagName()!="P")return false;

@@ -278,8 +278,8 @@ Q_ASSERT(!FileOpen);
 if(!IsAuto){
 	config.LastKeyLocation=QString();
 	config.LastKeyType=PASSWORD;}
-CPasswordDialog PasswordDlg(this,"Password Dialog",true,IsAuto);
-PasswordDlg.setCaption(filename);
+CPasswordDialog PasswordDlg(this,true,IsAuto);
+PasswordDlg.setWindowTitle(filename);
 int r=PasswordDlg.exec();
 if(r==0) return;
 if(r==2) {Start=false; return;}
@@ -299,7 +299,7 @@ StatusBarGeneral->setText(tr("Loading Database..."));
 if(db->openDatabase(filename,err)==true){
 //SUCCESS
 if(config.OpenLast)config.LastFile=filename;
-setCaption(tr("KeePassX - %1").arg(filename));
+setWindowTitle(tr("KeePassX - %1").arg(filename));
 GroupView->updateItems();
 EntryView->updateItems(0);
 setStateFileOpen(true);
@@ -338,14 +338,14 @@ GroupView->Items.clear();
 SearchResults.clear();
 GroupView->ShowSearchGroup=false;
 setStateFileOpen(false);
-setCaption("KeePassX Password Manager");
+setWindowTitle("KeePassX Password Manager");
 return true;
 }
 
 
 void KeepassMainWindow::OnFileNew(){
-CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
-dlg.setCaption("New Database");
+CPasswordDialog dlg(this,true,false,true);
+dlg.setWindowTitle("New Database");
 if(dlg.exec()==1){
 	if(FileOpen)
 		if(!closeDatabase())return;
@@ -364,7 +364,7 @@ if(dlg.exec()==1){
 		db->CalcMasterKeyByFile(dlg.keyfile);
 	if(dlg.password!="" && dlg.keyfile!="")
 		db->CalcMasterKeyByFileAndPw(dlg.keyfile,dlg.password);
-	setCaption(tr("KeePassX - %1").arg(tr("[new]")));
+	setWindowTitle(tr("KeePassX - %1").arg(tr("[new]")));
 	GroupView->db=db;
 	EntryView->db=db;
 	GroupView->updateItems();
@@ -427,7 +427,7 @@ else{
 }
 
 void KeepassMainWindow::editEntry(CEntry* pEntry){
-CEditEntryDlg dlg(db,pEntry,this,"EditEntryDialog",true);
+CEditEntryDlg dlg(db,pEntry,this,true);
 switch(dlg.exec()){
 	case 0: //canceled or no changes
 			break;
@@ -480,7 +480,7 @@ default: Q_ASSERT(false);
 
 void KeepassMainWindow::updateDetailView(){
 if(EntryView->selectedItems().size()!=1){
- DetailView->setText("");
+ DetailView->setPlainText("");
  return;}
 
 CEntry& entry=*((EntryViewItem*)(EntryView->selectedItems()[0]))->pEntry;
@@ -614,18 +614,18 @@ Q_ASSERT(db->file);
 if(db->file->isOpen()) db->file->close();
 
 db->file->setFileName(filename);
-setCaption(tr("KeePassX - %1").arg(filename));
+setWindowTitle(tr("KeePassX - %1").arg(filename));
 return OnFileSave();
 }
 
 void KeepassMainWindow::OnFileSettings(){
-CDbSettingsDlg dlg(this,db,"DatabaseSettingsDlg");
+CDbSettingsDlg dlg(this,db);
 if(dlg.exec())setStateFileModified(true);
 }
 
 void KeepassMainWindow::OnFileChangeKey(){
-CPasswordDialog dlg(this,"PasswordDlg",true,false,true);
-dlg.setCaption(db->file->fileName());
+CPasswordDialog dlg(this,true,false,true);
+dlg.setWindowTitle(db->file->fileName());
 if(dlg.exec()==1){
 	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
 		if(!db->createKeyFile(dlg.keyfile)){
@@ -664,7 +664,7 @@ if(filename!=QString::null){
 	Q_ASSERT(!FileOpen);
 	db = new PwDatabase();
 	db->newDatabase();
-	CSimplePasswordDialog dlg(this,"SimplePasswordDlg",true);
+	CSimplePasswordDialog dlg(this,true);
 	if(!dlg.exec()){
 		delete db;
 		db=NULL;
@@ -677,7 +677,7 @@ if(filename!=QString::null){
 	Import_PwManager import;
 	if(import.importFile(filename,dlg.password,db,err)==true){
 		//SUCCESS
-		setCaption(tr("KeePassX [new]"));
+		setWindowTitle(tr("KeePassX [new]"));
 		GroupView->updateItems();
 		EntryView->updateItems(0);
 		setStateFileOpen(true);
@@ -711,7 +711,7 @@ if(filename!=QString::null){
 	Import_KWalletXml import;
 	if(import.importFile(filename,db,err)==true){
 		//SUCCESS
-		setCaption(tr("KeePassX [new]"));
+		setWindowTitle(tr("KeePassX [new]"));
 		GroupView->updateItems();
 		EntryView->updateItems(0);
 		setStateFileOpen(true);
@@ -792,7 +792,7 @@ if(GroupView->selectedItems().size())
  pNew=db->addGroup(static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup);
 else
  pNew=db->addGroup(NULL);
-CEditGroupDialog dlg(db,this,"EditGroupDlg",true);
+CEditGroupDialog dlg(db,this,true);
 if(!dlg.exec()){
  db->deleteGroup(pNew);
  return;
@@ -806,7 +806,7 @@ GroupView->updateItems();
 void KeepassMainWindow::OnEditEditGroup(){
 Q_ASSERT(GroupView->selectedItems().size());
 CGroup *pGroup=static_cast<GroupViewItem*>(GroupView->selectedItems()[0])->pGroup;
-CEditGroupDialog dlg(db,this,"EditGroupDlg",true);
+CEditGroupDialog dlg(db,this,true);
 dlg.GroupName=pGroup->Name;
 dlg.IconID=pGroup->ImageID;
 if(!dlg.exec())return;
@@ -831,7 +831,7 @@ setStateFileModified(true);
 void KeepassMainWindow::OnEditNewEntry(){
 CEntry NewEntry;
 NewEntry.GroupID=currentGroup()->ID;
-CEditEntryDlg dlg(db,&NewEntry,this,"EditEntryDialog",true);
+CEditEntryDlg dlg(db,&NewEntry,this,true);
 if(dlg.exec()){
  db->addEntry(&NewEntry);
  EntryView->updateItems(currentGroup()->ID);
@@ -879,13 +879,15 @@ for(int i=0; i<SearchResults.size();i++){
 
 void KeepassMainWindow::OnEditUsernameToClipboard(){
 Clipboard->setText(currentEntry()->UserName,  QClipboard::Clipboard);
-ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
+ClipboardTimer.setSingleShot(true);
+ClipboardTimer.start(config.ClipboardTimeOut*1000);
 }
 
 void KeepassMainWindow::OnEditPasswordToClipboard(){
 currentEntry()->Password.unlock();
 Clipboard->setText(currentEntry()->Password.string(),QClipboard::Clipboard);
-ClipboardTimer.start(config.ClipboardTimeOut*1000,true);
+ClipboardTimer.setSingleShot(true);
+ClipboardTimer.start(config.ClipboardTimeOut*1000);
 currentEntry()->Password.lock();
 
 }
@@ -1006,7 +1008,7 @@ CGroup::UI_ExpandByDefault=config.ExpandGroupTree;
 }
 
 void KeepassMainWindow::OnHelpAbout(){
-CAboutDialog dlg(this,"AboutDlg");
+CAboutDialog dlg(this);
 dlg.exec();
 }
 

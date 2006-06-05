@@ -27,8 +27,8 @@
 #include "SelectIconDlg.h"
 
 
-CEditGroupDialog::CEditGroupDialog(Database* database,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CEditGroupDialog::CEditGroupDialog(Database* database,QWidget* parent, bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 db=database;
@@ -47,16 +47,16 @@ void CEditGroupDialog::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
 	EditTitle->setText(GroupName);
 	for(int i=0;i<db->numIcons();i++){
-		ComboIconPicker->insertItem(db->icon(i),"",i);
+		ComboIconPicker->insertItem(i,db->icon(i),"");
 	}
-	ComboIconPicker->setCurrentItem(IconID);
+	ComboIconPicker->setCurrentIndex(IconID);
 }
 }
 
 void CEditGroupDialog::OnOK()
 {
 GroupName=EditTitle->text();
-IconID=ComboIconPicker->currentItem();
+IconID=ComboIconPicker->currentIndex();
 done(1);
 }
 
@@ -72,8 +72,8 @@ int r=dlg.exec();
 if(r!=-1){
 	ComboIconPicker->clear();
 	for(int i=0;i<db->numIcons();i++)
-		ComboIconPicker->insertItem(db->icon(i),"",i);
+		ComboIconPicker->insertItem(i,db->icon(i),"");
 	IconID=r;
-	ComboIconPicker->setCurrentItem(IconID);
+	ComboIconPicker->setCurrentIndex(IconID);
 }
 }

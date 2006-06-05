@@ -87,7 +87,7 @@ if(!file->open(QIODevice::ReadWrite)){
 }
 total_size=file->size();
 char* buffer = new char[total_size];
-file->readBlock(buffer,total_size);
+file->read(buffer,total_size);
 
 if(total_size < DB_HEADER_SIZE){
 err=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
@@ -418,7 +418,7 @@ if(Password == QString::null) return false;
 
 paKey = new char[Password.length() + 1];
 if(paKey == NULL) return false;
-strcpy(paKey, Password);
+strcpy(paKey, Password.toUtf8());
 
 
 
@@ -447,13 +447,13 @@ if(file.open(QIODevice::ReadOnly) == false) return false;
 unsigned long FileSize=file.size();
 
 if(FileSize == 32){
-	if(file.readBlock((char*)MasterKey,32) != 32){
+	if(file.read((char*)MasterKey,32) != 32){
 	  file.close();
 	  return false;}
 }
 else if(FileSize == 64){
 	char hex[64];
-	if(file.readBlock(hex,64) != 64){
+	if(file.read(hex,64) != 64){
 	  file.close();
 	  return false;}
 	file.close();
@@ -467,7 +467,7 @@ sha256_starts(&sha32);
 unsigned char* buffer = new unsigned char[2048];
 while(1)
  {
- unsigned long read=file.readBlock((char*)buffer,2048);
+ unsigned long read=file.read((char*)buffer,2048);
  if(read == 0) break;
  sha256_update(&sha32,buffer,read);
  if(read != 2048) break;
@@ -535,13 +535,13 @@ QFile file(filename);
 if(file.open(QIODevice::ReadOnly) == false) return false;
 unsigned long FileSize=file.size();
 if(FileSize == 32){
-	if(file.readBlock((char*)FileKey,32) != 32){
+	if(file.read((char*)FileKey,32) != 32){
 	   file.close();
 	   return false;}
 }
 else if(FileSize == 64){
 	char hex[64];
-	if(file.readBlock(hex,64) != 64){
+	if(file.read(hex,64) != 64){
 	  file.close();
 	  return false;}
 	file.close();
@@ -552,7 +552,7 @@ sha256_starts(&sha32);
 unsigned char* buffer = new unsigned char[2048];
 while(1)
  {
- unsigned long read=file.readBlock((char*)buffer,2048);
+ unsigned long read=file.read((char*)buffer,2048);
  if(read == 0) break;
  sha256_update(&sha32,buffer,read);
  if(read != 2048) break;
@@ -569,7 +569,7 @@ char *paKey = NULL;
 if(Password == QString::null) return false;
 paKey = new char[Password.length() + 1];
 if(paKey == NULL) return false;
-strcpy(paKey, Password);
+strcpy(paKey, Password.toUtf8());
 if(paKey == NULL) return false;
 KeyLen = strlen(paKey);
 if(KeyLen == 0) {
@@ -796,23 +796,23 @@ MetaStreams << &CustomIconsMetaStream;
 FileSize=DB_HEADER_SIZE;
 // Get the size of all groups (94 Byte + length of the name string)
 for(int i = 0; i < Groups.size(); i++){
-  FileSize += 94 + Groups[i].Name.utf8().length()+1;
+  FileSize += 94 + Groups[i].Name.toUtf8().length()+1;
 }
 // Get the size of all entries
 for(int i = 0; i < Entries.size(); i++){
   FileSize	+= 134
-			+Entries[i].Title.utf8().length()+1
-			+Entries[i].UserName.utf8().length()+1
-			+Entries[i].URL.utf8().length()+1
+			+Entries[i].Title.toUtf8().length()+1
+			+Entries[i].UserName.toUtf8().length()+1
+			+Entries[i].URL.toUtf8().length()+1
 			+Entries[i].Password.length()+1
-			+Entries[i].Additional.utf8().length()+1
-			+Entries[i].BinaryDesc.utf8().length()+1
+			+Entries[i].Additional.toUtf8().length()+1
+			+Entries[i].BinaryDesc.toUtf8().length()+1
 			+Entries[i].BinaryData.length();	
 }
 
 for(int i=0; i < MetaStreams.size(); i++){
   FileSize	+=164
-			+MetaStreams[i]->Additional.utf8().length()+1
+			+MetaStreams[i]->Additional.toUtf8().length()+1
 			+MetaStreams[i]->BinaryData.length();
 }
 
@@ -845,10 +845,10 @@ for(int i=0; i < Groups.size(); i++){
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		memcpyToLEnd32(buffer+pos, &Groups[i].ID); pos += 4;
 
-		FieldType = 0x0002; FieldSize = Groups[i].Name.utf8().length() + 1;
+		FieldType = 0x0002; FieldSize = Groups[i].Name.toUtf8().length() + 1;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Groups[i].Name.utf8(),FieldSize); pos += FieldSize;
+		memcpy(buffer+pos, Groups[i].Name.toUtf8(),FieldSize); pos += FieldSize;
 
 		FieldType = 0x0003; FieldSize = 5;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -908,36 +908,36 @@ for(int i = 0; i < Entries.size(); i++){
 
 
 		FieldType = 0x0004;
-		FieldSize = Entries[i].Title.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = Entries[i].Title.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Entries[i].Title.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, Entries[i].Title.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0005;
-		FieldSize = Entries[i].URL.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = Entries[i].URL.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Entries[i].URL.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, Entries[i].URL.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0006;
-		FieldSize = Entries[i].UserName.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = Entries[i].UserName.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Entries[i].UserName.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, Entries[i].UserName.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0007;
 		FieldSize = Entries[i].Password.length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		Entries[i].Password.unlock();
-		memcpy(buffer+pos, Entries[i].Password.string(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, Entries[i].Password.string().toUtf8(),FieldSize);  pos += FieldSize;
 		Entries[i].Password.lock();
 
 		FieldType = 0x0008;
-		FieldSize = Entries[i].Additional.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = Entries[i].Additional.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Entries[i].Additional.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, Entries[i].Additional.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0009; FieldSize = 5;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -961,10 +961,10 @@ for(int i = 0; i < Entries.size(); i++){
 		dateToPackedStruct5(Entries[i].Expire,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000D;
-		FieldSize = Entries[i].BinaryDesc.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = Entries[i].BinaryDesc.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, Entries[i].BinaryDesc.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, Entries[i].BinaryDesc.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x000E; FieldSize = Entries[i].BinaryData.length();
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -996,36 +996,36 @@ for(int i = 0; i < MetaStreams.size(); i++){
 
 
 		FieldType = 0x0004;
-		FieldSize = MetaStreams[i]->Title.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = MetaStreams[i]->Title.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, MetaStreams[i]->Title.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, MetaStreams[i]->Title.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0005;
-		FieldSize = MetaStreams[i]->URL.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = MetaStreams[i]->URL.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, MetaStreams[i]->URL.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, MetaStreams[i]->URL.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0006;
-		FieldSize = MetaStreams[i]->UserName.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = MetaStreams[i]->UserName.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, MetaStreams[i]->UserName.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, MetaStreams[i]->UserName.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0007;
 		FieldSize = MetaStreams[i]->Password.length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
 		MetaStreams[i]->Password.unlock();
-		memcpy(buffer+pos, MetaStreams[i]->Password.string(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, MetaStreams[i]->Password.string().toUtf8(),FieldSize);  pos += FieldSize;
 		MetaStreams[i]->Password.lock();
 
 		FieldType = 0x0008;
-		FieldSize = MetaStreams[i]->Additional.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = MetaStreams[i]->Additional.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, MetaStreams[i]->Additional.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, MetaStreams[i]->Additional.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x0009; FieldSize = 5;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -1049,10 +1049,10 @@ for(int i = 0; i < MetaStreams.size(); i++){
 		dateToPackedStruct5(MetaStreams[i]->Expire,(unsigned char*)buffer+pos); pos+=5;
 
 		FieldType = 0x000D;
-		FieldSize = MetaStreams[i]->BinaryDesc.utf8().length() + 1; // Add terminating NULL character space
+		FieldSize = MetaStreams[i]->BinaryDesc.toUtf8().length() + 1; // Add terminating NULL character space
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, MetaStreams[i]->BinaryDesc.utf8(),FieldSize);  pos += FieldSize;
+		memcpy(buffer+pos, MetaStreams[i]->BinaryDesc.toUtf8(),FieldSize);  pos += FieldSize;
 
 		FieldType = 0x000E; FieldSize = MetaStreams[i]->BinaryData.length();
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -1117,7 +1117,7 @@ return false;
 }
 
 file->resize(0); //truncate
-if(file->writeBlock(buffer,EncryptedPartSize+DB_HEADER_SIZE)!=EncryptedPartSize+DB_HEADER_SIZE){
+if(file->write(buffer,EncryptedPartSize+DB_HEADER_SIZE)!=EncryptedPartSize+DB_HEADER_SIZE){
 delete [] buffer;
 return false;
 }
@@ -1648,7 +1648,7 @@ bool testDatabase(){
         bool loadedDB = cloneDatabase.openDatabase(dbPath, err);
         if (!loadedDB){
                 kp_assert(results, loadedDB);
-                cout << err.ascii() << endl;
+                qWarning((err+QString('\n')).toAscii());
         }
 		
 	assertDatabasesEq(results, &database, &cloneDatabase);

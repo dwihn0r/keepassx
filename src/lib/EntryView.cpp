@@ -357,7 +357,7 @@ DragPixmap.fill(QColor(255,255,255));
 QPainter painter(&DragPixmap);
 painter.setPen(QColor(0,0,0));
 painter.setFont(DragItems[0]->font(0));
-painter.drawPixmap(0,0,DragItems[0]->icon(0).pixmap());
+painter.drawPixmap(0,0,DragItems[0]->icon(0).pixmap(QSize(16,16)));
 painter.drawText(19,DragPixmHeight-fontmet.strikeOutPos(),DragText);	
 QMimeData *mimeData = new QMimeData;
 void* pDragItems=&DragItems;

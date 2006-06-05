@@ -25,8 +25,8 @@
 #include <qfont.h>
 #include <qlineedit.h>
 #include <qlabel.h>
-#include <q3progressbar.h>
-#include <q3textedit.h>
+#include <QProgressBar>
+#include <QTextEdit>
 #include <qpixmap.h>
 #include <qcolor.h>
 #include <qcombobox.h>
@@ -35,7 +35,6 @@
 #include <QFileDialog>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
-//Added by qt3to4:
 #include <QShowEvent>
 
 #include "SelectIconDlg.h"
@@ -44,8 +43,8 @@
 
 
 
-CEditEntryDlg::CEditEntryDlg(Database* _db, CEntry* _entry,QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CEditEntryDlg::CEditEntryDlg(Database* _db, CEntry* _entry,QWidget* parent,  bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 Q_ASSERT(_db);
 Q_ASSERT(_entry);
@@ -74,8 +73,8 @@ ButtonSaveAttachment->setIcon(*Icon_FileSave);
 if(entry->BinaryData.isNull()){
   ButtonSaveAttachment->setDisabled(true);
   ButtonDeleteAttachment->setDisabled(true);}
-setCaption(entry->Title);
-setIcon(db->icon(entry->ImageID));
+setWindowTitle(entry->Title);
+setWindowIcon(db->icon(entry->ImageID));
 Edit_Title->setText(entry->Title);
 Edit_UserName->setText(entry->UserName);
 Edit_URL->setText(entry->URL);
@@ -92,7 +91,7 @@ if(bits>128)
   bits=128;
 Progress_Quali->setValue(100*bits/128);
 Edit_Attachment->setText(entry->BinaryDesc);
-Edit_Comment->setText(entry->Additional);
+Edit_Comment->setPlainText(entry->Additional);
 InitGroupComboBox();
 InitIconComboBox();
 if(entry->BinaryData.length()==0)
@@ -136,9 +135,9 @@ if(event->spontaneous()==false){
 
 void CEditEntryDlg::InitIconComboBox(){
 for(int i=0;i<db->numIcons();i++){
-	Combo_IconPicker->insertItem(db->icon(i),"",i);
+	Combo_IconPicker->insertItem(i,db->icon(i),"");
 }
-	Combo_IconPicker->setCurrentItem(entry->ImageID);
+	Combo_IconPicker->setCurrentIndex(entry->ImageID);
 }
 
 
@@ -148,10 +147,10 @@ int i;
 for(i=0;i!=db->numGroups();i++){
 tmp="";
   for(int j=0;j<db->group(i).Level;j++)tmp+="  ";
-Combo_Group->insertItem(db->icon(db->group(i).ImageID),
- 			tmp+db->group(i).Name,i);
+Combo_Group->insertItem(i,db->icon(db->group(i).ImageID),
+ 			tmp+db->group(i).Name);
 }
-Combo_Group->setCurrentItem(db->getGroupIndex(entry->GroupID));
+Combo_Group->setCurrentIndex(db->getGroupIndex(entry->GroupID));
 }
 
 void CEditEntryDlg::OnButtonOK()
@@ -162,7 +161,7 @@ QMessageBox::warning(NULL,tr("Warning"),tr("Password and password repetition are
 return;
 }
 
-if(CheckBox_ExpiresNever->state()==Qt::Checked){
+if(CheckBox_ExpiresNever->checkState()==Qt::Checked){
   DateTime_Expire->setDateTime(Date_Never);}
 
 if(DateTime_Expire->dateTime()!=entry->Expire)
@@ -173,13 +172,13 @@ if(entry->UserName!=Edit_UserName->text())
 	ModFlag=true;
 if(entry->URL!=Edit_URL->text())
 	ModFlag=true;
-if(entry->Additional!=Edit_Comment->text())
+if(entry->Additional!=Edit_Comment->toPlainText())
 	ModFlag=true;
 entry->Password.unlock();
 if(entry->Password.string()!=Edit_Password->text())
 	ModFlag=true;
 entry->Password.lock();
-if(entry->ImageID!=Combo_IconPicker->currentItem())
+if(entry->ImageID!=Combo_IconPicker->currentIndex())
 	ModFlag=true;
 
 entry->Expire=DateTime_Expire->dateTime();
@@ -190,14 +189,14 @@ entry->UserName=Edit_UserName->text();
 entry->URL=Edit_URL->text();
 QString s=Edit_Password->text();
 entry->Password.setString(s,true);
-entry->Additional=Edit_Comment->text();
-if(Combo_Group->currentItem()!=db->getGroupIndex(entry->GroupID)){
-	db->moveEntry(entry,&db->group(Combo_Group->currentItem()));
+entry->Additional=Edit_Comment->toPlainText();
+if(Combo_Group->currentIndex()!=db->getGroupIndex(entry->GroupID)){
+	db->moveEntry(entry,&db->group(Combo_Group->currentIndex()));
 	EntryMoved=true; ModFlag=true;
 }
-if(entry->ImageID<BUILTIN_ICONS && Combo_IconPicker->currentItem()>=BUILTIN_ICONS)
+if(entry->ImageID<BUILTIN_ICONS && Combo_IconPicker->currentIndex()>=BUILTIN_ICONS)
 	entry->OldImgID=entry->ImageID;
-entry->ImageID=Combo_IconPicker->currentItem();
+entry->ImageID=Combo_IconPicker->currentIndex();
 
 if(ModFlag&&EntryMoved)done(2);
 else if(ModFlag)done(1);
@@ -238,10 +237,15 @@ void CEditEntryDlg::OnPasswordwTextChanged(const QString& w)
 {
 
 if(QString::compare(Edit_Password_w->text(),Edit_Password->text().mid(0,(Edit_Password_w->text().length())))!=0){
-Edit_Password_w->setPaletteBackgroundColor(QColor(255,125,125));
+	QPalette palette;
+    palette.setColor(Edit_Password_w->foregroundRole(),QColor(255,125,125));
+	Edit_Password_w->setPalette(palette);
 }else
 {
-Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Standard-Hintergrundfarbe nicht weiß
+///@FIXME should set correct background color... it's not always white!
+	QPalette palette;
+    palette.setColor(Edit_Password_w->foregroundRole(),QColor(255,255,255));
+	Edit_Password_w->setPalette(palette);
 }
 
 
@@ -251,11 +255,16 @@ Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Stand
 void CEditEntryDlg::OnPasswordwLostFocus()
 {
 if(QString::compare(Edit_Password_w->text(),Edit_Password->text())!=0){
-Edit_Password_w->setPaletteBackgroundColor(QColor(255,125,125));
+	QPalette palette;
+    palette.setColor(Edit_Password_w->foregroundRole(),QColor(255,125,125));
+	Edit_Password_w->setPalette(palette);
 }
 else
 {
-Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Standard-Hintergrundfarbe nicht weiß
+///@FIXME should set correct background color... it's not always white!
+	QPalette palette;
+    palette.setColor(Edit_Password_w->foregroundRole(),QColor(255,255,255));
+	Edit_Password_w->setPalette(palette);
 }
 
 
@@ -263,7 +272,7 @@ Edit_Password_w->setPaletteBackgroundColor(QColor(255,255,255)); ///@FIXME Stand
 
 void CEditEntryDlg::OnNewAttachment()
 {
-QString filename=QFileDialog::getOpenFileName(this,tr("Add Attachment..."),QDir::homeDirPath());
+QString filename=QFileDialog::getOpenFileName(this,tr("Add Attachment..."),QDir::homePath());
 if(filename=="")return;
 QFile file(filename);
 if(file.open(QIODevice::ReadOnly)==false){
@@ -297,7 +306,7 @@ saveAttachment(entry,this);
 
 void CEditEntryDlg::saveAttachment(CEntry* pEntry, QWidget* ParentWidget)
 {
-QFileDialog FileDlg(ParentWidget,tr("Save Attachment..."),QDir::homeDirPath());
+QFileDialog FileDlg(ParentWidget,tr("Save Attachment..."),QDir::homePath());
 FileDlg.selectFile(pEntry->BinaryDesc);
 FileDlg.setAcceptMode(QFileDialog::AcceptSave);
 if(!FileDlg.exec())return;
@@ -347,7 +356,7 @@ ButtonDeleteAttachment->setDisabled(true);
 
 void CEditEntryDlg::OnButtonGenPw()
 {
-CGenPwDialog* pDlg=new CGenPwDialog(this,0,true);
+CGenPwDialog* pDlg=new CGenPwDialog(this,true);
 pDlg->show();
 }
 
@@ -363,13 +372,13 @@ else
 }
 
 void CEditEntryDlg::OnCustomIcons(){
-CSelectIconDlg dlg(db,Combo_IconPicker->currentItem(),this);
+CSelectIconDlg dlg(db,Combo_IconPicker->currentIndex(),this);
 int r=dlg.exec();
 if(r!=-1){
 	Combo_IconPicker->clear();
 	for(int i=0;i<db->numIcons();i++)
-		Combo_IconPicker->insertItem(db->icon(i),"",i);
-	Combo_IconPicker->setCurrentItem(r);
+		Combo_IconPicker->insertItem(i,db->icon(i),"");
+	Combo_IconPicker->setCurrentIndex(r);
 }
 }
 

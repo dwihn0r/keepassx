@@ -38,7 +38,7 @@ using namespace std;
 bool CConfig::loadFromIni(QString filename){
 QString defaultSearchOptions = "001101111";
 QString defaultPwGenOptions = "1111100001";
-ini.SetPath((const char*)filename);
+ini.SetPath((const char*)filename.toUtf8());
 ini.ReadFile();
 ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
 Toolbar=ini.GetValueB("UI","ShowToolbar",true);
@@ -52,10 +52,10 @@ BannerTextColor=ParseColorString(ini.GetValue("Options","BannerTextColor","222,2
 ShowPasswords=ini.GetValueB("Options","ShowPasswords",false);
 OpenUrlCommand=ini.GetValue("Options","UrlCmd","kfmclient openURL %1").c_str();
 Language=ini.GetValue("Options","LangFile","").c_str();
-ParseBoolString(ini.GetValue("Options","SearchOptions",defaultSearchOptions.ascii()).c_str(),defaultSearchOptions,SearchOptions,9);
+ParseBoolString(ini.GetValue("Options","SearchOptions",(const char*)defaultSearchOptions.toUtf8()).c_str(),defaultSearchOptions,SearchOptions,9);
 ListView_HidePasswords=ini.GetValueB("UI","HidePasswords",true);
 ListView_HideUsernames=ini.GetValueB("UI","HideUsernames",false);
-ParseBoolString(ini.GetValue("Options","PwGenOptions",defaultPwGenOptions.ascii()).c_str(),defaultPwGenOptions,PwGenOptions,10);
+ParseBoolString(ini.GetValue("Options","PwGenOptions",(const char*)defaultPwGenOptions.toUtf8()).c_str(),defaultPwGenOptions,PwGenOptions,10);
 PwGenLength=ini.GetValueI("Options","PwGenLength",25);
 PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
 ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
@@ -81,34 +81,34 @@ ini.SetValueI("Options","ClipboardTimeOut",ClipboardTimeOut);
 ini.SetValueB("UI","ShowToolbar",Toolbar);
 ini.SetValueB("UI","ShowEntryDetails",EntryDetails);
 ini.SetValueB("Options","RememberLastFile",OpenLast);
- if(OpenLast)ini.SetValue("Options","LastFile",(const char*)LastFile);
+ if(OpenLast)ini.SetValue("Options","LastFile",(const char*)LastFile.toUtf8());
  else	     ini.SetValue("Options","LastFile","");
-ini.SetValue("UI","Columns",(const char*)CreateColumnString(),true);
-ini.SetValue("Options","BannerColor1",(const char*)CreateColorString(BannerColor1),true);
-ini.SetValue("Options","BannerColor2",(const char*)CreateColorString(BannerColor2),true);
-ini.SetValue("Options","BannerTextColor",(const char*)CreateColorString(BannerTextColor),true);
+ini.SetValue("UI","Columns",(const char*)CreateColumnString().toUtf8(),true);
+ini.SetValue("Options","BannerColor1",(const char*)CreateColorString(BannerColor1).toUtf8(),true);
+ini.SetValue("Options","BannerColor2",(const char*)CreateColorString(BannerColor2).toUtf8(),true);
+ini.SetValue("Options","BannerTextColor",(const char*)CreateColorString(BannerTextColor).toUtf8(),true);
 ini.SetValueB("Options","ShowPasswords",ShowPasswords,true);
-ini.SetValue("Options","UrlCmd",(const char*)OpenUrlCommand,true);
-ini.SetValue("Options","LangFile",(const char*)Language,true);
-ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,9),true);
+ini.SetValue("Options","UrlCmd",(const char*)OpenUrlCommand.toUtf8(),true);
+ini.SetValue("Options","LangFile",(const char*)Language.toUtf8(),true);
+ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,9).toUtf8(),true);
 ini.SetValueB("UI","HidePasswords",ListView_HidePasswords);
 ini.SetValueB("UI","HideUsernames",ListView_HideUsernames);
-ini.SetValue("Options","PwGenOptions",(const char*)CreateBoolString(PwGenOptions,10),true);
+ini.SetValue("Options","PwGenOptions",(const char*)CreateBoolString(PwGenOptions,10).toUtf8(),true);
 ini.SetValueI("Options","PwGenLength",PwGenLength,true);
-ini.SetValue("Options","PwGenCharList",(const char*)PwGenCharList,true);
+ini.SetValue("Options","PwGenCharList",(const char*)PwGenCharList.toUtf8(),true);
 ini.SetValueB("Options","ExpandGroupTree",ExpandGroupTree,true);
 ini.SetValueB("KDE Plugin","Enabled",EnableKdePlugin,true);
 ini.SetValueI("UI","MainWinHeight",MainWinHeight);
 ini.SetValueI("UI","MainWinWidth",MainWinWidth);
 ini.SetValueI("UI","MainWinSplit1",MainWinSplit1);
 ini.SetValueI("UI","MainWinSplit2",MainWinSplit2);
-ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10),true);
+ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10).toUtf8(),true);
 ini.SetValueB("UI","ShowStatusbar",ShowStatusbar);
 ini.SetValueB("Options","AlternatingRowColors",AlternatingRowColors);
-ini.SetValue("Options","MountDir",(const char*)MountDir);
+ini.SetValue("Options","MountDir",(const char*)MountDir.toUtf8());
 ini.SetValueB("Options","RememberLastKey",RememberLastKey);
 if(RememberLastKey){
-	ini.SetValue("Options","LastKeyLocation",(const char*)LastKeyLocation);
+	ini.SetValue("Options","LastKeyLocation",(const char*)LastKeyLocation.toUtf8());
 	ini.SetValueI("Options","LastKeyType",LastKeyType);}
 else{
 	ini.SetValue("Options","LastKeyLocation","");
@@ -142,16 +142,16 @@ return str;
 }
 
 QColor CConfig::ParseColorString(QString str){
-QStringList lst=QStringList::split(',',str);
+QStringList lst=str.split(',');
 if(lst.size()!=3){
-  qWarning(QObject::tr("Warning:")+" CConfig::ParseColorString(QString):"+QObject::tr("Invalid RGB color value.\n"));
+  qWarning((QObject::tr("Warning:")+" CConfig::ParseColorString(QString):"+QObject::tr("Invalid RGB color value.\n")).toUtf8());
   return QColor(0,0,0);}
 bool err[3];
 int r=lst[0].toUInt(err);
 int g=lst[1].toUInt(err+1);
 int b=lst[2].toUInt(err+2);
 if(!err[0] || !err[1] || !err[2]){
-  qWarning(QObject::tr("Warning:")+" CConfig::ParseColorString(QString):"+QObject::tr("Invalid RGB color value.\n"));
+  qWarning((QObject::tr("Warning:")+" CConfig::ParseColorString(QString):"+QObject::tr("Invalid RGB color value.\n")).toUtf8());
   return QColor(0,0,0);}
 return QColor(r,g,b);
 }

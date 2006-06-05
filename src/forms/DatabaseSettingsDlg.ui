@@ -35,7 +35,7 @@
     <property name="windowTitle" >
       <string>Database Settings</string>
     </property>
-    <widget class="Q3GroupBox" name="groupBox1" >
+    <widget class="QGroupBox" name="groupBox1" >
       <property name="geometry" >
         <rect>
           <x>10</x>

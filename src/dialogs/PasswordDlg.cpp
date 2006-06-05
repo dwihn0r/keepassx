@@ -31,15 +31,15 @@
 #include <QMessageBox>
 
 
-CPasswordDialog::CPasswordDialog(QWidget* parent, const char* name, bool modal, bool ShowExitButton,bool ChangeKeyMode, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CPasswordDialog::CPasswordDialog(QWidget* parent,  bool modal, bool ShowExitButton,bool ChangeKeyMode, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 createBanner(Banner,Icon_Key32x32,tr("Database Key"));
 QDir media(config.MountDir);
 if(media.exists()){
 	QStringList Paths;
-	Paths=media.entryList("*",QDir::Dirs);
+	Paths=media.entryList(QStringList()<<"*",QDir::Dirs);
 	Paths.erase(Paths.begin()); // delete "."
 	Paths.erase(Paths.begin()); // delete ".."
 	for(int i=0;i<Paths.count();i++)
@@ -124,7 +124,7 @@ KeyType=BOTH;
 
 void CPasswordDialog::OnButtonBrowse()
 {
-QString filename=QFileDialog::getOpenFileName(this,tr("Select a Key File"),QDir::homeDirPath(),tr("*.key"));
+QString filename=QFileDialog::getOpenFileName(this,tr("Select a Key File"),QDir::homePath(),tr("*.key"));
 if(filename=="")return;
 QFile file(filename);
 if(file.exists()){
@@ -136,7 +136,7 @@ QMessageBox::warning(this,tr("Error"),tr("Unexpected Error: File does not exist.
 
 void CPasswordDialog::OnButtonBrowse_Set()
 {
-QString filename=QFileDialog::getSaveFileName(this,tr("Select a Key File"),QDir::homeDirPath(),tr("*.key"));
+QString filename=QFileDialog::getSaveFileName(this,tr("Select a Key File"),QDir::homePath(),tr("*.key"));
 if(filename=="")return;
 Combo_Dirs->setEditText(filename);
 }
@@ -179,7 +179,7 @@ if(KeyType==BOTH || KeyType==KEYFILE){
 		if(!file.exists()){				
 			QDir dir(keyfile);
 			QStringList files;
-			files=dir.entryList("*.key",QDir::Files);
+			files=dir.entryList(QStringList()<<"*.key",QDir::Files);
 			if(!files.size()){
 				QMessageBox::warning(this,tr("Error"),tr("The given directory does not contain any key files."),tr("OK"),"","",0,0);
 				return;}

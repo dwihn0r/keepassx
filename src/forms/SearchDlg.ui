@@ -106,7 +106,7 @@
         <bool>true</bool>
       </property>
     </widget>
-    <widget class="Q3GroupBox" name="groupBox1" >
+    <widget class="QGroupBox" name="groupBox1" >
       <property name="geometry" >
         <rect>
           <x>10</x>
@@ -117,9 +117,6 @@
       </property>
       <property name="title" >
         <string>Include:</string>
-      </property>
-      <property name="orientation" >
-        <enum>Qt::Vertical</enum>
       </property>
       <widget class="QCheckBox" name="checkBox_Title" >
         <property name="geometry" >
@@ -271,15 +268,6 @@
   </widget>
   <layoutdefault spacing="6" margin="11" />
   <pixmapfunction/>
-  <customwidgets>
-    <customwidget>
-      <class>Q3GroupBox</class>
-      <extends/>
-      <header>Qt3Support/Q3GroupBox</header>
-      <container>1</container>
-      <pixmap/>
-    </customwidget>
-  </customwidgets>
   <tabstops>
     <tabstop>Edit_Search</tabstop>
     <tabstop>checkBox_Cs</tabstop>

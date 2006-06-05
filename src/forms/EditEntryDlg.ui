@@ -275,7 +275,7 @@
      </widget>
     </item>
     <item row="7" column="1" colspan="5" >
-     <widget class="Q3TextEdit" name="Edit_Comment" />
+     <widget class="QTextEdit" name="Edit_Comment" />
     </item>
     <item row="11" column="0" colspan="6" >
      <widget class="Line" name="line1" >
@@ -394,15 +394,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>Q3TextEdit</class>
-   <extends></extends>
-   <header>q3textedit.h</header>
-   <container>0</container>
-   <pixmap></pixmap>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>Combo_Group</tabstop>
   <tabstop>Combo_IconPicker</tabstop>

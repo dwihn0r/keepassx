@@ -31,7 +31,7 @@ class CEditGroupDialog : public QDialog, public Ui_EditGroupDialog
   Q_OBJECT
 
 public:
-  CEditGroupDialog(Database*,QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
+  CEditGroupDialog(Database*,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CEditGroupDialog();
   bool ModFlag;
 virtual void showEvent(QShowEvent *event);

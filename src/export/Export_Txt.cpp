@@ -44,7 +44,7 @@ if(!file.open(QIODevice::Truncate | QIODevice::WriteOnly)){
 }
 
 for(int g=0;g<db->numGroups();g++){
-	file.write(GroupTemplate.arg(db->group(g).Name).utf8());
+	file.write(GroupTemplate.arg(db->group(g).Name).toUtf8());
 	for(int e=0;e<db->numEntries();e++){
 		if(db->group(g).ID==db->entry(e).GroupID){
 			db->entry(e).Password.unlock();
@@ -53,7 +53,7 @@ for(int g=0;g<db->numGroups();g++){
 									.arg(db->entry(e).URL)
 									.arg(db->entry(e).Password.string())
 									.arg(db->entry(e).Additional.replace('\n',"\n            "))
-									.utf8());
+									.toUtf8());
 			db->entry(e).Password.lock();
 		}
 	}

@@ -26,8 +26,8 @@
 #include "DatabaseSettingsDlg.h"
 
 
-CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,Database* db, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,Database* db,  bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 database=db;
@@ -42,9 +42,9 @@ CDbSettingsDlg::~CDbSettingsDlg()
 void CDbSettingsDlg::showEvent(QShowEvent *event){
 if(event->spontaneous()==false){
 createBanner(Banner,Icon_Settings32x32,tr("Settings"));
-ComboAlgo->insertItem(tr("AES(Rijndael):  256 Bit   (default)"),0);
-ComboAlgo->insertItem(tr("Twofish:  256 Bit"),1);
-ComboAlgo->setCurrentItem(database->CryptoAlgorithmus); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
+ComboAlgo->insertItem(0,tr("AES(Rijndael):  256 Bit   (default)"));
+ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));
+ComboAlgo->setCurrentIndex(database->CryptoAlgorithmus); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
 EditRounds->setText(QString::number(database->KeyEncRounds));
 
 }
@@ -73,7 +73,7 @@ QMessageBox::warning(NULL,tr("Error"),tr("The number of encryption rounds have t
 return;
 }
 database->KeyEncRounds=rounds;
-database->CryptoAlgorithmus=ComboAlgo->currentItem();
+database->CryptoAlgorithmus=ComboAlgo->currentIndex();
 
 done(1);
 }

@@ -38,7 +38,7 @@ QString keyfile;
 QString password;
 tKeyType KeyType;
 
-CPasswordDialog(QWidget* parent = 0, const char* name = 0, bool modal = false,
+CPasswordDialog(QWidget* parent = 0,  bool modal = false,
 								bool ShowExitButton = false, bool KeyMode_Set=false,  Qt::WFlags fl = 0 );
 
 public slots:

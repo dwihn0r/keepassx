@@ -115,7 +115,7 @@ SOURCES += lib/IniReader.cpp \
            lib/EntryView.cpp \
            crypto/arcfour.cpp \
            lib/KpFileIconProvider.cpp 
-QT += xml qt3support
+QT += xml
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/

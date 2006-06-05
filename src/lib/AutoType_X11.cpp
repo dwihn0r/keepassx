@@ -97,7 +97,7 @@ for(int i=0;i<str.size();i++){
 					Found '{' without closing '}'").arg(i+10);
 			return;
 		}
-		templateToKeysyms(tmpl.lower(),Keys,entry);
+		templateToKeysyms(tmpl.toLower(),Keys,entry);
 		continue;
 	}
 	else

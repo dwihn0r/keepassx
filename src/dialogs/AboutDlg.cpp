@@ -26,8 +26,8 @@
 #include "main.h"
 #include "AboutDlg.h"
 
-CAboutDialog::CAboutDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
-: QDialog(parent,name, modal,fl)
+CAboutDialog::CAboutDialog(QWidget* parent,bool modal, Qt::WFlags fl)
+: QDialog(parent,fl)
 {
 setupUi(this);
 createBanner(Banner,Icon_Key32x32,tr("KeePassX %1").arg(KEEPASS_VERSION));
@@ -42,7 +42,7 @@ if(TrActive){
 	}
 	AboutTr+="<br>";
 }
-Edit_Translation->setText(AboutTr+tr("\
+Edit_Translation->setHtml(AboutTr+tr("\
 Information on how to translate KeePassX can be found under:\n\
 http://keepass.berlios.de/"));
 QString str;
@@ -55,7 +55,7 @@ str+="</div><br><div style='margin-left:0px;'>";
 str+="<b>"+tr("Thanks To")+"</b>";
 str+="</div><div style='margin-left:10px;'>";
 str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
-Edit_Thanks->setText(str);
+Edit_Thanks->setHtml(str);
 }
 
 CAboutDialog::~CAboutDialog()
@@ -86,9 +86,9 @@ return;
 }
 
 char* buffer=new char[gpl.size()];
-long l=gpl.readBlock(buffer,gpl.size());
+long l=gpl.read(buffer,gpl.size());
 gpl.close();
-Edit_License->setText(QString::fromUtf8(buffer,l));
+Edit_License->setHtml(QString::fromUtf8(buffer,l));
 delete buffer;
 }
 

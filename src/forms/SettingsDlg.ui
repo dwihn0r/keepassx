@@ -176,7 +176,7 @@
     <attribute name="title" >
      <string>Appea&amp;rance</string>
     </attribute>
-    <widget class="Q3GroupBox" name="groupBox1" >
+    <widget class="QGroupBox" name="groupBox1" >
      <property name="geometry" >
       <rect>
        <x>20</x>
@@ -578,15 +578,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends></extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-   <pixmap></pixmap>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>tabWidget4</tabstop>
   <tabstop>SpinBox_ClipboardTime</tabstop>
