@@ -14,14 +14,14 @@
   </property>
   <property name="minimumSize" >
    <size>
-    <width>200</width>
+    <width>302</width>
     <height>105</height>
    </size>
   </property>
   <property name="maximumSize" >
    <size>
     <width>302</width>
-    <height>100</height>
+    <height>105</height>
    </size>
   </property>
   <property name="windowTitle" >
@@ -63,38 +63,6 @@
     <string>Icon:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="ButtonCancel" >
-   <property name="geometry" >
-    <rect>
-     <x>227</x>
-     <y>77</y>
-     <width>70</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>&amp;Cancel</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+C</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="ButtonOK" >
-   <property name="geometry" >
-    <rect>
-     <x>147</x>
-     <y>77</y>
-     <width>70</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>O&amp;K</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+K</string>
-   </property>
-  </widget>
   <widget class="Line" name="line1" >
    <property name="geometry" >
     <rect>
@@ -114,21 +82,53 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QPushButton" name="ButtonOK" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>76</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>O&amp;K</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+K</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ButtonCancel" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>76</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>&amp;Cancel</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+C</string>
+   </property>
+  </widget>
   <widget class="QComboBox" name="ComboIconPicker" >
    <property name="geometry" >
     <rect>
-     <x>70</x>
-     <y>40</y>
-     <width>50</width>
-     <height>21</height>
+     <x>68</x>
+     <y>37</y>
+     <width>62</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="Button_Icon" >
    <property name="geometry" >
     <rect>
-     <x>123</x>
-     <y>39</y>
+     <x>135</x>
+     <y>38</y>
      <width>21</width>
      <height>23</height>
     </rect>
