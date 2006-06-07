@@ -4,10 +4,11 @@
 -fixed crash when parsing config file under Win32
 -fixed loss of entry icons when saving a database which was not created 
  with KeePassX (no KPX_CUSTOM_ICONS metastream)
+-when there is no translation installed for the system's country preference but
+ one for the same language the program will now use it
 -when canceling the file dialog for the opening of an existing database a already
  openend database will not longer be closed
 -same for the creation of a new database
-
 ---------------
     0.2.1
 ---------------

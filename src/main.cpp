@@ -77,6 +77,7 @@ QIcon *Icon_Swap;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
+bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
 
 
 int main(int argc, char **argv)
@@ -113,38 +114,33 @@ QTranslator* translator = NULL;
 QTranslator* qtTranslator=NULL;
 translator=new QTranslator;
 qtTranslator=new QTranslator;
-bool TrFound=true;
-QString locname;
 
-if(!translator->load("keepass-"+loc.name(),app->applicationDirPath()+"/../share/keepass/i18n/")){
-	if(!translator->load("keepass-"+loc.name(),QDir::homePath()+"/.keepass/")){
-		if(loc.name()!="en_US")
-		qWarning(QString("KeePassX: No Translation found language '%1 (%2)' using 'English (UnitedStates)'")
-				.arg(QLocale::languageToString(loc.language()))
-				.arg(QLocale::countryToString(loc.country())).toAscii());
-		TrFound=false;
-	}
+if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
+					<< app->applicationDirPath()+"/../share/keepass/i18n/" 
+					<< QDir::homePath()+"/.keepass/" ))
+	app->installTranslator(translator);
+else{
+	if(loc.name()!="en_US")
+	qWarning(QString("Kpx: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
+			.arg(QLocale::languageToString(loc.language()))
+			.arg(QLocale::countryToString(loc.country())).toAscii());
+	delete translator;
+	TrActive=false;
 }
 
-if(TrFound)
-	app->installTranslator(translator);
-else 
-	delete translator;
-
-
-if(!qtTranslator->load("qt_"+loc.name().left(2),QLibraryInfo::location(QLibraryInfo::TranslationsPath))){
+if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
+					<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
+					<< app->applicationDirPath()+"/../share/keepass/i18n/" 
+					<< QDir::homePath()+"/.keepass/" ))
+	app->installTranslator(qtTranslator);
+else{
 	if(loc.name()!="en_US")
 	qWarning(QString("Qt: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
 			.arg(QLocale::languageToString(loc.language()))
 			.arg(QLocale::countryToString(loc.country())).toAscii());
 	delete qtTranslator;
-}else{
-	app->installTranslator(qtTranslator);
 }
 
-
-
-TrActive=TrFound;
 loadImages();
 SecString::generateSessionKey();
 int r=0;
@@ -295,6 +291,23 @@ _loadIcon(Icon_Help,"/actions/help.png");
 _loadIcon(Icon_AutoType,"/apps/ktouch.png");
 _loadIcon(Icon_Swap,"/actions/reload.png");
 }
+
+
+bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& loc,const QStringList& paths){
+for(int i=0;i<paths.size();i++)
+	if(tr->load(prefix+loc+".qm",paths[i])) return true;
+for(int i=0;i<paths.size();i++){
+	QDir dir(paths[i]);
+	QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
+	for(int j=0;j<TrFiles.size();j++){
+		if(TrFiles[j].left(prefix.length()+2)==prefix+loc.left(2)){
+			if(tr->load(TrFiles[j],paths[i]))return true;
+		}
+	}
+}
+return false;
+}
+
 
 
 void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang){
