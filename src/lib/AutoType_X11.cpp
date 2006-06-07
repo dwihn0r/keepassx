@@ -18,7 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QApplication>
 #include "AutoType.h"
+#include <QTime>
 #include <QList>
 #include <QChar>
 
@@ -64,6 +66,11 @@ switch(mods){
 
 
 void AutoType::perform(CEntry* entry, QString& err){
+struct timespec timeOut,remains;
+timeOut.tv_sec = 0;
+timeOut.tv_nsec = 300000000; /* 300 milliseconds */
+for(int i=0;i<10;i++)nanosleep(&timeOut, &remains);
+
 QString str;
 int c=entry->Additional.count("Auto-Type:");
 if(c>1){
@@ -110,7 +117,6 @@ for(int i=0;i<Keys.size();i++){
 	int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
 	int mods=getModifiers(pDisplay,Keys[i],keycode);
 	pressModifiers(pDisplay,mods);
-	qDebug("[%i]: Keysym=%i, KeyCode=%i, Mod=%i",i,(int)Keys[i],keycode,mods);
 	XTestFakeKeyEvent(pDisplay,keycode,True,0);
 	XTestFakeKeyEvent(pDisplay,keycode,False,1);
 	releaseModifiers(pDisplay,mods);
