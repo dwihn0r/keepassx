@@ -4,6 +4,9 @@
 -fixed crash when parsing config file under Win32
 -fixed loss of entry icons when saving a database which was not created 
  with KeePassX (no KPX_CUSTOM_ICONS metastream)
+-removed all old Qt3 support dependecies
+-implemented correct UUID management for entries
+-fixed drawing errors when performing drag and drop operations in group view
 -when there is no translation installed for the system's country preference but
  one for the same language the program will now use it
 -when canceling the file dialog for the opening of an existing database a already

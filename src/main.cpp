@@ -35,7 +35,6 @@
 #include "PwmConfig.h"
 #include "PwManager.h"
 #include "mainwindow.h"
-#include "Database.h"
 using namespace std;
 
 #ifdef Q_WS_X11
@@ -83,13 +82,6 @@ bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& Locale
 
 int main(int argc, char **argv)
 {
-for(int i=0;i<100;i++){
-	KpxUuid id;
-	cout << (const char*)id.toString().toAscii() << endl;
-}
-
-
-
 QApplication* app=new QApplication(argc,argv);
 QString ArgFile,ArgCfg,ArgLang,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);

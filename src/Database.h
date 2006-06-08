@@ -33,15 +33,16 @@ extern const QDateTime Date_Never;
 class KpxUuid{
 public:
 	KpxUuid();
-	bool operator==(const KpxUuid&) const;
-	bool operator!=(const KpxUuid&) const;
+	KpxUuid(const void* src);
+	void generate();
 	QString toString() const;
 	const unsigned char* data()const
 		{return (const unsigned char*) Data.data();}
-	void toRaw(void* dst);
-	void fromRaw(void* src);
+	void toRaw(void* dst)const;
+	void fromRaw(const void* src);
+	bool operator==(const KpxUuid&) const;
+	bool operator!=(const KpxUuid&) const;
 private:
-	void generate();
 	QByteArray Data;
 };
 
@@ -59,7 +60,7 @@ class CEntry{
 public:
 CEntry();
 ~CEntry();
-quint8 ID[16];
+KpxUuid Uuid;
 quint32 sID;
 quint32 GroupID;
 quint32 ImageID;

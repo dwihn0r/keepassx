@@ -22,9 +22,12 @@
 #include "lib/random.h"
 
 KpxUuid::KpxUuid(){
-	generate();
+	Data.fill(0,16);
 }
 
+KpxUuid::KpxUuid(const void* src){
+	fromRaw(src);
+}
 
 void KpxUuid::generate(){
 	char uuid[16];
@@ -54,11 +57,11 @@ QString KpxUuid::toString()const{
 			.arg(hex.mid(20,12));
 }
 
-void KpxUuid::toRaw(void* dst){
+void KpxUuid::toRaw(void* dst)const{
 	memcpy(dst,Data.data(),16);
 }
 
-void KpxUuid::fromRaw(void* src){
+void KpxUuid::fromRaw(const void* src){
 	Data=QByteArray((char*)src,16);
 }
 

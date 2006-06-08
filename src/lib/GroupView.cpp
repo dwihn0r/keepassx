@@ -74,6 +74,7 @@ if(LastHoverItem){
 	LastHoverItem->setFont(0,f);
 }
 
+QLine LastMarker=InsertionMarker;
 InsertionMarker=QLine();
 if(isSearchResultGroup(item))
 	event->setAccepted(false);
@@ -117,7 +118,15 @@ else{
 		LastHoverItem=NULL;
 	}
 }
-
+if(!LastMarker.isNull()){
+	///@FIXME
+	//this is a very dirty work-around to force a redraw of items at the last marker position
+	//should be replaced!!!
+	GroupViewItem* i=(GroupViewItem*)itemAt(0,LastMarker.y1());
+	if(i)i->setFont(0,i->font(0));
+	i=(GroupViewItem*)itemAt(0,LastMarker.y1()-1);
+	if(i)i->setFont(0,i->font(0));
+}
 update();
 }
 
@@ -268,8 +277,9 @@ QPen pen(QColor(100,100,100));
 pen.setWidth(2);
 pen.setStyle(Qt::DotLine);
 painter.setPen(pen);
+qDebug("UPDATE: (%i,%i) %ix%i",event->rect().x(),event->rect().y(),event->rect().width(),event->rect().height());
 if(!InsertionMarker.isNull()){
-painter.drawLine(InsertionMarker);
+	painter.drawLine(InsertionMarker);
 }
 }
 

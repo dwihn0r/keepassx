@@ -483,20 +483,13 @@ return true;
 
 CEntry* PwDatabase::addEntry(CEntry* NewEntry){
 if(Entries.size()==0){
- NewEntry->sID=0;
- getRandomBytes(&NewEntry->ID,16,1,false);
- }
- else {
- NewEntry->sID=Entries.back().sID+1;
- while(1){
- bool used=false;
- getRandomBytes(&NewEntry->ID,16,1,false);
-  for(int j=0;j<Entries.size();j++){
-	int k;
-	for(k=0;k<16;k++){if(Entries[j].ID[k]!=NewEntry->ID[k])k=0;break;}
-	if(k==15)used=true;}
- if(used==false)break;
- }}
+	NewEntry->sID=0;
+ 	NewEntry->Uuid.generate();
+}
+else{
+	NewEntry->sID=Entries.back().sID+1;
+	NewEntry->Uuid.generate();
+}
 Entries.push_back(*NewEntry);
 return &Entries.back();
 }
@@ -505,20 +498,13 @@ return &Entries.back();
 CEntry* PwDatabase::addEntry(){
 CEntry NewEntry;
 if(Entries.size()==0){
- NewEntry.sID=0;
- getRandomBytes(&NewEntry.ID,16,1,false);
- }
- else {
- NewEntry.sID=Entries.back().sID+1;
- while(1){
- bool used=false;
- getRandomBytes(&NewEntry.ID,16,1,false);
-  for(int j=0;j<Entries.size();j++){
-	int k;
-	for(k=0;k<16;k++){if(Entries[j].ID[k]!=NewEntry.ID[k])k=0;break;}
-	if(k==15)used=true;}
- if(used==false)break;
- }}
+	NewEntry.sID=0;
+	NewEntry.Uuid.generate();
+}
+else{
+	NewEntry.Uuid.generate();
+ 	NewEntry.sID=Entries.back().sID+1;
+}
 Entries.push_back(NewEntry);
 return &Entries.back();
 }
@@ -612,12 +598,10 @@ entry->GroupID=dst->ID;
 
 CEntry* PwDatabase::cloneEntry(CEntry* entry){
 CEntry *Dolly=addEntry();
-quint8 ID[16];
 quint32 sid=Dolly->sID;
-memcpy(ID,Dolly->ID,16);
 *Dolly=*entry;
 Dolly->sID=sid;
-memcpy(Dolly->ID,ID,16);
+Dolly->Uuid.generate();
 return Dolly;
 }
 
@@ -685,7 +669,7 @@ switch(FieldType)
 		// Ignore field
 		break;
 	case 0x0001:
-		memcpy(ID, pData, 16);
+		Uuid=KpxUuid(pData);
 		break;
 	case 0x0002:
 		memcpyFromLEnd32(&GroupID, (char*)pData);
@@ -894,7 +878,7 @@ for(int i = 0; i < Entries.size(); i++){
 		FieldType = 0x0001; FieldSize = 16;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, &Entries[i].ID, 16); pos += 16;
+		Entries[i].Uuid.toRaw(buffer+pos);		pos += 16;
 
 		FieldType = 0x0002; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -982,7 +966,7 @@ for(int i = 0; i < MetaStreams.size(); i++){
 		FieldType = 0x0001; FieldSize = 16;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpy(buffer+pos, &MetaStreams[i]->ID, 16); pos += 16;
+		MetaStreams[i]->Uuid.toRaw(buffer+pos); pos += 16;
 
 		FieldType = 0x0002; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -1528,8 +1512,8 @@ void assertGroupsEq(KPTestResults& results, CGroup* left, CGroup* right){
 void assertEntriesEq(KPTestResults& results, CEntry* left, CEntry* right){
 	unsigned long size = 0;
 	
-	kp_assert(results, memcmp(left->ID, right->ID, sizeof(left->ID)) == 0);
-	size += sizeof(left->ID);
+	kp_assert(results, left->Uuid==right->Uuid);
+	size += sizeof(left->Uuid);
 
 	kp_assert(results, left->sID == right->sID);
 	size += sizeof(left->sID);
