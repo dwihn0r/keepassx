@@ -19,6 +19,58 @@
  ***************************************************************************/
 
 #include "Database.h"
+#include "lib/random.h"
+
+KpxUuid::KpxUuid(){
+	generate();
+}
+
+
+void KpxUuid::generate(){
+	char uuid[16];
+	getRandomBytes(uuid,16);
+	quint32 Secs=QDateTime::currentDateTime().toTime_t();
+	quint16 mSecs=QTime::currentTime().msec();
+	mSecs=(mSecs & 0x3FF) | (*((quint16*)(uuid+4)) & 0xFC00); //msec has only 10 Bits, filling the rest with random data
+	memcpy((void*)uuid,&Secs,4);
+	memcpy((void*)(uuid+4),&mSecs,2);
+	Data=QByteArray(uuid,16);
+}
+
+QString KpxUuid::toString()const{
+	QString hex;
+	Q_ASSERT(Data.length()==16);
+	for(int i=0;i<16;i++){
+		QString HexByte;
+		HexByte.setNum((unsigned char)*(Data.data()+i),16);
+		if(HexByte.length()<2)HexByte="0"+HexByte;
+		hex+=HexByte;
+	}
+	return QString("{%1-%2-%3-%4-%5}")
+			.arg(hex.mid(0,8))
+			.arg(hex.mid(8,4))
+			.arg(hex.mid(12,4))	
+			.arg(hex.mid(16,4))											
+			.arg(hex.mid(20,12));
+}
+
+void KpxUuid::toRaw(void* dst){
+	memcpy(dst,Data.data(),16);
+}
+
+void KpxUuid::fromRaw(void* src){
+	Data=QByteArray((char*)src,16);
+}
+
+bool KpxUuid::operator==(const KpxUuid& other)const{
+	return other.Data==Data;
+}
+
+bool KpxUuid::operator!=(const KpxUuid& other)const{
+	return other.Data!=Data;
+}
+
+
 
 QString KpxDateTime::toString(Qt::DateFormat format) const{
 if(*this==Date_Never)return QObject::tr("Never");

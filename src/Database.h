@@ -24,10 +24,27 @@
 #include <QDateTime>
 #include <QFile>
 #include <QPixmap>
+#include <QByteArray>
 #include "lib/SecString.h"
 using namespace std;
 
 extern const QDateTime Date_Never;
+
+class KpxUuid{
+public:
+	KpxUuid();
+	bool operator==(const KpxUuid&) const;
+	bool operator!=(const KpxUuid&) const;
+	QString toString() const;
+	const unsigned char* data()const
+		{return (const unsigned char*) Data.data();}
+	void toRaw(void* dst);
+	void fromRaw(void* src);
+private:
+	void generate();
+	QByteArray Data;
+};
+
 class KpxDateTime:public QDateTime{
 public:
 KpxDateTime(){};
