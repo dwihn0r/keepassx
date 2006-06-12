@@ -49,8 +49,8 @@ else return QString(tr("Unknown Error"));
 QString PwDatabase::getErrors(){
 QString r;
 for(int i=0; i<Errors.size(); i++){
-r+=Errors[i];
-r+='\n';
+	r+=Errors[i];
+	r+='\n';
 }
 Errors.clear();
 return r;
@@ -244,11 +244,21 @@ return true;
 }
 
 bool PwDatabase::parseMetaStream(const CEntry& entry){
-if(entry.Additional=="KPX_CUSTOM_ICONS")
+
+if(entry.Additional=="KPX_CUSTOM_ICONS_2")
 	return parseCustomIconsMetaStream(entry.BinaryData);
 
+/* Old stream format will be ignored*/
+if(entry.Additional=="KPX_CUSTOM_ICONS")
+	return true; //return true to avoid that this stream get saved
 
-return false; //unknown MetaStreams
+return false; //unknown MetaStream
+}
+
+CEntry* PwDatabase::getEntry(const KpxUuid& uuid){
+	for(int i=0; i<Entries.size();i++)
+		if(Entries[i].Uuid==uuid)return &Entries[i];
+	return NULL;
 }
 
 bool PwDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
@@ -275,13 +285,17 @@ for(int i=0;i<NumIcons;i++){
 		return false;}
 }
 for(int i=0;i<NumEntries;i++){
-	quint32 Entry,Icon;
-	memcpyFromLEnd32(&Entry,dta.data()+offset);
-	offset+=4;
+	quint32 Icon;
+	KpxUuid EntryUuid;
+	EntryUuid.fromRaw(dta.data()+offset);
+	offset+=16;
 	memcpyFromLEnd32(&Icon,dta.data()+offset);
 	offset+=4;
-	Entries[Entry].OldImgID=Entries[Entry].ImageID;
-	Entries[Entry].ImageID=Icon;
+	CEntry* entry=getEntry(EntryUuid);
+	if(entry){
+		entry->OldImgID=entry->ImageID;
+		entry->ImageID=Icon;
+	}
 }
 for(int i=0;i<NumGroups;i++){
 	quint32 Group,Icon;
@@ -295,17 +309,20 @@ for(int i=0;i<NumGroups;i++){
 return true;
 }
 
+
 void PwDatabase::createCustomIconsMetaStream(CEntry* e){
+/* Rev 2 */
 e->BinaryDesc="bin-stream";
 e->Title="Meta-Info";
 e->UserName="SYSTEM";
-e->Additional="KPX_CUSTOM_ICONS";
+e->Additional="KPX_CUSTOM_ICONS_2";
 e->URL="$";
 e->ImageID=0;
+if(Groups.size())e->GroupID=Groups[0].ID;
 int Size=12;
 quint32 NumEntries=Entries.size();
 quint32 NumGroups=Groups.size();
-Size+=8*(NumEntries+NumGroups);
+Size+=8*NumGroups+20*NumEntries;
 Size+=CustomIcons.size()*1000; // 1KB 
 e->BinaryData.reserve(Size);
 e->BinaryData.resize(12);
@@ -327,11 +344,11 @@ for(int i=0;i<CustomIcons.size();i++){
 	e->BinaryData.append(png);
 }
 for(quint32 i=0;i<Entries.size();i++){
-		char Bin[8];
-		memcpyToLEnd32(Bin,&i);
+		char Bin[20];
+		Entries[i].Uuid.toRaw(Bin);
 		quint32 id=Entries[i].ImageID;
-		memcpyToLEnd32(Bin+4,&id);
-		e->BinaryData.append(QByteArray::fromRawData(Bin,8));
+		memcpyToLEnd32(Bin+16,&id);
+		e->BinaryData.append(QByteArray::fromRawData(Bin,20));
 }
 for(quint32 i=0;i<Groups.size();i++){
 		char Bin[8];

@@ -89,6 +89,7 @@ if(DragType==GROUP){
 				item->setFont(0,f);
 				LastHoverItem=item;
 				event->setAccepted(true);
+				///@FIXME does not work for top level groups
 			}
 			else{
 				LastHoverItem=NULL;
@@ -277,7 +278,7 @@ QPen pen(QColor(100,100,100));
 pen.setWidth(2);
 pen.setStyle(Qt::DotLine);
 painter.setPen(pen);
-qDebug("UPDATE: (%i,%i) %ix%i",event->rect().x(),event->rect().y(),event->rect().width(),event->rect().height());
+//qDebug("UPDATE: (%i,%i) %ix%i",event->rect().x(),event->rect().y(),event->rect().width(),event->rect().height());
 if(!InsertionMarker.isNull()){
 	painter.drawLine(InsertionMarker);
 }

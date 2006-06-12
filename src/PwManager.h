@@ -68,6 +68,7 @@ public:
  QList<int> getChildIds(CGroup* pGroup);
 
  CEntry&   entry(unsigned long index);
+ CEntry*   getEntry(const KpxUuid& uuid);
  void	   setEntry(unsigned long index,CEntry& Entry);
  int	   numEntries();
  CEntry*   cloneEntry(CEntry* pEntry);

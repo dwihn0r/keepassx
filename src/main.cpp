@@ -202,10 +202,14 @@ if(color1!=color2){
 else{
  banner_pixmap->fill(color1);
 }
-painter.drawPixmap(10,10,*symbol);
+QPixmap icon(32,32);
+icon.fill(textcolor);
+icon.setAlphaChannel(*symbol);
+painter.drawPixmap(10,10,icon);
+
 pen.setColor(textcolor);
 painter.setPen(pen);
-painter.drawText(50,30,text);
+painter.drawText(50,35,text);
 Banner->setPixmap(*banner_pixmap);
 }
 
