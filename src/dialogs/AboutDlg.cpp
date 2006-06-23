@@ -44,7 +44,7 @@ if(TrActive){
 }
 Edit_Translation->setHtml(AboutTr+tr("\
 Information on how to translate KeePassX can be found under:\n\
-http://keepass.berlios.de/"));
+http://keepassx.sourceforge.net/"));
 QString str;
 str+="<b>"+tr("Team")+"</b><br>";
 str+="<div style='margin-left:10px;'>";
@@ -55,6 +55,9 @@ str+="</div><br><div style='margin-left:0px;'>";
 str+="<b>"+tr("Thanks To")+"</b>";
 str+="</div><div style='margin-left:10px;'>";
 str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
+str+="<br>";
+str+="</div><div style='margin-left:10px;'>";
+str+="<u>"+tr("James Nicholls")+"</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
 Edit_Thanks->setHtml(str);
 }
 
@@ -93,10 +96,10 @@ delete buffer;
 }
 
 void CAboutDialog::OnHomepageClicked(){
-openBrowser(tr("http://keepass.berlios.de/index.php"));
+openBrowser(tr("http://keepassx.sf.net"));
 }
 
 void CAboutDialog::OnEMailClicked(){
-openBrowser("mailto:tarek.saidi@arcor.de");
+openBrowser("mailto:keepassx@gmail.com");
 }
 

@@ -92,19 +92,6 @@ KeePassX is distributed under the terms of the
 General Public License (GPL) version 2.</string>
      </property>
     </widget>
-    <widget class="LinkLabel" name="label_3" >
-     <property name="geometry" >
-      <rect>
-       <x>30</x>
-       <y>80</y>
-       <width>351</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>tarek.saidi@arcor.de</string>
-     </property>
-    </widget>
     <widget class="LinkLabel" name="label_2" >
      <property name="geometry" >
       <rect>
@@ -115,10 +102,23 @@ General Public License (GPL) version 2.</string>
       </rect>
      </property>
      <property name="text" >
-      <string>http://keepass.berlios.de/</string>
+      <string>http://keepassx.sourceforge.net</string>
      </property>
      <property name="buddy" >
       <cstring></cstring>
+     </property>
+    </widget>
+    <widget class="LinkLabel" name="label_3" >
+     <property name="geometry" >
+      <rect>
+       <x>30</x>
+       <y>80</y>
+       <width>351</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>keepassx@gmail.com</string>
      </property>
     </widget>
    </widget>
