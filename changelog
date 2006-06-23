@@ -6,12 +6,16 @@
  with KeePassX (no KPX_CUSTOM_ICONS metastream)
 -removed all old Qt3 support dependecies
 -implemented correct UUID management for entries
+-added delay of 0.3s before performing auto-type
+-metastreams now get valid group IDs (KeePass/Win compatibility)
 -fixed drawing errors when performing drag and drop operations in group view
 -when there is no translation installed for the system's country preference but
- one for the same language the program will now use it
+ one for the same language the program will use it now
 -when canceling the file dialog for the opening of an existing database a already
  openend database will not longer be closed
 -same for the creation of a new database
+-alpha blending for banner icons
+-new standard banner icon
 ---------------
     0.2.1
 ---------------

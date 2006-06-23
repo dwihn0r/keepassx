@@ -248,9 +248,8 @@ bool PwDatabase::parseMetaStream(const CEntry& entry){
 if(entry.Additional=="KPX_CUSTOM_ICONS_2")
 	return parseCustomIconsMetaStream(entry.BinaryData);
 
-/* Old stream format will be ignored*/
 if(entry.Additional=="KPX_CUSTOM_ICONS")
-	return true; //return true to avoid that this stream get saved
+	return parseCustomIconsMetaStreamV1(entry.BinaryData); 
 
 return false; //unknown MetaStream
 }
@@ -260,6 +259,15 @@ CEntry* PwDatabase::getEntry(const KpxUuid& uuid){
 		if(Entries[i].Uuid==uuid)return &Entries[i];
 	return NULL;
 }
+
+
+/* legacy function */
+bool PwDatabase::parseCustomIconsMetaStreamV1(const QByteArray& dta){
+
+return true;
+
+}
+
 
 bool PwDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
 quint32 NumIcons,NumEntries,NumGroups,offset;

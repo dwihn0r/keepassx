@@ -26,7 +26,7 @@
 #include <QColor>
 #include <QIcon>
 
-#define KEEPASS_VERSION "0.2.1"
+#define KEEPASS_VERSION "0.2.2"
 #define BUILTIN_ICONS 62
 
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};

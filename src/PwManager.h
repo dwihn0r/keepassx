@@ -93,6 +93,7 @@ private:
  bool IsMetaStream(CEntry& Entry);
  bool parseMetaStream(const CEntry& Entry);
  bool parseCustomIconsMetaStream(const QByteArray& data);
+ 	bool parseCustomIconsMetaStreamV1(const QByteArray& data);
  void createCustomIconsMetaStream(CEntry* dst);
  void transformKey(quint8* src,quint8* dst,quint8* seed,int rounds);
  bool readHeader(char* raw);
