@@ -117,7 +117,8 @@ qtTranslator=new QTranslator;
 if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
 					<< app->applicationDirPath()+"/../share/keepass/i18n/" 
 					<< QDir::homePath()+"/.keepass/" ))
-	app->installTranslator(translator);
+	{app->installTranslator(translator);
+	 TrActive=true;}
 else{
 	if(loc.name()!="en_US")
 	qWarning(QString("Kpx: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")

@@ -38,14 +38,22 @@ General Public License (GPL) Version 2.</translation>
     </message>
     <message>
         <source>tarek.saidi@arcor.de</source>
-        <translation>tarek.saidi@arcor.de</translation>
+        <translation type="obsolete">tarek.saidi@arcor.de</translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/</source>
-        <translation>http://keepass.berlios.de/</translation>
+        <translation type="obsolete">http://keepass.berlios.de/</translation>
     </message>
     <message>
         <source>Credits</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>http://keepassx.sourceforge.net</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>keepassx@gmail.com</source>
         <translation></translation>
     </message>
 </context>
@@ -102,7 +110,7 @@ Erlaubt ist nur eine pro Eintrag.</translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation>http://keepass.berlios.de/index.php</translation>
+        <translation type="obsolete">http://keepass.berlios.de/index.php</translation>
     </message>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
@@ -147,7 +155,7 @@ http://keepass.berlios.de/translation-howto.html</translation>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/</source>
-        <translation>Informationen über das Erstellen eine Übersetztung für KeePassX sind hier zu finden:
+        <translation type="obsolete">Informationen über das Erstellen eine Übersetztung für KeePassX sind hier zu finden:
 http://keepass.berlios.de</translation>
     </message>
     <message>
@@ -184,6 +192,23 @@ http://keepass.berlios.de</translation>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepassx.sourceforge.net/</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>James Nicholls</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Main Application Icon</source>
+        <translation>Anwendungssymbol</translation>
+    </message>
+    <message>
+        <source>http://keepassx.sf.net</source>
         <translation></translation>
     </message>
 </context>
@@ -1254,71 +1279,71 @@ die Änderungen speichern?</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">Datei</translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;Import from...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importieren aus...</translation>
     </message>
     <message>
         <source>&amp;Export to...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exportieren nach...</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <source>E&amp;xtras</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;xtras</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <source>&amp;New Database...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neue Datenbank...</translation>
     </message>
     <message>
         <source>&amp;Open Database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenbank &amp;öffnen...</translation>
     </message>
     <message>
         <source>&amp;Close Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenbank s&amp;chließen</translation>
     </message>
     <message>
         <source>&amp;Save Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenbank &amp;speichern</translation>
     </message>
     <message>
         <source>Save Database &amp;As...</source>
-        <translation type="unfinished"></translation>
+        <translation>D&amp;atenbank speichern unter...</translation>
     </message>
     <message>
         <source>&amp;Database Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datenbankeinstellungen...</translation>
     </message>
     <message>
         <source>Change &amp;Master Key...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptschlüssel &amp;ändern...</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
+        <translation>Beend&amp;en</translation>
     </message>
     <message>
         <source>&amp;Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein&amp;stellungen...</translation>
     </message>
     <message>
         <source>&amp;About...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Über...</translation>
     </message>
     <message>
         <source>&amp;KeePassX Handbook...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;KeePassX Handbuch...</translation>
     </message>
 </context>
 <context>
@@ -1771,7 +1796,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Remember last opened file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zuletzt geöffnete Datei merken</translation>
     </message>
 </context>
 <context>

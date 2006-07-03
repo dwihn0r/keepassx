@@ -35,15 +35,15 @@ General Public License (GPL) version 2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>tarek.saidi@arcor.de</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>http://keepass.berlios.de/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>http://keepassx.sourceforge.net</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>keepassx@gmail.com</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -98,7 +98,7 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation>http://keepass.berlios.de/index.php</translation>
+        <translation type="obsolete">http://keepass.berlios.de/index.php</translation>
     </message>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
@@ -137,11 +137,6 @@ http://keepass.berlios.de/translation-howto.html</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Information on how to translate KeePassX can be found under:
-http://keepass.berlios.de/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Team</source>
         <translation type="unfinished"></translation>
     </message>
@@ -175,6 +170,23 @@ http://keepass.berlios.de/</source>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepassx.sourceforge.net/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>James Nicholls</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main Application Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>http://keepassx.sf.net</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

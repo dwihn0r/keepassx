@@ -26,26 +26,34 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Gest. de mot de passe multiplateforme&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copyright (C) 2005 - 2006 Tarek Saidi 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
-        <translation>&lt;span style=&quot; font-size:9pt; font-weight:400;&quot;&gt;Copyright (c) 2005 - 2006     Tarek Saidi &lt;br&gt;
+        <translation>&lt;span style=&quot; font-size:9pt; font-weight:400;&quot;&gt;Copyright (c)  2005 - 2006     Tarek Saidi &lt;br&gt;
 KeePassX  est  distribué  sous  les  termes  de  la&lt;br&gt; Licence Publique Générale GNU v2  (GPL v2).&lt;/span&gt;</translation>
     </message>
     <message>
         <source>tarek.saidi@arcor.de</source>
-        <translation>tarek.saidi@arcor.de</translation>
+        <translation type="obsolete">tarek.saidi@arcor.de</translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/</source>
-        <translation>http://keepass.berlios.de/</translation>
+        <translation type="obsolete">http://keepass.berlios.de/</translation>
     </message>
     <message>
         <source>Credits</source>
         <translation>Crédits </translation>
+    </message>
+    <message>
+        <source>http://keepassx.sourceforge.net</source>
+        <translation>http://keepassx.sourceforge.net</translation>
+    </message>
+    <message>
+        <source>keepassx@gmail.com</source>
+        <translation>keepassx@gmail.com</translation>
     </message>
 </context>
 <context>
@@ -83,7 +91,7 @@ Seulement une par entrée est autorisée. </translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation>Être sûr que le programme soit correctement installé.</translation>
+        <translation>S&apos;assurer que l&apos;application est correctement installée.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -91,17 +99,17 @@ Seulement une par entrée est autorisée. </translation>
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation>Ne  peut ouvrir le fichier &apos;%1&apos;</translation>
+        <translation>N&apos;a pas pu ouvrir le fichier &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The following error occured:
 %1</source>
-        <translation>L&apos;erreur suivant est survenue:
+        <translation>L&apos;erreur suivante est survenue:
 %1</translation>
     </message>
     <message>
         <source>http://keepass.berlios.de/index.php</source>
-        <translation>http://keepass.berlios.de/index.php </translation>
+        <translation type="obsolete">http://keepass.berlios.de/index.php </translation>
     </message>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
@@ -110,7 +118,7 @@ Seulement une par entrée est autorisée. </translation>
     </message>
     <message>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation>&lt;b&gt; A pour auteur:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation>&lt;b&gt; À pour auteur:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>$TRANSALTION_AUTHOR</source>
@@ -119,7 +127,7 @@ Seulement une par entrée est autorisée. </translation>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation>&lt;b&gt; Courriel: &lt;/b&gt;  &lt;br&gt;djellel@free.fr
+        <translation> &lt;b&gt;Courriel:&lt;/b&gt;  &lt;br&gt; djellel@free.fr
 </translation>
     </message>
     <message>
@@ -152,12 +160,12 @@ http://keepass.berlios.de/translation-howto.html</source>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/</source>
-        <translation>Toutes les informations concernant la méthode pour traduire KeePassX peuvent être obtenues à l&apos;adresse suivante:&lt;br&gt;
+        <translation type="obsolete">Toutes les informations concernant la méthode pour traduire KeePassX peuvent être obtenues à l&apos;adresse suivante:&lt;br&gt;
 &lt;ADDRESS&gt;http://keepass.berlios.de/&lt;ADDRESS&gt;</translation>
     </message>
     <message>
         <source>Team</source>
-        <translation>Equipe</translation>
+        <translation>Équipe</translation>
     </message>
     <message>
         <source>Tarek Saidi</source>
@@ -190,6 +198,24 @@ http://keepass.berlios.de/</source>
     <message>
         <source>www.outofhanwell.com</source>
         <translation>&lt;ADDRESS&gt;www.outofhanwell.com&lt;ADDRESS&gt;</translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepassx.sourceforge.net/</source>
+        <translation>Les informations concernant la méthode de traduction de KeePassX peuvent être trouvées à l&apos;adresse suivante:&lt;br&gt;
+ &lt;ADDRESS&gt;http://keepass.berlios.de/translation-howto.html&lt;/ADDRESS&gt;</translation>
+    </message>
+    <message>
+        <source>James Nicholls</source>
+        <translation>James Nicholls</translation>
+    </message>
+    <message>
+        <source>Main Application Icon</source>
+        <translation>Pour le logo de KeepassX</translation>
+    </message>
+    <message>
+        <source>http://keepassx.sf.net</source>
+        <translation>http://keepassx.sf.net</translation>
     </message>
 </context>
 <context>
@@ -596,7 +622,7 @@ S&apos;il vous plait, vérifier vos permissions.</translation>
     </message>
     <message>
         <source>Ge&amp;n.</source>
-        <translation>Ge&amp;n.</translation>
+        <translation>&amp;Gen.</translation>
     </message>
     <message>
         <source>...</source>
@@ -666,7 +692,7 @@ S&apos;il vous plait, vérifier vos permissions.</translation>
     <name>Export_Txt</name>
     <message>
         <source>Could not open file (FileError=%1)</source>
-        <translation type="unfinished">Ne peut ouvrir le fichier (FileError=%1)</translation>
+        <translation>N&apos;a pas pu ouvrir le fichier (FileError=%1)</translation>
     </message>
 </context>
 <context>
@@ -1257,75 +1283,75 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Affichage</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <source>&amp;Import from...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importer d&apos;un...</translation>
     </message>
     <message>
         <source>&amp;Export to...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Exporter vers...</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Ed&amp;iter</translation>
     </message>
     <message>
         <source>E&amp;xtras</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;xtras</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ai&amp;de</translation>
     </message>
     <message>
         <source>&amp;New Database...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nouvelle BD...</translation>
     </message>
     <message>
         <source>&amp;Open Database...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ouvrir une BD...</translation>
     </message>
     <message>
         <source>&amp;Close Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Fer&amp;mer la BD</translation>
     </message>
     <message>
         <source>&amp;Save Database</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Enregistrer la BD</translation>
     </message>
     <message>
         <source>Save Database &amp;As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enre&amp;gistrer la BD sous...</translation>
     </message>
     <message>
         <source>&amp;Database Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramé&amp;trage de la BD...</translation>
     </message>
     <message>
         <source>Change &amp;Master Key...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Changer la clé maitresse...</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>&amp;Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Préférences...</translation>
     </message>
     <message>
         <source>&amp;About...</source>
-        <translation type="unfinished"></translation>
+        <translation>À pr&amp;opos...</translation>
     </message>
     <message>
         <source>&amp;KeePassX Handbook...</source>
-        <translation type="unfinished"></translation>
+        <translation>Le manuel de &amp;KeePassX...</translation>
     </message>
 </context>
 <context>
@@ -1403,23 +1429,23 @@ Désirez-vous enregistrer le changement ?</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [G1]</source>
-        <translation>Erreur inattendue: Le décalage est hors limites.[G1]</translation>
+        <translation>Erreur inattendue: Le décalage est hors limite.[G1]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [G2]</source>
-        <translation>Erreur inattendue: Le décalage est hors limites.[G2]</translation>
+        <translation>Erreur inattendue: Le décalage est hors limite.[G2]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E1]</source>
-        <translation>Erreur inattendue: Le décalage est hors limites.[E1]</translation>
+        <translation>Erreur inattendue: Le décalage est hors limite.[E1]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E2]</source>
-        <translation>Erreur inattendue: Le décalage est hors limites.[E2]</translation>
+        <translation>Erreur inattendue: Le décalage est hors limite.[E2]</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range. [E3]</source>
-        <translation>Erreur inattendue: Le décalage est hors limites.[E3]</translation>
+        <translation>Erreur inattendue: Le décalage est hors limite.[E3]</translation>
     </message>
     <message>
         <source>Hash test failed.
@@ -1758,7 +1784,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Securi&amp;ty</source>
-        <translation>Sécuri&amp;té</translation>
+        <translation>Séc&amp;urité</translation>
     </message>
     <message>
         <source>Alternating Row Colors</source>
@@ -1778,7 +1804,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Remember last opened file</source>
-        <translation type="unfinished"></translation>
+        <translation>Se souvenir du dernier fichier ouvert</translation>
     </message>
 </context>
 <context>

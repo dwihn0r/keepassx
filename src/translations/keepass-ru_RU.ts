@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name></name>
-</context>
-<context>
     <name>AboutDlg</name>
     <message>
         <source>About</source>
@@ -27,15 +24,15 @@ General Public License (GPL) version 2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>tarek.saidi@arcor.de</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>http://keepass.berlios.de/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>http://keepassx.sourceforge.net</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>keepassx@gmail.com</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -88,10 +85,6 @@ Allowed is only one per entry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>http://keepass.berlios.de/index.php</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
         <translation type="unfinished"></translation>
@@ -115,11 +108,6 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Information on how to translate KeePassX can be found under:
-http://keepass.berlios.de/</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -156,6 +144,23 @@ http://keepass.berlios.de/</source>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information on how to translate KeePassX can be found under:
+http://keepassx.sourceforge.net/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>James Nicholls</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main Application Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>http://keepassx.sf.net</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
