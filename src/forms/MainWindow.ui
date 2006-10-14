@@ -117,7 +117,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAnsicht" >
@@ -163,38 +163,6 @@
     <addaction name="menuSpalten" />
     <addaction name="menuTool_Button_Sizes" />
    </widget>
-   <widget class="QMenu" name="menuDatei" >
-    <property name="title" >
-     <string>&amp;File</string>
-    </property>
-    <widget class="QMenu" name="menuImportieren_aus" >
-     <property name="title" >
-      <string>&amp;Import from...</string>
-     </property>
-     <addaction name="FileImpPwmAction" />
-     <addaction name="FileImpKWalletXmlAction" />
-    </widget>
-    <widget class="QMenu" name="menuExport_to" >
-     <property name="title" >
-      <string>&amp;Export to...</string>
-     </property>
-     <addaction name="FileExpPlainTextAction" />
-    </widget>
-    <addaction name="FileNewAction" />
-    <addaction name="FileOpenAction" />
-    <addaction name="FileCloseAction" />
-    <addaction name="separator" />
-    <addaction name="FileSaveAction" />
-    <addaction name="FileSaveAsAction" />
-    <addaction name="separator" />
-    <addaction name="FileSettingsAction" />
-    <addaction name="FileChangeKeyAction" />
-    <addaction name="separator" />
-    <addaction name="menuImportieren_aus" />
-    <addaction name="menuExport_to" />
-    <addaction name="separator" />
-    <addaction name="FileExitAction" />
-   </widget>
    <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
      <string>&amp;Edit</string>
@@ -231,17 +199,49 @@
     <addaction name="separator" />
     <addaction name="HelpAboutAction" />
    </widget>
+   <widget class="QMenu" name="menuDatei" >
+    <property name="title" >
+     <string>&amp;File</string>
+    </property>
+    <widget class="QMenu" name="menuImportieren_aus" >
+     <property name="title" >
+      <string>&amp;Import from...</string>
+     </property>
+     <addaction name="FileImpPwmAction" />
+     <addaction name="FileImpKWalletXmlAction" />
+    </widget>
+    <widget class="QMenu" name="menuExport_to" >
+     <property name="title" >
+      <string>&amp;Export to...</string>
+     </property>
+     <addaction name="FileExpPlainTextAction" />
+    </widget>
+    <widget class="QMenu" name="FileNewMenu" >
+     <property name="title" >
+      <string>&amp;New Database</string>
+     </property>
+    </widget>
+    <addaction name="FileNewAction" />
+    <addaction name="FileOpenAction" />
+    <addaction name="FileCloseAction" />
+    <addaction name="separator" />
+    <addaction name="FileSaveAction" />
+    <addaction name="FileSaveAsAction" />
+    <addaction name="separator" />
+    <addaction name="FileSettingsAction" />
+    <addaction name="FileChangeKeyAction" />
+    <addaction name="separator" />
+    <addaction name="menuImportieren_aus" />
+    <addaction name="menuExport_to" />
+    <addaction name="separator" />
+    <addaction name="FileExitAction" />
+   </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
    <addaction name="menuAnsicht" />
    <addaction name="menuExtras" />
    <addaction name="menuHilfe" />
   </widget>
-  <action name="FileNewAction" >
-   <property name="text" >
-    <string>&amp;New Database...</string>
-   </property>
-  </action>
   <action name="FileOpenAction" >
    <property name="text" >
     <string>&amp;Open Database...</string>
@@ -526,20 +526,35 @@
     <string>28x28</string>
    </property>
   </action>
+  <action name="FileNewKdbAction" >
+   <property name="text" >
+    <string>Standard KeePass Single User Database (*.kdb)</string>
+   </property>
+  </action>
+  <action name="FileNewKxdbAction" >
+   <property name="text" >
+    <string>Advanced KeePassX Database (*.kxdb)</string>
+   </property>
+  </action>
+  <action name="FileNewAction" >
+   <property name="text" >
+    <string>New Database...</string>
+   </property>
+  </action>
  </widget>
  <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KeepassEntryView</class>
+   <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
+   <header>../../src/lib/GroupView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>KeepassGroupView</class>
+   <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
+   <header>../../src/lib/EntryView.h</header>
    <container>0</container>
    <pixmap></pixmap>
   </customwidget>

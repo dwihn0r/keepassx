@@ -22,12 +22,13 @@
 #include <qfile.h>
 #include <iostream>
 #include <qdom.h>
-#include "crypto/blowfish.h"
-#include "crypto/sha1.h"
+//#include "crypto/blowfish.h"
+//#include "crypto/sha1.h"
 #include "Import_PwManager.h"
 using namespace std;
+	/*
+bool Import_PwManager::importFile(QString filename, QString password, StandardDatabase* db, QString& err){
 
-bool Import_PwManager::importFile(QString filename, QString password, Database* db, QString& err){
 database=db;
 QFile file(filename);
 char* buffer=NULL;
@@ -133,7 +134,7 @@ while(1){
  if(!groups.elementsByTagName("c"+QString::number(i)).item(0).isElement())return false;
  CurrGroup=groups.elementsByTagName("c"+QString::number(i)).item(0).toElement();
  if(!CurrGroup.hasAttribute("n"))return false;
- CGroup* NewGroup=database->addGroup(NULL);
+ IGroupHandle* NewGroup=database->addGroup(NULL);
  NewGroup->Name=CurrGroup.attribute("n");
  int j=0;
 	while(1){
@@ -151,8 +152,8 @@ while(1){
 return true;
 }
 
-bool Import_PwManager::xml_parseEntryAttributes(QDomElement* EntryElement,CGroup* NewGroup){
-CEntry* e=database->addEntry();
+bool Import_PwManager::xml_parseEntryAttributes(QDomElement* EntryElement,IGroupHandle* NewGroup){/*
+IEntryHandle* e=database->addEntry();
 e->Title=EntryElement->elementsByTagName("d").item(0).toElement().text();
 e->UserName=EntryElement->elementsByTagName("n").item(0).toElement().text();
 QString pw=EntryElement->elementsByTagName("p").item(0).toElement().text();
@@ -163,4 +164,4 @@ e->URL=EntryElement->elementsByTagName("u").item(0).toElement().text();
 e->GroupID=NewGroup->ID;
 return true;
 }
-
+																				*/

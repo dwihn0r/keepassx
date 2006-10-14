@@ -24,53 +24,44 @@
 #include <QPixmap>
 #include <QShowEvent>
 #include "main.h"
-#include "PwManager.h"
+#include "StandardDatabase.h"
 
 class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 {
-  Q_OBJECT
-
-public:
-  CEditEntryDlg(Database* _db, CEntry* _entry,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0);
-  ~CEditEntryDlg();
-  virtual void showEvent(QShowEvent *);
-  /*$PUBLIC_FUNCTIONS$*/
-
-public slots:
-  virtual void OnButtonOK();
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
-
-public:
-CEntry* entry;
-Database* db;
-QPixmap* banner_pixmap;
-bool ModFlag;
-
-
-void CreateBanner();
-void InitGroupComboBox();
-void InitIconComboBox();
-static void saveAttachment(CEntry* pEntry, QWidget* ParentWidget=NULL);
-
-
-public slots:
-    void OnPasswordwLostFocus();
-    void OnPasswordwTextChanged(const QString&);
-    void OnPasswordTextChanged(const QString&);
-    void ChangeEchoMode();
-    void OnButtonCancel();
-    void OnNewAttachment();
-    void OnDeleteAttachment();
-    void OnSaveAttachment();
-    void OnButtonGenPw();
-    void OnCheckBoxExpiresNeverChanged(int state);
-	void OnCustomIcons();
+	Q_OBJECT
+	public:
+		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0);
+		~CEditEntryDlg();
+		void InitGroupComboBox();
+		void InitIconComboBox();
+		static void saveAttachment(IEntryHandle* pEntry, QWidget* ParentWidget=NULL);
+		
+		IEntryHandle* entry;
+		IDatabase* db;
+		bool ModFlag;
+		int GroupIndex;
+		QList<IGroupHandle*> groups;
+		QPixmap BannerPixmap;	
+	
+	public slots:
+		void OnPasswordwLostFocus();
+		void OnPasswordwTextChanged(const QString&);
+		void OnPasswordTextChanged(const QString&);
+		void ChangeEchoMode();
+		void OnButtonCancel();
+		void OnNewAttachment();
+		void OnDeleteAttachment();
+		void OnSaveAttachment();
+		void OnButtonGenPw();
+		void OnCheckBoxExpiresNeverChanged(int state);
+		void OnCustomIcons();
+		void OnButtonOK();
+		
+	private:		
+		virtual void showEvent(QShowEvent *);
+		virtual void paintEvent(QPaintEvent*);
+	
+	
 
 };
 

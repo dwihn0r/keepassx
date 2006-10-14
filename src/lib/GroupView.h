@@ -23,60 +23,65 @@
 #include <QTreeWidget>
 #include <QLine>
 #include <QContextMenuEvent>
-#include "../PwManager.h"
+#include "../StandardDatabase.h"
 
 class GroupViewItem;
-typedef vector<GroupViewItem*>::iterator GroupItemItr;
 
 class KeepassGroupView:public QTreeWidget{
-Q_OBJECT
-public:
- KeepassGroupView(QWidget* parent=0);
- bool isSearchResultGroup(GroupViewItem* item);
- void selectSearchGroup();
- Database *db;
- bool ShowSearchGroup;  //needs a "updateItems()" after a change! 
- vector<GroupViewItem*>Items;
- QMenu *ContextMenu;
- QMenu *ContextMenuSearchGroup;
-
-public slots:
- void updateItems();
-
-signals:
- void fileModified();
- void entryDropped();
-
-protected:
- virtual void dragEnterEvent ( QDragEnterEvent * event );
- virtual void dragMoveEvent ( QDragMoveEvent * event );
- virtual void dragLeaveEvent ( QDragLeaveEvent * event );
- virtual void dropEvent ( QDropEvent * event );
- virtual void mousePressEvent(QMouseEvent *event);
- virtual void mouseMoveEvent(QMouseEvent *event);
- virtual void paintEvent ( QPaintEvent * event );
- virtual void contextMenuEvent(QContextMenuEvent *event);
-
-private:
- QLine InsertionMarker;
- QPoint DragStartPos;
- QPixmap DragPixmap;
- GroupViewItem* DragItem;
- GroupViewItem* LastHoverItem;
- GroupViewItem* getLastSameLevelItem(int level);
- enum tDragType{GROUP,ENTRY};
- tDragType DragType;
+	Q_OBJECT
+	public:
+		KeepassGroupView(QWidget* parent=0);
+		IDatabase *db;
+		QList<GroupViewItem*>Items;
+		QMenu *ContextMenu;
+		QMenu *ContextMenuSearchGroup;
+		GroupViewItem* SearchResultItem;
+		void createItems();
+		void showSearchResults();
+		
+	private:
+		virtual void dragEnterEvent ( QDragEnterEvent * event );
+		virtual void dragMoveEvent ( QDragMoveEvent * event );
+		virtual void dragLeaveEvent ( QDragLeaveEvent * event );
+		virtual void dropEvent ( QDropEvent * event );
+		virtual void mousePressEvent(QMouseEvent *event);
+		virtual void mouseMoveEvent(QMouseEvent *event);
+		virtual void paintEvent ( QPaintEvent * event );
+		virtual void contextMenuEvent(QContextMenuEvent *event);	
+		void addChilds(GroupViewItem* item);
+		QPoint DragStartPos;
+		GroupViewItem* DragItem;
+		GroupViewItem* LastHoverItem;
+		int InsLinePos;
+		int InsLineStart;
+	
+	public slots:
+		void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
+		void OnDeleteGroup();
+		void OnNewGroup();
+		void OnEditGroup();
+		void updateIcons();
+		void OnHideSearchResults();
+//		void OnItemExpanded(QTreeWidgetItem*);
+//		void OnItemCollapsed(QTreeWidgetItem*);
+		
+	signals:
+		void groupChanged(IGroupHandle* NewGroup);
+		void searchResultsSelected();
+		void fileModified();
 };
 
 
 class GroupViewItem:public QTreeWidgetItem{
-public:
-GroupViewItem(QTreeWidget *parent);
-GroupViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
-GroupViewItem(QTreeWidgetItem *parent);
-GroupViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
-CGroup* pGroup;
+	public:
+		GroupViewItem();
+		GroupViewItem(QTreeWidget *parent);
+		GroupViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
+		GroupViewItem(QTreeWidgetItem *parent);
+		GroupViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
+		IGroupHandle* GroupHandle;
 };
+
 
 
 #endif

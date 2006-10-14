@@ -36,268 +36,371 @@
 #include "main.h"
 #include "EntryView.h"
 #include "GroupView.h"
+#include "dialogs/EditGroupDlg.h"
 #define INSERT_AREA_WIDTH 4
 
 KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
-InsertionMarker=QLine();
-db=NULL;
-LastHoverItem=NULL;
-setHeaderLabels(QStringList()<<tr("Groups"));
-ShowSearchGroup=false;
-ContextMenu=new QMenu(this);
-ContextMenuSearchGroup=new QMenu(this);
+
+	db=NULL;
+	setHeaderLabels(QStringList()<<tr("Groups"));
+	ContextMenu=new QMenu(this);
+	ContextMenuSearchGroup=new QMenu(this);
+	connect(this,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+//	connect(this,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
+//	connect(this,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollapsed(QTreeWidgetItem*)));
 }
 
-void KeepassGroupView::selectSearchGroup(){
-Q_ASSERT(ShowSearchGroup);
-setItemSelected(Items.back(),true);
-}
 
-void KeepassGroupView:: dragEnterEvent ( QDragEnterEvent * event ){
-if(event->mimeData()->hasFormat("keepass/group")){
-	DragType=GROUP;
-	event->accept();
-	return;
-}
-if(event->mimeData()->hasFormat("keepass/entry")){
-	DragType=ENTRY;
-	event->accept();
-	return;
-}
-}
-
-void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
-GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
-if(LastHoverItem){
-	QFont f=LastHoverItem->font(0);
-	f.setBold(false);
-	LastHoverItem->setFont(0,f);
-}
-
-QLine LastMarker=InsertionMarker;
-InsertionMarker=QLine();
-if(isSearchResultGroup(item))
-	event->setAccepted(false);
-else 
-if(DragType==GROUP){
-	if(item){
-	QRect ItemRect=visualItemRect(item);
-		if(!db->isParentGroup(item->pGroup,DragItem->pGroup) && DragItem!=item){
-			if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
-				QFont f=item->font(0);
-				f.setBold(true);
-				item->setFont(0,f);
-				LastHoverItem=item;
-				event->setAccepted(true);
-				///@FIXME does not work for top level groups
-			}
-			else{
-				LastHoverItem=NULL;
-				if(event->pos().y() > INSERT_AREA_WIDTH)
-					InsertionMarker=QLine(ItemRect.x(),ItemRect.y()+ItemRect.height()
-										,ItemRect.x()+ItemRect.width(),ItemRect.y()+ItemRect.height());
-				else
-					InsertionMarker=QLine(ItemRect.x(),0,ItemRect.x()+ItemRect.width(),0);
-			}
+void KeepassGroupView::createItems(){	
+	clear();
+	Items.clear();
+	QList<IGroupHandle*> groups=db->groups();
+	for(int i=0;i<groups.size();i++){
+		if(groups[i]->parent()==NULL){
+			Items.append(new GroupViewItem(this));
+			Items.back()->setText(0,groups[i]->title());
+			Items.back()->GroupHandle=groups[i]; 
+			addChilds(Items.back());	
 		}
-		else 
-			event->setAccepted(false);
 	}
-else
-  LastHoverItem=NULL;
-}
-else{
-	if(item){
-		QFont f=item->font(0);
-		f.setBold(true);
-		item->setFont(0,f);
-		LastHoverItem=item;
-		event->setAccepted(true);
+	for(int i=0;i<Items.size();i++){
+		Items[i]->setIcon(0,db->icon(Items[i]->GroupHandle->image()));
 	}
-	else{
-		event->setAccepted(false);
-		LastHoverItem=NULL;
-	}
-}
-if(!LastMarker.isNull()){
-	///@FIXME
-	//this is a very dirty work-around to force a redraw of items at the last marker position
-	//should be replaced!!!
-	GroupViewItem* i=(GroupViewItem*)itemAt(0,LastMarker.y1());
-	if(i)i->setFont(0,i->font(0));
-	i=(GroupViewItem*)itemAt(0,LastMarker.y1()-1);
-	if(i)i->setFont(0,i->font(0));
-}
-update();
+	SearchResultItem=new GroupViewItem();
+	SearchResultItem->setText(0,tr("Search Results"));
 }
 
-void KeepassGroupView:: dragLeaveEvent ( QDragLeaveEvent * event ){
-InsertionMarker=QLine();
-if(LastHoverItem){
-  QFont f=LastHoverItem->font(0);
-  f.setBold(false);
-  LastHoverItem->setFont(0,f);
+void KeepassGroupView::updateIcons(){
+	for(int i=0;i<Items.size();i++){
+		Items[i]->setIcon(0,db->icon(Items[i]->GroupHandle->image()));
+	}	
 }
-update();
+
+void KeepassGroupView::showSearchResults(){
+	if(topLevelItem(topLevelItemCount()-1)!=SearchResultItem){
+		addTopLevelItem(SearchResultItem);
+		setCurrentItem(SearchResultItem);
+	}
+	emit searchResultsSelected();	
+}
+
+void KeepassGroupView::addChilds(GroupViewItem* item){
+	QList<IGroupHandle*>childs=item->GroupHandle->childs();
+	if(!childs.size())
+		return;
+	for(int i=0; i<childs.size(); i++){
+		Items.push_back(new GroupViewItem(item));
+		Items.back()->setText(0,childs[i]->title());
+		Items.back()->GroupHandle=childs[i]; 
+		addChilds(Items.back());		
+	}	
+}
+
+void KeepassGroupView::OnDeleteGroup(){
+	GroupViewItem* item=(GroupViewItem*)currentItem();
+	if(item){
+		db->deleteGroup(item->GroupHandle);
+		delete item;
+		emit fileModified();
+	}
+}
+
+void KeepassGroupView::OnHideSearchResults(){
+	takeTopLevelItem(topLevelItemCount()-1);
+}
+
+void KeepassGroupView::OnNewGroup(){
+	GroupViewItem* parent=(GroupViewItem*)currentItem();
+	CGroup NewGroup;
+	CEditGroupDialog dlg(db,&NewGroup,parentWidget(),true);
+	if(dlg.exec()){
+		IGroupHandle* group;
+		if(parent){
+			group=db->addGroup(&NewGroup,parent->GroupHandle);
+			Items.append(new GroupViewItem(parent));
+			}
+		else{
+			if(topLevelItemCount()){
+				if(topLevelItem(topLevelItemCount()-1)==SearchResultItem)
+					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-2)));			
+				else
+					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-1)));			
+			}
+			else
+				Items.append(new GroupViewItem(this));			
+			group=db->addGroup(&NewGroup,NULL);
+		}
+		Items.back()->GroupHandle=group;
+		Items.back()->setText(0,group->title());
+		Items.back()->setIcon(0,db->icon(group->image()));		
+	}
+	emit fileModified();	
+}
+
+void KeepassGroupView::OnEditGroup(){
+	GroupViewItem* item=(GroupViewItem*)currentItem();
+	CEditGroupDialog dlg(db,item->GroupHandle,parentWidget(),true);
+	int r=dlg.exec();
+	if(r){
+		item->setIcon(0,db->icon(item->GroupHandle->image()));
+		item->setText(0,item->GroupHandle->title());
+		if(r==2)emit fileModified();
+	}
+}
+
+void KeepassGroupView::contextMenuEvent(QContextMenuEvent* e){
+	if(!(GroupViewItem*)itemAt(e->pos()))
+		setCurrentItem(NULL);
+	e->accept();
+	if(currentItem()==SearchResultItem)
+		ContextMenuSearchGroup->popup(e->globalPos());
+	else
+		ContextMenu->popup(e->globalPos());
+}
+
+void KeepassGroupView::OnCurrentGroupChanged(QTreeWidgetItem* cur,QTreeWidgetItem* prev){
+	if(cur){
+		if(cur==SearchResultItem)
+			emit searchResultsSelected();
+		else
+			emit groupChanged(((GroupViewItem*)cur)->GroupHandle);
+	}
+	else
+		emit groupChanged(NULL);	
+}
+
+
+
+
+
+void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
+	LastHoverItem=NULL;	
+	InsLinePos=-1;
+	
+	if(event->mimeData()->hasFormat("application/x-keepassx")){
+		event->accept();
+		return;
+	}
+	
+}
+
+
+
+void KeepassGroupView::dragLeaveEvent ( QDragLeaveEvent * event ){
+	if(LastHoverItem){
+		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+	}
+	if(InsLinePos!=-1){
+		int RemoveLine=InsLinePos;
+		InsLinePos=-1;
+		viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
+	}
+	
 }
 
 
 void KeepassGroupView::dropEvent( QDropEvent * event ){
-emit fileModified();
-InsertionMarker=QLine();
-if(LastHoverItem){
-  QFont f=LastHoverItem->font(0);
-  f.setBold(false);
-  LastHoverItem->setFont(0,f);
-  LastHoverItem=NULL;
-}
-GroupViewItem* item=(GroupViewItem*)itemAt(event->pos());
-if(DragType==GROUP){
-	if(item){
-		QRect ItemRect=visualItemRect(item);
-		if((ItemRect.height()+ItemRect.y())-event->pos().y() > INSERT_AREA_WIDTH && event->pos().y() > INSERT_AREA_WIDTH){
-			db->moveGroup(DragItem->pGroup,item->pGroup);}
+	if(LastHoverItem){
+		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+	}
+	if(InsLinePos!=-1){
+		int RemoveLine=InsLinePos;
+		InsLinePos=-1;
+		viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
+	}
+	GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
+	if(!Item){
+		qDebug("Append at the end");
+		db->moveGroup(DragItem->GroupHandle,NULL,-1);
+		if(DragItem->parent()){
+			DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));			
+		}
 		else{
-			if(event->pos().y() > INSERT_AREA_WIDTH){
-				if(db->getNumberOfChilds(item->pGroup) > 0)
-					db->moveGroup(DragItem->pGroup,item->pGroup,0);				
-				else				
-					db->moveGroupDirectly(DragItem->pGroup,item->pGroup);
+			takeTopLevelItem(indexOfTopLevelItem(DragItem));			
+		}
+		insertTopLevelItem(topLevelItemCount(),DragItem);
+		if(topLevelItemCount()>1){
+			if(topLevelItem(topLevelItemCount()-2)==SearchResultItem){
+				takeTopLevelItem(topLevelItemCount()-2);
+				insertTopLevelItem(topLevelItemCount(),SearchResultItem);	
+			}			
+		}
+		emit fileModified();
+	}
+	else{
+		QRect ItemRect=visualItemRect(Item);
+		if(event->pos().y()>ItemRect.y()+2 && event->pos().y()<ItemRect.y()+ItemRect.height()-2){
+			qDebug("Append as child of '%s'",((char*)Item->text(0).toUtf8().data()));
+			db->moveGroup(DragItem->GroupHandle,Item->GroupHandle,-1);
+			if(DragItem->parent()){
+				DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));
 			}
-			else	db->moveGroupDirectly(DragItem->pGroup,NULL);
-			}		
+			else{
+				takeTopLevelItem(indexOfTopLevelItem(DragItem));
+			}
+			Item->insertChild(Item->childCount(),DragItem);
+			emit fileModified();
+		}
+		else{
+			if(event->pos().y()>ItemRect.y()+2){
+				qDebug("Insert behind sibling '%s'",((char*)Item->text(0).toUtf8().data()));
+				if(DragItem->parent()){
+					DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));			
+				}
+				else{
+					takeTopLevelItem(indexOfTopLevelItem(DragItem));			
+				}				
+				if(Item->parent()){
+					int index=Item->parent()->indexOfChild(Item)+1;
+					db->moveGroup(DragItem->GroupHandle,((GroupViewItem*)Item->parent())->GroupHandle,index);
+					Item->parent()->insertChild(index,DragItem);					
+				}
+				else{
+					int index=indexOfTopLevelItem(Item)+1;
+					db->moveGroup(DragItem->GroupHandle,NULL,index);
+					insertTopLevelItem(index,DragItem);	
+				}
+				emit fileModified();
+			}
+			else{	
+				qDebug("Insert before sibling '%s'",((char*)Item->text(0).toUtf8().data()));
+				if(DragItem->parent()){
+					DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));			
+				}
+				else{
+					takeTopLevelItem(indexOfTopLevelItem(DragItem));			
+				}				
+				if(Item->parent()){
+					int index=Item->parent()->indexOfChild(Item);
+					db->moveGroup(DragItem->GroupHandle,((GroupViewItem*)Item->parent())->GroupHandle,index);
+					Item->parent()->insertChild(index,DragItem);					
+				}
+				else{
+					int index=indexOfTopLevelItem(Item);
+					db->moveGroup(DragItem->GroupHandle,NULL,index);
+					insertTopLevelItem(index,DragItem);	
+				}
+				emit fileModified();	
+			}
+		}
+		
+		
 	}
-	else db->moveGroup(DragItem->pGroup,NULL);
-	updateItems();
-}else{
-	Q_ASSERT(item);
-	QList<QTreeWidgetItem*>* pDragItems=(QList<QTreeWidgetItem*>*)*((QList<QTreeWidgetItem*>**)event->mimeData()->data("keepass/entry").data());
-	for(int i=0;i<pDragItems->size();i++){
-		db->moveEntry(((EntryViewItem*)(*pDragItems)[i])->pEntry,item->pGroup);
-	}
-	emit entryDropped();
+	
 }
+
+void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
+	if(DragItem){
+		GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
+		if(!Item){
+			if(LastHoverItem){
+				LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+				LastHoverItem=NULL;
+			}
+			if(InsLinePos!=-1){
+				int RemoveLine=InsLinePos;
+				InsLinePos=-1;
+				viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
+			}
+			event->accept();
+			return;
+		}
+		if(Item==DragItem || Item==SearchResultItem){
+			event->ignore();
+			return;
+		}
+		if(!db->isParent(DragItem->GroupHandle,Item->GroupHandle)){
+			QRect ItemRect=visualItemRect(Item);
+			if(event->pos().y()>ItemRect.y()+2 && event->pos().y()<ItemRect.y()+ItemRect.height()-2){
+				if(InsLinePos!=-1){
+					int RemoveLine=InsLinePos;
+					InsLinePos=-1;
+					viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
+				}
+				if(LastHoverItem != Item){
+					if(LastHoverItem){
+						LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+					}
+					Item->setBackgroundColor(0,QApplication::palette().color(QPalette::Highlight));
+					LastHoverItem=Item;
+				}
+			}
+			else{
+				if(LastHoverItem){
+					LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+					LastHoverItem=NULL;
+				}
+				if(InsLinePos!=-1){
+					int RemoveLine=InsLinePos;
+					InsLinePos=-1;
+					viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
+				}
+				if(event->pos().y()>ItemRect.y()+2){
+					InsLinePos=ItemRect.y()+ItemRect.height();
+				}
+				else{	
+					InsLinePos=ItemRect.y();
+				}
+				InsLineStart=ItemRect.x();
+				viewport()->update(QRegion(0,InsLinePos-2,viewport()->width(),4));			
+			}
+			event->accept();
+			return;
+		}		
+		
+	}
+	event->ignore();
+}
+
+void KeepassGroupView::paintEvent(QPaintEvent* event){
+
+	QTreeWidget::paintEvent(event);
+	if(InsLinePos != -1){
+		QPainter painter(viewport());
+		painter.setBrush(QBrush(QColor(0,0,0),Qt::Dense4Pattern));
+		painter.setPen(Qt::NoPen);		
+		painter.drawRect(InsLineStart,InsLinePos-2,viewport()->width(),4);
+	}
 }
 
 
 void KeepassGroupView::mousePressEvent(QMouseEvent *event){
-//save event position - maybe this is the start of a drag
-if (event->button() == Qt::LeftButton)
-            DragStartPos = event->pos();
-//call base function
-QTreeWidget::mousePressEvent(event);
+	if (event->button() == Qt::LeftButton)
+		DragStartPos = event->pos();
+	QTreeWidget::mousePressEvent(event);	
 }
 
 void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
- if (!(event->buttons() & Qt::LeftButton))
-            return;
- if ((event->pos() - DragStartPos).manhattanLength() < QApplication::startDragDistance())
-            return;
-	DragItem=(GroupViewItem*)itemAt(DragStartPos);
- if (isSearchResultGroup(DragItem))
-			return;
+	if (!(event->buttons() & Qt::LeftButton))
+		return;
+	if ((event->pos() - DragStartPos).manhattanLength()
+			< QApplication::startDragDistance())
+		return;
+	
+	DragItem=(GroupViewItem*)itemAt(event->pos());
 	if(!DragItem)return;
+	
+	if(DragItem==SearchResultItem){
+		qDebug("SearchGroup");
+		DragItem=NULL;
+		return;
+	}
+	
+	setCurrentItem(DragItem);
+	
 	QDrag *drag = new QDrag(this);
-	QFontMetrics fontmet(DragItem->font(0));
-	int DragPixmHeight=16;
-	if(fontmet.height()>16)DragPixmHeight=fontmet.height();
-	DragPixmap  = QPixmap(fontmet.width(DragItem->text(0))+19,DragPixmHeight);
-	DragPixmap.fill(QColor(255,255,255));
-	QPainter painter(&DragPixmap);
-	painter.setPen(QColor(0,0,0));
-	painter.setFont(DragItem->font(0));
-	painter.drawPixmap(0,0,DragItem->icon(0).pixmap(QSize(16,16)));
-	painter.drawText(19,DragPixmHeight-fontmet.strikeOutPos(),DragItem->text(0));	
-        QMimeData *mimeData = new QMimeData;
-	mimeData->setData("keepass/group",QByteArray((char*)&(DragItem->pGroup),sizeof(void*)));
-        drag->setMimeData(mimeData);
-        drag->setPixmap(DragPixmap);
-	drag->start();
-}
+	QMimeData *mimeData = new QMimeData;
 
-void KeepassGroupView::updateItems(){
+	mimeData->setData("text/plain;charset=UTF-8",DragItem->text(0).toUtf8());
+	mimeData->setData("application/x-keepassx",QString("drag-type=group").toUtf8());
+	drag->setMimeData(mimeData);
 
-clear();
-Items.clear();
-for(int i=0; i<db->numGroups();i++){
-if(db->group(i).Level==0){
- if(Items.size()) Items.push_back(new GroupViewItem(this,getLastSameLevelItem(0)));
- else 		  Items.push_back(new GroupViewItem(this));
- Items.back()->setText(0,db->group(i).Name);
- Items.back()->pGroup=&db->group(i); 
-}
- else{
- if(db->group(i).Level>db->group(i-1).Level){
- Items.push_back(new GroupViewItem(Items.back(),getLastSameLevelItem(db->group(i).Level)));
- Items.back()->setText(0,db->group(i).Name);
- Items.back()->pGroup=&db->group(i);
- }
- if(db->group(i).Level<=db->group(i-1).Level){
-   GroupItemItr j;
-   for(j=Items.end()-1;j!=Items.begin();j--){
-    if((*j)->pGroup->Level<db->group(i).Level)break;}
-     Items.push_back(new GroupViewItem((*j),getLastSameLevelItem(db->group(i).Level)));
-     Items.back()->setText(0,db->group(i).Name);
-     Items.back()->pGroup=&db->group(i);
-     }
- }
-Items.back()->setIcon(0,db->icon(db->group(i).ImageID));
-}
-
-for(int i=0;i<Items.size();i++){
- setItemExpanded(Items[i],Items[i]->pGroup->UI_ItemIsExpanded);
-}
-if(ShowSearchGroup){
- 	 Items.push_back(new GroupViewItem(this));
-     Items.back()->setText(0,tr("Search Results"));
-     Items.back()->pGroup=NULL;
-     QFont f=Items.back()->font(0);
-     f.setItalic(true);
-	 f.setBold(true);
-     Items.back()->setFont(0,f);
-}
-
+	Qt::DropAction dropAction = drag->start(Qt::MoveAction);
 }
 
 
 
-GroupViewItem* KeepassGroupView::getLastSameLevelItem(int level){
-for(int i=Items.size()-1;i>=0;i--){
- if(Items[i]->pGroup->Level==level){
-return Items[i];}
-}
-
-return Items.back();
-
-}
-
-void KeepassGroupView::paintEvent(QPaintEvent* event){
-QTreeWidget::paintEvent(event);
-QPainter painter(viewport());
-QPen pen(QColor(100,100,100));
-pen.setWidth(2);
-pen.setStyle(Qt::DotLine);
-painter.setPen(pen);
-//qDebug("UPDATE: (%i,%i) %ix%i",event->rect().x(),event->rect().y(),event->rect().width(),event->rect().height());
-if(!InsertionMarker.isNull()){
-	painter.drawLine(InsertionMarker);
-}
-}
-
-bool KeepassGroupView::isSearchResultGroup(GroupViewItem* item){
-if(ShowSearchGroup && (item == Items.back()))return true;
-else return false;
-}
-
-void KeepassGroupView::contextMenuEvent(QContextMenuEvent* e){
-if(!(GroupViewItem*)itemAt(e->pos()) && selectedItems().size()){
-	setItemSelected(selectedItems()[0],false);
-}
-e->accept();
-if(isSearchResultGroup((GroupViewItem*)itemAt(e->pos())))
-	ContextMenuSearchGroup->popup(e->globalPos());
-else
-	ContextMenu->popup(e->globalPos());
+GroupViewItem::GroupViewItem():QTreeWidgetItem(){
 }
 
 GroupViewItem::GroupViewItem(QTreeWidget *parent):QTreeWidgetItem(parent){

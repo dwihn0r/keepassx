@@ -29,18 +29,15 @@
 class CEditGroupDialog : public QDialog, public Ui_EditGroupDialog
 {
   Q_OBJECT
-
 public:
-  CEditGroupDialog(Database*,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
-  ~CEditGroupDialog();
-  bool ModFlag;
-virtual void showEvent(QShowEvent *event);
- int IconID;
- QString GroupName;
-
+	CEditGroupDialog(IDatabase*,IGroupHandle*,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
+	CEditGroupDialog(IDatabase*,CGroup*,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
+	~CEditGroupDialog();
+	virtual void showEvent(QShowEvent *event);
 private:
- Database* db;
- 
+ IDatabase* db;
+ IGroupHandle* handle; 
+ CGroup* group;
 
 public slots:
     virtual void OnOK();

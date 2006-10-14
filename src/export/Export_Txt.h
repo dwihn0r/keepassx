@@ -20,11 +20,11 @@
 #ifndef _EXPORT_TXT_H_
 #define _EXPORT_TXT_H_
 #include <QObject>
-#include "PwManager.h"
+#include "StandardDatabase.h"
 
 class Export_Txt:public QObject{
 public:
-	bool exportFile(const QString& filename,Database* db,QString& err);
+	bool exportFile(const QString& filename,StandardDatabase* db,QString& err);
 
 };
 

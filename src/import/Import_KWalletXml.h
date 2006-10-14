@@ -20,11 +20,11 @@
 #ifndef _IMPORT_KWALLET_H_
 #define _IMPORT_KWALLET_H_
 #include <qstring.h>
-#include "PwManager.h"
+#include "StandardDatabase.h"
 
 class Import_KWalletXml{
 public:
-  bool importFile(QString FileName,Database* db,QString& err);
+  bool importFile(QString FileName,StandardDatabase* db,QString& err);
 private:
 
 };

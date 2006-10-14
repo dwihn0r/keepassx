@@ -36,9 +36,12 @@
 #include <QTreeWidget>
 #include <QClipboard>
 #include <QTimer>
+#include <QToolButton>
+#include <QSystemTrayIcon>
 
-#include "PwManager.h"
+#include "StandardDatabase.h"
 #include "PwmConfig.h"
+#include "lib/EntryView.h"
 #include "lib/GroupView.h"
 
 #include "ui_MainWindow.h"
@@ -49,14 +52,15 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 Q_OBJECT
 public:
  KeepassMainWindow (const QString& ArgFile,QWidget *parent=0, Qt::WFlags flags=0);
- Database* db;
+ StandardDatabase* db;
  bool Start;
 
 signals:
    void entryChanged();
 
 private slots:
-   void OnFileNew();
+   void OnFileNewKdb();
+   void OnFileNewKxdb();
    void OnFileOpen();
    void OnFileClose();
    bool OnFileSave();
@@ -67,30 +71,15 @@ private slots:
    void OnImportFromPwm();
    void OnImportFromKWalletXml();
    void OnExportToTxt();
-   void OnEditNewGroup();
-   void OnEditEditGroup();
-   void OnEditDeleteGroup();
-   void OnEditNewEntry();
-   void OnEditEditEntry();
-   void OnEditCloneEntry();
-   void OnEditDeleteEntry();
-   void OnEditUsernameToClipboard();
-   void OnEditPasswordToClipboard();
-   void OnEditSaveAttachment();
    void OnEditOpenUrl();
-   void OnEditSearch();
-   void OnEditGroupSearch();
-   void OnEditAutoType();
+   void OnSearch();
+   void OnGroupSearch();
    void OnViewShowToolbar(bool);
    void OnViewShowEntryDetails(bool);
    void OnViewToolbarIconSize16(bool);
    void OnViewToolbarIconSize22(bool);
    void OnViewToolbarIconSize28(bool);
-   void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
-   void OnEntryItemDoubleClicked(QTreeWidgetItem* item,int column);
-   void OnEntrySelectionChanged();
-   void OnGroupSelectionChanged();
-   void OnClipboardTimeOut();
+   void OnGroupSelectionChanged(IGroupHandle*);
    void OnQuickSearch();
    void OnColumnVisibilityChanged(bool show);
    void OnUsernPasswVisibilityChanged(bool hide);
@@ -100,15 +89,14 @@ private slots:
    void OnHelpHandbook();
    void OnItemExpanded(QTreeWidgetItem*);
    void OnItemCollaped(QTreeWidgetItem*);
-   void OnHideSearchGroup();
+   void OnShowSearchResults();
+   void OnEntryChanged(SelectionState);
+   void OnSysTrayActivated(QSystemTrayIcon::ActivationReason);
 
 private:
- enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
  SelectionState GroupSelection, EntrySelection;
  bool FileOpen;
  bool ModFlag;
- QClipboard* Clipboard;
- QTimer ClipboardTimer;
  QList<quint32> SearchResults;
  inline void setupToolbar();
  inline void setupIcons();
@@ -119,19 +107,17 @@ private:
  void setStateGroupSelected(SelectionState s);
  void setStateEntrySelected(SelectionState s);
  void openDatabase(QString filename,bool IsStart=false);
- void setupDatabaseConnections(Database* DB);
+ void setupDatabaseConnections(IDatabase* DB);
  bool closeDatabase();
- void search(CGroup* pGroup);
- void editEntry(CEntry* pEntry);
+ void search(IGroupHandle* Group);
  void removeFromSearchResults(int sID);
  void updateDetailView();
- inline CGroup* currentGroup();
- inline CEntry* currentEntry();
  QLineEdit* QuickSearchEdit;
  QLabel* StatusBarGeneral;
  QLabel* StatusBarSelection;
  QToolBar* toolBar;
-
+ QSystemTrayIcon* SysTray;
+ bool ShutingDown;
 protected:
  void closeEvent(QCloseEvent* event);
 

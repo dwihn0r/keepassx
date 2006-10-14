@@ -87,49 +87,18 @@ else return date().toString(format);
 
 
 CEntry::CEntry(){
-ImageID=0;
-OldImgID=0;
-GroupID=0;
+Image=0;
+GroupId=0;
 Creation=QDateTime::currentDateTime();
 LastMod=QDateTime::currentDateTime();
 LastAccess=QDateTime::currentDateTime();
 Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59)); //Never
-BinaryData=QByteArray();
+Binary=QByteArray();
 }
 
-bool CGroup::UI_ExpandByDefault=true;
-
-bool CEntry::operator==(const CEntry& e)const{
-if(sID==e.sID)return true;
-else	      return false;
-}
-
-bool CGroup::operator==(const CGroup& g)const{
-if(ID==g.ID)return true;
-else	      return false;
-}
 
 CGroup::CGroup(){
-Creation=QDateTime::currentDateTime();
-LastAccess=QDateTime::currentDateTime();
-LastMod=QDateTime::currentDateTime();
-Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59));
-Level=0;
-ImageID=0;
-OldImgID=0;
-Name="<Group>";
-UI_ItemIsExpanded=UI_ExpandByDefault;
+Image=0;
 }
 
-CGroup::~CGroup(){
-}
 
-CEntry::~CEntry(){
-
-}
-
-Database::Database(){
-file=NULL;
-KeyEncRounds=6000;
-CryptoAlgorithmus=ALGO_AES;
-}

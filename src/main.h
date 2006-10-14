@@ -25,17 +25,20 @@
 #include <QString>
 #include <QColor>
 #include <QIcon>
+#include <QFile>
 
-#define KEEPASS_VERSION "0.2.2"
+#define KEEPASS_VERSION "0.2.3"
 #define BUILTIN_ICONS 62
 
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
 class CConfig;
 
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text);
-void createBanner(QLabel *Banner,QPixmap* symbol,QString text,QColor color1,QColor color2,QColor textcolor);
+void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Width);
+void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor);
 void openBrowser(QString url);
 void showErrMsg(const QString& msg,QWidget* parent=NULL);
+QString decodeFileError(QFile::FileError Code);
 
 extern CConfig  config;
 extern QString  AppDir;

@@ -42,7 +42,7 @@ typedef struct tKeysymMap{
 class AutoType:public QObject{
 public:
  static QWidget* MainWin;
- static void perform(CEntry* entry,QString& errors);
+ static void perform(IEntryHandle* entry,QString& errors);
 private:
 #ifdef Q_WS_X11
  static tKeysymMap KeysymMap[];
@@ -50,7 +50,7 @@ private:
  static int getModifiers(Display*,KeySym,int);
  static void pressModifiers(Display*,int,bool Press=true);
  static void releaseModifiers(Display*,int);
- static void templateToKeysyms(const QString& Template, QList<quint16>& KeySymList,CEntry* entry);
+ static void templateToKeysyms(const QString& Template, QList<quint16>& KeySymList,IEntryHandle* entry);
  static void stringToKeysyms(const QString& string,QList<quint16>& KeySymList);
 #endif
 

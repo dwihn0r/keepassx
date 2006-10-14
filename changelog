@@ -1,4 +1,18 @@
 ---------------
+    0.2.3
+---------------
+-fixed to long Auto-Type delay
+-fixed wrong text color in the password repeation box when using new Qt versions (Bug #???)
+-fixed problem with the assignment of group icons (custom icons metastream format rev 3)
+-more stable drag&drop implementation which also works under MacOSX 
+-new more robust and flexible database back-end api
+-replaced old AES implementation by the latest version of Brian Gladman's implementation.
+-now using strong random number generator 'yarrow' instead of the standard library functions.
+-final program icon
+
+
+
+---------------
     0.2.2
 ---------------
 -fixed crash when parsing config file under Win32

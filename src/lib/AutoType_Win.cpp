@@ -23,7 +23,7 @@
 
 QWidget* AutoType::MainWin=NULL; 
 
-void AutoType::perform(CEntry* entry, QString& err){
+void AutoType::perform(IEntryHandle* entry, QString& err){
 QString str;
 QMessageBox::warning(NULL,tr("Error"),"This feature is not available under Windows");
 

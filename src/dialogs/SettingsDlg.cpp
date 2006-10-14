@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+ 
 #include "main.h"
 #include "PwmConfig.h"
 #include <qpixmap.h>
@@ -99,6 +100,7 @@ close();
 
 void CSettingsDlg::OnTextColor()
 {
+
 QColor c=QColorDialog::getColor(textcolor,this);
 if(c.isValid()){
 textcolor=c;
@@ -106,7 +108,10 @@ QPixmap *px=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
 px->fill(c);
 pixmTextColor->clear();
 pixmTextColor->setPixmap(*px);
-createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);}
+//NICHT VERGESSEN!
+//createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
+}
+	
 }
 
 
@@ -119,7 +124,8 @@ QPixmap *px=new QPixmap(pixmColor2->width(),pixmColor2->height());
 px->fill(c);
 pixmColor2->clear();
 pixmColor2->setPixmap(*px);
-createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);}
+//createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
+}
 }
 
 
@@ -132,7 +138,7 @@ QPixmap *px=new QPixmap(pixmColor1->width(),pixmColor1->height());
 px->fill(c);
 pixmColor1->clear();
 pixmColor1->setPixmap(*px);
-createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
+//createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
 }
 }
 

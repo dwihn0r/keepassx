@@ -21,7 +21,8 @@
 #include "SecString.h"
 #include <iostream>
 #include "crypto/arcfour.h"
-#include "random.h"
+#include "crypto/yarrow.h"
+
 using namespace std;
 CArcFour SecString::RC4;
 
@@ -101,7 +102,7 @@ for(int i=0; i<str.length(); i++){
 void SecString::generateSessionKey(){
 CArcFour arc;
 unsigned char* sessionkey=new unsigned char[32];
-getRandomBytes(sessionkey,32,1,false);
+randomize(sessionkey,32);
 RC4.setKey(sessionkey,32);
 delete [] sessionkey;
 }

@@ -33,8 +33,9 @@
 
 #include "main.h"
 #include "PwmConfig.h"
-#include "PwManager.h"
+#include "StandardDatabase.h"
 #include "mainwindow.h"
+#include "crypto/yarrow.h"
 using namespace std;
 
 #ifdef Q_WS_X11
@@ -100,8 +101,6 @@ else{
  IniFilename=ArgCfg;
  config.loadFromIni(IniFilename);}
 
-
-
 //Internationalization
 QLocale loc;
 if(!ArgLang.size())
@@ -142,7 +141,9 @@ else{
 }
 
 loadImages();
+initYarrow(); //init random number generator
 SecString::generateSessionKey();
+
 int r=0;
 KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile);
 if(mainWin->Start){
@@ -162,59 +163,58 @@ return r;
 
 
 void createBanner(QLabel *Banner,QPixmap* symbol,QString text){
-createBanner(Banner,symbol,text,config.BannerColor1
+	QPixmap Pixmap;
+	createBanner(&Pixmap,symbol,text
+				   ,Banner->width()
+				   ,config.BannerColor1
 			       ,config.BannerColor2
-			       ,config.BannerTextColor); //call overloaded function
+			       ,config.BannerTextColor);
+	Banner->setPixmap(Pixmap);
 }
 
-
-void createBanner(QLabel *Banner,QPixmap* symbol,QString text,QColor color1,QColor color2,QColor textcolor){
-int w=Banner->width();
-int h=Banner->height();
-QColor color;
-float b1[3];
-float b2[3];
-float a1,a2;
-QPixmap* banner_pixmap=new QPixmap(w,h); ///@FIXME löscht der Destruktor von QLabel die Pixmap zum schluss???
-QPainter painter(banner_pixmap);
-QPen pen;
-pen.setWidth(1);
-painter.setPen(pen);
-QFont font("Arial",16);
-painter.setFont(font);
-if(color1!=color2){
- b1[0]=color1.red();
- b1[1]=color1.green();
- b1[2]=color1.blue();
- b2[0]=color2.red();
- b2[1]=color2.green();
- b2[2]=color2.blue();
- for(int x=0;x<w;x++){
-  a2=(float)x/(float)w;
-  a1=1-a2;
-  color.setRgb(	(int)(a1*b1[0]+a2*b2[0]),
-		(int)(a1*b1[1]+a2*b2[1]),
-		(int)(a1*b1[2]+a2*b2[2]));
-  pen.setColor(color);
-  painter.setPen(pen);
-  painter.drawLine(x,0,x,h);
- }
-}
-else{
- banner_pixmap->fill(color1);
-}
-QPixmap icon(32,32);
-icon.fill(textcolor);
-icon.setAlphaChannel(*symbol);
-painter.drawPixmap(10,10,icon);
-
-pen.setColor(textcolor);
-painter.setPen(pen);
-painter.drawText(50,35,text);
-Banner->setPixmap(*banner_pixmap);
+void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Width){
+	createBanner(Pixmap,IconAlpha,Text,Width,config.BannerColor1,config.BannerColor2,config.BannerTextColor);
 }
 
+void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor){
+	*Pixmap=QPixmap(Width,50);
+	QPainter painter(Pixmap);
+	QLinearGradient grad(0,0,Width,0);
+	grad.setColorAt(0,Color1);
+	grad.setColorAt(1,Color2);
+	painter.setPen(Qt::NoPen);
+	painter.setBrush(grad);
+	painter.drawRect(0,0,Width,50);
+	
+	QPixmap Icon(32,32);
+	Icon.fill(TextColor);
+	Icon.setAlphaChannel(*IconAlpha);
+	painter.drawPixmap(10,10,Icon);
+	
+	painter.setPen(QPen(TextColor));
+	painter.setFont(QFont(QApplication::font().family(),16));
+	painter.drawText(50,35,Text);	
+}
 
+QString decodeFileError(QFile::FileError Code){
+	switch(Code){			
+		case QFile::NoError: return QApplication::translate("FileErrors","No error occurred.");
+		case QFile::ReadError: return QApplication::translate("FileErrors","An error occurred while reading from the file.");
+		case QFile::WriteError: return QApplication::translate("FileErrors","An error occurred while writing to the file.");
+		case QFile::FatalError: return QApplication::translate("FileErrors","A fatal error occurred.");
+		case QFile::ResourceError: return QApplication::translate("FileErrors","An resource error occurred."); 
+		case QFile::OpenError: return QApplication::translate("FileErrors","The file could not be opened.");
+		case QFile::AbortError: return QApplication::translate("FileErrors","The operation was aborted.");
+		case QFile::TimeOutError: return QApplication::translate("FileErrors","A timeout occurred.");
+		case QFile::UnspecifiedError: return QApplication::translate("FileErrors","An unspecified error occurred.");
+		case QFile::RemoveError: return QApplication::translate("FileErrors","The file could not be removed.");
+		case QFile::RenameError: return QApplication::translate("FileErrors","The file could not be renamed.");
+		case QFile::PositionError: return QApplication::translate("FileErrors","The position in the file could not be changed.");
+		case QFile::ResizeError: return QApplication::translate("FileErrors","The file could not be resized.");
+		case QFile::PermissionsError: return QApplication::translate("FileErrors","The file could not be accessed.");
+		case QFile::CopyError: return QApplication::translate("FileErrors","The file could not be copied.");		
+	}
+}
 
 void openBrowser(QString url){
 QProcess browser;
@@ -341,9 +341,9 @@ int i=1;
 			if(i-1==argc) cout << "Missing argument for -lang" << endl;
 			else{ArgLang=QString::fromUtf8(argv[i+1]); i++;}
 			}
-		else if(QString(argv[i])=="-test"){
+			else if(QString(argv[i])=="-test"){/*
 				if (testDatabase()) exit(0);
-				else exit(1);
+				else exit(1);*/
 			}
 		else{cout << "** Unrecognized argument: " << argv[i] <<  endl;
 			exit(1);}

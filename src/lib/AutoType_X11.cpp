@@ -65,26 +65,28 @@ switch(mods){
 }
 
 
-void AutoType::perform(CEntry* entry, QString& err){
+void AutoType::perform(IEntryHandle* entry, QString& err){
 struct timespec timeOut,remains;
 timeOut.tv_sec = 0;
-timeOut.tv_nsec = 300000000; /* 300 milliseconds */
+timeOut.tv_nsec = 30000000; /* 300 milliseconds */
 for(int i=0;i<10;i++)nanosleep(&timeOut, &remains);
 
 QString str;
-int c=entry->Additional.count("Auto-Type:");
+QString comment=entry->comment();
+int c=comment.count("Auto-Type:");
 if(c>1){
 	err=tr("More than one 'Auto-Type:' key sequence found.\nAllowed is only one per entry.");
 	return;}
 if(c==1){
-	int start=entry->Additional.indexOf("Auto-Type:")+10;
+	int start=comment.indexOf("Auto-Type:")+10;
 	int len;
-	if(entry->Additional.size()==10)return;
-	for(len=0;len<entry->Additional.size();len++){
-		if(entry->Additional.size()==(start+len))break;
-		if(entry->Additional.at(start+len)==QChar('\n'))break;}
+	if(comment.size()==10)return;
+		for(len=0;len<comment.size();len++){
+			if(comment.size()==(start+len))break;
+			if(comment.at(start+len)==QChar('\n'))break;
+		}
 	if(!len)return;
-	str=entry->Additional.mid(start,len);
+	str=comment.mid(start,len);
 }
 else
 	str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
@@ -125,21 +127,21 @@ XCloseDisplay(pDisplay);
 MainWin->show();
 }
 
-void AutoType::templateToKeysyms(const QString& tmpl, QList<quint16>& keys,CEntry* entry){
+void AutoType::templateToKeysyms(const QString& tmpl, QList<quint16>& keys,IEntryHandle* entry){
 //tmpl must be lower case!!!
 if(!tmpl.compare("title")){
-	stringToKeysyms(entry->Title,keys);
+	stringToKeysyms(entry->title(),keys);
 	return;}
 if(!tmpl.compare("username")){
-	stringToKeysyms(entry->UserName,keys);
+	stringToKeysyms(entry->username(),keys);
 	return;}
 if(!tmpl.compare("url")){
-	stringToKeysyms(entry->URL,keys);
+	stringToKeysyms(entry->url(),keys);
 	return;}
 if(!tmpl.compare("password")){
-	entry->Password.unlock();
-	stringToKeysyms(entry->Password.string(),keys);
-	entry->Password.lock();
+	SecString password=entry->password();
+	password.unlock();
+	stringToKeysyms(password,keys);
 	return;
 }
 if(!tmpl.compare("space")){
@@ -1163,7 +1165,7 @@ return 0;
 
 #ifdef Q_WS_MAC
 #include <QMessageBox>
-void AutoType::perform(CEntry* entry, QString& err){
+void AutoType::perform(IEntryHandle* entry, QString& err){
 QMessageBox::warning(NULL,"AutoType","Sorry, but Auto-Type does not work under Mac OS X yet.","OK");
 }
 #endif

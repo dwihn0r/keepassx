@@ -31,7 +31,6 @@
 #define ___TWOFISH_CLASS_H___
 
 #include "twofish.h"
-#include "crypto/rijndael.h"
 
 class CTwofish
 {

@@ -31,7 +31,7 @@
 class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
  Q_OBJECT
 public:
- CSelectIconDlg(Database* db,int,QWidget* parent = 0,  bool modal = false, Qt::WFlags fl = 0);
+ CSelectIconDlg(IDatabase* db,int ImageID,QWidget* parent = 0,  bool modal = false, Qt::WFlags fl = 0);
 
 public slots:
  void OnAddIcon();
@@ -42,14 +42,16 @@ public slots:
  void OnSelectionChanged(QListWidgetItem*,QListWidgetItem*);
 
 private:
- Database* db;
- void updateView();
- QMenu* CtxMenu;
- QAction* DeleteAction;
- QAction* ReplaceAction;
+	int Id;
+	IDatabase* db;
+	void updateView();
+	QMenu* CtxMenu;
+	QAction* DeleteAction;
+	QAction* ReplaceAction;
 
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);
+ virtual void showEvent(QShowEvent* event);
 
 };
 

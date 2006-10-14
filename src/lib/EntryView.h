@@ -25,55 +25,79 @@
 #include <QTreeWidget>
 #include <QContextMenuEvent>
 #include <QHeaderView>
-#include "../PwManager.h"
+#include <QTimer>
+#include <QClipboard>
+#include "../StandardDatabase.h"
 
 #define NUM_COLUMNS 10
 
 class EntryViewItem;
-
+enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
 
 class KeepassEntryView:public QTreeWidget{
-Q_OBJECT
-public:
- KeepassEntryView(QWidget* parent=0);
- ~KeepassEntryView();
- void updateItems(unsigned int group);
- void updateColumns();
- void refreshItems();
- void showSearchResults(QList<quint32>& results);
- Database* db;
- vector<EntryViewItem*>Items;
- QMenu *ContextMenu;
-private:
- void setEntry(CEntry* entry);
- int CurrentGroup;
- QList<float>ColumnSizes;
- void resizeColumns();
- bool AutoResizeColumns;
- QPoint DragStartPos;
- QList<QTreeWidgetItem*> DragItems;
- QPixmap DragPixmap;
- bool IsSearchGroup;
-protected:
- virtual void contextMenuEvent(QContextMenuEvent *event);
- virtual void paintEvent(QPaintEvent* event);
- virtual void resizeEvent(QResizeEvent* event);
- virtual void mousePressEvent(QMouseEvent *event);
- virtual void mouseMoveEvent(QMouseEvent *event);
-public slots:
- void OnColumnResized(int index,int OldSize, int NewSize);
- void updateItems();
+	Q_OBJECT
+	public:
+		KeepassEntryView(QWidget* parent=0);
+		~KeepassEntryView();
+		void showSearchResults();
+		void showGroup(IGroupHandle* group);
+		void updateColumns();
+		// void showSearchResults(QList<quint32>& results);
+		IDatabase* db;
+		QList<EntryViewItem*>Items;
+		QList<IEntryHandle*> SearchResults;
+		QMenu *ContextMenu;
+	private:
+		void setEntry(IEntryHandle* entry);
+		void updateEntry(EntryViewItem*);
+		void editEntry(EntryViewItem*);
+		void createItems(QList<IEntryHandle*>& entries);
+		
+		QClipboard* Clipboard;
+		QTimer ClipboardTimer;		
+		QList<float>ColumnSizes;
+		void resizeColumns();
+		bool AutoResizeColumns;
+		QPoint DragStartPos;
+		QList<QTreeWidgetItem*> DragItems;
+		QPixmap DragPixmap;
+		IGroupHandle* CurrentGroup;
+		
+		virtual void contextMenuEvent(QContextMenuEvent *event);
+		virtual void paintEvent(QPaintEvent* event);
+		virtual void resizeEvent(QResizeEvent* event);
+		virtual void mousePressEvent(QMouseEvent *event);
+		virtual void mouseMoveEvent(QMouseEvent *event);
+	public slots:
+		void OnColumnResized(int index,int OldSize, int NewSize);
+		void OnGroupChanged(IGroupHandle* group);
+		void OnShowSearchResults();
+		void OnEntryActivated(QTreeWidgetItem*,int);
+		void OnNewEntry();
+		void OnItemsChanged();
+		void updateIcons();
+		void OnUsernameToClipboard();
+		void OnPasswordToClipboard();
+		void OnEditEntry();
+		void OnClipboardTimeOut();
+		void OnCloneEntry();
+		void OnDeleteEntry();
+		void OnSaveAttachment();
+		void OnAutoType();
+	signals:
+		void fileModified();
+		void selectionChanged(SelectionState);
 };
 
 
 class EntryViewItem:public QTreeWidgetItem{
-public:
-EntryViewItem(QTreeWidget *parent);
-EntryViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
-EntryViewItem(QTreeWidgetItem *parent);
-EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
-CEntry* pEntry;
-virtual bool operator<(const QTreeWidgetItem& other)const;
+	public:
+		EntryViewItem(QTreeWidget *parent);
+		EntryViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
+		EntryViewItem(QTreeWidgetItem *parent);
+		EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
+		IEntryHandle* EntryHandle;
+		virtual bool operator<(const QTreeWidgetItem& other)const;
 };
 
 

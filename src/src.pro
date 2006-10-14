@@ -6,7 +6,7 @@
 
 INSTALLS += target data
 data.files += ../share/keepass/* 
-TARGET = ../bin/keepass
+TARGET = ../bin/keepassx
 
 unix:!macx{
 	isEmpty(PREFIX){
@@ -50,16 +50,12 @@ TRANSLATIONS += translations/keepass-de_DE.ts \
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \
            mainwindow.h \
-           PwManager.h \
-           crypto/rijndael.h \
+           StandardDatabase.h \
            lib/SecString.h \
-           crypto/sha256.h \
            crypto/twoclass.h \
            crypto/twofish.h \
            import/Import_PwManager.h \
            export/Export_Txt.h \
-           crypto/blowfish.h \
-           crypto/sha1.h \
            import/Import_KWalletXml.h \
            PwmConfig.h \
            dialogs/AboutDlg.h \
@@ -81,21 +77,25 @@ HEADERS += lib/IniReader.h \
            lib/GroupView.h \
            lib/EntryView.h \
            crypto/arcfour.h \
-           lib/KpFileIconProvider.h 
+           lib/KpFileIconProvider.h \
+	   crypto/aes_edefs.h \
+	   crypto/aes_tdefs.h \
+	   crypto/aes.h \
+	   crypto/aesopt.h \
+	   crypto/aestab.h \
+	   crypto/aescpp.h \
+	   crypto/sha256.h \
+	   crypto/yarrow.h
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
            mainwindow.cpp \
-           PwManager.cpp \
-           crypto/rijndael.cpp \
+           StandardDatabase.cpp \
            lib/SecString.cpp \
-           crypto/sha256.c \
            crypto/twoclass.cpp \
            crypto/twofish.cpp \
            import/Import_PwManager.cpp \
            export/Export_Txt.cpp \
-           crypto/blowfish.cpp \
-           crypto/sha1.cpp \
            import/Import_KWalletXml.cpp \
            PwmConfig.cpp \
            dialogs/AboutDlg.cpp \
@@ -114,7 +114,13 @@ SOURCES += lib/IniReader.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
            crypto/arcfour.cpp \
-           lib/KpFileIconProvider.cpp 
+           lib/KpFileIconProvider.cpp \
+	   crypto/aescrypt.c \
+	   crypto/aeskey.c \
+	   crypto/aestab.c \
+	   crypto/aes_modes.c \
+	   crypto/sha256.cpp \
+	   crypto/yarrow.cpp	
 QT += xml
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui

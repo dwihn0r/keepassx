@@ -124,89 +124,110 @@ KeyType=BOTH;
 
 void CPasswordDialog::OnButtonBrowse()
 {
-QString filename=QFileDialog::getOpenFileName(this,tr("Select a Key File"),QDir::homePath(),tr("*.key"));
-if(filename=="")return;
-QFile file(filename);
-if(file.exists()){
-	Combo_Dirs->setEditText(filename);
-	return;
-}
-QMessageBox::warning(this,tr("Error"),tr("Unexpected Error: File does not exist."),tr("OK"),"","",0,0);
+	QFileDialog FileDlg(this,tr("Select a Key File"),QDir::homePath());
+	FileDlg.setFilters(QStringList()<<tr("All Files (*)") << tr("Key Files (*.key)"));
+	FileDlg.setFileMode(QFileDialog::ExistingFile);
+	if(!FileDlg.exec())return;
+	if(!FileDlg.selectedFiles().size())return;	
+	QFile file(FileDlg.selectedFiles()[0]);
+	if(file.exists()){
+		Combo_Dirs->setEditText(FileDlg.selectedFiles()[0]);
+		return;
+	}
+	QMessageBox::warning(this,tr("Error"),tr("Unexpected Error: File does not exist."),tr("OK"),"","",0,0);
 }
 
 void CPasswordDialog::OnButtonBrowse_Set()
 {
-QString filename=QFileDialog::getSaveFileName(this,tr("Select a Key File"),QDir::homePath(),tr("*.key"));
-if(filename=="")return;
-Combo_Dirs->setEditText(filename);
+	QFileDialog FileDlg(this,tr("Select a Key File"),QDir::homePath());
+	FileDlg.setFilters(QStringList()<<tr("All Files (*)") << tr("Key Files (*.key)"));
+	FileDlg.setFileMode(QFileDialog::AnyFile);
+	if(!FileDlg.exec())return;
+	if(!FileDlg.selectedFiles().size())return;	
+	Combo_Dirs->setEditText(FileDlg.selectedFiles()[0]);
 }
 
 void CPasswordDialog::OnCancel()
 {
-done(0);
+	done(0);
 }
 
 void CPasswordDialog::OnOK(){
-password=Edit_Password->text();
-keyfile=Combo_Dirs->currentText();
+	password=Edit_Password->text();
+	keyfile=Combo_Dirs->currentText();
 
-if(password=="" && keyfile==""){
-	QMessageBox::warning(this,tr("Error"),tr("Please enter a Password or select a key file."),tr("OK"),"","",0,0);
-	return;}
-
-if(KeyType==BOTH){
-	if(password==""){
-		QMessageBox::warning(this,tr("Error"),tr("Please enter a Password."),tr("OK"),"","",0,0);
+	if(password=="" && keyfile==""){
+		QMessageBox::warning(this,tr("Error"),tr("Please enter a Password or select a key file."),tr("OK"),"","",0,0);
 		return;}
-	if(keyfile==""){
-		QMessageBox::warning(this,tr("Error"),tr("Please choose a key file."),tr("OK"),"","",0,0);
-		return;}
-}
 
-if(KeyType==BOTH || KeyType==KEYFILE){
-	QFileInfo fileinfo(keyfile);
-	if(!fileinfo.exists()){
-		QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory does not exist."),tr("OK"),"","",0,0);
-		return;
-	}
-	if(!fileinfo.isReadable()){
-		QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-		return;
-	}
-	if(fileinfo.isDir()){
-		if(keyfile.right(1)!="/")keyfile+="/";
-		QFile file(keyfile+"pwsafe.key");
-		if(!file.exists()){				
-			QDir dir(keyfile);
-			QStringList files;
-			files=dir.entryList(QStringList()<<"*.key",QDir::Files);
-			if(!files.size()){
-				QMessageBox::warning(this,tr("Error"),tr("The given directory does not contain any key files."),tr("OK"),"","",0,0);
+		if(KeyType==BOTH){
+			if(password==""){
+				QMessageBox::warning(this,tr("Error"),tr("Please enter a Password."),tr("OK"),"","",0,0);
 				return;}
-			if(files.size()>1){
-				QMessageBox::warning(this,tr("Error"),tr("The given directory contains more then one key file.\nPlease specify the key file directly."),tr("OK"),"","",0,0);
-				return;}
-			QFile file(keyfile+files[0]);
-			Q_ASSERT(file.exists());
-			if(!QFileInfo(file).isReadable()){
-				QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-				return;}				
-			keyfile+=files[0];
-		}else{
-			if(!QFileInfo(file).isReadable()){
-				QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-				return;}			
-			keyfile+="pwsafe.key";
+				if(keyfile==""){
+					QMessageBox::warning(this,tr("Error"),tr("Please choose a key file."),tr("OK"),"","",0,0);
+					return;}
 		}
-	}else{
-	QFile file(keyfile);
-	if(!file.exists()){
-		QMessageBox::warning(this,tr("Error"),tr("Key file could not be found."),tr("OK"),"","",0,0);
-		return;}
-	if(!QFileInfo(file).isReadable()){
-		QMessageBox::warning(this,tr("Error"),tr("Key file is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-		return;}
-	}
+
+		if(KeyType==BOTH || KeyType==KEYFILE){
+			QFileInfo fileinfo(keyfile);
+			if(Mode_Set){
+				if(fileinfo.exists()){
+					switch(QMessageBox::question(this,tr("File exists."),tr("A file with the selected name already exists, should this file be used as key file\nor do you want to overwrite it with a new generated one?"),
+						   tr("Use"),tr("Overwrite"),tr("Cancel"),0,2)){
+						case 0: OverwriteKeyFile=false;
+							   	break;
+						case 1: OverwriteKeyFile=true;
+								break;
+						case 2:	return; 
+					}					
+				}
+				
+			}
+			else{				
+				if(!fileinfo.exists()){
+					QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory does not exist."),tr("OK"),"","",0,0);
+					return;
+				}
+				if(!fileinfo.isReadable()){
+					QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
+					return;
+				}
+				if(fileinfo.isDir()){
+					if(keyfile.right(1)!="/")keyfile+="/";
+					QFile file(keyfile+"pwsafe.key");
+					if(!file.exists()){				
+						QDir dir(keyfile);
+						QStringList files;
+						files=dir.entryList(QStringList()<<"*.key",QDir::Files);
+						if(!files.size()){
+							QMessageBox::warning(this,tr("Error"),tr("The given directory does not contain any key files."),tr("OK"),"","",0,0);
+							return;}
+							if(files.size()>1){
+								QMessageBox::warning(this,tr("Error"),tr("The given directory contains more then one key file.\nPlease specify the key file directly."),tr("OK"),"","",0,0);
+								return;}
+								QFile file(keyfile+files[0]);
+								Q_ASSERT(file.exists());
+								if(!QFileInfo(file).isReadable()){
+									QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
+									return;}				
+									keyfile+=files[0];
+					}else{
+						if(!QFileInfo(file).isReadable()){
+							QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
+							return;}			
+							keyfile+="pwsafe.key";
+					}
+				}else{
+					QFile file(keyfile);
+					if(!file.exists()){
+						QMessageBox::warning(this,tr("Error"),tr("Key file could not be found."),tr("OK"),"","",0,0);
+						return;}
+						if(!QFileInfo(file).isReadable()){
+							QMessageBox::warning(this,tr("Error"),tr("Key file is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
+							return;}
+				}
+			}
 }
 
 if(config.RememberLastKey){

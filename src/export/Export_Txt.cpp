@@ -23,6 +23,7 @@
 #include "main.h"
 #include "../lib/SecString.h"
 #include "Export_Txt.h"
+/*
 
 QString EntryTemplate=QString("\n\
   Title:    %1\n\
@@ -36,7 +37,7 @@ QString GroupTemplate=QString("\n\
 *** Group: %1 ***\n\
 ");
 
-bool Export_Txt::exportFile(const QString& filename,Database* db,QString& err){
+bool Export_Txt::exportFile(const QString& filename,StandardDatabase* db,QString& err){
 QFile file(filename);
 if(!file.open(QIODevice::Truncate | QIODevice::WriteOnly)){
 	err+=tr("Could not open file (FileError=%1)").arg(file.error());
@@ -59,4 +60,4 @@ for(int g=0;g<db->numGroups();g++){
 	}
 }
 file.close();
-}
+}*/

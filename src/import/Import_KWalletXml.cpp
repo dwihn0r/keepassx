@@ -24,8 +24,9 @@
 #include <qfile.h>
 #include <qdom.h>
 using namespace std;
+/*
 
-bool Import_KWalletXml::importFile(QString FileName,Database* pwm,QString& err){
+bool Import_KWalletXml::importFile(QString FileName,StandardDatabase* pwm,QString& err){
 QFile file(FileName);
 if(!file.exists()){
 	err+=QObject::tr("File not found.");
@@ -58,14 +59,14 @@ for(int i=0;i<groups.length();i++){
 	if(!groups.item(i).isElement()){err+=QObject::tr("Invalid XML file."); return false;}
 	QDomElement CurrGroup=groups.item(i).toElement();
 	if(!CurrGroup.hasAttribute("name")){err+=QObject::tr("Invalid XML file."); return false;}
- 	CGroup* NewGroup=pwm->addGroup(NULL);
+ 	IGroupHandle* NewGroup=pwm->addGroup(NULL);
 	NewGroup->Name=CurrGroup.attribute("name");
 	QDomNodeList entries=CurrGroup.elementsByTagName("password");
 	for(int j=0;j<entries.length();j++){
 		if(!entries.item(j).isElement()){err+=QObject::tr("Invalid XML file."); return false;}
 		QDomElement CurrEntry=entries.item(j).toElement();
 		if(!CurrEntry.hasAttribute("name")){err+=QObject::tr("Invalid XML file."); return false;}
-		CEntry* NewEntry=pwm->addEntry();
+		IEntryHandle* NewEntry=pwm->addEntry();
 		NewEntry->Title=CurrEntry.attribute("name");
 		NewEntry->GroupID=NewGroup->ID;
 		QString pw=CurrEntry.text();
@@ -77,4 +78,4 @@ pwm->SearchGroupID=-1;
 pwm->CryptoAlgorithmus=ALGO_AES;
 pwm->KeyEncRounds=6000;
 return true;
-}
+}*/

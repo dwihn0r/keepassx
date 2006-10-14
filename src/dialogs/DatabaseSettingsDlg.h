@@ -30,7 +30,7 @@ class CDbSettingsDlg : public QDialog, public Ui_dbsettingdlg_base
   Q_OBJECT
 
 public:
-  CDbSettingsDlg(QWidget* parent,Database* db, bool modal = FALSE, Qt::WFlags fl = 0 );
+  CDbSettingsDlg(QWidget* parent,IDatabase* db, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CDbSettingsDlg();
    virtual void showEvent(QShowEvent *);
   /*$PUBLIC_FUNCTIONS$*/
@@ -49,7 +49,7 @@ public slots:
     virtual void OnOK();
 
 private:
-   Database* database;
+   IDatabase* database;
 };
 
 #endif

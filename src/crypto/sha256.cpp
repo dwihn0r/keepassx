@@ -1,41 +1,48 @@
-/*
- *  FIPS-180-2 compliant SHA-256 implementation
- *
- *  Copyright (C) 2001-2003  Christophe Devine
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
+/***************************************************************************
+ *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   based on the FIPS-180-2 compliant SHA-256 implementation of	       *
+ *   Christophe Devine.                                                    *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
 
 #include <string.h>
-
 #include "sha256.h"
 
-#define GET_quint32(n,b,i)                       \
+#define GET_qquint32(n,b,i)                       \
 {                                               \
-    (n) = ( (uint32) (b)[(i)    ] << 24 )       \
-        | ( (uint32) (b)[(i) + 1] << 16 )       \
-        | ( (uint32) (b)[(i) + 2] <<  8 )       \
-        | ( (uint32) (b)[(i) + 3]       );      \
+    (n) = ( (quint32) (b)[(i)    ] << 24 )       \
+        | ( (quint32) (b)[(i) + 1] << 16 )       \
+        | ( (quint32) (b)[(i) + 2] <<  8 )       \
+        | ( (quint32) (b)[(i) + 3]       );      \
 }
 
-#define PUT_quint32(n,b,i)                       \
+#define PUT_qquint32(n,b,i)                       \
 {                                               \
-    (b)[(i)    ] = (uint8) ( (n) >> 24 );       \
-    (b)[(i) + 1] = (uint8) ( (n) >> 16 );       \
-    (b)[(i) + 2] = (uint8) ( (n) >>  8 );       \
-    (b)[(i) + 3] = (uint8) ( (n)       );       \
+    (b)[(i)    ] = (quint8) ( (n) >> 24 );       \
+    (b)[(i) + 1] = (quint8) ( (n) >> 16 );       \
+    (b)[(i) + 2] = (quint8) ( (n) >>  8 );       \
+    (b)[(i) + 3] = (quint8) ( (n)       );       \
+}
+
+void SHA256::hashBuffer(void* input, void* digest, quint32 length){
+	sha256_context ctx;
+	sha256_starts(&ctx);
+	sha256_update(&ctx,(quint8*)input,length);
+	sha256_finish(&ctx,(quint8*)digest);
 }
 
 void sha256_starts( sha256_context *ctx )
@@ -53,27 +60,27 @@ void sha256_starts( sha256_context *ctx )
     ctx->state[7] = 0x5BE0CD19;
 }
 
-void sha256_process( sha256_context *ctx, uint8 data[64] )
+void sha256_process( sha256_context *ctx, const quint8 data[64] )
 {
-    uint32 temp1, temp2, W[64];
-    uint32 A, B, C, D, E, F, G, H;
+    quint32 temp1, temp2, W[64];
+    quint32 A, B, C, D, E, F, G, H;
 
-    GET_quint32( W[0],  data,  0 );
-    GET_quint32( W[1],  data,  4 );
-    GET_quint32( W[2],  data,  8 );
-    GET_quint32( W[3],  data, 12 );
-    GET_quint32( W[4],  data, 16 );
-    GET_quint32( W[5],  data, 20 );
-    GET_quint32( W[6],  data, 24 );
-    GET_quint32( W[7],  data, 28 );
-    GET_quint32( W[8],  data, 32 );
-    GET_quint32( W[9],  data, 36 );
-    GET_quint32( W[10], data, 40 );
-    GET_quint32( W[11], data, 44 );
-    GET_quint32( W[12], data, 48 );
-    GET_quint32( W[13], data, 52 );
-    GET_quint32( W[14], data, 56 );
-    GET_quint32( W[15], data, 60 );
+    GET_qquint32( W[0],  data,  0 );
+    GET_qquint32( W[1],  data,  4 );
+    GET_qquint32( W[2],  data,  8 );
+    GET_qquint32( W[3],  data, 12 );
+    GET_qquint32( W[4],  data, 16 );
+    GET_qquint32( W[5],  data, 20 );
+    GET_qquint32( W[6],  data, 24 );
+    GET_qquint32( W[7],  data, 28 );
+    GET_qquint32( W[8],  data, 32 );
+    GET_qquint32( W[9],  data, 36 );
+    GET_qquint32( W[10], data, 40 );
+    GET_qquint32( W[11], data, 44 );
+    GET_qquint32( W[12], data, 48 );
+    GET_qquint32( W[13], data, 52 );
+    GET_qquint32( W[14], data, 56 );
+    GET_qquint32( W[15], data, 60 );
 
 #define  SHR(x,n) ((x & 0xFFFFFFFF) >> n)
 #define ROTR(x,n) (SHR(x,n) | (x << (32 - n)))
@@ -184,9 +191,9 @@ void sha256_process( sha256_context *ctx, uint8 data[64] )
     ctx->state[7] += H;
 }
 
-void sha256_update( sha256_context *ctx, uint8 *input, uint32 length )
+void sha256_update( sha256_context *ctx, const quint8 *input, quint32 length )
 {
-    uint32 left, fill;
+    quint32 left, fill;
 
     if( ! length ) return;
 
@@ -223,7 +230,7 @@ void sha256_update( sha256_context *ctx, uint8 *input, uint32 length )
     }
 }
 
-static uint8 sha256_padding[64] =
+static quint8 sha256_padding[64] =
 {
  0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -231,18 +238,18 @@ static uint8 sha256_padding[64] =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-void sha256_finish( sha256_context *ctx, uint8 digest[32] )
+void sha256_finish( sha256_context *ctx, quint8 digest[32] )
 {
-    uint32 last, padn;
-    uint32 high, low;
-    uint8 msglen[8];
+    quint32 last, padn;
+    quint32 high, low;
+    quint8 msglen[8];
 
     high = ( ctx->total[0] >> 29 )
          | ( ctx->total[1] <<  3 );
     low  = ( ctx->total[0] <<  3 );
 
-    PUT_quint32( high, msglen, 0 );
-    PUT_quint32( low,  msglen, 4 );
+    PUT_qquint32( high, msglen, 0 );
+    PUT_qquint32( low,  msglen, 4 );
 
     last = ctx->total[0] & 0x3F;
     padn = ( last < 56 ) ? ( 56 - last ) : ( 120 - last );
@@ -250,120 +257,12 @@ void sha256_finish( sha256_context *ctx, uint8 digest[32] )
     sha256_update( ctx, sha256_padding, padn );
     sha256_update( ctx, msglen, 8 );
 
-    PUT_quint32( ctx->state[0], digest,  0 );
-    PUT_quint32( ctx->state[1], digest,  4 );
-    PUT_quint32( ctx->state[2], digest,  8 );
-    PUT_quint32( ctx->state[3], digest, 12 );
-    PUT_quint32( ctx->state[4], digest, 16 );
-    PUT_quint32( ctx->state[5], digest, 20 );
-    PUT_quint32( ctx->state[6], digest, 24 );
-    PUT_quint32( ctx->state[7], digest, 28 );
+    PUT_qquint32( ctx->state[0], digest,  0 );
+    PUT_qquint32( ctx->state[1], digest,  4 );
+    PUT_qquint32( ctx->state[2], digest,  8 );
+    PUT_qquint32( ctx->state[3], digest, 12 );
+    PUT_qquint32( ctx->state[4], digest, 16 );
+    PUT_qquint32( ctx->state[5], digest, 20 );
+    PUT_qquint32( ctx->state[6], digest, 24 );
+    PUT_qquint32( ctx->state[7], digest, 28 );
 }
-
-#ifdef TEST
-
-#include <stdlib.h>
-#include <stdio.h>
-
-/*
- * those are the standard FIPS-180-2 test vectors
- */
-
-static char *msg[] = 
-{
-    "abc",
-    "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
-    NULL
-};
-
-static char *val[] =
-{
-    "ba7816bf8f01cfea414140de5dae2223" \
-    "b00361a396177a9cb410ff61f20015ad",
-    "248d6a61d20638b8e5c026930c3e6039" \
-    "a33ce45964ff2167f6ecedd419db06c1",
-    "cdc76e5c9914fb9281a1c7e284d73e67" \
-    "f1809a48a497200e046d39ccc7112cd0"
-};
-
-int main( int argc, char *argv[] )
-{
-    FILE *f;
-    int i, j;
-    char output[65];
-    sha256_context ctx;
-    unsigned char buf[1000];
-    unsigned char sha256sum[32];
-
-    if( argc < 2 )
-    {
-        printf( "\n SHA-256 Validation Tests:\n\n" );
-
-        for( i = 0; i < 3; i++ )
-        {
-            printf( " Test %d ", i + 1 );
-
-            sha256_starts( &ctx );
-
-            if( i < 2 )
-            {
-                sha256_update( &ctx, (uint8 *) msg[i],
-                               strlen( msg[i] ) );
-            }
-            else
-            {
-                memset( buf, 'a', 1000 );
-
-                for( j = 0; j < 1000; j++ )
-                {
-                    sha256_update( &ctx, (uint8 *) buf, 1000 );
-                }
-            }
-
-            sha256_finish( &ctx, sha256sum );
-
-            for( j = 0; j < 32; j++ )
-            {
-                sprintf( output + j * 2, "%02x", sha256sum[j] );
-            }
-
-            if( memcmp( output, val[i], 64 ) )
-            {
-                printf( "failed!\n" );
-                return( 1 );
-            }
-
-            printf( "passed.\n" );
-        }
-
-        printf( "\n" );
-    }
-    else
-    {
-        if( ! ( f = fopen( argv[1], "rb" ) ) )
-        {
-            perror( "fopen" );
-            return( 1 );
-        }
-
-        sha256_starts( &ctx );
-
-        while( ( i = fread( buf, 1, sizeof( buf ), f ) ) > 0 )
-        {
-            sha256_update( &ctx, buf, i );
-        }
-
-        sha256_finish( &ctx, sha256sum );
-
-        for( j = 0; j < 32; j++ )
-        {
-            printf( "%02x", sha256sum[j] );
-        }
-
-        printf( "  %s\n", argv[1] );
-    }
-
-    return( 0 );
-}
-
-#endif

@@ -21,27 +21,23 @@
 #define SEARCHDLG_H
 #include "ui_SearchDlg.h"
 #include "main.h"
-#include "PwManager.h"
+#include "Database.h"
 
 class CSearchDlg : public QDialog, public Ui_Search_Dlg
 {
   Q_OBJECT
 public:
-  CSearchDlg(Database* _db, CGroup* pGroup=NULL,QWidget* parent = 0,  
-	     bool modal = FALSE, Qt::WFlags fl = 0 );
+  CSearchDlg(IDatabase* database, IGroupHandle* group=NULL,QWidget* parent = 0, bool modal = true, Qt::WFlags fl = 0 );
   ~CSearchDlg();
-  QList<quint32> Hits;
+  QList<IEntryHandle*> Result;
 
 public slots:
-    virtual void OnButtonClose();
-    virtual void OnButtonSearch();
+    virtual void OnClose();
+    virtual void OnSearch();
 
 private:
-  QString txt;
-  CGroup* group;
-  bool regexp;
-  Database* db;
-  bool search(const QString& str);
+ 	IGroupHandle* group;
+	IDatabase* db;
 };
 
 #endif

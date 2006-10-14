@@ -26,17 +26,31 @@
 #include "EditGroupDlg.h"
 #include "SelectIconDlg.h"
 
-
-CEditGroupDialog::CEditGroupDialog(Database* database,QWidget* parent, bool modal, Qt::WFlags fl)
+CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWidget* parent, bool modal, Qt::WFlags fl)
 : QDialog(parent,fl)
 {
-setupUi(this);
-db=database;
-IconID=0;
-connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
-connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
-ModFlag=false;
+	setupUi(this);
+	db=database;
+	handle=Handle;
+	group=new CGroup();
+	group->Title=handle->title();
+	group->Image=handle->image();
+	connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
+}
+
+
+CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* parent, bool modal, Qt::WFlags fl)
+	: QDialog(parent,fl)
+{
+	setupUi(this);
+	db=database;
+	group=Group;
+	handle=NULL;
+	connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
 }
 
 CEditGroupDialog::~CEditGroupDialog()
@@ -44,36 +58,47 @@ CEditGroupDialog::~CEditGroupDialog()
 }
 
 void CEditGroupDialog::showEvent(QShowEvent *event){
-if(event->spontaneous()==false){
-	EditTitle->setText(GroupName);
-	for(int i=0;i<db->numIcons();i++){
-		ComboIconPicker->insertItem(i,db->icon(i),"");
+	if(event->spontaneous()==false){
+		EditTitle->setText(group->Title);
+		for(int i=0;i<db->numIcons();i++){
+			ComboIconPicker->insertItem(i,db->icon(i),"");
+		}
+		ComboIconPicker->setCurrentIndex(group->Image);
 	}
-	ComboIconPicker->setCurrentIndex(IconID);
-}
 }
 
 void CEditGroupDialog::OnOK()
 {
-GroupName=EditTitle->text();
-IconID=ComboIconPicker->currentIndex();
-done(1);
+	int r=1;
+	if(EditTitle->text()!=group->Title){
+		group->Title=EditTitle->text();
+		r=2;
+	}
+	if(ComboIconPicker->currentIndex()!=group->Image){
+		group->Image=ComboIconPicker->currentIndex();
+		r=2;
+	}	
+	if(handle){
+		handle->setTitle(group->Title);
+		handle->setImage(group->Image);
+	}
+	done(r);
 }
 
 void CEditGroupDialog::OnCancel()
 {
-done(0);
+	done(0);
 }
 
 
 void CEditGroupDialog::OnIconDlg(){
-CSelectIconDlg dlg(db,IconID,this);
-int r=dlg.exec();
-if(r!=-1){
-	ComboIconPicker->clear();
-	for(int i=0;i<db->numIcons();i++)
-		ComboIconPicker->insertItem(i,db->icon(i),"");
-	IconID=r;
-	ComboIconPicker->setCurrentIndex(IconID);
-}
+	CSelectIconDlg dlg(db,group->Image,this);
+	int r=dlg.exec();
+	if(r!=-1){
+		ComboIconPicker->clear();
+		for(int i=0;i<db->numIcons();i++)
+			ComboIconPicker->insertItem(i,db->icon(i),"");
+		group->Image=r;
+		ComboIconPicker->setCurrentIndex(r);
+	}
 }
