@@ -401,9 +401,11 @@ yarrow256_force_reseed(struct yarrow256_ctx *ctx)
 struct yarrow256_ctx WeakCtx;
 struct yarrow256_ctx StrongCtx;
 struct yarrow_source WeakSrc[2];
+struct yarrow_source StrongSrc[2];
 
 void initYarrow(){
 	yarrow256_init(&WeakCtx,2,WeakSrc);
+	yarrow256_init(&StrongCtx,2,StrongSrc);
 	quint8 buffer[100];
 	srand(time(0));
 	for(int i=0;i<100;i++)
@@ -416,5 +418,14 @@ void initYarrow(){
 }
 
 void randomize(void* buffer, unsigned int length){
-	yarrow256_random(&WeakCtx,length,(quint8*)buffer);	
+	if(!yarrow256_is_seeded(&StrongCtx))
+		yarrow256_random(&WeakCtx,length,(quint8*)buffer);
+	else
+		yarrow256_random(&StrongCtx,length,(quint8*)buffer);
+}
+
+void strongRandomize(void* buffer, unsigned int length){
+	Q_ASSERT(yarrow256_is_seeded(&StrongCtx));
+	for(int i=0; i<length;i++)
+		yarrow256_random(&StrongCtx,1,(quint8*)buffer+i);	
 }

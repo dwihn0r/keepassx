@@ -48,7 +48,7 @@ void memcpyToLEnd32(char* src,const quint32* dst);
 void memcpyToLEnd16(char* src,const quint16* dst);
 
 //! Implementation of the standard KeePassX database.
-class StandardDatabase:public ICustomIcons,public IDatabase, public IFilePasswordAuth{
+class StandardDatabase:public ICustomIcons,public IDatabase, public IFilePasswordAuth, public IKdbSettings{
 Q_OBJECT
 public:
 	class StdGroup;
@@ -160,6 +160,10 @@ public:
 	virtual QList<IEntryHandle*> search(IGroupHandle* Group,const QString& SearchString, bool CaseSensitve, bool RegExp,bool Recursive,bool* Fields);
 	virtual QFile* file(){return File;}
 	virtual bool changeFile(const QString& filename);
+	virtual void setCryptAlgorithm(CryptAlgorithm algo){Algorithm=algo;}
+	virtual CryptAlgorithm cryptAlgorithm(){return Algorithm;}
+	virtual unsigned int keyTransfRounds(){return KeyTransfRounds;}
+	virtual void setKeyTransfRounds(unsigned int rounds){KeyTransfRounds=rounds;}	
 	
 	virtual QList<IEntryHandle*> entries();
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group);

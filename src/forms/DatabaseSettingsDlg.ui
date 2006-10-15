@@ -60,22 +60,6 @@
           <string>Algorithm:</string>
         </property>
       </widget>
-      <widget class="QPushButton" name="pushButton1" >
-        <property name="geometry" >
-          <rect>
-            <x>390</x>
-            <y>0</y>
-            <width>20</width>
-            <height>20</height>
-          </rect>
-        </property>
-        <property name="text" >
-          <string>?</string>
-        </property>
-        <property name="shortcut" >
-          <string/>
-        </property>
-      </widget>
       <widget class="QComboBox" name="ComboAlgo" >
         <property name="geometry" >
           <rect>
@@ -109,22 +93,6 @@
           <string>Encryption Rounds:</string>
         </property>
       </widget>
-    </widget>
-    <widget class="QLabel" name="Banner" >
-      <property name="geometry" >
-        <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>440</width>
-          <height>51</height>
-        </rect>
-      </property>
-      <property name="pixmap" >
-        <pixmap>image0</pixmap>
-      </property>
-      <property name="scaledContents" >
-        <bool>true</bool>
-      </property>
     </widget>
     <widget class="QPushButton" name="ButtonOK" >
       <property name="geometry" >

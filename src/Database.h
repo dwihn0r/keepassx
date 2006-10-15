@@ -396,4 +396,12 @@ public:
 	virtual bool createKeyFile(const QString& filename,int length=32, bool Hex=false)=0;
 };
 
+class IKdbSettings{
+	public:
+		virtual void setCryptAlgorithm(CryptAlgorithm algo)=0;
+		virtual CryptAlgorithm cryptAlgorithm()=0;
+		virtual unsigned int keyTransfRounds()=0;
+		virtual void setKeyTransfRounds(unsigned int rounds)=0;	
+};
+
 #endif

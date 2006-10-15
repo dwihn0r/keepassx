@@ -17,10 +17,11 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qmessagebox.h>
-//Added by qt3to4:
+ 
+#include <QPainter>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QMessageBox>
 #include <QShowEvent>
 #include "main.h"
 #include "DatabaseSettingsDlg.h"
@@ -29,66 +30,51 @@
 CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::WFlags fl)
 : QDialog(parent,fl)
 {
-setupUi(this);
-database=db;
-connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	setupUi(this);
+	database=dynamic_cast<IKdbSettings*>(db);
+	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
+	ComboAlgo->insertItem(0,tr("AES(Rijndael):  256 Bit   (default)"));
+	ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));
+	ComboAlgo->setCurrentIndex(database->cryptAlgorithm()); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
+	EditRounds->setText(QString::number(database->keyTransfRounds()));		
+	connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 }
 
 CDbSettingsDlg::~CDbSettingsDlg()
 {
 }
 
-void CDbSettingsDlg::showEvent(QShowEvent *event){
-//@NICHTVERGESSEN
-	/*
-if(event->spontaneous()==false){
-createBanner(Banner,Icon_Settings32x32,tr("Settings"));
-ComboAlgo->insertItem(0,tr("AES(Rijndael):  256 Bit   (default)"));
-ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));
-ComboAlgo->setCurrentIndex(database->CryptoAlgorithmus); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
-EditRounds->setText(QString::number(database->KeyEncRounds));
-	
-}
-	*/
+void CDbSettingsDlg::paintEvent(QPaintEvent *event){
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
 void CDbSettingsDlg::OnCancel()
 {
-done(0);
+	done(0);
 }
 
 
 void CDbSettingsDlg::OnOK()
 {
-if(EditRounds->text()==""){
-QMessageBox::warning(NULL,tr("Warning"),tr("Please determine the number of encryption rounds."),tr("OK"));
-return;
+	if(EditRounds->text()==""){
+		QMessageBox::warning(NULL,tr("Warning"),tr("Please determine the number of encryption rounds."),tr("OK"));
+		return;
+	}
+	bool valid;
+	int rounds=EditRounds->text().toUInt(&valid,10);
+	if(valid==false){
+		QMessageBox::warning(NULL,tr("Error"),tr("'%1' is not valid integer value.").arg(EditRounds->text()),tr("OK"));
+		return;
+	}
+	if(rounds==0){
+		QMessageBox::warning(NULL,tr("Error"),tr("The number of encryption rounds have to be greater than 0."),tr("OK"));
+		return;
+	}
+	database->setKeyTransfRounds(rounds);
+	database->setCryptAlgorithm((CryptAlgorithm)ComboAlgo->currentIndex());
+	done(1);
 }
-bool valid;
-int rounds=EditRounds->text().toUInt(&valid,10);
-if(valid==false){
-QMessageBox::warning(NULL,tr("Error"),tr("'%1' is not valid integer value.").arg(EditRounds->text()),tr("OK"));
-return;
-}
-if(rounds==0){
-QMessageBox::warning(NULL,tr("Error"),tr("The number of encryption rounds have to be greater than 0."),tr("OK"));
-return;
-}
-
-//@NICHTVERGESSEN
-//database->KeyEncRounds=rounds;
-//database->CryptoAlgorithmus=ComboAlgo->currentIndex();
-
-done(1);
-}
-
-
-
-
-
-/*$SPECIALIZATION$*/
-
-
-//#include "databasesettingsdlg.moc"
-

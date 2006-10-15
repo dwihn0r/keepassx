@@ -436,12 +436,15 @@ void KeepassMainWindow::OnFileNewKxdb(){
 
 
 void KeepassMainWindow::OnFileOpen(){
-	QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.kdb");
-	if(filename!=QString()){
-		if(FileOpen)
-			if(!closeDatabase())return;
-		openDatabase(filename);
-	}
+	QFileDialog FileDlg(this,tr("Open Database..."),QDir::homePath());
+	FileDlg.setFilters(QStringList()<< tr("KeePass Databases (*.kdb)")<< tr("All Files (*)"));
+	FileDlg.setFileMode(QFileDialog::ExistingFile);
+	FileDlg.setAcceptMode(QFileDialog::AcceptOpen);
+	if(!FileDlg.exec())return;
+	if(!FileDlg.selectedFiles().size())return;
+	if(FileOpen)
+		if(!closeDatabase())return;
+	openDatabase(FileDlg.selectedFiles()[0]);
 }
 
 void KeepassMainWindow::OnFileClose(){
