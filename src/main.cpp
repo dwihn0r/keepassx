@@ -217,10 +217,9 @@ QString decodeFileError(QFile::FileError Code){
 }
 
 void openBrowser(QString url){
-QProcess browser;
 QStringList args=config.OpenUrlCommand.arg(url).split(' ');
 QString cmd=args.takeFirst();
-browser.startDetached(cmd,args);
+QProcess::startDetached(cmd,args);
 }
 
 

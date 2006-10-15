@@ -52,9 +52,10 @@ else return text();
 }
 
 void LinkLabel::mouseReleaseEvent(QMouseEvent* event){
-if(event->button()==Qt::LeftButton)
-emit clicked();
-openBrowser(url());
+	if(event->button()==Qt::LeftButton){
+		emit clicked();
+		openBrowser(url());
+	}
 }
 
 void LinkLabel::setPos(int x,int y){
