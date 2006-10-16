@@ -35,9 +35,9 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
   <widget class="QProgressBar" name="progressBar" >
    <property name="geometry" >
     <rect>
-     <x>90</x>
+     <x>70</x>
      <y>140</y>
-     <width>371</width>
+     <width>391</width>
      <height>23</height>
     </rect>
    </property>
@@ -67,10 +67,10 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
   <widget class="WaitAnimationWidget" native="1" name="Animation" >
    <property name="geometry" >
     <rect>
-     <x>10</x>
-     <y>140</y>
-     <width>61</width>
-     <height>51</height>
+     <x>420</x>
+     <y>10</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
   </widget>

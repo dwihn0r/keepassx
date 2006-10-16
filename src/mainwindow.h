@@ -117,6 +117,7 @@ private:
  QLabel* StatusBarSelection;
  QToolBar* toolBar;
  QSystemTrayIcon* SysTray;
+ QAction* ViewShowToolbarAction;
  bool ShutingDown;
 protected:
  void closeEvent(QCloseEvent* event);

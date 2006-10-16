@@ -1,7 +1,5 @@
 <ui version="4.0" >
  <author>Tarek Saidi</author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow" >
   <property name="geometry" >
@@ -120,49 +118,6 @@
      <height>29</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuAnsicht" >
-    <property name="title" >
-     <string>&amp;View</string>
-    </property>
-    <widget class="QMenu" name="menuSpalten" >
-     <property name="title" >
-      <string>Columns</string>
-     </property>
-     <addaction name="ViewColumnsTitleAction" />
-     <addaction name="ViewColumnsUsernameAction" />
-     <addaction name="ViewColumnsUrlAction" />
-     <addaction name="ViewColumnsPasswordAction" />
-     <addaction name="ViewColumnsCommentAction" />
-     <addaction name="separator" />
-     <addaction name="ViewColumnsExpireAction" />
-     <addaction name="ViewColumnsCreationAction" />
-     <addaction name="ViewColumnsLastChangeAction" />
-     <addaction name="ViewColumnsLastAccessAction" />
-     <addaction name="ViewColumnsAttachmentAction" />
-    </widget>
-    <widget class="QMenu" name="menuType_Here" >
-     <property name="title" >
-      <string>Type Here</string>
-     </property>
-    </widget>
-    <widget class="QMenu" name="menuTool_Button_Sizes" >
-     <property name="title" >
-      <string>Toolbar Icon Size</string>
-     </property>
-     <addaction name="ViewToolButtonSize16Action" />
-     <addaction name="ViewToolButtonSize22Action" />
-     <addaction name="ViewToolButtonSize28Action" />
-    </widget>
-    <addaction name="ViewShowToolbarAction" />
-    <addaction name="ViewShowEntryDetailsAction" />
-    <addaction name="ViewShowStatusbarAction" />
-    <addaction name="separator" />
-    <addaction name="ViewHideUsernamesAction" />
-    <addaction name="ViewHidePasswordsAction" />
-    <addaction name="separator" />
-    <addaction name="menuSpalten" />
-    <addaction name="menuTool_Button_Sizes" />
-   </widget>
    <widget class="QMenu" name="menuBearbeiten" >
     <property name="title" >
      <string>&amp;Edit</string>
@@ -216,11 +171,6 @@
      </property>
      <addaction name="FileExpPlainTextAction" />
     </widget>
-    <widget class="QMenu" name="FileNewMenu" >
-     <property name="title" >
-      <string>&amp;New Database</string>
-     </property>
-    </widget>
     <addaction name="FileNewAction" />
     <addaction name="FileOpenAction" />
     <addaction name="FileCloseAction" />
@@ -236,9 +186,46 @@
     <addaction name="separator" />
     <addaction name="FileExitAction" />
    </widget>
+   <widget class="QMenu" name="ViewMenu" >
+    <property name="title" >
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="menuSpalten" >
+     <property name="title" >
+      <string>Columns</string>
+     </property>
+     <addaction name="ViewColumnsTitleAction" />
+     <addaction name="ViewColumnsUsernameAction" />
+     <addaction name="ViewColumnsUrlAction" />
+     <addaction name="ViewColumnsPasswordAction" />
+     <addaction name="ViewColumnsCommentAction" />
+     <addaction name="separator" />
+     <addaction name="ViewColumnsExpireAction" />
+     <addaction name="ViewColumnsCreationAction" />
+     <addaction name="ViewColumnsLastChangeAction" />
+     <addaction name="ViewColumnsLastAccessAction" />
+     <addaction name="ViewColumnsAttachmentAction" />
+    </widget>
+    <widget class="QMenu" name="menuTool_Button_Sizes" >
+     <property name="title" >
+      <string>Toolbar Icon Size</string>
+     </property>
+     <addaction name="ViewToolButtonSize16Action" />
+     <addaction name="ViewToolButtonSize22Action" />
+     <addaction name="ViewToolButtonSize28Action" />
+    </widget>
+    <addaction name="ViewShowEntryDetailsAction" />
+    <addaction name="ViewShowStatusbarAction" />
+    <addaction name="separator" />
+    <addaction name="ViewHideUsernamesAction" />
+    <addaction name="ViewHidePasswordsAction" />
+    <addaction name="separator" />
+    <addaction name="menuSpalten" />
+    <addaction name="menuTool_Button_Sizes" />
+   </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
-   <addaction name="menuAnsicht" />
+   <addaction name="ViewMenu" />
    <addaction name="menuExtras" />
    <addaction name="menuHilfe" />
   </widget>
@@ -350,14 +337,6 @@
   <action name="EditGroupSearchAction" >
    <property name="text" >
     <string>Search in this group...</string>
-   </property>
-  </action>
-  <action name="ViewShowToolbarAction" >
-   <property name="checkable" >
-    <bool>true</bool>
-   </property>
-   <property name="text" >
-    <string>Show Toolbar</string>
    </property>
   </action>
   <action name="ViewShowEntryDetailsAction" >
@@ -542,21 +521,16 @@
    </property>
   </action>
  </widget>
- <pixmapfunction></pixmapfunction>
  <customwidgets>
   <customwidget>
    <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
    <header>../../src/lib/GroupView.h</header>
-   <container>0</container>
-   <pixmap></pixmap>
   </customwidget>
   <customwidget>
    <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
    <header>../../src/lib/EntryView.h</header>
-   <container>0</container>
-   <pixmap></pixmap>
   </customwidget>
  </customwidgets>
  <resources/>

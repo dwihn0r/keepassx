@@ -45,7 +45,9 @@ void WaitAnimationWidget::refreshAnimation(){
 		float diff=CurAngle-i*0.16666667f;
 		if(diff>0.5f)
 			diff=1.0f-diff;
-		CircSizes[i]=1.0+exp(-10.0f*diff*diff);		
+		if(diff<-0.5f)
+			diff=1.0f+diff;
+		CircSizes[i]=1.0+exp(-14.0f*diff*diff);		
 	}
 	repaint();	
 }
@@ -53,8 +55,10 @@ void WaitAnimationWidget::refreshAnimation(){
 void WaitAnimationWidget::paintEvent(QPaintEvent* event){
 	QPainter painter(this);
 	painter.setRenderHints(QPainter::Antialiasing,true);
+	painter.setBrush(QColor(255,255,255));	
+	painter.setPen(QColor(255,255,255));
 	for(int i=0;i<6;i++){
-		float d=CircSizes[i]*6;
+		float d=CircSizes[i]*5.0;
 		QRectF rect(CircPositions[i].x()-d/2,CircPositions[i].y()-d/2,d,d);
 		painter.drawEllipse(rect);	
 		

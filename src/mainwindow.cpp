@@ -157,6 +157,7 @@ void KeepassMainWindow::setupToolbar(){
 	toolBar=new QToolBar(this);
 	addToolBar(toolBar);
 	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	ViewShowToolbarAction=toolBar->toggleViewAction();
 	toolBar->addAction(FileNewAction);
 	toolBar->addAction(FileOpenAction);
 	toolBar->addAction(FileSaveAction);
@@ -223,6 +224,8 @@ void KeepassMainWindow::setupMenus(){
 	EntryView->ContextMenu->addAction(EditCloneEntryAction);
 	EntryView->ContextMenu->addAction(EditDeleteEntryAction);
 	
+	ViewShowToolbarAction->setText(tr("Show Toolbar"));
+	ViewMenu->insertAction(ViewShowEntryDetailsAction,ViewShowToolbarAction);
 	ViewShowToolbarAction->setChecked(config.Toolbar);
 	ViewShowEntryDetailsAction->setChecked(config.EntryDetails);
 	ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
