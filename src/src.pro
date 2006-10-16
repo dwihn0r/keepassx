@@ -41,7 +41,8 @@ FORMS += forms/EditGroupDlg.ui \
          forms/PasswordDlg.ui \
          forms/EditEntryDlg.ui \
          forms/PasswordGenDlg.ui \
-	 forms/SelectIconDlg.ui
+	 forms/SelectIconDlg.ui \
+	 forms/CollectEntropyDlg.ui
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
 		translations/keepass-es_ES.ts \
@@ -68,6 +69,7 @@ HEADERS += lib/IniReader.h \
            dialogs/EditEntryDlg.h \
            dialogs/PasswordGenDlg.h \
 	   dialogs/SelectIconDlg.h \
+	   dialogs/CollectEntropyDlg.h \
            lib/random.h \
            Database.h \
            lib/KdePlugin.h \
@@ -85,7 +87,8 @@ HEADERS += lib/IniReader.h \
 	   crypto/aestab.h \
 	   crypto/aescpp.h \
 	   crypto/sha256.h \
-	   crypto/yarrow.h
+	   crypto/yarrow.h \
+	   lib/WaitAnimationWidget.h
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
@@ -108,6 +111,7 @@ SOURCES += lib/IniReader.cpp \
            dialogs/EditEntryDlg.cpp \
            dialogs/PasswordGenDlg.cpp \
 	   dialogs/SelectIconDlg.cpp \
+	   dialogs/CollectEntropyDlg.cpp \
            lib/random.cpp \
            Database.cpp \
            lib/KdePlugin.cpp \
@@ -120,7 +124,8 @@ SOURCES += lib/IniReader.cpp \
 	   crypto/aestab.c \
 	   crypto/aes_modes.c \
 	   crypto/sha256.cpp \
-	   crypto/yarrow.cpp	
+	   crypto/yarrow.cpp \
+	   lib/WaitAnimationWidget.cpp
 QT += xml
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
