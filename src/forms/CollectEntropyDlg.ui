@@ -32,22 +32,6 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QProgressBar" name="progressBar" >
-   <property name="geometry" >
-    <rect>
-     <x>70</x>
-     <y>140</y>
-     <width>391</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="value" >
-    <number>24</number>
-   </property>
-   <property name="orientation" >
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="QDialogButtonBox" name="buttonBox" >
    <property name="geometry" >
     <rect>
@@ -67,11 +51,33 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
   <widget class="WaitAnimationWidget" native="1" name="Animation" >
    <property name="geometry" >
     <rect>
-     <x>420</x>
-     <y>10</y>
+     <x>8</x>
+     <y>5</y>
      <width>41</width>
      <height>41</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum" >
+    <number>420</number>
+   </property>
+   <property name="value" >
+    <number>0</number>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="format" >
+    <string>%v Bits</string>
    </property>
   </widget>
  </widget>

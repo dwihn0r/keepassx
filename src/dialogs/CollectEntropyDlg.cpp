@@ -19,15 +19,27 @@
  ***************************************************************************/
 
 #include <QPainter>
+#include <QCursor>
 #include "CollectEntropyDlg.h"
 #include "main.h"
 
 CollectEntropyDlg::CollectEntropyDlg(QWidget* parent):QDialog(parent){
 	setupUi(this);
-	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Entropy Collection"),width());
+	createBanner(&BannerPixmap,NULL,tr("Entropy Collection"),width());
+	KeyEntropyBuffer=new unsigned char[105];
+	MouseEntropyBuffer=new quint16[210];
+	KeyCounter=0;
+	MouseCounter=0;
+	QTimer* timer=new QTimer(this);
+	connect(timer,SIGNAL(timeout()),this,SLOT(trackMousePos()));
+	timer->setInterval(50);
+	timer->start();
+	ReseedDone=false;
+}
 
-
-
+CollectEntropyDlg::~CollectEntropyDlg(){
+	delete [] KeyEntropyBuffer;
+	delete [] MouseEntropyBuffer;
 }
 
 void CollectEntropyDlg::paintEvent(QPaintEvent *event){
@@ -35,4 +47,40 @@ void CollectEntropyDlg::paintEvent(QPaintEvent *event){
 	QPainter painter(this);
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
+}
+
+void CollectEntropyDlg::trackMousePos(){
+	QPoint p=QCursor::pos();
+	if(LastPos-p==QPoint(0,0))return;
+	LastPos=p;
+	if(MouseCounter==105 || ReseedDone)return;
+	MouseEntropyBuffer[2*MouseCounter]=p.x();
+	MouseEntropyBuffer[2*MouseCounter+1]=p.y();
+	MouseCounter++;
+	updateProgress();
+}
+
+void CollectEntropyDlg::keyReleaseEvent(QKeyEvent* event ){
+	QDialog::keyReleaseEvent(event);
+	if(KeyCounter==105 || ReseedDone)return;
+	KeyEntropyBuffer[KeyCounter]=event->key();
+	KeyCounter++;
+	updateProgress();
+}
+
+void CollectEntropyDlg::updateProgress(){
+	if(4*KeyCounter+4*MouseCounter>=420){
+		progressBar->setValue(420);
+		ReseedDone=true;
+		
+	}
+	else
+		progressBar->setValue(4*KeyCounter+4*MouseCounter);	
+	
+}
+
+void CollectEntropyDlg::showEvent(QShowEvent* event){
+	if(!event->spontaneous()){
+		Animation->start();	
+	}	
 }

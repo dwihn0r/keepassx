@@ -24,15 +24,27 @@
 #include "ui_CollectEntropyDlg.h"
 #include <QDialog>
 #include <QPaintEvent>
+#include <QShowEvent>
 
 class CollectEntropyDlg: public QDialog, public Ui_CollectEntropyDlg{
 	Q_OBJECT
 	public:
 		CollectEntropyDlg(QWidget* parent);
+		~CollectEntropyDlg();
 		
 	private:
 		QPixmap BannerPixmap;
 		virtual void paintEvent(QPaintEvent* event);
+		virtual void keyReleaseEvent(QKeyEvent* event );
+		virtual void showEvent(QShowEvent* event);
+		void updateProgress();
+		unsigned char* KeyEntropyBuffer;
+		quint16* MouseEntropyBuffer;
+		int KeyCounter,MouseCounter;
+		QPoint LastPos;
+		bool ReseedDone;
+	private slots:
+		void trackMousePos();
 
 };
 

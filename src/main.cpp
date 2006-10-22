@@ -187,9 +187,11 @@ void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Wi
 	painter.drawRect(0,0,Width,50);
 	
 	QPixmap Icon(32,32);
-	Icon.fill(TextColor);
-	Icon.setAlphaChannel(*IconAlpha);
-	painter.drawPixmap(10,10,Icon);
+	if(IconAlpha){
+		Icon.fill(TextColor);
+		Icon.setAlphaChannel(*IconAlpha);
+		painter.drawPixmap(10,10,Icon);
+	}
 	
 	painter.setPen(QPen(TextColor));
 	painter.setFont(QFont(QApplication::font().family(),16));

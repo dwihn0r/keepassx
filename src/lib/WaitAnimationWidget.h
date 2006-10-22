@@ -28,8 +28,11 @@ class WaitAnimationWidget:public QWidget{
 	Q_OBJECT
 	public:
 		WaitAnimationWidget(QWidget* parent);
+		~WaitAnimationWidget();
 		void setSpeed(int rpm){speed=rpm;}
 		void setRefreshRate(int fps);
+		void start();
+		void stop();
 	public slots:
 		void refreshAnimation();
 	private:

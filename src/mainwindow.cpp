@@ -373,13 +373,15 @@ return true;
 
 void KeepassMainWindow::OnFileNewKdb(){
 	
-	/*
+	
 	//Test
+	/*
 	CollectEntropyDlg dialog(this);
 	dialog.exec();
 	return;
-	//~Test
 	*/
+	//~Test
+	
 	
 	CPasswordDialog dlg(this,true,false,true);
 	dlg.setWindowTitle("New Database");
