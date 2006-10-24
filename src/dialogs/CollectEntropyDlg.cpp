@@ -20,12 +20,13 @@
 
 #include <QPainter>
 #include <QCursor>
+#include "crypto/yarrow.h"
 #include "CollectEntropyDlg.h"
 #include "main.h"
 
 CollectEntropyDlg::CollectEntropyDlg(QWidget* parent):QDialog(parent){
 	setupUi(this);
-	createBanner(&BannerPixmap,NULL,tr("Entropy Collection"),width());
+	createBanner(&BannerPixmap,Icon_Key32x32,tr("Entropy Collection"),width());
 	KeyEntropyBuffer=new unsigned char[105];
 	MouseEntropyBuffer=new quint16[210];
 	KeyCounter=0;
@@ -72,7 +73,9 @@ void CollectEntropyDlg::updateProgress(){
 	if(4*KeyCounter+4*MouseCounter>=420){
 		progressBar->setValue(420);
 		ReseedDone=true;
-		
+		reseedStrongPool((quint8*)MouseEntropyBuffer,4*MouseCounter,KeyEntropyBuffer,KeyCounter);
+		Animation->stop();
+		stackedWidget->setCurrentIndex(1);
 	}
 	else
 		progressBar->setValue(4*KeyCounter+4*MouseCounter);	

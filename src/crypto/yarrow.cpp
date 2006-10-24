@@ -429,3 +429,32 @@ void strongRandomize(void* buffer, unsigned int length){
 	for(int i=0; i<length;i++)
 		yarrow256_random(&StrongCtx,1,(quint8*)buffer+i);	
 }
+
+void reseedStrongPool(quint8* buffer1,int l1,quint8* buffer2,int l2){
+	if(l1>l2*4){
+		yarrow256_update(&StrongCtx,0,100,100,buffer1);
+		buffer1=buffer1+100;
+		l1=l1-100;
+	}
+	else
+	{
+		yarrow256_update(&StrongCtx,1,100,25,buffer2);
+		buffer2=buffer2+25;
+		l2=l2-25;
+	}
+	
+	if(l1>l2*4){
+		yarrow256_update(&StrongCtx,0,160,160,buffer1);
+		l1-=160;
+		buffer1+=160;
+		yarrow256_update(&StrongCtx,1,l1,l1,buffer1);
+		yarrow256_update(&StrongCtx,1,4*l2,l2,buffer2);
+	}
+	else{
+		yarrow256_update(&StrongCtx,0,160,40,buffer2);
+		l2-=40;
+		buffer2+=40;
+		yarrow256_update(&StrongCtx,1,l2*4,l2,buffer2);
+		yarrow256_update(&StrongCtx,1,l1,l1,buffer1);
+	}
+}

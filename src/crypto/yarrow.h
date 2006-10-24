@@ -185,6 +185,7 @@ do {						\
 
 void initYarrow();
 void randomize(void* buffer, unsigned int length);
+void reseedStrongPool(quint8* buffer1,int l1,quint8* buffer2,int l2);
 
   
 #endif /* NETTLE_YARROW_COMPAT_H_INCLUDED */

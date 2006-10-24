@@ -77,8 +77,8 @@ void WaitAnimationWidget::paintEvent(QPaintEvent* event){
 	if(timer.isActive()){
 		QPainter painter(this);
 		painter.setRenderHints(QPainter::Antialiasing,true);
-		painter.setBrush(config.BannerTextColor);	
-		painter.setPen(config.BannerTextColor);
+		painter.setBrush(Qt::black);	
+		painter.setPen(Qt::black);
 		for(int i=0;i<6;i++){
 			float d=CircSizes[i]*5.0;
 			QRectF rect(CircPositions[i].x()-d/2,CircPositions[i].y()-d/2,d,d);
