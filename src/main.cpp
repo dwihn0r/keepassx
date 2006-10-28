@@ -30,6 +30,9 @@
 #include <QStyleFactory>
 #include <QProcess>
 #include <QLibraryInfo>
+#include <QPluginLoader>
+
+#include "plugins/interfaces/IFileDialog.h"
 
 #include "main.h"
 #include "PwmConfig.h"
@@ -87,6 +90,17 @@ QApplication* app=new QApplication(argc,argv);
 QString ArgFile,ArgCfg,ArgLang,IniFilename;
 parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
 AppDir=app->applicationDirPath();
+
+/*
+
+QPluginLoader gtkplugin("/home/tarek/Documents/KeePassX/src/plugins/gnome/libkeepassx-gnome.so");
+if(!gtkplugin.load())
+	qDebug(gtkplugin.errorString().toUtf8().data());
+IFileDialog* filedlg=qobject_cast<IFileDialog*>(gtkplugin.instance());
+showErrMsg(filedlg->openExistingFileDialog(NULL,"Hallo","/home",QStringList()<<"Images (*.jpg *.bmp *.jpeg *.png)"<<"Text Files (*.txt *.rtf)"<<"All files (*)"));
+return 0;
+*/
+
 //Load Config
 if(ArgCfg==QString()){
  if(!QDir(QDir::homePath()+"/.keepass").exists()){
