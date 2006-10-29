@@ -27,6 +27,7 @@
 #include <qlineedit.h>
 #include <QFileDialog>
 #include <QDir>
+#include <QPainter>
 #include "SettingsDlg.h"
 
 
@@ -34,14 +35,14 @@ CSettingsDlg::CSettingsDlg(QWidget* parent)
 : QDialog(parent,Qt::Dialog)
 {
 setupUi(this);
-connect(ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-connect(ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+connect(DialogButtons, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
+connect(DialogButtons, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
 connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
 connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCeckBoxOpenLastChanged(int)));
 connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
-createBanner(Banner,Icon_Settings32x32,tr("Settings"));
+createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
 CheckBox_OpenLast->setChecked(config.OpenLast);
 SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
 
@@ -73,6 +74,13 @@ CheckBox_RememberLastKey->setChecked(config.RememberLastKey);
 
 CSettingsDlg::~CSettingsDlg()
 {
+}
+
+void CSettingsDlg::paintEvent(QPaintEvent *event){
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
 void CSettingsDlg::OnOK()

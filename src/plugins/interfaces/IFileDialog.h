@@ -20,12 +20,20 @@
 #include <QString>
 #include <QStringList>
 
+#ifndef _I_FILE_DIALOG_H_
+#define _I_FILE_DIALOG_H_
+
 class IFileDialog{
 	public:
 		virtual ~IFileDialog(){}
 		virtual QString openExistingFileDialog(QWidget* parent,QString title,QString dir,
 							QStringList Filters)=0;
-		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
+		virtual QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,
 							QStringList Filters)=0;
+		
+		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
+							QStringList Filters,bool ShowOverwriteWarning=true)=0;
 };
 Q_DECLARE_INTERFACE(IFileDialog,"org.KeePassX.FileDialogInterface/1.0")
+		
+#endif

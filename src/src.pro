@@ -74,6 +74,7 @@ HEADERS += lib/IniReader.h \
            Database.h \
            lib/KdePlugin.h \
 	   lib/AutoType.h \
+	   lib/FileDialogs.h \
            global.h \
            main.h \
            lib/GroupView.h \
@@ -118,6 +119,7 @@ SOURCES += lib/IniReader.cpp \
            lib/KdePlugin.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
+	   lib/FileDialogs.cpp \
            crypto/arcfour.cpp \
            lib/KpFileIconProvider.cpp \
 	   crypto/aescrypt.c \

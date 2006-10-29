@@ -31,8 +31,10 @@ class GnomePlugin:public QObject,public IFileDialog{
 	public:
 		virtual QString openExistingFileDialog(QWidget* parent,QString title,QString dir,
 							QStringList Filters);
+		virtual QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,
+							QStringList Filters);		
 		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters);
+							QStringList Filters,bool ShowOverwriteWarning=true);
 	private:
 		GtkFileFilter** parseFilterStrings(const QStringList &Filters);
 };

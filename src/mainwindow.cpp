@@ -41,6 +41,7 @@
 #include "lib/random.h"
 #include "lib/IniReader.h"
 #include "lib/AutoType.h"
+#include "lib/FileDialogs.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 #include "export/Export_Txt.h"
@@ -440,15 +441,18 @@ void KeepassMainWindow::OnFileNewKxdb(){
 
 
 void KeepassMainWindow::OnFileOpen(){
-	QFileDialog FileDlg(this,tr("Open Database..."),QDir::homePath());
+	/*QFileDialog FileDlg(this,tr("Open Database..."),QDir::homePath());
 	FileDlg.setFilters(QStringList()<< tr("KeePass Databases (*.kdb)")<< tr("All Files (*)"));
 	FileDlg.setFileMode(QFileDialog::ExistingFile);
 	FileDlg.setAcceptMode(QFileDialog::AcceptOpen);
 	if(!FileDlg.exec())return;
-	if(!FileDlg.selectedFiles().size())return;
+	if(!FileDlg.selectedFiles().size())return;*/
+	QString filename=KpxFileDialogs::openExistingFile(this,"MainWindow_FileOpen",
+			tr("Open Database..."),QStringList()<<tr("KeePass Databases (*.kdb)")<< tr("All Files (*)"));
+	if(filename==QString())return;
 	if(FileOpen)
 		if(!closeDatabase())return;
-	openDatabase(FileDlg.selectedFiles()[0]);
+	openDatabase(filename);
 }
 
 void KeepassMainWindow::OnFileClose(){

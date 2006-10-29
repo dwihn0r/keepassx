@@ -1,7 +1,4 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>SettingsDialog</class>
  <widget class="QDialog" name="SettingsDialog" >
   <property name="geometry" >
@@ -30,554 +27,638 @@
   <property name="modal" >
    <bool>true</bool>
   </property>
-  <widget class="QPushButton" name="ButtonCancel" >
-   <property name="geometry" >
-    <rect>
-     <x>470</x>
-     <y>310</y>
-     <width>90</width>
-     <height>23</height>
-    </rect>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
    </property>
-   <property name="text" >
-    <string>&amp;Cancel</string>
+   <property name="spacing" >
+    <number>6</number>
    </property>
-   <property name="shortcut" >
-    <string>Alt+C</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Banner" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>570</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="pixmap" >
-    <pixmap/>
-   </property>
-   <property name="scaledContents" >
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="ButtonOK" >
-   <property name="geometry" >
-    <rect>
-     <x>380</x>
-     <y>310</y>
-     <width>80</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text" >
-    <string>O&amp;K</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+K</string>
-   </property>
-  </widget>
-  <widget class="QTabWidget" name="tabWidget4" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>550</width>
-     <height>241</height>
-    </rect>
-   </property>
-   <widget class="QWidget" name="tab" >
-    <attribute name="title" >
-     <string>Securi&amp;ty</string>
-    </attribute>
-    <widget class="QWidget" name="widget" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>531</width>
-       <height>25</height>
-      </rect>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
      </property>
-     <layout class="QHBoxLayout" >
-      <property name="margin" >
-       <number>0</number>
-      </property>
-      <property name="spacing" >
-       <number>6</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="textLabel1" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>5</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>50</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget4" >
+     <property name="currentIndex" >
+      <number>3</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>Securi&amp;ty</string>
+      </attribute>
+      <widget class="QWidget" name="widget" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>531</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
         </property>
-        <property name="text" >
-         <string>Clear clipboard after:</string>
+        <property name="spacing" >
+         <number>6</number>
         </property>
+        <item>
+         <widget class="QLabel" name="textLabel1" >
+          <property name="sizePolicy" >
+           <sizepolicy>
+            <hsizetype>4</hsizetype>
+            <vsizetype>5</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text" >
+           <string>Clear clipboard after:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="SpinBox_ClipboardTime" >
+          <property name="sizePolicy" >
+           <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>0</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="maximum" >
+           <number>50000</number>
+          </property>
+          <property name="value" >
+           <number>2</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="textLabel2" >
+          <property name="text" >
+           <string>Seconds</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>531</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Sh&amp;ow passwords in plain text by default</string>
+       </property>
+       <property name="shortcut" >
+        <string>Alt+O</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="TabPage" >
+      <attribute name="title" >
+       <string>Appea&amp;rance</string>
+      </attribute>
+      <widget class="QGroupBox" name="groupBox1" >
+       <property name="geometry" >
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>520</width>
+         <height>90</height>
+        </rect>
+       </property>
+       <property name="title" >
+        <string>Banner Color</string>
+       </property>
+       <widget class="QWidget" name="widget" >
+        <property name="geometry" >
+         <rect>
+          <x>11</x>
+          <y>20</y>
+          <width>501</width>
+          <height>62</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="textLabel2_2" >
+           <property name="text" >
+            <string>Text Color:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" >
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="2" >
+          <widget class="QPushButton" name="ButtonTextColor" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>0</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>16777215</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Change...</string>
+           </property>
+           <property name="shortcut" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4" >
+          <widget class="QLabel" name="textLabel3" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>5</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>Color 2:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QLabel" name="pixmColor1" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>0</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QLabel" name="pixmTextColor" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>0</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="pixmap" >
+            <pixmap/>
+           </property>
+           <property name="scaledContents" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6" >
+          <widget class="QPushButton" name="ButtonColor2" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>0</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>16777215</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Change...</string>
+           </property>
+           <property name="shortcut" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5" >
+          <widget class="QLabel" name="pixmColor2" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>0</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="pixmap" >
+            <pixmap/>
+           </property>
+           <property name="scaledContents" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" >
+          <widget class="QPushButton" name="ButtonColor1" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>0</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>16777215</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>C&amp;hange...</string>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+H</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" >
+          <widget class="QLabel" name="textLabel1_3" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>5</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>Color 1:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="7" >
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="SpinBox_ClipboardTime" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>5</hsizetype>
-          <vsizetype>0</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize" >
-         <size>
-          <width>80</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="maximum" >
-         <number>50000</number>
-        </property>
-        <property name="value" >
-         <number>2</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="textLabel2" >
-        <property name="text" >
-         <string>Seconds</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>531</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Sh&amp;ow passwords in plain text by default</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+O</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="TabPage" >
-    <attribute name="title" >
-     <string>Appea&amp;rance</string>
-    </attribute>
-    <widget class="QGroupBox" name="groupBox1" >
-     <property name="geometry" >
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>520</width>
-       <height>90</height>
-      </rect>
-     </property>
-     <property name="title" >
-      <string>Banner Color</string>
-     </property>
-     <widget class="QWidget" name="widget" >
-      <property name="geometry" >
-       <rect>
-        <x>11</x>
-        <y>20</y>
-        <width>501</width>
-        <height>62</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" >
+      </widget>
+      <widget class="QCheckBox" name="CheckBox_ExpandGroupTree" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>521</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Expand group tree when opening a database</string>
+       </property>
+       <property name="shortcut" >
+        <string>Alt+Ö</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="CheckBox_AlternatingRowColors" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>531</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Alternating Row Colors</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Intergration Plug-ins</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
        <property name="margin" >
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="spacing" >
         <number>6</number>
        </property>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="textLabel2_2" >
-         <property name="text" >
-          <string>Text Color:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType" >
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="2" >
-        <widget class="QPushButton" name="ButtonTextColor" >
+       <item>
+        <widget class="QLabel" name="label_3" >
          <property name="sizePolicy" >
           <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>0</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>16777215</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Change...</string>
-         </property>
-         <property name="shortcut" >
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4" >
-        <widget class="QLabel" name="textLabel3" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>5</vsizetype>
+           <hsizetype>5</hsizetype>
+           <vsizetype>4</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>Color 2:</string>
+          <string>&lt; some text about plugin usage ></string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1" >
-        <widget class="QLabel" name="pixmColor1" >
+       <item>
+        <widget class="QGroupBox" name="groupBox" >
          <property name="sizePolicy" >
           <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>0</vsizetype>
+           <hsizetype>5</hsizetype>
+           <vsizetype>1</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize" >
-          <size>
-           <width>23</width>
-           <height>23</height>
-          </size>
+         <property name="title" >
+          <string>Plug-Ins</string>
          </property>
-         <property name="maximumSize" >
-          <size>
-           <width>23</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string/>
-         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="radioButton" >
+            <property name="text" >
+             <string>None</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_2" >
+            <property name="text" >
+             <string>Gnome Desktop Integration (Gtk 2.x)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_3" >
+            <property name="text" >
+             <string>KDE 4 Desktop Integration</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="1" column="1" >
-        <widget class="QLabel" name="pixmTextColor" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>0</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
          </property>
-         <property name="minimumSize" >
-          <size>
-           <width>23</width>
-           <height>23</height>
-          </size>
+         <property name="spacing" >
+          <number>6</number>
          </property>
-         <property name="maximumSize" >
-          <size>
-           <width>23</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="pixmap" >
-          <pixmap/>
-         </property>
-         <property name="scaledContents" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6" >
-        <widget class="QPushButton" name="ButtonColor2" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>0</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>16777215</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>Change...</string>
-         </property>
-         <property name="shortcut" >
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5" >
-        <widget class="QLabel" name="pixmColor2" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>0</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>23</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>23</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="pixmap" >
-          <pixmap/>
-         </property>
-         <property name="scaledContents" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" >
-        <widget class="QPushButton" name="ButtonColor1" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>0</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="maximumSize" >
-          <size>
-           <width>16777215</width>
-           <height>23</height>
-          </size>
-         </property>
-         <property name="text" >
-          <string>C&amp;hange...</string>
-         </property>
-         <property name="shortcut" >
-          <string>Alt+H</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="textLabel1_3" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>4</hsizetype>
-           <vsizetype>5</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text" >
-          <string>Color 1:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="7" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType" >
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Button_ConfigureDesktopPlugin" >
+           <property name="text" >
+            <string>Configure...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
-    </widget>
-    <widget class="QCheckBox" name="CheckBox_ExpandGroupTree" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>521</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Expand group tree when opening a database</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="CheckBox_AlternatingRowColors" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>531</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Alternating Row Colors</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tab" >
-    <attribute name="title" >
-     <string>&amp;Other</string>
-    </attribute>
-    <widget class="QWidget" name="widget" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>531</width>
-       <height>58</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" >
-      <property name="margin" >
-       <number>0</number>
-      </property>
-      <property name="spacing" >
-       <number>6</number>
-      </property>
-      <item row="1" column="2" >
-       <widget class="QPushButton" name="Button_MountDirBrowse" >
-        <property name="minimumSize" >
-         <size>
-          <width>0</width>
-          <height>23</height>
-         </size>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Other</string>
+      </attribute>
+      <widget class="QWidget" name="widget" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>531</width>
+         <height>66</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" >
+        <property name="margin" >
+         <number>0</number>
         </property>
-        <property name="maximumSize" >
-         <size>
-          <width>16777215</width>
-          <height>23</height>
-         </size>
+        <property name="spacing" >
+         <number>6</number>
         </property>
-        <property name="text" >
-         <string>Browse...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
-         <string>Browser Command:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1" >
-       <widget class="QLineEdit" name="Edit_MountDir" />
-      </item>
-      <item row="0" column="1" >
-       <widget class="QLineEdit" name="Edit_BrowserCmd" />
-      </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
-         <string>Mounting Root:</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+        <item row="1" column="2" >
+         <widget class="QPushButton" name="Button_MountDirBrowse" >
+          <property name="minimumSize" >
+           <size>
+            <width>0</width>
+            <height>23</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>16777215</width>
+            <height>23</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Browse...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" >
+         <widget class="QLabel" name="label" >
+          <property name="text" >
+           <string>Browser Command:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" >
+         <widget class="QLineEdit" name="Edit_MountDir" />
+        </item>
+        <item row="0" column="1" >
+         <widget class="QLineEdit" name="Edit_BrowserCmd" />
+        </item>
+        <item row="1" column="0" >
+         <widget class="QLabel" name="label_2" >
+          <property name="text" >
+           <string>Mounting Root:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
+       <property name="geometry" >
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>501</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Remember last key type and location</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="CheckBox_OpenLast" >
+       <property name="geometry" >
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>521</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text" >
+        <string>Remember last opened file</string>
+       </property>
+       <property name="shortcut" >
+        <string>Alt+Ö</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
-    <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
-     <property name="geometry" >
-      <rect>
-       <x>30</x>
-       <y>40</y>
-       <width>501</width>
-       <height>22</height>
-      </rect>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="DialogButtons" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
      </property>
-     <property name="text" >
-      <string>Remember last key type and location</string>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
      </property>
     </widget>
-    <widget class="QCheckBox" name="CheckBox_OpenLast" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>521</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Remember last opened file</string>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Ö</string>
-     </property>
-    </widget>
-   </widget>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
  <tabstops>
   <tabstop>tabWidget4</tabstop>
   <tabstop>SpinBox_ClipboardTime</tabstop>
@@ -586,8 +667,6 @@
   <tabstop>ButtonTextColor</tabstop>
   <tabstop>ButtonColor2</tabstop>
   <tabstop>CheckBox_OpenLast</tabstop>
-  <tabstop>ButtonOK</tabstop>
-  <tabstop>ButtonCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

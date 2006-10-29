@@ -17,31 +17,37 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "main.h"
+
 #ifndef SETTINGSDLG_H
 #define SETTINGSDLG_H
+
+
+#include <QColor>
+#include <QPixmap>
+#include <QPaintEvent>
 #include "ui_SettingsDlg.h"
-#include <qcolor.h>
+#include "main.h"
 
 class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 {
-  Q_OBJECT
+	Q_OBJECT
+	public:
+		CSettingsDlg(QWidget* parent);
+		~CSettingsDlg();
 
-public:
-  CSettingsDlg(QWidget* parent /*, Qt::WFlags fl*/);
-  ~CSettingsDlg();
+	public slots:
+    	virtual void OnCancel();
+    	virtual void OnOK();
+    	virtual void OnTextColor();
+    	virtual void OnColor2();
+    	virtual void OnColor1();
+		void OnCeckBoxOpenLastChanged(int state);
+		void OnMountDirBrowse();
 
-public slots:
-    virtual void OnCancel();
-    virtual void OnOK();
-    virtual void OnTextColor();
-    virtual void OnColor2();
-    virtual void OnColor1();
-	void OnCeckBoxOpenLastChanged(int state);
-	void OnMountDirBrowse();
-
-private:
- QColor color1,color2,textcolor;
+	private:
+ 		virtual void paintEvent(QPaintEvent*);
+ 		QColor color1,color2,textcolor;
+ 		QPixmap BannerPixmap;
 };
 
 #endif
