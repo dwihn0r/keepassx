@@ -87,87 +87,103 @@ bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& Locale
 
 int main(int argc, char **argv)
 {
-QApplication* app=new QApplication(argc,argv);
-QString ArgFile,ArgCfg,ArgLang,IniFilename;
-parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
-AppDir=app->applicationDirPath();
+	QApplication* app=new QApplication(argc,argv);
+	QString ArgFile,ArgCfg,ArgLang,IniFilename;
+	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
+	AppDir=app->applicationDirPath();
+	
+	
+	//Load Config
+	if(ArgCfg==QString()){
+	if(!QDir(QDir::homePath()+"/.keepass").exists()){
+		QDir conf(QDir::homePath());
+		if(!conf.mkdir(".keepass")){
+			cout << "Warning: Could not create directory '~/.keepass'." << endl;}
+	}
+	IniFilename=QDir::homePath()+"/.keepass/config";
+	config.loadFromIni(IniFilename);
+	}
+	else{
+	IniFilename=ArgCfg;
+	config.loadFromIni(IniFilename);}
+	
+	
+	//Plugins
+	if(config.IntegrPlugin!=CConfig::NONE){
+		QString LibName="libkeepassx-";
+		if(config.IntegrPlugin==CConfig::KDE)
+			LibName+="kde.so";
+		else if(config.IntegrPlugin==CConfig::GNOME)
+			LibName+="gnome.so";
+		QPluginLoader plugin("/home/tarek/Documents/KeePassX/src/plugins/gnome/"+LibName);
+		if(!plugin.load()){
+			qDebug(plugin.errorString().toUtf8().data());
+			exit(1);
+		}
+		else{
+			IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugin.instance());
+			KpxFileDialogs::setPlugin(fdlg);		
+		}
+	}
+	
 
-
-
-QPluginLoader gtkplugin("/home/tarek/Documents/KeePassX/src/plugins/gnome/libkeepassx-gnome.so");
-KpxFileDialogs::setPlugin(qobject_cast<IFileDialog*>(gtkplugin.instance()));
-
-
-//Load Config
-if(ArgCfg==QString()){
- if(!QDir(QDir::homePath()+"/.keepass").exists()){
-	QDir conf(QDir::homePath());
-	if(!conf.mkdir(".keepass")){
-		cout << "Warning: Could not create directory '~/.keepass'." << endl;}
- }
- IniFilename=QDir::homePath()+"/.keepass/config";
- config.loadFromIni(IniFilename);
-}
-else{
- IniFilename=ArgCfg;
- config.loadFromIni(IniFilename);}
-
-//Internationalization
-QLocale loc;
-if(!ArgLang.size())
-	loc=QLocale::system();
-else
-	loc=QLocale(ArgLang);
-
-QTranslator* translator = NULL;
-QTranslator* qtTranslator=NULL;
-translator=new QTranslator;
-qtTranslator=new QTranslator;
-
-if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
-					<< app->applicationDirPath()+"/../share/keepass/i18n/" 
-					<< QDir::homePath()+"/.keepass/" ))
-	{app->installTranslator(translator);
-	 TrActive=true;}
-else{
-	if(loc.name()!="en_US")
-	qWarning(QString("Kpx: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
-			.arg(QLocale::languageToString(loc.language()))
-			.arg(QLocale::countryToString(loc.country())).toAscii());
-	delete translator;
-	TrActive=false;
-}
-
-if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
-					<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-					<< app->applicationDirPath()+"/../share/keepass/i18n/" 
-					<< QDir::homePath()+"/.keepass/" ))
-	app->installTranslator(qtTranslator);
-else{
-	if(loc.name()!="en_US")
-	qWarning(QString("Qt: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
-			.arg(QLocale::languageToString(loc.language()))
-			.arg(QLocale::countryToString(loc.country())).toAscii());
-	delete qtTranslator;
-}
-
-loadImages();
-initYarrow(); //init random number generator
-SecString::generateSessionKey();
-
-int r=0;
-KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile);
-if(mainWin->Start){
-	mainWin->show();
-	r=app->exec();
-}
-delete mainWin;
-if(!config.saveToIni(IniFilename))
-	QMessageBox::warning(NULL,QObject::tr("Warning"),
-			QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),
-			QObject::tr("OK"),"","",0.0);
-delete app;
-return r;
+	
+	//Internationalization
+	QLocale loc;
+	if(!ArgLang.size())
+		loc=QLocale::system();
+	else
+		loc=QLocale(ArgLang);
+	
+	QTranslator* translator = NULL;
+	QTranslator* qtTranslator=NULL;
+	translator=new QTranslator;
+	qtTranslator=new QTranslator;
+	
+	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
+						<< app->applicationDirPath()+"/../share/keepass/i18n/" 
+						<< QDir::homePath()+"/.keepass/" ))
+		{app->installTranslator(translator);
+		TrActive=true;}
+	else{
+		if(loc.name()!="en_US")
+		qWarning(QString("Kpx: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
+				.arg(QLocale::languageToString(loc.language()))
+				.arg(QLocale::countryToString(loc.country())).toAscii());
+		delete translator;
+		TrActive=false;
+	}
+	
+	if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
+						<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
+						<< app->applicationDirPath()+"/../share/keepass/i18n/" 
+						<< QDir::homePath()+"/.keepass/" ))
+		app->installTranslator(qtTranslator);
+	else{
+		if(loc.name()!="en_US")
+		qWarning(QString("Qt: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
+				.arg(QLocale::languageToString(loc.language()))
+				.arg(QLocale::countryToString(loc.country())).toAscii());
+		delete qtTranslator;
+	}
+	
+	loadImages();
+	initYarrow(); //init random number generator
+	SecString::generateSessionKey();
+	
+	int r=0;
+	KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile);
+	if(mainWin->Start){
+		mainWin->show();
+		r=app->exec();
+	}
+	delete mainWin;
+	if(!config.saveToIni(IniFilename))
+		QMessageBox::warning(NULL,QObject::tr("Warning"),
+				QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),
+				QObject::tr("OK"),"","",0.0);
+	delete app;
+	return r;
 }
 
 

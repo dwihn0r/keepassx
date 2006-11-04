@@ -24,8 +24,10 @@
 #include "lib/IniReader.h"
 #include <qcolor.h>
 
+		
 class CConfig{
 public:
+enum IntegrPluginType{NONE,KDE,GNOME};
  int TimeFormat;
  int ClipboardTimeOut;
  bool Toolbar;
@@ -59,7 +61,7 @@ public:
  tKeyType LastKeyType;
  QString LastKeyLocation;
  int ToolbarIconSize;
-
+ IntegrPluginType IntegrPlugin;
  bool loadFromIni(QString filename);
  bool saveToIni(QString filename);
 

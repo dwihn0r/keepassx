@@ -34,6 +34,8 @@ using namespace std;
 	#define DEFAULT_MOUNT_DIR "/"
 #endif
 
+#define CSTR(x)((const char*)x.toUtf8())
+
 
 bool CConfig::loadFromIni(QString filename){
 QString defaultSearchOptions = "001101111";
@@ -59,7 +61,6 @@ ParseBoolString(ini.GetValue("Options","PwGenOptions",(const char*)defaultPwGenO
 PwGenLength=ini.GetValueI("Options","PwGenLength",25);
 PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
 ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
-EnableKdePlugin=ini.GetValueB("KDE Plugin","Enabled",false);
 MainWinHeight=ini.GetValueI("UI","MainWinHeight",550);
 MainWinWidth=ini.GetValueI("UI","MainWinWidth",900);
 MainWinSplit1=ini.GetValueI("UI","MainWinSplit1",100);
@@ -73,6 +74,17 @@ LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
 LastKeyType=(tKeyType)ini.GetValueI("Options","LastKeyType",(int)PASSWORD);
 if(!OpenLast)RememberLastKey=false;
 ToolbarIconSize=ini.GetValueI("UI","ToolbarIconSize",16);
+
+QString IntegrPluginVal=ini.GetValue("Options","IntegrPlugin","None").c_str();
+if(IntegrPluginVal=="None")	
+	IntegrPlugin=NONE;
+else if(IntegrPluginVal=="Gnome")
+	IntegrPlugin=GNOME;
+else if(IntegrPluginVal=="KDE")
+	IntegrPlugin=KDE;
+else
+	IntegrPlugin=NONE;
+	
 return true;
 }
 
@@ -97,7 +109,6 @@ ini.SetValue("Options","PwGenOptions",(const char*)CreateBoolString(PwGenOptions
 ini.SetValueI("Options","PwGenLength",PwGenLength,true);
 ini.SetValue("Options","PwGenCharList",(const char*)PwGenCharList.toUtf8(),true);
 ini.SetValueB("Options","ExpandGroupTree",ExpandGroupTree,true);
-ini.SetValueB("KDE Plugin","Enabled",EnableKdePlugin,true);
 ini.SetValueI("UI","MainWinHeight",MainWinHeight);
 ini.SetValueI("UI","MainWinWidth",MainWinWidth);
 ini.SetValueI("UI","MainWinSplit1",MainWinSplit1);
@@ -114,6 +125,14 @@ else{
 	ini.SetValue("Options","LastKeyLocation","");
 	ini.SetValueI("Options","LastKeyType",0);}
 ini.SetValueI("UI","ToolbarIconSize",ToolbarIconSize,true);
+
+if(IntegrPlugin==NONE)
+	ini.SetValue("Options","IntegrPlugin","None");
+if(IntegrPlugin==GNOME)
+	ini.SetValue("Options","IntegrPlugin","Gnome");
+if(IntegrPlugin==KDE)
+	ini.SetValue("Options","IntegrPlugin","KDE");
+
 if(!ini.WriteFile())return false;
 else return true;
 }
