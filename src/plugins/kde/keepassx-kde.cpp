@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
- 
+#include <kapplication.h>
 #include <kfiledialog.h>
 #include "keepassx-kde.h"
 
@@ -35,3 +35,8 @@ QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QSt
 }
 
 QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool OverWriteWarn){return QString();}
+
+QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
+
+
+}

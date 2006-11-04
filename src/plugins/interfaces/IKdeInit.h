@@ -17,24 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#include <QString>
+#include <QStringList>
+#include <QApplication>
 
-#include <QtPlugin>
-#include <QObject>
-#include "../interfaces/IFileDialog.h"
-#include "../interfaces/IKdeInit.h"
+#ifndef _I_KDE_INIT_H_
+#define _I_KDE_INIT_H_
 
-
-class KdePlugin:public QObject,public IFileDialog,public IKdeInit{
-	Q_OBJECT
-	Q_INTERFACES(IFileDialog)
-	Q_INTERFACES(IKdeInit)
+class IKdeInit{
 	public:
-		virtual QString openExistingFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters);
-		virtual QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters);		
-		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters,bool ShowOverwriteWarning=true);
-		virtual QApplication* getMainAppObject(int argc, char** argv);
-	
+		virtual ~IKdeInit(){}
+		virtual QApplication* getMainAppObject(int argc, char** argv)=0;
 };
+Q_DECLARE_INTERFACE(IKdeInit,"org.KeePassX.KdeInitInterface/1.0")
+		
+#endif 

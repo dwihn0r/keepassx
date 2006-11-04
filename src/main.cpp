@@ -33,6 +33,7 @@
 #include <QPluginLoader>
 
 #include "plugins/interfaces/IFileDialog.h"
+#include "plugins/interfaces/IKdeInit.h"
 #include "lib/FileDialogs.h"
 
 #include "main.h"
@@ -87,11 +88,8 @@ bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& Locale
 
 int main(int argc, char **argv)
 {
-	QApplication* app=new QApplication(argc,argv);
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
-	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
-	AppDir=app->applicationDirPath();
-	
+	QApplication* app=NULL;
 	
 	//Load Config
 	if(ArgCfg==QString()){
@@ -117,14 +115,21 @@ int main(int argc, char **argv)
 			LibName+="gnome.so";
 		QPluginLoader plugin("/home/tarek/Documents/KeePassX/src/plugins/gnome/"+LibName);
 		if(!plugin.load()){
-			qDebug(plugin.errorString().toUtf8().data());
-			exit(1);
+			qWarning("Could not load destop integration plugin:");
+			qWarning(plugin.errorString().toUtf8().data());
 		}
 		else{
 			IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugin.instance());
-			KpxFileDialogs::setPlugin(fdlg);		
+			KpxFileDialogs::setPlugin(fdlg);
+			if(config.IntegrPlugin==CConfig::KDE){
+				IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
+				app=kdeinit->getMainAppObject(argc,argv);
+			}			
 		}
 	}
+	if(!app) QApplication* app=new QApplication(argc,argv);
+	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
+	AppDir=app->applicationDirPath();
 	
 
 	
