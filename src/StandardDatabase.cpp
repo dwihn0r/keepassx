@@ -421,6 +421,7 @@ SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
 
 if(memcmp(ContentsHash, FinalKey, 32) != 0){
 	error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
+	KeyError=true;
 	return false;}
 
 unsigned long tmp_id=0;
@@ -1359,7 +1360,16 @@ void StandardDatabase::create(){
 	RootGroup.Handle=NULL;
 	Algorithm=Rijndael_Cipher;
 	KeyTransfRounds=6000;
-	
+	KeyError=false;
+}
+
+bool StandardDatabase::isKeyError(){
+	if(KeyError){
+		KeyError=false;
+		return true;	
+	}
+	else
+		return false;
 }
 
 IEntryHandle* StandardDatabase::cloneEntry(const IEntryHandle* entry){

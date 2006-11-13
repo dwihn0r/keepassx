@@ -146,6 +146,7 @@ public:
 	virtual int numEntries();
 	virtual int numGroups();
 	virtual QString getError();
+	virtual bool isKeyError();
 	virtual void cleanUpHandles();
 	virtual QPixmap& icon(int index);
  	virtual int	numIcons();
@@ -227,6 +228,7 @@ private:
 	QList<QPixmap>CustomIcons;
 	QFile* File;
 	QString error;
+	bool KeyError;
 	QList<StdEntry> UnknownMetaStreams;
 	unsigned int KeyTransfRounds;
 	CryptAlgorithm Algorithm;

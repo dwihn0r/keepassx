@@ -336,11 +336,14 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	else{
 		StatusBarGeneral->setText(tr("Loading Failed"));
 		QString error=db->getError();
+		bool KeyError=auth->isKeyError();
 		delete db;
 		if(error==QString())error=tr("Unknown error while loading database.");
 		QMessageBox::critical(this,tr("Error")
 								,tr("The following error occured while opening the database:\n%1")
 								.arg(error),tr("OK"));
+		if(KeyError)
+			openDatabase(filename,IsAuto);
 	}
 	StatusBarGeneral->setText(tr("Ready"));
 }

@@ -394,6 +394,7 @@ public:
 		\return TRUE if the creation was successfull, otherwise FALSE.
 	*/
 	virtual bool createKeyFile(const QString& filename,int length=32, bool Hex=false)=0;
+	virtual bool isKeyError()=0;
 };
 
 class IKdbSettings{
