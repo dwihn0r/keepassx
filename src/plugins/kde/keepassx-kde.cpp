@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include <kapplication.h>
 #include <kfiledialog.h>
+#include <kcmdlineargs.h>
 #include "keepassx-kde.h"
 
 
@@ -37,6 +38,6 @@ QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QSt
 QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool OverWriteWarn){return QString();}
 
 QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
-
-
+	KCmdLineArgs::init(argc,argv,"keepassx","KeePassX","Cross Platform Password Manager","0.2.3");
+	return dynamic_cast<QApplication*>( new KApplication() );
 }
