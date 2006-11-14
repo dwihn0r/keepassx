@@ -23,12 +23,17 @@
 #define CSTR(x)(x.toUtf8().data())
 
 Q_EXPORT_PLUGIN2(keepassx_gnome, GnomePlugin)
+		
+bool GnomePlugin::init(int argc, char** argv){
+	int t_argc=argc;
+	char** t_argv=argv;
+	return gtk_init_check(&t_argc,&t_argv);	
+}
 
 QString GnomePlugin::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters){
 	unsigned int NumFilters=Filters.size();
 	GtkWidget *FileDlg;
 	QString filename;
-	gtk_init(0,0);
 	FileDlg=gtk_file_chooser_dialog_new(CSTR(title),NULL,
 				GTK_FILE_CHOOSER_ACTION_OPEN,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -68,7 +73,6 @@ GtkFileFilter** GnomePlugin::parseFilterStrings(const QStringList& filters){
 		for(p;p<filters[i].size();p++){
 			if(filters[i][p]==' ' || filters[i][p]==')'){
 				gtk_file_filter_add_pattern(f[i],CSTR(pattern));
-				qDebug(CSTR(pattern));
 				pattern=QString();
 			}
 			else{
@@ -84,7 +88,6 @@ QStringList GnomePlugin::openExistingFilesDialog(QWidget* parent,QString title,Q
 	unsigned int NumFilters=Filters.size();
 	GtkWidget *FileDlg;
 	QStringList filenames;
-	gtk_init(0,0);
 	FileDlg=gtk_file_chooser_dialog_new(CSTR(title),NULL,
 				GTK_FILE_CHOOSER_ACTION_OPEN,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,

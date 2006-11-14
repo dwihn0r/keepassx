@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "FileDialogs.h"
+#include <QDir>
 
 IFileDialog* KpxFileDialogs::iFileDialog=NULL;
 QtStandardFileDialogs DefaultQtDlgs;
@@ -31,7 +32,7 @@ QString KpxFileDialogs::openExistingFile(QWidget* Parent, const QString& Name, c
 {
 	if(iFileDialog==NULL)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
 	//Load History here!
-	return iFileDialog->openExistingFileDialog(Parent,Title,QString(),Filters);													  
+	return iFileDialog->openExistingFileDialog(Parent,Title,QDir::homePath(),Filters);													  
 												  
 }
 

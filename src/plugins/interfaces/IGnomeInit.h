@@ -17,26 +17,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#include <QString>
+#include <QStringList>
+#include <QApplication>
 
+#ifndef _I_GNOME_INIT_H_
+#define _I_GNOME_INIT_H_
 
-#include <gtk/gtk.h>
-#include <QtPlugin>
-#include <QObject>
-#include "../interfaces/IFileDialog.h"
-#include "../interfaces/IGnomeInit.h"
-
-class GnomePlugin:public QObject,public IFileDialog,public IGnomeInit{
-	Q_OBJECT
-	Q_INTERFACES(IFileDialog)
-	Q_INTERFACES(IGnomeInit)
+class IGnomeInit{
 	public:
-		virtual QString openExistingFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters);
-		virtual QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters);		
-		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters,bool ShowOverwriteWarning=true);
-		virtual bool init(int argc, char** argv);
-	private:
-		GtkFileFilter** parseFilterStrings(const QStringList &Filters);
+		virtual ~IGnomeInit(){}
+		virtual bool init(int argc, char** argv)=0;
 };
+Q_DECLARE_INTERFACE(IGnomeInit,"org.KeePassX.GnomeInitInterface/1.0")
+		
+#endif 

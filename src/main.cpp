@@ -34,6 +34,7 @@
 
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
+#include "plugins/interfaces/IGnomeInit.h"
 #include "lib/FileDialogs.h"
 
 #include "main.h"
@@ -124,7 +125,12 @@ int main(int argc, char **argv)
 			if(config.IntegrPlugin==CConfig::KDE){
 				IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
 				app=kdeinit->getMainAppObject(argc,argv);
-			}			
+			}
+			if(config.IntegrPlugin==CConfig::GNOME){
+				IGnomeInit* ginit=qobject_cast<IGnomeInit*>(plugin.instance());
+				if(!ginit->init(argc,argv))
+					KpxFileDialogs::setPlugin(NULL);
+			}				
 		}
 	}
 	if(!app) QApplication* app=new QApplication(argc,argv);

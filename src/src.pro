@@ -90,7 +90,9 @@ HEADERS += lib/IniReader.h \
 	   crypto/sha256.h \
 	   crypto/yarrow.h \
 	   lib/WaitAnimationWidget.h \
-	   plugins/interfaces/IFileDialog.h
+	   plugins/interfaces/IFileDialog.h \
+	   plugins/interfaces/IKdeInit.h \
+	   plugins/interfaces/IGnomeInit.h
 SOURCES += lib/IniReader.cpp \
            lib/UrlLabel.cpp \
            main.cpp \
