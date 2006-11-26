@@ -52,9 +52,12 @@ using namespace std;
 	#include <X11/keysymdef.h>
 	#include <X11/Xlib.h>
 #endif
-
+					 
+#define CSTR(x)(x.toUtf8().data())
+					 
 CConfig config;
 QString  AppDir;
+QString PluginLoadError;
 bool TrActive;
 QPixmap *Icon_Key32x32;
 QPixmap *Icon_Settings32x32;
@@ -81,6 +84,7 @@ QIcon *Icon_Configure;
 QIcon *Icon_Help;
 QIcon *Icon_AutoType;
 QIcon *Icon_Swap;
+QIcon *Icon_FileSaveDisabled;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
@@ -91,6 +95,9 @@ int main(int argc, char **argv)
 {
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
 	QApplication* app=NULL;
+	
+	AppDir=QString(argv[0]);
+	AppDir.truncate(AppDir.lastIndexOf("/"));
 	
 	//Load Config
 	if(ArgCfg==QString()){
@@ -114,29 +121,39 @@ int main(int argc, char **argv)
 			LibName+="kde.so";
 		else if(config.IntegrPlugin==CConfig::GNOME)
 			LibName+="gnome.so";
-		QPluginLoader plugin("/home/tarek/Documents/KeePassX/src/plugins/gnome/"+LibName);
-		if(!plugin.load()){
-			qWarning("Could not load destop integration plugin:");
-			qWarning(plugin.errorString().toUtf8().data());
+		QString filename=findPlugin(LibName);
+		if(filename!=QString()){
+			QPluginLoader plugin(filename);
+			if(!plugin.load()){
+				PluginLoadError=plugin.errorString();
+				qWarning("Could not load desktop integration plugin:");
+				qWarning(CSTR(PluginLoadError));
+			}
+			else{
+				IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugin.instance());
+				KpxFileDialogs::setPlugin(fdlg);
+				if(config.IntegrPlugin==CConfig::KDE){
+					IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
+					app=kdeinit->getMainAppObject(argc,argv);
+					if(!app)PluginLoadError=QObject::tr("Initialization failed.");
+				}
+				if(config.IntegrPlugin==CConfig::GNOME){
+					IGnomeInit* ginit=qobject_cast<IGnomeInit*>(plugin.instance());
+					if(!ginit->init(argc,argv)){
+						KpxFileDialogs::setPlugin(NULL);
+						qWarning("GtkIntegrPlugin: Gtk init failed.");
+						PluginLoadError=QObject::tr("Initialization failed.");
+					}
+				}				
+			}
 		}
 		else{
-			IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugin.instance());
-			KpxFileDialogs::setPlugin(fdlg);
-			if(config.IntegrPlugin==CConfig::KDE){
-				IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
-				app=kdeinit->getMainAppObject(argc,argv);
-			}
-			if(config.IntegrPlugin==CConfig::GNOME){
-				IGnomeInit* ginit=qobject_cast<IGnomeInit*>(plugin.instance());
-				if(!ginit->init(argc,argv))
-					KpxFileDialogs::setPlugin(NULL);
-			}				
+			qWarning(CSTR(QString("Could not load desktop integration plugin: File '%1' not found.").arg(LibName)));
+			PluginLoadError=QObject::tr("Could not locate library file.");	
 		}
 	}
 	if(!app) QApplication* app=new QApplication(argc,argv);
-	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
-	AppDir=app->applicationDirPath();
-	
+	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);	
 
 	
 	//Internationalization
@@ -257,9 +274,9 @@ QString decodeFileError(QFile::FileError Code){
 }
 
 void openBrowser(QString url){
-QStringList args=config.OpenUrlCommand.arg(url).split(' ');
-QString cmd=args.takeFirst();
-QProcess::startDetached(cmd,args);
+	QStringList args=config.OpenUrlCommand.arg(url).split(' ');
+	QString cmd=args.takeFirst();
+	QProcess::startDetached(cmd,args);
 }
 
 
@@ -333,6 +350,7 @@ _loadIcon(Icon_Configure,"/actions/configure.png");
 _loadIcon(Icon_Help,"/actions/help.png");
 _loadIcon(Icon_AutoType,"/apps/ktouch.png");
 _loadIcon(Icon_Swap,"/actions/reload.png");
+Icon_FileSaveDisabled=new QIcon(Icon_FileSave->pixmap(32,32,QIcon::Disabled));
 }
 
 
@@ -392,4 +410,14 @@ int i=1;
 
 void showErrMsg(const QString& msg,QWidget* parent){
 QMessageBox::critical(parent,QObject::tr("Error"),msg,QObject::tr("OK"));
+}
+
+QString findPlugin(const QString& filename){
+	QFileInfo info;
+	
+	info.setFile(AppDir+"/../lib/keepassx/"+filename);
+	if(info.exists() && info.isFile())
+		return AppDir+"/../lib/keepassx/"+filename;
+	
+	return QString();
 }

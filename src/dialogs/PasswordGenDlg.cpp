@@ -18,214 +18,257 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <fstream>
-#include <qspinbox.h>
-#include <qmessagebox.h>
-#include "PasswordGenDlg.h"
-#include <qradiobutton.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
+#include <QSpinBox>
+#include <QMessageBox>
+#include <QRadioButton>
+#include <QLineEdit>
+#include <QCheckBox>
 #include <QProgressBar>
+#include <QPainter>
+#include <math.h>
+#include "PasswordGenDlg.h"
+#include "CollectEntropyDlg.h"
+#include "crypto/yarrow.h"
+#include "PwmConfig.h"
 
-CGenPwDialog::CGenPwDialog(QWidget* parent,  bool modal, Qt::WFlags fl)
+bool CGenPwDialog::EntropyCollected=false;
+		
+CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 : QDialog(parent,fl)
 {
-setupUi(this);
-createBanner(Banner,Icon_Key32x32,tr("Password Generator"));
-Radio_1->setChecked(true);
-Edit_chars->setDisabled(true);
-connect(ButtonGenerate,SIGNAL(clicked()),this,SLOT(OnGeneratePw()));
-connect(Radio_1,SIGNAL(toggled(bool)),this,SLOT(OnRadio1StateChanged(bool)));
-connect(Radio_2,SIGNAL(toggled(bool)),this,SLOT(OnRadio2StateChanged(bool)));
-connect(Button_Cancel,SIGNAL(clicked()),this,SLOT(OnCancel()));
-connect(ButtonOK,SIGNAL(clicked()),this,SLOT(OnAccept()));
+	setupUi(this);
+	createBanner(&BannerPixmap,Icon_Key32x32,tr("Password Generator"),width());
+	
+	connect(ButtonGenerate,SIGNAL(clicked()),this,SLOT(OnGeneratePw()));
+	connect(Radio_1,SIGNAL(toggled(bool)),this,SLOT(OnRadio1StateChanged(bool)));
+	connect(Radio_2,SIGNAL(toggled(bool)),this,SLOT(OnRadio2StateChanged(bool)));
+	connect(DialogButtons,SIGNAL(rejected()),this,SLOT(OnCancel()));
+	connect(DialogButtons,SIGNAL(accepted()),this,SLOT(OnAccept()));
+	connect(checkBox1,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(checkBox2,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(checkBox3,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(checkBox4,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(checkBox5,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(checkBox6,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(checkBox7,SIGNAL(clicked()),this,SLOT(estimateQuality()));
+	connect(Spin_Num,SIGNAL(valueChanged(int)),this,SLOT(estimateQuality()));
+	connect(Check_CollectEntropy,SIGNAL(stateChanged(int)),this,SLOT(OnCollectEntropyChanged(int)));
+	connect(Edit_chars,SIGNAL(textChanged(const QString&)),this,SLOT(estimateQuality()));
+	
+	if(StandAloneMode){
+		AcceptButton=DialogButtons->addButton(tr("Accept"),QDialogButtonBox::AcceptRole);
+		AcceptButton->setDisabled(true);
+		DialogButtons->addButton(QDialogButtonBox::Cancel);		
+	}
+	else{
+		DialogButtons->addButton(tr("OK"),QDialogButtonBox::AcceptRole);
+		AcceptButton=NULL;
+	}
+	
+	Radio_1->setChecked(config.PwGenOptions[0]);
+	Edit_chars->setDisabled(config.PwGenOptions[0]);
+	checkBox1->setChecked(config.PwGenOptions[1]);
+	checkBox2->setChecked(config.PwGenOptions[2]);
+	checkBox3->setChecked(config.PwGenOptions[3]);
+	checkBox4->setChecked(config.PwGenOptions[4]);
+	checkBox5->setChecked(config.PwGenOptions[5]);
+	checkBox6->setChecked(config.PwGenOptions[6]);
+	checkBox7->setChecked(config.PwGenOptions[7]);
+	Check_CollectEntropy->setChecked(config.PwGenOptions[8]);
+	Check_CollectOncePerSession->setChecked(config.PwGenOptions[9]);
+	estimateQuality();
+
 }
 
-CGenPwDialog::~CGenPwDialog()
-{
+CGenPwDialog::~CGenPwDialog(){
+	config.PwGenOptions[0]=Radio_1->isChecked();
+	config.PwGenOptions[1]=checkBox1->isChecked();
+	config.PwGenOptions[2]=checkBox2->isChecked();
+	config.PwGenOptions[3]=checkBox3->isChecked();
+	config.PwGenOptions[4]=checkBox4->isChecked();
+	config.PwGenOptions[5]=checkBox5->isChecked();
+	config.PwGenOptions[6]=checkBox6->isChecked();
+	config.PwGenOptions[7]=checkBox7->isChecked();
+	config.PwGenOptions[8]=Check_CollectEntropy->isChecked();
+	config.PwGenOptions[9]=Check_CollectOncePerSession->isChecked();
+}
+
+void CGenPwDialog::paintEvent(QPaintEvent *event){
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
 void CGenPwDialog::OnRadio1StateChanged(bool state)
 {
-if(state){
- Radio_2->setChecked(false);
- checkBox1->setEnabled(true);
- checkBox2->setEnabled(true);
- checkBox3->setEnabled(true);
- checkBox4->setEnabled(true);
- checkBox5->setEnabled(true);
- checkBox6->setEnabled(true);
- checkBox7->setEnabled(true);
- checkBox8->setEnabled(true);
-}else{
- if(Radio_2->isChecked()==false)Radio_2->setChecked(true);
- checkBox1->setDisabled(true);
- checkBox2->setDisabled(true);
- checkBox3->setDisabled(true);
- checkBox4->setDisabled(true);
- checkBox5->setDisabled(true);
- checkBox6->setDisabled(true);
- checkBox7->setDisabled(true);
- checkBox8->setDisabled(true);
+	if(state){
+		checkBox1->setEnabled(true);
+		checkBox2->setEnabled(true);
+		checkBox3->setEnabled(true);
+		checkBox4->setEnabled(true);
+		checkBox5->setEnabled(true);
+		checkBox6->setEnabled(true);
+		checkBox7->setEnabled(true);
+	}else{
+		checkBox1->setDisabled(true);
+		checkBox2->setDisabled(true);
+		checkBox3->setDisabled(true);
+		checkBox4->setDisabled(true);
+		checkBox5->setDisabled(true);
+		checkBox6->setDisabled(true);
+		checkBox7->setDisabled(true);
+	}
+	estimateQuality();
 }
 
-}
-
-void CGenPwDialog::OnRadio2StateChanged(bool state)
-{
-if(state){
- Radio_1->setChecked(false);
- Edit_chars->setEnabled(true);
-}
-else{
-  if(Radio_1->isChecked()==false)Radio_1->setChecked(true);
- Edit_chars->setDisabled(true);
-}
-
+void CGenPwDialog::OnRadio2StateChanged(bool state){
+	if(state)
+		Edit_chars->setEnabled(true);
+	else
+		Edit_chars->setDisabled(true);
+	
+	estimateQuality();
 }
 
 void CGenPwDialog::OnGeneratePw()
 {
-/*
--------
- ASCII
--------
-"A...Z" 65...90
-"a...z" 97...122
-"0...9" 48...57
-Special Charakters 33...47;58...64;91...96;123...126
-"-" 45
-"_" 95
-ANSI >127
-*/
-
-int num=0;
-char assoctable[255];
-
-if(Radio_1->isChecked()){
-if(checkBox1->isChecked()){
-num+=AddToAssoctable(assoctable,65,90,num);
+	/*-------------------------------------------------------
+	     ASCII
+	  -------------------------------------------------------
+	  "A...Z" 65...90
+	  "a...z" 97...122
+	  "0...9" 48...57
+	  Special Charakters 33...47; 58...64; 91...96; 123...126
+	  "-" 45
+	  "_" 95
+	  -------------------------------------------------------
+	*/
+	
+	int num=0;
+	char assoctable[255];
+	
+	if(Radio_1->isChecked()){
+		if(checkBox1->isChecked())
+			num+=AddToAssoctable(assoctable,65,90,num);		
+		if(checkBox2->isChecked())
+			num+=AddToAssoctable(assoctable,97,122,num);		
+		if(checkBox3->isChecked())
+			num+=AddToAssoctable(assoctable,48,57,num);		
+		if(checkBox4->isChecked()){
+			num+=AddToAssoctable(assoctable,33,47,num);
+			num+=AddToAssoctable(assoctable,58,64,num);
+			num+=AddToAssoctable(assoctable,91,96,num);
+			num+=AddToAssoctable(assoctable,123,126,num);}
+		if(checkBox5->isChecked())
+			num+=AddToAssoctable(assoctable,32,32,num);
+		if(checkBox6->isChecked() && !checkBox4->isChecked())
+			num+=AddToAssoctable(assoctable,45,45,num);
+		if(checkBox7->isChecked() && !checkBox4->isChecked())
+			num+=AddToAssoctable(assoctable,95,95,num);
+	}
+	else{
+		QString str=Edit_chars->text();
+		for(int i=0;i<str.length();i++){
+			assoctable[i]=str[i].toAscii();
+			num++;	
+		}
+	}
+	if(num==0){
+		if(Radio_2->isChecked())
+			QMessageBox::information(this,tr("Notice"),tr("You need to enter at least one character"),tr("OK"));
+		else
+			QMessageBox::information(this,tr("Notice"),QString::fromUtf8("You need to select at least one character group."),"OK");
+		return;
+	}
+	int length=Spin_Num->value();
+	char* buffer=new char[length+1];
+	buffer[length]=0;
+	
+	if(Check_CollectEntropy->isChecked()){
+		if((Check_CollectOncePerSession->isChecked() && !EntropyCollected) || !Check_CollectOncePerSession->isChecked()){
+			CollectEntropyDlg dlg(this);
+			dlg.exec();
+			EntropyCollected=true;
+		}
+	}
+	
+	unsigned char tmp;	
+	for(int i=0;i<length;i++){
+	
+		do randomize(&tmp,1);		
+		while(!trim(tmp,num));
+		
+		buffer[i]=assoctable[tmp];
+	}
+	
+	Edit_dest->setText(buffer);
+	delete [] buffer;
+	if(AcceptButton)AcceptButton->setEnabled(true);
 }
-
-if(checkBox2->isChecked()){
-num+=AddToAssoctable(assoctable,97,122,num);
-}
-
-if(checkBox3->isChecked()){
-num+=AddToAssoctable(assoctable,48,57,num);
-}
-
-if(checkBox4->isChecked()){
-num+=AddToAssoctable(assoctable,33,47,num);
-num+=AddToAssoctable(assoctable,58,64,num);
-num+=AddToAssoctable(assoctable,91,96,num);
-num+=AddToAssoctable(assoctable,123,126,num);
-}
-
-if(checkBox5->isChecked()){
-num+=AddToAssoctable(assoctable,32,32,num);
-}
-
-
-if(checkBox6->isChecked() && !checkBox4->isChecked()){
-num+=AddToAssoctable(assoctable,45,45,num);
-}
-
-if(checkBox7->isChecked() && !checkBox4->isChecked()){
-num+=AddToAssoctable(assoctable,95,95,num);
-}
-
-if(checkBox8->isChecked()){
-num+=AddToAssoctable(assoctable,128,255,num);
-}
-}else
-{
-QString str=Edit_chars->text();
-int i=0;
-while(str.length()>0){
-assoctable[i]=((QChar)str[0]).toAscii();
-str.remove(str[0]);
-i++;
-num++;
-}
-}
-if(num==0){
-if(Radio_2->isChecked())QMessageBox::information(this,tr("Notice"),tr("You need to enter at least one character"),tr("OK"));
-else QMessageBox::information(this,tr("Notice"),QString::fromUtf8("You need to select at least one character group."),"OK");
-return;
-}
-int length=Spin_Num->value();
-char* buffer=new char[length+1];
-buffer[length]=0;
-FILE *dev_random;
-if(Check_strongrandom->isChecked()){
-dev_random = fopen("/dev/random","r");}
-else
-{dev_random = fopen("/dev/urandom","r");}
-
-if (dev_random==NULL){
-QMessageBox::critical(this,tr("Error"),tr("Could not open '/dev/random' or '/dev/urandom'."),tr("OK"));
-return;
-}
-unsigned char tmp;
-
-for(int i=0;i<length;i++){
-
-do{
-fread(&tmp,1,1,dev_random);
-}while(trim(tmp,num)==false);
-
-buffer[i]=assoctable[tmp];
-}
-
-Edit_dest->setText(buffer);
-delete [] buffer;
-fclose(dev_random);
-
-int bits;
-if(checkBox8->isChecked())bits=length*8;
-else bits=length*7;
-Label_Bits->setText(tr("%1 Bit").arg(QString::number(bits)));
-if(bits>128)bits=128;
-Progress_Quali->setRange(0,128);
-Progress_Quali->setValue(bits);
-Progress_Quali->setTextVisible(false);
-}
-
+	
 int CGenPwDialog::AddToAssoctable(char* table,int start,int end,int pos){
-for(int i=start;i<=end;i++){
-table[pos]=i;
-pos++;
-}
-return (end-start)+1;
+	for(int i=start;i<=end;i++){
+	table[pos]=i;
+	pos++;
+	}
+	return (end-start)+1;
 }
 
 
 bool CGenPwDialog::trim(unsigned char &x, int r){
-if(x<r)return true;
-if(256%r!=0)return false;
-x=x-(x/r)*r;
-return true;
+	if(x<r)
+		return true;
+	if(256%r!=0)
+		return false;
+	x=x-(x/r)*r;
+	return true;
+}
+
+void CGenPwDialog::estimateQuality(){
+	int num=0;
+	if(Radio_1->isChecked()){
+		if(checkBox1->isChecked())
+			num+=26;	
+		if(checkBox2->isChecked())
+			num+=26;		
+		if(checkBox3->isChecked())
+			num+=10;	
+		if(checkBox4->isChecked())
+			num+=32;
+		if(checkBox5->isChecked())
+			num++;
+		if(checkBox6->isChecked() && !checkBox4->isChecked())
+			num++;
+		if(checkBox7->isChecked() && !checkBox4->isChecked())
+			num++;
+	}
+	else
+		num=Edit_chars->text().length();
+	
+	float bits=0;
+	if(num)bits=log(num)/log(2);
+	bits=bits*((float)Spin_Num->value());
+	Progress_Quali->setFormat(tr("%1 Bits").arg((int)bits));
+	Progress_Quali->update();
+	if(bits>128)bits=128;
+	Progress_Quali->setValue(bits);
 }
 
 void CGenPwDialog::OnAccept()
 {
-((CEditEntryDlg*)parentWidget())->Edit_Password->setText(Edit_dest->text());
-((CEditEntryDlg*)parentWidget())->Edit_Password_w->setText(Edit_dest->text());
-((CEditEntryDlg*)parentWidget())->ModFlag=true;
-close();
+	done(1);
 }
 
 void CGenPwDialog::OnCancel()
 {
-close();
+	done(0);
 }
 
+void CGenPwDialog::OnCollectEntropyChanged(int state){
+	if(state==Qt::Checked)
+		Check_CollectOncePerSession->setDisabled(false);
+	else
+		Check_CollectOncePerSession->setDisabled(true);
 
-
-
-/*$SPECIALIZATION$*/
-
-
-//#include "genpwdialog.moc"
-
+}

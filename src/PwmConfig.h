@@ -57,7 +57,7 @@ enum IntegrPluginType{NONE,KDE,GNOME};
  bool ShowStatusbar;
  bool AlternatingRowColors;
  QString MountDir;
- bool RememberLastKey; //location and type, not the key itself
+ bool RememberLastKey;
  tKeyType LastKeyType;
  QString LastKeyLocation;
  int ToolbarIconSize;

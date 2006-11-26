@@ -80,9 +80,6 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="format" >
-      <string>%v Bits</string>
-     </property>
     </widget>
    </item>
    <item>

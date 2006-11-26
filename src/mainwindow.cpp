@@ -327,7 +327,7 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	if(db->load(filename)==true){
 		if(config.OpenLast)config.LastFile=filename;
-		setWindowTitle(tr("KeePassX - %1").arg(filename));
+		setWindowTitle(tr("%1 - KeePassX").arg(filename));
 		GroupView->createItems();
 		EntryView->showGroup(NULL);
 		setStateFileOpen(true);
@@ -350,28 +350,28 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 
 
 bool KeepassMainWindow::closeDatabase(){
-Q_ASSERT(FileOpen);
-Q_ASSERT(db!=NULL);
-if(ModFlag){
- int r=QMessageBox::question(this,tr("Save modified file?"),
-				  tr("The current file was modified. Do you want\nto save the changes?"),tr("Yes"),tr("No"),tr("Cancel"),2,2);
- if(r==2)return false;	//Abbrechen
- if(r==0)				//Ja (Datei speichern)
- if(!OnFileSave())return false;
-}
-db->close();
-delete db;
-db=NULL;
-EntryView->db=NULL;
-EntryView->clear();
-EntryView->Items.clear();
-GroupView->db=NULL;
-GroupView->clear();
-GroupView->Items.clear();
-SearchResults.clear();
-setStateFileOpen(false);
-setWindowTitle("KeePassX Password Manager");
-return true;
+	Q_ASSERT(FileOpen);
+	Q_ASSERT(db!=NULL);
+	if(ModFlag){
+	int r=QMessageBox::question(this,tr("Save modified file?"),
+					tr("The current file was modified. Do you want\nto save the changes?"),tr("Yes"),tr("No"),tr("Cancel"),2,2);
+	if(r==2)return false;	//Abbrechen
+	if(r==0)				//Ja (Datei speichern)
+	if(!OnFileSave())return false;
+	}
+	db->close();
+	delete db;
+	db=NULL;
+	EntryView->db=NULL;
+	EntryView->clear();
+	EntryView->Items.clear();
+	GroupView->db=NULL;
+	GroupView->clear();
+	GroupView->Items.clear();
+	SearchResults.clear();
+	setStateFileOpen(false);
+	setWindowTitle("KeePassX Password Manager");
+	return true;
 }
 
 
@@ -422,7 +422,7 @@ void KeepassMainWindow::OnFileNewKdb(){
 				return;			
 			}
 		}		
-		setWindowTitle(tr("KeePassX - %1").arg(tr("[new]")));
+		setWindowTitle(tr("%1 - KeePassX").arg(tr("[new]")));
 		GroupView->db=db;
 		EntryView->db=db;		
 		GroupView->createItems();
@@ -501,9 +501,15 @@ else{
 
 
 void KeepassMainWindow::setStateFileModified(bool mod){
-if(!FileOpen)return;
-ModFlag=mod;
-FileSaveAction->setEnabled(mod);
+	if(!FileOpen){
+		FileSaveAction->setIcon(*Icon_FileSave);
+		return;
+	}
+	ModFlag=mod;
+	if(mod)
+		FileSaveAction->setIcon(*Icon_FileSave);
+	else
+		FileSaveAction->setIcon(*Icon_FileSaveDisabled);
 }
 
 void KeepassMainWindow::setStateGroupSelected(SelectionState s){
@@ -535,32 +541,33 @@ void KeepassMainWindow::setStateGroupSelected(SelectionState s){
 }
 
 void KeepassMainWindow::updateDetailView(){
-if(EntryView->selectedItems().size()!=1){
- DetailView->setPlainText("");
- return;}
-
-IEntryHandle* entry=((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle;
-QString str=tr("<B>Group: </B>%1  <B>Title: </B>%2  <B>Username: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Password: </B>%5  <B>Creation: </B>%6  <B>Last Change: </B>%7  <B>LastAccess: </B>%8  <B>Expires: </B>%9");
-
-str=str.arg(entry->group()->title()).arg(entry->title());
-
-if(!config.ListView_HideUsernames)	str=str.arg(entry->username());
-else str=str.arg("****");
-
-str=str.arg(entry->url());
-
-if(!config.ListView_HidePasswords){	
-	SecString password=entry->password();
-	password.unlock();
-	str=str.arg(password.string());
-}
-else str=str.arg("****");
-
-str=str	.arg(entry->creation().toString(Qt::LocalDate))
-		.arg(entry->lastMod().toString(Qt::LocalDate))
-		.arg(entry->lastAccess().toString(Qt::LocalDate))
-		.arg(entry->expire().toString(Qt::LocalDate));
-DetailView->setHtml(str);
+	if(EntryView->selectedItems().size()!=1){
+		DetailView->setPlainText("");
+		return;
+	}
+	
+	IEntryHandle* entry=((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle;
+	QString str=tr("<B>Group: </B>%1 <B>Title: </B>%2  <B>Username: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Password: </B>%5  <B>Creation: </B>%6  <B>Last Change: </B>%7  <B>LastAccess: </B>%8  <B>Expires: </B>%9");
+	
+	str=str.arg(entry->group()->title()).arg(entry->title());
+	
+	if(!config.ListView_HideUsernames)	str=str.arg(entry->username());
+	else str=str.arg("****");
+	
+	str=str.arg(entry->url());
+	
+	if(!config.ListView_HidePasswords){	
+		SecString password=entry->password();
+		password.unlock();
+		str=str.arg(password.string());
+	}
+	else str=str.arg("****");
+	
+	str=str	.arg(entry->creation().toString(Qt::LocalDate))
+			.arg(entry->lastMod().toString(Qt::LocalDate))
+			.arg(entry->lastAccess().toString(Qt::LocalDate))
+			.arg(entry->expire().toString(Qt::LocalDate));
+	DetailView->setHtml(str);
 }
 
 
@@ -663,19 +670,16 @@ return true;
 }
 
 bool KeepassMainWindow::OnFileSaveAs(){
-	QFileDialog FileDlg(this,tr("Save Database As..."),QDir::homePath());
-	FileDlg.setFilters(QStringList()<< tr("KeePass Databases (*.kdb)")<< tr("All Files (*)"));
-	FileDlg.setFileMode(QFileDialog::AnyFile);
-	FileDlg.setAcceptMode(QFileDialog::AcceptSave);
-	if(!FileDlg.exec())return false;
-	if(!FileDlg.selectedFiles().size())return false;
-	if(!db->changeFile(FileDlg.selectedFiles()[0])){
+	QString filename=KpxFileDialogs::saveFile(this,"MainWindow_FileSave",
+			tr("Save Database..."),QStringList()<<tr("KeePass Databases (*.kdb)")<< tr("All Files (*)"));
+	if(filename==QString())return false;
+	if(!db->changeFile(filename)){
 		showErrMsg(tr("File could not be saved.\n%1").arg(db->getError()));
 		db->changeFile(QString());
-		setWindowTitle(tr("KeePassX - [unsaved]").arg(FileDlg.selectedFiles()[0]));
+		setWindowTitle(tr("KeePassX - [unsaved]").arg(filename));
 		return false;		
 	}
-	setWindowTitle(tr("KeePassX - %1").arg(FileDlg.selectedFiles()[0]));
+	setWindowTitle(tr("%1 - KeePassX").arg(filename));
 	return OnFileSave();
 }
 
@@ -950,7 +954,7 @@ void KeepassMainWindow::OnGroupSelectionChanged(IGroupHandle* group){
 }
 
 void KeepassMainWindow::OnEntryChanged(SelectionState Selection){
-	//DETAIL-VIEW!!!
+	updateDetailView();
 	setStateEntrySelected(Selection);
 }
 

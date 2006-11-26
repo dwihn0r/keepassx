@@ -113,4 +113,26 @@ QStringList GnomePlugin::openExistingFilesDialog(QWidget* parent,QString title,Q
 	return filenames;
 }
 
-QString GnomePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool OverWriteWarn){return QString();}
+QString GnomePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool OverWriteWarn){
+	unsigned int NumFilters=Filters.size();
+	GtkWidget *FileDlg;
+	QString filename;
+	FileDlg=gtk_file_chooser_dialog_new(CSTR(title),NULL,
+				GTK_FILE_CHOOSER_ACTION_SAVE,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+				NULL);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(FileDlg),CSTR(dir));
+	gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(FileDlg),OverWriteWarn);
+	GtkFileFilter** filters=parseFilterStrings(Filters);
+	
+	for(int i=0;i<NumFilters;i++){		
+		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(FileDlg),filters[i]);
+	}
+	if (gtk_dialog_run(GTK_DIALOG(FileDlg)) == GTK_RESPONSE_ACCEPT){
+		char* filename_cstring=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(FileDlg));
+		filename = QString::fromUtf8(filename_cstring);
+		g_free(filename_cstring);
+ 	}	
+	gtk_widget_destroy(FileDlg);
+	return filename;}

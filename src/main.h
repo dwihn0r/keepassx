@@ -39,6 +39,8 @@ void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Wi
 void openBrowser(QString url);
 void showErrMsg(const QString& msg,QWidget* parent=NULL);
 QString decodeFileError(QFile::FileError Code);
+QString findPlugin(const QString& filename);
+extern QString PluginLoadError;
 
 extern CConfig  config;
 extern QString  AppDir;
@@ -69,6 +71,7 @@ extern QIcon *Icon_Configure;
 extern QIcon *Icon_Help;
 extern QIcon *Icon_AutoType;
 extern QIcon *Icon_Swap;
+extern QIcon *Icon_FileSaveDisabled;
 
 
 #endif

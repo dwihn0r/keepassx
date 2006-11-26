@@ -41,13 +41,20 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
     	virtual void OnTextColor();
     	virtual void OnColor2();
     	virtual void OnColor1();
+		void OnOtherButton(QAbstractButton*);
+		void OnIntPluginNone(bool);
+		void OnIntPluginGnome(bool);
+		void OnIntPluginKde(bool);
 		void OnCeckBoxOpenLastChanged(int state);
 		void OnMountDirBrowse();
 
 	private:
  		virtual void paintEvent(QPaintEvent*);
+		void apply();
  		QColor color1,color2,textcolor;
  		QPixmap BannerPixmap;
+		static bool PluginsModified;
+
 };
 
 #endif

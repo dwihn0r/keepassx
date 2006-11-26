@@ -17,39 +17,40 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "main.h"
+ 
 #ifndef GENPWDIALOG_H
 #define GENPWDIALOG_H
+
+#include <QPixmap>
+#include <QPaintEvent>
 #include "ui_PasswordGenDlg.h"
+#include "main.h"
 #include "EditEntryDlg.h"
-
-
 
 class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 {
-  Q_OBJECT
-private:
-int AddToAssoctable(char* table,int start,int end,int pos);
-bool trim(unsigned char &value,int range);
-public:
-  CGenPwDialog(QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
-  ~CGenPwDialog();
-  /*$PUBLIC_FUNCTIONS$*/
-
-public slots:
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
-public slots:
-    virtual void OnGeneratePw();
-    virtual void OnRadio2StateChanged(bool);
-    virtual void OnRadio1StateChanged(bool);
-    virtual void OnCancel();
-    virtual void OnAccept();
+	Q_OBJECT
+	public:
+		CGenPwDialog(QWidget* parent = 0, bool ShowCancelButton=false, Qt::WFlags fl = 0 );
+		~CGenPwDialog();
+				
+	private:
+		int AddToAssoctable(char* table,int start,int end,int pos);
+		bool trim(unsigned char &value,int range);
+		virtual void paintEvent(QPaintEvent* event);
+		QPixmap BannerPixmap;	
+		static bool EntropyCollected;
+		QPushButton* AcceptButton;
+	
+	private slots:
+		virtual void OnGeneratePw();
+		virtual void OnRadio2StateChanged(bool);
+		virtual void OnRadio1StateChanged(bool);
+		virtual void OnCancel();
+		virtual void OnAccept();
+		void estimateQuality();
+		void OnCollectEntropyChanged(int);
+		
 };
 
 #endif

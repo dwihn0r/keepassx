@@ -13,4 +13,4 @@ HEADERS += keepassx-gnome.h
 SOURCES += keepassx-gnome.cpp
 MOC_DIR = build/moc
 OBJECTS_DIR = build/
-LIBS+=-lgtk-x11-2.0
+LIBS+=-L /opt/gnome/lib -lgtk-x11-2.0

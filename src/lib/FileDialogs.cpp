@@ -73,8 +73,11 @@ QStringList QtStandardFileDialogs::openExistingFilesDialog(QWidget* parent,QStri
 }
 
 QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool ShowOverwriteWarning){
-	
-	return QString();
-	
-	
+	QFileDialog FileDlg(parent,title,dir);
+	FileDlg.setFilters(Filters);
+	FileDlg.setFileMode(QFileDialog::AnyFile);
+	FileDlg.setAcceptMode(QFileDialog::AcceptSave);
+	FileDlg.setConfirmOverwrite(ShowOverwriteWarning);
+	if(!FileDlg.exec())return QString();
+	return FileDlg.selectedFiles()[0];	
 }

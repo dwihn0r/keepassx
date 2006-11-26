@@ -30,46 +30,70 @@
 #include <QPainter>
 #include "SettingsDlg.h"
 
+bool CSettingsDlg::PluginsModified=false;
 
-CSettingsDlg::CSettingsDlg(QWidget* parent)
-: QDialog(parent,Qt::Dialog)
+
+CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 {
-setupUi(this);
-connect(DialogButtons, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
-connect(DialogButtons, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
-connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
-connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
-connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
-connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCeckBoxOpenLastChanged(int)));
-connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
-createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
-CheckBox_OpenLast->setChecked(config.OpenLast);
-SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
+	setupUi(this);
+	connect(DialogButtons, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
+	connect(DialogButtons, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
+	connect(DialogButtons, SIGNAL( clicked(QAbstractButton*)), this, SLOT(OnOtherButton(QAbstractButton*)));
+	
+	connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
+	connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
+	connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
+	connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCeckBoxOpenLastChanged(int)));
+	connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
+	
+	connect(Radio_IntPlugin_None,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginNone(bool)));
+	connect(Radio_IntPlugin_Gnome,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginGnome(bool)));
+	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde(bool)));
 
-QPixmap *pxt=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
-pxt->fill(config.BannerTextColor);
-pixmTextColor->clear();
-pixmTextColor->setPixmap(*pxt);
-
-QPixmap *px1=new QPixmap(pixmColor1->width(),pixmColor1->height());
-px1->fill(config.BannerColor1);
-pixmColor1->clear();
-pixmColor1->setPixmap(*px1);
-
-QPixmap *px2=new QPixmap(pixmColor2->width(),pixmColor2->height());
-px2->fill(config.BannerColor2);
-pixmColor2->clear();
-pixmColor2->setPixmap(*px2);
-
-color1=config.BannerColor1;
-color2=config.BannerColor2;
-textcolor=config.BannerTextColor;
-CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
-Edit_BrowserCmd->setText(config.OpenUrlCommand);
-CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
-CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
-Edit_MountDir->setText(config.MountDir);
-CheckBox_RememberLastKey->setChecked(config.RememberLastKey);
+	
+	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
+	CheckBox_OpenLast->setChecked(config.OpenLast);
+	SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
+	
+	QPixmap *pxt=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
+	pxt->fill(config.BannerTextColor);
+	pixmTextColor->clear();
+	pixmTextColor->setPixmap(*pxt);
+	
+	QPixmap *px1=new QPixmap(pixmColor1->width(),pixmColor1->height());
+	px1->fill(config.BannerColor1);
+	pixmColor1->clear();
+	pixmColor1->setPixmap(*px1);
+	
+	QPixmap *px2=new QPixmap(pixmColor2->width(),pixmColor2->height());
+	px2->fill(config.BannerColor2);
+	pixmColor2->clear();
+	pixmColor2->setPixmap(*px2);
+	
+	color1=config.BannerColor1;
+	color2=config.BannerColor2;
+	textcolor=config.BannerTextColor;
+	CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
+	Edit_BrowserCmd->setText(config.OpenUrlCommand);
+	CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
+	CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
+	Edit_MountDir->setText(config.MountDir);
+	CheckBox_RememberLastKey->setChecked(config.RememberLastKey);
+	
+	if(PluginLoadError==QString())
+		Label_IntPlugin_Error->hide();
+	else
+		Label_IntPlugin_Error->setText(QString("<html><p style='font-weight:600; color:#8b0000;'>%1</p></body></html>")
+				.arg(tr("Error: %1")).arg(PluginLoadError));	
+	
+	switch(config.IntegrPlugin){
+		case CConfig::NONE: Radio_IntPlugin_None->setChecked(true); break;
+		case CConfig::GNOME: Radio_IntPlugin_Gnome->setChecked(true); break;
+		case CConfig::KDE: Radio_IntPlugin_Kde->setChecked(true); break;		
+	}
+	
+	if(!PluginsModified)
+		Label_IntPlugin_Info->hide();
 }
 
 CSettingsDlg::~CSettingsDlg()
@@ -83,71 +107,83 @@ void CSettingsDlg::paintEvent(QPaintEvent *event){
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
+
+
 void CSettingsDlg::OnOK()
 {
-config.OpenLast=CheckBox_OpenLast->isChecked();
-config.ClipboardTimeOut=SpinBox_ClipboardTime->value();
-config.BannerColor1=color1;
-config.BannerColor2=color2;
-config.BannerTextColor=textcolor;
-config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
-config.OpenUrlCommand=Edit_BrowserCmd->text();
-config.ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
-config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
-config.MountDir=Edit_MountDir->text();
-if(config.MountDir!="" && config.MountDir.right(1)!="/")
-	config.MountDir+="/";
-config.RememberLastKey=CheckBox_RememberLastKey->isChecked();
-close();
+	apply();
+	close();
 }
 
 void CSettingsDlg::OnCancel()
 {
-close();
+	close();
+}
+
+void CSettingsDlg::OnOtherButton(QAbstractButton* button){
+	if(DialogButtons->buttonRole(button)==QDialogButtonBox::ApplyRole)			
+		apply();
+}
+
+void CSettingsDlg::apply(){
+	config.OpenLast=CheckBox_OpenLast->isChecked();
+	config.ClipboardTimeOut=SpinBox_ClipboardTime->value();
+	config.BannerColor1=color1;
+	config.BannerColor2=color2;
+	config.BannerTextColor=textcolor;
+	config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
+	config.OpenUrlCommand=Edit_BrowserCmd->text();
+	config.ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
+	config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
+	config.MountDir=Edit_MountDir->text();
+	if(config.MountDir!="" && config.MountDir.right(1)!="/")
+		config.MountDir+="/";
+	config.RememberLastKey=CheckBox_RememberLastKey->isChecked();
+	PluginsModified=Label_IntPlugin_Info->isVisible();
+	if(Radio_IntPlugin_None->isChecked())config.IntegrPlugin=CConfig::NONE;
+	if(Radio_IntPlugin_Gnome->isChecked())config.IntegrPlugin=CConfig::GNOME;	
+	if(Radio_IntPlugin_Kde->isChecked())config.IntegrPlugin=CConfig::KDE;
 }
 
 void CSettingsDlg::OnTextColor()
 {
-
-QColor c=QColorDialog::getColor(textcolor,this);
-if(c.isValid()){
-textcolor=c;
-QPixmap *px=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
-px->fill(c);
-pixmTextColor->clear();
-pixmTextColor->setPixmap(*px);
-//NICHT VERGESSEN!
-//createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
-}
-	
+	QColor c=QColorDialog::getColor(textcolor,this);
+	if(c.isValid()){
+	textcolor=c;
+	QPixmap *px=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
+	px->fill(c);
+	pixmTextColor->clear();
+	pixmTextColor->setPixmap(*px);
+	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width(),color1,color2,textcolor);
+	}	
 }
 
 
 void CSettingsDlg::OnColor2()
 {
-QColor c=QColorDialog::getColor(color2,this);
-if(c.isValid()){
-color2=c;
-QPixmap *px=new QPixmap(pixmColor2->width(),pixmColor2->height());
-px->fill(c);
-pixmColor2->clear();
-pixmColor2->setPixmap(*px);
-//createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
-}
+	QColor c=QColorDialog::getColor(color2,this);
+	if(c.isValid()){
+		color2=c;
+		QPixmap *px=new QPixmap(pixmColor2->width(),pixmColor2->height());
+		px->fill(c);
+		pixmColor2->clear();
+		pixmColor2->setPixmap(*px);
+		createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width(),color1,color2,textcolor);
+	}
 }
 
 
 void CSettingsDlg::OnColor1()
 {
-QColor c=QColorDialog::getColor(color1,this);
-if(c.isValid()){
-color1=c;
-QPixmap *px=new QPixmap(pixmColor1->width(),pixmColor1->height());
-px->fill(c);
-pixmColor1->clear();
-pixmColor1->setPixmap(*px);
-//createBanner(Banner,Icon_Settings32x32,tr("Settings"),color1,color2,textcolor);
-}
+	QColor c=QColorDialog::getColor(color1,this);
+	if(c.isValid()){
+		color1=c;
+		QPixmap *px=new QPixmap(pixmColor1->width(),pixmColor1->height());
+		px->fill(c);
+		pixmColor1->clear();
+		pixmColor1->setPixmap(*px);
+		createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width(),color1,color2,textcolor);
+	}
 }
 
 void CSettingsDlg::OnCeckBoxOpenLastChanged(int state){
@@ -164,4 +200,16 @@ QString dir=QFileDialog::getExistingDirectory(this,tr("Select a directory..."),"
 if(dir!=QString()){
 	Edit_MountDir->setText(dir);
 }
+}
+
+void CSettingsDlg::OnIntPluginNone(bool toggled){
+	Label_IntPlugin_Info->show();
+}
+
+void CSettingsDlg::OnIntPluginGnome(bool toggled){
+	Label_IntPlugin_Info->show();
+}
+
+void CSettingsDlg::OnIntPluginKde(bool toggled){
+	Label_IntPlugin_Info->show();
 }

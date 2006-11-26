@@ -52,8 +52,17 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget4" >
+     <property name="whatsThis" >
+      <string>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</string>
+     </property>
+     <property name="tabPosition" >
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape" >
+      <enum>QTabWidget::Rounded</enum>
+     </property>
      <property name="currentIndex" >
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -453,7 +462,7 @@
      </widget>
      <widget class="QWidget" name="tab_2" >
       <attribute name="title" >
-       <string>Intergration Plug-ins</string>
+       <string>Desktop Integration</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="margin" >
@@ -463,7 +472,7 @@
         <number>6</number>
        </property>
        <item>
-        <widget class="QLabel" name="label_3" >
+        <widget class="QLabel" name="Label_IntPlugin_Error" >
          <property name="sizePolicy" >
           <sizepolicy>
            <hsizetype>5</hsizetype>
@@ -473,7 +482,10 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>&lt; some text about plugin usage ></string>
+          <string/>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -498,21 +510,21 @@
            <number>6</number>
           </property>
           <item>
-           <widget class="QRadioButton" name="radioButton" >
+           <widget class="QRadioButton" name="Radio_IntPlugin_None" >
             <property name="text" >
              <string>None</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_2" >
+           <widget class="QRadioButton" name="Radio_IntPlugin_Gnome" >
             <property name="text" >
              <string>Gnome Desktop Integration (Gtk 2.x)</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_3" >
+           <widget class="QRadioButton" name="Radio_IntPlugin_Kde" >
             <property name="text" >
              <string>KDE 4 Desktop Integration</string>
             </property>
@@ -530,6 +542,13 @@
           <number>6</number>
          </property>
          <item>
+          <widget class="QLabel" name="Label_IntPlugin_Info" >
+           <property name="text" >
+            <string>You need to restart the program before the changes take effect.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -543,13 +562,26 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="Button_ConfigureDesktopPlugin" >
+          <widget class="QPushButton" name="IntPlugin_Button_Config" >
            <property name="text" >
             <string>Configure...</string>
            </property>
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -652,7 +684,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
