@@ -54,8 +54,9 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	connect(Spin_Num,SIGNAL(valueChanged(int)),this,SLOT(estimateQuality()));
 	connect(Check_CollectEntropy,SIGNAL(stateChanged(int)),this,SLOT(OnCollectEntropyChanged(int)));
 	connect(Edit_chars,SIGNAL(textChanged(const QString&)),this,SLOT(estimateQuality()));
+	connect(Edit_chars,SIGNAL(textEdited(const QString&)),this,SLOT(OnCharsChanged(const QString&)));
 	
-	if(StandAloneMode){
+	if(!StandAloneMode){
 		AcceptButton=DialogButtons->addButton(tr("Accept"),QDialogButtonBox::AcceptRole);
 		AcceptButton->setDisabled(true);
 		DialogButtons->addButton(QDialogButtonBox::Cancel);		
@@ -66,7 +67,7 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	}
 	
 	Radio_1->setChecked(config.PwGenOptions[0]);
-	Edit_chars->setDisabled(config.PwGenOptions[0]);
+	Radio_2->setChecked(!config.PwGenOptions[0]);
 	checkBox1->setChecked(config.PwGenOptions[1]);
 	checkBox2->setChecked(config.PwGenOptions[2]);
 	checkBox3->setChecked(config.PwGenOptions[3]);
@@ -76,8 +77,8 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	checkBox7->setChecked(config.PwGenOptions[7]);
 	Check_CollectEntropy->setChecked(config.PwGenOptions[8]);
 	Check_CollectOncePerSession->setChecked(config.PwGenOptions[9]);
-	estimateQuality();
-
+	OnRadio1StateChanged(config.PwGenOptions[0]);
+	OnRadio2StateChanged(!config.PwGenOptions[0]);
 }
 
 CGenPwDialog::~CGenPwDialog(){
@@ -253,6 +254,30 @@ void CGenPwDialog::estimateQuality(){
 	Progress_Quali->update();
 	if(bits>128)bits=128;
 	Progress_Quali->setValue(bits);
+}
+
+void CGenPwDialog::OnCharsChanged(const QString& str){
+	bool multiple=false;
+	for(int i=0;i<str.size();i++){
+		int count=0;
+		for(int j=0;j<str.size();j++){
+			if(str[i]==str[j]){
+				if(count){multiple=true; break;}
+				else {count++;}
+			}
+		}
+		if(multiple)break;		
+	}
+	if(!multiple)return;
+	
+	QString newstr;
+	for(int i=0;i<str.size();i++){
+		if(!newstr.count(str[i])){
+			newstr+=str[i];			
+		}		
+	}
+	Edit_chars->setText(newstr);
+		
 }
 
 void CGenPwDialog::OnAccept()

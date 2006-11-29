@@ -140,20 +140,6 @@
     <addaction name="EditSearchAction" />
     <addaction name="EditGroupSearchAction" />
    </widget>
-   <widget class="QMenu" name="menuExtras" >
-    <property name="title" >
-     <string>E&amp;xtras</string>
-    </property>
-    <addaction name="ExtrasSettingsAction" />
-   </widget>
-   <widget class="QMenu" name="menuHilfe" >
-    <property name="title" >
-     <string>&amp;Help</string>
-    </property>
-    <addaction name="HelpHandbookAction" />
-    <addaction name="separator" />
-    <addaction name="HelpAboutAction" />
-   </widget>
    <widget class="QMenu" name="menuDatei" >
     <property name="title" >
      <string>&amp;File</string>
@@ -222,6 +208,21 @@
     <addaction name="separator" />
     <addaction name="menuSpalten" />
     <addaction name="menuTool_Button_Sizes" />
+   </widget>
+   <widget class="QMenu" name="menuHilfe" >
+    <property name="title" >
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="HelpHandbookAction" />
+    <addaction name="separator" />
+    <addaction name="HelpAboutAction" />
+   </widget>
+   <widget class="QMenu" name="menuExtras" >
+    <property name="title" >
+     <string>E&amp;xtras</string>
+    </property>
+    <addaction name="ExtrasSettingsAction" />
+    <addaction name="ExtrasPasswordGenAction" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -518,6 +519,11 @@
   <action name="FileNewAction" >
    <property name="text" >
     <string>New Database...</string>
+   </property>
+  </action>
+  <action name="ExtrasPasswordGenAction" >
+   <property name="text" >
+    <string>Password Generator...</string>
    </property>
   </action>
  </widget>

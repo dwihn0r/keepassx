@@ -31,7 +31,7 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 {
 	Q_OBJECT
 	public:
-		CGenPwDialog(QWidget* parent = 0, bool ShowCancelButton=false, Qt::WFlags fl = 0 );
+		CGenPwDialog(QWidget* parent, bool StandAloneMode, Qt::WFlags fl = 0 );
 		~CGenPwDialog();
 				
 	private:
@@ -50,6 +50,7 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 		virtual void OnAccept();
 		void estimateQuality();
 		void OnCollectEntropyChanged(int);
+		void OnCharsChanged(const QString& str);
 		
 };
 

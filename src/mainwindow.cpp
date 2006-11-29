@@ -135,6 +135,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
 	
 	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
+	connect(ExtrasPasswordGenAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasPasswordGen()));
 	
 	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
@@ -248,6 +249,10 @@ void KeepassMainWindow::setupMenus(){
 		case 22: ViewToolButtonSize22Action->setChecked(true); break;
 		case 28: ViewToolButtonSize28Action->setChecked(true); break;
 	}
+	
+	SysTrayMenu = new QMenu(tr("KeePassX"),this);
+	SysTrayMenu->addAction(FileExitAction);
+	SysTray->setContextMenu(SysTrayMenu);
 	
 	//FileNewMenu->setShortcut(tr("Ctrl+N"));
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
@@ -988,5 +993,11 @@ toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
 }
 
 void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason reason){
-	this->show();
+	if(reason!=QSystemTrayIcon::Context)
+		this->show();
+}
+
+void KeepassMainWindow::OnExtrasPasswordGen(){
+	CGenPwDialog dlg(this,true);
+	dlg.exec();	
 }

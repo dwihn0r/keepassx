@@ -361,7 +361,7 @@ void CEditEntryDlg::OnDeleteAttachment()
 
 void CEditEntryDlg::OnButtonGenPw()
 {
-	CGenPwDialog dlg(this,true);
+	CGenPwDialog dlg(this,false);
 	if(dlg.exec()){
 		Edit_Password->setText(dlg.Edit_dest->text());	
 		Edit_Password_w->setText(dlg.Edit_dest->text());	

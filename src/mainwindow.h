@@ -85,6 +85,7 @@ private slots:
    void OnUsernPasswVisibilityChanged(bool hide);
    void OnFileModified();
    void OnExtrasSettings();
+   void OnExtrasPasswordGen();
    void OnHelpAbout();
    void OnHelpHandbook();
    void OnItemExpanded(QTreeWidgetItem*);
@@ -118,6 +119,7 @@ private:
  QToolBar* toolBar;
  QSystemTrayIcon* SysTray;
  QAction* ViewShowToolbarAction;
+ QMenu* SysTrayMenu;
  bool ShutingDown;
 protected:
  void closeEvent(QCloseEvent* event);
