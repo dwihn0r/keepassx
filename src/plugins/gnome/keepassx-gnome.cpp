@@ -39,6 +39,7 @@ QString GnomePlugin::openExistingFileDialog(QWidget* parent,QString title,QStrin
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 				NULL);
+
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(FileDlg),CSTR(dir));
 	GtkFileFilter** filters=parseFilterStrings(Filters);
 	

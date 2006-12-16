@@ -62,7 +62,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -209,7 +209,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_4" >
+        <widget class="QCheckBox" name="checkBox_EnableBookmarkMenu" >
          <property name="text" >
           <string>Enable bookmark menu</string>
          </property>
@@ -276,7 +276,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="Radion_GroupTreeDoNothing" >
+            <widget class="QRadioButton" name="Radio_GroupTreeDoNothing" >
              <property name="text" >
               <string>Do not expand any item</string>
              </property>
@@ -827,7 +827,7 @@
      </widget>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
-       <string>&amp;Other</string>
+       <string>Advanced</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="margin" >
@@ -863,6 +863,13 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_2" >
+           <property name="text" >
+            <string>Mounting Root:</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0" >
           <widget class="QLabel" name="label" >
            <property name="text" >
@@ -875,13 +882,6 @@
          </item>
          <item row="0" column="1" >
           <widget class="QLineEdit" name="Edit_BrowserCmd" />
-         </item>
-         <item row="1" column="0" >
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Mounting Root:</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>

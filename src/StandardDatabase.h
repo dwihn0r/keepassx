@@ -139,6 +139,7 @@ public:
 			QList<StdGroup*> Childs;
 			QList<StdEntry*> Entries;
 	};
+	virtual ~StandardDatabase(){};
 	virtual bool load(QString identifier);
 	virtual bool save();
 	virtual bool close();
@@ -155,8 +156,8 @@ public:
 	virtual void replaceIcon(int index,const QPixmap& icon);
 	virtual int builtinIcons(){return 62;};
 	virtual void authByPwd(QString& password);
-	virtual bool authByFile(QFile& file);
-	virtual bool authByFileAndPwd(QString& password, QFile& file);
+	virtual bool authByFile(QString& filename);
+	virtual bool authByFileAndPwd(QString& password, QString& filename);
 	virtual bool createKeyFile(const QString& filename,int length=32, bool Hex=false);
 	virtual QList<IEntryHandle*> search(IGroupHandle* Group,const QString& SearchString, bool CaseSensitve, bool RegExp,bool Recursive,bool* Fields);
 	virtual QFile* file(){return File;}

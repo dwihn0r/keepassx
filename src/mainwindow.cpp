@@ -73,7 +73,6 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
   statusBar()->addWidget(StatusBarGeneral,15);
   statusBar()->addWidget(StatusBarSelection,85);
   statusBar()->setVisible(config.ShowStatusbar);
-//  Group::UI_ExpandByDefault=config.ExpandGroupTree;
   setupConnections();
   FileOpen=false;
   if(ArgFile!=QString())
@@ -202,7 +201,8 @@ void KeepassMainWindow::setupIcons(){
 	EditAutoTypeAction->setIcon(*Icon_AutoType);
 	HelpHandbookAction->setIcon(*Icon_Help);
 	SysTray->setIcon(QIcon(AppDir+"/../share/keepass/icons/keepassx_large.png"));
-	SysTray->show();
+	if(config.ShowSysTrayIcon)
+		SysTray->show();	
 }
 
 void KeepassMainWindow::setupMenus(){
@@ -285,49 +285,19 @@ void KeepassMainWindow::setupDatabaseConnections(IDatabase* DB){
 
 
 void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
-	Q_ASSERT(!FileOpen);
 	if(!IsAuto){
 		config.LastKeyLocation=QString();
 		config.LastKeyType=PASSWORD;}
-	CPasswordDialog PasswordDlg(this,true,IsAuto);
+	db=dynamic_cast<IDatabase*>(new StandardDatabase());
+	CPasswordDialog PasswordDlg(this,db,IsAuto,false);
 	PasswordDlg.setWindowTitle(filename);
-	int r=PasswordDlg.exec();
-	if(r==0) return;
-	if(r==2) {Start=false; return;}
-	Q_ASSERT(r==1);
-	db = new StandardDatabase();
+	switch(PasswordDlg.exec()){
+		case 0: return;
+		case 2: Start=false; return;
+	}
 	GroupView->db=db;
 	EntryView->db=db;
-	setupDatabaseConnections(db);
-	IFilePasswordAuth* auth=dynamic_cast<IFilePasswordAuth*>(db);
-	if(PasswordDlg.password!="" && PasswordDlg.keyfile=="")
-		auth->authByPwd(PasswordDlg.password);
-	if(PasswordDlg.password=="" && PasswordDlg.keyfile!=""){
-		QFile keyfile(PasswordDlg.keyfile);
-		if(!keyfile.open(QIODevice::ReadOnly)){
-			delete db;
-			QMessageBox::critical(this,tr("Error"),tr("Could not open key file."),tr("OK"));
-			return;		
-		}
-		if(!auth->authByFile(keyfile)){
-			QMessageBox::critical(this,tr("Error"),db->getError(),tr("OK"));
-			delete db;
-			return;			
-		}	
-	}
-	if(PasswordDlg.password!="" && PasswordDlg.keyfile!=""){
-		QFile keyfile(PasswordDlg.keyfile);
-		if(!keyfile.open(QIODevice::ReadOnly)){
-			delete db;
-			QMessageBox::critical(this,tr("Error"),tr("Could not open key file."),tr("OK"));
-			return;		
-		}
-		if(!auth->authByFileAndPwd(PasswordDlg.password,keyfile)){
-			QMessageBox::critical(this,tr("Error"),db->getError(),tr("OK"));
-			delete db;
-			return;			
-		}
-	}		
+	setupDatabaseConnections(db);	
 	QString err;
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	if(db->load(filename)==true){
@@ -341,18 +311,19 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	else{
 		StatusBarGeneral->setText(tr("Loading Failed"));
 		QString error=db->getError();
-		bool KeyError=auth->isKeyError();
-		delete db;
 		if(error==QString())error=tr("Unknown error while loading database.");
 		QMessageBox::critical(this,tr("Error")
 								,tr("The following error occured while opening the database:\n%1")
 								.arg(error),tr("OK"));
-		if(KeyError)
+		if(dynamic_cast<IFilePasswordAuth*>(db)->isKeyError()){
+			delete db;
 			openDatabase(filename,IsAuto);
+		}
+		else
+			delete db;
 	}
 	StatusBarGeneral->setText(tr("Ready"));
 }
-
 
 bool KeepassMainWindow::closeDatabase(){
 	Q_ASSERT(FileOpen);
@@ -381,52 +352,14 @@ bool KeepassMainWindow::closeDatabase(){
 
 
 void KeepassMainWindow::OnFileNewKdb(){
-	CPasswordDialog dlg(this,true,false,true);
+	IDatabase* db_new=dynamic_cast<IDatabase*>(new StandardDatabase());
+	db_new->create();
+	CPasswordDialog dlg(this,db_new,false,true);
 	dlg.setWindowTitle("New Database");
 	if(dlg.exec()==1){
 		if(FileOpen)
 			if(!closeDatabase())return;
-		db=new StandardDatabase();
-		db->create();
-		IFilePasswordAuth* DbAuth=dynamic_cast<IFilePasswordAuth*>(db);
-		if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
-			bool KeyFileExists=QFileInfo(dlg.keyfile).exists();
-			if((KeyFileExists && dlg.OverwriteKeyFile) || !KeyFileExists){
-				if(!DbAuth->createKeyFile(dlg.keyfile)){					
-					QMessageBox::warning(this,tr("Error"),tr("Could not create key file. The following error occured:\n%1").arg(db->getError()),tr("OK"),"","",0,0);
-					delete db; db=NULL;
-					return;
-				}
-			}
-		}	
-		if(dlg.password!="" && dlg.keyfile=="")
-			DbAuth->authByPwd(dlg.password);
-		if(dlg.password=="" && dlg.keyfile!=""){
-			QFile keyfile(dlg.keyfile);
-			if(!keyfile.open(QIODevice::ReadOnly)){
-				delete db;
-				QMessageBox::critical(this,tr("Error"),tr("Could not open key file."),tr("OK"));
-				return;		
-			}
-			if(!DbAuth->authByFile(keyfile)){
-				QMessageBox::critical(this,tr("Error"),db->getError(),tr("OK"));
-				delete db;
-				return;			
-			}	
-		}
-		if(dlg.password!="" && dlg.keyfile!=""){
-			QFile keyfile(dlg.keyfile);
-			if(!keyfile.open(QIODevice::ReadOnly)){
-				delete db;
-				QMessageBox::critical(this,tr("Error"),tr("Could not open key file."),tr("OK"));
-				return;		
-			}
-			if(!DbAuth->authByFileAndPwd(dlg.password,keyfile)){
-				QMessageBox::critical(this,tr("Error"),db->getError(),tr("OK"));
-				delete db;
-				return;			
-			}
-		}		
+		db=dynamic_cast<IDatabase*>(db_new);	
 		setWindowTitle(tr("%1 - KeePassX").arg(tr("[new]")));
 		GroupView->db=db;
 		EntryView->db=db;		
@@ -438,8 +371,12 @@ void KeepassMainWindow::OnFileNewKdb(){
 		setupDatabaseConnections(db);
 		setStateGroupSelected(NONE);
 		setStateEntrySelected(NONE);
-	}	
 	}
+	else{
+		delete db_new;		
+	}
+	
+}
 
 void KeepassMainWindow::OnFileNewKxdb(){
 	
@@ -694,27 +631,9 @@ if(dlg.exec())setStateFileModified(true);
 }
 
 void KeepassMainWindow::OnFileChangeKey(){
-	/*
-CPasswordDialog dlg(this,true,false,true);
-dlg.setWindowTitle(db->file->fileName());
-if(dlg.exec()==1){
-	if(dlg.KeyType==BOTH || dlg.KeyType==KEYFILE){
-		if(!db->createKeyFile(dlg.keyfile)){
-			QMessageBox::warning(this,tr("Error"),tr("Could not create key file. The following error occured:\n%1").arg(db->getError()),tr("OK"),"","",0,0);
-			return;
-		}
-	}
-	IFilePasswordAuth* auth=dynamic_cast<IFilePasswordAuth*>db;
-	if(dlg.password!="" && dlg.keyfile=="")
-		auth->authByPwd(dlg.password);
-	if(dlg.password=="" && dlg.keyfile!="")
-		auth->authByFile(dlg.keyfile);
-	if(dlg.password!="" && dlg.keyfile!="")
-		auth->authByFileAndPw(dlg.keyfile,dlg.password);
-	setStateFileModified(true);
-}
-	*/
-
+	CPasswordDialog dlg(this,db,false,true);
+	if(dlg.exec())
+		setStateFileModified(true);
 }
 
 void KeepassMainWindow::OnFileExit(){
@@ -866,18 +785,18 @@ void KeepassMainWindow::OnQuickSearch(){
 }
 
 void KeepassMainWindow::OnColumnVisibilityChanged(bool value){
-config.Columns[0]=ViewColumnsTitleAction->isChecked();
-config.Columns[1]=ViewColumnsUsernameAction->isChecked();
-config.Columns[2]=ViewColumnsUrlAction->isChecked();
-config.Columns[3]=ViewColumnsPasswordAction->isChecked();
-config.Columns[4]=ViewColumnsCommentAction->isChecked();
-config.Columns[5]=ViewColumnsExpireAction->isChecked();
-config.Columns[6]=ViewColumnsCreationAction->isChecked();
-config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
-config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
-config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
-//EntryView->updateColumns();
-//if(FileOpen) EntryView->updateItems();
+	config.Columns[0]=ViewColumnsTitleAction->isChecked();
+	config.Columns[1]=ViewColumnsUsernameAction->isChecked();
+	config.Columns[2]=ViewColumnsUrlAction->isChecked();
+	config.Columns[3]=ViewColumnsPasswordAction->isChecked();
+	config.Columns[4]=ViewColumnsCommentAction->isChecked();
+	config.Columns[5]=ViewColumnsExpireAction->isChecked();
+	config.Columns[6]=ViewColumnsCreationAction->isChecked();
+	config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
+	config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
+	config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
+	//EntryView->updateColumns();
+	//if(FileOpen) EntryView->updateItems();
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
@@ -891,7 +810,7 @@ setStateFileModified(true);
 }
 
 void KeepassMainWindow::closeEvent(QCloseEvent* e){
-	if(!ShutingDown){
+	if(!ShutingDown && config.MinimizeToTray){
 		e->ignore();
 		hide();
 		return;
@@ -918,10 +837,11 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 
 
 void KeepassMainWindow::OnExtrasSettings(){
-CSettingsDlg dlg(this);
-dlg.exec();
-EntryView->setAlternatingRowColors(config.AlternatingRowColors);
-//Group::UI_ExpandByDefault=config.ExpandGroupTree;
+	CSettingsDlg dlg(this);
+	if(dlg.exec()==1){
+		EntryView->setAlternatingRowColors(config.AlternatingRowColors);
+		SysTray->setVisible(config.ShowSysTrayIcon);
+	}
 }
 
 void KeepassMainWindow::OnHelpAbout(){

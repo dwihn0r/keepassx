@@ -95,7 +95,6 @@ int main(int argc, char **argv)
 {
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
 	QApplication* app=NULL;
-	
 	AppDir=QString(argv[0]);
 	AppDir.truncate(AppDir.lastIndexOf("/"));
 	

@@ -17,42 +17,44 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "main.h"
 #ifndef PASSWORDDIALOG_H
 #define PASSWORDDIALOG_H
-#include "lib/UrlLabel.h"
 #include "ui_PasswordDlg.h"
+#include "main.h"
+#include "lib/UrlLabel.h"
+#include "Database.h"
+
 
 class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 {
-  Q_OBJECT
+ 	Q_OBJECT
 
-private:
-bool Mode_Set; //true = Set, false = Get
-void setStatePasswordOnly();
-void setStateKeyFileOnly();
-void setStateBoth();
-
-public:
-QString keyfile;
-QString password;
-tKeyType KeyType;
-bool OverwriteKeyFile;
-
-CPasswordDialog(QWidget* parent = 0,  bool modal = false,
-								bool ShowExitButton = false, bool KeyMode_Set=false,  Qt::WFlags fl = 0 );
-
-public slots:
-    void OnOK();
-	void OnOK_Set();
-    void OnCancel();
-    void OnButtonBrowse();
-	void OnButtonBrowse_Set();
-    void OnButtonExit();
-    void OnPasswordChanged(const QString &txt);
-    void OnCheckBox_BothChanged(int state);
-    void ChangeEchoMode();
-    void OnComboTextChanged(const QString&);
+	private:
+		bool Mode_Set; //true = Set, false = Get
+		IDatabase* db;
+		void setStatePasswordOnly();
+		void setStateKeyFileOnly();
+		void setStateBoth();
+		bool doAuth();
+	
+	public:
+		QString keyfile;
+		QString password;
+		tKeyType KeyType;
+		bool OverwriteKeyFile;	
+		CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButton = false, bool KeyMode_Set=false);
+	
+	public slots:
+	    void OnOK();
+		void OnOK_Set();
+	    void OnCancel();
+	    void OnButtonBrowse();
+		void OnButtonBrowse_Set();
+	    void OnButtonExit();
+	    void OnPasswordChanged(const QString &txt);
+	    void OnCheckBox_BothChanged(int state);
+	    void ChangeEchoMode();
+	    void OnComboTextChanged(const QString&);
 };
 
 #endif

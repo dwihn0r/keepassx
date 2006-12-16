@@ -227,6 +227,8 @@ This is the common base interface for databases. Every database class must imple
 */
 class IDatabase{
 public:
+	virtual ~IDatabase(){};
+
 	//! Loads a database.
    	/*! It is not allowed to call this function if a database is already loaded.
 		\param  identifier Normally this is the filename of the database but it can also be an IP address or something else if the database is not file based.
@@ -385,8 +387,8 @@ public:
 class IFilePasswordAuth{
 public:
 	virtual void authByPwd(QString& password)=0;
-	virtual bool authByFile(QFile& file)=0;
-	virtual bool authByFileAndPwd(QString& password, QFile& file)=0;
+	virtual bool authByFile(QString& filename)=0;
+	virtual bool authByFileAndPwd(QString& password, QString& filename)=0;
 	/*! Creates a key file.
 		\param filename Filename of the new key file.
 		\param length Length of the key file.

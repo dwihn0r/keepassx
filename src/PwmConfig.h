@@ -20,61 +20,66 @@
 #ifndef _PWMCONFIG_H_
 #define _PWMCONFIG_H_
 
+#include <QColor>
 #include "main.h"
 #include "lib/IniReader.h"
-#include <qcolor.h>
-
 		
 class CConfig{
-public:
-enum IntegrPluginType{NONE,KDE,GNOME};
- int TimeFormat;
- int ClipboardTimeOut;
- bool Toolbar;
- bool EntryDetails;
- QString LastFile;
- bool OpenLast;
- bool Columns[10];
- QColor BannerColor1;
- QColor BannerColor2;
- QColor BannerTextColor;
- bool ShowPasswords;
- QString OpenUrlCommand;
- QString Language;
- bool SearchOptions[9];
- bool ListView_HidePasswords;
- bool ListView_HideUsernames;
- bool PwGenOptions[10];
- int PwGenLength;
- QString PwGenCharList;
- bool ExpandGroupTree;
- bool EnableKdePlugin;
- int MainWinHeight;
- int MainWinWidth;
- int MainWinSplit1;
- int MainWinSplit2;
- int ColumnSizes[10];
- bool ShowStatusbar;
- bool AlternatingRowColors;
- QString MountDir;
- bool RememberLastKey;
- tKeyType LastKeyType;
- QString LastKeyLocation;
- int ToolbarIconSize;
- IntegrPluginType IntegrPlugin;
- bool loadFromIni(QString filename);
- bool saveToIni(QString filename);
+	public:
+	enum IntegrPluginType{NONE,KDE,GNOME};
+		int TimeFormat;
+		int ClipboardTimeOut;
+		int MainWinHeight;
+		int MainWinWidth;
+		int MainWinSplit1;
+		int MainWinSplit2;
+		int ToolbarIconSize;
+		int PwGenLength;
+		int GroupTreeRestore; // 0:Restore Last; 1:Expand All; 2:Don't Expand
+		int ColumnSizes[10];
+		bool Toolbar;
+		bool EntryDetails;
+		bool OpenLast;		
+		bool ListView_HidePasswords;
+		bool ListView_HideUsernames;
+		bool SearchOptions[9];
+		bool PwGenOptions[10];
+		bool Columns[10];
+		bool ShowPasswords;
+		bool ExpandGroupTree;
+		bool EnableKdePlugin;
+		bool ShowStatusbar;
+		bool AlternatingRowColors;
+		bool RememberLastKey;
+		bool ShowSysTrayIcon;
+		bool MinimizeToTray;
+		bool SaveFileDlgHistory;
+		bool EnableBookmarkMenu;
+		QString PwGenCharList;
+		QString MountDir;
+		QString LastKeyLocation;
+		QString OpenUrlCommand;
+		QString Language;
+		QString LastFile;		
+		QColor BannerColor1;
+		QColor BannerColor2;
+		QColor BannerTextColor;		
+		IntegrPluginType IntegrPlugin;
+		tKeyType LastKeyType;
+		
+		bool loadFromIni(QString filename);
+		bool saveToIni(QString filename);
 
-private:
- CIniFile ini;
- void ParseColumnString(QString str, bool* dst);
- void ParseBoolString(const QString &str,const QString &defaults,bool* dst, int count);
- void ParseIntString(const QString &str,int* dst, int count);
- QString CreateBoolString(bool* src, int count);
- QColor ParseColorString(QString str);
- QString CreateColumnString();
- QString CreateColorString(QColor);
- QString CreateIntString(int* src, int count);
+	private:
+		CIniFile ini;
+		void ParseColumnString(QString str, bool* dst);
+		void ParseBoolString(const QString &str,const QString &defaults,bool* dst, int count);
+		void ParseIntString(const QString &str,int* dst, int count);
+		QString CreateBoolString(bool* src, int count);
+		QColor ParseColorString(QString str);
+		QString CreateColumnString();
+		QString CreateColorString(QColor);
+		QString CreateIntString(int* src, int count);
 };
 
 #endif

@@ -38,103 +38,113 @@ using namespace std;
 
 
 bool CConfig::loadFromIni(QString filename){
-QString defaultSearchOptions = "001101111";
-QString defaultPwGenOptions = "1111100001";
-ini.SetPath((const char*)filename.toUtf8());
-ini.ReadFile();
-ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
-Toolbar=ini.GetValueB("UI","ShowToolbar",true);
-EntryDetails=ini.GetValueB("UI","ShowEntryDetails",true);
-OpenLast=ini.GetValueB("Options","RememberLastFile",true);
-LastFile=ini.GetValue("Options","LastFile","").c_str();
-ParseColumnString(ini.GetValue("UI","Columns","1111100000").c_str(),Columns);
-BannerColor1=ParseColorString(ini.GetValue("Options","BannerColor1","0,85,127").c_str());
-BannerColor2=ParseColorString(ini.GetValue("Options","BannerColor2","0,117,175").c_str());
-BannerTextColor=ParseColorString(ini.GetValue("Options","BannerTextColor","222,222,222").c_str());
-ShowPasswords=ini.GetValueB("Options","ShowPasswords",false);
-OpenUrlCommand=ini.GetValue("Options","UrlCmd","kfmclient openURL %1").c_str();
-Language=ini.GetValue("Options","LangFile","").c_str();
-ParseBoolString(ini.GetValue("Options","SearchOptions",(const char*)defaultSearchOptions.toUtf8()).c_str(),defaultSearchOptions,SearchOptions,9);
-ListView_HidePasswords=ini.GetValueB("UI","HidePasswords",true);
-ListView_HideUsernames=ini.GetValueB("UI","HideUsernames",false);
-ParseBoolString(ini.GetValue("Options","PwGenOptions",(const char*)defaultPwGenOptions.toUtf8()).c_str(),defaultPwGenOptions,PwGenOptions,10);
-PwGenLength=ini.GetValueI("Options","PwGenLength",25);
-PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
-ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
-MainWinHeight=ini.GetValueI("UI","MainWinHeight",550);
-MainWinWidth=ini.GetValueI("UI","MainWinWidth",900);
-MainWinSplit1=ini.GetValueI("UI","MainWinSplit1",100);
-MainWinSplit2=ini.GetValueI("UI","MainWinSplit2",300);
-ParseIntString(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10").c_str(),ColumnSizes,10);
-ShowStatusbar=ini.GetValueB("UI","ShowStatusbar",true);
-AlternatingRowColors=ini.GetValueB("Options","AlternatingRowColors",true);
-MountDir=ini.GetValue("Options","MountDir",DEFAULT_MOUNT_DIR).c_str();
-RememberLastKey=ini.GetValueB("Options","RememberLastKey",true);
-LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
-LastKeyType=(tKeyType)ini.GetValueI("Options","LastKeyType",(int)PASSWORD);
-if(!OpenLast)RememberLastKey=false;
-ToolbarIconSize=ini.GetValueI("UI","ToolbarIconSize",16);
-
-QString IntegrPluginVal=ini.GetValue("Options","IntegrPlugin","None").c_str();
-if(IntegrPluginVal=="None")	
-	IntegrPlugin=NONE;
-else if(IntegrPluginVal=="Gnome")
-	IntegrPlugin=GNOME;
-else if(IntegrPluginVal=="KDE")
-	IntegrPlugin=KDE;
-else
-	IntegrPlugin=NONE;
-	
-return true;
+	QString defaultSearchOptions = "001101111";
+	QString defaultPwGenOptions = "1111100001";
+	ini.SetPath((const char*)filename.toUtf8());
+	ini.ReadFile();
+	ClipboardTimeOut=ini.GetValueI("Options","ClipboardTimeOut",20);
+	Toolbar=ini.GetValueB("UI","ShowToolbar",true);
+	EntryDetails=ini.GetValueB("UI","ShowEntryDetails",true);
+	OpenLast=ini.GetValueB("Options","RememberLastFile",true);
+	LastFile=ini.GetValue("Options","LastFile","").c_str();
+	ParseColumnString(ini.GetValue("UI","Columns","1111100000").c_str(),Columns);
+	BannerColor1=ParseColorString(ini.GetValue("Options","BannerColor1","0,85,127").c_str());
+	BannerColor2=ParseColorString(ini.GetValue("Options","BannerColor2","0,117,175").c_str());
+	BannerTextColor=ParseColorString(ini.GetValue("Options","BannerTextColor","222,222,222").c_str());
+	ShowPasswords=ini.GetValueB("Options","ShowPasswords",false);
+	OpenUrlCommand=ini.GetValue("Options","UrlCmd","kfmclient openURL %1").c_str();
+	Language=ini.GetValue("Options","LangFile","").c_str();
+	ParseBoolString(ini.GetValue("Options","SearchOptions",(const char*)defaultSearchOptions.toUtf8()).c_str(),defaultSearchOptions,SearchOptions,9);
+	ListView_HidePasswords=ini.GetValueB("UI","HidePasswords",true);
+	ListView_HideUsernames=ini.GetValueB("UI","HideUsernames",false);
+	ParseBoolString(ini.GetValue("Options","PwGenOptions",(const char*)defaultPwGenOptions.toUtf8()).c_str(),defaultPwGenOptions,PwGenOptions,10);
+	PwGenLength=ini.GetValueI("Options","PwGenLength",25);
+	PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
+	ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
+	MainWinHeight=ini.GetValueI("UI","MainWinHeight",550);
+	MainWinWidth=ini.GetValueI("UI","MainWinWidth",900);
+	MainWinSplit1=ini.GetValueI("UI","MainWinSplit1",100);
+	MainWinSplit2=ini.GetValueI("UI","MainWinSplit2",300);
+	ParseIntString(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10").c_str(),ColumnSizes,10);
+	ShowStatusbar=ini.GetValueB("UI","ShowStatusbar",true);
+	AlternatingRowColors=ini.GetValueB("Options","AlternatingRowColors",true);
+	MountDir=ini.GetValue("Options","MountDir",DEFAULT_MOUNT_DIR).c_str();
+	RememberLastKey=ini.GetValueB("Options","RememberLastKey",true);
+	LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
+	LastKeyType=(tKeyType)ini.GetValueI("Options","LastKeyType",(int)PASSWORD);	
+	if(!OpenLast)RememberLastKey=false;
+	ToolbarIconSize=ini.GetValueI("UI","ToolbarIconSize",16);
+	ShowSysTrayIcon=ini.GetValueB("Options","ShowSysTrayIcon",false);
+	MinimizeToTray=ini.GetValueB("Options","MinimizeToTray",false);
+	SaveFileDlgHistory=ini.GetValueB("Options","SaveFileDlgHistory",true);
+	EnableBookmarkMenu=ini.GetValueB("Options","EnableBookmarkMenu",true);
+	GroupTreeRestore=ini.GetValueI("Options","GroupTreeRestore",1);
+	QString IntegrPluginVal=ini.GetValue("Options","IntegrPlugin","None").c_str();
+	if(IntegrPluginVal=="None")	
+		IntegrPlugin=NONE;
+	else if(IntegrPluginVal=="Gnome")
+		IntegrPlugin=GNOME;
+	else if(IntegrPluginVal=="KDE")
+		IntegrPlugin=KDE;
+	else
+		IntegrPlugin=NONE;
+		
+	return true;
 }
 
 bool CConfig::saveToIni(QString filename){
-ini.SetValueI("Options","ClipboardTimeOut",ClipboardTimeOut);
-ini.SetValueB("UI","ShowToolbar",Toolbar);
-ini.SetValueB("UI","ShowEntryDetails",EntryDetails);
-ini.SetValueB("Options","RememberLastFile",OpenLast);
- if(OpenLast)ini.SetValue("Options","LastFile",(const char*)LastFile.toUtf8());
- else	     ini.SetValue("Options","LastFile","");
-ini.SetValue("UI","Columns",(const char*)CreateColumnString().toUtf8(),true);
-ini.SetValue("Options","BannerColor1",(const char*)CreateColorString(BannerColor1).toUtf8(),true);
-ini.SetValue("Options","BannerColor2",(const char*)CreateColorString(BannerColor2).toUtf8(),true);
-ini.SetValue("Options","BannerTextColor",(const char*)CreateColorString(BannerTextColor).toUtf8(),true);
-ini.SetValueB("Options","ShowPasswords",ShowPasswords,true);
-ini.SetValue("Options","UrlCmd",(const char*)OpenUrlCommand.toUtf8(),true);
-ini.SetValue("Options","LangFile",(const char*)Language.toUtf8(),true);
-ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,9).toUtf8(),true);
-ini.SetValueB("UI","HidePasswords",ListView_HidePasswords);
-ini.SetValueB("UI","HideUsernames",ListView_HideUsernames);
-ini.SetValue("Options","PwGenOptions",(const char*)CreateBoolString(PwGenOptions,10).toUtf8(),true);
-ini.SetValueI("Options","PwGenLength",PwGenLength,true);
-ini.SetValue("Options","PwGenCharList",(const char*)PwGenCharList.toUtf8(),true);
-ini.SetValueB("Options","ExpandGroupTree",ExpandGroupTree,true);
-ini.SetValueI("UI","MainWinHeight",MainWinHeight);
-ini.SetValueI("UI","MainWinWidth",MainWinWidth);
-ini.SetValueI("UI","MainWinSplit1",MainWinSplit1);
-ini.SetValueI("UI","MainWinSplit2",MainWinSplit2);
-ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10).toUtf8(),true);
-ini.SetValueB("UI","ShowStatusbar",ShowStatusbar);
-ini.SetValueB("Options","AlternatingRowColors",AlternatingRowColors);
-ini.SetValue("Options","MountDir",(const char*)MountDir.toUtf8());
-ini.SetValueB("Options","RememberLastKey",RememberLastKey);
-if(RememberLastKey){
-	ini.SetValue("Options","LastKeyLocation",(const char*)LastKeyLocation.toUtf8());
-	ini.SetValueI("Options","LastKeyType",LastKeyType);}
-else{
-	ini.SetValue("Options","LastKeyLocation","");
-	ini.SetValueI("Options","LastKeyType",0);}
-ini.SetValueI("UI","ToolbarIconSize",ToolbarIconSize,true);
-
-if(IntegrPlugin==NONE)
-	ini.SetValue("Options","IntegrPlugin","None");
-if(IntegrPlugin==GNOME)
-	ini.SetValue("Options","IntegrPlugin","Gnome");
-if(IntegrPlugin==KDE)
-	ini.SetValue("Options","IntegrPlugin","KDE");
-
-if(!ini.WriteFile())return false;
-else return true;
+	ini.SetValueI("Options","ClipboardTimeOut",ClipboardTimeOut);
+	ini.SetValueB("UI","ShowToolbar",Toolbar);
+	ini.SetValueB("UI","ShowEntryDetails",EntryDetails);
+	ini.SetValueB("Options","RememberLastFile",OpenLast);
+	 if(OpenLast)ini.SetValue("Options","LastFile",(const char*)LastFile.toUtf8());
+	 else	     ini.SetValue("Options","LastFile","");
+	ini.SetValue("UI","Columns",(const char*)CreateColumnString().toUtf8(),true);
+	ini.SetValue("Options","BannerColor1",(const char*)CreateColorString(BannerColor1).toUtf8(),true);
+	ini.SetValue("Options","BannerColor2",(const char*)CreateColorString(BannerColor2).toUtf8(),true);
+	ini.SetValue("Options","BannerTextColor",(const char*)CreateColorString(BannerTextColor).toUtf8(),true);
+	ini.SetValueB("Options","ShowPasswords",ShowPasswords,true);
+	ini.SetValue("Options","UrlCmd",(const char*)OpenUrlCommand.toUtf8(),true);
+	ini.SetValue("Options","LangFile",(const char*)Language.toUtf8(),true);
+	ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,9).toUtf8(),true);
+	ini.SetValueB("UI","HidePasswords",ListView_HidePasswords);
+	ini.SetValueB("UI","HideUsernames",ListView_HideUsernames);
+	ini.SetValue("Options","PwGenOptions",(const char*)CreateBoolString(PwGenOptions,10).toUtf8(),true);
+	ini.SetValueI("Options","PwGenLength",PwGenLength,true);
+	ini.SetValue("Options","PwGenCharList",(const char*)PwGenCharList.toUtf8(),true);
+	ini.SetValueB("Options","ExpandGroupTree",ExpandGroupTree,true);
+	ini.SetValueI("UI","MainWinHeight",MainWinHeight);
+	ini.SetValueI("UI","MainWinWidth",MainWinWidth);
+	ini.SetValueI("UI","MainWinSplit1",MainWinSplit1);
+	ini.SetValueI("UI","MainWinSplit2",MainWinSplit2);
+	ini.SetValue("UI","ColumnSizes",(const char*)CreateIntString(ColumnSizes,10).toUtf8(),true);
+	ini.SetValueB("UI","ShowStatusbar",ShowStatusbar);
+	ini.SetValueB("Options","AlternatingRowColors",AlternatingRowColors);
+	ini.SetValue("Options","MountDir",(const char*)MountDir.toUtf8());
+	ini.SetValueB("Options","RememberLastKey",RememberLastKey);
+	ini.SetValueB("Options","ShowSysTrayIcon",ShowSysTrayIcon);
+	ini.SetValueB("Options","MinimizeToTray",MinimizeToTray);
+	ini.SetValueB("Options","SaveFileDlgHistory",SaveFileDlgHistory);
+	ini.SetValueB("Options","EnableBookmarkMenu",EnableBookmarkMenu);
+	ini.SetValueI("Options","GroupTreeRestore",GroupTreeRestore);	
+	
+	if(RememberLastKey){
+		ini.SetValue("Options","LastKeyLocation",(const char*)LastKeyLocation.toUtf8());
+		ini.SetValueI("Options","LastKeyType",LastKeyType);}
+	else{
+		ini.SetValue("Options","LastKeyLocation","");
+		ini.SetValueI("Options","LastKeyType",0);}
+	ini.SetValueI("UI","ToolbarIconSize",ToolbarIconSize,true);
+	
+	if(IntegrPlugin==NONE)
+		ini.SetValue("Options","IntegrPlugin","None");
+	if(IntegrPlugin==GNOME)
+		ini.SetValue("Options","IntegrPlugin","Gnome");
+	if(IntegrPlugin==KDE)
+		ini.SetValue("Options","IntegrPlugin","KDE");
+	
+	if(!ini.WriteFile())return false;
+	else return true;
 }
 
 void CConfig::ParseColumnString(QString str, bool* dst){

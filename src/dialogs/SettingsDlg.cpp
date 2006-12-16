@@ -74,8 +74,22 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	color2=config.BannerColor2;
 	textcolor=config.BannerTextColor;
 	CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
+	checkBox_ShowSysTrayIcon->setChecked(config.ShowSysTrayIcon);
+	checkBox_MinimizeToTray->setChecked(config.MinimizeToTray);
+	checkBox_SaveFileDlgHistory->setChecked(config.SaveFileDlgHistory);
 	Edit_BrowserCmd->setText(config.OpenUrlCommand);
-//	CheckBox_ExpandGroupTree->setChecked(config.ExpandGroupTree);
+
+	switch(config.GroupTreeRestore){
+		case 1:
+			Radio_GroupTreeRestore->setChecked(true);
+			break;
+		case 2:
+			Radio_GroupTreeExpand->setChecked(true);
+			break;
+		case 3:
+			Radio_GroupTreeDoNothing->setChecked(true);
+	}
+	
 	CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
 	Edit_MountDir->setText(config.MountDir);
 	CheckBox_RememberLastKey->setChecked(config.RememberLastKey);
@@ -133,9 +147,17 @@ void CSettingsDlg::apply(){
 	config.BannerTextColor=textcolor;
 	config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
 	config.OpenUrlCommand=Edit_BrowserCmd->text();
-//	config.ExpandGroupTree=CheckBox_ExpandGroupTree->isChecked();
 	config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
 	config.MountDir=Edit_MountDir->text();
+	config.ShowSysTrayIcon=checkBox_ShowSysTrayIcon->isChecked();
+	config.MinimizeToTray=checkBox_MinimizeToTray->isChecked();
+	config.SaveFileDlgHistory=checkBox_SaveFileDlgHistory->isChecked();
+	config.EnableBookmarkMenu=checkBox_EnableBookmarkMenu->isChecked();
+	
+	if(Radio_GroupTreeRestore->isChecked())config.GroupTreeRestore=0;
+	if(Radio_GroupTreeExpand->isChecked())config.GroupTreeRestore=1;
+	if(Radio_GroupTreeDoNothing->isChecked())config.GroupTreeRestore=2;
+	
 	if(config.MountDir!="" && config.MountDir.right(1)!="/")
 		config.MountDir+="/";
 	config.RememberLastKey=CheckBox_RememberLastKey->isChecked();

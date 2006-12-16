@@ -666,7 +666,12 @@ void StandardDatabase::authByPwd(QString& Password){
 	return;	
 }
 
-bool StandardDatabase::authByFile(QFile& file){	
+bool StandardDatabase::authByFile(QString& filename){
+	QFile file(filename);
+	if(!file.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
+		error=decodeFileError(file.error());
+		return false;
+	}
 	unsigned long FileSize=file.size();	
 	if(FileSize == 0){
 		error=tr("Key file is empty.");
@@ -674,14 +679,14 @@ bool StandardDatabase::authByFile(QFile& file){
 	}	
 	if(FileSize == 32){
 		if(file.read((char*)RawMasterKey,32) != 32){
-			error=tr("Error while reading key file.");
+			error=decodeFileError(file.error());
 			return false;}
 		return true;
 	}	
 	if(FileSize == 64){
 		char hex[64];
 		if(file.read(hex,64) != 64){
-			error=tr("Error while reading key file.");
+			error=decodeFileError(file.error());
 			return false;}
 		if(convHexToBinaryKey(hex,(char*)RawMasterKey))return true;
 	}
@@ -699,10 +704,10 @@ bool StandardDatabase::authByFile(QFile& file){
 	return true;
 }
 
-bool StandardDatabase::authByFileAndPwd(QString& Password, QFile& file){
+bool StandardDatabase::authByFileAndPwd(QString& Password, QString& filename){
 	unsigned char PasswordKey[32];
 	unsigned char FileKey[32];
-	if(!authByFile(file))return false;
+	if(!authByFile(filename))return false;
 	memcpy(FileKey,RawMasterKey,32);
 	authByPwd(Password);
 	memcpy(PasswordKey,RawMasterKey,32);
@@ -711,6 +716,7 @@ bool StandardDatabase::authByFileAndPwd(QString& Password, QFile& file){
 	sha.update(PasswordKey,32);
 	sha.update(FileKey,32);
 	sha.finish(RawMasterKey);
+	return true;
 }
 
 QList<IEntryHandle*> StandardDatabase::entries(){
@@ -1511,6 +1517,7 @@ bool StandardDatabase::createKeyFile(const QString& filename,int length, bool He
 	}	
 	file.close();
 	delete [] key;
+	return true;
 }
 
 
