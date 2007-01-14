@@ -35,7 +35,7 @@ using namespace std;
 #endif
 
 #define CSTR(x)((const char*)x.toUtf8())
-
+#define QSTR(x)(QString::fromUtf8((x).c_str()))
 
 bool CConfig::loadFromIni(QString filename){
 	QString defaultSearchOptions = "001101111";
@@ -46,31 +46,32 @@ bool CConfig::loadFromIni(QString filename){
 	Toolbar=ini.GetValueB("UI","ShowToolbar",true);
 	EntryDetails=ini.GetValueB("UI","ShowEntryDetails",true);
 	OpenLast=ini.GetValueB("Options","RememberLastFile",true);
-	LastFile=ini.GetValue("Options","LastFile","").c_str();
-	ParseColumnString(ini.GetValue("UI","Columns","1111100000").c_str(),Columns);
-	BannerColor1=ParseColorString(ini.GetValue("Options","BannerColor1","0,85,127").c_str());
-	BannerColor2=ParseColorString(ini.GetValue("Options","BannerColor2","0,117,175").c_str());
-	BannerTextColor=ParseColorString(ini.GetValue("Options","BannerTextColor","222,222,222").c_str());
+	LastFile=QSTR(ini.GetValue("Options","LastFile",""));
+	ParseColumnString(QSTR(ini.GetValue("UI","Columns","1111100000")),Columns);
+	BannerColor1=ParseColorString(QSTR(ini.GetValue("Options","BannerColor1","0,85,127")));
+	BannerColor2=ParseColorString(QSTR(ini.GetValue("Options","BannerColor2","0,117,175")));
+	BannerTextColor=ParseColorString(QSTR(ini.GetValue("Options","BannerTextColor","222,222,222")));
 	ShowPasswords=ini.GetValueB("Options","ShowPasswords",false);
-	OpenUrlCommand=ini.GetValue("Options","UrlCmd","kfmclient openURL %1").c_str();
-	Language=ini.GetValue("Options","LangFile","").c_str();
-	ParseBoolString(ini.GetValue("Options","SearchOptions",(const char*)defaultSearchOptions.toUtf8()).c_str(),defaultSearchOptions,SearchOptions,9);
+	ShowPasswordsPasswordDlg=ini.GetValueB("Options","ShowPasswordsPasswordDlg",false);
+	OpenUrlCommand=QSTR(ini.GetValue("Options","UrlCmd","kfmclient openURL %1"));
+	Language=QSTR(ini.GetValue("Options","LangFile",""));
+	ParseBoolString(QSTR(ini.GetValue("Options","SearchOptions",(const char*)defaultSearchOptions.toUtf8())),defaultSearchOptions,SearchOptions,9);
 	ListView_HidePasswords=ini.GetValueB("UI","HidePasswords",true);
 	ListView_HideUsernames=ini.GetValueB("UI","HideUsernames",false);
-	ParseBoolString(ini.GetValue("Options","PwGenOptions",(const char*)defaultPwGenOptions.toUtf8()).c_str(),defaultPwGenOptions,PwGenOptions,10);
+	ParseBoolString(QSTR(ini.GetValue("Options","PwGenOptions",(const char*)defaultPwGenOptions.toUtf8())),defaultPwGenOptions,PwGenOptions,10);
 	PwGenLength=ini.GetValueI("Options","PwGenLength",25);
-	PwGenCharList=ini.GetValue("Options","PwGenCharList","").c_str();
+	PwGenCharList=QSTR(ini.GetValue("Options","PwGenCharList",""));
 	ExpandGroupTree=ini.GetValueB("Options","ExpandGroupTree",true);
 	MainWinHeight=ini.GetValueI("UI","MainWinHeight",550);
 	MainWinWidth=ini.GetValueI("UI","MainWinWidth",900);
 	MainWinSplit1=ini.GetValueI("UI","MainWinSplit1",100);
 	MainWinSplit2=ini.GetValueI("UI","MainWinSplit2",300);
-	ParseIntString(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10").c_str(),ColumnSizes,10);
+	ParseIntString(QSTR(ini.GetValue("UI","ColumnSizes","15,10,10,10,10,10,10,10,10,10")),ColumnSizes,10);
 	ShowStatusbar=ini.GetValueB("UI","ShowStatusbar",true);
 	AlternatingRowColors=ini.GetValueB("Options","AlternatingRowColors",true);
-	MountDir=ini.GetValue("Options","MountDir",DEFAULT_MOUNT_DIR).c_str();
+	MountDir=QSTR(ini.GetValue("Options","MountDir",DEFAULT_MOUNT_DIR));
 	RememberLastKey=ini.GetValueB("Options","RememberLastKey",true);
-	LastKeyLocation=ini.GetValue("Options","LastKeyLocation","").c_str();
+	LastKeyLocation=QSTR(ini.GetValue("Options","LastKeyLocation",""));
 	LastKeyType=(tKeyType)ini.GetValueI("Options","LastKeyType",(int)PASSWORD);	
 	if(!OpenLast)RememberLastKey=false;
 	ToolbarIconSize=ini.GetValueI("UI","ToolbarIconSize",16);
@@ -79,7 +80,7 @@ bool CConfig::loadFromIni(QString filename){
 	SaveFileDlgHistory=ini.GetValueB("Options","SaveFileDlgHistory",true);
 	EnableBookmarkMenu=ini.GetValueB("Options","EnableBookmarkMenu",true);
 	GroupTreeRestore=ini.GetValueI("Options","GroupTreeRestore",1);
-	QString IntegrPluginVal=ini.GetValue("Options","IntegrPlugin","None").c_str();
+	QString IntegrPluginVal=QSTR(ini.GetValue("Options","IntegrPlugin","None"));
 	if(IntegrPluginVal=="None")	
 		IntegrPlugin=NONE;
 	else if(IntegrPluginVal=="Gnome")
@@ -104,6 +105,7 @@ bool CConfig::saveToIni(QString filename){
 	ini.SetValue("Options","BannerColor2",(const char*)CreateColorString(BannerColor2).toUtf8(),true);
 	ini.SetValue("Options","BannerTextColor",(const char*)CreateColorString(BannerTextColor).toUtf8(),true);
 	ini.SetValueB("Options","ShowPasswords",ShowPasswords,true);
+	ini.SetValueB("Options","ShowPasswordsPasswordDlg",ShowPasswordsPasswordDlg,true);
 	ini.SetValue("Options","UrlCmd",(const char*)OpenUrlCommand.toUtf8(),true);
 	ini.SetValue("Options","LangFile",(const char*)Language.toUtf8(),true);
 	ini.SetValue("Options","SearchOptions",(const char*)CreateBoolString(SearchOptions,9).toUtf8(),true);

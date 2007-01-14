@@ -36,6 +36,7 @@
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
 #include <QShowEvent>
+#include <QResizeEvent>
 
 #include "SelectIconDlg.h"
 #include "PasswordGenDlg.h"
@@ -51,7 +52,9 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	entry=_entry;
 	db=_db;
 	setupUi(this);
+	//not sure if this createBanner is still needed
 	createBanner(&BannerPixmap,Icon_Key32x32,tr("Edit Entry"),width());
+	//end
 	ModFlag=false;
 	connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
 	connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
@@ -132,6 +135,13 @@ if(event->spontaneous()==false){
 
 }
 }
+
+//Added resize event
+void CEditEntryDlg::resizeEvent(QResizeEvent *event){
+	createBanner(&BannerPixmap,Icon_Key32x32,tr("Test 2"),width());
+}
+
+
 
 void CEditEntryDlg::paintEvent(QPaintEvent *event){
 	QDialog::paintEvent(event);

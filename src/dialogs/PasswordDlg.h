@@ -53,7 +53,7 @@ class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 	    void OnButtonExit();
 	    void OnPasswordChanged(const QString &txt);
 	    void OnCheckBox_BothChanged(int state);
-	    void ChangeEchoMode();
+	    void ChangeEchoModeDatabaseKey();
 	    void OnComboTextChanged(const QString&);
 };
 

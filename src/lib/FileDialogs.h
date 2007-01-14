@@ -22,7 +22,28 @@
  
 #include <QObject>
 #include <QFileDialog>
+#include <QList>
 #include "plugins/interfaces/IFileDialog.h"
+
+/*
+class FileDlgHistory{
+	class HistoryEntry{
+	public:
+		QString DlgId;
+		QString Dir;
+		int Filter;
+		QString toString();
+		void fromString(const QString& str);
+	};
+	public:
+		void set(const QString& DlgId,const QString& Dir,int Filter);
+		int getFilter(const QString& DlgId);
+		QString getDir(const QString& DlgId);
+		void clear();
+	private:
+		QList
+};
+*/
 
 class KpxFileDialogs{
 	public:

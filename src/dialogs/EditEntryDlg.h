@@ -60,6 +60,8 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 	private:		
 		virtual void showEvent(QShowEvent *);
 		virtual void paintEvent(QPaintEvent*);
+		// Added resizeEvent
+		virtual void resizeEvent(QResizeEvent *);
 	
 	
 

@@ -52,9 +52,6 @@ QString KpxFileDialogs::saveFile(QWidget* Parent, const QString& Name, const QSt
 												  
 }
 
-
-
-
 QString QtStandardFileDialogs::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters){
 	QFileDialog FileDlg(parent,title,dir);
 	FileDlg.setFilters(Filters);
@@ -81,3 +78,5 @@ QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QStr
 	if(!FileDlg.exec())return QString();
 	return FileDlg.selectedFiles()[0];	
 }
+
+

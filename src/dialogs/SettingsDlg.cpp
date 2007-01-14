@@ -74,6 +74,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	color2=config.BannerColor2;
 	textcolor=config.BannerTextColor;
 	CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
+	CheckBox_ShowPasswords_PasswordDlg->setChecked(config.ShowPasswordsPasswordDlg);
 	checkBox_ShowSysTrayIcon->setChecked(config.ShowSysTrayIcon);
 	checkBox_MinimizeToTray->setChecked(config.MinimizeToTray);
 	checkBox_SaveFileDlgHistory->setChecked(config.SaveFileDlgHistory);
@@ -146,6 +147,7 @@ void CSettingsDlg::apply(){
 	config.BannerColor2=color2;
 	config.BannerTextColor=textcolor;
 	config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
+	config.ShowPasswordsPasswordDlg=CheckBox_ShowPasswords_PasswordDlg->isChecked();
 	config.OpenUrlCommand=Edit_BrowserCmd->text();
 	config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
 	config.MountDir=Edit_MountDir->text();

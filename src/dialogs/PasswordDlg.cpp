@@ -65,7 +65,7 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 	connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
 	connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
-	connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoMode() ) );
+	connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoModeDatabaseKey() ) );
 	connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 	connect( Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 	connect( ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
@@ -82,7 +82,7 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 		connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse_Set() ) );
 	}
 	
-	if(!config.ShowPasswords)ChangeEchoMode();
+	if(!config.ShowPasswordsPasswordDlg)ChangeEchoModeDatabaseKey();
 }
 
 
@@ -322,7 +322,7 @@ if(state==Qt::Unchecked){
 
 }
 
-void CPasswordDialog::ChangeEchoMode(){
+void CPasswordDialog::ChangeEchoModeDatabaseKey(){
 if(Edit_Password->echoMode()==QLineEdit::Normal){
 	Edit_Password->setEchoMode(QLineEdit::Password);
 	Edit_PasswordRep->setEchoMode(QLineEdit::Password);}

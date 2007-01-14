@@ -46,6 +46,7 @@ class CConfig{
 		bool PwGenOptions[10];
 		bool Columns[10];
 		bool ShowPasswords;
+		bool ShowPasswordsPasswordDlg;
 		bool ExpandGroupTree;
 		bool EnableKdePlugin;
 		bool ShowStatusbar;

@@ -14,8 +14,8 @@
   </property>
   <property name="sizePolicy" >
    <sizepolicy>
-    <hsizetype>0</hsizetype>
-    <vsizetype>0</vsizetype>
+    <hsizetype>5</hsizetype>
+    <vsizetype>5</vsizetype>
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -28,12 +28,15 @@
   </property>
   <property name="maximumSize" >
    <size>
-    <width>500</width>
-    <height>526</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle" >
    <string>Edit Entry</string>
+  </property>
+  <property name="sizeGripEnabled" >
+   <bool>true</bool>
   </property>
   <property name="modal" >
    <bool>true</bool>
@@ -51,7 +54,7 @@
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeType" >
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Minimum</enum>
      </property>
      <property name="sizeHint" >
       <size>

@@ -62,7 +62,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex" >
-      <number>4</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -197,16 +197,6 @@
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
-         <property name="text" >
-          <string>Sh&amp;ow passwords in plain text by default</string>
-         </property>
-         <property name="shortcut" >
-          <string>Alt+O</string>
-         </property>
-        </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_EnableBookmarkMenu" >
@@ -686,6 +676,46 @@
         </layout>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_2" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>5</hsizetype>
+           <vsizetype>1</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title" >
+          <string>Show passwords in plain text in:</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
+            <property name="text" >
+             <string>Edit Entry Dialog</string>
+            </property>
+            <property name="shortcut" >
+             <string>Alt+O</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="CheckBox_ShowPasswords_PasswordDlg" >
+            <property name="text" >
+             <string>Key Dialogs</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -917,7 +947,6 @@
  <layoutdefault spacing="6" margin="11" />
  <tabstops>
   <tabstop>tabWidget4</tabstop>
-  <tabstop>CheckBox_ShowPasswords</tabstop>
   <tabstop>ButtonColor1</tabstop>
   <tabstop>ButtonTextColor</tabstop>
   <tabstop>ButtonColor2</tabstop>
