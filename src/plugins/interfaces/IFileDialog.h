@@ -33,6 +33,8 @@ class IFileDialog{
 		
 		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
 							QStringList Filters,bool ShowOverwriteWarning=true)=0;
+		
+		virtual int getLastFilter()=0;
 };
 Q_DECLARE_INTERFACE(IFileDialog,"org.KeePassX.FileDialogInterface/1.0")
 		

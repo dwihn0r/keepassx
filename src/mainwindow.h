@@ -43,6 +43,7 @@
 #include "PwmConfig.h"
 #include "lib/EntryView.h"
 #include "lib/GroupView.h"
+#include "export/IExport.h"
 
 #include "ui_MainWindow.h"
 
@@ -112,6 +113,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void search(IGroupHandle* Group);
 		void removeFromSearchResults(int sID);
 		void updateDetailView();
+		void exportDatabase(IExport* exporter,QStringList filters);
 		QLineEdit* QuickSearchEdit;
 		QLabel* StatusBarGeneral;
 		QLabel* StatusBarSelection;

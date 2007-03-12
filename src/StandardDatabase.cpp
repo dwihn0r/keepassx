@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   keepassx@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+
 #include "global.h"
 #include <iostream>
 #include <time.h>
@@ -38,6 +39,19 @@ using namespace std;
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 
 const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));
+		 
+		 
+bool EntryHandleLessThan(const IEntryHandle* This,const IEntryHandle* Other){
+	if(!This->isValid() && Other->isValid())return true;
+	if(This->isValid() && !Other->isValid())return false;
+	if(!This->isValid() && !Other->isValid())return false;
+	return This->visualIndex()<Other->visualIndex();	
+	
+}
+
+bool StdEntryLessThan(const StandardDatabase::StdEntry& This,const StandardDatabase::StdEntry& Other){
+	return This.Index<Other.Index;
+}
 
 
 QString StandardDatabase::getError(){
@@ -89,8 +103,15 @@ int StandardDatabase::numIcons(){
 
 bool StandardDatabase::parseMetaStream(const StdEntry& entry){
 	
-	if(entry.Comment=="KPX_CUSTOM_ICONS_3")
-		return parseCustomIconsMetaStream(entry.Binary);	
+	qDebug("%s",entry.Comment.toUtf8().data());
+	
+	if(entry.Comment=="KPX_GROUP_TREE_STATE"){
+		parseGroupTreeStateMetaStream(entry.Binary);
+		return true;}
+	
+	if(entry.Comment=="KPX_CUSTOM_ICONS_3"){
+		parseCustomIconsMetaStream(entry.Binary);
+		return true;}	
 
 	if(entry.Comment=="KPX_CUSTOM_ICONS_2")
 		return parseCustomIconsMetaStreamV2(entry.Binary);
@@ -123,58 +144,98 @@ bool StandardDatabase::parseCustomIconsMetaStreamV2(const QByteArray& dta){
 	return true;
 }
 
-bool StandardDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
-	qDebug("CuIcMeSt v3 found.");
+void StandardDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
+	//Rev 3
+	quint32 NumIcons,NumEntries,NumGroups,offset;
+	memcpyFromLEnd32(&NumIcons,dta.data());
+	memcpyFromLEnd32(&NumEntries,dta.data()+4);
+	memcpyFromLEnd32(&NumGroups,dta.data()+8);
+	offset=12;
+	CustomIcons.clear();
+	for(int i=0;i<NumIcons;i++){
+		CustomIcons << QPixmap();
+		quint32 Size;
+		memcpyFromLEnd32(&Size,dta.data()+offset);
+		if(offset+Size > dta.size()){
+			CustomIcons.clear();
+			qWarning("Discarded metastream KPX_CUSTOM_ICONS_3 because of a parsing error.");
+			return;}
+		offset+=4;
+		if(!CustomIcons.back().loadFromData((const unsigned char*)dta.data()+offset,Size,"PNG")){
+			CustomIcons.clear();
+			qWarning("Discarded metastream KPX_CUSTOM_ICONS_3 because of a parsing error.");
+			return;}
+		offset+=Size;
+		if(offset > dta.size()){
+			CustomIcons.clear();
+			qWarning("Discarded metastream KPX_CUSTOM_ICONS_3 because of a parsing error.");
+			return;}
+	}
+	for(int i=0;i<NumEntries;i++){
+		quint32 Icon;
+		KpxUuid EntryUuid;
+		EntryUuid.fromRaw(dta.data()+offset);
+		offset+=16;
+		memcpyFromLEnd32(&Icon,dta.data()+offset);
+		offset+=4;
+		StdEntry* entry=getEntry(EntryUuid);
+		if(entry){
+			entry->OldImage=entry->Image;
+			entry->Image=Icon;
+		}
+	}
+	for(int i=0;i<NumGroups;i++){
+		quint32 GroupId,Icon;
+		memcpyFromLEnd32(&GroupId,dta.data()+offset);
+		offset+=4;
+		memcpyFromLEnd32(&Icon,dta.data()+offset);
+		offset+=4;
+		StdGroup* Group=getGroup(GroupId);
+		if(Group){
+			Group->OldImage=Group->Image;
+			Group->Image=Icon;
+		}
+	}
+	return;
+}
 
-//Rev 3
-quint32 NumIcons,NumEntries,NumGroups,offset;
-memcpyFromLEnd32(&NumIcons,dta.data());
-memcpyFromLEnd32(&NumEntries,dta.data()+4);
-memcpyFromLEnd32(&NumGroups,dta.data()+8);
-offset=12;
-CustomIcons.clear();
-for(int i=0;i<NumIcons;i++){
-	CustomIcons << QPixmap();
-	quint32 Size;
-	memcpyFromLEnd32(&Size,dta.data()+offset);
-	if(offset+Size > dta.size()){
-		CustomIcons.clear();
-		return false;}
-	offset+=4;
-	if(!CustomIcons.back().loadFromData((const unsigned char*)dta.data()+offset,Size,"PNG")){
-		CustomIcons.clear();
-		return false;}
-	offset+=Size;
-	if(offset > dta.size()){
-		CustomIcons.clear();
-		return false;}
-}
-for(int i=0;i<NumEntries;i++){
-	quint32 Icon;
-	KpxUuid EntryUuid;
-	EntryUuid.fromRaw(dta.data()+offset);
-	offset+=16;
-	memcpyFromLEnd32(&Icon,dta.data()+offset);
-	offset+=4;
-	StdEntry* entry=getEntry(EntryUuid);
-	if(entry){
-		entry->OldImage=entry->Image;
-		entry->Image=Icon;
+void StandardDatabase::parseGroupTreeStateMetaStream(const QByteArray& dta){
+	if(dta.size()<4){qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error."); return;}
+	quint32 Num;
+	memcpyFromLEnd32(&Num,dta.data());
+	if(Num*5!=dta.size()-4){qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error."); return;}
+	TreeStateMetaStream.clear();
+	for(int i=0;i<Num;i++){
+		quint32 GroupID;
+		quint8 IsExpanded;
+		memcpyFromLEnd32(&GroupID,dta.data()+4+5*i);
+		memcpy(&IsExpanded,dta.data()+8+5*i,1);
+		TreeStateMetaStream.insert(GroupID,(bool)IsExpanded);
 	}
+	return;
 }
-for(int i=0;i<NumGroups;i++){
-	quint32 GroupId,Icon;
-	memcpyFromLEnd32(&GroupId,dta.data()+offset);
-	offset+=4;
-	memcpyFromLEnd32(&Icon,dta.data()+offset);
-	offset+=4;
-	StdGroup* Group=getGroup(GroupId);
-	if(Group){
-		Group->OldImage=Group->Image;
-		Group->Image=Icon;
+
+void StandardDatabase::createGroupTreeStateMetaStream(StdEntry* e){
+	e->BinaryDesc="bin-stream";
+	e->Title="Meta-Info";
+	e->Username="SYSTEM";
+	e->Comment="KPX_GROUP_TREE_STATE";
+	e->Url="$";
+	e->OldImage=0;
+	e->Image=0;
+	if(Groups.size())e->GroupId=Groups[0].Id;
+	QByteArray bin;
+	quint32 Num=Groups.size();
+	bin.resize(Num*5+4);
+	memcpyToLEnd32(bin.data(),&Num);
+	for(int i=0;i<Num;i++){
+		memcpyToLEnd32(bin.data()+4+5*i,&Groups[i].Id);
+		if(Groups[i].IsExpanded)
+			bin.data()[8+5*i]=1;
+		else
+			bin.data()[8+5*i]=0;		
 	}
-}
-return true;
+	e->Binary=bin;
 }
 
 StandardDatabase::StdEntry* StandardDatabase::getEntry(const KpxUuid& uuid){
@@ -319,11 +380,16 @@ bool StandardDatabase::createGroupTree(QList<quint32>& Levels){
 		Groups[i].Parent->Childs.append(&Groups[i]);
 	}
 	
+	QList<int> EntryIndexCounter;
+	for(int i=0;i<Groups.size();i++)EntryIndexCounter << 0;
+	
 	for(int e=0;e<Entries.size();e++){
 		for(int g=0;g<Groups.size();g++){
 			if(Entries[e].GroupId==Groups[g].Id){
 				Groups[g].Entries.append(&Entries[e]);
 				Entries[e].Group=&Groups[g];
+				Entries[e].Index=EntryIndexCounter[g];
+				EntryIndexCounter[g]++;
 			}
 		}		
 	}
@@ -335,13 +401,28 @@ void StandardDatabase::createHandles(){
 	for(int i=0;i<Groups.size();i++){
 		GroupHandles.append(GroupHandle(this));
 		Groups[i].Handle=&GroupHandles.back();
-		GroupHandles.back().Group=&Groups[i];	
+		GroupHandles.back().Group=&Groups[i];
 	}
 	for(int i=0;i<Entries.size();i++){
 		EntryHandles.append(EntryHandle(this));
 		Entries[i].Handle=&EntryHandles.back();
 		EntryHandles.back().Entry=&Entries[i];
 	}		
+}
+
+void StandardDatabase::restoreGroupTreeState(){
+	if(settings->value("GroupTreeState","ExpandAll")=="ExpandAll"){
+		for(int i=0;i<Groups.size();i++){
+			Groups[i].IsExpanded=true;
+		}
+	}
+	else
+	if(settings->value("GroupTreeState","ExpandAll")=="Restore"){
+			for(int i=0;i<Groups.size();i++){
+				if(TreeStateMetaStream.contains(Groups[i].Id))
+					Groups[i].IsExpanded=TreeStateMetaStream.value(Groups[i].Id);				
+			}
+	}
 }
 
 bool StandardDatabase::load(QString filename){
@@ -511,6 +592,7 @@ for(int i=0;i<Entries.size();i++){
 			UnknownMetaStreams << Entries[i];
 		Entries.removeAt(i);
 		i--;}
+
 }
 
 int* EntryIndices=new int[Groups.size()];
@@ -526,6 +608,7 @@ for(int g=0;g<Groups.size();g++){
 }
 delete [] EntryIndices;
 createHandles();
+restoreGroupTreeState();
 
 return true;
 }
@@ -727,20 +810,15 @@ QList<IEntryHandle*> StandardDatabase::entries(){
 	return handles;	
 }
 
-bool StandardDatabase::EntryHandle::operator<(const IEntryHandle*& other){
-	if(!isValid() && other->isValid())return true;
-	if(isValid() && !other->isValid())return false;
-	if(!isValid() && !other->isValid())return false;
-	return index()<other->index();	
-}
-
 QList<IEntryHandle*> StandardDatabase::entries(IGroupHandle* group){
 	QList<IEntryHandle*> handles;
 	for(int i=0; i<EntryHandles.size(); i++){
 		if(EntryHandles[i].isValid() && (EntryHandles[i].group()==group))
 			handles.append(&EntryHandles[i]);
 	}
-	qSort(handles.begin(),handles.end());
+	qSort(handles.begin(),handles.end(),EntryHandleLessThan);
+	foreach(IEntryHandle* h,handles){qDebug("+ %s (%i)",h->title().toUtf8().data(),(int)h->isValid());}
+
 	return handles;
 }
 
@@ -859,8 +937,17 @@ KpxDateTime	StandardDatabase::EntryHandle::lastAccess(){return Entry->LastAccess
 KpxDateTime	StandardDatabase::EntryHandle::expire(){return Entry->Expire;}
 QByteArray StandardDatabase::EntryHandle::binary(){return Entry->Binary;}
 quint32 StandardDatabase::EntryHandle::binarySize(){return Entry->Binary.size();}
-int StandardDatabase::EntryHandle::index()const{return Entry->Index;}
+int StandardDatabase::EntryHandle::visualIndex()const{return Entry->Index;}
+void StandardDatabase::EntryHandle::setVisualIndexDirectly(int i){Entry->Index=i;}
 bool StandardDatabase::EntryHandle::isValid()const{return valid;}
+
+void StandardDatabase::EntryHandle::setVisualIndex(int index){
+	QList<IEntryHandle*>Entries=pDB->entries(Entry->Group->Handle);
+	Entries.move(visualIndex(),index);
+	for(int i=0;i<Entries.size();i++){
+		dynamic_cast<StandardDatabase::EntryHandle*>(Entries[i])->Entry->Index=index;
+	}
+}
 
 StandardDatabase::EntryHandle::EntryHandle(StandardDatabase* db){
 	pDB=db;
@@ -876,8 +963,8 @@ quint32	StandardDatabase::GroupHandle::oldImage(){return Group->OldImage;}
 quint32	StandardDatabase::GroupHandle::image(){return Group->Image;}
 int StandardDatabase::GroupHandle::index(){return Group->Index;}
 void StandardDatabase::GroupHandle::setTitle(const QString& Title){Group->Title=Title;}
-
-
+void StandardDatabase::GroupHandle::setExpanded(bool IsExpanded){Group->IsExpanded=IsExpanded;}
+bool StandardDatabase::GroupHandle::expanded(){return Group->IsExpanded;}
 void StandardDatabase::GroupHandle::setImage(const quint32& New)
 {
 	if(Group->Image < pDB->builtinIcons() && New >= pDB->builtinIcons())
@@ -1003,6 +1090,8 @@ bool StandardDatabase::save(){
 	QList<StdEntry> MetaStreams;
 	MetaStreams << StdEntry();
 	createCustomIconsMetaStream(&MetaStreams.back());
+	MetaStreams << StdEntry();
+	createGroupTreeStateMetaStream(&MetaStreams.back());
 
 	FileSize=DB_HEADER_SIZE;
 	// Get the size of all groups (94 Byte + length of the name string)
@@ -1048,7 +1137,9 @@ bool StandardDatabase::save(){
 	else if(Algorithm == Twofish_Cipher) Flags |= PWM_FLAG_TWOFISH;
 	Version = PWM_DBVER_DW;
 	NumGroups = Groups.size();
-	NumEntries = Entries.size()+UnknownMetaStreams.size()+1;
+	NumEntries = Entries.size()+UnknownMetaStreams.size()+MetaStreams.size();
+	
+	qSort(Entries.begin(),Entries.end(),StdEntryLessThan);
 
 	randomize(FinalRandomSeed,16);
 	randomize(TransfRandomSeed,32);

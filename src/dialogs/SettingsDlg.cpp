@@ -107,6 +107,10 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 		case CConfig::KDE: Radio_IntPlugin_Kde->setChecked(true); break;		
 	}
 	
+	if(settings->value("GroupTreeState","ExpandAll")=="ExpandAll")Radio_GroupTreeExpand->setChecked(true);
+	if(settings->value("GroupTreeState","ExpandAll")=="Restore")Radio_GroupTreeRestore->setChecked(true);
+	if(settings->value("GroupTreeState","ExpandAll")=="ExpandNone")Radio_GroupTreeDoNothing->setChecked(true);
+	
 	if(!PluginsModified)
 		Label_IntPlugin_Info->hide();
 }
@@ -167,6 +171,11 @@ void CSettingsDlg::apply(){
 	if(Radio_IntPlugin_None->isChecked())config.IntegrPlugin=CConfig::NONE;
 	if(Radio_IntPlugin_Gnome->isChecked())config.IntegrPlugin=CConfig::GNOME;	
 	if(Radio_IntPlugin_Kde->isChecked())config.IntegrPlugin=CConfig::KDE;
+	
+	if(Radio_GroupTreeExpand->isChecked())settings->setValue("GroupTreeState","ExpandAll");
+	if(Radio_GroupTreeDoNothing->isChecked())settings->setValue("GroupTreeState","ExpandNone");
+	if(Radio_GroupTreeRestore->isChecked())settings->setValue("GroupTreeState","Restore");
+
 }
 
 void CSettingsDlg::OnTextColor()

@@ -70,6 +70,7 @@ class KeepassEntryView:public QTreeWidget{
 		virtual void mouseMoveEvent(QMouseEvent *event);
 	public slots:
 		void OnColumnResized(int index,int OldSize, int NewSize);
+		void OnHeaderSectionClicked(int index);
 		void OnGroupChanged(IGroupHandle* group);
 		void OnShowSearchResults();
 		void OnEntryActivated(QTreeWidgetItem*,int);

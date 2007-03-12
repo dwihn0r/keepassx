@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   mail@tarek-saidi.de                                                   *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -87,18 +87,19 @@ else return date().toString(format);
 
 
 CEntry::CEntry(){
-Image=0;
-GroupId=0;
-Creation=QDateTime::currentDateTime();
-LastMod=QDateTime::currentDateTime();
-LastAccess=QDateTime::currentDateTime();
-Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59)); //Never
-Binary=QByteArray();
+	Image=0;
+	GroupId=0;
+	Creation=QDateTime::currentDateTime();
+	LastMod=QDateTime::currentDateTime();
+	LastAccess=QDateTime::currentDateTime();
+	Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59)); //Never
+	Binary=QByteArray();
 }
 
 
 CGroup::CGroup(){
-Image=0;
+	Image=0;
+	IsExpanded=false;
 }
 
 

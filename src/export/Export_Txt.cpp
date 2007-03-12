@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -21,9 +21,9 @@
 #include <QString>
 #include <QFile>
 #include "main.h"
-#include "../lib/SecString.h"
+#include "lib/SecString.h"
 #include "Export_Txt.h"
-/*
+
 
 QString EntryTemplate=QString("\n\
   Title:    %1\n\
@@ -37,27 +37,22 @@ QString GroupTemplate=QString("\n\
 *** Group: %1 ***\n\
 ");
 
-bool Export_Txt::exportFile(const QString& filename,StandardDatabase* db,QString& err){
-QFile file(filename);
-if(!file.open(QIODevice::Truncate | QIODevice::WriteOnly)){
-	err+=tr("Could not open file (FileError=%1)").arg(file.error());
-	return false;
-}
-
-for(int g=0;g<db->numGroups();g++){
-	file.write(GroupTemplate.arg(db->group(g).Name).toUtf8());
-	for(int e=0;e<db->numEntries();e++){
-		if(db->group(g).ID==db->entry(e).GroupID){
-			db->entry(e).Password.unlock();
-			file.write(EntryTemplate.arg(db->entry(e).Title)
-									.arg(db->entry(e).UserName)
-									.arg(db->entry(e).URL)
-									.arg(db->entry(e).Password.string())
-									.arg(db->entry(e).Additional.replace('\n',"\n            "))
+QString Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db, QIODevice* file){
+	QList<IGroupHandle*> groups=db->sortedGroups();
+	for(int g=0;g<groups.size();g++){
+		file->write(GroupTemplate.arg(groups[g]->title()).toUtf8());
+		QList<IEntryHandle*> entries=db->entries(groups[g]);
+		for(int e=0;e<entries.size();e++){
+			SecString password=entries[e]->password();
+			password.unlock();
+			file->write(EntryTemplate.arg(entries[e]->title())
+									.arg(entries[e]->username())
+									.arg(entries[e]->url())
+									.arg(password.string())
+									.arg(entries[e]->comment().replace('\n',"\n            "))
 									.toUtf8());
-			db->entry(e).Password.lock();
+			password.lock();
 		}
 	}
+	return QString();
 }
-file.close();
-}*/

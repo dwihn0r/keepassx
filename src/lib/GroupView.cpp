@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -46,8 +46,8 @@ KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
 	ContextMenu=new QMenu(this);
 	ContextMenuSearchGroup=new QMenu(this);
 	connect(this,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
-//	connect(this,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
-//	connect(this,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollapsed(QTreeWidgetItem*)));
+	connect(this,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
+	connect(this,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollapsed(QTreeWidgetItem*)));
 }
 
 
@@ -59,12 +59,13 @@ void KeepassGroupView::createItems(){
 		if(groups[i]->parent()==NULL){
 			Items.append(new GroupViewItem(this));
 			Items.back()->setText(0,groups[i]->title());
-			Items.back()->GroupHandle=groups[i]; 
+			Items.back()->GroupHandle=groups[i];
 			addChilds(Items.back());	
 		}
 	}
 	for(int i=0;i<Items.size();i++){
 		Items[i]->setIcon(0,db->icon(Items[i]->GroupHandle->image()));
+		Items[i]->setExpanded(Items[i]->GroupHandle->expanded());
 	}
 	SearchResultItem=new GroupViewItem();
 	SearchResultItem->setText(0,tr("Search Results"));
@@ -396,6 +397,14 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 	drag->setMimeData(mimeData);
 
 	Qt::DropAction dropAction = drag->start(Qt::MoveAction);
+}
+
+void KeepassGroupView::OnItemExpanded(QTreeWidgetItem* item){
+	dynamic_cast<GroupViewItem*>(item)->GroupHandle->setExpanded(true);
+}
+
+void KeepassGroupView::OnItemCollapsed(QTreeWidgetItem* item){
+	dynamic_cast<GroupViewItem*>(item)->GroupHandle->setExpanded(false);
 }
 
 

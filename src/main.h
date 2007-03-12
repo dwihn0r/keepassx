@@ -26,6 +26,7 @@
 #include <QColor>
 #include <QIcon>
 #include <QFile>
+#include <QSettings>
 
 #define KEEPASS_VERSION "0.2.3"
 #define BUILTIN_ICONS 62
@@ -43,6 +44,7 @@ QString findPlugin(const QString& filename);
 extern QString PluginLoadError;
 
 extern CConfig  config;
+extern QSettings *settings;
 extern QString  AppDir;
 extern bool TrActive;
 extern QPixmap *EntryIcons;

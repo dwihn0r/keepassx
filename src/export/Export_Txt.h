@@ -19,13 +19,14 @@
  ***************************************************************************/
 #ifndef _EXPORT_TXT_H_
 #define _EXPORT_TXT_H_
+
 #include <QObject>
-#include "StandardDatabase.h"
+#include "IExport.h"
 
-class Export_Txt:public QObject{
-public:
-	bool exportFile(const QString& filename,StandardDatabase* db,QString& err);
-
+class Export_Txt:public QObject, public IExport{
+	public:
+		virtual QString exportDatabase(QWidget* GuiParent, IDatabase* Database, QIODevice* Dest);	
+		virtual QString name(){return QString("Txt");}
 };
 
 #endif

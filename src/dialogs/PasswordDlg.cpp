@@ -18,9 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "main.h"
-#include "PwmConfig.h"
-#include "PasswordDlg.h"
 #include <QFileDialog>
 #include <QDir>
 #include <QStringList>
@@ -29,6 +26,12 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QStringList>
+
+#include "main.h"
+#include "PwmConfig.h"
+#include "PasswordDlg.h"
+#include "lib/FileDialogs.h"
 
 
 CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButton,bool ChangeKeyMode)
@@ -127,27 +130,23 @@ void CPasswordDialog::setStateBoth(){
 
 void CPasswordDialog::OnButtonBrowse()
 {
-	QFileDialog FileDlg(this,tr("Select a Key File"),QDir::homePath());
-	FileDlg.setFilters(QStringList()<<tr("All Files (*)") << tr("Key Files (*.key)"));
-	FileDlg.setFileMode(QFileDialog::ExistingFile);
-	if(!FileDlg.exec())return;
-	if(!FileDlg.selectedFiles().size())return;	
-	QFile file(FileDlg.selectedFiles()[0]);
-	if(file.exists()){
-		Combo_Dirs->setEditText(FileDlg.selectedFiles()[0]);
-		return;
+	QString filename=KpxFileDialogs::openExistingFile(this,"PasswordDlg",tr("Select a Key File"),
+													  QStringList() << tr("All Files (*)") << tr("Key Files (*.key)"));
+	if(filename!=QString()){
+		Combo_Dirs->setEditText(filename);
 	}
-	QMessageBox::warning(this,tr("Error"),tr("Unexpected Error: File does not exist."),tr("OK"),"","",0,0);
+	return;
 }
 
 void CPasswordDialog::OnButtonBrowse_Set()
 {
-	QFileDialog FileDlg(this,tr("Select a Key File"),QDir::homePath());
-	FileDlg.setFilters(QStringList()<<tr("All Files (*)") << tr("Key Files (*.key)"));
-	FileDlg.setFileMode(QFileDialog::AnyFile);
-	if(!FileDlg.exec())return;
-	if(!FileDlg.selectedFiles().size())return;	
-	Combo_Dirs->setEditText(FileDlg.selectedFiles()[0]);
+	QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Select a Key File"),
+											  QStringList() << tr("All Files (*)") << tr("Key Files (*.key)"),
+											  false);
+	if(filename!=QString()){
+		Combo_Dirs->setEditText(filename);
+	}
+	return;
 }
 
 void CPasswordDialog::OnCancel()

@@ -62,7 +62,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex" >
-      <number>3</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -914,6 +914,13 @@
           <widget class="QLineEdit" name="Edit_BrowserCmd" />
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_VerifyAfterSaving" >
+         <property name="text" >
+          <string>Verify database content and structure after saving</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer>

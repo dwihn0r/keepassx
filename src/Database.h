@@ -103,6 +103,7 @@ public:
 	quint32 Image;
 	QString Title;
 	bool operator==(const CGroup& other) const;
+	bool IsExpanded;
 };
 
 
@@ -144,14 +145,25 @@ public:
 	virtual KpxDateTime expire()=0;
 	virtual QByteArray binary()=0;
 	virtual quint32 binarySize()=0;
+	
 	//! \return the index of the entry amongst the entries of its group. The index of the first entry is 0.
-	virtual int index()const=0;
+	virtual int visualIndex()const=0;
+	
+	/*! Sets the visual index of an entry. The indices of all other entries in the same group get automaticly readjusted by this function.
+		\param index The new visual index.
+	*/
+	virtual void setVisualIndex(int index)=0;
+	
+	/*! Sets the visual index of an entry. The indices of all other entries in the same group need to be adjusted manually!
+		This function is optimal to avoid readjustion overhead when sorting items.
+		\param index The new visual index.
+	*/
+	virtual void setVisualIndexDirectly(int index)=0;
 
 	/*! Tests the validity of the handle.
 		\return TRUE if the handle is valid and FALSE if the handle is invalid e.g. because the associated entry was deleted.*/
 	virtual bool isValid()const=0;
-	
-	virtual bool operator<(const IEntryHandle*& other)=0;
+
 
 };
 
@@ -218,6 +230,9 @@ public:
 	
 	/*! \return the level of the group in the group tree. This level is tantamount to the number of parents that the group has. */
 	virtual int level()=0;
+	
+	virtual bool expanded()=0;
+	virtual void setExpanded(bool)=0;
 
 };
 
@@ -225,7 +240,7 @@ public:
 /*!
 This is the common base interface for databases. Every database class must implement this interface necessarily. 
 */
-class IDatabase{
+class IDatabase:public QObject{
 public:
 	virtual ~IDatabase(){};
 

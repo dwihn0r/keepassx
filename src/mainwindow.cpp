@@ -38,6 +38,7 @@
 #include <QFileDialog>
 #include <QStatusBar>
 
+#include "KpxFirefox.h"
 #include "lib/random.h"
 #include "lib/IniReader.h"
 #include "lib/AutoType.h"
@@ -55,35 +56,54 @@
 #include "dialogs/PasswordGenDlg.h"
 #include "dialogs/CollectEntropyDlg.h"
 
+#include <QtDBus/QtDBus>
+#include <iostream>
+
+QDBusServer* dbusServer;
+QDBusConnection* dbusCon;
+
 
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
-  Start=true;
-  ShutingDown=false;
-  setupUi(this);
-  AutoType::MainWin=this;
-  setGeometry(geometry().x(),geometry().y(),config.MainWinWidth,config.MainWinHeight);
-  splitter->setSizes(QList<int>() << config.MainWinSplit1 << config.MainWinSplit2);
-  SysTray=new QSystemTrayIcon(this);
-  setupToolbar();
-  setupIcons();
-  setStateFileOpen(false);
-  setupMenus();
-  StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
-  StatusBarSelection=new QLabel(statusBar());
-  statusBar()->addWidget(StatusBarGeneral,15);
-  statusBar()->addWidget(StatusBarSelection,85);
-  statusBar()->setVisible(config.ShowStatusbar);
-  setupConnections();
-  FileOpen=false;
-  if(ArgFile!=QString())
-	openDatabase(ArgFile,false);
-  else if(config.OpenLast && (config.LastFile!=QString()) ){
+	Start=true;
+	ShutingDown=false;
+	setupUi(this);
+	AutoType::MainWin=this;
+	setGeometry(settings->value("Ui/MainWindowGeometry",QVariant(geometry())).toRect());
+	splitter->restoreState(settings->value("Ui/SplitterPos").toByteArray());
+	SysTray=new QSystemTrayIcon(this);
+	setupToolbar();
+	setupIcons();
+	setStateFileOpen(false);
+	setupMenus();
+	StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
+	StatusBarSelection=new QLabel(statusBar());
+	statusBar()->addWidget(StatusBarGeneral,15);
+	statusBar()->addWidget(StatusBarSelection,85);
+	statusBar()->setVisible(config.ShowStatusbar);
+	setupConnections();
+	FileOpen=false;
+	if(ArgFile!=QString())
+		openDatabase(ArgFile,false);
+	else if(config.OpenLast && (config.LastFile!=QString()) ){
 		QFileInfo file(config.LastFile);
 		if(file.exists())
 			openDatabase(config.LastFile,true);
 		else
 			config.LastFile=QString();	
-  		}
+	}
+	
+	
+	//dbusServer=new QDBusServer("unix:path=/tmp/KpxBus",this);
+	//qDebug("DBUS: %s",dbusServer->lastError().message().toAscii().data());
+	//QDBusConnection::connectToBus("unix:path=/tmp/KpxBus","MyKpxConnection");
+	//qDebug("DBUS: %s",dbusCon->lastError().message().toAscii().data());
+	
+	KpxFirefox* fox=new KpxFirefox(NULL);
+	new KpxFirefoxAdaptor(fox);
+	QDBusConnection::sessionBus().registerService("org.keepassx.firefoxservice");
+	QDBusConnection::sessionBus().registerObject("/KpxFirefox",fox);
+	qDebug("DBUS: %s",QDBusConnection::sessionBus().lastError().message().toAscii().data());
+	
 }
 
 void KeepassMainWindow::setupConnections(){
@@ -642,13 +662,33 @@ void KeepassMainWindow::OnFileExit(){
 }
 
 void KeepassMainWindow::OnExportToTxt(){
-	/*
-QString filename=QFileDialog::getSaveFileName(this,tr("Export To..."),QDir::homePath(),"*.txt");
-if(filename==QString())return;
-Export_Txt exp;
-QString err;
-exp.exportFile(filename,db,err);
-	*/
+	IExport* exporter=new Export_Txt();
+	QStringList Filters;
+	Filters << tr("All Files (*)");
+	Filters << tr("Text Files (*.txt)");
+	exportDatabase(exporter, Filters);
+	delete exporter;
+}
+
+void KeepassMainWindow::exportDatabase(IExport* exporter,QStringList Filters){
+	QString filename=KpxFileDialogs::saveFile(this,"Export_"+exporter->name(),tr("Export Database"),Filters,true);
+	if(filename==QString())return;
+	QFile file(filename);
+	if(!file.open(QIODevice::WriteOnly|QIODevice::Truncate)){
+		QMessageBox::critical(this,tr("Export Failed"),decodeFileError(file.error()));
+		return;
+	}
+	QString err=exporter->exportDatabase(this,db,&file);
+	if(err!=QString()){
+		QMessageBox::critical(this,tr("Export Failed"),err);
+		return;
+	}
+	file.close();
+	if(file.error()!=QFile::NoError){
+		QMessageBox::critical(this,tr("Export Failed"),decodeFileError(file.error()));
+		return;		
+	}	
+	
 }
 
 void KeepassMainWindow::OnImportFromPwm(){
@@ -816,10 +856,8 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 		return;
 	}
 	
-	config.MainWinHeight=geometry().height();
-	config.MainWinWidth=geometry().width();
-	config.MainWinSplit1=splitter->sizes()[0];
-	config.MainWinSplit2=splitter->sizes()[1];
+	settings->setValue("Ui/MainWindowGeometry",QVariant(geometry()));
+	settings->setValue("Ui/SplitterPos",splitter->saveState());
 	config.ShowStatusbar=statusBar()->isVisible();
 	
 	if(FileOpen){

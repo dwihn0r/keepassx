@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   mail@tarek-saidi.de                                                   *
+ *   Copyright (C) 2007 by Tarek Saidi                                     *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,6 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+ 
 #ifndef _IMPORT_KWALLET_H_
 #define _IMPORT_KWALLET_H_
 #include <qstring.h>

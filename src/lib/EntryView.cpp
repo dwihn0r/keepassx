@@ -47,9 +47,11 @@ KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 	updateColumns();
 	header()->setResizeMode(QHeaderView::Interactive);
 	header()->setStretchLastSection(false);
+	header()->setClickable(true);
 	connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized(int,int,int)));
 	connect(this,SIGNAL(itemSelectionChanged()),this,SLOT(OnItemsChanged()));
 	connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
+	connect(header(),SIGNAL(sectionClicked(int)),this,SLOT(OnHeaderSectionClicked(int)));
 	Clipboard=QApplication::clipboard();
 	ContextMenu=new QMenu(this);
 	setAlternatingRowColors(config.AlternatingRowColors);
@@ -79,6 +81,22 @@ void KeepassEntryView::OnItemsChanged(){
 		case 1:	emit selectionChanged(SINGLE);
 				break;	
 		default:emit selectionChanged(MULTIPLE);
+	}
+}
+
+void KeepassEntryView::OnHeaderSectionClicked(int index){
+	if(header()->isSortIndicatorShown() && header()->sortIndicatorSection()==index){
+		header()->setSortIndicator(index,header()->sortIndicatorOrder() ? Qt::DescendingOrder : Qt::AscendingOrder);
+		sortItems(index,header()->sortIndicatorOrder());
+	}
+	else{
+		header()->setSortIndicator(index,Qt::AscendingOrder);
+		header()->setSortIndicatorShown(true);
+		sortItems(index,Qt::AscendingOrder);			
+	}
+	
+	for(int i=0;i<Items.size();i++){
+		Items[i]->EntryHandle->setVisualIndexDirectly(indexOfTopLevelItem(Items[i]));		
 	}
 }
 
@@ -268,7 +286,8 @@ void KeepassEntryView::showGroup(IGroupHandle* group){
 	createItems(entries);	
 }
 
-void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){	
+void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){
+	header()->setSortIndicatorShown(false);
 	for(int i=0;i<entries.size();i++){
 		if(!entries[i]->isValid())continue;
 		EntryViewItem* item=new EntryViewItem(this);
@@ -304,6 +323,7 @@ void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){
 		if(config.Columns[9]){
 			item->setText(j++,entries[i]->binaryDesc());}
 		Items.back()->setIcon(0,db->icon(entries[i]->image()));
+		qDebug("%s  :  %i",entries[i]->title().toUtf8().data(),entries[i]->visualIndex());
 	}
 }
 

@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -38,6 +38,7 @@
 #include "lib/FileDialogs.h"
 
 #include "main.h"
+#include "lib/FileDialogs.h"
 #include "PwmConfig.h"
 #include "StandardDatabase.h"
 #include "mainwindow.h"
@@ -56,6 +57,7 @@ using namespace std;
 #define CSTR(x)(x.toUtf8().data())
 					 
 CConfig config;
+QSettings* settings;
 QString  AppDir;
 QString PluginLoadError;
 bool TrActive;
@@ -112,6 +114,9 @@ int main(int argc, char **argv)
 	IniFilename=ArgCfg;
 	config.loadFromIni(IniFilename);}
 	
+	
+	settings = new QSettings(QDir::homePath()+"/.keepassx/config",QSettings::IniFormat);
+	fileDlgHistory.load();
 	
 	//Plugins
 	if(config.IntegrPlugin!=CConfig::NONE){
@@ -209,7 +214,10 @@ int main(int argc, char **argv)
 		QMessageBox::warning(NULL,QObject::tr("Warning"),
 				QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),
 				QObject::tr("OK"),"","",0.0);
+	
+	fileDlgHistory.save();
 	delete app;
+	delete settings;
 	return r;
 }
 

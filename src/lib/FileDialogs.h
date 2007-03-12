@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -23,27 +23,31 @@
 #include <QObject>
 #include <QFileDialog>
 #include <QList>
+#include <QHash>
 #include "plugins/interfaces/IFileDialog.h"
 
-/*
+
 class FileDlgHistory{
-	class HistoryEntry{
 	public:
-		QString DlgId;
-		QString Dir;
-		int Filter;
-		QString toString();
-		void fromString(const QString& str);
-	};
-	public:
-		void set(const QString& DlgId,const QString& Dir,int Filter);
-		int getFilter(const QString& DlgId);
-		QString getDir(const QString& DlgId);
-		void clear();
+		QString getDir(const QString& name);
+		int getFilter(const QString& name);
+		void set(const QString& name,const QString& dir,int filter);
+		void save();
+		void load();	
 	private:
-		QList
+		class Entry{
+			public:
+				Entry(){Filter=-1;}
+				QString Dir;
+				int Filter;
+				bool isNull(){if(Filter==-1)return true;
+								else return false;}
+		};
+		
+		QHash<QString,Entry>History;
+	
 };
-*/
+
 
 class KpxFileDialogs{
 	public:
@@ -71,14 +75,17 @@ class KpxFileDialogs{
 
 
 class QtStandardFileDialogs:public QObject,public IFileDialog{
-Q_OBJECT	
-	public:
-		QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters);
-		QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters);		
-		QString saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool ShowOverwriteWarning);
+	Q_OBJECT	
+		public:
+			QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters);
+			QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters);		
+			QString saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool ShowOverwriteWarning);
+			int getLastFilter();
+		private:
+			int LastFilter;
 	
 };
 
- 
+extern FileDlgHistory fileDlgHistory; 
  
 #endif

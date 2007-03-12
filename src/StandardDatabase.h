@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   keepassx@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -38,6 +38,7 @@
 #include <QTime>
 #include <QStringList>
 #include <QPixmap>
+#include <QMap>
 #include "lib/SecString.h"
 #include "Database.h"
 
@@ -73,7 +74,9 @@ public:
 			virtual KpxUuid uuid();
 			virtual IGroupHandle* group();
 			virtual quint32 image();
-			virtual int index() const;
+			virtual int visualIndex() const;
+			virtual void setVisualIndex(int i);
+			virtual void setVisualIndexDirectly(int i);
 			quint32 oldImage();
 			virtual QString title();
 			virtual QString url();
@@ -88,7 +91,6 @@ public:
 			virtual QByteArray binary();
 			virtual quint32 binarySize();
 			virtual bool isValid() const;
-			virtual bool operator<(const IEntryHandle*& other);
 		private:
 			void invalidate(){valid=false;}
 			bool valid;
@@ -113,6 +115,8 @@ public:
 			virtual int index();
 			virtual void setIndex(int index);
 			virtual int level();
+			virtual bool expanded();
+			virtual void setExpanded(bool IsExpanded);
 		private:
 			void invalidate(){valid=false;}
 			bool valid;
@@ -193,9 +197,12 @@ private:
 	void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
 	bool isMetaStream(StdEntry& Entry);
 	bool parseMetaStream(const StdEntry& Entry);
-	bool parseCustomIconsMetaStream(const QByteArray& data);
+	void parseCustomIconsMetaStream(const QByteArray& data);
  	bool parseCustomIconsMetaStreamV1(const QByteArray& data);
 	bool parseCustomIconsMetaStreamV2(const QByteArray& data);
+	void parseGroupTreeStateMetaStream(const QByteArray& data);
+	void createCustomIconsMetaStream(StdEntry* e);
+	void createGroupTreeStateMetaStream(StdEntry* e);
 	bool readEntryField(StdEntry* entry, quint16 FieldType, quint32 FieldSize, quint8 *pData);
 	bool readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint32 FieldSize, quint8 *pData);
 	bool createGroupTree(QList<quint32>& Levels);
@@ -206,12 +213,12 @@ private:
 	quint32 getNewGroupId();
 	void serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsigned int& pos);
 	void serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos);
-	void createCustomIconsMetaStream(StdEntry* e);
 	void appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& group);
 	void appendChildsToGroupList(QList<IGroupHandle*>& list,StdGroup& group);
 	bool searchStringContains(const QString& search, const QString& string,bool Cs, bool RegExp);
 	void getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList);
 	void rebuildIndices(QList<StdGroup*>& list);
+	void restoreGroupTreeState();
 
 	StdEntry* getEntry(const KpxUuid& uuid);
 	StdEntry* getEntry(EntryHandle* handle);
@@ -231,6 +238,7 @@ private:
 	QString error;
 	bool KeyError;
 	QList<StdEntry> UnknownMetaStreams;
+	QMap<quint32,bool> TreeStateMetaStream;
 	unsigned int KeyTransfRounds;
 	CryptAlgorithm Algorithm;
 	quint8 RawMasterKey[32];
