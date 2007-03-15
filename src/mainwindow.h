@@ -43,7 +43,7 @@
 #include "PwmConfig.h"
 #include "lib/EntryView.h"
 #include "lib/GroupView.h"
-#include "export/IExport.h"
+#include "export/Export.h"
 
 #include "ui_MainWindow.h"
 
@@ -67,9 +67,6 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnFileSettings();
 		void OnFileChangeKey();
 		void OnFileExit();
-		void OnImportFromPwm();
-		void OnImportFromKWalletXml();
-		void OnExportToTxt();
 		void OnEditOpenUrl();
 		void OnSearch();
 		void OnGroupSearch();
@@ -92,6 +89,8 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnShowSearchResults();
 		void OnEntryChanged(SelectionState);
 		void OnSysTrayActivated(QSystemTrayIcon::ActivationReason);
+		void OnImport(QAction*);
+		void OnExport(QAction*);
 	
 	private:
 		void closeEvent(QCloseEvent* event);

@@ -61,8 +61,12 @@ HEADERS += lib/IniReader.h \
            lib/SecString.h \
            crypto/twoclass.h \
            crypto/twofish.h \
+	   import/Import.h \
+	   import/Import_KeePassX_Xml.h \
            import/Import_PwManager.h \
            export/Export_Txt.h \
+	   export/Export_KeePassX_Xml.h \
+	   export/Export.h \
            import/Import_KWalletXml.h \
            PwmConfig.h \
            dialogs/AboutDlg.h \
@@ -95,6 +99,8 @@ HEADERS += lib/IniReader.h \
 	   crypto/aescpp.h \
 	   crypto/sha256.h \
 	   crypto/yarrow.h \
+	   crypto/blowfish.h \
+	   crypto/sha1.h \
 	   lib/WaitAnimationWidget.h \
 	   plugins/interfaces/IFileDialog.h \
 	   plugins/interfaces/IKdeInit.h \
@@ -108,8 +114,14 @@ SOURCES += lib/IniReader.cpp \
            lib/SecString.cpp \
            crypto/twoclass.cpp \
            crypto/twofish.cpp \
+	   crypto/blowfish.cpp \
+	   crypto/sha1.cpp \
+	   import/Import.cpp \
            import/Import_PwManager.cpp \
+	   import/Import_KeePassX_Xml.cpp \
            export/Export_Txt.cpp \
+	   export/Export_KeePassX_Xml.cpp \
+	   export/Export.cpp \
            import/Import_KWalletXml.cpp \
            PwmConfig.cpp \
            dialogs/AboutDlg.cpp \

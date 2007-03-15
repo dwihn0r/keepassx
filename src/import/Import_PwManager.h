@@ -20,23 +20,26 @@
 
 #ifndef _IMPORT_PWMANAGER_
 #define _IMPORT_PWMANAGER_
-#include <qdom.h>
-#include <qstring.h>
-#include "StandardDatabase.h"
+#include <QDomElement>
+#include <QString>
+#include "Database.h"
+#include "Import.h"
 
-/*
-class Import_PwManager{
-public:
-bool importFile(QString FileName, QString Password,StandardDatabase* db,QString& err);
-private:
- bool KeyFlag; // true=Password, false=Chipcard
- int Compression; // 0=none, 1=gzip, 2=bzip2
- unsigned char KeyHash[20];
- unsigned char DataHash[20];
- StandardDatabase* database;
 
- bool parseXmlContent(char* content);
- bool xml_parseEntryAttributes(QDomElement* EntryTag,IGroupHandle* parent);
+class Import_PwManager:public IImport, public ImporterBase{
+	public:
+		virtual bool importDatabase(QWidget* GuiParent, IDatabase* Database);
+		virtual QString identifier(){return "PwManager";}
+		virtual QString title(){return "PwManager File (*.pwm)";}
+	private:
+		bool KeyFlag; // true=Password, false=Chipcard
+		int Compression; // 0=none, 1=gzip, 2=bzip2
+		unsigned char KeyHash[20];
+		unsigned char DataHash[20];
+		IDatabase* database;
+		
+		bool parseXmlContent(char* content);
+		bool xml_parseEntryAttributes(QDomElement* EntryTag,IGroupHandle* parent);
 };
-*/
+
 #endif

@@ -60,12 +60,12 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
 	connect(Edit_Password, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordTextChanged(const QString&)));
 	connect(ButtonEchoMode, SIGNAL(clicked()), this, SLOT( ChangeEchoMode()));
-	connect(ButtonCancel, SIGNAL(clicked()), this, SLOT( OnButtonCancel()));
+	connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT( OnButtonCancel()));
 	connect(ButtonOpenAttachment, SIGNAL(clicked()), this, SLOT( OnNewAttachment()));
 	connect(ButtonDeleteAttachment, SIGNAL(clicked()), this, SLOT( OnDeleteAttachment()));
 	connect(ButtonSaveAttachment, SIGNAL(clicked()), this, SLOT( OnSaveAttachment()));
 	connect(ButtonGenPw, SIGNAL(clicked()), this, SLOT( OnButtonGenPw()));
-	connect(ButtonOK, SIGNAL(clicked()),this,SLOT(OnButtonOK()));
+	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()),this,SLOT(OnButtonOK()));
 	connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
 	connect(Button_CustomIcons,SIGNAL(clicked()),this,SLOT(OnCustomIcons()));
 	
@@ -139,6 +139,7 @@ if(event->spontaneous()==false){
 //Added resize event
 void CEditEntryDlg::resizeEvent(QResizeEvent *event){
 	createBanner(&BannerPixmap,Icon_Key32x32,tr("Test 2"),width());
+	QDialog::resizeEvent(event);
 }
 
 

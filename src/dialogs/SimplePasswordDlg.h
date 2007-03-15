@@ -23,31 +23,21 @@
 
 #include "ui_SimplePasswordDlg.h"
 
-class CSimplePasswordDialog : public QDialog, public Ui_SimplePasswordDialog
+class SimplePasswordDialog : public QDialog, public Ui_SimplePasswordDialog
 {
   Q_OBJECT
 
 public:
-  CSimplePasswordDialog(QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
-  ~CSimplePasswordDialog();
-  /*$PUBLIC_FUNCTIONS$*/
+  SimplePasswordDialog(QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
+  ~SimplePasswordDialog();
 
-public slots:
-  /*$PUBLIC_SLOTS$*/
-
-protected:
-  /*$PROTECTED_FUNCTIONS$*/
-
-protected slots:
-  /*$PROTECTED_SLOTS$*/
-public: QString password;
+  public: QString password;
 
 public slots:
     virtual void OnCancel();
-public slots:
     virtual void OnOK();
-public slots:
     virtual void OnHidePasswordToggled(bool state);
+	virtual void OnTextChanged(const QString&);
 };
 
 #endif

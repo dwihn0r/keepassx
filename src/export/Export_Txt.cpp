@@ -37,7 +37,9 @@ QString GroupTemplate=QString("\n\
 *** Group: %1 ***\n\
 ");
 
-QString Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db, QIODevice* file){
+bool Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db){
+	QFile *file=openFile(GuiParent,identifier(),QStringList()<<tr("All Files (*)") << tr("Text Files (*.txt)"));
+	if(!file)return false;
 	QList<IGroupHandle*> groups=db->sortedGroups();
 	for(int g=0;g<groups.size();g++){
 		file->write(GroupTemplate.arg(groups[g]->title()).toUtf8());
@@ -54,5 +56,6 @@ QString Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db, QIODevice*
 			password.lock();
 		}
 	}
-	return QString();
+	delete file;
+	return true;
 }

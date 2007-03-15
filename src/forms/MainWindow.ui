@@ -137,38 +137,6 @@
     <addaction name="EditSearchAction" />
     <addaction name="EditGroupSearchAction" />
    </widget>
-   <widget class="QMenu" name="menuDatei" >
-    <property name="title" >
-     <string>&amp;File</string>
-    </property>
-    <widget class="QMenu" name="menuImportieren_aus" >
-     <property name="title" >
-      <string>&amp;Import from...</string>
-     </property>
-     <addaction name="FileImpPwmAction" />
-     <addaction name="FileImpKWalletXmlAction" />
-    </widget>
-    <widget class="QMenu" name="menuExport_to" >
-     <property name="title" >
-      <string>&amp;Export to...</string>
-     </property>
-     <addaction name="FileExpPlainTextAction" />
-    </widget>
-    <addaction name="FileNewAction" />
-    <addaction name="FileOpenAction" />
-    <addaction name="FileCloseAction" />
-    <addaction name="separator" />
-    <addaction name="FileSaveAction" />
-    <addaction name="FileSaveAsAction" />
-    <addaction name="separator" />
-    <addaction name="FileSettingsAction" />
-    <addaction name="FileChangeKeyAction" />
-    <addaction name="separator" />
-    <addaction name="menuImportieren_aus" />
-    <addaction name="menuExport_to" />
-    <addaction name="separator" />
-    <addaction name="FileExitAction" />
-   </widget>
    <widget class="QMenu" name="ViewMenu" >
     <property name="title" >
      <string>&amp;View</string>
@@ -221,6 +189,35 @@
     <addaction name="ExtrasSettingsAction" />
     <addaction name="ExtrasPasswordGenAction" />
    </widget>
+   <widget class="QMenu" name="menuDatei" >
+    <property name="title" >
+     <string>&amp;File</string>
+    </property>
+    <widget class="QMenu" name="menuExport" >
+     <property name="title" >
+      <string>&amp;Export to...</string>
+     </property>
+    </widget>
+    <widget class="QMenu" name="menuImport" >
+     <property name="title" >
+      <string>&amp;Import from...</string>
+     </property>
+    </widget>
+    <addaction name="FileNewAction" />
+    <addaction name="FileOpenAction" />
+    <addaction name="FileCloseAction" />
+    <addaction name="separator" />
+    <addaction name="FileSaveAction" />
+    <addaction name="FileSaveAsAction" />
+    <addaction name="separator" />
+    <addaction name="FileSettingsAction" />
+    <addaction name="FileChangeKeyAction" />
+    <addaction name="separator" />
+    <addaction name="menuImport" />
+    <addaction name="menuExport" />
+    <addaction name="separator" />
+    <addaction name="FileExitAction" />
+   </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
    <addaction name="ViewMenu" />
@@ -260,16 +257,6 @@
   <action name="FileExitAction" >
    <property name="text" >
     <string>E&amp;xit</string>
-   </property>
-  </action>
-  <action name="FileImpPwmAction" >
-   <property name="text" >
-    <string>PwManager File (*.pwm)</string>
-   </property>
-  </action>
-  <action name="FileImpKWalletXmlAction" >
-   <property name="text" >
-    <string>KWallet XML-File (*.xml)</string>
    </property>
   </action>
   <action name="EditNewGroupAction" >
@@ -464,11 +451,6 @@
     <string>&amp;KeePassX Handbook...</string>
    </property>
   </action>
-  <action name="FileExpPlainTextAction" >
-   <property name="text" >
-    <string>Plain Text (*.txt)</string>
-   </property>
-  </action>
   <action name="HideSearchResultsAction" >
    <property name="text" >
     <string>Hide</string>
@@ -526,14 +508,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KeepassGroupView</class>
-   <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
-  </customwidget>
-  <customwidget>
    <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
    <header>../../src/lib/EntryView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeepassGroupView</class>
+   <extends>QTreeWidget</extends>
+   <header>../../src/lib/GroupView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

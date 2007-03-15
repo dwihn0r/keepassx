@@ -18,150 +18,152 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <qobject.h>
-#include <qfile.h>
+#include <QFile>
 #include <iostream>
-#include <qdom.h>
-//#include "crypto/blowfish.h"
-//#include "crypto/sha1.h"
+#include <QMessageBox>
+#include <QtXml>
+#include "crypto/blowfish.h"
+#include "crypto/sha1.h"
 #include "Import_PwManager.h"
 using namespace std;
-	/*
-bool Import_PwManager::importFile(QString filename, QString password, StandardDatabase* db, QString& err){
 
-database=db;
-QFile file(filename);
-char* buffer=NULL;
-int offset=0;
-int len=0;
-if(!file.exists()){err+=QObject::tr("File not found."); return false;}
-if(!file.open(QIODevice::ReadOnly)){err+=QObject::tr("Could not open file."); return false;}
-if(len=file.size()) buffer=new char[len];
-else {err+=QObject::tr("File is empty."); return false;}
-file.read(buffer,len);
-file.close();
-if(QString::fromAscii(buffer,17)!="PWM_PASSWORD_FILE")
-  {err+=QObject::tr("File is no valid PwManager file."); return false;}
-offset+=17;
-if(buffer[offset]!=0x05)
- {err+=QObject::tr("Unsupported file version."); return false;}
-offset++;
-if(buffer[offset]!=0x01)
- {err+=QObject::tr("Unsupported hash algorithm."); return false;}
-offset++;
-if(buffer[offset]!=0x01)
- {err+=QObject::tr("Unsupported hash algorithm."); return false;}
-offset++;
-if(buffer[offset]!=0x01)
- {err+=QObject::tr("Unsupported encryption algorithm."); return false;}
-offset++;
-if(buffer[offset]==0x00)Compression=0;
-if(buffer[offset]==0x01)Compression=1;
-if(buffer[offset]==0x02)Compression=2;
-  ///@TODO Compression
-  if(buffer[offset])
-  {err+=QObject::tr("Compressed files are not supported yet."); return false;}
-offset++;
-if(buffer[offset]==0x00)KeyFlag=true;
-else KeyFlag=false;
-offset++;
-//Reserved Bytes (64)
-offset+=64;
-memcpy(KeyHash,buffer+offset,20);
-offset+=20;
-memcpy(DataHash,buffer+offset,20);
-offset+=20;
-
-Blowfish blowfish;
-int pwlen=password.length();
-byte* Key=new byte[pwlen];
-byte* xml=new byte[len-offset+1];
-xml[len-offset]=0;
-memcpy(Key,password.toAscii(),pwlen);
-  char* key_hash=new char[20];
-  CSHA1 sha;
-  sha.Update(Key,pwlen);
-  sha.Final();
-  sha.GetHash((unsigned char*)key_hash);
-  if(memcmp(key_hash,KeyHash,20)){
-	delete[] Key; delete [] key_hash; delete [] buffer;
-	err+=QObject::tr("Wrong password.");
-	return false;
-}
-delete [] key_hash;
-blowfish.bf_setkey(Key,password.length());
-blowfish.bf_decrypt(xml,(byte*)buffer+offset,len-offset);
-delete [] Key;
-delete [] buffer;
-  char* content_hash=new char[20];
-  sha.Reset();
-  sha.Update(xml,strlen((char*)xml)-1);
-  sha.Final();
-  sha.GetHash((unsigned char*)content_hash);
-  if(memcmp(content_hash,DataHash,20)){
-	delete [] content_hash; delete [] xml;
-	err+=QObject::tr("File is damaged (hash test failed).");
-	return false;
-}
-delete[] content_hash;
-
-if(!parseXmlContent((char*)xml)){
-	delete [] xml;
-	err+=QObject::tr("Invalid XML data (see stdout for details)."); return false;}
-database->CalcMasterKeyByPassword(password);
-return true;
+bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){	
+	database=db;
+	QFile* file=openFile(GuiParent,identifier(),QStringList()<<tr("PwManager Files (*.pwm)")<<tr("All Files (*)"));
+	if(!file)return false;
+	QString password=getPassword(GuiParent);
+	if(password==QString()){delete file; return false;}
+	char* buffer=NULL;
+	int offset=0;
+	int len=0;
+	if(len=file->size()) buffer=new char[len];
+	else {QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is empty.")); delete file; return false;}
+	file->read(buffer,len);
+	file->close();
+	delete file;
+	if(QString::fromAscii(buffer,17)!="PWM_PASSWORD_FILE")
+	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is no valid PwManager file.")); return false;}
+	offset+=17;
+	if(buffer[offset]!=0x05)
+	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Unsupported file version.")); return false;}
+	offset++;
+	if(buffer[offset]!=0x01)
+	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Unsupported hash algorithm.")); return false;}
+	offset++;
+	if(buffer[offset]!=0x01)
+	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Unsupported hash algorithm.")); return false;}
+	offset++;
+	if(buffer[offset]!=0x01)
+	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Unsupported encryption algorithm.")); return false;}
+	offset++;
+	if(buffer[offset]==0x00)Compression=0;
+	if(buffer[offset]==0x01)Compression=1;
+	if(buffer[offset]==0x02)Compression=2;
+	///@TODO Compression
+	if(buffer[offset])
+	{QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Compressed files are not supported yet.")); return false;}
+	offset++;
+	if(buffer[offset]==0x00)KeyFlag=true;
+	else KeyFlag=false;
+	offset++;
+	//Reserved Bytes (64)
+	offset+=64;
+	memcpy(KeyHash,buffer+offset,20);
+	offset+=20;
+	memcpy(DataHash,buffer+offset,20);
+	offset+=20;
+	
+	Blowfish blowfish;
+	int pwlen=password.length();
+	byte* Key=new byte[pwlen];
+	byte* xml=new byte[len-offset+1];
+	xml[len-offset]=0;
+	memcpy(Key,password.toAscii(),pwlen);
+	char* key_hash=new char[20];
+	CSHA1 sha;
+	sha.Update(Key,pwlen);
+	sha.Final();
+	sha.GetHash((unsigned char*)key_hash);
+	if(memcmp(key_hash,KeyHash,20)){
+		delete[] Key; delete [] key_hash; delete [] buffer;
+		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Wrong password."));
+		return false;
+	}
+	delete [] key_hash;
+	blowfish.bf_setkey(Key,password.length());
+	blowfish.bf_decrypt(xml,(byte*)buffer+offset,len-offset);
+	delete [] Key;
+	delete [] buffer;
+	char* content_hash=new char[20];
+	sha.Reset();
+	sha.Update(xml,strlen((char*)xml)-1);
+	sha.Final();
+	sha.GetHash((unsigned char*)content_hash);
+	if(memcmp(content_hash,DataHash,20)){
+		delete [] content_hash; delete [] xml;
+		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is damaged (hash test failed)."));
+		return false;
+	}
+	delete[] content_hash;
+	
+	if(!parseXmlContent((char*)xml)){
+		delete [] xml;
+		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Invalid XML data (see stdout for details).")); return false;}
+	dynamic_cast<IFilePasswordAuth*>(database)->authByPwd(password);
+	return true;
 }
 
 bool Import_PwManager::parseXmlContent(char* content){
-QDomDocument db;
-QString err;
-int col,line;
-if(!db.setContent(QString::fromUtf8(content,strlen(content)-1),false,&err,&line,&col)){
-	qWarning("Import_PwManager::parseXmlContent():\n");
-	qWarning(((err+" (Line:%1 Column:%2)").arg(line).arg(col)+QString('\n')).toAscii());
-	return false;}
-QDomElement root=db.documentElement();
-if(root.tagName()!="P")return false;
-//Achtung! Kommentare und Kategorien haben das selbe Tag "c"
-if(!root.elementsByTagName("c").item(0).isElement())return false;
-QDomElement groups=root.elementsByTagName("c").item(0).toElement();
-
-int i=0;
-while(1){
- QDomElement CurrGroup;
- if(!groups.elementsByTagName("c"+QString::number(i)).length())break;
- if(groups.elementsByTagName("c"+QString::number(i)).length()>1)return false;
- if(!groups.elementsByTagName("c"+QString::number(i)).item(0).isElement())return false;
- CurrGroup=groups.elementsByTagName("c"+QString::number(i)).item(0).toElement();
- if(!CurrGroup.hasAttribute("n"))return false;
- IGroupHandle* NewGroup=database->addGroup(NULL);
- NewGroup->Name=CurrGroup.attribute("n");
- int j=0;
+	QDomDocument db;
+	QString err;
+	int col,line;
+	if(!db.setContent(QString::fromUtf8(content,strlen(content)-1),false,&err,&line,&col)){
+		qWarning("Import_PwManager::parseXmlContent():\n");
+		qWarning(((err+" (Line:%1 Column:%2)").arg(line).arg(col)+QString('\n')).toAscii());
+		return false;}
+	QDomElement root=db.documentElement();
+	if(root.tagName()!="P")return false;
+	//Achtung! Kommentare und Kategorien haben das selbe Tag "c"
+	if(!root.elementsByTagName("c").item(0).isElement())return false;
+	QDomElement groups=root.elementsByTagName("c").item(0).toElement();
+	
+	int i=0;
 	while(1){
-	  QDomElement CurrEntry;
-	  if(!CurrGroup.elementsByTagName("e"+QString::number(j)).length())break;
- 	  if(CurrGroup.elementsByTagName("e"+QString::number(j)).length()>1)return false;
- 	  if(!CurrGroup.elementsByTagName("e"+QString::number(j)).item(0).isElement())return false;
-	  CurrEntry=CurrGroup.elementsByTagName("e"+QString::number(j)).item(0).toElement();
-	  if(!xml_parseEntryAttributes(&CurrEntry,NewGroup))return false;
-	  j++;
+	QDomElement CurrGroup;
+	if(!groups.elementsByTagName("c"+QString::number(i)).length())break;
+	if(groups.elementsByTagName("c"+QString::number(i)).length()>1)return false;
+	if(!groups.elementsByTagName("c"+QString::number(i)).item(0).isElement())return false;
+	CurrGroup=groups.elementsByTagName("c"+QString::number(i)).item(0).toElement();
+	if(!CurrGroup.hasAttribute("n"))return false;
+	IGroupHandle* NewGroup=database->addGroup(&CGroup(),NULL);
+	NewGroup->setTitle(CurrGroup.attribute("n"));
+	int j=0;
+		while(1){
+		QDomElement CurrEntry;
+		if(!CurrGroup.elementsByTagName("e"+QString::number(j)).length())break;
+		if(CurrGroup.elementsByTagName("e"+QString::number(j)).length()>1)return false;
+		if(!CurrGroup.elementsByTagName("e"+QString::number(j)).item(0).isElement())return false;
+		CurrEntry=CurrGroup.elementsByTagName("e"+QString::number(j)).item(0).toElement();
+		if(!xml_parseEntryAttributes(&CurrEntry,NewGroup))return false;
+		j++;
+		}
+	i++;
 	}
- i++;
+	
+	return true;
 }
 
-return true;
+bool Import_PwManager::xml_parseEntryAttributes(QDomElement* EntryElement,IGroupHandle* NewGroup){
+	IEntryHandle* e=database->newEntry(NewGroup);
+	e->setTitle(EntryElement->elementsByTagName("d").item(0).toElement().text());
+	e->setUsername(EntryElement->elementsByTagName("n").item(0).toElement().text());
+	QString pw(EntryElement->elementsByTagName("p").item(0).toElement().text());
+	SecString spw;
+	spw.setString(pw,true);
+	e->setPassword(spw);
+	QString comment=EntryElement->elementsByTagName("c").item(0).toElement().text();
+	comment.replace("$>--endl--<$","\n");
+	e->setComment(comment);
+	e->setUrl(EntryElement->elementsByTagName("u").item(0).toElement().text());
+	return true;
 }
-
-bool Import_PwManager::xml_parseEntryAttributes(QDomElement* EntryElement,IGroupHandle* NewGroup){/*
-IEntryHandle* e=database->addEntry();
-e->Title=EntryElement->elementsByTagName("d").item(0).toElement().text();
-e->UserName=EntryElement->elementsByTagName("n").item(0).toElement().text();
-QString pw=EntryElement->elementsByTagName("p").item(0).toElement().text();
-e->Password.setString(pw,true);
-e->Additional=EntryElement->elementsByTagName("c").item(0).toElement().text();
-e->Additional=e->Additional.replace("$>--endl--<$","\n");
-e->URL=EntryElement->elementsByTagName("u").item(0).toElement().text();
-e->GroupID=NewGroup->ID;
-return true;
-}
-																				*/

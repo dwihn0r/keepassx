@@ -45,7 +45,9 @@
 #include "lib/FileDialogs.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
+#include "import/Import_KeePassX_Xml.h"
 #include "export/Export_Txt.h"
+#include "export/Export_KeePassX_Xml.h"
 
 #include "dialogs/AboutDlg.h"
 #include "dialogs/SearchDlg.h"
@@ -61,6 +63,11 @@
 
 QDBusServer* dbusServer;
 QDBusConnection* dbusCon;
+
+Import_KeePassX_Xml import_KeePassX_Xml;
+Import_PwManager import_PwManager;
+Export_Txt export_Txt;
+Export_KeePassX_Xml export_KeePassX_Xml;
 
 
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
@@ -115,9 +122,8 @@ void KeepassMainWindow::setupConnections(){
 	connect(FileSettingsAction, SIGNAL(triggered()), this, SLOT(OnFileSettings()));
 	connect(FileChangeKeyAction, SIGNAL(triggered()), this, SLOT(OnFileChangeKey()));
 	connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
-	connect(FileImpPwmAction, SIGNAL(triggered()), this, SLOT(OnImportFromPwm()));
-	connect(FileImpKWalletXmlAction, SIGNAL(triggered()), this,SLOT(OnImportFromKWalletXml()));
-	connect(FileExpPlainTextAction,SIGNAL(triggered()),this,SLOT(OnExportToTxt()));
+	connect(menuImport,SIGNAL(triggered(QAction*)),this,SLOT(OnImport(QAction*)));
+	connect(menuExport,SIGNAL(triggered(QAction*)),this,SLOT(OnExport(QAction*)));
 	
 	connect(EditNewGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnNewGroup()));
 	connect(EditEditGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnEditGroup()));
@@ -274,6 +280,23 @@ void KeepassMainWindow::setupMenus(){
 	SysTrayMenu->addAction(FileExitAction);
 	SysTray->setContextMenu(SysTrayMenu);
 	
+	#define _add_import(name){\
+	QAction* import=new QAction(this);\
+	import->setData(qVariantFromValue(dynamic_cast<QObject*>(&name)));\
+	import->setText(name.title());\
+	menuImport->addAction(import);}
+	
+	#define _add_export(name){\
+	QAction* Export=new QAction(this);\
+	Export->setData(qVariantFromValue(dynamic_cast<QObject*>(&name)));\
+	Export->setText(name.title());\
+	menuExport->addAction(Export);}
+	
+	_add_import(import_KeePassX_Xml)
+	_add_import(import_PwManager)
+	_add_export(export_Txt);
+	_add_export(export_KeePassX_Xml);
+	
 	//FileNewMenu->setShortcut(tr("Ctrl+N"));
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
 	FileSaveAction->setShortcut(tr("Ctrl+S"));
@@ -317,7 +340,7 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	}
 	GroupView->db=db;
 	EntryView->db=db;
-	setupDatabaseConnections(db);	
+	setupDatabaseConnections(db);
 	QString err;
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	if(db->load(filename)==true){
@@ -431,8 +454,6 @@ FileSaveAsAction->setEnabled(IsOpen);
 FileCloseAction->setEnabled(IsOpen);
 FileSettingsAction->setEnabled(IsOpen);
 FileChangeKeyAction->setEnabled(IsOpen);
-FileExpPlainTextAction->setEnabled(IsOpen);
-
 
 EditSearchAction->setEnabled(IsOpen);
 GroupView->setEnabled(IsOpen);
@@ -618,6 +639,7 @@ switch(EntrySelection){
 else Q_ASSERT(false);
 }
 
+
 bool KeepassMainWindow::OnFileSave(){
 if(!db->file())
   return OnFileSaveAs();
@@ -661,129 +683,31 @@ void KeepassMainWindow::OnFileExit(){
 	close();
 }
 
-void KeepassMainWindow::OnExportToTxt(){
-	IExport* exporter=new Export_Txt();
-	QStringList Filters;
-	Filters << tr("All Files (*)");
-	Filters << tr("Text Files (*.txt)");
-	exportDatabase(exporter, Filters);
-	delete exporter;
+
+void KeepassMainWindow::OnExport(QAction* action){
+	dynamic_cast<IExport*>(action->data().value<QObject*>())->exportDatabase(this,db);	
 }
 
-void KeepassMainWindow::exportDatabase(IExport* exporter,QStringList Filters){
-	QString filename=KpxFileDialogs::saveFile(this,"Export_"+exporter->name(),tr("Export Database"),Filters,true);
-	if(filename==QString())return;
-	QFile file(filename);
-	if(!file.open(QIODevice::WriteOnly|QIODevice::Truncate)){
-		QMessageBox::critical(this,tr("Export Failed"),decodeFileError(file.error()));
-		return;
+void KeepassMainWindow::OnImport(QAction* action){
+	if(FileOpen)
+		if(!closeDatabase())return;
+	IDatabase* tmpdb=dynamic_cast<IDatabase*>(new StandardDatabase());
+	tmpdb->create();
+	if(dynamic_cast<IImport*>(action->data().value<QObject*>())->importDatabase(this,tmpdb)){
+			db=tmpdb;
+			GroupView->db=db;
+			EntryView->db=db;
+			setupDatabaseConnections(db);
+			setWindowTitle(tr("* - KeePassX"));
+			GroupView->createItems();
+			EntryView->showGroup(NULL);
+			setStateFileOpen(true);
+			setStateFileModified(true);
 	}
-	QString err=exporter->exportDatabase(this,db,&file);
-	if(err!=QString()){
-		QMessageBox::critical(this,tr("Export Failed"),err);
-		return;
-	}
-	file.close();
-	if(file.error()!=QFile::NoError){
-		QMessageBox::critical(this,tr("Export Failed"),decodeFileError(file.error()));
-		return;		
-	}	
+	else
+		delete tmpdb;
 	
 }
-
-void KeepassMainWindow::OnImportFromPwm(){
-	/*
-if(FileOpen)
- if(!closeDatabase())return;
-QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.pwm");
-if(filename!=QString::null){
-	Q_ASSERT(!FileOpen);
-	db = new PwDatabase();
-	db->newDatabase();
-	CSimplePasswordDialog dlg(this,true);
-	if(!dlg.exec()){
-		delete db;
-		db=NULL;
-		StatusBarGeneral->setText(tr("Ready"));
-	}
-	GroupView->db=db;
-	EntryView->db=db;
-	QString err;
-	StatusBarGeneral->setText(tr("Loading Database..."));
-	Import_PwManager import;
-	if(import.importFile(filename,dlg.password,db,err)==true){
-		//SUCCESS
-		setWindowTitle(tr("KeePassX [new]"));
-		GroupView->updateItems();
-		EntryView->updateItems(0);
-		setStateFileOpen(true);
-		setStateFileModified(true);
-	}
-	else{
-		//ERROR
-		delete db;
-		StatusBarGeneral->setText(tr("Loading Failed"));
-		if(err=="")err=tr("Unknown error in Import_PwManager::importFile()()");
-		QMessageBox::critical(this,tr("Error")
-								,tr("The following error occured while opening the database:\n%1")
-								.arg(err),tr("OK"));
-	}
-	StatusBarGeneral->setText(tr("Ready"));
-	}
-	*/
-}
-
-void KeepassMainWindow::OnImportFromKWalletXml(){
-	/*
-if(FileOpen)
- if(!closeDatabase())return;
-QString filename=QFileDialog::getOpenFileName(this,tr("Open Database..."),QDir::homePath(),"*.pwm");
-if(filename!=QString::null){
-	Q_ASSERT(!FileOpen);
-	db = new PwDatabase();
-	db->newDatabase();
-	GroupView->db=db;
-	EntryView->db=db;
-	QString err;
-	StatusBarGeneral->setText(tr("Loading Database..."));
-	Import_KWalletXml import;
-	if(import.importFile(filename,db,err)==true){
-		//SUCCESS
-		setWindowTitle(tr("KeePassX [new]"));
-		GroupView->updateItems();
-		EntryView->updateItems(0);
-		setStateFileOpen(true);
-		setStateFileModified(true);
-	}
-	else{
-		//ERROR
-		delete db;
-		StatusBarGeneral->setText(tr("Loading Failed"));
-		if(err=="")err=tr("Unknown error in Import_KWalletXml::importFile()");
-		QMessageBox::critical(this,tr("Error")
-								,tr("The following error occured while opening the database:\n%1")
-								.arg(err),tr("OK"));
-	}
-	StatusBarGeneral->setText(tr("Ready"));
-	}
-	*/
-}
-
-/*
-void KeepassMainWindow::OnEntrySelectionChanged(){
-updateDetailView();
-if(EntryView->selectedItems().size()==0)
-  setStateEntrySelected(NONE);
-if(EntryView->selectedItems().size()==1)
-  setStateEntrySelected(SINGLE);
-if(EntryView->selectedItems().size()>1)
-  setStateEntrySelected(MULTIPLE);
-}
-*/
-
-
-
-
 
 
 void KeepassMainWindow::removeFromSearchResults(int id){

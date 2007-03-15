@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   mail@tarek-saidi.de                                                   *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,11 +19,9 @@
  ***************************************************************************/
 
 #include "Import_KWalletXml.h"
-#include <iostream>
-#include <qobject.h>
-#include <qfile.h>
-#include <qdom.h>
-using namespace std;
+#include <QFile>
+#include <QtXml>
+
 /*
 
 bool Import_KWalletXml::importFile(QString FileName,StandardDatabase* pwm,QString& err){

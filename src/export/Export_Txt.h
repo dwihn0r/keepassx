@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                 *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -21,12 +21,13 @@
 #define _EXPORT_TXT_H_
 
 #include <QObject>
-#include "IExport.h"
+#include "Export.h"
 
-class Export_Txt:public QObject, public IExport{
+class Export_Txt:public IExport, public ExporterBase{
 	public:
-		virtual QString exportDatabase(QWidget* GuiParent, IDatabase* Database, QIODevice* Dest);	
-		virtual QString name(){return QString("Txt");}
+		virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database);	
+		virtual QString identifier(){return "e_txt";}
+		virtual QString title(){return "Text File";}
 };
 
 #endif
