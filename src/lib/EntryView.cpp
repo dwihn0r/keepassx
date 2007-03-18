@@ -476,11 +476,11 @@ resizeColumns();
 }
 
 void KeepassEntryView::mousePressEvent(QMouseEvent *event){
-//save event position - maybe this is the start of a drag
-if (event->button() == Qt::LeftButton)
-            DragStartPos = event->pos();
-//call base function
-QTreeWidget::mousePressEvent(event);
+	//save event position - maybe this is the start of a drag
+	if (event->button() == Qt::LeftButton)
+				DragStartPos = event->pos();
+	//call base function
+	QTreeWidget::mousePressEvent(event);
 }
 
 void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
@@ -574,27 +574,24 @@ bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
 		else 
 			return false;
 	}
-	QDateTime DateThis;
-	QDateTime DateOther;
+	KpxDateTime DateThis;
+	KpxDateTime DateOther;
+
 	
-	//@NICHTVERGESSEN
-	return false;
-	/*
 	switch(SortCol){
-		case 5: DateThis=&pEntry->Expire;
-				DateOther=&((EntryViewItem&)other).pEntry->Expire;
+		case 5: DateThis=EntryHandle->expire();
+				DateOther=((EntryViewItem&)other).EntryHandle->expire();
 				break;
-		case 6: DateThis=&pEntry->Creation;
-				DateOther=&((EntryViewItem&)other).pEntry->Creation;
+		case 6: DateThis=EntryHandle->creation();
+				DateOther=((EntryViewItem&)other).EntryHandle->creation();
 				break;
-		case 7: DateThis=&pEntry->LastMod;
-				DateOther=&((EntryViewItem&)other).pEntry->LastMod;
+		case 7: DateThis=EntryHandle->lastMod();
+				DateOther=((EntryViewItem&)other).EntryHandle->lastMod();
 				break;
-		case 8: DateThis=&pEntry->LastAccess;
-				DateOther=&((EntryViewItem&)other).pEntry->LastAccess;
+		case 8: DateThis=EntryHandle->lastAccess();
+				DateOther=((EntryViewItem&)other).EntryHandle->lastAccess();
 				break;
 		default:Q_ASSERT(false);
 	}
 	return DateThis < DateOther;
-	*/
 }

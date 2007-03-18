@@ -76,15 +76,21 @@ bool KpxUuid::operator!=(const KpxUuid& other)const{
 
 
 QString KpxDateTime::toString(Qt::DateFormat format) const{
-if(*this==Date_Never)return QObject::tr("Never");
-else return QDateTime::toString(format);
+	if(*this==Date_Never)return QObject::tr("Never");
+	else return QDateTime::toString(format);
 }
 
 QString KpxDateTime::dateToString(Qt::DateFormat format) const{
-if(*this==Date_Never)return QObject::tr("Never");
-else return date().toString(format);
+	if(*this==Date_Never)return QObject::tr("Never");
+	else return date().toString(format);
 }
 
+
+KpxDateTime KpxDateTime::fromString(const QString& string,Qt::DateFormat format){
+	if(string.toLower()=="never")
+		return Date_Never;
+	else return QDateTime::fromString(string,format);	
+}
 
 CEntry::CEntry(){
 	Image=0;
@@ -94,6 +100,14 @@ CEntry::CEntry(){
 	LastAccess=QDateTime::currentDateTime();
 	Expire=QDateTime(QDate(2999,12,28),QTime(23,59,59)); //Never
 	Binary=QByteArray();
+}
+
+bool KpxDateTime::operator<(const QDateTime& other){
+	if(*this!=Date_Never && other!=Date_Never)return ((QDateTime)(*this)<other);
+	if(*this==Date_Never && other==Date_Never)return false;
+	if(*this==Date_Never)return false;
+	if(other==Date_Never)return true;
+		
 }
 
 

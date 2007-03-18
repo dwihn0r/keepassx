@@ -70,6 +70,8 @@ class KpxDateTime:public QDateTime{
 		virtual QString toString(Qt::DateFormat format = Qt::TextDate ) const;
 		//! Returns a string representation of the date part of the DateTime object in the given format or "Never" if the DateTime value is 28.12.2999 23:59:59.
 		QString dateToString(Qt::DateFormat format = Qt::TextDate)const;
+		static KpxDateTime fromString(const QString& string,Qt::DateFormat format = Qt::TextDate);
+		bool operator<(const QDateTime& other);
 };
 
 //! Entry Data Structure

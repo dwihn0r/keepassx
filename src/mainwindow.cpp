@@ -398,7 +398,7 @@ void KeepassMainWindow::OnFileNewKdb(){
 	IDatabase* db_new=dynamic_cast<IDatabase*>(new StandardDatabase());
 	db_new->create();
 	CPasswordDialog dlg(this,db_new,false,true);
-	dlg.setWindowTitle("New Database");
+	dlg.setWindowTitle(tr("New Database"));
 	if(dlg.exec()==1){
 		if(FileOpen)
 			if(!closeDatabase())return;
@@ -694,6 +694,12 @@ void KeepassMainWindow::OnImport(QAction* action){
 	IDatabase* tmpdb=dynamic_cast<IDatabase*>(new StandardDatabase());
 	tmpdb->create();
 	if(dynamic_cast<IImport*>(action->data().value<QObject*>())->importDatabase(this,tmpdb)){
+			CPasswordDialog dlg(this,tmpdb,false,true);
+			dlg.setWindowTitle(tr("Set Master Key"));
+			if(!dlg.exec()){
+				delete tmpdb;
+				return;
+			}
 			db=tmpdb;
 			GroupView->db=db;
 			EntryView->db=db;
