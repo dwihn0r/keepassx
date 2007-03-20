@@ -40,10 +40,12 @@ class KeepassGroupView:public QTreeWidget{
 		void showSearchResults();
 		
 	private:
-		virtual void dragEnterEvent ( QDragEnterEvent * event );
-		virtual void dragMoveEvent ( QDragMoveEvent * event );
+		virtual void dragEnterEvent(QDragEnterEvent* event);
+		virtual void dragMoveEvent(QDragMoveEvent* event);
+		void entryDragMoveEvent(QDragMoveEvent* event);
 		virtual void dragLeaveEvent ( QDragLeaveEvent * event );
 		virtual void dropEvent ( QDropEvent * event );
+		void entryDropEvent(QDropEvent* event);
 		virtual void mousePressEvent(QMouseEvent *event);
 		virtual void mouseMoveEvent(QMouseEvent *event);
 		virtual void paintEvent ( QPaintEvent * event );
@@ -54,6 +56,9 @@ class KeepassGroupView:public QTreeWidget{
 		GroupViewItem* LastHoverItem;
 		int InsLinePos;
 		int InsLineStart;
+		enum GroupViewDragType{EntryDrag,GroupDrag};
+		GroupViewDragType DragType;
+		QList<QTreeWidgetItem*>* EntryDragItems;
 	
 	public slots:
 		void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
@@ -69,6 +74,7 @@ class KeepassGroupView:public QTreeWidget{
 		void groupChanged(IGroupHandle* NewGroup);
 		void searchResultsSelected();
 		void fileModified();
+		void entriesDropped();
 };
 
 

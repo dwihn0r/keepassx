@@ -27,9 +27,10 @@
 #include <QHeaderView>
 #include <QTimer>
 #include <QClipboard>
+#include <QVarLengthArray>
 #include "../StandardDatabase.h"
 
-#define NUM_COLUMNS 10
+#define NUM_COLUMNS 11
 
 class EntryViewItem;
 enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
@@ -42,26 +43,31 @@ class KeepassEntryView:public QTreeWidget{
 		void showSearchResults();
 		void showGroup(IGroupHandle* group);
 		void updateColumns();
-		// void showSearchResults(QList<quint32>& results);
 		IDatabase* db;
 		QList<EntryViewItem*>Items;
 		QList<IEntryHandle*> SearchResults;
 		QMenu *ContextMenu;
+		QVarLengthArray<bool>Columns;
 	private:
 		void setEntry(IEntryHandle* entry);
 		void updateEntry(EntryViewItem*);
 		void editEntry(EntryViewItem*);
 		void createItems(QList<IEntryHandle*>& entries);
+		int columnListIndex(int LogicalIndex);
+		int logicalColIndex(int ListIndex);
 		
 		QClipboard* Clipboard;
 		QTimer ClipboardTimer;		
-		QList<float>ColumnSizes;
 		void resizeColumns();
 		bool AutoResizeColumns;
 		QPoint DragStartPos;
 		QList<QTreeWidgetItem*> DragItems;
 		QPixmap DragPixmap;
 		IGroupHandle* CurrentGroup;
+		enum EntryViewMode {Normal, ShowSearchResults};
+		EntryViewMode ViewMode;
+		QVarLengthArray<float>ColumnSizes;
+		QVarLengthArray<int>ColumnOrder;
 		
 		virtual void contextMenuEvent(QContextMenuEvent *event);
 		virtual void paintEvent(QPaintEvent* event);
@@ -85,6 +91,8 @@ class KeepassEntryView:public QTreeWidget{
 		void OnDeleteEntry();
 		void OnSaveAttachment();
 		void OnAutoType();
+		void removeDragItems();
+		void OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisIndex);
 	signals:
 		void fileModified();
 		void selectionChanged(SelectionState);

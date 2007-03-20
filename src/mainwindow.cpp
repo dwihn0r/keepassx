@@ -144,16 +144,8 @@ void KeepassMainWindow::setupConnections(){
 	connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
 	connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
 	connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
-	connect(ViewColumnsTitleAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsUsernameAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsUrlAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsPasswordAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsCommentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsExpireAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsCreationAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsLastChangeAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsLastAccessAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
-	connect(ViewColumnsAttachmentAction,SIGNAL(toggled(bool)), this, SLOT(OnColumnVisibilityChanged(bool)));
+	
+	connect(menuColumns,SIGNAL(triggered(QAction*)),this,SLOT(OnColumnVisibilityChanged(QAction*)));
 	connect(ViewToolButtonSize16Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize16(bool)));
 	connect(ViewToolButtonSize22Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize22(bool)));
 	connect(ViewToolButtonSize28Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize28(bool)));
@@ -174,6 +166,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(EntryView,SIGNAL(selectionChanged(SelectionState)),this,SLOT(OnEntryChanged(SelectionState)));
 	connect(GroupView,SIGNAL(searchResultsSelected()),EntryView,SLOT(OnShowSearchResults()));
 	connect(GroupView,SIGNAL(searchResultsSelected()),this,SLOT(OnShowSearchResults()));
+	connect(GroupView,SIGNAL(entriesDropped()),EntryView,SLOT(removeDragItems()));
 	connect(HideSearchResultsAction,SIGNAL(triggered()),GroupView,SLOT(OnHideSearchResults()));
 	
 	connect(SysTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(OnSysTrayActivated(QSystemTrayIcon::ActivationReason)));
@@ -258,16 +251,17 @@ void KeepassMainWindow::setupMenus(){
 	ViewShowEntryDetailsAction->setChecked(config.EntryDetails);
 	ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
 	ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
-	ViewColumnsTitleAction->setChecked(config.Columns[0]);
-	ViewColumnsUsernameAction->setChecked(config.Columns[1]);
-	ViewColumnsUrlAction->setChecked(config.Columns[2]);
-	ViewColumnsPasswordAction->setChecked(config.Columns[3]);
-	ViewColumnsCommentAction->setChecked(config.Columns[4]);
-	ViewColumnsExpireAction->setChecked(config.Columns[5]);
-	ViewColumnsCreationAction->setChecked(config.Columns[6]);
-	ViewColumnsLastChangeAction->setChecked(config.Columns[7]);
-	ViewColumnsLastAccessAction->setChecked(config.Columns[8]);
-	ViewColumnsAttachmentAction->setChecked(config.Columns[9]);
+	ViewColumnsTitleAction->setChecked(EntryView->Columns[0]);
+	ViewColumnsUsernameAction->setChecked(EntryView->Columns[1]);
+	ViewColumnsUrlAction->setChecked(EntryView->Columns[2]);
+	ViewColumnsPasswordAction->setChecked(EntryView->Columns[3]);
+	ViewColumnsCommentAction->setChecked(EntryView->Columns[4]);
+	ViewColumnsExpireAction->setChecked(EntryView->Columns[5]);
+	ViewColumnsCreationAction->setChecked(EntryView->Columns[6]);
+	ViewColumnsLastChangeAction->setChecked(EntryView->Columns[7]);
+	ViewColumnsLastAccessAction->setChecked(EntryView->Columns[8]);
+	ViewColumnsAttachmentAction->setChecked(EntryView->Columns[9]);
+	ViewColumnsGroupAction->setChecked(EntryView->Columns[10]);
 	ViewShowStatusbarAction->setChecked(config.ShowStatusbar);
 	
 	switch(config.ToolbarIconSize){
@@ -754,24 +748,25 @@ void KeepassMainWindow::OnQuickSearch(){
 	GroupView->showSearchResults();	
 }
 
-void KeepassMainWindow::OnColumnVisibilityChanged(bool value){
-	config.Columns[0]=ViewColumnsTitleAction->isChecked();
-	config.Columns[1]=ViewColumnsUsernameAction->isChecked();
-	config.Columns[2]=ViewColumnsUrlAction->isChecked();
-	config.Columns[3]=ViewColumnsPasswordAction->isChecked();
-	config.Columns[4]=ViewColumnsCommentAction->isChecked();
-	config.Columns[5]=ViewColumnsExpireAction->isChecked();
-	config.Columns[6]=ViewColumnsCreationAction->isChecked();
-	config.Columns[7]=ViewColumnsLastChangeAction->isChecked();
-	config.Columns[8]=ViewColumnsLastAccessAction->isChecked();
-	config.Columns[9]=ViewColumnsAttachmentAction->isChecked();
-	//EntryView->updateColumns();
+void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
+	EntryView->Columns[0]=ViewColumnsTitleAction->isChecked();
+	EntryView->Columns[1]=ViewColumnsUsernameAction->isChecked();
+	EntryView->Columns[2]=ViewColumnsUrlAction->isChecked();
+	EntryView->Columns[3]=ViewColumnsPasswordAction->isChecked();
+	EntryView->Columns[4]=ViewColumnsCommentAction->isChecked();
+	EntryView->Columns[5]=ViewColumnsExpireAction->isChecked();
+	EntryView->Columns[6]=ViewColumnsCreationAction->isChecked();
+	EntryView->Columns[7]=ViewColumnsLastChangeAction->isChecked();
+	EntryView->Columns[8]=ViewColumnsLastAccessAction->isChecked();
+	EntryView->Columns[9]=ViewColumnsAttachmentAction->isChecked();		
+	EntryView->Columns[10]=ViewColumnsGroupAction->isChecked();
+	EntryView->updateColumns();
 	//if(FileOpen) EntryView->updateItems();
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
-config.ListView_HidePasswords=ViewHidePasswordsAction->isChecked();
-config.ListView_HideUsernames=ViewHideUsernamesAction->isChecked();
+	config.ListView_HidePasswords=ViewHidePasswordsAction->isChecked();
+	config.ListView_HideUsernames=ViewHideUsernamesAction->isChecked();
 //EntryView->refreshItems();
 }
 

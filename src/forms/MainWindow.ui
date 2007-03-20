@@ -115,65 +115,6 @@
      <height>29</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuBearbeiten" >
-    <property name="title" >
-     <string>&amp;Edit</string>
-    </property>
-    <addaction name="EditNewGroupAction" />
-    <addaction name="EditEditGroupAction" />
-    <addaction name="EditDeleteGroupAction" />
-    <addaction name="separator" />
-    <addaction name="EditPasswordToClipboardAction" />
-    <addaction name="EditUsernameToClipboardAction" />
-    <addaction name="EditOpenUrlAction" />
-    <addaction name="EditSaveAttachmentAction" />
-    <addaction name="separator" />
-    <addaction name="EditNewEntryAction" />
-    <addaction name="EditEditEntryAction" />
-    <addaction name="EditCloneEntryAction" />
-    <addaction name="EditDeleteEntryAction" />
-    <addaction name="EditAutoTypeAction" />
-    <addaction name="separator" />
-    <addaction name="EditSearchAction" />
-    <addaction name="EditGroupSearchAction" />
-   </widget>
-   <widget class="QMenu" name="ViewMenu" >
-    <property name="title" >
-     <string>&amp;View</string>
-    </property>
-    <widget class="QMenu" name="menuSpalten" >
-     <property name="title" >
-      <string>Columns</string>
-     </property>
-     <addaction name="ViewColumnsTitleAction" />
-     <addaction name="ViewColumnsUsernameAction" />
-     <addaction name="ViewColumnsUrlAction" />
-     <addaction name="ViewColumnsPasswordAction" />
-     <addaction name="ViewColumnsCommentAction" />
-     <addaction name="separator" />
-     <addaction name="ViewColumnsExpireAction" />
-     <addaction name="ViewColumnsCreationAction" />
-     <addaction name="ViewColumnsLastChangeAction" />
-     <addaction name="ViewColumnsLastAccessAction" />
-     <addaction name="ViewColumnsAttachmentAction" />
-    </widget>
-    <widget class="QMenu" name="menuTool_Button_Sizes" >
-     <property name="title" >
-      <string>Toolbar Icon Size</string>
-     </property>
-     <addaction name="ViewToolButtonSize16Action" />
-     <addaction name="ViewToolButtonSize22Action" />
-     <addaction name="ViewToolButtonSize28Action" />
-    </widget>
-    <addaction name="ViewShowEntryDetailsAction" />
-    <addaction name="ViewShowStatusbarAction" />
-    <addaction name="separator" />
-    <addaction name="ViewHideUsernamesAction" />
-    <addaction name="ViewHidePasswordsAction" />
-    <addaction name="separator" />
-    <addaction name="menuSpalten" />
-    <addaction name="menuTool_Button_Sizes" />
-   </widget>
    <widget class="QMenu" name="menuHilfe" >
     <property name="title" >
      <string>&amp;Help</string>
@@ -217,6 +158,67 @@
     <addaction name="menuExport" />
     <addaction name="separator" />
     <addaction name="FileExitAction" />
+   </widget>
+   <widget class="QMenu" name="menuBearbeiten" >
+    <property name="title" >
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="EditNewGroupAction" />
+    <addaction name="EditEditGroupAction" />
+    <addaction name="EditDeleteGroupAction" />
+    <addaction name="separator" />
+    <addaction name="EditPasswordToClipboardAction" />
+    <addaction name="EditUsernameToClipboardAction" />
+    <addaction name="EditOpenUrlAction" />
+    <addaction name="EditSaveAttachmentAction" />
+    <addaction name="separator" />
+    <addaction name="EditNewEntryAction" />
+    <addaction name="EditEditEntryAction" />
+    <addaction name="EditCloneEntryAction" />
+    <addaction name="EditDeleteEntryAction" />
+    <addaction name="EditAutoTypeAction" />
+    <addaction name="separator" />
+    <addaction name="EditSearchAction" />
+    <addaction name="EditGroupSearchAction" />
+   </widget>
+   <widget class="QMenu" name="ViewMenu" >
+    <property name="title" >
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="menuTool_Button_Sizes" >
+     <property name="title" >
+      <string>Toolbar Icon Size</string>
+     </property>
+     <addaction name="ViewToolButtonSize16Action" />
+     <addaction name="ViewToolButtonSize22Action" />
+     <addaction name="ViewToolButtonSize28Action" />
+    </widget>
+    <widget class="QMenu" name="menuColumns" >
+     <property name="title" >
+      <string>Columns</string>
+     </property>
+     <addaction name="ViewColumnsGroupAction" />
+     <addaction name="separator" />
+     <addaction name="ViewColumnsTitleAction" />
+     <addaction name="ViewColumnsUsernameAction" />
+     <addaction name="ViewColumnsUrlAction" />
+     <addaction name="ViewColumnsPasswordAction" />
+     <addaction name="ViewColumnsCommentAction" />
+     <addaction name="separator" />
+     <addaction name="ViewColumnsExpireAction" />
+     <addaction name="ViewColumnsCreationAction" />
+     <addaction name="ViewColumnsLastChangeAction" />
+     <addaction name="ViewColumnsLastAccessAction" />
+     <addaction name="ViewColumnsAttachmentAction" />
+    </widget>
+    <addaction name="ViewShowEntryDetailsAction" />
+    <addaction name="ViewShowStatusbarAction" />
+    <addaction name="separator" />
+    <addaction name="ViewHideUsernamesAction" />
+    <addaction name="ViewHidePasswordsAction" />
+    <addaction name="separator" />
+    <addaction name="menuColumns" />
+    <addaction name="menuTool_Button_Sizes" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -505,17 +507,28 @@
     <string>Password Generator...</string>
    </property>
   </action>
+  <action name="ViewColumnsGroupAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Group (search results only)</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KeepassEntryView</class>
-   <extends>QTreeWidget</extends>
-   <header>../../src/lib/EntryView.h</header>
-  </customwidget>
   <customwidget>
    <class>KeepassGroupView</class>
    <extends>QTreeWidget</extends>
    <header>../../src/lib/GroupView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeepassEntryView</class>
+   <extends>QTreeWidget</extends>
+   <header>../../src/lib/EntryView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

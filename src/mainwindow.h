@@ -77,7 +77,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnViewToolbarIconSize28(bool);
 		void OnGroupSelectionChanged(IGroupHandle*);
 		void OnQuickSearch();
-		void OnColumnVisibilityChanged(bool show);
+		void OnColumnVisibilityChanged(QAction* action);
 		void OnUsernPasswVisibilityChanged(bool hide);
 		void OnFileModified();
 		void OnExtrasSettings();

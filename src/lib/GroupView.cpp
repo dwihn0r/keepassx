@@ -54,6 +54,7 @@ KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
 void KeepassGroupView::createItems(){	
 	clear();
 	Items.clear();
+	InsLinePos=-1;
 	QList<IGroupHandle*> groups=db->groups();
 	for(int i=0;i<groups.size();i++){
 		if(groups[i]->parent()==NULL){
@@ -178,7 +179,14 @@ void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
 	LastHoverItem=NULL;	
 	InsLinePos=-1;
 	
-	if(event->mimeData()->hasFormat("application/x-keepassx")){
+	if(event->mimeData()->hasFormat("application/x-keepassx-group")){
+		DragType=GroupDrag;
+		event->accept();
+		return;
+	}
+	if(event->mimeData()->hasFormat("application/x-keepassx-entry")){
+		DragType=EntryDrag;
+		memcpy(&EntryDragItems,event->mimeData()->data("application/x-keepassx-entry").data(),sizeof(void*));
 		event->accept();
 		return;
 	}
@@ -199,10 +207,39 @@ void KeepassGroupView::dragLeaveEvent ( QDragLeaveEvent * event ){
 	
 }
 
-
-void KeepassGroupView::dropEvent( QDropEvent * event ){
+void KeepassGroupView::entryDropEvent( QDropEvent * event ){
 	if(LastHoverItem){
 		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
+	}
+	GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
+	if(!Item){
+		event->ignore();
+		return;
+	}
+	else{
+		if(Item->GroupHandle==((EntryViewItem*)(*EntryDragItems)[0])->EntryHandle->group())
+			return;
+		for(int i=0;i<EntryDragItems->size();i++){
+			db->moveEntry(((EntryViewItem*)(*EntryDragItems)[i])->EntryHandle,Item->GroupHandle);					
+		}
+		emit entriesDropped();
+		emit fileModified();
+		}
+	
+}
+
+
+void KeepassGroupView::dropEvent( QDropEvent * event ){
+	
+	if(DragType==EntryDrag){
+		entryDropEvent(event);
+		return;
+	}
+	
+	if(LastHoverItem){
+		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
 	}
 	if(InsLinePos!=-1){
 		int RemoveLine=InsLinePos;
@@ -290,7 +327,38 @@ void KeepassGroupView::dropEvent( QDropEvent * event ){
 	
 }
 
+void KeepassGroupView::entryDragMoveEvent( QDragMoveEvent * event ){
+
+	GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
+	if(!Item){
+		if(LastHoverItem){
+			LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+			LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
+			LastHoverItem=NULL;
+		}
+		event->ignore();
+		return;
+	}
+	if(LastHoverItem != Item){
+		if(LastHoverItem){
+			LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+			LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
+		}
+		Item->setBackgroundColor(0,QApplication::palette().color(QPalette::Highlight));
+		Item->setForeground(0,QBrush(QApplication::palette().color(QPalette::HighlightedText)));
+		LastHoverItem=Item;
+	}
+
+	event->accept();
+	return;
+	
+}
+
 void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
+	if(DragType==EntryDrag){
+		entryDragMoveEvent(event);
+		return;
+	}	
 	if(DragItem){
 		GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
 		if(!Item){
@@ -393,7 +461,7 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 	QMimeData *mimeData = new QMimeData;
 
 	mimeData->setData("text/plain;charset=UTF-8",DragItem->text(0).toUtf8());
-	mimeData->setData("application/x-keepassx",QString("drag-type=group").toUtf8());
+	mimeData->setData("application/x-keepassx-group",QByteArray());
 	drag->setMimeData(mimeData);
 
 	Qt::DropAction dropAction = drag->start(Qt::MoveAction);
