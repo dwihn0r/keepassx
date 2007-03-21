@@ -43,17 +43,17 @@ class KeepassEntryView:public QTreeWidget{
 		void showSearchResults();
 		void showGroup(IGroupHandle* group);
 		void updateColumns();
+		int columnListIndex(int LogicalIndex);
 		IDatabase* db;
 		QList<EntryViewItem*>Items;
 		QList<IEntryHandle*> SearchResults;
 		QMenu *ContextMenu;
-		QVarLengthArray<bool>Columns;
+		QVarLengthArray<bool>Columns;		
 	private:
 		void setEntry(IEntryHandle* entry);
 		void updateEntry(EntryViewItem*);
 		void editEntry(EntryViewItem*);
 		void createItems(QList<IEntryHandle*>& entries);
-		int columnListIndex(int LogicalIndex);
 		int logicalColIndex(int ListIndex);
 		
 		QClipboard* Clipboard;
@@ -68,6 +68,7 @@ class KeepassEntryView:public QTreeWidget{
 		EntryViewMode ViewMode;
 		QVarLengthArray<float>ColumnSizes;
 		QVarLengthArray<int>ColumnOrder;
+		float GroupColumnSize;
 		
 		virtual void contextMenuEvent(QContextMenuEvent *event);
 		virtual void paintEvent(QPaintEvent* event);

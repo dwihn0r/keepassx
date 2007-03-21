@@ -66,6 +66,7 @@ QDBusConnection* dbusCon;
 
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;
+Import_KWalletXml import_KWalletXml;
 Export_Txt export_Txt;
 Export_KeePassX_Xml export_KeePassX_Xml;
 
@@ -288,6 +289,7 @@ void KeepassMainWindow::setupMenus(){
 	
 	_add_import(import_KeePassX_Xml)
 	_add_import(import_PwManager)
+	_add_import(import_KWalletXml)
 	_add_export(export_Txt);
 	_add_export(export_KeePassX_Xml);
 	

@@ -20,14 +20,14 @@
  
 #ifndef _IMPORT_KWALLET_H_
 #define _IMPORT_KWALLET_H_
-#include <qstring.h>
-#include "StandardDatabase.h"
+#include "Database.h"
+#include "Import.h"
 
-class Import_KWalletXml{
-public:
-  bool importFile(QString FileName,StandardDatabase* db,QString& err);
-private:
-
+class Import_KWalletXml:public IImport, public ImporterBase{
+	public:
+		virtual bool importDatabase(QWidget* GuiParent, IDatabase* Database);
+		virtual QString identifier(){return "KWalletXml";}
+		virtual QString title(){return "KWallet XML File (*.xml)";}
 };
 
 #endif

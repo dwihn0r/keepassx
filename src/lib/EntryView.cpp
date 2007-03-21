@@ -224,7 +224,7 @@ void KeepassEntryView::updateEntry(EntryViewItem* item){
 		item->setText(j++,entry->lastAccess().dateToString(Qt::LocalDate));}
 	if(Columns[9]){
 		item->setText(j++,entry->binaryDesc());}
-	if(Columns[10]){
+	if(Columns[10] && ViewMode==ShowSearchResults){
 		item->setText(j,entry->group()->title());
 		item->setIcon(j++,db->icon(entry->group()->image()));}	
 }
@@ -339,7 +339,11 @@ void KeepassEntryView::resizeEvent(QResizeEvent* e){
 
 
 void KeepassEntryView::showSearchResults(){
-	ViewMode=ShowSearchResults;
+	if(ViewMode==Normal){
+		ViewMode=ShowSearchResults;
+		if(Columns[10])ColumnOrder[10]--;
+		updateColumns();
+	}
 	clear();
 	Items.clear();
 	createItems(SearchResults);
@@ -347,7 +351,10 @@ void KeepassEntryView::showSearchResults(){
 
 
 void KeepassEntryView::showGroup(IGroupHandle* group){
-	ViewMode=Normal;
+	if(ViewMode==ShowSearchResults){
+		ViewMode=Normal;
+		updateColumns();
+	}
 	clear();
 	Items.clear();
 	if(group==NULL)return;
@@ -393,7 +400,7 @@ void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){
 			item->setText(j++,entries[i]->lastAccess().dateToString(Qt::LocalDate));}
 		if(Columns[9]){
 			item->setText(j++,entries[i]->binaryDesc());}
-		if(Columns[10]){
+		if(Columns[10] && ViewMode==ShowSearchResults){
 			item->setText(j,entries[i]->group()->title());
 			item->setIcon(j++,db->icon(entries[i]->group()->image()));}
 	}
@@ -433,9 +440,13 @@ void KeepassEntryView::updateColumns(){
 	cols << tr("Last Access");}
 	if(Columns[9]){
 	cols << tr("Attachment");}
-	if(Columns[10]){
+	if(Columns[10] && ViewMode==ShowSearchResults){
 	cols << tr("Group");}	
 	setHeaderLabels(cols);
+	
+	for(int i=0;i<NUM_COLUMNS;i++){
+		if(!Columns[i])ColumnOrder[i]=100;		
+	}
 	
 	QMap<int,int> Order;
 	for(int i=NUM_COLUMNS-1;i>=0;i--)
@@ -463,6 +474,7 @@ int KeepassEntryView::logicalColIndex(int LstIndex){
 	int c=-1;
 	for(int i=0;i<NUM_COLUMNS;i++){
 		if(Columns[i])c++;
+		if(i==10 && Columns[10] && ViewMode!=ShowSearchResults)c--;
 		if(i==LstIndex)return c;		
 	}
 	Q_ASSERT(false);	
@@ -472,6 +484,13 @@ void KeepassEntryView::resizeColumns(){
 	AutoResizeColumns=false;
 	int w=viewport()->width();
 	int sum=0;
+	
+	for(int i=0;i<NUM_COLUMNS;i++){
+	//	if(i==10) continue; //skip "Group" column
+		if(!Columns[i])ColumnSizes[i]=0;
+		if(Columns[i] && ColumnSizes[i]==0)ColumnSizes[i]=0.1f*(float)w;
+	}
+
 	for(int i=0;i<header()->count();i++){
 		sum+=ColumnSizes[columnListIndex(i)];		
 	}
@@ -484,7 +503,6 @@ void KeepassEntryView::resizeColumns(){
 		if(i==header()->count()-1){
 			NewSize+=(w-sum);	// add rounding difference to the last column
 		}
-		//qDebug("i=%i lstIndex=%i NewSize=%f",i,lstIndex,NewSize);
 		header()->resizeSection(header()->logicalIndex(i),NewSize);
 		ColumnSizes[lstIndex]=NewSize;
 	}	
@@ -495,6 +513,7 @@ int KeepassEntryView::columnListIndex(int LogicalIndex){
 	int c=-1; int i=0;
 	for(i;i<NUM_COLUMNS;i++){
 		if(Columns[i])c++;
+		if(i==10 && Columns[10] && ViewMode!=ShowSearchResults)c--;
 		if(c==LogicalIndex)break;
 	}
 	return i;
@@ -597,8 +616,9 @@ EntryViewItem::EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding
 
 
 bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
-	int SortCol=treeWidget()->sortColumn();
-	if(SortCol < 5 || SortCol==9 || SortCol==10){ //columns with string values (Title, Username, Password, URL, Comment, Group)
+	int SortCol=treeWidget()->header()->sortIndicatorSection();
+	int ListIndex=((KeepassEntryView*)treeWidget())->columnListIndex(SortCol);
+	if(ListIndex < 5 || ListIndex==9 || ListIndex==10){ //columns with string values (Title, Username, Password, URL, Comment, Group)
 		if(QString::localeAwareCompare(text(SortCol),other.text(SortCol)) < 0)
 			return true;
 		else 
