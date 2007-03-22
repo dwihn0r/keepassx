@@ -51,17 +51,18 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 	}
 	
 	Combo_Dirs->setEditText(QString());
-	if(config.RememberLastKey && !ChangeKeyMode){
-		switch(config.LastKeyType){
-			//case PASSWORD:	setStatePasswordOnly(); break; //Password-Only is already the default
-			case KEYFILE:	setStateKeyFileOnly();
-							Combo_Dirs->setEditText(config.LastKeyLocation);
-							break;
-			case BOTH:		setStateBoth();
-							CheckBox_Both->setChecked(true);
-							Combo_Dirs->setEditText(config.LastKeyLocation);
-							break;
+	if(settings->value("RememberLastKey",true).toBool() && !ChangeKeyMode){
+		QString LastKeyType=settings->value("LastKeyType","").toString();
+		if(LastKeyType=="KeyFile"){
+			setStateKeyFileOnly();
+			Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(settings->value("LastKeyFile","").toString())));
 		}
+		else if(LastKeyType=="Composite"){
+			setStateBoth();
+			CheckBox_Both->setChecked(true);
+			Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(settings->value("LastKeyFile","").toString())));
+		}
+		// if(LastKeyType==Password){... is not required because it is already the default state.
 	}
 	
 	connect( Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
@@ -277,9 +278,19 @@ bool CPasswordDialog::doAuth(){
 		if(!DbAuth->authByFile(keyfile))return false;	
 	}	
 	
-	if(config.RememberLastKey){
-		config.LastKeyLocation=keyfile;
-		config.LastKeyType=KeyType;
+	if(settings->value("RememberLastKey",true).toBool()){
+		QString KeyLocation=keyfile;
+		if(settings->value("SaveRelativePaths",true).toBool()){
+			KeyLocation=KeyLocation.left(KeyLocation.lastIndexOf("/"));
+			KeyLocation=makePathRelative(KeyLocation,QDir::currentPath())+keyfile.right(keyfile.length()-keyfile.lastIndexOf("/")-1);	
+		}
+		settings->setValue("LastKeyFile",KeyLocation);
+		if(KeyType==PASSWORD)
+			settings->setValue("LastKeyType","Password");
+		if(KeyType==KEYFILE)
+			settings->setValue("LastKeyType","KeyFile");
+		if(KeyType==BOTH)
+			settings->setValue("LastKeyType","Composite");
 	}
 	return true;
 	

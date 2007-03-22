@@ -45,7 +45,8 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 		void OnIntPluginNone(bool);
 		void OnIntPluginGnome(bool);
 		void OnIntPluginKde(bool);
-		void OnCeckBoxOpenLastChanged(int state);
+		void OnCheckBoxOpenLastChanged(int state);
+		void OnCheckBoxBrowserDefaultChanged(int state);
 		void OnMountDirBrowse();
 
 	private:

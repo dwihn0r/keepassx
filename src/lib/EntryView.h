@@ -94,6 +94,7 @@ class KeepassEntryView:public QTreeWidget{
 		void OnAutoType();
 		void removeDragItems();
 		void OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisIndex);
+		void OnEditOpenUrl();
 	signals:
 		void fileModified();
 		void selectionChanged(SelectionState);

@@ -27,6 +27,7 @@
 #include <qdatetime.h>
 #include <QSysInfo>
 #include <QBuffer>
+#include <QDir>
 #include "crypto/twoclass.h"
 #include "crypto/aescpp.h"
 #include "crypto/sha256.h"

@@ -264,19 +264,12 @@ void KeepassEntryView::OnNewEntry(){
 }
 
 void KeepassEntryView::OnEntryActivated(QTreeWidgetItem* item,int Column){
-	int i=0;
-	int c=-1;
-	for(i;i<NUM_COLUMNS;i++){
-		if(config.Columns[i])c++;
-		if(c==Column)break;
-	}
-	if(c==-1)return;
-	switch(i){
+	switch(columnListIndex(Column)){
 		case 0:	editEntry((EntryViewItem*)item);
 		break;
 		case 1: OnUsernameToClipboard();
 		break;
-		case 2: //OnEditOpenUrl();
+		case 2: OnEditOpenUrl();
 		break;
 		case 3:	OnPasswordToClipboard();
 		break;
@@ -287,6 +280,11 @@ void KeepassEntryView::OnEntryActivated(QTreeWidgetItem* item,int Column){
 void KeepassEntryView::OnEditEntry(){
 	Q_ASSERT(selectedItems().size()==1);
 	editEntry((EntryViewItem*)selectedItems()[0]);	
+}
+
+void KeepassEntryView::OnEditOpenUrl(){
+	Q_ASSERT(selectedItems().size()==1);
+	openBrowser(((EntryViewItem*)selectedItems()[0])->text(logicalColIndex(2)));		
 }
 
 void KeepassEntryView::OnUsernameToClipboard(){

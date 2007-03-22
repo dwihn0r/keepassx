@@ -43,18 +43,41 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 	connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
 	connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
-	connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCeckBoxOpenLastChanged(int)));
+	connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxOpenLastChanged(int)));
 	connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
 	
 	connect(Radio_IntPlugin_None,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginNone(bool)));
 	connect(Radio_IntPlugin_Gnome,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginGnome(bool)));
 	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde(bool)));
+	
+	connect(CheckBox_BrowserDefault,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxBrowserDefaultChanged(int)));
 
 	
 	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
-	CheckBox_OpenLast->setChecked(config.OpenLast);
-	SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
 	
+	//General
+	CheckBox_OpenLast->setChecked(settings->value("OpenLastFile",true).toBool());
+	CheckBox_RememberLastKey->setChecked(settings->value("RememberLastKey",true).toBool());
+	checkBox_ShowSysTrayIcon->setChecked(config.ShowSysTrayIcon);
+	checkBox_MinimizeToTray->setChecked(config.MinimizeToTray);
+	checkBox_SaveFileDlgHistory->setChecked(config.SaveFileDlgHistory);
+	
+	switch(config.GroupTreeRestore){
+		case 1:
+			Radio_GroupTreeRestore->setChecked(true);
+			break;
+		case 2:
+			Radio_GroupTreeExpand->setChecked(true);
+			break;
+		case 3:
+			Radio_GroupTreeDoNothing->setChecked(true);
+	}
+	if(settings->value("GroupTreeState","ExpandAll")=="ExpandAll")Radio_GroupTreeExpand->setChecked(true);
+	if(settings->value("GroupTreeState","ExpandAll")=="Restore")Radio_GroupTreeRestore->setChecked(true);
+	if(settings->value("GroupTreeState","ExpandAll")=="ExpandNone")Radio_GroupTreeDoNothing->setChecked(true);	
+	
+		
+	//Appearance	
 	QPixmap *pxt=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
 	pxt->fill(config.BannerTextColor);
 	pixmTextColor->clear();
@@ -68,33 +91,21 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	QPixmap *px2=new QPixmap(pixmColor2->width(),pixmColor2->height());
 	px2->fill(config.BannerColor2);
 	pixmColor2->clear();
-	pixmColor2->setPixmap(*px2);
+	pixmColor2->setPixmap(*px2);	
 	
 	color1=config.BannerColor1;
 	color2=config.BannerColor2;
 	textcolor=config.BannerTextColor;
+	CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
+	
+	
+	//Security
+	SpinBox_ClipboardTime->setValue(config.ClipboardTimeOut);
 	CheckBox_ShowPasswords->setChecked(config.ShowPasswords);
 	CheckBox_ShowPasswords_PasswordDlg->setChecked(config.ShowPasswordsPasswordDlg);
-	checkBox_ShowSysTrayIcon->setChecked(config.ShowSysTrayIcon);
-	checkBox_MinimizeToTray->setChecked(config.MinimizeToTray);
-	checkBox_SaveFileDlgHistory->setChecked(config.SaveFileDlgHistory);
-	Edit_BrowserCmd->setText(config.OpenUrlCommand);
-
-	switch(config.GroupTreeRestore){
-		case 1:
-			Radio_GroupTreeRestore->setChecked(true);
-			break;
-		case 2:
-			Radio_GroupTreeExpand->setChecked(true);
-			break;
-		case 3:
-			Radio_GroupTreeDoNothing->setChecked(true);
-	}
 	
-	CheckBox_AlternatingRowColors->setChecked(config.AlternatingRowColors);
-	Edit_MountDir->setText(config.MountDir);
-	CheckBox_RememberLastKey->setChecked(config.RememberLastKey);
 	
+	//Desktop Integration
 	if(PluginLoadError==QString())
 		Label_IntPlugin_Error->hide();
 	else
@@ -106,13 +117,24 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 		case CConfig::GNOME: Radio_IntPlugin_Gnome->setChecked(true); break;
 		case CConfig::KDE: Radio_IntPlugin_Kde->setChecked(true); break;		
 	}
-	
-	if(settings->value("GroupTreeState","ExpandAll")=="ExpandAll")Radio_GroupTreeExpand->setChecked(true);
-	if(settings->value("GroupTreeState","ExpandAll")=="Restore")Radio_GroupTreeRestore->setChecked(true);
-	if(settings->value("GroupTreeState","ExpandAll")=="ExpandNone")Radio_GroupTreeDoNothing->setChecked(true);
-	
 	if(!PluginsModified)
 		Label_IntPlugin_Info->hide();
+	
+		
+	//Advanced
+	QString BrowserCmd=settings->value("BrowserCmd","<<default>>").toString();
+	if(BrowserCmd=="<<default>>"){
+		CheckBox_BrowserDefault->setChecked(true);
+		Edit_BrowserCmd->setDisabled(true);
+	}
+	else{
+		Edit_BrowserCmd->setText(BrowserCmd);
+		CheckBox_BrowserDefault->setChecked(false);
+	}
+	
+	Edit_MountDir->setText(config.MountDir);
+	CheckBox_SaveRelativePaths->setChecked(settings->value("SaveRelativePaths",true).toBool());
+		
 }
 
 CSettingsDlg::~CSettingsDlg()
@@ -126,7 +148,15 @@ void CSettingsDlg::paintEvent(QPaintEvent *event){
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
-
+void CSettingsDlg::OnCheckBoxBrowserDefaultChanged(int state){
+	if(state==Qt::Checked){
+		Edit_BrowserCmd->setDisabled(true);
+		Edit_BrowserCmd->setText("");
+	}
+	else{
+		Edit_BrowserCmd->setDisabled(false);
+	}
+}
 
 void CSettingsDlg::OnOK()
 {
@@ -145,36 +175,46 @@ void CSettingsDlg::OnOtherButton(QAbstractButton* button){
 }
 
 void CSettingsDlg::apply(){
-	config.OpenLast=CheckBox_OpenLast->isChecked();
-	config.ClipboardTimeOut=SpinBox_ClipboardTime->value();
-	config.BannerColor1=color1;
-	config.BannerColor2=color2;
-	config.BannerTextColor=textcolor;
-	config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
-	config.ShowPasswordsPasswordDlg=CheckBox_ShowPasswords_PasswordDlg->isChecked();
-	config.OpenUrlCommand=Edit_BrowserCmd->text();
-	config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
-	config.MountDir=Edit_MountDir->text();
+	
+	//General
 	config.ShowSysTrayIcon=checkBox_ShowSysTrayIcon->isChecked();
 	config.MinimizeToTray=checkBox_MinimizeToTray->isChecked();
 	config.SaveFileDlgHistory=checkBox_SaveFileDlgHistory->isChecked();
-	config.EnableBookmarkMenu=checkBox_EnableBookmarkMenu->isChecked();
-	
+	config.EnableBookmarkMenu=checkBox_EnableBookmarkMenu->isChecked();	
 	if(Radio_GroupTreeRestore->isChecked())config.GroupTreeRestore=0;
 	if(Radio_GroupTreeExpand->isChecked())config.GroupTreeRestore=1;
 	if(Radio_GroupTreeDoNothing->isChecked())config.GroupTreeRestore=2;
+	settings->setValue("OpenLastFile",CheckBox_OpenLast->isChecked());
+	settings->setValue("RememberLastKey",CheckBox_RememberLastKey->isChecked());	
+	if(Radio_GroupTreeExpand->isChecked())settings->setValue("GroupTreeState","ExpandAll");
+	if(Radio_GroupTreeDoNothing->isChecked())settings->setValue("GroupTreeState","ExpandNone");
+	if(Radio_GroupTreeRestore->isChecked())settings->setValue("GroupTreeState","Restore");
 	
-	if(config.MountDir!="" && config.MountDir.right(1)!="/")
-		config.MountDir+="/";
-	config.RememberLastKey=CheckBox_RememberLastKey->isChecked();
+	//Appearence
+	config.BannerColor1=color1;
+	config.BannerColor2=color2;
+	config.BannerTextColor=textcolor;
+	config.AlternatingRowColors=CheckBox_AlternatingRowColors->isChecked();
+	
+	//Security
+	config.ClipboardTimeOut=SpinBox_ClipboardTime->value();
+	config.ShowPasswords=CheckBox_ShowPasswords->isChecked();
+	config.ShowPasswordsPasswordDlg=CheckBox_ShowPasswords_PasswordDlg->isChecked();
+	
+	//Desktop Integration	
 	PluginsModified=Label_IntPlugin_Info->isVisible();
 	if(Radio_IntPlugin_None->isChecked())config.IntegrPlugin=CConfig::NONE;
 	if(Radio_IntPlugin_Gnome->isChecked())config.IntegrPlugin=CConfig::GNOME;	
 	if(Radio_IntPlugin_Kde->isChecked())config.IntegrPlugin=CConfig::KDE;
 	
-	if(Radio_GroupTreeExpand->isChecked())settings->setValue("GroupTreeState","ExpandAll");
-	if(Radio_GroupTreeDoNothing->isChecked())settings->setValue("GroupTreeState","ExpandNone");
-	if(Radio_GroupTreeRestore->isChecked())settings->setValue("GroupTreeState","Restore");
+	//Advanced
+	config.OpenUrlCommand=Edit_BrowserCmd->text();	
+	config.MountDir=Edit_MountDir->text();
+	if(config.MountDir!="" && config.MountDir.right(1)!="/")
+		config.MountDir+="/";	
+	if(CheckBox_BrowserDefault->isChecked())settings->setValue("BrowserCmd","<<default>>");
+	else settings->setValue("BrowserCmd",Edit_BrowserCmd->text());
+	settings->setValue("SaveRelativePaths",CheckBox_SaveRelativePaths->isChecked());
 
 }
 
@@ -219,7 +259,7 @@ void CSettingsDlg::OnColor1()
 	}
 }
 
-void CSettingsDlg::OnCeckBoxOpenLastChanged(int state){
+void CSettingsDlg::OnCheckBoxOpenLastChanged(int state){
 if(state==Qt::Checked){
 	CheckBox_RememberLastKey->setEnabled(true);
 }else{

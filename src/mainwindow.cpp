@@ -91,16 +91,16 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	setupConnections();
 	FileOpen=false;
 	if(ArgFile!=QString())
-		openDatabase(ArgFile,false);
-	else if(config.OpenLast && (config.LastFile!=QString()) ){
-		QFileInfo file(config.LastFile);
+		openDatabase(QDir::cleanPath(QDir::current().absoluteFilePath(ArgFile)),false);
+	else if(settings->value("OpenLastFile",true).toBool() && (settings->value("LastFile","").toString()!=QString())){
+		QFileInfo file(settings->value("LastFile","").toString());
 		if(file.exists())
-			openDatabase(config.LastFile,true);
+			openDatabase(QDir::cleanPath(QDir::current().absoluteFilePath(settings->value("LastFile","").toString())),true);
 		else
-			config.LastFile=QString();	
+			settings->setValue("LastFile","");	
 	}
 	
-	
+	/*
 	//dbusServer=new QDBusServer("unix:path=/tmp/KpxBus",this);
 	//qDebug("DBUS: %s",dbusServer->lastError().message().toAscii().data());
 	//QDBusConnection::connectToBus("unix:path=/tmp/KpxBus","MyKpxConnection");
@@ -111,6 +111,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	QDBusConnection::sessionBus().registerService("org.keepassx.firefoxservice");
 	QDBusConnection::sessionBus().registerObject("/KpxFirefox",fox);
 	qDebug("DBUS: %s",QDBusConnection::sessionBus().lastError().message().toAscii().data());
+	*/
 	
 }
 
@@ -135,7 +136,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditDeleteEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnDeleteEntry()));
 	connect(EditUsernameToClipboardAction, SIGNAL(triggered()), EntryView, SLOT(OnUsernameToClipboard()));
 	connect(EditPasswordToClipboardAction, SIGNAL(triggered()), EntryView, SLOT(OnPasswordToClipboard()));
-	connect(EditOpenUrlAction, SIGNAL(triggered()), this, SLOT(OnEditOpenUrl()));
+	connect(EditOpenUrlAction, SIGNAL(triggered()), EntryView, SLOT(OnEditOpenUrl()));
 	connect(EditSaveAttachmentAction, SIGNAL(triggered()),EntryView, SLOT(OnSaveAttachment()));
 	connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnSearch()));
 	connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnGroupSearch()));
@@ -340,7 +341,7 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	QString err;
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	if(db->load(filename)==true){
-		if(config.OpenLast)config.LastFile=filename;
+		saveLastFilename(filename);
 		setWindowTitle(tr("%1 - KeePassX").arg(filename));
 		GroupView->createItems();
 		EntryView->showGroup(NULL);
@@ -639,7 +640,7 @@ else Q_ASSERT(false);
 bool KeepassMainWindow::OnFileSave(){
 if(!db->file())
   return OnFileSaveAs();
-config.LastFile=db->file()->fileName();
+saveLastFilename(db->file()->fileName());
 if(db->save())
   setStateFileModified(false);
 else{
@@ -723,10 +724,6 @@ for(int i=0; i<SearchResults.size();i++){
 	*/
 }
 
-
-void KeepassMainWindow::OnEditOpenUrl(){
-//openBrowser(currentEntry()->URL);
-}
 
 void KeepassMainWindow::search(IGroupHandle* group){
 	CSearchDlg dlg(db,group,this,"SearchDialog",false);
@@ -854,27 +851,27 @@ void KeepassMainWindow::OnShowSearchResults(){
 
 
 void KeepassMainWindow::OnViewToolbarIconSize16(bool state){
-if(!state)return;
-ViewToolButtonSize22Action->setChecked(false);
-ViewToolButtonSize28Action->setChecked(false);
-config.ToolbarIconSize=16;
-toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	if(!state)return;
+	ViewToolButtonSize22Action->setChecked(false);
+	ViewToolButtonSize28Action->setChecked(false);
+	config.ToolbarIconSize=16;
+	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
 }
 
 void KeepassMainWindow::OnViewToolbarIconSize22(bool state){
-if(!state)return;
-ViewToolButtonSize16Action->setChecked(false);
-ViewToolButtonSize28Action->setChecked(false);
-config.ToolbarIconSize=22;
-toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	if(!state)return;
+	ViewToolButtonSize16Action->setChecked(false);
+	ViewToolButtonSize28Action->setChecked(false);
+	config.ToolbarIconSize=22;
+	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
 }
 
 void KeepassMainWindow::OnViewToolbarIconSize28(bool state){
-if(!state)return;
-ViewToolButtonSize16Action->setChecked(false);
-ViewToolButtonSize22Action->setChecked(false);
-config.ToolbarIconSize=28;
-toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	if(!state)return;
+	ViewToolButtonSize16Action->setChecked(false);
+	ViewToolButtonSize22Action->setChecked(false);
+	config.ToolbarIconSize=28;
+	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
 }
 
 void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason reason){
@@ -885,4 +882,18 @@ void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason rea
 void KeepassMainWindow::OnExtrasPasswordGen(){
 	CGenPwDialog dlg(this,true);
 	dlg.exec();	
+}
+
+
+void KeepassMainWindow::saveLastFilename(const QString& filename){
+	
+	if(settings->value("OpenLastFile",true).toBool()){
+		if(settings->value("SaveRelativePath",true).toBool()){
+			QString Path=filename.left(filename.lastIndexOf("/"));
+			Path=makePathRelative(Path,QDir::currentPath());	
+			settings->setValue("LastFile",Path+filename.right(filename.length()-filename.lastIndexOf("/")-1));
+		}
+		else
+			settings->setValue("LastFile",filename);
+	}	
 }

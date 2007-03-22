@@ -31,6 +31,8 @@
 #include <QProcess>
 #include <QLibraryInfo>
 #include <QPluginLoader>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
@@ -280,10 +282,18 @@ QString decodeFileError(QFile::FileError Code){
 	}
 }
 
-void openBrowser(QString url){
-	QStringList args=config.OpenUrlCommand.arg(url).split(' ');
-	QString cmd=args.takeFirst();
-	QProcess::startDetached(cmd,args);
+void openBrowser(QString UrlString){
+	QUrl url(UrlString);
+	if(url.scheme().isEmpty())
+		url=QUrl("http://"+UrlString);
+	if(settings->value("BrowserCmd","<<default>>").toString() == "<<default>>"){
+		QDesktopServices::openUrl(url);		
+	}
+	else{
+		QStringList args=settings->value("BrowserCmd","<<default>>").toString().arg(url.toString()).split(' ');		
+		QString cmd=args.takeFirst();
+		QProcess::startDetached(cmd,args);
+	}
 }
 
 
@@ -426,4 +436,20 @@ QString findPlugin(const QString& filename){
 		return AppDir+"/../lib/keepassx/"+filename;
 	
 	return QString();
+}
+
+
+QString makePathRelative(const QString& AbsDir,const QString& CurDir){
+	QStringList abs=AbsDir.split('/');
+	QStringList cur=CurDir.split('/');
+	QString rel="./";
+	int common=0;
+	for(common; common < abs.size() && common < cur.size(); common++){
+		if(abs[common]!=cur[common])break;		
+	}
+	for(int i=0;i<cur.size()-common;i++)
+		rel.append("../");
+	for(int i=common;i<abs.size();i++)
+		rel.append(abs[i]+"/");
+	return rel;	
 }

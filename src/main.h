@@ -41,6 +41,7 @@ void openBrowser(QString url);
 void showErrMsg(const QString& msg,QWidget* parent=NULL);
 QString decodeFileError(QFile::FileError Code);
 QString findPlugin(const QString& filename);
+QString makePathRelative(const QString& Abs,const QString& Cur);
 extern QString PluginLoadError;
 
 extern CConfig  config;
