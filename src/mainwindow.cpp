@@ -60,11 +60,11 @@
 #include "dialogs/CustomizeDetailViewDlg.h"
 #include "dialogs/ExpiredEntriesDlg.h"
 
-#include <QtDBus/QtDBus>
+//#include <QtDBus/QtDBus>
 #include <iostream>
 
-QDBusServer* dbusServer;
-QDBusConnection* dbusCon;
+//QDBusServer* dbusServer;
+//QDBusConnection* dbusCon;
 
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;

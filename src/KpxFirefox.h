@@ -21,6 +21,7 @@
 #ifndef KPXFIREFOX_H
 #define KPXFIREFOX_H
 
+/*
 #include <QtDBus/QtDBus>
 #include <QObject>
 #include "Database.h"
@@ -54,7 +55,7 @@ class KpxFirefoxAdaptor:public QDBusAbstractAdaptor
 	private:
 		KpxFirefox* kpx;
 };
-
+*/
 
 
 #endif

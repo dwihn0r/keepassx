@@ -19,11 +19,11 @@
  ***************************************************************************/
  
 #include "KpxFirefox.h"
-
+/*
 KpxFirefoxAdaptor::KpxFirefoxAdaptor(KpxFirefox* obj): QDBusAbstractAdaptor(obj)
 { kpx=obj; }
 
-
+*/
 
 
 
