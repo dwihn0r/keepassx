@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2005-2006 by Tarek Saidi                                *
- *   tarek@linux                                                           *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -38,7 +38,7 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 : QDialog(parent)
 {
 	setupUi(this);
-	createBanner(Banner,Icon_Key32x32,tr("Database Key"));
+	createBanner(Banner,getPixmap("key"),tr("Database Key"));
 	db=DB;
 	QDir media(config.MountDir);
 	if(media.exists()){

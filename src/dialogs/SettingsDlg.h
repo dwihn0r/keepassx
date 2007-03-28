@@ -48,6 +48,7 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 		void OnCheckBoxOpenLastChanged(int state);
 		void OnCheckBoxBrowserDefaultChanged(int state);
 		void OnMountDirBrowse();
+		void OnCustomizeEntryDetails();
 
 	private:
  		virtual void paintEvent(QPaintEvent*);

@@ -362,6 +362,16 @@
       <widget class="QDateTimeEdit" name="DateTime_Expire" />
      </item>
      <item>
+      <widget class="QToolButton" name="ButtonExpirePresets" >
+       <property name="text" >
+        <string>...</string>
+       </property>
+       <property name="popupMode" >
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QCheckBox" name="CheckBox_ExpiresNever" >
        <property name="text" >
         <string>Never</string>

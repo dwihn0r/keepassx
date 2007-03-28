@@ -43,12 +43,14 @@ class KeepassEntryView:public QTreeWidget{
 		void showSearchResults();
 		void showGroup(IGroupHandle* group);
 		void updateColumns();
+		void refreshItems();
 		int columnListIndex(int LogicalIndex);
 		IDatabase* db;
 		QList<EntryViewItem*>Items;
 		QList<IEntryHandle*> SearchResults;
 		QMenu *ContextMenu;
-		QVarLengthArray<bool>Columns;		
+		QVarLengthArray<bool>Columns;
+		void setCurrentEntry(IEntryHandle* entry);	
 	private:
 		void setEntry(IEntryHandle* entry);
 		void updateEntry(EntryViewItem*);

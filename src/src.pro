@@ -8,7 +8,8 @@ DEPENDPATH += "crypto \
               forms \
               import \
               lib \
-              translations"
+              translations \
+	      res"
 INSTALLS += target data
 data.files += ../share/keepass/* 
 TARGET = ../bin/keepassx
@@ -47,7 +48,10 @@ FORMS += forms/EditGroupDlg.ui \
          forms/EditEntryDlg.ui \
          forms/PasswordGenDlg.ui \
 	 forms/SelectIconDlg.ui \
-	 forms/CollectEntropyDlg.ui
+	 forms/CollectEntropyDlg.ui \
+	 forms/CustomizeDetailViewDlg.ui \
+	 forms/CalendarDlg.ui \
+	 forms/ExpiredEntriesDlg.ui
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
 		translations/keepass-es_ES.ts \
@@ -80,6 +84,9 @@ HEADERS += lib/IniReader.h \
            dialogs/PasswordGenDlg.h \
 	   dialogs/SelectIconDlg.h \
 	   dialogs/CollectEntropyDlg.h \
+	   dialogs/CustomizeDetailViewDlg.h \
+	   dialogs/CalendarDlg.h \
+	   dialogs/ExpiredEntriesDlg.h \
            lib/random.h \
            Database.h \
            lib/KdePlugin.h \
@@ -135,6 +142,9 @@ SOURCES += lib/IniReader.cpp \
            dialogs/PasswordGenDlg.cpp \
 	   dialogs/SelectIconDlg.cpp \
 	   dialogs/CollectEntropyDlg.cpp \
+	   dialogs/CustomizeDetailViewDlg.cpp \
+	   dialogs/CalendarDlg.cpp \
+	   dialogs/ExpiredEntriesDlg.cpp \
            lib/random.cpp \
            Database.cpp \
            lib/KdePlugin.cpp \
@@ -151,9 +161,11 @@ SOURCES += lib/IniReader.cpp \
 	   crypto/yarrow.cpp \
 	   lib/WaitAnimationWidget.cpp \
            KpxFirefox.cpp
+RESOURCES += res/resources.qrc
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/
+RCC_DIR = ../build/rcc
 CONFIG += debug \
 qt \
 thread \

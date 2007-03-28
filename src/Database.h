@@ -284,6 +284,9 @@ public:
 	//! \param Group The group which contains the wanted entries.
 	//! \return a list of pointers to the handles of all entries which belong to the given group. The list contains only valid handles and is sorted in an ascending order regarding to the entry indices.
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group)=0;
+	
+	//! \return a list with the pointers to the handles of all expired entries of the database. The list contains only valid handles. The list is not sorted.
+	virtual QList<IEntryHandle*> expiredEntries()=0;
 		
 	//! \return a list with the pointers to the handles of all entries of the database. The list contains only valid handles and is not sorted.
 	virtual QList<IGroupHandle*> groups()=0;

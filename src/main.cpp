@@ -58,37 +58,17 @@ using namespace std;
 					 
 #define CSTR(x)(x.toUtf8().data())
 					 
+QHash<QString,QPixmap*>PixmapCache;
+QHash<QString,QIcon*>IconCache;
+					 
 CConfig config;
 QSettings* settings;
 QString  AppDir;
 QString PluginLoadError;
 bool TrActive;
-QPixmap *Icon_Key32x32;
-QPixmap *Icon_Settings32x32;
-QPixmap *Icon_Search32x32;
-QPixmap *Icon_I18n32x32;
-QPixmap *Icon_Ok16x16;
-QPixmap *EntryIcons;
-QIcon *Icon_FileNew;
-QIcon *Icon_FileOpen;
-QIcon *Icon_FileClose;
-QIcon *Icon_FileSave;
-QIcon *Icon_FileSaveAs;
-QIcon *Icon_Exit;
-QIcon *Icon_File_Export;
-QIcon *Icon_EditDelete;
-QIcon *Icon_EditAdd;
-QIcon *Icon_EditEdit;
-QIcon *Icon_EditUsernameToCb;
-QIcon *Icon_EditPasswordToCb;
-QIcon *Icon_EditClone;
-QIcon *Icon_EditOpenUrl;
-QIcon *Icon_EditSearch;
-QIcon *Icon_Configure;
-QIcon *Icon_Help;
-QIcon *Icon_AutoType;
-QIcon *Icon_Swap;
-QIcon *Icon_FileSaveDisabled;
+QString DetailViewTemplate;
+
+QPixmap* EntryIcons;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
@@ -176,7 +156,7 @@ int main(int argc, char **argv)
 	
 	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
 						<< app->applicationDirPath()+"/../share/keepass/i18n/" 
-						<< QDir::homePath()+"/.keepass/" ))
+						<< QDir::homePath()+"/.keepassx/" ))
 		{app->installTranslator(translator);
 		TrActive=true;}
 	else{
@@ -201,6 +181,14 @@ int main(int argc, char **argv)
 		delete qtTranslator;
 	}
 	
+	
+	QFile templ(QDir::homePath()+"/.keepassx/detailview-template.html"); ///FIXME ArgCfg
+	if(templ.open(QIODevice::ReadOnly)){
+		DetailViewTemplate=QString::fromUtf8(templ.readAll());		
+		templ.close();		
+	}
+	else loadDefaultDetailViewTemplate();
+		
 	loadImages();
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
@@ -217,6 +205,15 @@ int main(int argc, char **argv)
 				QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),
 				QObject::tr("OK"),"","",0.0);
 	
+	if(templ.open(QIODevice::WriteOnly)){
+		templ.write(DetailViewTemplate.toUtf8());
+		templ.close();		
+	}
+	else{
+		qWarning("Failed to save detail view template: %s",decodeFileError(templ.error()).toUtf8().data());		
+	}
+	
+	
 	fileDlgHistory.save();
 	delete app;
 	delete settings;
@@ -224,9 +221,25 @@ int main(int argc, char **argv)
 }
 
 
+void loadDefaultDetailViewTemplate(){
+		QFile templ(":/default-detailview.html");
+		templ.open(QIODevice::ReadOnly);
+		DetailViewTemplate=QString::fromUtf8(templ.readAll());		
+		templ.close();
+		DetailViewTemplate.replace("Group",QCoreApplication::translate("DetailViewTemplate","Group"));
+		DetailViewTemplate.replace("Title",QCoreApplication::translate("DetailViewTemplate","Title"));
+		DetailViewTemplate.replace("Username",QCoreApplication::translate("DetailViewTemplate","Username"));
+		DetailViewTemplate.replace("Password",QCoreApplication::translate("DetailViewTemplate","Password"));
+		DetailViewTemplate.replace("URL",QCoreApplication::translate("DetailViewTemplate","URL"));
+		DetailViewTemplate.replace("Creation",QCoreApplication::translate("DetailViewTemplate","Creation"));
+		DetailViewTemplate.replace("Last Access",QCoreApplication::translate("DetailViewTemplate","Last Access"));
+		DetailViewTemplate.replace("Last Modification",QCoreApplication::translate("DetailViewTemplate","Last Modification"));
+		DetailViewTemplate.replace("Expiration",QCoreApplication::translate("DetailViewTemplate","Expiration"));
+		DetailViewTemplate.replace("Comment",QCoreApplication::translate("DetailViewTemplate","Comment"));	
+}
 
-
-void createBanner(QLabel *Banner,QPixmap* symbol,QString text){
+//obsolete
+void createBanner(QLabel *Banner,const QPixmap* symbol,QString text){
 	QPixmap Pixmap;
 	createBanner(&Pixmap,symbol,text
 				   ,Banner->width()
@@ -236,11 +249,11 @@ void createBanner(QLabel *Banner,QPixmap* symbol,QString text){
 	Banner->setPixmap(Pixmap);
 }
 
-void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Width){
+void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
 	createBanner(Pixmap,IconAlpha,Text,Width,config.BannerColor1,config.BannerColor2,config.BannerTextColor);
 }
 
-void createBanner(QPixmap* Pixmap, QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor){
+void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor){
 	*Pixmap=QPixmap(Width,50);
 	QPainter painter(Pixmap);
 	QLinearGradient grad(0,0,Width,0);
@@ -296,7 +309,7 @@ void openBrowser(QString UrlString){
 	}
 }
 
-
+///TODO 0.2.3 remove
 void loadImg(QString name,QPixmap& Img){
 if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
  if(Img.load(AppDir+"/share/"+name)==false){
@@ -307,66 +320,44 @@ if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
 
 }
 
-
-#define _loadIcon(Icon,PATH)\
-	Icon=new QIcon(ThemeDir+PATH);
-
-
+///TODO 0.2.3 remove
 void loadImages(){
+	bool small=true;
+	QString ThemeDir=AppDir+"/../share/keepass/icons/nuvola/32x32";
+	QPixmap tmpImg;
+	loadImg("clientic.png",tmpImg);
+	EntryIcons=new QPixmap[BUILTIN_ICONS];
+	for(int i=0;i<BUILTIN_ICONS;i++){
+	EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
 
-bool small=true;
-QString ThemeDir=AppDir+"/../share/keepass/icons/nuvola/32x32";
+}
 
-QPixmap tmpImg;
+const QIcon& getIcon(const QString& name){
+	QIcon* CachedIcon=IconCache.value(name);
+	if(CachedIcon)
+		return *CachedIcon;
+	QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
+	if(!IconFile.isFile() || !IconFile.exists() || !IconFile.isReadable()){
+		//ERROR
+		qWarning("%s",CSTR(name));
+	}
+	QIcon* NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
+	IconCache.insert(name,NewIcon);
+	return *NewIcon;
+}
 
-//-----------------------
-loadImg("clientic.png",tmpImg);
-EntryIcons=new QPixmap[BUILTIN_ICONS];
-for(int i=0;i<BUILTIN_ICONS;i++){
-EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
-
-//--------------------------
-loadImg("key.png",tmpImg);
-Icon_Key32x32=new QPixmap;
-*Icon_Key32x32=tmpImg;
-//--------------------------
-loadImg("settings.png",tmpImg);
-Icon_Settings32x32=new QPixmap;
-*Icon_Settings32x32=tmpImg;
-//--------------------------
-loadImg("i18n.png",tmpImg);
-Icon_I18n32x32=new QPixmap;
-*Icon_I18n32x32=tmpImg;
-//--------------------------
-loadImg("ok.png",tmpImg);
-Icon_Ok16x16=new QPixmap;
-*Icon_Ok16x16=tmpImg;
-//--------------------------
-loadImg("search.png",tmpImg);
-Icon_Search32x32=new QPixmap;
-*Icon_Search32x32=tmpImg;
-//--------------------------
-
-
-_loadIcon(Icon_FileNew,"/actions/filenew.png");
-_loadIcon(Icon_FileOpen,"/actions/fileopen.png");
-_loadIcon(Icon_FileSave,"/actions/filesave.png");
-_loadIcon(Icon_FileSaveAs,"/actions/filesaveas.png");
-_loadIcon(Icon_FileClose,"/actions/fileclose.png");
-_loadIcon(Icon_Exit,"/actions/exit.png");
-_loadIcon(Icon_EditDelete,"/actions/editdelete.png");
-_loadIcon(Icon_EditAdd,"/actions/edit_add.png");
-_loadIcon(Icon_EditEdit,"/actions/edit.png");
-_loadIcon(Icon_EditUsernameToCb,"/actions/identity.png");
-_loadIcon(Icon_EditPasswordToCb,"/actions/klipper_dock.png");
-_loadIcon(Icon_EditClone,"/actions/editcopy.png");
-_loadIcon(Icon_EditOpenUrl,"/actions/run.png");
-_loadIcon(Icon_EditSearch,"/actions/find.png");
-_loadIcon(Icon_Configure,"/actions/configure.png");
-_loadIcon(Icon_Help,"/actions/help.png");
-_loadIcon(Icon_AutoType,"/apps/ktouch.png");
-_loadIcon(Icon_Swap,"/actions/reload.png");
-Icon_FileSaveDisabled=new QIcon(Icon_FileSave->pixmap(32,32,QIcon::Disabled));
+const QPixmap* getPixmap(const QString& name){
+	QPixmap* CachedPixmap=PixmapCache.value(name);
+	if(CachedPixmap)
+		return CachedPixmap;
+	QImage img;
+	if(!img.load(AppDir+"/../share/keepass/icons/"+name+".png")){
+		//ERROR
+		qWarning("%s",CSTR(name));
+	}
+	QPixmap* NewPixmap=new QPixmap(QPixmap::fromImage(img));
+	PixmapCache.insert(name,NewPixmap);
+	return NewPixmap;
 }
 
 

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -57,6 +57,8 @@
 #include "dialogs/SimplePasswordDlg.h"
 #include "dialogs/PasswordGenDlg.h"
 #include "dialogs/CollectEntropyDlg.h"
+#include "dialogs/CustomizeDetailViewDlg.h"
+#include "dialogs/ExpiredEntriesDlg.h"
 
 #include <QtDBus/QtDBus>
 #include <iostream>
@@ -77,7 +79,8 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	setupUi(this);
 	AutoType::MainWin=this;
 	setGeometry(settings->value("Ui/MainWindowGeometry",QVariant(geometry())).toRect());
-	splitter->restoreState(settings->value("Ui/SplitterPos").toByteArray());
+	VSplitter->restoreState(settings->value("Ui/VSplitterPos").toByteArray());
+	HSplitter->restoreState(settings->value("Ui/HSplitterPos").toByteArray());
 	SysTray=new QSystemTrayIcon(this);
 	setupToolbar();
 	setupIcons();
@@ -89,6 +92,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config.ShowStatusbar);
 	setupConnections();
+
 	FileOpen=false;
 	if(ArgFile!=QString())
 		openDatabase(QDir::cleanPath(QDir::current().absoluteFilePath(ArgFile)),false);
@@ -100,6 +104,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 			settings->setValue("LastFile","");	
 	}
 	
+	// DBus Server of Qt 4.2 does not work - 4.3 snapshot seems to work fine	
 	/*
 	//dbusServer=new QDBusServer("unix:path=/tmp/KpxBus",this);
 	//qDebug("DBUS: %s",dbusServer->lastError().message().toAscii().data());
@@ -155,6 +160,7 @@ void KeepassMainWindow::setupConnections(){
 	
 	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
 	connect(ExtrasPasswordGenAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasPasswordGen()));
+	connect(ExtrasShowExpiredEntriesAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasShowExpiredEntries()));
 	
 	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
@@ -197,31 +203,34 @@ void KeepassMainWindow::setupToolbar(){
 }
 
 void KeepassMainWindow::setupIcons(){
-	setWindowIcon(QIcon(AppDir+"/../share/keepass/icons/keepassx.png"));
-	FileNewAction->setIcon(*Icon_FileNew);
-	FileOpenAction->setIcon(*Icon_FileOpen);
-	FileSaveAction->setIcon(*Icon_FileSave);
-	FileSaveAsAction->setIcon(*Icon_FileSaveAs);
-	FileCloseAction->setIcon(*Icon_FileClose);
-	FileSettingsAction->setIcon(*Icon_Configure);
-	FileExitAction->setIcon(*Icon_Exit);
-	EditNewEntryAction->setIcon(*Icon_EditAdd);
-	EditEditEntryAction->setIcon(*Icon_EditEdit);
-	EditDeleteEntryAction->setIcon(*Icon_EditDelete);
-	EditPasswordToClipboardAction->setIcon(*Icon_EditPasswordToCb);
-	EditUsernameToClipboardAction->setIcon(*Icon_EditUsernameToCb);
-	EditCloneEntryAction->setIcon(*Icon_EditClone);
-	EditOpenUrlAction->setIcon(*Icon_EditOpenUrl);
-	EditSaveAttachmentAction->setIcon(*Icon_FileSave);
-	EditNewGroupAction->setIcon(*Icon_EditAdd);
-	EditEditGroupAction->setIcon(*Icon_EditEdit);
-	EditDeleteGroupAction->setIcon(*Icon_EditDelete);
-	EditSearchAction->setIcon(*Icon_EditSearch);
-	EditGroupSearchAction->setIcon(*Icon_EditSearch);
-	ExtrasSettingsAction->setIcon(*Icon_Configure);
-	EditAutoTypeAction->setIcon(*Icon_AutoType);
-	HelpHandbookAction->setIcon(*Icon_Help);
-	SysTray->setIcon(QIcon(AppDir+"/../share/keepass/icons/keepassx_large.png"));
+	setWindowIcon(getIcon("keepassx"));
+	FileNewAction->setIcon(getIcon("filenew"));
+	FileOpenAction->setIcon(getIcon("fileopen"));
+	FileSaveAction->setIcon(getIcon("filesave"));
+	FileSaveAsAction->setIcon(getIcon("filesaveas"));
+	FileCloseAction->setIcon(getIcon("fileclose"));
+	FileSettingsAction->setIcon(getIcon("dbsettings"));
+	FileExitAction->setIcon(getIcon("exit"));
+	EditNewEntryAction->setIcon(getIcon("newentry"));
+	EditEditEntryAction->setIcon(getIcon("editentry"));
+	EditDeleteEntryAction->setIcon(getIcon("deleteentry"));
+	EditPasswordToClipboardAction->setIcon(getIcon("copypwd"));
+	EditUsernameToClipboardAction->setIcon(getIcon("copyusername"));
+	EditCloneEntryAction->setIcon(getIcon("cloneentry"));
+	EditOpenUrlAction->setIcon(getIcon("openurl"));
+	EditSaveAttachmentAction->setIcon(getIcon("filesave"));
+	EditNewGroupAction->setIcon(getIcon("newgroup"));
+	EditEditGroupAction->setIcon(getIcon("editgroup"));
+	EditDeleteGroupAction->setIcon(getIcon("deletegroup"));
+	EditSearchAction->setIcon(getIcon("dbsearch"));
+	EditGroupSearchAction->setIcon(getIcon("groupsearch"));
+	ExtrasSettingsAction->setIcon(getIcon("appsettings"));
+	ExtrasShowExpiredEntriesAction->setIcon(getIcon("expired"));
+	ExtrasPasswordGenAction->setIcon(getIcon("generator"));
+	EditAutoTypeAction->setIcon(getIcon("autotype"));
+	HelpHandbookAction->setIcon(getIcon("manual"));
+	HelpAboutAction->setIcon(getIcon("help"));
+	SysTray->setIcon(getIcon("keepassx_large"));
 	if(config.ShowSysTrayIcon)
 		SysTray->show();	
 }
@@ -328,7 +337,7 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	if(!IsAuto){
 		config.LastKeyLocation=QString();
 		config.LastKeyType=PASSWORD;}
-	db=dynamic_cast<IDatabase*>(new StandardDatabase());
+	db=dynamic_cast<IDatabase*>(new Kdb3Database());
 	CPasswordDialog PasswordDlg(this,db,IsAuto,false);
 	PasswordDlg.setWindowTitle(filename);
 	switch(PasswordDlg.exec()){
@@ -392,7 +401,7 @@ bool KeepassMainWindow::closeDatabase(){
 
 
 void KeepassMainWindow::OnFileNewKdb(){
-	IDatabase* db_new=dynamic_cast<IDatabase*>(new StandardDatabase());
+	IDatabase* db_new=dynamic_cast<IDatabase*>(new Kdb3Database());
 	db_new->create();
 	CPasswordDialog dlg(this,db_new,false,true);
 	dlg.setWindowTitle(tr("New Database"));
@@ -451,12 +460,13 @@ FileSaveAsAction->setEnabled(IsOpen);
 FileCloseAction->setEnabled(IsOpen);
 FileSettingsAction->setEnabled(IsOpen);
 FileChangeKeyAction->setEnabled(IsOpen);
-
 EditSearchAction->setEnabled(IsOpen);
 GroupView->setEnabled(IsOpen);
 EntryView->setEnabled(IsOpen);
 DetailView->setEnabled(IsOpen);
 QuickSearchEdit->setEnabled(IsOpen);
+ExtrasShowExpiredEntriesAction->setEnabled(IsOpen);
+
 if(!IsOpen){
     EditNewGroupAction->setEnabled(false);
     EditEditGroupAction->setEnabled(false);
@@ -482,14 +492,14 @@ else{
 
 void KeepassMainWindow::setStateFileModified(bool mod){
 	if(!FileOpen){
-		FileSaveAction->setIcon(*Icon_FileSave);
+		FileSaveAction->setIcon(getIcon("filesave"));
 		return;
 	}
 	ModFlag=mod;
 	if(mod)
-		FileSaveAction->setIcon(*Icon_FileSave);
+		FileSaveAction->setIcon(getIcon("filesave"));
 	else
-		FileSaveAction->setIcon(*Icon_FileSaveDisabled);
+		FileSaveAction->setIcon(getIcon("filesavedisabled"));
 }
 
 void KeepassMainWindow::setStateGroupSelected(SelectionState s){
@@ -526,28 +536,75 @@ void KeepassMainWindow::updateDetailView(){
 		return;
 	}
 	
+	QString templ=DetailViewTemplate;
 	IEntryHandle* entry=((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle;
-	QString str=tr("<B>Group: </B>%1 <B>Title: </B>%2  <B>Username: </B>%3  <B>URL: </B><a href=%4>%4</a>  <B>Password: </B>%5  <B>Creation: </B>%6  <B>Last Change: </B>%7  <B>LastAccess: </B>%8  <B>Expires: </B>%9");
 	
-	str=str.arg(entry->group()->title()).arg(entry->title());
-	
-	if(!config.ListView_HideUsernames)	str=str.arg(entry->username());
-	else str=str.arg("****");
-	
-	str=str.arg(entry->url());
-	
+	templ.replace("%group%",entry->group()->title());
+	templ.replace("%title%",entry->title());
+	if(config.ListView_HideUsernames)templ.replace("%username%","****");
+	else templ.replace("%username%",entry->username());	
 	if(!config.ListView_HidePasswords){	
 		SecString password=entry->password();
 		password.unlock();
-		str=str.arg(password.string());
+		templ.replace("%password%",password.string());
 	}
-	else str=str.arg("****");
+	else templ.replace("%password%","****");
+	templ.replace("%url%",entry->url());
+	templ.replace("%creation%",entry->creation().toString(Qt::LocalDate));
+	templ.replace("%lastmod%",entry->lastMod().toString(Qt::LocalDate));
+	templ.replace("%lastaccess%",entry->lastAccess().toString(Qt::LocalDate));
+	templ.replace("%expire%",entry->expire().toString(Qt::LocalDate));
+	templ.replace("%comment%",entry->comment());
+	templ.replace("%attachment%",entry->binaryDesc());
 	
-	str=str	.arg(entry->creation().toString(Qt::LocalDate))
-			.arg(entry->lastMod().toString(Qt::LocalDate))
-			.arg(entry->lastAccess().toString(Qt::LocalDate))
-			.arg(entry->expire().toString(Qt::LocalDate));
-	DetailView->setHtml(str);
+	if(entry->expire()!=Date_Never){
+		int secs=QDateTime::currentDateTime().secsTo(entry->expire());
+		if(secs < 0)
+			templ.replace("%expire-timeleft%",tr("expired"));			
+		else{
+			int years=0;
+			int months=0;
+			int days=0;
+			years=secs/(86400*365);
+			secs-=years*(86400*365);
+			months=secs/(86400*30);
+			secs-=months*(86400*30);
+			days=secs/86400;
+			
+			QString out;
+			
+			if(months==1)
+				out=tr("1 Month");			
+			if(months>1)
+				out=tr("%1 Months").arg(months);
+			
+			if(years){
+				if(out!=QString())
+					out.prepend(tr(", "));
+				if(years==1)
+					out.prepend(tr("1 Year"));
+				if(years>1)
+					out.prepend(tr("%1 Years").arg(years));				
+			}
+			else if(days){
+				if(out!=QString())
+					out.append(tr(", "));
+				if(days==1)
+					out.append(tr("1 Day"));
+				if(days>1)
+					out.append(tr("%1 Days").arg(days));						
+			}
+			
+			if(!days && !years && !months)
+				out=tr("less than 1 day"); 
+			
+			templ.replace("%expire-timeleft%",out);						
+		}
+	}
+	else
+		templ.replace("%expire-timeleft%","-");
+	
+	DetailView->setHtml(templ);
 }
 
 
@@ -688,7 +745,7 @@ void KeepassMainWindow::OnExport(QAction* action){
 void KeepassMainWindow::OnImport(QAction* action){
 	if(FileOpen)
 		if(!closeDatabase())return;
-	IDatabase* tmpdb=dynamic_cast<IDatabase*>(new StandardDatabase());
+	IDatabase* tmpdb=dynamic_cast<IDatabase*>(new Kdb3Database());
 	tmpdb->create();
 	if(dynamic_cast<IImport*>(action->data().value<QObject*>())->importDatabase(this,tmpdb)){
 			CPasswordDialog dlg(this,tmpdb,false,true);
@@ -726,7 +783,7 @@ for(int i=0; i<SearchResults.size();i++){
 
 
 void KeepassMainWindow::search(IGroupHandle* group){
-	CSearchDlg dlg(db,group,this,"SearchDialog",false);
+	SearchDialog dlg(db,group,this);
 	if(dlg.exec()){
 		EntryView->SearchResults=dlg.Result;
 		GroupView->showSearchResults();
@@ -766,7 +823,7 @@ void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
 	config.ListView_HidePasswords=ViewHidePasswordsAction->isChecked();
 	config.ListView_HideUsernames=ViewHideUsernamesAction->isChecked();
-//EntryView->refreshItems();
+	EntryView->refreshItems();
 }
 
 void KeepassMainWindow::OnFileModified(){
@@ -781,7 +838,8 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 	}
 	
 	settings->setValue("Ui/MainWindowGeometry",QVariant(geometry()));
-	settings->setValue("Ui/SplitterPos",splitter->saveState());
+	settings->setValue("Ui/VSplitterPos",VSplitter->saveState());
+	settings->setValue("Ui/HSplitterPos",HSplitter->saveState());
 	config.ShowStatusbar=statusBar()->isVisible();
 	
 	if(FileOpen){
@@ -800,14 +858,14 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 
 void KeepassMainWindow::OnExtrasSettings(){
 	CSettingsDlg dlg(this);
-	if(dlg.exec()==1){
+	if(dlg.exec()==QDialog::Accepted){
 		EntryView->setAlternatingRowColors(config.AlternatingRowColors);
 		SysTray->setVisible(config.ShowSysTrayIcon);
 	}
 }
 
 void KeepassMainWindow::OnHelpAbout(){
-CAboutDialog dlg(this);
+AboutDialog dlg(this);
 dlg.exec();
 }
 
@@ -896,4 +954,13 @@ void KeepassMainWindow::saveLastFilename(const QString& filename){
 		else
 			settings->setValue("LastFile",filename);
 	}	
+}
+
+void KeepassMainWindow::OnExtrasShowExpiredEntries(){
+	ExpiredEntriesDialog dlg(this,db,db->expiredEntries());
+	if(dlg.exec()==QDialog::Accepted){
+		GroupView->setCurrentGroup(dlg.SelectedEntry->group());
+		EntryView->setCurrentEntry(dlg.SelectedEntry);
+	}
+	
 }

@@ -38,7 +38,7 @@
     (b)[(i) + 3] = (quint8) ( (n)       );       \
 }
 
-void SHA256::hashBuffer(void* input, void* digest, quint32 length){
+void SHA256::hashBuffer(const void* input, void* digest, quint32 length){
 	sha256_context ctx;
 	sha256_starts(&ctx);
 	sha256_update(&ctx,(quint8*)input,length);

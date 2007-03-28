@@ -19,25 +19,30 @@
  ***************************************************************************/
 #ifndef SEARCHDLG_H
 #define SEARCHDLG_H
+
+#include <QPaintEvent>
+#include <QPixmap>
 #include "ui_SearchDlg.h"
 #include "main.h"
 #include "Database.h"
 
-class CSearchDlg : public QDialog, public Ui_Search_Dlg
+class SearchDialog : public QDialog, public Ui_Search_Dlg
 {
-  Q_OBJECT
-public:
-  CSearchDlg(IDatabase* database, IGroupHandle* group=NULL,QWidget* parent = 0, bool modal = true, Qt::WFlags fl = 0 );
-  ~CSearchDlg();
-  QList<IEntryHandle*> Result;
-
-public slots:
-    virtual void OnClose();
-    virtual void OnSearch();
-
-private:
- 	IGroupHandle* group;
-	IDatabase* db;
+	Q_OBJECT
+	public:
+		SearchDialog(IDatabase* database, IGroupHandle* group,QWidget* parent);
+		~SearchDialog();
+		QList<IEntryHandle*> Result;
+	
+	public slots:
+		virtual void OnClose();
+		virtual void OnSearch();
+	
+	private:
+		QPixmap BannerPixmap;
+		IGroupHandle* group;
+		IDatabase* db;
+		virtual void paintEvent(QPaintEvent*);
 };
 
 #endif

@@ -41,6 +41,7 @@
 #include "SelectIconDlg.h"
 #include "PasswordGenDlg.h"
 #include "EditEntryDlg.h"
+#include "CalendarDlg.h"
 
 
 
@@ -52,10 +53,8 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	entry=_entry;
 	db=_db;
 	setupUi(this);
-	//not sure if this createBanner is still needed
-	createBanner(&BannerPixmap,Icon_Key32x32,tr("Edit Entry"),width());
-	//end
 	ModFlag=false;
+	QMenu *ExpirePresetsMenu=new QMenu();
 	connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
 	connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
 	connect(Edit_Password, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordTextChanged(const QString&)));
@@ -68,10 +67,28 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()),this,SLOT(OnButtonOK()));
 	connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
 	connect(Button_CustomIcons,SIGNAL(clicked()),this,SLOT(OnCustomIcons()));
+	connect(ExpirePresetsMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnExpirePreset(QAction*)));
+	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar(QAction*)));
 	
-	ButtonOpenAttachment->setIcon(*Icon_FileOpen);
-	ButtonDeleteAttachment->setIcon(*Icon_EditDelete);
-	ButtonSaveAttachment->setIcon(*Icon_FileSave);
+	// QAction::data() contains the time until expiration in days.
+	ExpirePresetsMenu->addAction(tr("Today"))->setData(0);
+	ExpirePresetsMenu->addSeparator();
+	ExpirePresetsMenu->addAction(tr("1 Week"))->setData(7);
+	ExpirePresetsMenu->addAction(tr("2 Weeks"))->setData(14);
+	ExpirePresetsMenu->addAction(tr("3 Weeks"))->setData(21);
+	ExpirePresetsMenu->addSeparator();
+	ExpirePresetsMenu->addAction(tr("1 Month"))->setData(30);
+	ExpirePresetsMenu->addAction(tr("3 Months"))->setData(60);
+	ExpirePresetsMenu->addAction(tr("6 Months"))->setData(180);
+	ExpirePresetsMenu->addSeparator();
+	ExpirePresetsMenu->addAction(tr("1 Year"))->setData(365);
+	ButtonExpirePresets->setMenu(ExpirePresetsMenu);
+	ButtonExpirePresets->setDefaultAction(new QAction(tr("Calendar..."),ButtonExpirePresets));
+	
+	ButtonOpenAttachment->setIcon(getIcon("fileopen"));
+	ButtonDeleteAttachment->setIcon(getIcon("filedelete"));
+	ButtonSaveAttachment->setIcon(getIcon("filesave"));
+	ButtonExpirePresets->setIcon(getIcon("clock"));
 
 
 	setWindowTitle(entry->title());
@@ -136,9 +153,8 @@ if(event->spontaneous()==false){
 }
 }
 
-//Added resize event
 void CEditEntryDlg::resizeEvent(QResizeEvent *event){
-	createBanner(&BannerPixmap,Icon_Key32x32,tr("Test 2"),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Test 2"),width());
 	QDialog::resizeEvent(event);
 }
 
@@ -382,23 +398,35 @@ void CEditEntryDlg::OnButtonGenPw()
 
 
 void CEditEntryDlg::OnCheckBoxExpiresNeverChanged(int state){
-if(state==Qt::Unchecked){
- DateTime_Expire->setDisabled(false);
-}
-else
-{
- DateTime_Expire->setDisabled(true);
-}
+	if(state==Qt::Unchecked)
+		DateTime_Expire->setDisabled(false);
+	else
+		DateTime_Expire->setDisabled(true);
 }
 
 void CEditEntryDlg::OnCustomIcons(){
-CSelectIconDlg dlg(db,Combo_IconPicker->currentIndex(),this);
-int r=dlg.exec();
-if(r!=-1){
-	Combo_IconPicker->clear();
-	for(int i=0;i<db->numIcons();i++)
-		Combo_IconPicker->insertItem(i,db->icon(i),"");
-	Combo_IconPicker->setCurrentIndex(r);
+	CSelectIconDlg dlg(db,Combo_IconPicker->currentIndex(),this);
+	int r=dlg.exec();
+	if(r!=-1){
+		Combo_IconPicker->clear();
+		for(int i=0;i<db->numIcons();i++)
+			Combo_IconPicker->insertItem(i,db->icon(i),"");
+		Combo_IconPicker->setCurrentIndex(r);
+	}
 }
+
+void CEditEntryDlg::OnExpirePreset(QAction* action){
+	CheckBox_ExpiresNever->setChecked(false);
+	DateTime_Expire->setDate(QDate::fromJulianDay(QDate::currentDate().toJulianDay()+action->data().toInt()));
+	DateTime_Expire->setTime(QTime(0,0,0));
+}
+
+void CEditEntryDlg::OnCalendar(QAction* action){
+	CalendarDialog dlg(this);
+	if(dlg.exec()==QDialog::Accepted){
+		CheckBox_ExpiresNever->setChecked(false);
+		DateTime_Expire->setDate(dlg.calendarWidget->selectedDate());
+		DateTime_Expire->setTime(QTime(0,0,0));
+	}	
 }
 

@@ -32,7 +32,7 @@ CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::W
 {
 	setupUi(this);
 	database=dynamic_cast<IKdbSettings*>(db);
-	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
+	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width());
 	ComboAlgo->insertItem(0,tr("AES(Rijndael):  256 Bit   (default)"));
 	ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));
 	ComboAlgo->setCurrentIndex(database->cryptAlgorithm()); //Achtung: AlgoID muss gleich dem ComboBox Index sein!

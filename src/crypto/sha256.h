@@ -40,7 +40,7 @@ class SHA256{
 		SHA256(){sha256_starts(&ctx);}
 		void update(void* input,quint32 length){sha256_update(&ctx,(quint8*)input,length);}
 		void finish(void* digest){sha256_finish(&ctx,(quint8*)digest);}
-		static void hashBuffer(void* input, void* digest,quint32 length);
+		static void hashBuffer(const void* input, void* digest,quint32 length);
 	private:
 		sha256_context ctx;	
 };

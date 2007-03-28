@@ -31,15 +31,15 @@ QWidget* AutoType::MainWin=NULL;
 
 
 int AutoType::getModifiers(Display *d,KeySym keysym, int keycode){
-int SymsPerKey;
-KeySym* Syms=XGetKeyboardMapping(d,keycode,1,&SymsPerKey);
-int c=-1;
-for(int i=0;i<4;i++)
-	if(Syms[i]==keysym){
-		c=i; break;}
-Q_ASSERT(c!=-1);
-XFree(Syms);
-return c;
+	int SymsPerKey;
+	KeySym* Syms=XGetKeyboardMapping(d,keycode,1,&SymsPerKey);
+	int c=-1;
+	for(int i=0;i<4;i++)
+		if(Syms[i]==keysym){
+			c=i; break;}
+	Q_ASSERT(c!=-1);
+	XFree(Syms);
+	return c;
 }
 
 void AutoType::releaseModifiers(Display* d,int mods){
@@ -47,310 +47,310 @@ pressModifiers(d,mods,False);
 }
 
 void AutoType::pressModifiers(Display* d,int mods,bool press){
-int keycode;
-switch(mods){
-	case 0: //no modifier
-			break;
-	case 1: //Shift
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
-			break;
-	case 2: //AltGr
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
-			break;
-	case 3: //Shift+AltGr
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
-			XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
-			break;
+	int keycode;
+	switch(mods){
+		case 0: //no modifier
+				break;
+		case 1: //Shift
+				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
+				break;
+		case 2: //AltGr
+				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
+				break;
+		case 3: //Shift+AltGr
+				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
+				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
+				break;
+	}
 }
-}
 
 
-void AutoType::perform(IEntryHandle* entry, QString& err){
-struct timespec timeOut,remains;
-timeOut.tv_sec = 0;
-timeOut.tv_nsec = 30000000; /* 300 milliseconds */
-for(int i=0;i<10;i++)nanosleep(&timeOut, &remains);
-
-QString str;
-QString comment=entry->comment();
-int c=comment.count("Auto-Type:");
-if(c>1){
-	err=tr("More than one 'Auto-Type:' key sequence found.\nAllowed is only one per entry.");
-	return;}
-if(c==1){
-	int start=comment.indexOf("Auto-Type:")+10;
-	int len;
-	if(comment.size()==10)return;
-		for(len=0;len<comment.size();len++){
-			if(comment.size()==(start+len))break;
-			if(comment.at(start+len)==QChar('\n'))break;
-		}
-	if(!len)return;
-	str=comment.mid(start,len);
-}
-else
-	str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
-
-QList<quint16> Keys;
-for(int i=0;i<str.size();i++){
-	if(str[i]=='{'){
-		int start=i;
-		QString tmpl;
-		i++;
-		while(str[i]!='}' && i<str.size()){
-			tmpl += str[i];
-			i++;
-		}
-		if(i>=str.size()){
-			err=tr("Syntax Error in Auto-Type sequence near character %1\n\
-					Found '{' without closing '}'").arg(i+10);
-			return;
-		}
-		templateToKeysyms(tmpl.toLower(),Keys,entry);
-		continue;
+	void AutoType::perform(IEntryHandle* entry, QString& err){
+	struct timespec timeOut,remains;
+	timeOut.tv_sec = 0;
+	timeOut.tv_nsec = 30000000; /* 300 milliseconds */
+	for(int i=0;i<10;i++)nanosleep(&timeOut, &remains);
+	
+	QString str;
+	QString comment=entry->comment();
+	int c=comment.count("Auto-Type:");
+	if(c>1){
+		err=tr("More than one 'Auto-Type:' key sequence found.\nAllowed is only one per entry.");
+		return;}
+	if(c==1){
+		int start=comment.indexOf("Auto-Type:")+10;
+		int len;
+		if(comment.size()==10)return;
+			for(len=0;len<comment.size();len++){
+				if(comment.size()==(start+len))break;
+				if(comment.at(start+len)==QChar('\n'))break;
+			}
+		if(!len)return;
+		str=comment.mid(start,len);
 	}
 	else
-		Keys << getKeysym(str[i]);
-}
-
-MainWin->hide();
-Display* pDisplay = XOpenDisplay( NULL );
-for(int i=0;i<Keys.size();i++){
-	int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
-	int mods=getModifiers(pDisplay,Keys[i],keycode);
-	pressModifiers(pDisplay,mods);
-	XTestFakeKeyEvent(pDisplay,keycode,True,0);
-	XTestFakeKeyEvent(pDisplay,keycode,False,1);
-	releaseModifiers(pDisplay,mods);
-}
-XCloseDisplay(pDisplay);
-MainWin->show();
+		str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
+	
+	QList<quint16> Keys;
+	for(int i=0;i<str.size();i++){
+		if(str[i]=='{'){
+			int start=i;
+			QString tmpl;
+			i++;
+			while(str[i]!='}' && i<str.size()){
+				tmpl += str[i];
+				i++;
+			}
+			if(i>=str.size()){
+				err=tr("Syntax Error in Auto-Type sequence near character %1\n\
+						Found '{' without closing '}'").arg(i+10);
+				return;
+			}
+			templateToKeysyms(tmpl.toLower(),Keys,entry);
+			continue;
+		}
+		else
+			Keys << getKeysym(str[i]);
+	}
+	
+	MainWin->hide();
+	Display* pDisplay = XOpenDisplay( NULL );
+	for(int i=0;i<Keys.size();i++){
+		int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
+		int mods=getModifiers(pDisplay,Keys[i],keycode);
+		pressModifiers(pDisplay,mods);
+		XTestFakeKeyEvent(pDisplay,keycode,True,0);
+		XTestFakeKeyEvent(pDisplay,keycode,False,1);
+		releaseModifiers(pDisplay,mods);
+	}
+	XCloseDisplay(pDisplay);
+	MainWin->show();
 }
 
 void AutoType::templateToKeysyms(const QString& tmpl, QList<quint16>& keys,IEntryHandle* entry){
-//tmpl must be lower case!!!
-if(!tmpl.compare("title")){
-	stringToKeysyms(entry->title(),keys);
-	return;}
-if(!tmpl.compare("username")){
-	stringToKeysyms(entry->username(),keys);
-	return;}
-if(!tmpl.compare("url")){
-	stringToKeysyms(entry->url(),keys);
-	return;}
-if(!tmpl.compare("password")){
-	SecString password=entry->password();
-	password.unlock();
-	stringToKeysyms(password,keys);
-	return;
-}
-if(!tmpl.compare("space")){
-	keys << getKeysym(' ');
-	return;}
-
-if(!tmpl.compare("backspace") || !tmpl.compare("bs") || !tmpl.compare("bksp")){
-	keys << XK_BackSpace;
-	return;}
-
-if(!tmpl.compare("break")){
-	keys << XK_Break;
-	return;}
-
-if(!tmpl.compare("capslock")){
-	keys << XK_Caps_Lock;
-	return;}
-
-if(!tmpl.compare("del") || !tmpl.compare("delete")){
-	keys << XK_Delete;
-	return;}
-
-if(!tmpl.compare("end")){
-	keys << XK_End;
-	return;}
-
-if(!tmpl.compare("enter")){
-	keys << XK_Return;
-	return;}
-
-if(!tmpl.compare("esc")){
-	keys << XK_Escape;
-	return;}
-
-if(!tmpl.compare("help")){
-	keys << XK_Help;
-	return;}
-
-if(!tmpl.compare("home")){
-	keys << XK_Home;
-	return;}
-
-if(!tmpl.compare("ins")){
-	keys << XK_Insert;
-	return;}
-
-if(!tmpl.compare("numlock")){
-	keys << XK_Num_Lock;
-	return;}
-
-if(!tmpl.compare("scroll")){
-	keys << XK_Scroll_Lock;
-	return;}
-
-if(!tmpl.compare("pgdn")){
-	keys << XK_Page_Down;
-	return;}
-
-if(!tmpl.compare("pgup")){
-	keys << XK_Page_Up;
-	return;}
-
-if(!tmpl.compare("prtsc")){
-	keys << XK_3270_PrintScreen;
-	return;}
-
-if(!tmpl.compare("up")){
-	keys << XK_Up;
-	return;}
-
-if(!tmpl.compare("down")){
-	keys << XK_Down;
-	return;}
-
-if(!tmpl.compare("left")){
-	keys << XK_Left;
-	return;}
-
-if(!tmpl.compare("right")){
-	keys << XK_Right;
-	return;}
-
-if(!tmpl.compare("f1")){
-	keys << XK_F1;
-	return;}
-
-if(!tmpl.compare("f2")){
-	keys << XK_F2;
-	return;}
-
-if(!tmpl.compare("f3")){
-	keys << XK_F3;
-	return;}
-
-if(!tmpl.compare("f4")){
-	keys << XK_F4;
-	return;}
-
-if(!tmpl.compare("f5")){
-	keys << XK_F5;
-	return;}
-
-if(!tmpl.compare("f6")){
-	keys << XK_F6;
-	return;}
-
-if(!tmpl.compare("f7")){
-	keys << XK_F7;
-	return;}
-
-if(!tmpl.compare("f8")){
-	keys << XK_F8;
-	return;}
-
-if(!tmpl.compare("f9")){
-	keys << XK_F9;
-	return;}
-
-if(!tmpl.compare("f10")){
-	keys << XK_F10;
-	return;}
-
-if(!tmpl.compare("f11")){
-	keys << XK_F11;
-	return;}
-
-if(!tmpl.compare("f12")){
-	keys << XK_F12;
-	return;}
-
-if(!tmpl.compare("f13")){
-	keys << XK_F13;
-	return;}
-
-if(!tmpl.compare("f14")){
-	keys << XK_F14;
-	return;}
-
-if(!tmpl.compare("f15")){
-	keys << XK_F15;
-	return;}
-
-if(!tmpl.compare("f16")){
-	keys << XK_F16;
-	return;}
-
-if(!tmpl.compare("add") || !tmpl.compare("plus")){
-	keys << getKeysym('+');
-	return;}
-
-if(!tmpl.compare("subtract")){
-	keys << getKeysym('-');
-	return;}
-
-if(!tmpl.compare("multiply")){
-	keys << getKeysym('+');
-	return;}
-
-if(!tmpl.compare("divide")){
-	keys << getKeysym('/');
-	return;}
-
-if(!tmpl.compare("at")){
-	keys << getKeysym('@');
-	return;}
-
-if(!tmpl.compare("percent")){
-	keys << getKeysym('%');
-	return;}
-
-if(!tmpl.compare("caret")){
-	keys << getKeysym('^');
-	return;}
-
-if(!tmpl.compare("tilde")){
-	keys << getKeysym('~');
-	return;}
-
-if(!tmpl.compare("leftbrace")){
-	keys << getKeysym('{');
-	return;}
-
-if(!tmpl.compare("rightbrace")){
-	keys << getKeysym('}');
-	return;}
-
-if(!tmpl.compare("leftparen")){
-	keys << getKeysym('(');
-	return;}
-
-if(!tmpl.compare("rightparen")){
-	keys << getKeysym(')');
-	return;}
-
-if(!tmpl.compare("winl")){
-	keys << XK_Super_L;
-	return;}
-
-if(!tmpl.compare("winr")){
-	keys << XK_Super_R;
-	return;}
-
-if(!tmpl.compare("win")){
-	keys << XK_Super_L;
-	return;}
-
-if(!tmpl.compare("tab")){
-	keys << XK_Tab;
-	return;}
+	//tmpl must be lower case!!!
+	if(!tmpl.compare("title")){
+		stringToKeysyms(entry->title(),keys);
+		return;}
+	if(!tmpl.compare("username")){
+		stringToKeysyms(entry->username(),keys);
+		return;}
+	if(!tmpl.compare("url")){
+		stringToKeysyms(entry->url(),keys);
+		return;}
+	if(!tmpl.compare("password")){
+		SecString password=entry->password();
+		password.unlock();
+		stringToKeysyms(password,keys);
+		return;
+	}
+	if(!tmpl.compare("space")){
+		keys << getKeysym(' ');
+		return;}
+	
+	if(!tmpl.compare("backspace") || !tmpl.compare("bs") || !tmpl.compare("bksp")){
+		keys << XK_BackSpace;
+		return;}
+	
+	if(!tmpl.compare("break")){
+		keys << XK_Break;
+		return;}
+	
+	if(!tmpl.compare("capslock")){
+		keys << XK_Caps_Lock;
+		return;}
+	
+	if(!tmpl.compare("del") || !tmpl.compare("delete")){
+		keys << XK_Delete;
+		return;}
+	
+	if(!tmpl.compare("end")){
+		keys << XK_End;
+		return;}
+	
+	if(!tmpl.compare("enter")){
+		keys << XK_Return;
+		return;}
+	
+	if(!tmpl.compare("esc")){
+		keys << XK_Escape;
+		return;}
+	
+	if(!tmpl.compare("help")){
+		keys << XK_Help;
+		return;}
+	
+	if(!tmpl.compare("home")){
+		keys << XK_Home;
+		return;}
+	
+	if(!tmpl.compare("ins")){
+		keys << XK_Insert;
+		return;}
+	
+	if(!tmpl.compare("numlock")){
+		keys << XK_Num_Lock;
+		return;}
+	
+	if(!tmpl.compare("scroll")){
+		keys << XK_Scroll_Lock;
+		return;}
+	
+	if(!tmpl.compare("pgdn")){
+		keys << XK_Page_Down;
+		return;}
+	
+	if(!tmpl.compare("pgup")){
+		keys << XK_Page_Up;
+		return;}
+	
+	if(!tmpl.compare("prtsc")){
+		keys << XK_3270_PrintScreen;
+		return;}
+	
+	if(!tmpl.compare("up")){
+		keys << XK_Up;
+		return;}
+	
+	if(!tmpl.compare("down")){
+		keys << XK_Down;
+		return;}
+	
+	if(!tmpl.compare("left")){
+		keys << XK_Left;
+		return;}
+	
+	if(!tmpl.compare("right")){
+		keys << XK_Right;
+		return;}
+	
+	if(!tmpl.compare("f1")){
+		keys << XK_F1;
+		return;}
+	
+	if(!tmpl.compare("f2")){
+		keys << XK_F2;
+		return;}
+	
+	if(!tmpl.compare("f3")){
+		keys << XK_F3;
+		return;}
+	
+	if(!tmpl.compare("f4")){
+		keys << XK_F4;
+		return;}
+	
+	if(!tmpl.compare("f5")){
+		keys << XK_F5;
+		return;}
+	
+	if(!tmpl.compare("f6")){
+		keys << XK_F6;
+		return;}
+	
+	if(!tmpl.compare("f7")){
+		keys << XK_F7;
+		return;}
+	
+	if(!tmpl.compare("f8")){
+		keys << XK_F8;
+		return;}
+	
+	if(!tmpl.compare("f9")){
+		keys << XK_F9;
+		return;}
+	
+	if(!tmpl.compare("f10")){
+		keys << XK_F10;
+		return;}
+	
+	if(!tmpl.compare("f11")){
+		keys << XK_F11;
+		return;}
+	
+	if(!tmpl.compare("f12")){
+		keys << XK_F12;
+		return;}
+	
+	if(!tmpl.compare("f13")){
+		keys << XK_F13;
+		return;}
+	
+	if(!tmpl.compare("f14")){
+		keys << XK_F14;
+		return;}
+	
+	if(!tmpl.compare("f15")){
+		keys << XK_F15;
+		return;}
+	
+	if(!tmpl.compare("f16")){
+		keys << XK_F16;
+		return;}
+	
+	if(!tmpl.compare("add") || !tmpl.compare("plus")){
+		keys << getKeysym('+');
+		return;}
+	
+	if(!tmpl.compare("subtract")){
+		keys << getKeysym('-');
+		return;}
+	
+	if(!tmpl.compare("multiply")){
+		keys << getKeysym('+');
+		return;}
+	
+	if(!tmpl.compare("divide")){
+		keys << getKeysym('/');
+		return;}
+	
+	if(!tmpl.compare("at")){
+		keys << getKeysym('@');
+		return;}
+	
+	if(!tmpl.compare("percent")){
+		keys << getKeysym('%');
+		return;}
+	
+	if(!tmpl.compare("caret")){
+		keys << getKeysym('^');
+		return;}
+	
+	if(!tmpl.compare("tilde")){
+		keys << getKeysym('~');
+		return;}
+	
+	if(!tmpl.compare("leftbrace")){
+		keys << getKeysym('{');
+		return;}
+	
+	if(!tmpl.compare("rightbrace")){
+		keys << getKeysym('}');
+		return;}
+	
+	if(!tmpl.compare("leftparen")){
+		keys << getKeysym('(');
+		return;}
+	
+	if(!tmpl.compare("rightparen")){
+		keys << getKeysym(')');
+		return;}
+	
+	if(!tmpl.compare("winl")){
+		keys << XK_Super_L;
+		return;}
+	
+	if(!tmpl.compare("winr")){
+		keys << XK_Super_R;
+		return;}
+	
+	if(!tmpl.compare("win")){
+		keys << XK_Super_L;
+		return;}
+	
+	if(!tmpl.compare("tab")){
+		keys << XK_Tab;
+		return;}
 }
 
 

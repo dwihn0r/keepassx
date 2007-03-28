@@ -50,21 +50,21 @@ bool EntryHandleLessThan(const IEntryHandle* This,const IEntryHandle* Other){
 	
 }
 
-bool StdEntryLessThan(const StandardDatabase::StdEntry& This,const StandardDatabase::StdEntry& Other){
+bool StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb3Database::StdEntry& Other){
 	return This.Index<Other.Index;
 }
 
 
-QString StandardDatabase::getError(){
+QString Kdb3Database::getError(){
 	return error;
 }
 
-void StandardDatabase::addIcon(const QPixmap& icon){
+void Kdb3Database::addIcon(const QPixmap& icon){
 	CustomIcons << icon;
 	emit iconsModified();
 }
 
-QPixmap& StandardDatabase::icon(int i){
+QPixmap& Kdb3Database::icon(int i){
 	if(i>=builtinIcons()+CustomIcons.size())
 		return EntryIcons[0];
 	if(i<builtinIcons())
@@ -72,7 +72,7 @@ QPixmap& StandardDatabase::icon(int i){
 	return CustomIcons[i-builtinIcons()];
 }
 
-void StandardDatabase::removeIcon(int id){
+void Kdb3Database::removeIcon(int id){
 	id-=builtinIcons();
 	if(id < 0 ) return;
 	if(id >= CustomIcons.size()) return;
@@ -92,17 +92,17 @@ void StandardDatabase::removeIcon(int id){
 	emit iconsModified();
 }
 
-void StandardDatabase::replaceIcon(int id,const QPixmap& icon){
+void Kdb3Database::replaceIcon(int id,const QPixmap& icon){
 	if(id<builtinIcons())return;
 		CustomIcons[id-builtinIcons()]=icon;
 	emit iconsModified();
 }
 
-int StandardDatabase::numIcons(){
+int Kdb3Database::numIcons(){
 	return builtinIcons()+CustomIcons.size();
 }
 
-bool StandardDatabase::parseMetaStream(const StdEntry& entry){
+bool Kdb3Database::parseMetaStream(const StdEntry& entry){
 	
 	qDebug("%s",entry.Comment.toUtf8().data());
 	
@@ -123,7 +123,7 @@ bool StandardDatabase::parseMetaStream(const StdEntry& entry){
 	return false; //unknown MetaStream
 }
 
-bool StandardDatabase::isMetaStream(StdEntry& p){
+bool Kdb3Database::isMetaStream(StdEntry& p){
 	if(p.Binary.isNull()) return false;
 	if(p.Comment == "") return false;
 	if(p.BinaryDesc != "bin-stream") return false;
@@ -135,17 +135,17 @@ bool StandardDatabase::isMetaStream(StdEntry& p){
 }
 
 
-bool StandardDatabase::parseCustomIconsMetaStreamV1(const QByteArray& dta){
+bool Kdb3Database::parseCustomIconsMetaStreamV1(const QByteArray& dta){
 	qDebug("Removed old CuIcMeSt v1");
 	return true;
 }
 
-bool StandardDatabase::parseCustomIconsMetaStreamV2(const QByteArray& dta){
+bool Kdb3Database::parseCustomIconsMetaStreamV2(const QByteArray& dta){
 	qDebug("Removed old CuIcMeSt v2");
 	return true;
 }
 
-void StandardDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
+void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
 	//Rev 3
 	quint32 NumIcons,NumEntries,NumGroups,offset;
 	memcpyFromLEnd32(&NumIcons,dta.data());
@@ -200,7 +200,7 @@ void StandardDatabase::parseCustomIconsMetaStream(const QByteArray& dta){
 	return;
 }
 
-void StandardDatabase::parseGroupTreeStateMetaStream(const QByteArray& dta){
+void Kdb3Database::parseGroupTreeStateMetaStream(const QByteArray& dta){
 	if(dta.size()<4){qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error."); return;}
 	quint32 Num;
 	memcpyFromLEnd32(&Num,dta.data());
@@ -216,7 +216,7 @@ void StandardDatabase::parseGroupTreeStateMetaStream(const QByteArray& dta){
 	return;
 }
 
-void StandardDatabase::createGroupTreeStateMetaStream(StdEntry* e){
+void Kdb3Database::createGroupTreeStateMetaStream(StdEntry* e){
 	e->BinaryDesc="bin-stream";
 	e->Title="Meta-Info";
 	e->Username="SYSTEM";
@@ -239,13 +239,13 @@ void StandardDatabase::createGroupTreeStateMetaStream(StdEntry* e){
 	e->Binary=bin;
 }
 
-StandardDatabase::StdEntry* StandardDatabase::getEntry(const KpxUuid& uuid){
+Kdb3Database::StdEntry* Kdb3Database::getEntry(const KpxUuid& uuid){
 	for(int i=0; i<Entries.size();i++)
 		if(Entries[i].Uuid==uuid)return &Entries[i];
 	return NULL;
 }
 
-StandardDatabase::StdGroup* StandardDatabase::getGroup(quint32 Id){
+Kdb3Database::StdGroup* Kdb3Database::getGroup(quint32 Id){
 	for(int i=0; i<Groups.size();i++)
 		if(Groups[i].Id==Id)return &Groups[i];
 	return NULL;
@@ -253,7 +253,7 @@ StandardDatabase::StdGroup* StandardDatabase::getGroup(quint32 Id){
 
 
 //! Extracts one entry from raw decrypted data.
-bool StandardDatabase::readEntryField(StdEntry* entry, quint16 FieldType, quint32 FieldSize, quint8 *pData){
+bool Kdb3Database::readEntryField(StdEntry* entry, quint16 FieldType, quint32 FieldSize, quint8 *pData){
 switch(FieldType)
 	{
 	case 0x0000:
@@ -315,7 +315,7 @@ switch(FieldType)
 }
 
 //! Extracts one group from raw decrypted data.
-bool StandardDatabase::readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint32 FieldSize, quint8 *pData)
+bool Kdb3Database::readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint32 FieldSize, quint8 *pData)
 {
 	switch(FieldType)
 	{
@@ -358,7 +358,7 @@ bool StandardDatabase::readGroupField(StdGroup* group,QList<quint32>& Levels,qui
 	return true; // Field supported
 }
 
-bool StandardDatabase::createGroupTree(QList<quint32>& Levels){
+bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 	if(Levels[0]!=0) return false;
 	//find the parent for every group
 	for(int i=0;i<Groups.size();i++){
@@ -398,7 +398,7 @@ bool StandardDatabase::createGroupTree(QList<quint32>& Levels){
 	return true;
 }
 
-void StandardDatabase::createHandles(){
+void Kdb3Database::createHandles(){
 	for(int i=0;i<Groups.size();i++){
 		GroupHandles.append(GroupHandle(this));
 		Groups[i].Handle=&GroupHandles.back();
@@ -411,7 +411,7 @@ void StandardDatabase::createHandles(){
 	}		
 }
 
-void StandardDatabase::restoreGroupTreeState(){
+void Kdb3Database::restoreGroupTreeState(){
 	if(settings->value("GroupTreeState","ExpandAll")=="ExpandAll"){
 		for(int i=0;i<Groups.size();i++){
 			Groups[i].IsExpanded=true;
@@ -426,7 +426,7 @@ void StandardDatabase::restoreGroupTreeState(){
 	}
 }
 
-bool StandardDatabase::load(QString filename){
+bool Kdb3Database::load(QString filename){
 unsigned long total_size,crypto_size;
 quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
 quint8 TransfRandomSeed[32];
@@ -614,7 +614,7 @@ restoreGroupTreeState();
 return true;
 }
 
-QDateTime StandardDatabase::dateFromPackedStruct5(const unsigned char* pBytes){
+QDateTime Kdb3Database::dateFromPackedStruct5(const unsigned char* pBytes){
 quint32 dw1, dw2, dw3, dw4, dw5;
 dw1 = (quint32)pBytes[0]; dw2 = (quint32)pBytes[1]; dw3 = (quint32)pBytes[2];
 dw4 = (quint32)pBytes[3]; dw5 = (quint32)pBytes[4];
@@ -628,7 +628,7 @@ return QDateTime(QDate(y,mon,d),QTime(h,min,s));
 }
 
 
-void StandardDatabase::dateToPackedStruct5(const QDateTime& d,unsigned char* pBytes){
+void Kdb3Database::dateToPackedStruct5(const QDateTime& d,unsigned char* pBytes){
 pBytes[0] = (quint8)(((quint32)d.date().year() >> 6) & 0x0000003F);
 pBytes[1] = (quint8)((((quint32)d.date().year() & 0x0000003F) << 2) | (((quint32)d.date().month() >> 2) & 0x00000003));
 pBytes[2] = (quint8)((((quint32)d.date().month() & 0x00000003) << 6) | (((quint32)d.date().day() & 0x0000001F) << 1) | (((quint32)d.time().hour() >> 4) & 0x00000001));
@@ -637,7 +637,7 @@ pBytes[4] = (quint8)((((quint32)d.time().minute() & 0x00000003) << 6) | ((quint3
 }
 
 
-bool StandardDatabase::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int rounds){
+bool Kdb3Database::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int rounds){
 	quint8 tmp[32];
 	AESencrypt aes;
 	aes.key256(KeySeed);
@@ -650,17 +650,17 @@ bool StandardDatabase::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int 
 }
 
 
-int StandardDatabase::numGroups(){
+int Kdb3Database::numGroups(){
 	return Groups.size();
 }
 
-int StandardDatabase::numEntries(){
+int Kdb3Database::numEntries(){
 	return Entries.size();
 }
 
 	
 
-void StandardDatabase::deleteGroup(StdGroup* group){
+void Kdb3Database::deleteGroup(StdGroup* group){
 	
 	while(group->Childs.size())
 		deleteGroup(group->Childs.front());
@@ -686,11 +686,11 @@ void StandardDatabase::deleteGroup(StdGroup* group){
 }
 
 
-void StandardDatabase::deleteGroup(IGroupHandle* group){
+void Kdb3Database::deleteGroup(IGroupHandle* group){
 	deleteGroup(((GroupHandle*)group)->Group);	
 }
 
-void StandardDatabase::GroupHandle::setIndex(int index){
+void Kdb3Database::GroupHandle::setIndex(int index){
 	/*
 	quint32 ParentId=((GroupHandle*)parent())->Id;
 	int Pos=pDB->getGroupListIndex(this);
@@ -728,7 +728,7 @@ void StandardDatabase::GroupHandle::setIndex(int index){
 }
 
 
-bool StandardDatabase::convHexToBinaryKey(char* HexKey, char* dst){
+bool Kdb3Database::convHexToBinaryKey(char* HexKey, char* dst){
 	QString hex=QString::fromAscii(HexKey,64);
 	for(int i=0; i<64; i+=2){
 		bool err;
@@ -740,17 +740,31 @@ bool StandardDatabase::convHexToBinaryKey(char* HexKey, char* dst){
 	return true;
 }
 
-
-void StandardDatabase::authByPwd(QString& Password){
+/*
+void Kdb3Database::authByPwd(QString& Password){
 	if(!Password.size()) {
 		memcpy(RawMasterKey,QByteArray(32,'\0').data(),32);
 		return;
 	}
 	SHA256::hashBuffer(Password.toUtf8().data(),RawMasterKey,Password.toUtf8().size());
 	return;	
+}*/
+
+void Kdb3Database::authByPwd(QString& Password){
+	if(!Password.size()) {
+		memcpy(RawMasterKey,QByteArray(32,'\0').data(),32);
+		return;
+	}
+	SHA256::hashBuffer(Password.toLatin1().data(),RawMasterKey,Password.toLatin1().size());
+	QByteArray lat,utf;
+	utf=Password.toUtf8();
+	lat=Password.toLatin1();
+	char *Lat=lat.data();
+	char *Utf=utf.data();
+	return;	
 }
 
-bool StandardDatabase::authByFile(QString& filename){
+bool Kdb3Database::authByFile(QString& filename){
 	QFile file(filename);
 	if(!file.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
 		error=decodeFileError(file.error());
@@ -788,7 +802,7 @@ bool StandardDatabase::authByFile(QString& filename){
 	return true;
 }
 
-bool StandardDatabase::authByFileAndPwd(QString& Password, QString& filename){
+bool Kdb3Database::authByFileAndPwd(QString& Password, QString& filename){
 	unsigned char PasswordKey[32];
 	unsigned char FileKey[32];
 	if(!authByFile(filename))return false;
@@ -803,7 +817,7 @@ bool StandardDatabase::authByFileAndPwd(QString& Password, QString& filename){
 	return true;
 }
 
-QList<IEntryHandle*> StandardDatabase::entries(){
+QList<IEntryHandle*> Kdb3Database::entries(){
 	QList<IEntryHandle*> handles;
 	for(int i=0; i<EntryHandles.size(); i++){
 		if(EntryHandles[i].isValid())handles.append(&EntryHandles[i]);
@@ -811,7 +825,18 @@ QList<IEntryHandle*> StandardDatabase::entries(){
 	return handles;	
 }
 
-QList<IEntryHandle*> StandardDatabase::entries(IGroupHandle* group){
+QList<IEntryHandle*> Kdb3Database::expiredEntries(){
+	QList<IEntryHandle*> handles;
+	for(int i=0; i<EntryHandles.size(); i++){
+		if(EntryHandles[i].isValid() &&
+		  (EntryHandles[i].expire()<=QDateTime::currentDateTime()) &&
+		  (EntryHandles[i].expire()!=Date_Never))
+			handles.append(&EntryHandles[i]);
+	}
+	return handles;		
+}
+
+QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
 	QList<IEntryHandle*> handles;
 	for(int i=0; i<EntryHandles.size(); i++){
 		if(EntryHandles[i].isValid() && (EntryHandles[i].group()==group))
@@ -823,7 +848,7 @@ QList<IEntryHandle*> StandardDatabase::entries(IGroupHandle* group){
 	return handles;
 }
 
-void StandardDatabase::deleteEntry(IEntryHandle* entry){
+void Kdb3Database::deleteEntry(IEntryHandle* entry){
 	if(!entry)return;
 	StdGroup* Group=((EntryHandle*)entry)->Entry->Group;	
 	int j;
@@ -835,13 +860,13 @@ void StandardDatabase::deleteEntry(IEntryHandle* entry){
 	Entries.removeAt(j);	
 }
 
-void StandardDatabase::moveEntry(IEntryHandle* entry, IGroupHandle* group){
+void Kdb3Database::moveEntry(IEntryHandle* entry, IGroupHandle* group){
 	((EntryHandle*)entry)->Entry->GroupId=((GroupHandle*)group)->Group->Id;
 	((EntryHandle*)entry)->Entry->Group=((GroupHandle*)group)->Group;	
 }
 
 
-void StandardDatabase::deleteEntries(QList<IEntryHandle*> entries){
+void Kdb3Database::deleteEntries(QList<IEntryHandle*> entries){
 	if(!entries.size())return;
 	StdGroup* Group=((EntryHandle*)entries[0])->Entry->Group;
 	for(int i=0;i<entries.size();i++){
@@ -860,7 +885,7 @@ void StandardDatabase::deleteEntries(QList<IEntryHandle*> entries){
 	}
 };
 
-QList<IGroupHandle*> StandardDatabase::groups(){
+QList<IGroupHandle*> Kdb3Database::groups(){
 	QList<IGroupHandle*> handles;
 	for(int i=0; i<GroupHandles.size(); i++){
 		if(GroupHandles[i].isValid())handles.append(&GroupHandles[i]);
@@ -868,7 +893,7 @@ QList<IGroupHandle*> StandardDatabase::groups(){
 	return handles;	
 }
 
-quint32 StandardDatabase::getNewGroupId(){
+quint32 Kdb3Database::getNewGroupId(){
 	quint32 id;
 	bool used;
 	while(1){
@@ -882,7 +907,7 @@ quint32 StandardDatabase::getNewGroupId(){
 	return id;	
 }
 
-IGroupHandle* StandardDatabase::addGroup(const CGroup* group,IGroupHandle* ParentHandle){
+IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHandle){
 	GroupHandles.append(GroupHandle(this));
 	Groups.append(*group);
 	Groups.back().Id=getNewGroupId();
@@ -901,7 +926,7 @@ IGroupHandle* StandardDatabase::addGroup(const CGroup* group,IGroupHandle* Paren
 	return &GroupHandles.back();
 }
 
-StandardDatabase::StdGroup::StdGroup(const CGroup& other){
+Kdb3Database::StdGroup::StdGroup(const CGroup& other){
 	OldImage=0;
 	Index=0;
 	Id=other.Id;
@@ -909,64 +934,64 @@ StandardDatabase::StdGroup::StdGroup(const CGroup& other){
 	Title=other.Title;	
 }
 
-void StandardDatabase::EntryHandle::setTitle(const QString& Title){Entry->Title=Title; }
-void StandardDatabase::EntryHandle::setUsername(const QString& Username){Entry->Username=Username;}
-void StandardDatabase::EntryHandle::setUrl(const QString& Url){Entry->Url=Url;}
-void StandardDatabase::EntryHandle::setPassword(const SecString& Password){Entry->Password=Password;}
-void StandardDatabase::EntryHandle::setExpire(const KpxDateTime& s){Entry->Expire=s;}
-void StandardDatabase::EntryHandle::setCreation(const KpxDateTime& s){Entry->Creation=s;}
-void StandardDatabase::EntryHandle::setLastAccess(const KpxDateTime& s){Entry->LastAccess=s;}
-void StandardDatabase::EntryHandle::setLastMod(const KpxDateTime& s){Entry->LastMod=s;}
-void StandardDatabase::EntryHandle::setBinaryDesc(const QString& s){Entry->BinaryDesc=s;}
-void StandardDatabase::EntryHandle::setComment(const QString& s){Entry->Comment=s;}
-void StandardDatabase::EntryHandle::setBinary(const QByteArray& s){Entry->Binary=s;}
-void StandardDatabase::EntryHandle::setImage(const quint32& s){Entry->Image=s;}
-void StandardDatabase::EntryHandle::setOldImage(const quint32& s){Entry->OldImage=s;}
-KpxUuid	StandardDatabase::EntryHandle::uuid(){return Entry->Uuid;}
-IGroupHandle* StandardDatabase::EntryHandle::group(){return Entry->Group->Handle;}
-quint32	StandardDatabase::EntryHandle::image(){return Entry->Image;}
-quint32	StandardDatabase::EntryHandle::oldImage(){return Entry->OldImage;}
-QString	StandardDatabase::EntryHandle::title(){return Entry->Title;}
-QString	StandardDatabase::EntryHandle::url(){return Entry->Url;}
-QString	StandardDatabase::EntryHandle::username(){return Entry->Username;}
-SecString StandardDatabase::EntryHandle::password(){return Entry->Password;}
-QString	StandardDatabase::EntryHandle::comment(){return Entry->Comment;}
-QString	StandardDatabase::EntryHandle::binaryDesc(){return Entry->BinaryDesc;}
-KpxDateTime	StandardDatabase::EntryHandle::creation(){return Entry->Creation;}
-KpxDateTime	StandardDatabase::EntryHandle::lastMod(){return Entry->LastMod;}
-KpxDateTime	StandardDatabase::EntryHandle::lastAccess(){return Entry->LastAccess;}
-KpxDateTime	StandardDatabase::EntryHandle::expire(){return Entry->Expire;}
-QByteArray StandardDatabase::EntryHandle::binary(){return Entry->Binary;}
-quint32 StandardDatabase::EntryHandle::binarySize(){return Entry->Binary.size();}
-int StandardDatabase::EntryHandle::visualIndex()const{return Entry->Index;}
-void StandardDatabase::EntryHandle::setVisualIndexDirectly(int i){Entry->Index=i;}
-bool StandardDatabase::EntryHandle::isValid()const{return valid;}
+void Kdb3Database::EntryHandle::setTitle(const QString& Title){Entry->Title=Title; }
+void Kdb3Database::EntryHandle::setUsername(const QString& Username){Entry->Username=Username;}
+void Kdb3Database::EntryHandle::setUrl(const QString& Url){Entry->Url=Url;}
+void Kdb3Database::EntryHandle::setPassword(const SecString& Password){Entry->Password=Password;}
+void Kdb3Database::EntryHandle::setExpire(const KpxDateTime& s){Entry->Expire=s;}
+void Kdb3Database::EntryHandle::setCreation(const KpxDateTime& s){Entry->Creation=s;}
+void Kdb3Database::EntryHandle::setLastAccess(const KpxDateTime& s){Entry->LastAccess=s;}
+void Kdb3Database::EntryHandle::setLastMod(const KpxDateTime& s){Entry->LastMod=s;}
+void Kdb3Database::EntryHandle::setBinaryDesc(const QString& s){Entry->BinaryDesc=s;}
+void Kdb3Database::EntryHandle::setComment(const QString& s){Entry->Comment=s;}
+void Kdb3Database::EntryHandle::setBinary(const QByteArray& s){Entry->Binary=s;}
+void Kdb3Database::EntryHandle::setImage(const quint32& s){Entry->Image=s;}
+void Kdb3Database::EntryHandle::setOldImage(const quint32& s){Entry->OldImage=s;}
+KpxUuid	Kdb3Database::EntryHandle::uuid(){return Entry->Uuid;}
+IGroupHandle* Kdb3Database::EntryHandle::group(){return Entry->Group->Handle;}
+quint32	Kdb3Database::EntryHandle::image(){return Entry->Image;}
+quint32	Kdb3Database::EntryHandle::oldImage(){return Entry->OldImage;}
+QString	Kdb3Database::EntryHandle::title(){return Entry->Title;}
+QString	Kdb3Database::EntryHandle::url(){return Entry->Url;}
+QString	Kdb3Database::EntryHandle::username(){return Entry->Username;}
+SecString Kdb3Database::EntryHandle::password(){return Entry->Password;}
+QString	Kdb3Database::EntryHandle::comment(){return Entry->Comment;}
+QString	Kdb3Database::EntryHandle::binaryDesc(){return Entry->BinaryDesc;}
+KpxDateTime	Kdb3Database::EntryHandle::creation(){return Entry->Creation;}
+KpxDateTime	Kdb3Database::EntryHandle::lastMod(){return Entry->LastMod;}
+KpxDateTime	Kdb3Database::EntryHandle::lastAccess(){return Entry->LastAccess;}
+KpxDateTime	Kdb3Database::EntryHandle::expire(){return Entry->Expire;}
+QByteArray Kdb3Database::EntryHandle::binary(){return Entry->Binary;}
+quint32 Kdb3Database::EntryHandle::binarySize(){return Entry->Binary.size();}
+int Kdb3Database::EntryHandle::visualIndex()const{return Entry->Index;}
+void Kdb3Database::EntryHandle::setVisualIndexDirectly(int i){Entry->Index=i;}
+bool Kdb3Database::EntryHandle::isValid()const{return valid;}
 
-void StandardDatabase::EntryHandle::setVisualIndex(int index){
+void Kdb3Database::EntryHandle::setVisualIndex(int index){
 	QList<IEntryHandle*>Entries=pDB->entries(Entry->Group->Handle);
 	Entries.move(visualIndex(),index);
 	for(int i=0;i<Entries.size();i++){
-		dynamic_cast<StandardDatabase::EntryHandle*>(Entries[i])->Entry->Index=index;
+		dynamic_cast<Kdb3Database::EntryHandle*>(Entries[i])->Entry->Index=index;
 	}
 }
 
-StandardDatabase::EntryHandle::EntryHandle(StandardDatabase* db){
+Kdb3Database::EntryHandle::EntryHandle(Kdb3Database* db){
 	pDB=db;
 	ListIndex=0;
 	valid=true;
 }
 
 
-bool StandardDatabase::GroupHandle::isValid(){return valid;}
-void StandardDatabase::GroupHandle::setOldImage(const quint32& s){Group->OldImage=s;}
-QString StandardDatabase::GroupHandle::title(){return Group->Title;}
-quint32	StandardDatabase::GroupHandle::oldImage(){return Group->OldImage;}
-quint32	StandardDatabase::GroupHandle::image(){return Group->Image;}
-int StandardDatabase::GroupHandle::index(){return Group->Index;}
-void StandardDatabase::GroupHandle::setTitle(const QString& Title){Group->Title=Title;}
-void StandardDatabase::GroupHandle::setExpanded(bool IsExpanded){Group->IsExpanded=IsExpanded;}
-bool StandardDatabase::GroupHandle::expanded(){return Group->IsExpanded;}
-void StandardDatabase::GroupHandle::setImage(const quint32& New)
+bool Kdb3Database::GroupHandle::isValid(){return valid;}
+void Kdb3Database::GroupHandle::setOldImage(const quint32& s){Group->OldImage=s;}
+QString Kdb3Database::GroupHandle::title(){return Group->Title;}
+quint32	Kdb3Database::GroupHandle::oldImage(){return Group->OldImage;}
+quint32	Kdb3Database::GroupHandle::image(){return Group->Image;}
+int Kdb3Database::GroupHandle::index(){return Group->Index;}
+void Kdb3Database::GroupHandle::setTitle(const QString& Title){Group->Title=Title;}
+void Kdb3Database::GroupHandle::setExpanded(bool IsExpanded){Group->IsExpanded=IsExpanded;}
+bool Kdb3Database::GroupHandle::expanded(){return Group->IsExpanded;}
+void Kdb3Database::GroupHandle::setImage(const quint32& New)
 {
 	if(Group->Image < pDB->builtinIcons() && New >= pDB->builtinIcons())
 		Group->OldImage=Group->Image;
@@ -978,17 +1003,17 @@ void StandardDatabase::GroupHandle::setImage(const quint32& New)
 }
 
 
-StandardDatabase::GroupHandle::GroupHandle(StandardDatabase* db){
+Kdb3Database::GroupHandle::GroupHandle(Kdb3Database* db){
 	pDB=db;
 	valid=true;
 	Group=NULL;
 }
 
-IGroupHandle* StandardDatabase::GroupHandle::parent(){
+IGroupHandle* Kdb3Database::GroupHandle::parent(){
 	return (IGroupHandle*)Group->Parent->Handle;
 }
 
-int StandardDatabase::GroupHandle::level(){
+int Kdb3Database::GroupHandle::level(){
 	int i=0;
 	StdGroup* group=Group;
 	while(group->Parent){
@@ -1000,7 +1025,7 @@ int StandardDatabase::GroupHandle::level(){
 }
 
 
-QList<IGroupHandle*> StandardDatabase::GroupHandle::childs(){
+QList<IGroupHandle*> Kdb3Database::GroupHandle::childs(){
 	QList<IGroupHandle*> childs;
 	for(int i=0;i<Group->Childs.size();i++){
 		childs.append(Group->Childs[i]->Handle);
@@ -1053,7 +1078,7 @@ else
   memcpy(dst,src,2);
 }
 
-bool StandardDatabase::save(){
+bool Kdb3Database::save(){
 	if(!Groups.size()){
 		error=tr("The database must contain at least one group.");
 		return false;
@@ -1212,7 +1237,7 @@ bool StandardDatabase::save(){
 	return true;
 }
 
-void StandardDatabase::createCustomIconsMetaStream(StdEntry* e){
+void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 	/* Rev 3 */
 	e->BinaryDesc="bin-stream";
 	e->Title="Meta-Info";
@@ -1261,14 +1286,14 @@ void StandardDatabase::createCustomIconsMetaStream(StdEntry* e){
 	}
 }
 
-QList<IGroupHandle*> StandardDatabase::sortedGroups(){
+QList<IGroupHandle*> Kdb3Database::sortedGroups(){
 	QList<IGroupHandle*> SortedGroups;
 	appendChildsToGroupList(SortedGroups,RootGroup);	
 	return SortedGroups;
 }
 
 
-void StandardDatabase::appendChildsToGroupList(QList<IGroupHandle*>& list,StdGroup& group){
+void Kdb3Database::appendChildsToGroupList(QList<IGroupHandle*>& list,StdGroup& group){
 	for(int i=0;i<group.Childs.size();i++){
 		list << group.Childs[i]->Handle;
 		appendChildsToGroupList(list,*group.Childs[i]);		
@@ -1276,7 +1301,7 @@ void StandardDatabase::appendChildsToGroupList(QList<IGroupHandle*>& list,StdGro
 }
 
 
-void StandardDatabase::appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& group){
+void Kdb3Database::appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& group){
 	for(int i=0;i<group.Childs.size();i++){
 		list << group.Childs[i];
 		appendChildsToGroupList(list,*group.Childs[i]);		
@@ -1284,7 +1309,7 @@ void StandardDatabase::appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& 
 }
 
 
-void StandardDatabase::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos){	
+void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos){	
 	quint16 FieldType;
 	quint32 FieldSize;
 	quint32 Flags=0; //unused
@@ -1355,7 +1380,7 @@ void StandardDatabase::serializeGroups(QList<StdGroup>& GroupList,char* buffer,u
 }
 
 
-void StandardDatabase::serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsigned int& pos){
+void Kdb3Database::serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsigned int& pos){
 	 quint16 FieldType;
 	 quint32 FieldSize;
 	 for(int i = 0; i < EntryList.size(); i++){
@@ -1447,11 +1472,11 @@ void StandardDatabase::serializeEntries(QList<StdEntry>& EntryList,char* buffer,
 	 }	 	 
  }
 
-bool StandardDatabase::close(){
+bool Kdb3Database::close(){
 	return true;	
 }
 
-void StandardDatabase::create(){
+void Kdb3Database::create(){
 	File=NULL;
 	RootGroup.Title="$ROOT$";
 	RootGroup.Parent=NULL;
@@ -1461,7 +1486,7 @@ void StandardDatabase::create(){
 	KeyError=false;
 }
 
-bool StandardDatabase::isKeyError(){
+bool Kdb3Database::isKeyError(){
 	if(KeyError){
 		KeyError=false;
 		return true;	
@@ -1470,7 +1495,7 @@ bool StandardDatabase::isKeyError(){
 		return false;
 }
 
-IEntryHandle* StandardDatabase::cloneEntry(const IEntryHandle* entry){
+IEntryHandle* Kdb3Database::cloneEntry(const IEntryHandle* entry){
 	StdEntry dolly;
 	dolly=*((EntryHandle*)entry)->Entry;
 	dolly.Uuid.generate();
@@ -1481,7 +1506,7 @@ IEntryHandle* StandardDatabase::cloneEntry(const IEntryHandle* entry){
 	return &EntryHandles.back();
 }
 
-IEntryHandle* StandardDatabase::newEntry(IGroupHandle* group){
+IEntryHandle* Kdb3Database::newEntry(IGroupHandle* group){
 	StdEntry Entry;
 	Entry.Uuid.generate();
 	Entry.Group=((GroupHandle*)group)->Group;
@@ -1493,7 +1518,7 @@ IEntryHandle* StandardDatabase::newEntry(IGroupHandle* group){
 	return &EntryHandles.back();
 }
 
-IEntryHandle* StandardDatabase::addEntry(const CEntry* NewEntry, IGroupHandle* Group){
+IEntryHandle* Kdb3Database::addEntry(const CEntry* NewEntry, IGroupHandle* Group){
 	StdEntry Entry(*((StdEntry*)NewEntry));
 	Entry.Uuid.generate();
 	Entry.Group=((GroupHandle*)Group)->Group;
@@ -1505,12 +1530,12 @@ IEntryHandle* StandardDatabase::addEntry(const CEntry* NewEntry, IGroupHandle* G
 	return &EntryHandles.back();
 }
 
-void StandardDatabase::deleteLastEntry(){
+void Kdb3Database::deleteLastEntry(){
 	Entries.removeAt(Entries.size()-1);
 	EntryHandles.back().invalidate();
 }
 
-bool StandardDatabase::isParent(IGroupHandle* parent, IGroupHandle* child){
+bool Kdb3Database::isParent(IGroupHandle* parent, IGroupHandle* child){
 	StdGroup* group=((GroupHandle*)child)->Group;
 	while(group->Parent!=&RootGroup){
 		if(group->Parent==((GroupHandle*)parent)->Group)return true;
@@ -1521,9 +1546,9 @@ bool StandardDatabase::isParent(IGroupHandle* parent, IGroupHandle* child){
 
 
 
-void StandardDatabase::cleanUpHandles(){}	
+void Kdb3Database::cleanUpHandles(){}	
 	
-bool StandardDatabase::searchStringContains(const QString& search, const QString& string,bool Cs, bool RegExp){
+bool Kdb3Database::searchStringContains(const QString& search, const QString& string,bool Cs, bool RegExp){
 	if(RegExp){
 		QRegExp exp(search,Cs ? Qt::CaseSensitive : Qt::CaseInsensitive);
 		if(string.contains(exp)==0)return false;}
@@ -1533,14 +1558,14 @@ bool StandardDatabase::searchStringContains(const QString& search, const QString
 		return true;
 }
 
-void StandardDatabase::getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList){
+void Kdb3Database::getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList){
 	EntryList<<entries(Group);
 	for(int i=0;i<((GroupHandle*)Group)->Group->Childs.size();	i++){
 		getEntriesRecursive(((GroupHandle*)Group)->Group->Childs[i]->Handle,EntryList);		
 	}	
 }
 
-QList<IEntryHandle*> StandardDatabase::search(IGroupHandle* Group,const QString& search, bool CaseSensitive, bool RegExp, bool Recursive,bool* Fields){
+QList<IEntryHandle*> Kdb3Database::search(IGroupHandle* Group,const QString& search, bool CaseSensitive, bool RegExp, bool Recursive,bool* Fields){
 	bool fields[6]={true,true,true,false,true,true};
 	if(!Fields)
 		Fields=fields;	
@@ -1574,13 +1599,13 @@ QList<IEntryHandle*> StandardDatabase::search(IGroupHandle* Group,const QString&
 	return SearchEntries;
 }
 
-void StandardDatabase::rebuildIndices(QList<StdGroup*>& list){
+void Kdb3Database::rebuildIndices(QList<StdGroup*>& list){
 	for(int i=0;i<list.size();i++){
 		list[i]->Index=i;		
 	}	
 }
 
-bool StandardDatabase::createKeyFile(const QString& filename,int length, bool Hex){
+bool Kdb3Database::createKeyFile(const QString& filename,int length, bool Hex){
 	QFile file(filename);
 	if(!file.open(QIODevice::WriteOnly|QIODevice::Truncate|QIODevice::Unbuffered)){
 		error=decodeFileError(file.error());
@@ -1613,7 +1638,7 @@ bool StandardDatabase::createKeyFile(const QString& filename,int length, bool He
 }
 
 
-void StandardDatabase::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,int Pos){
+void Kdb3Database::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,int Pos){
 	StdGroup* Parent;
 	StdGroup* Group=((GroupHandle*)groupHandle)->Group;
 	if(NewParent)
@@ -1634,7 +1659,7 @@ void StandardDatabase::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewPare
 	rebuildIndices(Parent->Childs);	
 }
 
-bool StandardDatabase::changeFile(const QString& filename){
+bool Kdb3Database::changeFile(const QString& filename){
 	if(File)	
 		delete File;
 	if(filename==QString()){

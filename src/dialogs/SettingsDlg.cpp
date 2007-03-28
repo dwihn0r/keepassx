@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QPainter>
 #include "SettingsDlg.h"
+#include "CustomizeDetailViewDlg.h"
 
 bool CSettingsDlg::PluginsModified=false;
 
@@ -51,9 +52,10 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde(bool)));
 	
 	connect(CheckBox_BrowserDefault,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxBrowserDefaultChanged(int)));
+	connect(Button_CustomizeEntryDetails,SIGNAL(clicked()),this,SLOT(OnCustomizeEntryDetails()));
 
 	
-	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width());
+	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width());
 	
 	//General
 	CheckBox_OpenLast->setChecked(settings->value("OpenLastFile",true).toBool());
@@ -161,12 +163,12 @@ void CSettingsDlg::OnCheckBoxBrowserDefaultChanged(int state){
 void CSettingsDlg::OnOK()
 {
 	apply();
-	close();
+	accept();
 }
 
 void CSettingsDlg::OnCancel()
 {
-	close();
+	reject();
 }
 
 void CSettingsDlg::OnOtherButton(QAbstractButton* button){
@@ -227,7 +229,7 @@ void CSettingsDlg::OnTextColor()
 	px->fill(c);
 	pixmTextColor->clear();
 	pixmTextColor->setPixmap(*px);
-	createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width(),color1,color2,textcolor);
+	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width(),color1,color2,textcolor);
 	}	
 }
 
@@ -241,7 +243,7 @@ void CSettingsDlg::OnColor2()
 		px->fill(c);
 		pixmColor2->clear();
 		pixmColor2->setPixmap(*px);
-		createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width(),color1,color2,textcolor);
+		createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width(),color1,color2,textcolor);
 	}
 }
 
@@ -255,7 +257,7 @@ void CSettingsDlg::OnColor1()
 		px->fill(c);
 		pixmColor1->clear();
 		pixmColor1->setPixmap(*px);
-		createBanner(&BannerPixmap,Icon_Settings32x32,tr("Settings"),width(),color1,color2,textcolor);
+		createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width(),color1,color2,textcolor);
 	}
 }
 
@@ -285,4 +287,10 @@ void CSettingsDlg::OnIntPluginGnome(bool toggled){
 
 void CSettingsDlg::OnIntPluginKde(bool toggled){
 	Label_IntPlugin_Info->show();
+}
+
+
+void CSettingsDlg::OnCustomizeEntryDetails(){
+	CustomizeDetailViewDialog dlg(this);
+	dlg.exec();	
 }

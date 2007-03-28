@@ -25,19 +25,65 @@
      <number>6</number>
     </property>
     <item>
-     <widget class="QSplitter" name="splitter" >
-      <property name="sizePolicy" >
-       <sizepolicy>
-        <hsizetype>7</hsizetype>
-        <vsizetype>7</vsizetype>
-        <horstretch>0</horstretch>
-        <verstretch>60</verstretch>
-       </sizepolicy>
-      </property>
+     <widget class="QSplitter" name="HSplitter" >
       <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Vertical</enum>
       </property>
-      <widget class="KeepassGroupView" name="GroupView" >
+      <widget class="QSplitter" name="VSplitter" >
+       <property name="sizePolicy" >
+        <sizepolicy>
+         <hsizetype>7</hsizetype>
+         <vsizetype>7</vsizetype>
+         <horstretch>0</horstretch>
+         <verstretch>60</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="KeepassGroupView" name="GroupView" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy>
+          <hsizetype>7</hsizetype>
+          <vsizetype>7</vsizetype>
+          <horstretch>30</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="acceptDrops" >
+         <bool>true</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0" >
+         <bool>true</bool>
+        </property>
+        <property name="dragEnabled" >
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="KeepassEntryView" name="EntryView" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy>
+          <hsizetype>7</hsizetype>
+          <vsizetype>7</vsizetype>
+          <horstretch>70</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="selectionMode" >
+         <enum>QAbstractItemView::ExtendedSelection</enum>
+        </property>
+        <property name="rootIsDecorated" >
+         <bool>false</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QTextEdit" name="DetailView" >
        <property name="enabled" >
         <bool>false</bool>
        </property>
@@ -45,63 +91,20 @@
         <sizepolicy>
          <hsizetype>7</hsizetype>
          <vsizetype>7</vsizetype>
-         <horstretch>30</horstretch>
-         <verstretch>0</verstretch>
+         <horstretch>0</horstretch>
+         <verstretch>10</verstretch>
         </sizepolicy>
        </property>
-       <property name="acceptDrops" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="readOnly" >
         <bool>true</bool>
        </property>
-       <property name="showDropIndicator" stdset="0" >
-        <bool>true</bool>
-       </property>
-       <property name="dragEnabled" >
-        <bool>false</bool>
-       </property>
       </widget>
-      <widget class="KeepassEntryView" name="EntryView" >
-       <property name="enabled" >
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy" >
-        <sizepolicy>
-         <hsizetype>7</hsizetype>
-         <vsizetype>7</vsizetype>
-         <horstretch>70</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="selectionMode" >
-        <enum>QAbstractItemView::ExtendedSelection</enum>
-       </property>
-       <property name="rootIsDecorated" >
-        <bool>false</bool>
-       </property>
-      </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="QTextEdit" name="DetailView" >
-      <property name="enabled" >
-       <bool>false</bool>
-      </property>
-      <property name="sizePolicy" >
-       <sizepolicy>
-        <hsizetype>7</hsizetype>
-        <vsizetype>4</vsizetype>
-        <horstretch>0</horstretch>
-        <verstretch>10</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="maximumSize" >
-       <size>
-        <width>16777215</width>
-        <height>60</height>
-       </size>
-      </property>
-      <property name="readOnly" >
-       <bool>true</bool>
-      </property>
      </widget>
     </item>
    </layout>
@@ -122,13 +125,6 @@
     <addaction name="HelpHandbookAction" />
     <addaction name="separator" />
     <addaction name="HelpAboutAction" />
-   </widget>
-   <widget class="QMenu" name="menuExtras" >
-    <property name="title" >
-     <string>E&amp;xtras</string>
-    </property>
-    <addaction name="ExtrasSettingsAction" />
-    <addaction name="ExtrasPasswordGenAction" />
    </widget>
    <widget class="QMenu" name="menuDatei" >
     <property name="title" >
@@ -219,6 +215,14 @@
     <addaction name="separator" />
     <addaction name="menuColumns" />
     <addaction name="menuTool_Button_Sizes" />
+   </widget>
+   <widget class="QMenu" name="menuExtras" >
+    <property name="title" >
+     <string>E&amp;xtras</string>
+    </property>
+    <addaction name="ExtrasSettingsAction" />
+    <addaction name="ExtrasShowExpiredEntriesAction" />
+    <addaction name="ExtrasPasswordGenAction" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -518,17 +522,28 @@
     <string>Group (search results only)</string>
    </property>
   </action>
+  <action name="ExtrasShowExpiredEntriesAction" >
+   <property name="text" >
+    <string>Show Expired Entries...</string>
+   </property>
+   <property name="iconText" >
+    <string>Show Expired Entries...</string>
+   </property>
+   <property name="toolTip" >
+    <string>Show Expired Entries</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KeepassGroupView</class>
-   <extends>QTreeWidget</extends>
-   <header>../../src/lib/GroupView.h</header>
-  </customwidget>
   <customwidget>
    <class>KeepassEntryView</class>
    <extends>QTreeWidget</extends>
    <header>../../src/lib/EntryView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeepassGroupView</class>
+   <extends>QTreeWidget</extends>
+   <header>../../src/lib/GroupView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

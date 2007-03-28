@@ -22,56 +22,58 @@
 #include <qlabel.h>
 #include <qdialog.h>
 #include <qfile.h>
+#include <QPainter>
 
 #include "main.h"
 #include "AboutDlg.h"
 
-CAboutDialog::CAboutDialog(QWidget* parent,bool modal, Qt::WFlags fl)
-: QDialog(parent,fl)
+AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 {
-setupUi(this);
-createBanner(Banner,Icon_Key32x32,tr("KeePassX %1").arg(KEEPASS_VERSION));
-loadLicFromFile();
-
-QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
-if(TrActive){
-	AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSLATION_AUTHOR"));
-	QString mail=tr("$TRANSLATION_AUTHOR_EMAIL","Here you can enter your email or homepage if you want.");
-	if(mail!=QString()){
-		AboutTr+=mail+"<br>";
+	setupUi(this);
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("KeePassX %1").arg(KEEPASS_VERSION),width());
+	loadLicFromFile();
+	
+	QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
+	if(TrActive){
+		AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSLATION_AUTHOR"));
+		QString mail=tr("$TRANSLATION_AUTHOR_EMAIL","Here you can enter your email or homepage if you want.");
+		if(mail!=QString()){
+			AboutTr+=mail+"<br>";
+		}
+		AboutTr+="<br>";
 	}
-	AboutTr+="<br>";
-}
-Edit_Translation->setHtml(AboutTr+tr("\
-Information on how to translate KeePassX can be found under:\n\
-http://keepassx.sourceforge.net/"));
-QString str;
-str+="<b>"+tr("Team")+"</b><br>";
-str+="<div style='margin-left:10px;'>";
-str+="<u>"+tr("Tarek Saidi")+"</u><br>"+tr("Developer, Project Admin")+"<br>"+tr("tariq@users.berlios.de")+"<br>";
-str+="<br>";
-str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.berlios.de")+"<br>";
-str+="</div><br><div style='margin-left:0px;'>";
-str+="<b>"+tr("Thanks To")+"</b>";
-str+="</div><div style='margin-left:10px;'>";
-str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
-str+="<br>";
-str+="</div><div style='margin-left:10px;'>";
-str+="<u>"+tr("James Nicholls")+"</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
-Edit_Thanks->setHtml(str);
+	Edit_Translation->setHtml(AboutTr+tr("\
+	Information on how to translate KeePassX can be found under:\n\
+	http://keepassx.sourceforge.net/"));
+	QString str;
+	str+="<b>"+tr("Team")+"</b><br>";
+	str+="<div style='margin-left:10px;'>";
+	str+="<u>"+tr("Tarek Saidi")+"</u><br>"+tr("Developer, Project Admin")+"<br>"+tr("tariq@users.berlios.de")+"<br>";
+	str+="<br>";
+	str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.berlios.de")+"<br>";
+	str+="</div><br><div style='margin-left:0px;'>";
+	str+="<b>"+tr("Thanks To")+"</b>";
+	str+="</div><div style='margin-left:10px;'>";
+	str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
+	str+="<br>";
+	str+="</div><div style='margin-left:10px;'>";
+	str+="<u>"+tr("James Nicholls")+"</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
+	Edit_Thanks->setHtml(str);
 }
 
-CAboutDialog::~CAboutDialog()
-{
-
+void AboutDialog::paintEvent(QPaintEvent *event){
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
-void CAboutDialog::OnClose()
+void AboutDialog::OnClose()
 {
 close();
 }
 
-void CAboutDialog::loadLicFromFile(){
+void AboutDialog::loadLicFromFile(){
 
 QFile gpl(AppDir+"/../share/keepass/license.html");
 if(!gpl.exists()){
@@ -95,11 +97,11 @@ Edit_License->setHtml(QString::fromUtf8(buffer,l));
 delete buffer;
 }
 
-void CAboutDialog::OnHomepageClicked(){
+void AboutDialog::OnHomepageClicked(){
 openBrowser(tr("http://keepassx.sf.net"));
 }
 
-void CAboutDialog::OnEMailClicked(){
+void AboutDialog::OnEMailClicked(){
 openBrowser("mailto:keepassx@gmail.com");
 }
 

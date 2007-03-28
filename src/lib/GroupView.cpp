@@ -172,8 +172,14 @@ void KeepassGroupView::OnCurrentGroupChanged(QTreeWidgetItem* cur,QTreeWidgetIte
 }
 
 
-
-
+void KeepassGroupView::setCurrentGroup(IGroupHandle* group){
+	bool found=false;
+	int i=0;
+	for(i;i<Items.size();i++)
+		if(Items[i]->GroupHandle==group){found=true; break;}
+	if(!found)return;
+	setCurrentItem(Items[i]);	
+}
 
 void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
 	LastHoverItem=NULL;	

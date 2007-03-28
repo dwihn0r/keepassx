@@ -23,54 +23,55 @@
 #include <QCheckBox>
 #include <QRegExp>
 #include <QMessageBox>
+#include <QPainter>
 #include "main.h"
 #include "PwmConfig.h"
 #include "SearchDlg.h"
 
 
-CSearchDlg::CSearchDlg(IDatabase* database,IGroupHandle* Group,QWidget* parent,  bool modal, Qt::WFlags fl)
-: QDialog(parent,fl)
+SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* parent):QDialog(parent)
 {
-setupUi(this);
-connect( Button_Search, SIGNAL( clicked() ), this, SLOT( OnSearch() ) );
-connect( Button_Close, SIGNAL( clicked() ), this, SLOT( OnClose() ) );
-db=database;
-group=Group;
-createBanner(Banner,Icon_Search32x32,tr("Search"));
-checkBox_Cs->setChecked(config.SearchOptions[0]);
-checkBox_regExp->setChecked(config.SearchOptions[1]);
-checkBox_Title->setChecked(config.SearchOptions[2]);
-checkBox_Username->setChecked(config.SearchOptions[3]);
-checkBox_Password->setChecked(config.SearchOptions[4]);
-checkBox_Comment->setChecked(config.SearchOptions[5]);
-checkBox_URL->setChecked(config.SearchOptions[6]);
-checkBox_Attachment->setChecked(config.SearchOptions[7]);
-if(group)
- checkBox_Recursive->setChecked(config.SearchOptions[8]);
-else{
- checkBox_Recursive->setChecked(false);
- checkBox_Recursive->setEnabled(false);}
+	setupUi(this);
+	connect( Button_Search, SIGNAL( clicked() ), this, SLOT( OnSearch() ) );
+	connect( Button_Close, SIGNAL( clicked() ), this, SLOT( OnClose() ) );
+	db=database;
+	group=Group;
+	createBanner(&BannerPixmap,getPixmap("search"),tr("Search"),width());
+	checkBox_Cs->setChecked(config.SearchOptions[0]);
+	checkBox_regExp->setChecked(config.SearchOptions[1]);
+	checkBox_Title->setChecked(config.SearchOptions[2]);
+	checkBox_Username->setChecked(config.SearchOptions[3]);
+	checkBox_Password->setChecked(config.SearchOptions[4]);
+	checkBox_Comment->setChecked(config.SearchOptions[5]);
+	checkBox_URL->setChecked(config.SearchOptions[6]);
+	checkBox_Attachment->setChecked(config.SearchOptions[7]);
+	if(group)
+		checkBox_Recursive->setChecked(config.SearchOptions[8]);
+	else{
+		checkBox_Recursive->setChecked(false);
+		checkBox_Recursive->setEnabled(false);
+	}
 }
 
-CSearchDlg::~CSearchDlg()
+SearchDialog::~SearchDialog()
 {
-config.SearchOptions[0]=checkBox_Cs->isChecked();
-config.SearchOptions[1]=checkBox_regExp->isChecked();
-config.SearchOptions[2]=checkBox_Title->isChecked();
-config.SearchOptions[3]=checkBox_Username->isChecked();
-config.SearchOptions[4]=checkBox_Password->isChecked();
-config.SearchOptions[5]=checkBox_Comment->isChecked();
-config.SearchOptions[6]=checkBox_URL->isChecked();
-config.SearchOptions[7]=checkBox_Attachment->isChecked();
-if(group) config.SearchOptions[8]=checkBox_Recursive->isChecked();
+	config.SearchOptions[0]=checkBox_Cs->isChecked();
+	config.SearchOptions[1]=checkBox_regExp->isChecked();
+	config.SearchOptions[2]=checkBox_Title->isChecked();
+	config.SearchOptions[3]=checkBox_Username->isChecked();
+	config.SearchOptions[4]=checkBox_Password->isChecked();
+	config.SearchOptions[5]=checkBox_Comment->isChecked();
+	config.SearchOptions[6]=checkBox_URL->isChecked();
+	config.SearchOptions[7]=checkBox_Attachment->isChecked();
+	if(group) config.SearchOptions[8]=checkBox_Recursive->isChecked();
 }
 
-void CSearchDlg::OnClose()
+void SearchDialog::OnClose()
 {
 	done(0);
 }
 
-void CSearchDlg::OnSearch()
+void SearchDialog::OnSearch()
 {
 	bool Fields[6];
 	Fields[0]=checkBox_Title->isChecked();
@@ -83,6 +84,12 @@ void CSearchDlg::OnSearch()
 	done(1);
 }
 
+void SearchDialog::paintEvent(QPaintEvent *event){
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);
+}
 
 
 

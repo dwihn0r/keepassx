@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -56,14 +56,13 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		void OnCheckBoxExpiresNeverChanged(int state);
 		void OnCustomIcons();
 		void OnButtonOK();
+		void OnExpirePreset(QAction*);
+		void OnCalendar(QAction*);
 		
 	private:		
 		virtual void showEvent(QShowEvent *);
 		virtual void paintEvent(QPaintEvent*);
-		// Added resizeEvent
-		virtual void resizeEvent(QResizeEvent *);
-	
-	
+		virtual void resizeEvent(QResizeEvent *);	
 
 };
 

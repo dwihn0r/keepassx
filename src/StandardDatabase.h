@@ -49,15 +49,15 @@ void memcpyToLEnd32(char* src,const quint32* dst);
 void memcpyToLEnd16(char* src,const quint16* dst);
 
 //! Implementation of the standard KeePassX database.
-class StandardDatabase:public ICustomIcons,public IDatabase, public IFilePasswordAuth, public IKdbSettings{
+class Kdb3Database:public ICustomIcons,public IDatabase, public IFilePasswordAuth, public IKdbSettings{
 Q_OBJECT
 public:
 	class StdGroup;
 	class StdEntry;
 	class EntryHandle:public IEntryHandle{
-		friend class StandardDatabase;
+		friend class Kdb3Database;
 		public:
-			EntryHandle(StandardDatabase* db);
+			EntryHandle(Kdb3Database* db);
 			virtual void setImage(const quint32& ImageID);
 			void setOldImage(const quint32& OldImgID);
 			virtual void setTitle(const QString& Title);
@@ -96,12 +96,12 @@ public:
 			bool valid;
 			unsigned int ListIndex;
 			KpxUuid Uuid;
-			StandardDatabase* pDB;
+			Kdb3Database* pDB;
 			StdEntry* Entry;
 	};
 	class GroupHandle:public IGroupHandle{
-		friend class StandardDatabase;
-		GroupHandle(StandardDatabase* db);
+		friend class Kdb3Database;
+		GroupHandle(Kdb3Database* db);
 		public:
 			virtual void setTitle(const QString& Title);
 			virtual void setImage(const quint32& ImageId);
@@ -121,7 +121,7 @@ public:
 			void invalidate(){valid=false;}
 			bool valid;
 			StdGroup* Group;
-			StandardDatabase* pDB;
+			Kdb3Database* pDB;
 	};
 	friend class EntryHandle;
 	friend class GroupHandle;
@@ -143,7 +143,7 @@ public:
 			QList<StdGroup*> Childs;
 			QList<StdEntry*> Entries;
 	};
-	virtual ~StandardDatabase(){};
+	virtual ~Kdb3Database(){};
 	virtual bool load(QString identifier);
 	virtual bool save();
 	virtual bool close();
@@ -173,6 +173,8 @@ public:
 	
 	virtual QList<IEntryHandle*> entries();
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group);
+	virtual QList<IEntryHandle*> expiredEntries();
+		
 	virtual IEntryHandle* cloneEntry(const IEntryHandle* entry);
 	virtual void deleteEntry(IEntryHandle* entry);
 	virtual void deleteEntries(QList<IEntryHandle*> entries);

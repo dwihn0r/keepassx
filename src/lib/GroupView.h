@@ -38,6 +38,7 @@ class KeepassGroupView:public QTreeWidget{
 		GroupViewItem* SearchResultItem;
 		void createItems();
 		void showSearchResults();
+		void setCurrentGroup(IGroupHandle* group);
 		
 	private:
 		virtual void dragEnterEvent(QDragEnterEvent* event);

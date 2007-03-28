@@ -34,8 +34,8 @@ CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent
 	db=database;
 	Id=CurrentId;
 	CtxMenu=new QMenu(this);
-	ReplaceAction=CtxMenu->addAction(*Icon_Swap,tr("Replace..."));
-	DeleteAction=CtxMenu->addAction(*Icon_EditDelete,tr("Delete"));
+	ReplaceAction=CtxMenu->addAction(getIcon("swap"),tr("Replace..."));
+	DeleteAction=CtxMenu->addAction(getIcon("delete"),tr("Delete"));
 	connect(Button_AddIcon, SIGNAL(clicked()), this, SLOT(OnAddIcon()));
 	connect(Button_PickIcon, SIGNAL(clicked()), this, SLOT(OnPickIcon()));
 	connect(Button_Cancel, SIGNAL(clicked()), this, SLOT(OnCancel()));

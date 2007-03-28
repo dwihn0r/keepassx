@@ -461,6 +461,11 @@ void KeepassEntryView::updateColumns(){
 	resizeColumns();
 }
 
+void KeepassEntryView::refreshItems(){
+	for (int i=0;i<Items.size();i++)
+		updateEntry(Items.at(i));
+}
+
 void KeepassEntryView::OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisIndex){
 	for(int i=0;i<header()->count();i++){
 		ColumnOrder[columnListIndex(header()->logicalIndex(i))]=i;
@@ -642,4 +647,14 @@ bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
 		default:Q_ASSERT(false);
 	}
 	return DateThis < DateOther;
+}
+
+
+void KeepassEntryView::setCurrentEntry(IEntryHandle* entry){
+	bool found=false;
+	int i=0;
+	for(i;i<Items.size();i++)
+		if(Items[i]->EntryHandle==entry){found=true; break;}
+	if(!found)return;
+	setCurrentItem(Items[i]);	
 }

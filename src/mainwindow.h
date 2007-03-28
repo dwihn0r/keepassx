@@ -81,6 +81,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnFileModified();
 		void OnExtrasSettings();
 		void OnExtrasPasswordGen();
+		void OnExtrasShowExpiredEntries();
 		void OnHelpAbout();
 		void OnHelpHandbook();
 		void OnItemExpanded(QTreeWidgetItem*);

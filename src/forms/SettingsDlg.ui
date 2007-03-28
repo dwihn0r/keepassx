@@ -52,9 +52,6 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget4" >
-     <property name="whatsThis" >
-      <string>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</string>
-     </property>
      <property name="tabPosition" >
       <enum>QTabWidget::North</enum>
      </property>
@@ -62,9 +59,12 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex" >
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
+      <property name="whatsThis" >
+       <string>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</string>
+      </property>
       <attribute name="title" >
        <string>General</string>
       </attribute>
@@ -594,6 +594,43 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBox" >
+         <property name="text" >
+          <string>Unified Title and Toolbar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="Button_CustomizeEntryDetails" >
+           <property name="text" >
+            <string>Customize Entry Detail View...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -894,12 +931,19 @@
           </widget>
          </item>
          <item row="1" column="1" >
-          <widget class="QLineEdit" name="Edit_MountDir" />
+          <widget class="QLineEdit" name="Edit_MountDir" >
+           <property name="whatsThis" >
+            <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0" >
           <widget class="QLabel" name="label_2" >
            <property name="text" >
-            <string>Mounting Root:</string>
+            <string>Media Root:</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -907,6 +951,9 @@
           <widget class="QLabel" name="label" >
            <property name="text" >
             <string>Browser Command:</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -947,9 +994,86 @@
         </layout>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_3" >
+         <property name="title" >
+          <string>Auto-Type Fine Tuning</string>
+         </property>
+         <layout class="QGridLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item row="0" column="1" >
+           <widget class="QSpinBox" name="spinBox_PreGap" >
+            <property name="whatsThis" >
+             <string>Time between the activation of an auto-type action by the user and the first simulated key stroke.</string>
+            </property>
+            <property name="suffix" >
+             <string>ms</string>
+            </property>
+            <property name="maximum" >
+             <number>10000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_4" >
+            <property name="text" >
+             <string>Pre-Gap:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_5" >
+            <property name="text" >
+             <string>Key Stroke Delay:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QSpinBox" name="spinBox_KeyStrokeDelay" >
+            <property name="whatsThis" >
+             <string>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</string>
+            </property>
+            <property name="suffix" >
+             <string>ms</string>
+            </property>
+            <property name="maximum" >
+             <number>10000</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="CheckBox_SaveRelativePaths" >
+         <property name="whatsThis" >
+          <string>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</string>
+         </property>
          <property name="text" >
-          <string>Save relative paths</string>
+          <string>Save relative paths (bookmarks and last file)</string>
          </property>
         </widget>
        </item>
