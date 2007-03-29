@@ -26,6 +26,8 @@
 
 CollectEntropyDlg::CollectEntropyDlg(QWidget* parent):QDialog(parent){
 	setupUi(this);
+	setMinimumSize(size());
+	setMaximumSize(size());
 	createBanner(&BannerPixmap,getPixmap("dice"),tr("Entropy Collection"),width());
 	KeyEntropyBuffer=new unsigned char[105];
 	MouseEntropyBuffer=new quint16[210];

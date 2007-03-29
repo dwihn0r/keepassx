@@ -11,19 +11,13 @@
   </property>
   <property name="sizePolicy" >
    <sizepolicy>
-    <hsizetype>0</hsizetype>
-    <vsizetype>0</vsizetype>
+    <hsizetype>5</hsizetype>
+    <vsizetype>5</vsizetype>
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize" >
-   <size>
-    <width>432</width>
-    <height>230</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
    <size>
     <width>432</width>
     <height>230</height>
@@ -84,6 +78,20 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
    </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>5</hsizetype>
+       <vsizetype>1</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize" >
+      <size>
+       <width>16</width>
+       <height>45</height>
+      </size>
+     </property>
      <property name="currentIndex" >
       <number>0</number>
      </property>

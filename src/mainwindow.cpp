@@ -77,6 +77,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	Start=true;
 	ShutingDown=false;
 	setupUi(this);
+	setUnifiedTitleAndToolBarOnMac(true);
 	AutoType::MainWin=this;
 	setGeometry(settings->value("Ui/MainWindowGeometry",QVariant(geometry())).toRect());
 	VSplitter->restoreState(settings->value("Ui/VSplitterPos").toByteArray());
