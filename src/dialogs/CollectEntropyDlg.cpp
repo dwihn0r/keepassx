@@ -26,6 +26,7 @@
 
 CollectEntropyDlg::CollectEntropyDlg(QWidget* parent):QDialog(parent){
 	setupUi(this);
+	resize(layout()->closestAcceptableSize(this,QSize(0,0)));
 	setMinimumSize(size());
 	setMaximumSize(size());
 	createBanner(&BannerPixmap,getPixmap("dice"),tr("Entropy Collection"),width());

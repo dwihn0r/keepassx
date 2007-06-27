@@ -25,7 +25,7 @@
 #include <QMessageBox>
 #include <QPainter>
 #include "main.h"
-#include "PwmConfig.h"
+#include "KpxConfig.h"
 #include "SearchDlg.h"
 
 
@@ -37,16 +37,17 @@ SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* pare
 	db=database;
 	group=Group;
 	createBanner(&BannerPixmap,getPixmap("search"),tr("Search"),width());
-	checkBox_Cs->setChecked(config.SearchOptions[0]);
-	checkBox_regExp->setChecked(config.SearchOptions[1]);
-	checkBox_Title->setChecked(config.SearchOptions[2]);
-	checkBox_Username->setChecked(config.SearchOptions[3]);
-	checkBox_Password->setChecked(config.SearchOptions[4]);
-	checkBox_Comment->setChecked(config.SearchOptions[5]);
-	checkBox_URL->setChecked(config.SearchOptions[6]);
-	checkBox_Attachment->setChecked(config.SearchOptions[7]);
+	QBitArray searchOptions=config->searchOptions();
+	checkBox_Cs->setChecked(searchOptions.at(0));
+	checkBox_regExp->setChecked(searchOptions.at(1));
+	checkBox_Title->setChecked(searchOptions.at(2));
+	checkBox_Username->setChecked(searchOptions.at(3));
+	checkBox_Password->setChecked(searchOptions.at(4));
+	checkBox_Comment->setChecked(searchOptions.at(5));
+	checkBox_URL->setChecked(searchOptions.at(6));
+	checkBox_Attachment->setChecked(searchOptions.at(7));
 	if(group)
-		checkBox_Recursive->setChecked(config.SearchOptions[8]);
+		checkBox_Recursive->setChecked(searchOptions.at(8));
 	else{
 		checkBox_Recursive->setChecked(false);
 		checkBox_Recursive->setEnabled(false);
@@ -55,15 +56,17 @@ SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* pare
 
 SearchDialog::~SearchDialog()
 {
-	config.SearchOptions[0]=checkBox_Cs->isChecked();
-	config.SearchOptions[1]=checkBox_regExp->isChecked();
-	config.SearchOptions[2]=checkBox_Title->isChecked();
-	config.SearchOptions[3]=checkBox_Username->isChecked();
-	config.SearchOptions[4]=checkBox_Password->isChecked();
-	config.SearchOptions[5]=checkBox_Comment->isChecked();
-	config.SearchOptions[6]=checkBox_URL->isChecked();
-	config.SearchOptions[7]=checkBox_Attachment->isChecked();
-	if(group) config.SearchOptions[8]=checkBox_Recursive->isChecked();
+	QBitArray searchOptions(9);
+	searchOptions.setBit(0,checkBox_Cs->isChecked());
+	searchOptions.setBit(1,checkBox_regExp->isChecked());
+	searchOptions.setBit(2,checkBox_Title->isChecked());
+	searchOptions.setBit(3,checkBox_Username->isChecked());
+	searchOptions.setBit(4,checkBox_Password->isChecked());
+	searchOptions.setBit(5,checkBox_Comment->isChecked());
+	searchOptions.setBit(6,checkBox_URL->isChecked());
+	searchOptions.setBit(7,checkBox_Attachment->isChecked());
+	if(group) searchOptions.setBit(8,checkBox_Recursive->isChecked());
+	config->setSearchOptions(searchOptions);
 }
 
 void SearchDialog::OnClose()
@@ -79,7 +82,7 @@ void SearchDialog::OnSearch()
 	Fields[2]=checkBox_URL->isChecked();
 	Fields[3]=checkBox_Password->isChecked();
 	Fields[4]=checkBox_Comment->isChecked();
-	Fields[5]=checkBox_Attachment->isChecked();	
+	Fields[5]=checkBox_Attachment->isChecked();
 	Result=db->search(group,Edit_Search->text(),checkBox_Cs->isChecked(),checkBox_regExp->isChecked(),checkBox_Recursive->isChecked(),Fields);
 	done(1);
 }

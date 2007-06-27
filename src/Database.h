@@ -298,9 +298,7 @@ public:
 
 
 	/*! \return the last error message or an empty QString() object if no error occured.*/
-	virtual QString getError()=0;
-	
-	
+	virtual QString getError()=0;	
 
 	/*! Creates a clone of a given entry.
 		All attributes besides the UUID are copied, even the creation date.
@@ -398,7 +396,15 @@ public:
 		\param Fields A pointer to a six element bool array. It defines which fields are included into the search. The order is: title, username, url, password, comment, attachment description. The pointer can also be NULL, than the default pattern is used instead.
 		\return the search results as a list of pointers to the entry handles.*/
 	virtual QList<IEntryHandle*> search(IGroupHandle* Group,const QString& SearchString, bool CaseSensitve, bool RegExp,bool Recursive,bool* Fields)=0;
-
+	
+	//! Moves an entry to the recycle bin.
+	virtual void moveToTrash(IEntryHandle* entry)=0;
+	
+	//! \returns all entries of the recycle bin.
+	virtual QList<IEntryHandle*> trashEntries()=0;
+	
+	//! Empty the recycle bin.
+	virtual void emptyTrash()=0;
 	
 };
 

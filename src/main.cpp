@@ -41,8 +41,8 @@
 
 #include "main.h"
 #include "lib/FileDialogs.h"
-#include "PwmConfig.h"
-#include "StandardDatabase.h"
+#include "KpxConfig.h"
+#include "Kdb3Database.h"
 #include "mainwindow.h"
 #include "crypto/yarrow.h"
 using namespace std;
@@ -50,19 +50,18 @@ using namespace std;
 #ifdef Q_WS_X11
 	#include <X11/extensions/XTest.h>
 	#define XK_LATIN1
-	#define XK_MISCELLANY 
+	#define XK_MISCELLANY
 	#define XK_XKB_KEYS
 	#include <X11/keysymdef.h>
 	#include <X11/Xlib.h>
 #endif
-					 
+
 #define CSTR(x)(x.toUtf8().data())
-					 
+
 QHash<QString,QPixmap*>PixmapCache;
 QHash<QString,QIcon*>IconCache;
-					 
-CConfig config;
-QSettings* settings;
+
+KpxConfig *config;
 QString  AppDir;
 QString PluginLoadError;
 bool TrActive;
@@ -74,38 +73,58 @@ inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
 bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
 
+void test_getAllWindowTitles(){
+	#ifdef Q_WS_X11
+	Display* pDisplay = XOpenDisplay( NULL );
+	Window r,p;
+	Window* c;
+	unsigned int num_ch=0;
+	XQueryTree(pDisplay,DefaultRootWindow(pDisplay),&r,&p,&c,&num_ch);
+	qDebug("%u",num_ch);
+	for(int i=0;i<num_ch;i++){
+		int num_prop=0;
+		Atom* atom=XListProperties(pDisplay,c[i],&num_prop);
+		for(int p=0;p<num_prop;p++){
+			qDebug("%i %i: %s",i,p,XGetAtomName(pDisplay,atom[p]));
+		}
+		XFree(atom);
+		
+	}
+	#endif	
+}
 
 int main(int argc, char **argv)
 {
+	//test_getAllWindowTitles();
+	//exit(0);
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
 	QApplication* app=NULL;
 	AppDir=QString(argv[0]);
 	AppDir.truncate(AppDir.lastIndexOf("/"));
-	
+	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
+
 	//Load Config
-	if(ArgCfg==QString()){
-	if(!QDir(QDir::homePath()+"/.keepass").exists()){
-		QDir conf(QDir::homePath());
-		if(!conf.mkdir(".keepass")){
-			cout << "Warning: Could not create directory '~/.keepass'." << endl;}
+	if(ArgCfg.isEmpty()){
+		if(!QDir(QDir::homePath()+"/.keepassx").exists()){
+			QDir conf(QDir::homePath());
+			if(!conf.mkdir(".keepassx")){
+				cout << "Warning: Could not create directory '~/.keepassx'." << endl;}
+		}
+		IniFilename=QDir::homePath()+"/.keepassx/config";
 	}
-	IniFilename=QDir::homePath()+"/.keepass/config";
-	config.loadFromIni(IniFilename);
-	}
-	else{
-	IniFilename=ArgCfg;
-	config.loadFromIni(IniFilename);}
-	
-	
-	settings = new QSettings(QDir::homePath()+"/.keepassx/config",QSettings::IniFormat);
+	else
+		IniFilename=ArgCfg;
+
+
+	config = new KpxConfig(IniFilename);
 	fileDlgHistory.load();
-	
+
 	//Plugins
-	if(config.IntegrPlugin!=CConfig::NONE){
+	if(config->integrPlugin()!=KpxConfig::NoIntegr){
 		QString LibName="libkeepassx-";
-		if(config.IntegrPlugin==CConfig::KDE)
+		if(config->integrPlugin()==KpxConfig::KDE)
 			LibName+="kde.so";
-		else if(config.IntegrPlugin==CConfig::GNOME)
+		else if(config->integrPlugin()==KpxConfig::Gnome)
 			LibName+="gnome.so";
 		QString filename=findPlugin(LibName);
 		if(filename!=QString()){
@@ -118,44 +137,43 @@ int main(int argc, char **argv)
 			else{
 				IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugin.instance());
 				KpxFileDialogs::setPlugin(fdlg);
-				if(config.IntegrPlugin==CConfig::KDE){
+				if(config->integrPlugin()==KpxConfig::KDE){
 					IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
 					app=kdeinit->getMainAppObject(argc,argv);
 					if(!app)PluginLoadError=QObject::tr("Initialization failed.");
 				}
-				if(config.IntegrPlugin==CConfig::GNOME){
+				if(config->integrPlugin()==KpxConfig::Gnome){
 					IGnomeInit* ginit=qobject_cast<IGnomeInit*>(plugin.instance());
 					if(!ginit->init(argc,argv)){
 						KpxFileDialogs::setPlugin(NULL);
 						qWarning("GtkIntegrPlugin: Gtk init failed.");
 						PluginLoadError=QObject::tr("Initialization failed.");
 					}
-				}				
+				}
 			}
 		}
 		else{
 			qWarning(CSTR(QString("Could not load desktop integration plugin: File '%1' not found.").arg(LibName)));
-			PluginLoadError=QObject::tr("Could not locate library file.");	
+			PluginLoadError=QObject::tr("Could not locate library file.");
 		}
 	}
 	if(!app) QApplication* app=new QApplication(argc,argv);
-	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);	
 
-	
+
 	//Internationalization
 	QLocale loc;
 	if(!ArgLang.size())
 		loc=QLocale::system();
 	else
 		loc=QLocale(ArgLang);
-	
+
 	QTranslator* translator = NULL;
 	QTranslator* qtTranslator=NULL;
 	translator=new QTranslator;
 	qtTranslator=new QTranslator;
-	
+
 	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
-						<< app->applicationDirPath()+"/../share/keepass/i18n/" 
+						<< app->applicationDirPath()+"/../share/keepass/i18n/"
 						<< QDir::homePath()+"/.keepassx/" ))
 		{app->installTranslator(translator);
 		TrActive=true;}
@@ -167,10 +185,10 @@ int main(int argc, char **argv)
 		delete translator;
 		TrActive=false;
 	}
-	
+
 	if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
 						<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-						<< app->applicationDirPath()+"/../share/keepass/i18n/" 
+						<< app->applicationDirPath()+"/../share/keepass/i18n/"
 						<< QDir::homePath()+"/.keepass/" ))
 		app->installTranslator(qtTranslator);
 	else{
@@ -180,19 +198,19 @@ int main(int argc, char **argv)
 				.arg(QLocale::countryToString(loc.country())).toAscii());
 		delete qtTranslator;
 	}
-	
-	
+
+
 	QFile templ(QDir::homePath()+"/.keepassx/detailview-template.html"); ///FIXME ArgCfg
 	if(templ.open(QIODevice::ReadOnly)){
-		DetailViewTemplate=QString::fromUtf8(templ.readAll());		
-		templ.close();		
+		DetailViewTemplate=QString::fromUtf8(templ.readAll());
+		templ.close();
 	}
 	else loadDefaultDetailViewTemplate();
-		
+
 	loadImages();
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
-	
+
 	int r=0;
 	KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile);
 	if(mainWin->Start){
@@ -200,23 +218,19 @@ int main(int argc, char **argv)
 		r=app->exec();
 	}
 	delete mainWin;
-	if(!config.saveToIni(IniFilename))
-		QMessageBox::warning(NULL,QObject::tr("Warning"),
-				QObject::tr("Could not save configuration file.\nMake sure you have write access to '~/.keepass'."),
-				QObject::tr("OK"),"","",0.0);
-	
+
 	if(templ.open(QIODevice::WriteOnly)){
 		templ.write(DetailViewTemplate.toUtf8());
-		templ.close();		
+		templ.close();
 	}
 	else{
-		qWarning("Failed to save detail view template: %s",decodeFileError(templ.error()).toUtf8().data());		
+		qWarning("Failed to save detail view template: %s",decodeFileError(templ.error()).toUtf8().data());
 	}
-	
-	
+
+
 	fileDlgHistory.save();
 	delete app;
-	delete settings;
+	delete config;
 	return r;
 }
 
@@ -224,7 +238,7 @@ int main(int argc, char **argv)
 void loadDefaultDetailViewTemplate(){
 		QFile templ(":/default-detailview.html");
 		templ.open(QIODevice::ReadOnly);
-		DetailViewTemplate=QString::fromUtf8(templ.readAll());		
+		DetailViewTemplate=QString::fromUtf8(templ.readAll());
 		templ.close();
 		DetailViewTemplate.replace("Group",QCoreApplication::translate("DetailViewTemplate","Group"));
 		DetailViewTemplate.replace("Title",QCoreApplication::translate("DetailViewTemplate","Title"));
@@ -235,7 +249,7 @@ void loadDefaultDetailViewTemplate(){
 		DetailViewTemplate.replace("Last Access",QCoreApplication::translate("DetailViewTemplate","Last Access"));
 		DetailViewTemplate.replace("Last Modification",QCoreApplication::translate("DetailViewTemplate","Last Modification"));
 		DetailViewTemplate.replace("Expiration",QCoreApplication::translate("DetailViewTemplate","Expiration"));
-		DetailViewTemplate.replace("Comment",QCoreApplication::translate("DetailViewTemplate","Comment"));	
+		DetailViewTemplate.replace("Comment",QCoreApplication::translate("DetailViewTemplate","Comment"));
 }
 
 //obsolete
@@ -243,14 +257,14 @@ void createBanner(QLabel *Banner,const QPixmap* symbol,QString text){
 	QPixmap Pixmap;
 	createBanner(&Pixmap,symbol,text
 				   ,Banner->width()
-				   ,config.BannerColor1
-			       ,config.BannerColor2
-			       ,config.BannerTextColor);
+				   ,config->bannerColor1()
+			       ,config->bannerColor2()
+			       ,config->bannerTextColor());
 	Banner->setPixmap(Pixmap);
 }
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
-	createBanner(Pixmap,IconAlpha,Text,Width,config.BannerColor1,config.BannerColor2,config.BannerTextColor);
+	createBanner(Pixmap,IconAlpha,Text,Width,config->bannerColor1(),config->bannerColor2(),config->bannerTextColor());
 }
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor){
@@ -262,26 +276,26 @@ void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,i
 	painter.setPen(Qt::NoPen);
 	painter.setBrush(grad);
 	painter.drawRect(0,0,Width,50);
-	
+
 	QPixmap Icon(32,32);
 	if(IconAlpha){
 		Icon.fill(TextColor);
 		Icon.setAlphaChannel(*IconAlpha);
 		painter.drawPixmap(10,10,Icon);
 	}
-	
+
 	painter.setPen(QPen(TextColor));
 	painter.setFont(QFont(QApplication::font().family(),16));
-	painter.drawText(50,35,Text);	
+	painter.drawText(50,35,Text);
 }
 
 QString decodeFileError(QFile::FileError Code){
-	switch(Code){			
+	switch(Code){
 		case QFile::NoError: return QApplication::translate("FileErrors","No error occurred.");
 		case QFile::ReadError: return QApplication::translate("FileErrors","An error occurred while reading from the file.");
 		case QFile::WriteError: return QApplication::translate("FileErrors","An error occurred while writing to the file.");
 		case QFile::FatalError: return QApplication::translate("FileErrors","A fatal error occurred.");
-		case QFile::ResourceError: return QApplication::translate("FileErrors","An resource error occurred."); 
+		case QFile::ResourceError: return QApplication::translate("FileErrors","An resource error occurred.");
 		case QFile::OpenError: return QApplication::translate("FileErrors","The file could not be opened.");
 		case QFile::AbortError: return QApplication::translate("FileErrors","The operation was aborted.");
 		case QFile::TimeOutError: return QApplication::translate("FileErrors","A timeout occurred.");
@@ -291,7 +305,7 @@ QString decodeFileError(QFile::FileError Code){
 		case QFile::PositionError: return QApplication::translate("FileErrors","The position in the file could not be changed.");
 		case QFile::ResizeError: return QApplication::translate("FileErrors","The file could not be resized.");
 		case QFile::PermissionsError: return QApplication::translate("FileErrors","The file could not be accessed.");
-		case QFile::CopyError: return QApplication::translate("FileErrors","The file could not be copied.");		
+		case QFile::CopyError: return QApplication::translate("FileErrors","The file could not be copied.");
 	}
 }
 
@@ -299,11 +313,11 @@ void openBrowser(QString UrlString){
 	QUrl url(UrlString);
 	if(url.scheme().isEmpty())
 		url=QUrl("http://"+UrlString);
-	if(settings->value("BrowserCmd","<<default>>").toString() == "<<default>>"){
-		QDesktopServices::openUrl(url);		
+	if(config->urlCmd().isEmpty()){
+		QDesktopServices::openUrl(url);
 	}
 	else{
-		QStringList args=settings->value("BrowserCmd","<<default>>").toString().arg(url.toString()).split(' ');		
+		QStringList args=config->urlCmd().arg(url.toString()).split(' ');
 		QString cmd=args.takeFirst();
 		QProcess::startDetached(cmd,args);
 	}
@@ -338,7 +352,7 @@ const QIcon& getIcon(const QString& name){
 		return *CachedIcon;
 	QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
 	if(!IconFile.isFile() || !IconFile.exists() || !IconFile.isReadable()){
-		//ERROR
+		///TODO 0.2.3 error handling
 		qWarning("%s",CSTR(name));
 	}
 	QIcon* NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
@@ -352,7 +366,7 @@ const QPixmap* getPixmap(const QString& name){
 		return CachedPixmap;
 	QImage img;
 	if(!img.load(AppDir+"/../share/keepass/icons/"+name+".png")){
-		//ERROR
+		///TODO 0.2.3 error handling
 		qWarning("%s",CSTR(name));
 	}
 	QPixmap* NewPixmap=new QPixmap(QPixmap::fromImage(img));
@@ -421,11 +435,11 @@ QMessageBox::critical(parent,QObject::tr("Error"),msg,QObject::tr("OK"));
 
 QString findPlugin(const QString& filename){
 	QFileInfo info;
-	
+
 	info.setFile(AppDir+"/../lib/keepassx/"+filename);
 	if(info.exists() && info.isFile())
 		return AppDir+"/../lib/keepassx/"+filename;
-	
+
 	return QString();
 }
 
@@ -436,11 +450,11 @@ QString makePathRelative(const QString& AbsDir,const QString& CurDir){
 	QString rel="./";
 	int common=0;
 	for(common; common < abs.size() && common < cur.size(); common++){
-		if(abs[common]!=cur[common])break;		
+		if(abs[common]!=cur[common])break;
 	}
 	for(int i=0;i<cur.size()-common;i++)
 		rel.append("../");
 	for(int i=common;i<abs.size();i++)
 		rel.append(abs[i]+"/");
-	return rel;	
+	return rel;
 }

@@ -21,7 +21,6 @@
 #include <math.h>
 #include <QPainter>
 #include <QRectF>
-#include "PwmConfig.h"
 #include "main.h"
 #include "WaitAnimationWidget.h"
 
@@ -36,17 +35,17 @@ WaitAnimationWidget::WaitAnimationWidget(QWidget* parent):QWidget(parent){
 			diff=1.0f-diff;
 		if(diff<-0.5f)
 			diff=1.0f+diff;
-		CircSizes[i]=1.0+exp(-14.0f*diff*diff);		
+		CircSizes[i]=1.0+exp(-14.0f*diff*diff);
 	}
-	connect(&timer,SIGNAL(timeout()),this,SLOT(refreshAnimation()));	
+	connect(&timer,SIGNAL(timeout()),this,SLOT(refreshAnimation()));
 }
 
 WaitAnimationWidget::~WaitAnimationWidget(){
-	timer.stop();	
+	timer.stop();
 }
 
 void WaitAnimationWidget::start(){
-	timer.start();	
+	timer.start();
 }
 
 void WaitAnimationWidget::stop(){
@@ -68,22 +67,22 @@ void WaitAnimationWidget::refreshAnimation(){
 			diff=1.0f-diff;
 		if(diff<-0.5f)
 			diff=1.0f+diff;
-		CircSizes[i]=1.0+exp(-14.0f*diff*diff);		
+		CircSizes[i]=1.0+exp(-14.0f*diff*diff);
 	}
-	repaint();	
+	repaint();
 }
 
 void WaitAnimationWidget::paintEvent(QPaintEvent* event){
 	if(timer.isActive()){
 		QPainter painter(this);
 		painter.setRenderHints(QPainter::Antialiasing,true);
-		painter.setBrush(Qt::black);	
+		painter.setBrush(Qt::black);
 		painter.setPen(Qt::black);
 		for(int i=0;i<6;i++){
 			float d=CircSizes[i]*5.0;
 			QRectF rect(CircPositions[i].x()-d/2,CircPositions[i].y()-d/2,d,d);
-			painter.drawEllipse(rect);			
-		}	
+			painter.drawEllipse(rect);
+		}
 	}
 }
 
@@ -95,7 +94,7 @@ void WaitAnimationWidget::resizeEvent(QResizeEvent* event){
 		r=width()/2;
 	for(int i=0;i<6;i++){
 		CircPositions[i].setX((r-10)*cos(-2.0*3.14159265*(0.16666667*i))+r);
-		CircPositions[i].setY((r-10)*sin(-2.0*3.14159265*(0.16666667*i))+r);		
+		CircPositions[i].setY((r-10)*sin(-2.0*3.14159265*(0.16666667*i))+r);
 	}
 }
 

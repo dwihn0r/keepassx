@@ -21,14 +21,14 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include "main.h"
-#include "PwmConfig.h"
+#include "KpxConfig.h"
 #include "SimplePasswordDlg.h"
 
 SimplePasswordDialog::SimplePasswordDialog(QWidget* parent,  bool modal, Qt::WFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);
-	if(!config.ShowPasswords)Button_HidePassword->toggle();
+	if(!config->showPasswords())Button_HidePassword->toggle();
 	connect(buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()),this,SLOT(OnOK()));
 	connect(buttonBox->button(QDialogButtonBox::Cancel),SIGNAL(clicked()),this,SLOT(OnCancel()));
 	connect(Button_HidePassword,SIGNAL(toggled(bool)),this,SLOT(OnHidePasswordToggled(bool)));
@@ -42,9 +42,9 @@ SimplePasswordDialog::~SimplePasswordDialog()
 
 void SimplePasswordDialog::OnTextChanged(const QString& txt){
 	if(txt==QString())
-		buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);		
+		buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 	else
-		buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);		
+		buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 }
 
 void SimplePasswordDialog::OnCancel()

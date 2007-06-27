@@ -38,9 +38,10 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QSystemTrayIcon>
+#include <QUrl>
 
-#include "StandardDatabase.h"
-#include "PwmConfig.h"
+#include "Kdb3Database.h"
+#include "KpxConfig.h"
 #include "lib/EntryView.h"
 #include "lib/GroupView.h"
 #include "export/Export.h"
@@ -53,10 +54,10 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		KeepassMainWindow (const QString& ArgFile,QWidget *parent=0, Qt::WFlags flags=0);
 		IDatabase* db;
 	bool Start;
-	
+
 	signals:
 		void entryChanged();
-	
+
 	private slots:
 		void OnFileNewKdb();
 		void OnFileNewKxdb();
@@ -82,6 +83,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnExtrasSettings();
 		void OnExtrasPasswordGen();
 		void OnExtrasShowExpiredEntries();
+		void OnExtrasTrashCan();
 		void OnHelpAbout();
 		void OnHelpHandbook();
 		void OnItemExpanded(QTreeWidgetItem*);
@@ -91,7 +93,8 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnSysTrayActivated(QSystemTrayIcon::ActivationReason);
 		void OnImport(QAction*);
 		void OnExport(QAction*);
-	
+		void OnDetailViewUrlClicked(const QUrl& url);
+
 	private:
 		void closeEvent(QCloseEvent* event);
 		SelectionState GroupSelection, EntrySelection;

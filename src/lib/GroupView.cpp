@@ -33,6 +33,8 @@
 #include <QPen>
 #include <QBrush>
 #include <QMenu>
+#include <QMessageBox>
+#include "KpxConfig.h"
 #include "main.h"
 #include "EntryView.h"
 #include "GroupView.h"
@@ -99,6 +101,12 @@ void KeepassGroupView::addChilds(GroupViewItem* item){
 }
 
 void KeepassGroupView::OnDeleteGroup(){
+	if(config->askBeforeDelete()){
+		if(QMessageBox::question(this,tr("Delete?"),
+		   tr("Are you sure you want to delete this group, all it's child groups and all their entries?"),
+			  QMessageBox::Yes | QMessageBox::No,QMessageBox::No) == QMessageBox::No)
+			return;			
+	}
 	GroupViewItem* item=(GroupViewItem*)currentItem();
 	if(item){
 		db->deleteGroup(item->GroupHandle);
@@ -204,6 +212,7 @@ void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
 void KeepassGroupView::dragLeaveEvent ( QDragLeaveEvent * event ){
 	if(LastHoverItem){
 		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
 	}
 	if(InsLinePos!=-1){
 		int RemoveLine=InsLinePos;
@@ -345,6 +354,15 @@ void KeepassGroupView::entryDragMoveEvent( QDragMoveEvent * event ){
 		event->ignore();
 		return;
 	}
+	if(Item==SearchResultItem){
+		if(LastHoverItem){
+			LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+			LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
+			LastHoverItem=NULL;
+		}
+		event->ignore();
+		return;
+	}
 	if(LastHoverItem != Item){
 		if(LastHoverItem){
 			LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
@@ -354,7 +372,6 @@ void KeepassGroupView::entryDragMoveEvent( QDragMoveEvent * event ){
 		Item->setForeground(0,QBrush(QApplication::palette().color(QPalette::HighlightedText)));
 		LastHoverItem=Item;
 	}
-
 	event->accept();
 	return;
 	

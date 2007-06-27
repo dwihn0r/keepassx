@@ -11,7 +11,7 @@ DEPENDPATH += "crypto \
               translations \
 	      res"
 INSTALLS += target data
-data.files += ../share/keepass/* 
+data.files += ../share/keepass/*
 TARGET = ../bin/keepassx
 
 unix: !macx{
@@ -51,6 +51,7 @@ FORMS += forms/EditGroupDlg.ui \
 	 forms/CollectEntropyDlg.ui \
 	 forms/CustomizeDetailViewDlg.ui \
 	 forms/CalendarDlg.ui \
+	 forms/TrashCanDlg.ui \
 	 forms/ExpiredEntriesDlg.ui
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
@@ -61,7 +62,7 @@ TRANSLATIONS += translations/keepass-de_DE.ts \
 HEADERS += lib/IniReader.h \
            lib/UrlLabel.h \
            mainwindow.h \
-           StandardDatabase.h \
+           Kdb3Database.h \
            lib/SecString.h \
            crypto/twoclass.h \
            crypto/twofish.h \
@@ -72,7 +73,6 @@ HEADERS += lib/IniReader.h \
 	   export/Export_KeePassX_Xml.h \
 	   export/Export.h \
            import/Import_KWalletXml.h \
-           PwmConfig.h \
            dialogs/AboutDlg.h \
            dialogs/EditGroupDlg.h \
            dialogs/SearchDlg.h \
@@ -87,6 +87,7 @@ HEADERS += lib/IniReader.h \
 	   dialogs/CustomizeDetailViewDlg.h \
 	   dialogs/CalendarDlg.h \
 	   dialogs/ExpiredEntriesDlg.h \
+	   dialogs/TrashCanDlg.h \
            lib/random.h \
            Database.h \
            lib/KdePlugin.h \
@@ -112,12 +113,12 @@ HEADERS += lib/IniReader.h \
 	   plugins/interfaces/IFileDialog.h \
 	   plugins/interfaces/IKdeInit.h \
 	   plugins/interfaces/IGnomeInit.h \
+	   KpxConfig.h \
            KpxFirefox.h
-SOURCES += lib/IniReader.cpp \
-           lib/UrlLabel.cpp \
+SOURCES += lib/UrlLabel.cpp \
            main.cpp \
            mainwindow.cpp \
-           StandardDatabase.cpp \
+           Kdb3Database.cpp \
            lib/SecString.cpp \
            crypto/twoclass.cpp \
            crypto/twofish.cpp \
@@ -130,7 +131,6 @@ SOURCES += lib/IniReader.cpp \
 	   export/Export_KeePassX_Xml.cpp \
 	   export/Export.cpp \
            import/Import_KWalletXml.cpp \
-           PwmConfig.cpp \
            dialogs/AboutDlg.cpp \
            dialogs/EditGroupDlg.cpp \
            dialogs/SearchDlg.cpp \
@@ -145,6 +145,7 @@ SOURCES += lib/IniReader.cpp \
 	   dialogs/CustomizeDetailViewDlg.cpp \
 	   dialogs/CalendarDlg.cpp \
 	   dialogs/ExpiredEntriesDlg.cpp \
+	   dialogs/TrashCanDlg.cpp \
            lib/random.cpp \
            Database.cpp \
            lib/KdePlugin.cpp \
@@ -160,6 +161,7 @@ SOURCES += lib/IniReader.cpp \
 	   crypto/sha256.cpp \
 	   crypto/yarrow.cpp \
 	   lib/WaitAnimationWidget.cpp \
+	   KpxConfig.cpp \
            KpxFirefox.cpp
 RESOURCES += res/resources.qrc
 MOC_DIR = ../build/moc

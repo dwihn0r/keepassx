@@ -23,7 +23,7 @@
 #include <QTreeWidget>
 #include <QLine>
 #include <QContextMenuEvent>
-#include "../StandardDatabase.h"
+#include "../Kdb3Database.h"
 
 class GroupViewItem;
 

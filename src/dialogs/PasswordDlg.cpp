@@ -29,7 +29,7 @@
 #include <QStringList>
 
 #include "main.h"
-#include "PwmConfig.h"
+#include "KpxConfig.h"
 #include "PasswordDlg.h"
 #include "lib/FileDialogs.h"
 
@@ -40,31 +40,33 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 	setupUi(this);
 	createBanner(Banner,getPixmap("key"),tr("Database Key"));
 	db=DB;
-	QDir media(config.MountDir);
+	QString mountDir=config->mountDir();
+	QDir media(mountDir);
 	if(media.exists()){
 		QStringList Paths;
 		Paths=media.entryList(QStringList()<<"*",QDir::Dirs);
 		Paths.erase(Paths.begin()); // delete "."
 		Paths.erase(Paths.begin()); // delete ".."
 		for(int i=0;i<Paths.count();i++)
-			Combo_Dirs->addItem(config.MountDir+Paths[i]);
+			Combo_Dirs->addItem(mountDir+Paths[i]);
 	}
-	
+
 	Combo_Dirs->setEditText(QString());
-	if(settings->value("RememberLastKey",true).toBool() && !ChangeKeyMode){
-		QString LastKeyType=settings->value("LastKeyType","").toString();
-		if(LastKeyType=="KeyFile"){
-			setStateKeyFileOnly();
-			Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(settings->value("LastKeyFile","").toString())));
-		}
-		else if(LastKeyType=="Composite"){
-			setStateBoth();
-			CheckBox_Both->setChecked(true);
-			Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(settings->value("LastKeyFile","").toString())));
+	if(config->rememberLastKey() && !ChangeKeyMode){
+		switch(config->lastKeyType()){
+			case KEYFILE:
+				setStateKeyFileOnly();
+				Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+				break;
+
+			case BOTH:
+				setStateBoth();
+				CheckBox_Both->setChecked(true);
+				Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
 		}
 		// if(LastKeyType==Password){... is not required because it is already the default state.
 	}
-	
+
 	connect( Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
 	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 	connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
@@ -73,7 +75,7 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 	connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 	connect( Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 	connect( ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
-	
+
 	ButtonExit->setVisible(ShowExitButton);
 	Mode_Set=ChangeKeyMode;
 	if(!ChangeKeyMode){
@@ -85,8 +87,8 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 		connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK_Set() ) );
 		connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse_Set() ) );
 	}
-	
-	if(!config.ShowPasswordsPasswordDlg)ChangeEchoModeDatabaseKey();
+
+	if(!config->showPasswordsPasswordDlg())ChangeEchoModeDatabaseKey();
 }
 
 
@@ -159,16 +161,16 @@ void CPasswordDialog::OnOK(){
 	password=Edit_Password->text();
 	keyfile=Combo_Dirs->currentText();
 
-	if(password=="" && keyfile==""){
+	if(password.isEmpty() && keyfile.isEmpty()){
 		QMessageBox::warning(this,tr("Error"),tr("Please enter a Password or select a key file."),tr("OK"),"","",0,0);
 		return;
 	}
 
 	if(KeyType==BOTH){
-		if(password==""){
+		if(password.isEmpty()){
 			QMessageBox::warning(this,tr("Error"),tr("Please enter a Password."),tr("OK"),"","",0,0);
 			return;}
-		if(keyfile==""){
+		if(keyfile.isEmpty()){
 			QMessageBox::warning(this,tr("Error"),tr("Please choose a key file."),tr("OK"),"","",0,0);
 			return;}
 	}
@@ -186,7 +188,7 @@ void CPasswordDialog::OnOK(){
 		if(fileinfo.isDir()){
 			if(keyfile.right(1)!="/")keyfile+="/";
 			QFile file(keyfile+"pwsafe.key");
-			if(!file.exists()){				
+			if(!file.exists()){
 				QDir dir(keyfile);
 				QStringList files;
 				files=dir.entryList(QStringList()<<"*.key",QDir::Files);
@@ -200,13 +202,13 @@ void CPasswordDialog::OnOK(){
 				Q_ASSERT(file.exists());
 				if(!QFileInfo(file).isReadable()){
 					QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-					return;}				
+					return;}
 				keyfile+=files[0];
 				}
 			else{ /* pwsafe.key exists */
 				if(!QFileInfo(file).isReadable()){
 					QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-					return;}			
+					return;}
 				keyfile+="pwsafe.key";
 				}
 		}
@@ -231,15 +233,15 @@ void CPasswordDialog::OnOK_Set(){
 		return;
 	}
 	keyfile=Combo_Dirs->currentText();
-	if(password=="" && keyfile==""){
+	if(password.isEmpty() && keyfile.isEmpty()){
 		QMessageBox::warning(this,tr("Error"),tr("Please enter a password or select a key file."),tr("OK"),"","",0,0);
 		return;
 	}
-	
-	if(keyfile!=QString()){	
+
+	if(!keyfile.isEmpty()){
 		QFile file(keyfile);
 		if(QFileInfo(file).isDir()){
-			if(keyfile.right(1)!="/")keyfile+="/";		
+			if(keyfile.right(1)!="/")keyfile+="/";
 			keyfile+="pwsafe.key";
 		}
 		if(file.exists()){
@@ -252,60 +254,55 @@ void CPasswordDialog::OnOK_Set(){
 								OverwriteKeyFile=true;
 								break;
 							case 2:
-								return; 
+								return;
 			}
-		}		
+		}
 		IFilePasswordAuth* DbAuth=dynamic_cast<IFilePasswordAuth*>(db);
 		if(OverwriteKeyFile){
 			if(!DbAuth->createKeyFile(keyfile,32,true)){
 				QMessageBox::warning(this,tr("Error"),tr("Key file could not be created.\n%1").arg(db->getError()),tr("OK"),"","",0,0);
 				return;
-			}		
+			}
 		}
-	}		
+	}
 	if(doAuth())done(1);
 }
 
 bool CPasswordDialog::doAuth(){
 	IFilePasswordAuth* DbAuth=dynamic_cast<IFilePasswordAuth*>(db);
-	if(password!=QString() && keyfile==QString()){
+	if(!password.isEmpty() && keyfile.isEmpty()){
 		DbAuth->authByPwd(password);
 	}
-	if(password==QString() && keyfile!=QString()){
-		if(!DbAuth->authByFile(keyfile))return false;	
+	if(password.isEmpty() && !keyfile.isEmpty()){
+		if(!DbAuth->authByFile(keyfile))return false;
 	}
-	if(password!=QString() && keyfile!=QString()){
-		if(!DbAuth->authByFile(keyfile))return false;	
-	}	
-	
-	if(settings->value("RememberLastKey",true).toBool()){
+	if(!password.isEmpty() && !keyfile.isEmpty()){
+		if(!DbAuth->authByFile(keyfile))return false;
+	}
+
+	if(config->rememberLastKey()){
 		QString KeyLocation=keyfile;
-		if(settings->value("SaveRelativePaths",true).toBool()){
+		if(config->saveRelativePaths()){
 			KeyLocation=KeyLocation.left(KeyLocation.lastIndexOf("/"));
-			KeyLocation=makePathRelative(KeyLocation,QDir::currentPath())+keyfile.right(keyfile.length()-keyfile.lastIndexOf("/")-1);	
+			KeyLocation=makePathRelative(KeyLocation,QDir::currentPath())+keyfile.right(keyfile.length()-keyfile.lastIndexOf("/")-1);
 		}
-		settings->setValue("LastKeyFile",KeyLocation);
-		if(KeyType==PASSWORD)
-			settings->setValue("LastKeyType","Password");
-		if(KeyType==KEYFILE)
-			settings->setValue("LastKeyType","KeyFile");
-		if(KeyType==BOTH)
-			settings->setValue("LastKeyType","Composite");
+		config->setLastKeyLocation(KeyLocation);
+		config->setLastKeyType(KeyType);
 	}
 	return true;
-	
+
 }
 
 void CPasswordDialog::OnPasswordChanged(const QString &txt){
-Edit_PasswordRep->setText("");
-if(CheckBox_Both->isChecked() || txt==QString())
+Edit_PasswordRep->setText(QString());
+if(CheckBox_Both->isChecked() || txt.isEmpty())
 	setStateBoth();
 else
 	setStatePasswordOnly();
 }
 
 void CPasswordDialog::OnComboTextChanged(const QString& txt){
-if(CheckBox_Both->isChecked() || txt==QString())
+if(CheckBox_Both->isChecked() || txt.isEmpty())
 	setStateBoth();
 else
 	setStateKeyFileOnly();
@@ -317,17 +314,16 @@ void CPasswordDialog::OnCheckBox_BothChanged(int state){
 if(state==Qt::Checked)
 	setStateBoth();
 if(state==Qt::Unchecked){
-	if(Edit_Password->text()!=QString() && Combo_Dirs->currentText()!=QString()){
+	if(!Edit_Password->text().isEmpty() && !Combo_Dirs->currentText().isEmpty()){
 		Combo_Dirs->setEditText(QString());
 		setStatePasswordOnly();
 	}
 	else{
-		if(Edit_Password->text()==QString())
+		if(Edit_Password->text().isEmpty())
 			setStateKeyFileOnly();
 		else
 			setStatePasswordOnly();
 	}
-
 }
 
 }

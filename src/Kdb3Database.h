@@ -55,6 +55,7 @@ public:
 	class StdGroup;
 	class StdEntry;
 	class EntryHandle:public IEntryHandle{
+		
 		friend class Kdb3Database;
 		public:
 			EntryHandle(Kdb3Database* db);
@@ -94,11 +95,11 @@ public:
 		private:
 			void invalidate(){valid=false;}
 			bool valid;
-			unsigned int ListIndex;
-			KpxUuid Uuid;
+			//KpxUuid Uuid; ???
 			Kdb3Database* pDB;
 			StdEntry* Entry;
 	};
+	
 	class GroupHandle:public IGroupHandle{
 		friend class Kdb3Database;
 		GroupHandle(Kdb3Database* db);
@@ -123,8 +124,10 @@ public:
 			StdGroup* Group;
 			Kdb3Database* pDB;
 	};
+	
 	friend class EntryHandle;
 	friend class GroupHandle;
+	
 	class StdEntry:public CEntry{
 		public:
 				quint32 OldImage;
@@ -132,6 +135,7 @@ public:
 				EntryHandle* Handle;
 				StdGroup* Group;
 	};
+	
 	class StdGroup:public CGroup{
 		public:
 			StdGroup():CGroup(){};
@@ -143,6 +147,12 @@ public:
 			QList<StdGroup*> Childs;
 			QList<StdEntry*> Entries;
 	};
+	
+	class TrashEntry: public StdEntry{
+		public:
+			QStringList GroupPath;					
+	};
+	
 	virtual ~Kdb3Database(){};
 	virtual bool load(QString identifier);
 	virtual bool save();
@@ -182,6 +192,9 @@ public:
 	virtual IEntryHandle* addEntry(const CEntry* NewEntry, IGroupHandle* group);
 	virtual void moveEntry(IEntryHandle* entry, IGroupHandle* group);
 	virtual void deleteLastEntry();
+	virtual void moveToTrash(IEntryHandle* entry);
+	virtual QList<IEntryHandle*> trashEntries();
+	virtual void emptyTrash();
 
 	
 	virtual QList<IGroupHandle*> groups();
@@ -232,8 +245,10 @@ private:
 
 	QList<EntryHandle> EntryHandles;
 	QList<GroupHandle> GroupHandles;
+	QList<EntryHandle> TrashHandles;
 	QList<StdEntry> Entries;
 	QList<StdGroup> Groups;
+	QList<TrashEntry> TrashEntries;
 	StdGroup RootGroup;
 	QList<QPixmap>CustomIcons;
 	QFile* File;

@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "main.h"
-#include "PwmConfig.h"
+#include "KpxConfig.h"
 #include <qpushbutton.h>
 #include <qpalette.h>
 #include <qfont.h>
@@ -69,7 +69,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(Button_CustomIcons,SIGNAL(clicked()),this,SLOT(OnCustomIcons()));
 	connect(ExpirePresetsMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnExpirePreset(QAction*)));
 	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar(QAction*)));
-	
+
 	// QAction::data() contains the time until expiration in days.
 	ExpirePresetsMenu->addAction(tr("Today"))->setData(0);
 	ExpirePresetsMenu->addSeparator();
@@ -84,7 +84,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	ExpirePresetsMenu->addAction(tr("1 Year"))->setData(365);
 	ButtonExpirePresets->setMenu(ExpirePresetsMenu);
 	ButtonExpirePresets->setDefaultAction(new QAction(tr("Calendar..."),ButtonExpirePresets));
-	
+
 	ButtonOpenAttachment->setIcon(getIcon("fileopen"));
 	ButtonDeleteAttachment->setIcon(getIcon("filedelete"));
 	ButtonSaveAttachment->setIcon(getIcon("filesave"));
@@ -101,7 +101,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	Edit_Password->setText(Password.string());
 	Edit_Password_w->setText(Password.string());
 	Password.lock();
-	if(!config.ShowPasswords)
+	if(!config->showPasswords())
 		ChangeEchoMode();
 	OnPasswordwLostFocus();
 	int bits=(Password.length()*8);
@@ -118,15 +118,15 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 		ButtonSaveAttachment->setDisabled(true);
 		ButtonDeleteAttachment->setDisabled(true);
 		Label_AttachmentSize->setText("");
-	}	
+	}
 	else{
 		QString unit;
 		int faktor;
 		int prec;
 		if(entry->binarySize()<1000){unit=" Byte";faktor=1;prec=0;}
-		else 
+		else
 			if(entry->binarySize()<1000000){unit=" kB";faktor=1000;prec=1;}
-		else{unit=" MB";faktor=1000000;prec=1;}		
+		else{unit=" MB";faktor=1000000;prec=1;}
 		Label_AttachmentSize->setText(QString::number((float)entry->binarySize()/(float)faktor,'f',prec)+unit);
 	}
 	if(entry->expire()==Date_Never){
@@ -135,7 +135,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	}
 	else{
 		DateTime_Expire->setDateTime(entry->expire());
-	}	
+	}
 }
 
 CEditEntryDlg::~CEditEntryDlg()
@@ -183,9 +183,9 @@ void CEditEntryDlg::InitGroupComboBox(){
 		Combo_Group->insertItem(i,db->icon(groups[i]->image()),Space+groups[i]->title());
 		if(groups[i]==entry->group()){
 			Combo_Group->setCurrentIndex(i);
-			GroupIndex=i;		
+			GroupIndex=i;
 		}
-	}						
+	}
 }
 
 void CEditEntryDlg::OnButtonOK()
@@ -219,7 +219,7 @@ void CEditEntryDlg::OnButtonOK()
 	password.fill('X');
 	if(entry->image()!=Combo_IconPicker->currentIndex())
 		ModFlag=true;
-		
+
 	if(ModFlag){
 		entry->setExpire(DateTime_Expire->dateTime());
 		entry->setLastAccess(QDateTime::currentDateTime());
@@ -238,11 +238,11 @@ void CEditEntryDlg::OnButtonOK()
 		EntryMoved=true; ModFlag=true;
 	}
 	entry->setImage(Combo_IconPicker->currentIndex());
-		
+
 	if(ModFlag&&EntryMoved)done(2);
 	else if(ModFlag)done(1);
 	else done(0);
- 
+
 }
 
 void CEditEntryDlg::OnButtonCancel()
@@ -268,7 +268,7 @@ Edit_Password_w->setEchoMode(QLineEdit::Normal);
 
 void CEditEntryDlg::OnPasswordTextChanged(const QString& txt)
 {
-Edit_Password_w->setText("");
+Edit_Password_w->setText(QString());
 int bits=(Edit_Password->text().length()*8);
 Label_Bits->setText(QString::number(bits)+" Bit");
 if(bits>128)bits=128;
@@ -307,7 +307,7 @@ else
 }
 
 void CEditEntryDlg::OnNewAttachment()
-{	
+{
 	QString filename=QFileDialog::getOpenFileName(this,tr("Add Attachment..."),QDir::homePath());
 	if(filename=="")return;
 	QFile file(filename);
@@ -316,7 +316,7 @@ void CEditEntryDlg::OnNewAttachment()
 		QMessageBox::warning(NULL,tr("Error"),tr("Could not open file."),tr("OK"));
 		return;
 	}
-	ModFlag=true;	
+	ModFlag=true;
 	entry->setBinary(file.readAll());
 	file.close();
 	QFileInfo info(filename);
@@ -341,7 +341,7 @@ void CEditEntryDlg::OnSaveAttachment(){
 
 void CEditEntryDlg::saveAttachment(IEntryHandle* pEntry, QWidget* ParentWidget)
 {
-	if(!pEntry->binarySize()){		
+	if(!pEntry->binarySize()){
 		QMessageBox::information(NULL,tr("Error"),tr("The chosen entry has no attachment or it is empty."),tr("OK"));
 		return;
 	}
@@ -390,8 +390,8 @@ void CEditEntryDlg::OnButtonGenPw()
 {
 	CGenPwDialog dlg(this,false);
 	if(dlg.exec()){
-		Edit_Password->setText(dlg.Edit_dest->text());	
-		Edit_Password_w->setText(dlg.Edit_dest->text());	
+		Edit_Password->setText(dlg.Edit_dest->text());
+		Edit_Password_w->setText(dlg.Edit_dest->text());
 		ModFlag=true;
 	}
 }
@@ -427,6 +427,6 @@ void CEditEntryDlg::OnCalendar(QAction* action){
 		CheckBox_ExpiresNever->setChecked(false);
 		DateTime_Expire->setDate(dlg.calendarWidget->selectedDate());
 		DateTime_Expire->setTime(QTime(0,0,0));
-	}	
+	}
 }
 

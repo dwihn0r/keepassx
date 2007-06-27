@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -27,12 +27,12 @@ class IFileDialog{
 	public:
 		virtual ~IFileDialog(){}
 		virtual QString openExistingFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters)=0;
+							QStringList Filters,int SelectedFilter)=0;
 		virtual QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters)=0;
+							QStringList Filters,int SelectedFilter)=0;
 		
 		virtual QString saveFileDialog(QWidget* parent,QString title,QString dir,
-							QStringList Filters,bool ShowOverwriteWarning=true)=0;
+							QStringList Filters,int SelectedFilter, bool ShowOverwriteWarning=true)=0;
 		
 		virtual int getLastFilter()=0;
 };

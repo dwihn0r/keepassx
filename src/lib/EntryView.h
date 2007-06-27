@@ -27,8 +27,9 @@
 #include <QHeaderView>
 #include <QTimer>
 #include <QClipboard>
-#include <QVarLengthArray>
-#include "../StandardDatabase.h"
+#include <QBitArray>
+#include <QList>
+#include "../Kdb3Database.h"
 
 #define NUM_COLUMNS 11
 
@@ -49,17 +50,17 @@ class KeepassEntryView:public QTreeWidget{
 		QList<EntryViewItem*>Items;
 		QList<IEntryHandle*> SearchResults;
 		QMenu *ContextMenu;
-		QVarLengthArray<bool>Columns;
-		void setCurrentEntry(IEntryHandle* entry);	
+		QBitArray Columns;
+		void setCurrentEntry(IEntryHandle* entry);
 	private:
 		void setEntry(IEntryHandle* entry);
 		void updateEntry(EntryViewItem*);
 		void editEntry(EntryViewItem*);
 		void createItems(QList<IEntryHandle*>& entries);
 		int logicalColIndex(int ListIndex);
-		
+
 		QClipboard* Clipboard;
-		QTimer ClipboardTimer;		
+		QTimer ClipboardTimer;
 		void resizeColumns();
 		bool AutoResizeColumns;
 		QPoint DragStartPos;
@@ -68,10 +69,10 @@ class KeepassEntryView:public QTreeWidget{
 		IGroupHandle* CurrentGroup;
 		enum EntryViewMode {Normal, ShowSearchResults};
 		EntryViewMode ViewMode;
-		QVarLengthArray<float>ColumnSizes;
-		QVarLengthArray<int>ColumnOrder;
+		QList<int> ColumnSizes;
+		QList<int> ColumnOrder;
 		float GroupColumnSize;
-		
+
 		virtual void contextMenuEvent(QContextMenuEvent *event);
 		virtual void paintEvent(QPaintEvent* event);
 		virtual void resizeEvent(QResizeEvent* event);

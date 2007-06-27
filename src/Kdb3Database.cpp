@@ -34,20 +34,21 @@
 #include "crypto/yarrow.h"
 #include "lib/random.h"
 using namespace std;
-#include "StandardDatabase.h"
+#include "Kdb3Database.h"
 #include "main.h"
+#include "KpxConfig.h"
 
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 
 const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));
-		 
-		 
+
+
 bool EntryHandleLessThan(const IEntryHandle* This,const IEntryHandle* Other){
 	if(!This->isValid() && Other->isValid())return true;
 	if(This->isValid() && !Other->isValid())return false;
 	if(!This->isValid() && !Other->isValid())return false;
-	return This->visualIndex()<Other->visualIndex();	
-	
+	return This->visualIndex()<Other->visualIndex();
+
 }
 
 bool StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb3Database::StdEntry& Other){
@@ -103,23 +104,23 @@ int Kdb3Database::numIcons(){
 }
 
 bool Kdb3Database::parseMetaStream(const StdEntry& entry){
-	
+
 	qDebug("%s",entry.Comment.toUtf8().data());
-	
+
 	if(entry.Comment=="KPX_GROUP_TREE_STATE"){
 		parseGroupTreeStateMetaStream(entry.Binary);
 		return true;}
-	
+
 	if(entry.Comment=="KPX_CUSTOM_ICONS_3"){
 		parseCustomIconsMetaStream(entry.Binary);
-		return true;}	
+		return true;}
 
 	if(entry.Comment=="KPX_CUSTOM_ICONS_2")
 		return parseCustomIconsMetaStreamV2(entry.Binary);
-	
+
 	if(entry.Comment=="KPX_CUSTOM_ICONS")
-		return parseCustomIconsMetaStreamV1(entry.Binary); 
-	
+		return parseCustomIconsMetaStreamV1(entry.Binary);
+
 	return false; //unknown MetaStream
 }
 
@@ -234,7 +235,7 @@ void Kdb3Database::createGroupTreeStateMetaStream(StdEntry* e){
 		if(Groups[i].IsExpanded)
 			bin.data()[8+5*i]=1;
 		else
-			bin.data()[8+5*i]=0;		
+			bin.data()[8+5*i]=0;
 	}
 	e->Binary=bin;
 }
@@ -380,10 +381,10 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 		Groups[i].Index=Groups[j].Childs.size();
 		Groups[i].Parent->Childs.append(&Groups[i]);
 	}
-	
+
 	QList<int> EntryIndexCounter;
 	for(int i=0;i<Groups.size();i++)EntryIndexCounter << 0;
-	
+
 	for(int e=0;e<Entries.size();e++){
 		for(int g=0;g<Groups.size();g++){
 			if(Entries[e].GroupId==Groups[g].Id){
@@ -392,9 +393,9 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 				Entries[e].Index=EntryIndexCounter[g];
 				EntryIndexCounter[g]++;
 			}
-		}		
+		}
 	}
-	
+
 	return true;
 }
 
@@ -408,21 +409,22 @@ void Kdb3Database::createHandles(){
 		EntryHandles.append(EntryHandle(this));
 		Entries[i].Handle=&EntryHandles.back();
 		EntryHandles.back().Entry=&Entries[i];
-	}		
+	}
 }
 
 void Kdb3Database::restoreGroupTreeState(){
-	if(settings->value("GroupTreeState","ExpandAll")=="ExpandAll"){
-		for(int i=0;i<Groups.size();i++){
-			Groups[i].IsExpanded=true;
-		}
-	}
-	else
-	if(settings->value("GroupTreeState","ExpandAll")=="Restore"){
+	switch (config->groupTreeState()){
+		case KpxConfig::RestoreLast:
 			for(int i=0;i<Groups.size();i++){
 				if(TreeStateMetaStream.contains(Groups[i].Id))
-					Groups[i].IsExpanded=TreeStateMetaStream.value(Groups[i].Id);				
+					Groups[i].IsExpanded=TreeStateMetaStream.value(Groups[i].Id);
 			}
+			break;
+
+		case KpxConfig::ExpandAll:
+			for(int i=0;i<Groups.size();i++)
+				Groups[i].IsExpanded=true;
+			break;
 	}
 }
 
@@ -484,7 +486,7 @@ sha.update(FinalRandomSeed,16);
 sha.update(MasterKey,32);
 sha.finish(FinalKey);
 
-if(Algorithm == Rijndael_Cipher)	
+if(Algorithm == Rijndael_Cipher)
 {		AESdecrypt aes;
 		aes.key256(FinalKey);
 		aes.cbc_decrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,total_size-DB_HEADER_SIZE,(unsigned char*)EncryptionIV);
@@ -566,7 +568,7 @@ StdEntry entry;
 
 		bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
 
-		if((FieldType == 0xFFFF) && (bRet == true)){			
+		if((FieldType == 0xFFFF) && (bRet == true)){
 			Entries << entry;
 			if(!entry.GroupId)qDebug("NULL: %i, '%s'",(int)CurEntry,(char*)entry.Title.toUtf8().data());
 			CurEntry++;}
@@ -582,7 +584,7 @@ if(!createGroupTree(Levels)){
 	error=tr("Invalid group tree.");
 	return false;
 }
-	
+
 unsigned long CurGID, g, e, z, num;
 delete [] buffer;
 
@@ -599,7 +601,7 @@ for(int i=0;i<Entries.size();i++){
 int* EntryIndices=new int[Groups.size()];
 for(int i=0;i<Groups.size();i++)EntryIndices[i]=0;
 
-for(int g=0;g<Groups.size();g++){	
+for(int g=0;g<Groups.size();g++){
 	for(int e=0;e<Entries.size();e++){
 		if(Entries[e].GroupId==Groups[g].Id){
 			Entries[e].Index=EntryIndices[g];
@@ -643,8 +645,8 @@ bool Kdb3Database::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int roun
 	aes.key256(KeySeed);
 	memcpy(tmp,src,32);
 	for(int i=0;i<rounds;i++){
-		aes.ecb_encrypt(tmp,tmp,32);	
-	}	
+		aes.ecb_encrypt(tmp,tmp,32);
+	}
 	SHA256::hashBuffer(tmp,dst,32);
 	return true;
 }
@@ -658,13 +660,13 @@ int Kdb3Database::numEntries(){
 	return Entries.size();
 }
 
-	
+
 
 void Kdb3Database::deleteGroup(StdGroup* group){
-	
+
 	while(group->Childs.size())
 		deleteGroup(group->Childs.front());
-	
+
 	QList<IEntryHandle*> GroupEntries;
 	GroupEntries=entries(group->Handle);
 	deleteEntries(GroupEntries);
@@ -672,22 +674,22 @@ void Kdb3Database::deleteGroup(StdGroup* group){
 	Q_ASSERT(group==group->Parent->Childs[group->Index]);
 	group->Parent->Childs.removeAt(group->Index);
 	for(int i=group->Index;i<group->Parent->Childs.size();i++){
-		group->Parent->Childs[i]->Index--;	
+		group->Parent->Childs[i]->Index--;
 	}
 	group->Handle->invalidate();
-	
+
 	for(int i=0;i<Groups.size();i++){
 		if(&Groups[i]==group){
 			Groups.removeAt(i);
-			break;	
-		}		
+			break;
+		}
 	}
-	
+
 }
 
 
 void Kdb3Database::deleteGroup(IGroupHandle* group){
-	deleteGroup(((GroupHandle*)group)->Group);	
+	deleteGroup(((GroupHandle*)group)->Group);
 }
 
 void Kdb3Database::GroupHandle::setIndex(int index){
@@ -707,14 +709,14 @@ void Kdb3Database::GroupHandle::setIndex(int index){
 	else{
 		for(NewPos;NewPos<pDB->Groups.size();NewPos++){
 			if(pDB->Groups[NewPos].ParentId==ParentId && pDB->Groups[NewPos].Index+1==index)
-				break;						
+				break;
 		}
 		//skip the childs of the found sibling
 		for(NewPos;NewPos<Groups.size();NewPos++){
 			if(Groups[NewPos]
 			pDB->Groups.move(Pos,NewPos);
 		}
-						
+
 	}
 	// adjust the indices
 	int NewIndex=0;
@@ -722,7 +724,7 @@ void Kdb3Database::GroupHandle::setIndex(int index){
 		if(pDB->Groups[i].ParentId==ParentId){
 			pDB->Groups[i].Index=NewIndex;
 			NewIndex++;
-		}		
+		}
 	}
 	*/
 }
@@ -747,7 +749,7 @@ void Kdb3Database::authByPwd(QString& Password){
 		return;
 	}
 	SHA256::hashBuffer(Password.toUtf8().data(),RawMasterKey,Password.toUtf8().size());
-	return;	
+	return;
 }*/
 
 void Kdb3Database::authByPwd(QString& Password){
@@ -761,7 +763,7 @@ void Kdb3Database::authByPwd(QString& Password){
 	lat=Password.toLatin1();
 	char *Lat=lat.data();
 	char *Utf=utf.data();
-	return;	
+	return;
 }
 
 bool Kdb3Database::authByFile(QString& filename){
@@ -770,17 +772,17 @@ bool Kdb3Database::authByFile(QString& filename){
 		error=decodeFileError(file.error());
 		return false;
 	}
-	unsigned long FileSize=file.size();	
+	unsigned long FileSize=file.size();
 	if(FileSize == 0){
 		error=tr("Key file is empty.");
 		return false;
-	}	
+	}
 	if(FileSize == 32){
 		if(file.read((char*)RawMasterKey,32) != 32){
 			error=decodeFileError(file.error());
 			return false;}
 		return true;
-	}	
+	}
 	if(FileSize == 64){
 		char hex[64];
 		if(file.read(hex,64) != 64){
@@ -798,7 +800,7 @@ bool Kdb3Database::authByFile(QString& filename){
 		if(read != 2048) break;
 	}
 	sha.finish(RawMasterKey);
-	delete [] buffer;	
+	delete [] buffer;
 	return true;
 }
 
@@ -809,7 +811,7 @@ bool Kdb3Database::authByFileAndPwd(QString& Password, QString& filename){
 	memcpy(FileKey,RawMasterKey,32);
 	authByPwd(Password);
 	memcpy(PasswordKey,RawMasterKey,32);
-	
+
 	SHA256 sha;
 	sha.update(PasswordKey,32);
 	sha.update(FileKey,32);
@@ -822,7 +824,7 @@ QList<IEntryHandle*> Kdb3Database::entries(){
 	for(int i=0; i<EntryHandles.size(); i++){
 		if(EntryHandles[i].isValid())handles.append(&EntryHandles[i]);
 	}
-	return handles;	
+	return handles;
 }
 
 QList<IEntryHandle*> Kdb3Database::expiredEntries(){
@@ -833,7 +835,7 @@ QList<IEntryHandle*> Kdb3Database::expiredEntries(){
 		  (EntryHandles[i].expire()!=Date_Never))
 			handles.append(&EntryHandles[i]);
 	}
-	return handles;		
+	return handles;
 }
 
 QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
@@ -850,19 +852,19 @@ QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
 
 void Kdb3Database::deleteEntry(IEntryHandle* entry){
 	if(!entry)return;
-	StdGroup* Group=((EntryHandle*)entry)->Entry->Group;	
+	StdGroup* Group=((EntryHandle*)entry)->Entry->Group;
 	int j;
 	for(j=0;j<Entries.size();j++){
 		if(&Entries[j]==((EntryHandle*)entry)->Entry)
 			break;
 	}
 	Entries[j].Handle->invalidate();
-	Entries.removeAt(j);	
+	Entries.removeAt(j);
 }
 
 void Kdb3Database::moveEntry(IEntryHandle* entry, IGroupHandle* group){
 	((EntryHandle*)entry)->Entry->GroupId=((GroupHandle*)group)->Group->Id;
-	((EntryHandle*)entry)->Entry->Group=((GroupHandle*)group)->Group;	
+	((EntryHandle*)entry)->Entry->Group=((GroupHandle*)group)->Group;
 }
 
 
@@ -879,7 +881,7 @@ void Kdb3Database::deleteEntries(QList<IEntryHandle*> entries){
 		Entries[j].Handle->invalidate();
 		Entries.removeAt(j);
 	}
-	
+
 	for(int i=0;i<Group->Childs.size();i++){
 		Group->Childs[i]->Index=i;
 	}
@@ -890,7 +892,7 @@ QList<IGroupHandle*> Kdb3Database::groups(){
 	for(int i=0; i<GroupHandles.size(); i++){
 		if(GroupHandles[i].isValid())handles.append(&GroupHandles[i]);
 	}
-	return handles;	
+	return handles;
 }
 
 quint32 Kdb3Database::getNewGroupId(){
@@ -904,7 +906,7 @@ quint32 Kdb3Database::getNewGroupId(){
 			if(Groups[j].Id==id)used=true;}
 		if(used==false)break;
 	}
-	return id;	
+	return id;
 }
 
 IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHandle){
@@ -921,7 +923,7 @@ IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHan
 	else{
 		Groups.back().Parent=&RootGroup;
 		Groups.back().Index=RootGroup.Childs.size();
-		Groups.back().Parent->Childs.append(&Groups.back());		
+		Groups.back().Parent->Childs.append(&Groups.back());
 	}
 	return &GroupHandles.back();
 }
@@ -931,7 +933,7 @@ Kdb3Database::StdGroup::StdGroup(const CGroup& other){
 	Index=0;
 	Id=other.Id;
 	Image=other.Image;
-	Title=other.Title;	
+	Title=other.Title;
 }
 
 void Kdb3Database::EntryHandle::setTitle(const QString& Title){Entry->Title=Title; }
@@ -977,7 +979,6 @@ void Kdb3Database::EntryHandle::setVisualIndex(int index){
 
 Kdb3Database::EntryHandle::EntryHandle(Kdb3Database* db){
 	pDB=db;
-	ListIndex=0;
 	valid=true;
 }
 
@@ -995,10 +996,10 @@ void Kdb3Database::GroupHandle::setImage(const quint32& New)
 {
 	if(Group->Image < pDB->builtinIcons() && New >= pDB->builtinIcons())
 		Group->OldImage=Group->Image;
-	
+
 	if(New < pDB->builtinIcons())
 		Group->OldImage=New;
-		
+
 	Group->Image=New;
 }
 
@@ -1018,7 +1019,7 @@ int Kdb3Database::GroupHandle::level(){
 	StdGroup* group=Group;
 	while(group->Parent){
 		group=group->Parent;
-		i++;		
+		i++;
 	}
 	i--;
 	return i;
@@ -1112,7 +1113,7 @@ bool Kdb3Database::save(){
 /*  ----------------------------------------------------------------------------------*/
 
 	unsigned int FileSize;
-	
+
 	QList<StdEntry> MetaStreams;
 	MetaStreams << StdEntry();
 	createCustomIconsMetaStream(&MetaStreams.back());
@@ -1134,7 +1135,7 @@ bool Kdb3Database::save(){
 			+Entries[i].Password.length()+1
 			+Entries[i].Comment.toUtf8().length()+1
 			+Entries[i].BinaryDesc.toUtf8().length()+1
-			+Entries[i].Binary.length();	
+			+Entries[i].Binary.length();
 	}
 
 	for(int i=0; i < UnknownMetaStreams.size(); i++){
@@ -1143,14 +1144,14 @@ bool Kdb3Database::save(){
 			+UnknownMetaStreams[i].Comment.toUtf8().length()+1
 			+UnknownMetaStreams[i].Binary.length();
 	}
-	
+
 	for(int i=0; i < MetaStreams.size(); i++){
 		FileSize
 				+=164
 				+MetaStreams[i].Comment.toUtf8().length()+1
 				+MetaStreams[i].Binary.length();
 	}
-	
+
 
 	// Round up filesize to 16-byte boundary for Rijndael/Twofish
 	FileSize = (FileSize + 16) - (FileSize % 16);
@@ -1164,7 +1165,7 @@ bool Kdb3Database::save(){
 	Version = PWM_DBVER_DW;
 	NumGroups = Groups.size();
 	NumEntries = Entries.size()+UnknownMetaStreams.size()+MetaStreams.size();
-	
+
 	qSort(Entries.begin(),Entries.end(),StdEntryLessThan);
 
 	randomize(FinalRandomSeed,16);
@@ -1172,7 +1173,7 @@ bool Kdb3Database::save(){
 	randomize(EncryptionIV,16);
 
 	unsigned int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
-		
+
 	serializeGroups(Groups,buffer,pos);
 	serializeEntries(Entries,buffer,pos);
 	serializeEntries(UnknownMetaStreams,buffer,pos);
@@ -1191,7 +1192,7 @@ bool Kdb3Database::save(){
 	memcpyToLEnd32(buffer+120,&KeyTransfRounds);
 	transformKey(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds);
 	quint8 FinalKey[32];
-	
+
 	SHA256 sha;
 	sha.update(FinalRandomSeed,16);
 	sha.update(MasterKey,32);
@@ -1203,7 +1204,7 @@ bool Kdb3Database::save(){
 		EncryptedPartSize=((pos-DB_HEADER_SIZE)/16+1)*16;
 		quint8 PadLen=EncryptedPartSize-(pos-DB_HEADER_SIZE);
 		for(int i=0;i<PadLen;i++)
-			((quint8*)buffer)[DB_HEADER_SIZE+EncryptedPartSize-1-i]=PadLen;	
+			((quint8*)buffer)[DB_HEADER_SIZE+EncryptedPartSize-1-i]=PadLen;
 		AESencrypt aes;
 		aes.key256(FinalKey);
 		aes.cbc_encrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,EncryptedPartSize,(unsigned char*)EncryptionIV);
@@ -1250,7 +1251,7 @@ void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 	quint32 NumEntries=Entries.size();
 	quint32 NumGroups=Groups.size();
 	Size+=8*NumGroups+20*NumEntries;
-	Size+=CustomIcons.size()*1000; // 1KB 
+	Size+=CustomIcons.size()*1000; // 1KB
 	e->Binary.reserve(Size);
 	e->Binary.resize(12);
 	quint32 NumIcons=CustomIcons.size();
@@ -1288,7 +1289,7 @@ void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 
 QList<IGroupHandle*> Kdb3Database::sortedGroups(){
 	QList<IGroupHandle*> SortedGroups;
-	appendChildsToGroupList(SortedGroups,RootGroup);	
+	appendChildsToGroupList(SortedGroups,RootGroup);
 	return SortedGroups;
 }
 
@@ -1296,29 +1297,29 @@ QList<IGroupHandle*> Kdb3Database::sortedGroups(){
 void Kdb3Database::appendChildsToGroupList(QList<IGroupHandle*>& list,StdGroup& group){
 	for(int i=0;i<group.Childs.size();i++){
 		list << group.Childs[i]->Handle;
-		appendChildsToGroupList(list,*group.Childs[i]);		
-	}	
+		appendChildsToGroupList(list,*group.Childs[i]);
+	}
 }
 
 
 void Kdb3Database::appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& group){
 	for(int i=0;i<group.Childs.size();i++){
 		list << group.Childs[i];
-		appendChildsToGroupList(list,*group.Childs[i]);		
-	}	
+		appendChildsToGroupList(list,*group.Childs[i]);
+	}
 }
 
 
-void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos){	
+void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos){
 	quint16 FieldType;
 	quint32 FieldSize;
 	quint32 Flags=0; //unused
 	QList<StdGroup*>SortedGroups;
-	appendChildsToGroupList(SortedGroups,RootGroup);	
+	appendChildsToGroupList(SortedGroups,RootGroup);
 
 	for(int i=0; i < SortedGroups.size(); i++){
 		unsigned char Date[5];
-		dateToPackedStruct5(Date_Never,Date); 	
+		dateToPackedStruct5(Date_Never,Date);
 		quint16 Level=0;
 		StdGroup* group=SortedGroups[i];
 		while(group->Parent){
@@ -1326,7 +1327,7 @@ void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsig
 			group=group->Parent;
 		}
 		Level--;
-				
+
 		FieldType = 0x0001; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
@@ -1375,8 +1376,8 @@ void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsig
 		FieldType = 0xFFFF; FieldSize = 0;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-	}	
-	
+	}
+
 }
 
 
@@ -1469,11 +1470,11 @@ void Kdb3Database::serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsi
 		 FieldType = 0xFFFF; FieldSize = 0;
 		 memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		 memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-	 }	 	 
+	 }
  }
 
 bool Kdb3Database::close(){
-	return true;	
+	return true;
 }
 
 void Kdb3Database::create(){
@@ -1489,7 +1490,7 @@ void Kdb3Database::create(){
 bool Kdb3Database::isKeyError(){
 	if(KeyError){
 		KeyError=false;
-		return true;	
+		return true;
 	}
 	else
 		return false;
@@ -1502,7 +1503,7 @@ IEntryHandle* Kdb3Database::cloneEntry(const IEntryHandle* entry){
 	Entries.append(dolly);
 	EntryHandles.append(EntryHandle(this));
 	EntryHandles.back().Entry=&Entries.back();
-	Entries.back().Handle=&EntryHandles.back();	
+	Entries.back().Handle=&EntryHandles.back();
 	return &EntryHandles.back();
 }
 
@@ -1514,7 +1515,7 @@ IEntryHandle* Kdb3Database::newEntry(IGroupHandle* group){
 	Entries.append(Entry);
 	EntryHandles.append(EntryHandle(this));
 	EntryHandles.back().Entry=&Entries.back();
-	Entries.back().Handle=&EntryHandles.back();	
+	Entries.back().Handle=&EntryHandles.back();
 	return &EntryHandles.back();
 }
 
@@ -1526,7 +1527,7 @@ IEntryHandle* Kdb3Database::addEntry(const CEntry* NewEntry, IGroupHandle* Group
 	Entries.append(Entry);
 	EntryHandles.append(EntryHandle(this));
 	EntryHandles.back().Entry=&Entries.back();
-	Entries.back().Handle=&EntryHandles.back();	
+	Entries.back().Handle=&EntryHandles.back();
 	return &EntryHandles.back();
 }
 
@@ -1539,47 +1540,47 @@ bool Kdb3Database::isParent(IGroupHandle* parent, IGroupHandle* child){
 	StdGroup* group=((GroupHandle*)child)->Group;
 	while(group->Parent!=&RootGroup){
 		if(group->Parent==((GroupHandle*)parent)->Group)return true;
-		group=group->Parent;		
+		group=group->Parent;
 	}
-	return false;	
+	return false;
 }
 
 
 
-void Kdb3Database::cleanUpHandles(){}	
-	
+void Kdb3Database::cleanUpHandles(){}
+
 bool Kdb3Database::searchStringContains(const QString& search, const QString& string,bool Cs, bool RegExp){
 	if(RegExp){
 		QRegExp exp(search,Cs ? Qt::CaseSensitive : Qt::CaseInsensitive);
 		if(string.contains(exp)==0)return false;}
 		else
 			if(string.contains(search,Cs ? Qt::CaseSensitive : Qt::CaseInsensitive)==0)return false;
- 	
+
 		return true;
 }
 
 void Kdb3Database::getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList){
 	EntryList<<entries(Group);
 	for(int i=0;i<((GroupHandle*)Group)->Group->Childs.size();	i++){
-		getEntriesRecursive(((GroupHandle*)Group)->Group->Childs[i]->Handle,EntryList);		
-	}	
+		getEntriesRecursive(((GroupHandle*)Group)->Group->Childs[i]->Handle,EntryList);
+	}
 }
 
 QList<IEntryHandle*> Kdb3Database::search(IGroupHandle* Group,const QString& search, bool CaseSensitive, bool RegExp, bool Recursive,bool* Fields){
 	bool fields[6]={true,true,true,false,true,true};
 	if(!Fields)
-		Fields=fields;	
+		Fields=fields;
 	QList<IEntryHandle*> SearchEntries;
 	if(search==QString())return Group ? entries(Group) : entries();
 	if(Group){
-		if(Recursive)			
+		if(Recursive)
 			getEntriesRecursive(Group,SearchEntries);
 		else
-			SearchEntries=entries(Group);		
+			SearchEntries=entries(Group);
 	}
 	else
 		SearchEntries=entries();
-	
+
 	for(int i=0;i<SearchEntries.size();i++){
 		bool match=false;
 		if(Fields[0])match=match||searchStringContains(search,SearchEntries[i]->title(),CaseSensitive,RegExp);
@@ -1595,14 +1596,14 @@ QList<IEntryHandle*> Kdb3Database::search(IGroupHandle* Group,const QString& sea
 			i--;
 		}
 	}
-	
+
 	return SearchEntries;
 }
 
 void Kdb3Database::rebuildIndices(QList<StdGroup*>& list){
 	for(int i=0;i<list.size();i++){
-		list[i]->Index=i;		
-	}	
+		list[i]->Index=i;
+	}
 }
 
 bool Kdb3Database::createKeyFile(const QString& filename,int length, bool Hex){
@@ -1624,14 +1625,14 @@ bool Kdb3Database::createKeyFile(const QString& filename,int length, bool Hex){
 			else key[i]='0'+dig1;
 			if(dig2>9)key[i+1]='A'+dig2-10;
 			else key[i+1]='0'+dig2;
-		}		
+		}
 	}
 	if(file.write((char*)key,length)==-1){
 		delete [] key;
 		error=decodeFileError(file.error());
 		file.close();
-		return false;		
-	}	
+		return false;
+	}
 	file.close();
 	delete [] key;
 	return true;
@@ -1639,7 +1640,7 @@ bool Kdb3Database::createKeyFile(const QString& filename,int length, bool Hex){
 
 
 void Kdb3Database::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,int Pos){
-	StdGroup* Parent;
+	StdGroup* Parent;	
 	StdGroup* Group=((GroupHandle*)groupHandle)->Group;
 	if(NewParent)
 		Parent=((GroupHandle*)NewParent)->Group;
@@ -1656,22 +1657,50 @@ void Kdb3Database::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,i
 		Q_ASSERT(Parent->Childs.size()>=Pos);
 		Parent->Childs.insert(Pos,Group);
 	}
-	rebuildIndices(Parent->Childs);	
+	rebuildIndices(Parent->Childs);
 }
 
 bool Kdb3Database::changeFile(const QString& filename){
-	if(File)	
+	if(File)
 		delete File;
 	if(filename==QString()){
 		File=NULL;
 		return true;
 	}
-	File=new QFile(filename);		
+	File=new QFile(filename);
 	if(!File->open(QIODevice::ReadWrite)){
 		if(!File->open(QIODevice::ReadOnly)){
-			error=decodeFileError(File->error());	
+			error=decodeFileError(File->error());
 			return false;
 		}
 	}
-	return true;	
+	return true;
+}
+
+void Kdb3Database::moveToTrash(IEntryHandle* entry){
+	TrashEntry trash=*((TrashEntry*)dynamic_cast<EntryHandle*>(entry)->Entry);
+	IGroupHandle* CurGroup=entry->group();
+	while(CurGroup){
+		trash.GroupPath << CurGroup->title();
+		CurGroup=CurGroup->parent();
+	}
+	deleteEntry(entry);
+	trash.Group=NULL;
+	TrashEntries.append(trash);
+	TrashHandles.append(EntryHandle(this));
+	TrashHandles.back().Entry=&TrashEntries.back();
+	TrashEntries.back().Handle=&TrashHandles.back();	
+}
+
+void Kdb3Database::emptyTrash(){
+	TrashEntries.clear();
+	TrashHandles.clear();
+}
+
+QList<IEntryHandle*> Kdb3Database::trashEntries(){
+	QList<IEntryHandle*> handles;
+	for(int i=0; i<TrashHandles.size();i++)
+		if(TrashHandles[i].isValid())
+			handles << &TrashHandles[i];
+	return handles;
 }

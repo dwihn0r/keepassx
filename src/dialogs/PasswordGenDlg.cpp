@@ -29,17 +29,17 @@
 #include "PasswordGenDlg.h"
 #include "CollectEntropyDlg.h"
 #include "crypto/yarrow.h"
-#include "PwmConfig.h"
+#include "KpxConfig.h"
 
 bool CGenPwDialog::EntropyCollected=false;
-		
+
 CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);
 	setMinimumSize(size());
 	setMaximumSize(size());
-	createBanner(&BannerPixmap,getPixmap("dice"),tr("Password Generator"),width());	
+	createBanner(&BannerPixmap,getPixmap("dice"),tr("Password Generator"),width());
 	connect(ButtonGenerate,SIGNAL(clicked()),this,SLOT(OnGeneratePw()));
 	connect(Radio_1,SIGNAL(toggled(bool)),this,SLOT(OnRadio1StateChanged(bool)));
 	connect(Radio_2,SIGNAL(toggled(bool)),this,SLOT(OnRadio2StateChanged(bool)));
@@ -56,43 +56,46 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	connect(Check_CollectEntropy,SIGNAL(stateChanged(int)),this,SLOT(OnCollectEntropyChanged(int)));
 	connect(Edit_chars,SIGNAL(textChanged(const QString&)),this,SLOT(estimateQuality()));
 	connect(Edit_chars,SIGNAL(textEdited(const QString&)),this,SLOT(OnCharsChanged(const QString&)));
-	
+
 	if(!StandAloneMode){
 		AcceptButton=DialogButtons->addButton(tr("Accept"),QDialogButtonBox::AcceptRole);
 		AcceptButton->setDisabled(true);
-		DialogButtons->addButton(QDialogButtonBox::Cancel);		
+		DialogButtons->addButton(QDialogButtonBox::Cancel);
 	}
 	else{
 		DialogButtons->addButton(tr("OK"),QDialogButtonBox::AcceptRole);
 		AcceptButton=NULL;
 	}
-	
-	Radio_1->setChecked(config.PwGenOptions[0]);
-	Radio_2->setChecked(!config.PwGenOptions[0]);
-	checkBox1->setChecked(config.PwGenOptions[1]);
-	checkBox2->setChecked(config.PwGenOptions[2]);
-	checkBox3->setChecked(config.PwGenOptions[3]);
-	checkBox4->setChecked(config.PwGenOptions[4]);
-	checkBox5->setChecked(config.PwGenOptions[5]);
-	checkBox6->setChecked(config.PwGenOptions[6]);
-	checkBox7->setChecked(config.PwGenOptions[7]);
-	Check_CollectEntropy->setChecked(config.PwGenOptions[8]);
-	Check_CollectOncePerSession->setChecked(config.PwGenOptions[9]);
-	OnRadio1StateChanged(config.PwGenOptions[0]);
-	OnRadio2StateChanged(!config.PwGenOptions[0]);
+
+	QBitArray pwGenOptions=config->pwGenOptions();
+	Radio_1->setChecked(pwGenOptions.at(0));
+	Radio_2->setChecked(!pwGenOptions.at(0));
+	checkBox1->setChecked(pwGenOptions.at(1));
+	checkBox2->setChecked(pwGenOptions.at(2));
+	checkBox3->setChecked(pwGenOptions.at(3));
+	checkBox4->setChecked(pwGenOptions.at(4));
+	checkBox5->setChecked(pwGenOptions.at(5));
+	checkBox6->setChecked(pwGenOptions.at(6));
+	checkBox7->setChecked(pwGenOptions.at(7));
+	Check_CollectEntropy->setChecked(pwGenOptions.at(8));
+	Check_CollectOncePerSession->setChecked(pwGenOptions.at(9));
+	OnRadio1StateChanged(pwGenOptions.at(0));
+	OnRadio2StateChanged(!pwGenOptions.at(0));
 }
 
 CGenPwDialog::~CGenPwDialog(){
-	config.PwGenOptions[0]=Radio_1->isChecked();
-	config.PwGenOptions[1]=checkBox1->isChecked();
-	config.PwGenOptions[2]=checkBox2->isChecked();
-	config.PwGenOptions[3]=checkBox3->isChecked();
-	config.PwGenOptions[4]=checkBox4->isChecked();
-	config.PwGenOptions[5]=checkBox5->isChecked();
-	config.PwGenOptions[6]=checkBox6->isChecked();
-	config.PwGenOptions[7]=checkBox7->isChecked();
-	config.PwGenOptions[8]=Check_CollectEntropy->isChecked();
-	config.PwGenOptions[9]=Check_CollectOncePerSession->isChecked();
+	QBitArray pwGenOptions(10);
+	pwGenOptions.setBit(0,Radio_1->isChecked());
+	pwGenOptions.setBit(1,checkBox1->isChecked());
+	pwGenOptions.setBit(2,checkBox2->isChecked());
+	pwGenOptions.setBit(3,checkBox3->isChecked());
+	pwGenOptions.setBit(4,checkBox4->isChecked());
+	pwGenOptions.setBit(5,checkBox5->isChecked());
+	pwGenOptions.setBit(6,checkBox6->isChecked());
+	pwGenOptions.setBit(7,checkBox7->isChecked());
+	pwGenOptions.setBit(8,Check_CollectEntropy->isChecked());
+	pwGenOptions.setBit(9,Check_CollectOncePerSession->isChecked());
+	config->setPwGenOptions(pwGenOptions);
 }
 
 void CGenPwDialog::paintEvent(QPaintEvent *event){
@@ -129,7 +132,7 @@ void CGenPwDialog::OnRadio2StateChanged(bool state){
 		Edit_chars->setEnabled(true);
 	else
 		Edit_chars->setDisabled(true);
-	
+
 	estimateQuality();
 }
 
@@ -141,22 +144,22 @@ void CGenPwDialog::OnGeneratePw()
 	  "A...Z" 65...90
 	  "a...z" 97...122
 	  "0...9" 48...57
-	  Special Charakters 33...47; 58...64; 91...96; 123...126
+	  Special Characters 33...47; 58...64; 91...96; 123...126
 	  "-" 45
 	  "_" 95
 	  -------------------------------------------------------
 	*/
-	
+
 	int num=0;
 	char assoctable[255];
-	
+
 	if(Radio_1->isChecked()){
 		if(checkBox1->isChecked())
-			num+=AddToAssoctable(assoctable,65,90,num);		
+			num+=AddToAssoctable(assoctable,65,90,num);
 		if(checkBox2->isChecked())
-			num+=AddToAssoctable(assoctable,97,122,num);		
+			num+=AddToAssoctable(assoctable,97,122,num);
 		if(checkBox3->isChecked())
-			num+=AddToAssoctable(assoctable,48,57,num);		
+			num+=AddToAssoctable(assoctable,48,57,num);
 		if(checkBox4->isChecked()){
 			num+=AddToAssoctable(assoctable,33,47,num);
 			num+=AddToAssoctable(assoctable,58,64,num);
@@ -173,7 +176,7 @@ void CGenPwDialog::OnGeneratePw()
 		QString str=Edit_chars->text();
 		for(int i=0;i<str.length();i++){
 			assoctable[i]=str[i].toAscii();
-			num++;	
+			num++;
 		}
 	}
 	if(num==0){
@@ -186,7 +189,7 @@ void CGenPwDialog::OnGeneratePw()
 	int length=Spin_Num->value();
 	char* buffer=new char[length+1];
 	buffer[length]=0;
-	
+
 	if(Check_CollectEntropy->isChecked()){
 		if((Check_CollectOncePerSession->isChecked() && !EntropyCollected) || !Check_CollectOncePerSession->isChecked()){
 			CollectEntropyDlg dlg(this);
@@ -194,21 +197,21 @@ void CGenPwDialog::OnGeneratePw()
 			EntropyCollected=true;
 		}
 	}
-	
-	unsigned char tmp;	
+
+	unsigned char tmp;
 	for(int i=0;i<length;i++){
-	
-		do randomize(&tmp,1);		
+
+		do randomize(&tmp,1);
 		while(!trim(tmp,num));
-		
+
 		buffer[i]=assoctable[tmp];
 	}
-	
+
 	Edit_dest->setText(buffer);
 	delete [] buffer;
 	if(AcceptButton)AcceptButton->setEnabled(true);
 }
-	
+
 int CGenPwDialog::AddToAssoctable(char* table,int start,int end,int pos){
 	for(int i=start;i<=end;i++){
 	table[pos]=i;
@@ -231,11 +234,11 @@ void CGenPwDialog::estimateQuality(){
 	int num=0;
 	if(Radio_1->isChecked()){
 		if(checkBox1->isChecked())
-			num+=26;	
+			num+=26;
 		if(checkBox2->isChecked())
-			num+=26;		
+			num+=26;
 		if(checkBox3->isChecked())
-			num+=10;	
+			num+=10;
 		if(checkBox4->isChecked())
 			num+=32;
 		if(checkBox5->isChecked())
@@ -247,7 +250,7 @@ void CGenPwDialog::estimateQuality(){
 	}
 	else
 		num=Edit_chars->text().length();
-	
+
 	float bits=0;
 	if(num)bits=log(num)/log(2);
 	bits=bits*((float)Spin_Num->value());
@@ -267,18 +270,18 @@ void CGenPwDialog::OnCharsChanged(const QString& str){
 				else {count++;}
 			}
 		}
-		if(multiple)break;		
+		if(multiple)break;
 	}
 	if(!multiple)return;
-	
+
 	QString newstr;
 	for(int i=0;i<str.size();i++){
 		if(!newstr.count(str[i])){
-			newstr+=str[i];			
-		}		
+			newstr+=str[i];
+		}
 	}
 	Edit_chars->setText(newstr);
-		
+
 }
 
 void CGenPwDialog::OnAccept()

@@ -6,13 +6,13 @@
     <x>0</x>
     <y>0</y>
     <width>432</width>
-    <height>230</height>
+    <height>316</height>
    </rect>
   </property>
   <property name="sizePolicy" >
    <sizepolicy>
-    <hsizetype>5</hsizetype>
-    <vsizetype>5</vsizetype>
+    <hsizetype>4</hsizetype>
+    <vsizetype>4</vsizetype>
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -51,6 +51,14 @@
    </item>
    <item>
     <widget class="QLabel" name="label" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>5</hsizetype>
+       <vsizetype>4</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text" >
       <string>Collecting entropy...
 Please move the mouse and/or press some keys until enought entropy for a reseed of the random number generator is collected.</string>
@@ -81,7 +89,7 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>5</hsizetype>
-       <vsizetype>1</vsizetype>
+       <vsizetype>0</vsizetype>
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -89,7 +97,13 @@ Please move the mouse and/or press some keys until enought entropy for a reseed 
      <property name="minimumSize" >
       <size>
        <width>16</width>
-       <height>45</height>
+       <height>46</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>16777215</width>
+       <height>46</height>
       </size>
      </property>
      <property name="currentIndex" >

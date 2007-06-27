@@ -32,7 +32,7 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	setupUi(this);
 	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("KeePassX %1").arg(KEEPASS_VERSION),width());
 	loadLicFromFile();
-	
+
 	QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
 	if(TrActive){
 		AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSLATION_AUTHOR"));
@@ -58,6 +58,9 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	str+="<br>";
 	str+="</div><div style='margin-left:10px;'>";
 	str+="<u>"+tr("James Nicholls")+"</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
+	str+="<br>";
+	str+="</div><div style='margin-left:10px;'>";
+	str+="<u>"+tr("Constantin Makshin")+"</u><br>"+tr("Various fixes and improvements")+"<br>"+tr("dinosaur-rus@users.sourceforge.net")+"<br></div>";
 	Edit_Thanks->setHtml(str);
 }
 
@@ -85,7 +88,7 @@ return;
 
 if(!gpl.open(QIODevice::ReadOnly)){
 QMessageBox::critical(this,tr("Error"),tr("Could not open file '%1'")
-			  .arg("'license.txt'")+tr("The following error occured:\n%1").arg(gpl.errorString())			 
+			  .arg("'license.txt'")+tr("The following error occured:\n%1").arg(gpl.errorString())
 			  ,tr("OK"),0,0,2,1);
 return;
 }

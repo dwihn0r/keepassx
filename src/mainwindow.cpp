@@ -40,7 +40,6 @@
 
 #include "KpxFirefox.h"
 #include "lib/random.h"
-#include "lib/IniReader.h"
 #include "lib/AutoType.h"
 #include "lib/FileDialogs.h"
 #include "import/Import_PwManager.h"
@@ -59,6 +58,7 @@
 #include "dialogs/CollectEntropyDlg.h"
 #include "dialogs/CustomizeDetailViewDlg.h"
 #include "dialogs/ExpiredEntriesDlg.h"
+#include "dialogs/TrashCanDlg.h"
 
 //#include <QtDBus/QtDBus>
 #include <iostream>
@@ -77,11 +77,13 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	Start=true;
 	ShutingDown=false;
 	setupUi(this);
+#ifdef QT_WS_MAC
 	setUnifiedTitleAndToolBarOnMac(true);
+#endif
 	AutoType::MainWin=this;
-	setGeometry(settings->value("Ui/MainWindowGeometry",QVariant(geometry())).toRect());
-	VSplitter->restoreState(settings->value("Ui/VSplitterPos").toByteArray());
-	HSplitter->restoreState(settings->value("Ui/HSplitterPos").toByteArray());
+	setGeometry(config->mainWindowGeometry(geometry()));
+	VSplitter->restoreState(config->vSplitterPos());
+	HSplitter->restoreState(config->hSplitterPos());
 	SysTray=new QSystemTrayIcon(this);
 	setupToolbar();
 	setupIcons();
@@ -91,34 +93,34 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	StatusBarSelection=new QLabel(statusBar());
 	statusBar()->addWidget(StatusBarGeneral,15);
 	statusBar()->addWidget(StatusBarSelection,85);
-	statusBar()->setVisible(config.ShowStatusbar);
+	statusBar()->setVisible(config->showStatusbar());
 	setupConnections();
 
 	FileOpen=false;
-	if(ArgFile!=QString())
+	if(!ArgFile.isEmpty())
 		openDatabase(QDir::cleanPath(QDir::current().absoluteFilePath(ArgFile)),false);
-	else if(settings->value("OpenLastFile",true).toBool() && (settings->value("LastFile","").toString()!=QString())){
-		QFileInfo file(settings->value("LastFile","").toString());
+	else if(config->openLastFile() && !config->lastFile().isEmpty()){
+		QFileInfo file(config->lastFile());
 		if(file.exists())
-			openDatabase(QDir::cleanPath(QDir::current().absoluteFilePath(settings->value("LastFile","").toString())),true);
+			openDatabase(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastFile())),true);
 		else
-			settings->setValue("LastFile","");	
+			config->setLastFile(QString());
 	}
-	
-	// DBus Server of Qt 4.2 does not work - 4.3 snapshot seems to work fine	
+
+	// DBus Server of Qt 4.2 does not work - 4.3 snapshot seems to work fine
 	/*
 	//dbusServer=new QDBusServer("unix:path=/tmp/KpxBus",this);
 	//qDebug("DBUS: %s",dbusServer->lastError().message().toAscii().data());
 	//QDBusConnection::connectToBus("unix:path=/tmp/KpxBus","MyKpxConnection");
 	//qDebug("DBUS: %s",dbusCon->lastError().message().toAscii().data());
-	
+
 	KpxFirefox* fox=new KpxFirefox(NULL);
 	new KpxFirefoxAdaptor(fox);
 	QDBusConnection::sessionBus().registerService("org.keepassx.firefoxservice");
 	QDBusConnection::sessionBus().registerObject("/KpxFirefox",fox);
 	qDebug("DBUS: %s",QDBusConnection::sessionBus().lastError().message().toAscii().data());
 	*/
-	
+
 }
 
 void KeepassMainWindow::setupConnections(){
@@ -132,7 +134,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
 	connect(menuImport,SIGNAL(triggered(QAction*)),this,SLOT(OnImport(QAction*)));
 	connect(menuExport,SIGNAL(triggered(QAction*)),this,SLOT(OnExport(QAction*)));
-	
+
 	connect(EditNewGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnNewGroup()));
 	connect(EditEditGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnEditGroup()));
 	connect(EditDeleteGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnDeleteGroup()));
@@ -162,6 +164,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
 	connect(ExtrasPasswordGenAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasPasswordGen()));
 	connect(ExtrasShowExpiredEntriesAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasShowExpiredEntries()));
+	connect(ExtrasTrashCanAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasTrashCan()));
 	
 	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
@@ -177,15 +180,15 @@ void KeepassMainWindow::setupConnections(){
 	connect(GroupView,SIGNAL(searchResultsSelected()),this,SLOT(OnShowSearchResults()));
 	connect(GroupView,SIGNAL(entriesDropped()),EntryView,SLOT(removeDragItems()));
 	connect(HideSearchResultsAction,SIGNAL(triggered()),GroupView,SLOT(OnHideSearchResults()));
-	
-	connect(SysTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(OnSysTrayActivated(QSystemTrayIcon::ActivationReason)));
 
+	connect(SysTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(OnSysTrayActivated(QSystemTrayIcon::ActivationReason)));
+	connect(DetailView,SIGNAL(anchorClicked(const QUrl&)),this,SLOT(OnDetailViewUrlClicked(const QUrl&)));
 }
 
 void KeepassMainWindow::setupToolbar(){
 	toolBar=new QToolBar(this);
 	addToolBar(toolBar);
-	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	toolBar->setIconSize(QSize(config->toolbarIconSize(),config->toolbarIconSize()));
 	ViewShowToolbarAction=toolBar->toggleViewAction();
 	toolBar->addAction(FileNewAction);
 	toolBar->addAction(FileOpenAction);
@@ -228,12 +231,13 @@ void KeepassMainWindow::setupIcons(){
 	ExtrasSettingsAction->setIcon(getIcon("appsettings"));
 	ExtrasShowExpiredEntriesAction->setIcon(getIcon("expired"));
 	ExtrasPasswordGenAction->setIcon(getIcon("generator"));
+	ExtrasTrashCanAction->setIcon(getIcon("trashcan"));
 	EditAutoTypeAction->setIcon(getIcon("autotype"));
 	HelpHandbookAction->setIcon(getIcon("manual"));
 	HelpAboutAction->setIcon(getIcon("help"));
 	SysTray->setIcon(getIcon("keepassx_large"));
-	if(config.ShowSysTrayIcon)
-		SysTray->show();	
+	if(config->showSysTrayIcon())
+		SysTray->show();
 }
 
 void KeepassMainWindow::setupMenus(){
@@ -245,7 +249,7 @@ void KeepassMainWindow::setupMenus(){
 	GroupView->ContextMenu->addSeparator();
 	GroupView->ContextMenu->addAction(EditGroupSearchAction);
 	GroupView->ContextMenuSearchGroup->addAction(HideSearchResultsAction);
-	
+
 	EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
 	EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
 	EntryView->ContextMenu->addAction(EditOpenUrlAction);
@@ -256,13 +260,13 @@ void KeepassMainWindow::setupMenus(){
 	EntryView->ContextMenu->addAction(EditEditEntryAction);
 	EntryView->ContextMenu->addAction(EditCloneEntryAction);
 	EntryView->ContextMenu->addAction(EditDeleteEntryAction);
-	
+
 	ViewShowToolbarAction->setText(tr("Show Toolbar"));
 	ViewMenu->insertAction(ViewShowEntryDetailsAction,ViewShowToolbarAction);
-	ViewShowToolbarAction->setChecked(config.Toolbar);
-	ViewShowEntryDetailsAction->setChecked(config.EntryDetails);
-	ViewHidePasswordsAction->setChecked(config.ListView_HidePasswords);
-	ViewHideUsernamesAction->setChecked(config.ListView_HideUsernames);
+	ViewShowToolbarAction->setChecked(config->showToolbar());
+	ViewShowEntryDetailsAction->setChecked(config->showEntryDetails());
+	ViewHidePasswordsAction->setChecked(config->hidePasswords());
+	ViewHideUsernamesAction->setChecked(config->hideUsernames());
 	ViewColumnsTitleAction->setChecked(EntryView->Columns[0]);
 	ViewColumnsUsernameAction->setChecked(EntryView->Columns[1]);
 	ViewColumnsUrlAction->setChecked(EntryView->Columns[2]);
@@ -274,36 +278,36 @@ void KeepassMainWindow::setupMenus(){
 	ViewColumnsLastAccessAction->setChecked(EntryView->Columns[8]);
 	ViewColumnsAttachmentAction->setChecked(EntryView->Columns[9]);
 	ViewColumnsGroupAction->setChecked(EntryView->Columns[10]);
-	ViewShowStatusbarAction->setChecked(config.ShowStatusbar);
-	
-	switch(config.ToolbarIconSize){
+	ViewShowStatusbarAction->setChecked(config->showStatusbar());
+
+	switch(config->toolbarIconSize()){
 		case 16: ViewToolButtonSize16Action->setChecked(true); break;
 		case 22: ViewToolButtonSize22Action->setChecked(true); break;
 		case 28: ViewToolButtonSize28Action->setChecked(true); break;
 	}
-	
+
 	SysTrayMenu = new QMenu(tr("KeePassX"),this);
 	SysTrayMenu->addAction(FileExitAction);
 	SysTray->setContextMenu(SysTrayMenu);
-	
+
 	#define _add_import(name){\
 	QAction* import=new QAction(this);\
 	import->setData(qVariantFromValue(dynamic_cast<QObject*>(&name)));\
 	import->setText(name.title());\
 	menuImport->addAction(import);}
-	
+
 	#define _add_export(name){\
 	QAction* Export=new QAction(this);\
 	Export->setData(qVariantFromValue(dynamic_cast<QObject*>(&name)));\
 	Export->setText(name.title());\
 	menuExport->addAction(Export);}
-	
+
 	_add_import(import_KeePassX_Xml)
 	_add_import(import_PwManager)
 	_add_import(import_KWalletXml)
 	_add_export(export_Txt);
 	_add_export(export_KeePassX_Xml);
-	
+
 	//FileNewMenu->setShortcut(tr("Ctrl+N"));
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
 	FileSaveAction->setShortcut(tr("Ctrl+S"));
@@ -322,6 +326,8 @@ void KeepassMainWindow::setupMenus(){
 	FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
 	EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
 #endif
+	
+	ExtrasTrashCanAction->setVisible(false); //For KP 2.x only
 }
 
 void KeepassMainWindow::setupDatabaseConnections(IDatabase* DB){
@@ -336,8 +342,8 @@ void KeepassMainWindow::setupDatabaseConnections(IDatabase* DB){
 
 void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	if(!IsAuto){
-		config.LastKeyLocation=QString();
-		config.LastKeyType=PASSWORD;}
+		config->setLastKeyLocation(QString());
+		config->setLastKeyType(PASSWORD);}
 	db=dynamic_cast<IDatabase*>(new Kdb3Database());
 	CPasswordDialog PasswordDlg(this,db,IsAuto,false);
 	PasswordDlg.setWindowTitle(filename);
@@ -409,10 +415,10 @@ void KeepassMainWindow::OnFileNewKdb(){
 	if(dlg.exec()==1){
 		if(FileOpen)
 			if(!closeDatabase())return;
-		db=dynamic_cast<IDatabase*>(db_new);	
+		db=dynamic_cast<IDatabase*>(db_new);
 		setWindowTitle(tr("%1 - KeePassX").arg(tr("[new]")));
 		GroupView->db=db;
-		EntryView->db=db;		
+		EntryView->db=db;
 		GroupView->createItems();
 		EntryView->showGroup(NULL);
 		setStateFileOpen(true);
@@ -423,15 +429,15 @@ void KeepassMainWindow::OnFileNewKdb(){
 		setStateEntrySelected(NONE);
 	}
 	else{
-		delete db_new;		
+		delete db_new;
 	}
-	
+
 }
 
 void KeepassMainWindow::OnFileNewKxdb(){
-	
-	
-	
+
+
+
 }
 
 
@@ -526,7 +532,7 @@ void KeepassMainWindow::setStateGroupSelected(SelectionState s){
 			EditDeleteGroupAction->setEnabled(false);
 			EditGroupSearchAction->setEnabled(false);
 			EditNewEntryAction->setEnabled(false);
-			break;	
+			break;
 		default: Q_ASSERT(false);
 	}
 }
@@ -536,15 +542,15 @@ void KeepassMainWindow::updateDetailView(){
 		DetailView->setPlainText("");
 		return;
 	}
-	
+
 	QString templ=DetailViewTemplate;
 	IEntryHandle* entry=((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle;
-	
+
 	templ.replace("%group%",entry->group()->title());
 	templ.replace("%title%",entry->title());
-	if(config.ListView_HideUsernames)templ.replace("%username%","****");
-	else templ.replace("%username%",entry->username());	
-	if(!config.ListView_HidePasswords){	
+	if(config->hideUsernames())templ.replace("%username%","****");
+	else templ.replace("%username%",entry->username());
+	if(!config->hidePasswords()){
 		SecString password=entry->password();
 		password.unlock();
 		templ.replace("%password%",password.string());
@@ -557,11 +563,11 @@ void KeepassMainWindow::updateDetailView(){
 	templ.replace("%expire%",entry->expire().toString(Qt::LocalDate));
 	templ.replace("%comment%",entry->comment());
 	templ.replace("%attachment%",entry->binaryDesc());
-	
+
 	if(entry->expire()!=Date_Never){
 		int secs=QDateTime::currentDateTime().secsTo(entry->expire());
 		if(secs < 0)
-			templ.replace("%expire-timeleft%",tr("expired"));			
+			templ.replace("%expire-timeleft%",tr("expired"));
 		else{
 			int years=0;
 			int months=0;
@@ -571,21 +577,21 @@ void KeepassMainWindow::updateDetailView(){
 			months=secs/(86400*30);
 			secs-=months*(86400*30);
 			days=secs/86400;
-			
+
 			QString out;
-			
+
 			if(months==1)
-				out=tr("1 Month");			
+				out=tr("1 Month");
 			if(months>1)
 				out=tr("%1 Months").arg(months);
-			
+
 			if(years){
 				if(out!=QString())
 					out.prepend(tr(", "));
 				if(years==1)
 					out.prepend(tr("1 Year"));
 				if(years>1)
-					out.prepend(tr("%1 Years").arg(years));				
+					out.prepend(tr("%1 Years").arg(years));
 			}
 			else if(days){
 				if(out!=QString())
@@ -593,18 +599,18 @@ void KeepassMainWindow::updateDetailView(){
 				if(days==1)
 					out.append(tr("1 Day"));
 				if(days>1)
-					out.append(tr("%1 Days").arg(days));						
+					out.append(tr("%1 Days").arg(days));
 			}
-			
+
 			if(!days && !years && !months)
-				out=tr("less than 1 day"); 
-			
-			templ.replace("%expire-timeleft%",out);						
+				out=tr("less than 1 day");
+
+			templ.replace("%expire-timeleft%",out);
 		}
 	}
 	else
 		templ.replace("%expire-timeleft%","-");
-	
+
 	DetailView->setHtml(templ);
 }
 
@@ -703,7 +709,7 @@ if(db->save())
   setStateFileModified(false);
 else{
   showErrMsg(tr("File could not be saved.\n%1").arg(db->getError()));
-  return false;  
+  return false;
 }
 return true;
 }
@@ -716,7 +722,7 @@ bool KeepassMainWindow::OnFileSaveAs(){
 		showErrMsg(tr("File could not be saved.\n%1").arg(db->getError()));
 		db->changeFile(QString());
 		setWindowTitle(tr("KeePassX - [unsaved]").arg(filename));
-		return false;		
+		return false;
 	}
 	setWindowTitle(tr("%1 - KeePassX").arg(filename));
 	return OnFileSave();
@@ -740,7 +746,7 @@ void KeepassMainWindow::OnFileExit(){
 
 
 void KeepassMainWindow::OnExport(QAction* action){
-	dynamic_cast<IExport*>(action->data().value<QObject*>())->exportDatabase(this,db);	
+	dynamic_cast<IExport*>(action->data().value<QObject*>())->exportDatabase(this,db);
 }
 
 void KeepassMainWindow::OnImport(QAction* action){
@@ -767,7 +773,7 @@ void KeepassMainWindow::OnImport(QAction* action){
 	}
 	else
 		delete tmpdb;
-	
+
 }
 
 
@@ -802,7 +808,7 @@ void KeepassMainWindow::OnGroupSearch(){
 
 void KeepassMainWindow::OnQuickSearch(){
 	EntryView->SearchResults=db->search(NULL,QuickSearchEdit->text(),false,false,false,NULL);
-	GroupView->showSearchResults();	
+	GroupView->showSearchResults();
 }
 
 void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
@@ -818,12 +824,12 @@ void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
 	EntryView->Columns[9]=ViewColumnsAttachmentAction->isChecked();		
 	EntryView->Columns[10]=ViewColumnsGroupAction->isChecked();
 	EntryView->updateColumns();
-	//if(FileOpen) EntryView->updateItems();
+	if(FileOpen) EntryView->refreshItems();
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
-	config.ListView_HidePasswords=ViewHidePasswordsAction->isChecked();
-	config.ListView_HideUsernames=ViewHideUsernamesAction->isChecked();
+ 	config->setHidePasswords(ViewHidePasswordsAction->isChecked());
+ 	config->setHideUsernames(ViewHideUsernamesAction->isChecked());
 	EntryView->refreshItems();
 }
 
@@ -832,19 +838,19 @@ setStateFileModified(true);
 }
 
 void KeepassMainWindow::closeEvent(QCloseEvent* e){
-	if(!ShutingDown && config.MinimizeToTray){
+	if(!ShutingDown && config->minimizeToTray()){
 		e->ignore();
 		hide();
 		return;
 	}
-	
-	settings->setValue("Ui/MainWindowGeometry",QVariant(geometry()));
-	settings->setValue("Ui/VSplitterPos",VSplitter->saveState());
-	settings->setValue("Ui/HSplitterPos",HSplitter->saveState());
-	config.ShowStatusbar=statusBar()->isVisible();
-	
+
+	config->setMainWindowGeometry(geometry());
+	config->setVSplitterPos(VSplitter->saveState());
+	config->setHSplitterPos(HSplitter->saveState());
+	config->setShowStatusbar(statusBar()->isVisible());
+
 	if(FileOpen){
-		if(!closeDatabase()){		
+		if(!closeDatabase()){
 			ShutingDown=false;
 			e->ignore();
 			return;}
@@ -860,8 +866,8 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 void KeepassMainWindow::OnExtrasSettings(){
 	CSettingsDlg dlg(this);
 	if(dlg.exec()==QDialog::Accepted){
-		EntryView->setAlternatingRowColors(config.AlternatingRowColors);
-		SysTray->setVisible(config.ShowSysTrayIcon);
+		EntryView->setAlternatingRowColors(config->alternatingRowColors());
+		SysTray->setVisible(config->showSysTrayIcon());
 	}
 }
 
@@ -875,13 +881,13 @@ openBrowser(AppDir+"/../share/doc/keepass/index.html");
 }
 
 void KeepassMainWindow::OnViewShowToolbar(bool show){
-config.Toolbar=show;
-toolBar->setVisible(config.Toolbar);
+config->setShowToolbar(show);
+toolBar->setVisible(show);
 }
 
 void KeepassMainWindow::OnViewShowEntryDetails(bool show){
-config.EntryDetails=show;
-DetailView->setVisible(config.EntryDetails);
+config->setShowEntryDetails(show);
+DetailView->setVisible(show);
 }
 
 void KeepassMainWindow::OnItemExpanded(QTreeWidgetItem* item){
@@ -896,7 +902,7 @@ void KeepassMainWindow::OnGroupSelectionChanged(IGroupHandle* group){
 	if(group)
 		setStateGroupSelected(SINGLE);
 	else
-		setStateGroupSelected(NONE);	
+		setStateGroupSelected(NONE);
 }
 
 void KeepassMainWindow::OnEntryChanged(SelectionState Selection){
@@ -905,7 +911,7 @@ void KeepassMainWindow::OnEntryChanged(SelectionState Selection){
 }
 
 void KeepassMainWindow::OnShowSearchResults(){
-	setStateGroupSelected(SEARCHGROUP);	
+	setStateGroupSelected(SEARCHGROUP);
 }
 
 
@@ -913,24 +919,24 @@ void KeepassMainWindow::OnViewToolbarIconSize16(bool state){
 	if(!state)return;
 	ViewToolButtonSize22Action->setChecked(false);
 	ViewToolButtonSize28Action->setChecked(false);
-	config.ToolbarIconSize=16;
-	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	config->setToolbarIconSize(16);
+	toolBar->setIconSize(QSize(16,16));
 }
 
 void KeepassMainWindow::OnViewToolbarIconSize22(bool state){
 	if(!state)return;
 	ViewToolButtonSize16Action->setChecked(false);
 	ViewToolButtonSize28Action->setChecked(false);
-	config.ToolbarIconSize=22;
-	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	config->setToolbarIconSize(22);
+	toolBar->setIconSize(QSize(22,22));
 }
 
 void KeepassMainWindow::OnViewToolbarIconSize28(bool state){
 	if(!state)return;
 	ViewToolButtonSize16Action->setChecked(false);
 	ViewToolButtonSize22Action->setChecked(false);
-	config.ToolbarIconSize=28;
-	toolBar->setIconSize(QSize(config.ToolbarIconSize,config.ToolbarIconSize));
+	config->setToolbarIconSize(28);
+	toolBar->setIconSize(QSize(28,28));
 }
 
 void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason reason){
@@ -940,21 +946,21 @@ void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason rea
 
 void KeepassMainWindow::OnExtrasPasswordGen(){
 	CGenPwDialog dlg(this,true);
-	dlg.exec();	
+	dlg.exec();
 }
 
 
 void KeepassMainWindow::saveLastFilename(const QString& filename){
-	
-	if(settings->value("OpenLastFile",true).toBool()){
-		if(settings->value("SaveRelativePath",true).toBool()){
+
+	if(config->openLastFile()){
+		if(config->saveRelativePaths()){
 			QString Path=filename.left(filename.lastIndexOf("/"));
-			Path=makePathRelative(Path,QDir::currentPath());	
-			settings->setValue("LastFile",Path+filename.right(filename.length()-filename.lastIndexOf("/")-1));
+			Path=makePathRelative(Path,QDir::currentPath());
+			config->setLastFile(Path+filename.right(filename.length()-filename.lastIndexOf("/")-1));
 		}
 		else
-			settings->setValue("LastFile",filename);
-	}	
+			config->setLastFile(filename);
+	}
 }
 
 void KeepassMainWindow::OnExtrasShowExpiredEntries(){
@@ -963,5 +969,18 @@ void KeepassMainWindow::OnExtrasShowExpiredEntries(){
 		GroupView->setCurrentGroup(dlg.SelectedEntry->group());
 		EntryView->setCurrentEntry(dlg.SelectedEntry);
 	}
+
+}
+
+void KeepassMainWindow::OnExtrasTrashCan(){
+	TrashCanDialog dlg(this,db,db->expiredEntries());
+	if(dlg.exec()==QDialog::Accepted){
+		
+	}
 	
 }
+
+void KeepassMainWindow::OnDetailViewUrlClicked(const QUrl& url){
+	openBrowser(url.toString());	
+}
+

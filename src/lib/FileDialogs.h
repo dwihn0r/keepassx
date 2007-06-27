@@ -55,17 +55,19 @@ class KpxFileDialogs{
 		static QString openExistingFile(QWidget* parent, const QString& Name,
 										const QString& Title,
 										const QStringList& Filters,
-										const QString& Dir=QString());
+										QString Dir=QString(),
+									    int SelectedFilter=-1);
 		static QStringList openExistingFiles(QWidget* parent, const QString& Name,
 											const QString& Title,
 											const QStringList& Filters,
-											const QString& Dir=QString());
+											const QString Dir=QString(),
+											int SelectedFilter=-1);
 		static QString saveFile(QWidget* parent, const QString& Name,
 									const QString& Title,
 									const QStringList& Filters,
 									bool ShowOverwriteWarning=true,
-									const QString& Dir=QString()
-								   );		
+									QString Dir=QString(),
+									int SelectedFilter=-1);		
 	private:
 		static IFileDialog* iFileDialog;
 
@@ -77,9 +79,9 @@ class KpxFileDialogs{
 class QtStandardFileDialogs:public QObject,public IFileDialog{
 	Q_OBJECT	
 		public:
-			QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters);
-			QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters);		
-			QString saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool ShowOverwriteWarning);
+			QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);
+			QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);		
+			QString saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool ShowOverwriteWarning);
 			int getLastFilter();
 		private:
 			int LastFilter;

@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 #include <QDir>
-#include <QSettings>
 #include "main.h"
+#include "KpxConfig.h"
 #include "FileDialogs.h"
 
 
@@ -29,55 +29,65 @@ QtStandardFileDialogs DefaultQtDlgs;
 FileDlgHistory fileDlgHistory;
 
 void KpxFileDialogs::setPlugin(IFileDialog* plugin){
-	iFileDialog=plugin;	
+	iFileDialog=plugin;
 }
 
-QString KpxFileDialogs::openExistingFile(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,const QString& Dir)
+QString KpxFileDialogs::openExistingFile(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,QString Dir,int SelectedFilter)
 {
-	QString dir;
-	if(iFileDialog==NULL)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
-	if(Dir==QString()) dir=fileDlgHistory.getDir(Name);	
-	else dir=Dir;
-	QString result = iFileDialog->openExistingFileDialog(Parent,Title,dir,Filters);
-	if(result!=QString()){
-		fileDlgHistory.set(Name,result.left(result.lastIndexOf("/")+1),iFileDialog->getLastFilter());							  
+	if(!iFileDialog)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
+	if(Dir==QString())
+		Dir=fileDlgHistory.getDir(Name);
+	if(SelectedFilter==-1)
+		SelectedFilter=fileDlgHistory.getFilter(Name);
+	QString result = iFileDialog->openExistingFileDialog(Parent,Title,Dir,Filters,SelectedFilter);
+	if(!result.isEmpty()){
+		fileDlgHistory.set(Name,result.left(result.lastIndexOf("/")+1),iFileDialog->getLastFilter());
 	}
-	return result;											  
+	return result;
 }
 
-QStringList KpxFileDialogs::openExistingFiles(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,const QString& Dir)
+QStringList KpxFileDialogs::openExistingFiles(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,QString Dir,int SelectedFilter)
 {
-	if(iFileDialog==NULL)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
-	//Load History here!
-	QStringList results=iFileDialog->openExistingFilesDialog(Parent,Title,QString(),Filters);
-	if(results.size()){
-		fileDlgHistory.set(Name,results[0].left(results[0].lastIndexOf("/")+1),iFileDialog->getLastFilter());								  
+	if(!iFileDialog)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
+	if(Dir==QString())
+		Dir=fileDlgHistory.getDir(Name);
+	if(SelectedFilter==-1)
+		SelectedFilter=fileDlgHistory.getFilter(Name);
+	QStringList results=iFileDialog->openExistingFilesDialog(Parent,Title,QString(),Filters,SelectedFilter);
+	if(!results.isEmpty()){
+		fileDlgHistory.set(Name,results[0].left(results[0].lastIndexOf("/")+1),iFileDialog->getLastFilter());
 	}
 	return results;
 }
 
-QString KpxFileDialogs::saveFile(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,bool OverWriteWarn, const QString& Dir)
+QString KpxFileDialogs::saveFile(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,bool OverWriteWarn,QString Dir,int SelectedFilter)
 {
-	if(iFileDialog==NULL)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
-	//Load History here!
-	QString result = iFileDialog->saveFileDialog(Parent,Title,QString(),Filters,OverWriteWarn);
-	if(result!=QString()){
-		fileDlgHistory.set(Name,result.left(result.lastIndexOf("/")+1),iFileDialog->getLastFilter());							  
+	if(!iFileDialog)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
+	if(Dir==QString())
+		Dir=fileDlgHistory.getDir(Name);
+	if(SelectedFilter==-1)
+		SelectedFilter=fileDlgHistory.getFilter(Name);
+	QString result = iFileDialog->saveFileDialog(Parent,Title,QString(),Filters,SelectedFilter,OverWriteWarn);
+	if(!result.isEmpty()){
+		fileDlgHistory.set(Name,result.left(result.lastIndexOf("/")+1),iFileDialog->getLastFilter());
 	}
-	return result;											  
+	return result;
 }
 
-QString QtStandardFileDialogs::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters){
+QString QtStandardFileDialogs::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
+	if(SelectedFilter >= Filters.size())
+		SelectedFilter=0;
 	QFileDialog FileDlg(parent,title,dir);
 	FileDlg.setFilters(Filters);
 	FileDlg.setFileMode(QFileDialog::ExistingFile);
+	FileDlg.selectFilter(Filters[SelectedFilter]);
 	if(!FileDlg.exec())return QString();
 	if(!FileDlg.selectedFiles().size())return QString();
 	LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
-	return 	FileDlg.selectedFiles()[0];	
+	return FileDlg.selectedFiles()[0];
 }
 
-QStringList QtStandardFileDialogs::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters){
+QStringList QtStandardFileDialogs::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
 	QFileDialog FileDlg(parent,title,dir);
 	FileDlg.setFilters(Filters);
 	FileDlg.setFileMode(QFileDialog::ExistingFiles);
@@ -86,7 +96,7 @@ QStringList QtStandardFileDialogs::openExistingFilesDialog(QWidget* parent,QStri
 	return FileDlg.selectedFiles();
 }
 
-QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool ShowOverwriteWarning){
+QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter, bool ShowOverwriteWarning){
 	QFileDialog FileDlg(parent,title,dir);
 	FileDlg.setFilters(Filters);
 	FileDlg.setFileMode(QFileDialog::AnyFile);
@@ -94,11 +104,11 @@ QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QStr
 	FileDlg.setConfirmOverwrite(ShowOverwriteWarning);
 	if(!FileDlg.exec())return QString();
 	LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
-	return FileDlg.selectedFiles()[0];	
+	return FileDlg.selectedFiles().first();
 }
 
 int QtStandardFileDialogs::getLastFilter(){
-	return LastFilter;	
+	return LastFilter;
 }
 
 
@@ -121,37 +131,40 @@ int FileDlgHistory::getFilter(const QString& name){
 void FileDlgHistory::set(const QString& name,const QString& dir, int filter){
 	History[name]=Entry();
 	History[name].Dir=dir;
-	History[name].Filter=filter;		
+	History[name].Filter=filter;
 }
 void FileDlgHistory::save(){
-	if(settings->value("General/SaveFileDlgHistory",QVariant(true)).toBool()){
-		settings->beginGroup("FileDlgHistory");
-		for(int i=0;i<History.size();i++){
+	if(config->saveFileDlgHistory()){
+		//settings->beginGroup("FileDlgHistory");
+		for(unsigned i=0;i<static_cast<unsigned>(History.size());i++){
 			QStringList entry;
-			entry << History.keys()[i]
-				  << History.values()[i].Dir
-				  << QString::number(History.values()[i].Filter);
-			settings->setValue(QString("ENTRY%1").arg(i),QVariant(entry));		
+			entry << History.keys().at(i)
+				  << History.values().at(i).Dir
+				  << QString::number(History.values().at(i).Filter);
+			//settings->setValue(QString("ENTRY%1").arg(i),QVariant(entry));
+			config->setFileDlgHistory(i,entry);
 		}
-		settings->endGroup();
+		//settings->endGroup();
 	}
 }
 
 void FileDlgHistory::load(){
-	if(settings->value("General/SaveFileDlgHistory",QVariant(true)).toBool()){
-		settings->beginGroup("FileDlgHistory");
-		QStringList keys=settings->childKeys();
-		for(int i=0;i<keys.size();i++){
+	if(config->saveFileDlgHistory()){
+		//settings->beginGroup("FileDlgHistory");
+		//QStringList keys=settings->childKeys();
+		unsigned count=config->fileDlgHistorySize();
+		for(unsigned i=0;i</*keys.size()*/count;i++){
 			Entry entry;
-			QStringList value=settings->value(QString("ENTRY%1").arg(i)).toStringList();
+			QStringList value=config->fileDlgHistory(i);//settings->value(QString("ENTRY%1").arg(i)).toStringList();
 			entry.Dir=value[1];
 			entry.Filter=value[2].toInt();
-			History[value[0]]=entry;		
+			History[value[0]]=entry;
 		}
-		settings->endGroup();
+		//settings->endGroup();
 	}
 	else{
-		settings->remove("FileDlgHistory");		
+		config->clearFileDlgHistory();
+		//settings->remove("FileDlgHistory");
 	}
 }
 

@@ -26,13 +26,12 @@
 #include <QColor>
 #include <QIcon>
 #include <QFile>
-#include <QSettings>
 
 #define KEEPASS_VERSION "0.2.3"
 #define BUILTIN_ICONS 62
 
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
-class CConfig;
+class KpxConfig;
 
 void createBanner(QLabel *Banner,const QPixmap* symbol,QString text);
 void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width);
@@ -47,9 +46,8 @@ QString makePathRelative(const QString& Abs,const QString& Cur);
 void loadDefaultDetailViewTemplate();
 extern QString PluginLoadError;
 
-extern CConfig  config;
-extern QSettings *settings;
-extern QString  AppDir;
+extern KpxConfig *config;
+extern QString AppDir;
 extern bool TrActive;
 extern QString DetailViewTemplate;
 extern QPixmap *EntryIcons;

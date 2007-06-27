@@ -24,7 +24,7 @@
 #include <QPixmap>
 #include <QShowEvent>
 #include "main.h"
-#include "StandardDatabase.h"
+#include "Kdb3Database.h"
 
 class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 {
