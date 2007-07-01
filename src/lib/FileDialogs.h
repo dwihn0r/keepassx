@@ -27,13 +27,16 @@
 #include "plugins/interfaces/IFileDialog.h"
 
 
-class FileDlgHistory{
+class FileDlgHistory:public QObject{
+	Q_OBJECT
 	public:
 		QString getDir(const QString& name);
 		int getFilter(const QString& name);
+	public slots:
 		void set(const QString& name,const QString& dir,int filter);
 		void save();
-		void load();	
+		void load();
+		void clear();
 	private:
 		class Entry{
 			public:

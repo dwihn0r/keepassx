@@ -17,12 +17,14 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-
+ 
+#include "KpxConfig.h"
 #include <QApplication>
 #include "AutoType.h"
 #include <QTime>
 #include <QList>
 #include <QChar>
+
 
 QWidget* AutoType::MainWin=NULL; 
 
@@ -64,13 +66,21 @@ void AutoType::pressModifiers(Display* d,int mods,bool press){
 	}
 }
 
-
-	void AutoType::perform(IEntryHandle* entry, QString& err){
+void sleepKeyStrokeDelay(){
+	if(config->autoTypeKeyStrokeDelay()==0)return;
 	struct timespec timeOut,remains;
 	timeOut.tv_sec = 0;
-	timeOut.tv_nsec = 30000000; /* 300 milliseconds */
+	timeOut.tv_nsec = config->autoTypeKeyStrokeDelay()*100000;
+	nanosleep(&timeOut, &remains);	
+}
+
+
+void AutoType::perform(IEntryHandle* entry, QString& err){
+	struct timespec timeOut,remains;
+	timeOut.tv_sec = 0;
+	timeOut.tv_nsec = config->autoTypePreGap()*100000;
 	for(int i=0;i<10;i++)nanosleep(&timeOut, &remains);
-	
+
 	QString str;
 	QString comment=entry->comment();
 	int c=comment.count("Auto-Type:");
@@ -119,9 +129,13 @@ void AutoType::pressModifiers(Display* d,int mods,bool press){
 		int keycode=XKeysymToKeycode(pDisplay,Keys[i]);
 		int mods=getModifiers(pDisplay,Keys[i],keycode);
 		pressModifiers(pDisplay,mods);
+		sleepKeyStrokeDelay();
 		XTestFakeKeyEvent(pDisplay,keycode,True,0);
+		sleepKeyStrokeDelay();
 		XTestFakeKeyEvent(pDisplay,keycode,False,1);
+		sleepKeyStrokeDelay();
 		releaseModifiers(pDisplay,mods);
+		sleepKeyStrokeDelay();
 	}
 	XCloseDisplay(pDisplay);
 	MainWin->show();

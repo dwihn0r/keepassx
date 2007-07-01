@@ -38,6 +38,7 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QSystemTrayIcon>
+#include <QAssistantClient>
 #include <QUrl>
 
 #include "Kdb3Database.h"
@@ -47,6 +48,7 @@
 #include "export/Export.h"
 
 #include "ui_MainWindow.h"
+#include "ui_WorkspaceLockedWidget.h"
 
 class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 	Q_OBJECT
@@ -94,12 +96,14 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnImport(QAction*);
 		void OnExport(QAction*);
 		void OnDetailViewUrlClicked(const QUrl& url);
+		void OnUnLockWorkspace();
 
 	private:
 		void closeEvent(QCloseEvent* event);
 		SelectionState GroupSelection, EntrySelection;
 		bool FileOpen;
 		bool ModFlag;
+		bool IsLocked;
 		QList<quint32> SearchResults;
 		inline void setupToolbar();
 		inline void setupIcons();
@@ -124,6 +128,10 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		QSystemTrayIcon* SysTray;
 		QAction* ViewShowToolbarAction;
 		QMenu* SysTrayMenu;
+		QAssistantClient* HelpBrowser;
+		QWidget* NormalCentralWidget;
+		QWidget* LockedCentralWidget;
+		Ui_WorkspaceLockedWidget WorkspaceLockedWidget;
 		bool ShutingDown;
 };
 

@@ -135,36 +135,32 @@ void FileDlgHistory::set(const QString& name,const QString& dir, int filter){
 }
 void FileDlgHistory::save(){
 	if(config->saveFileDlgHistory()){
-		//settings->beginGroup("FileDlgHistory");
 		for(unsigned i=0;i<static_cast<unsigned>(History.size());i++){
 			QStringList entry;
 			entry << History.keys().at(i)
 				  << History.values().at(i).Dir
 				  << QString::number(History.values().at(i).Filter);
-			//settings->setValue(QString("ENTRY%1").arg(i),QVariant(entry));
 			config->setFileDlgHistory(i,entry);
 		}
-		//settings->endGroup();
 	}
 }
 
 void FileDlgHistory::load(){
 	if(config->saveFileDlgHistory()){
-		//settings->beginGroup("FileDlgHistory");
-		//QStringList keys=settings->childKeys();
 		unsigned count=config->fileDlgHistorySize();
 		for(unsigned i=0;i</*keys.size()*/count;i++){
 			Entry entry;
-			QStringList value=config->fileDlgHistory(i);//settings->value(QString("ENTRY%1").arg(i)).toStringList();
+			QStringList value=config->fileDlgHistory(i);
 			entry.Dir=value[1];
 			entry.Filter=value[2].toInt();
 			History[value[0]]=entry;
 		}
-		//settings->endGroup();
 	}
-	else{
+	else
 		config->clearFileDlgHistory();
-		//settings->remove("FileDlgHistory");
-	}
 }
 
+void FileDlgHistory::clear(){
+	History=QHash<QString,Entry>();
+	config->clearFileDlgHistory();	
+}

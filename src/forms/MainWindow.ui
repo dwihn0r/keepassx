@@ -157,6 +157,7 @@
     <addaction name="menuImport" />
     <addaction name="menuExport" />
     <addaction name="separator" />
+    <addaction name="FileUnLockWorkspaceAction" />
     <addaction name="FileExitAction" />
    </widget>
    <widget class="QMenu" name="menuBearbeiten" >
@@ -542,6 +543,11 @@
   <action name="ExtrasTrashCanAction" >
    <property name="text" >
     <string>Recycle Bin...</string>
+   </property>
+  </action>
+  <action name="FileUnLockWorkspaceAction" >
+   <property name="text" >
+    <string>Lock Workspace</string>
    </property>
   </action>
  </widget>

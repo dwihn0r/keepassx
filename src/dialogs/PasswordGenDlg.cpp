@@ -81,6 +81,7 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	Check_CollectOncePerSession->setChecked(pwGenOptions.at(9));
 	OnRadio1StateChanged(pwGenOptions.at(0));
 	OnRadio2StateChanged(!pwGenOptions.at(0));
+	Spin_Num->setValue(config->pwGenLength());
 }
 
 CGenPwDialog::~CGenPwDialog(){
@@ -96,6 +97,7 @@ CGenPwDialog::~CGenPwDialog(){
 	pwGenOptions.setBit(8,Check_CollectEntropy->isChecked());
 	pwGenOptions.setBit(9,Check_CollectOncePerSession->isChecked());
 	config->setPwGenOptions(pwGenOptions);
+	config->setPwGenLength(Spin_Num->value());
 }
 
 void CGenPwDialog::paintEvent(QPaintEvent *event){

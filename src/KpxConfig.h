@@ -89,7 +89,9 @@ public:
 	QString urlCmd(){return settings.value("Options/UrlCmd").toString();}
 	QByteArray vSplitterPos(){return settings.value("UI/VSplitterPos").toByteArray();}
 	bool askBeforeDelete(){return settings.value("Options/AskBeforeDelete",true).toBool();}
-
+	int autoTypePreGap(){return settings.value("Options/AutoTypePreGap",500).toInt();}
+	int autoTypeKeyStrokeDelay(){return settings.value("Options/AutoTypeKeyStrokeDelay",0).toInt();}
+	
 	void setAlternatingRowColors(bool value){settings.setValue("Options/AlternatingRowColors",value);}
 	void setBannerColor1(const QColor& value){settings.setValue("Options/BannerColor1",colorToString(value));}
 	void setBannerColor2(const QColor& value){settings.setValue("Options/BannerColor2",colorToString(value));}
@@ -130,6 +132,8 @@ public:
 	void setUrlCmd(const QString& value){settings.setValue("Options/UrlCmd",value);}
 	void setVSplitterPos(const QByteArray& value){settings.setValue("UI/VSplitterPos",value);}
 	void setAskBeforeDelete(bool value){settings.setValue("Options/AskBeforeDelete",value);}
+	void setAutoTypePreGap(int value){settings.setValue("Options/AutoTypePreGap",value);}
+	void setAutoTypeKeyStrokeDelay(int value){settings.setValue("Options/AutoTypeKeyStrokeDelay",value);}
 
 	unsigned fileDlgHistorySize();
 	void clearFileDlgHistory(){settings.remove("FileDlgHistory");};

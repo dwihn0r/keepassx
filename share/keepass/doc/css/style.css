@@ -2,7 +2,7 @@
 	min-height: 120px;
 	height: auto !important;
 	height: 120px;
-	background-image: url('../images/headerbackground.png');
+	background-image: url('./images/headerbackground.png');
 	background-repeat: repeat-x;
 	padding: 0 25px 15px 25px;
 	padding: 0;
@@ -12,7 +12,7 @@
 	min-height: 120px;
 	height: auto !important;
 	height: 120px;
-	background-image: url('../images/logo.png');
+	background-image: url('./images/logo.png');
 	padding: 0 25px 15px 25px;
 	background-repeat: no-repeat;
 	padding: 0;

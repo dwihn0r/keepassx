@@ -38,6 +38,7 @@
 #include <QFileDialog>
 #include <QStatusBar>
 
+
 #include "KpxFirefox.h"
 #include "lib/random.h"
 #include "lib/AutoType.h"
@@ -94,6 +95,13 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	statusBar()->addWidget(StatusBarGeneral,15);
 	statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config->showStatusbar());
+	
+	NormalCentralWidget=QMainWindow::centralWidget();
+	LockedCentralWidget=new QWidget(this);
+	WorkspaceLockedWidget.setupUi(LockedCentralWidget);
+	LockedCentralWidget->setVisible(false);
+	IsLocked=false;
+		
 	setupConnections();
 
 	FileOpen=false;
@@ -106,6 +114,8 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 		else
 			config->setLastFile(QString());
 	}
+	HelpBrowser = new QAssistantClient(QString(),this);
+	HelpBrowser->setArguments(QStringList()<< "-profile" << "/home/tarek/Documents/KeePassX/share/keepass/doc/keepassx.adp");
 
 	// DBus Server of Qt 4.2 does not work - 4.3 snapshot seems to work fine
 	/*
@@ -132,6 +142,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(FileSettingsAction, SIGNAL(triggered()), this, SLOT(OnFileSettings()));
 	connect(FileChangeKeyAction, SIGNAL(triggered()), this, SLOT(OnFileChangeKey()));
 	connect(FileExitAction, SIGNAL(triggered()), this, SLOT(OnFileExit()));
+	connect(FileUnLockWorkspaceAction,SIGNAL(triggered()), this, SLOT(OnUnLockWorkspace()));
 	connect(menuImport,SIGNAL(triggered(QAction*)),this,SLOT(OnImport(QAction*)));
 	connect(menuExport,SIGNAL(triggered(QAction*)),this,SLOT(OnExport(QAction*)));
 
@@ -183,6 +194,8 @@ void KeepassMainWindow::setupConnections(){
 
 	connect(SysTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(OnSysTrayActivated(QSystemTrayIcon::ActivationReason)));
 	connect(DetailView,SIGNAL(anchorClicked(const QUrl&)),this,SLOT(OnDetailViewUrlClicked(const QUrl&)));
+	connect(WorkspaceLockedWidget.Button_Unlock,SIGNAL(clicked()),this,SLOT(OnUnLockWorkspace()));
+	connect(WorkspaceLockedWidget.Button_CloseDatabase,SIGNAL(clicked()),this,SLOT(OnFileClose()));
 }
 
 void KeepassMainWindow::setupToolbar(){
@@ -877,7 +890,9 @@ dlg.exec();
 }
 
 void KeepassMainWindow::OnHelpHandbook(){
-openBrowser(AppDir+"/../share/doc/keepass/index.html");
+	HelpBrowser->openAssistant();
+	
+	
 }
 
 void KeepassMainWindow::OnViewShowToolbar(bool show){
@@ -984,3 +999,18 @@ void KeepassMainWindow::OnDetailViewUrlClicked(const QUrl& url){
 	openBrowser(url.toString());	
 }
 
+void KeepassMainWindow::OnUnLockWorkspace(){
+	if(IsLocked){
+		LockedCentralWidget->setVisible(false);	
+		LockedCentralWidget->setParent(NULL);
+		setCentralWidget(NormalCentralWidget);
+		NormalCentralWidget->setVisible(true);
+		IsLocked=false;		
+	} else {
+		NormalCentralWidget->setVisible(false);	
+		NormalCentralWidget->setParent(NULL);
+		setCentralWidget(LockedCentralWidget);
+		LockedCentralWidget->setVisible(true);
+		IsLocked=true;
+	}
+}

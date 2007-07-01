@@ -52,7 +52,8 @@ FORMS += forms/EditGroupDlg.ui \
 	 forms/CustomizeDetailViewDlg.ui \
 	 forms/CalendarDlg.ui \
 	 forms/TrashCanDlg.ui \
-	 forms/ExpiredEntriesDlg.ui
+	 forms/ExpiredEntriesDlg.ui \
+	 forms/WorkspaceLockedWidget.ui
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
 		translations/keepass-es_ES.ts \
@@ -172,7 +173,8 @@ CONFIG += debug \
 qt \
 thread \
 warn_off \
-dbus
+dbus \
+assistant
 QT += dbus xml
 TEMPLATE = app
 INCLUDEPATH += . \

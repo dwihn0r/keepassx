@@ -30,6 +30,7 @@
 #include <QPainter>
 #include "SettingsDlg.h"
 #include "CustomizeDetailViewDlg.h"
+#include "FileDialogs.h"
 
 bool CSettingsDlg::PluginsModified=false;
 
@@ -41,6 +42,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(DialogButtons, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect(DialogButtons, SIGNAL( clicked(QAbstractButton*)), this, SLOT(OnOtherButton(QAbstractButton*)));
 
+	connect(Button_ClearFileDlgHistory, SIGNAL(clicked()), &fileDlgHistory, SLOT(clear()));
 	connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 	connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
 	connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
@@ -138,7 +140,8 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 
 	Edit_MountDir->setText(config->mountDir());
 	CheckBox_SaveRelativePaths->setChecked(config->saveRelativePaths());
-
+	SpinBox_AutoTypePreGap->setValue(config->autoTypePreGap());
+	SpinBox_AutoTypeKeyStrokeDelay->setValue(config->autoTypeKeyStrokeDelay());
 }
 
 CSettingsDlg::~CSettingsDlg()
@@ -217,6 +220,8 @@ void CSettingsDlg::apply(){
 	if(CheckBox_BrowserDefault->isChecked())config->setUrlCmd(QString());
 	else config->setUrlCmd(Edit_BrowserCmd->text());
 	config->setSaveRelativePaths(CheckBox_SaveRelativePaths->isChecked());
+	config->setAutoTypePreGap(SpinBox_AutoTypePreGap->value());
+	config->setAutoTypeKeyStrokeDelay(SpinBox_AutoTypeKeyStrokeDelay->value());
 
 }
 
