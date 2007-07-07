@@ -34,17 +34,7 @@
      <number>9</number>
     </property>
     <item>
-     <widget class="QSplitter" name="HSplitter" >
-      <property name="orientation" >
-       <enum>Qt::Vertical</enum>
-      </property>
       <widget class="QSplitter" name="VSplitter" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-         <horstretch>0</horstretch>
-         <verstretch>60</verstretch>
-        </sizepolicy>
-       </property>
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -68,14 +58,24 @@
          <bool>false</bool>
         </property>
        </widget>
+       <widget class="QSplitter" name="HSplitter" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+          <horstretch>70</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="orientation" >
+         <enum>Qt::Vertical</enum>
+        </property>
        <widget class="KeepassEntryView" name="EntryView" >
         <property name="enabled" >
          <bool>false</bool>
         </property>
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-          <horstretch>70</horstretch>
-          <verstretch>0</verstretch>
+          <horstretch>0</horstretch>
+          <verstretch>70</verstretch>
          </sizepolicy>
         </property>
         <property name="selectionMode" >
@@ -85,7 +85,6 @@
          <bool>false</bool>
         </property>
        </widget>
-      </widget>
       <widget class="QTextBrowser" name="DetailView" >
        <property name="enabled" >
         <bool>false</bool>
@@ -93,7 +92,7 @@
        <property name="sizePolicy" >
         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
          <horstretch>0</horstretch>
-         <verstretch>10</verstretch>
+         <verstretch>30</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize" >
@@ -110,6 +109,7 @@
        </property>
       </widget>
      </widget>
+ </widget>
     </item>
    </layout>
   </widget>
