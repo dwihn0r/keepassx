@@ -55,6 +55,8 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	setupUi(this);
 	ModFlag=false;
 	QMenu *ExpirePresetsMenu=new QMenu();
+
+	connect(Edit_Title, SIGNAL(textChanged(const QString&)), this, SLOT( OnTitleTextChanged(const QString&)));
 	connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
 	connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
 	connect(Edit_Password, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordTextChanged(const QString&)));
@@ -66,7 +68,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(ButtonGenPw, SIGNAL(clicked()), this, SLOT( OnButtonGenPw()));
 	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()),this,SLOT(OnButtonOK()));
 	connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
-	connect(Button_CustomIcons,SIGNAL(clicked()),this,SLOT(OnCustomIcons()));
+	connect(Button_Icons,SIGNAL(clicked()),this,SLOT(OnButtonIcons()));
 	connect(ExpirePresetsMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnExpirePreset(QAction*)));
 	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar(QAction*)));
 
@@ -78,21 +80,23 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	ExpirePresetsMenu->addAction(tr("3 Weeks"))->setData(21);
 	ExpirePresetsMenu->addSeparator();
 	ExpirePresetsMenu->addAction(tr("1 Month"))->setData(30);
-	ExpirePresetsMenu->addAction(tr("3 Months"))->setData(60);
+	ExpirePresetsMenu->addAction(tr("3 Months"))->setData(90);
 	ExpirePresetsMenu->addAction(tr("6 Months"))->setData(180);
 	ExpirePresetsMenu->addSeparator();
 	ExpirePresetsMenu->addAction(tr("1 Year"))->setData(365);
 	ButtonExpirePresets->setMenu(ExpirePresetsMenu);
 	ButtonExpirePresets->setDefaultAction(new QAction(tr("Calendar..."),ButtonExpirePresets));
 
+	IconIndex = entry->image();
+	Button_Icons->setIcon(db->icon(IconIndex));
+
 	ButtonOpenAttachment->setIcon(getIcon("fileopen"));
 	ButtonDeleteAttachment->setIcon(getIcon("filedelete"));
 	ButtonSaveAttachment->setIcon(getIcon("filesave"));
 	ButtonExpirePresets->setIcon(getIcon("clock"));
 
-
-	setWindowTitle(entry->title());
-	setWindowIcon(db->icon(entry->image()));
+    OnTitleTextChanged(entry->title());
+	setWindowIcon(db->icon(IconIndex));
 	Edit_Title->setText(entry->title());
 	Edit_UserName->setText(entry->username());
 	Edit_URL->setText(entry->url());
@@ -103,7 +107,11 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	Password.lock();
 	if(!config->showPasswords())
 		ChangeEchoMode();
-	OnPasswordwLostFocus();
+    else
+        ButtonEchoMode->setIcon(getIcon("pwd_show"));
+
+    // MX-COMMENT: This call is not needed. Both Passwords fields will always have the same value
+    OnPasswordwLostFocus();
 	int bits=(Password.length()*8);
 	Label_Bits->setText(tr("%1 Bit").arg(QString::number(bits)));
 	if(bits>128)
@@ -112,7 +120,10 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	Edit_Attachment->setText(entry->binaryDesc());
 	Edit_Comment->setPlainText(entry->comment());
 	InitGroupComboBox();
+
+/* MX-TO-DO: After approval, remove this invokation
 	InitIconComboBox();
+*/
 
 	if(!entry->binarySize()){
 		ButtonSaveAttachment->setDisabled(true);
@@ -154,7 +165,7 @@ if(event->spontaneous()==false){
 }
 
 void CEditEntryDlg::resizeEvent(QResizeEvent *event){
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Test 2"),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Edit Entry"),width());
 	QDialog::resizeEvent(event);
 }
 
@@ -167,19 +178,21 @@ void CEditEntryDlg::paintEvent(QPaintEvent *event){
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
+/* MX-TO-DO: After approval, remove this implementation
+
 void CEditEntryDlg::InitIconComboBox(){
 	for(int i=0;i<db->numIcons();i++){
 		Combo_IconPicker->insertItem(i,db->icon(i),"");
 	}
 	Combo_IconPicker->setCurrentIndex(entry->image());
 }
-
+*/
 
 void CEditEntryDlg::InitGroupComboBox(){
 	QString Space;
 	groups=db->sortedGroups();
 	for(int i=0;i<groups.size();i++){
-		Space.fill(' ',2*groups[i]->level());
+		Space.fill(' ', 2 * (groups[i]->level() - 1));
 		Combo_Group->insertItem(i,db->icon(groups[i]->image()),Space+groups[i]->title());
 		if(groups[i]==entry->group()){
 			Combo_Group->setCurrentIndex(i);
@@ -217,7 +230,7 @@ void CEditEntryDlg::OnButtonOK()
 		ModFlag=true;
 	pw.lock();
 	password.fill('X');
-	if(entry->image()!=Combo_IconPicker->currentIndex())
+	if(entry->image()!=IconIndex)
 		ModFlag=true;
 
 	if(ModFlag){
@@ -237,7 +250,8 @@ void CEditEntryDlg::OnButtonOK()
 		db->moveEntry(entry,groups[Combo_Group->currentIndex()]);
 		EntryMoved=true; ModFlag=true;
 	}
-	entry->setImage(Combo_IconPicker->currentIndex());
+	// MX-COMMENT: Should not this line go inside the if(Modflag) block?
+	entry->setImage(IconIndex);
 
 	if(ModFlag&&EntryMoved)done(2);
 	else if(ModFlag)done(1);
@@ -256,14 +270,21 @@ void CEditEntryDlg::ChangeEchoMode()
 if(Edit_Password->echoMode()==QLineEdit::Normal){
 Edit_Password->setEchoMode(QLineEdit::Password);
 Edit_Password_w->setEchoMode(QLineEdit::Password);
+ButtonEchoMode->setIcon(getIcon("pwd_hide"));
 }
 else
 {
 Edit_Password->setEchoMode(QLineEdit::Normal);
 Edit_Password_w->setEchoMode(QLineEdit::Normal);
+ButtonEchoMode->setIcon(getIcon("pwd_show"));
 }
 
 
+}
+
+void CEditEntryDlg::OnTitleTextChanged(const QString& txt)
+{
+    setWindowTitle((txt=="") ? tr("[Untitled Entry]") : txt);
 }
 
 void CEditEntryDlg::OnPasswordTextChanged(const QString& txt)
@@ -279,7 +300,7 @@ void CEditEntryDlg::OnPasswordwTextChanged(const QString& w)
 {
 
 if(QString::compare(Edit_Password_w->text(),Edit_Password->text().mid(0,(Edit_Password_w->text().length())))!=0){
-	QPalette palette;
+    QPalette palette;
     palette.setColor(Edit_Password_w->backgroundRole(),QColor(255,125,125));
 	Edit_Password_w->setPalette(palette);
 }else
@@ -323,13 +344,35 @@ void CEditEntryDlg::OnNewAttachment()
 	entry->setBinaryDesc(info.fileName());
 	Edit_Attachment->setText(entry->binaryDesc());
 	QString unit;
-	int faktor;
+	uint faktor;
 	int prec;
-	if(entry->binarySize()<1000){unit=" Byte";faktor=1;prec=0;}
-	else {if(entry->binarySize()<1000000){unit=" kB";faktor=1000;prec=1;}
-		else{unit=" MB";faktor=1000000;prec=1;}
-	}
-	Label_AttachmentSize->setText(QString::number((float)entry->binarySize()/(float)faktor,'f',prec)+unit);
+	if (entry->binarySize() < 1024)
+    {
+        unit = "Bytes";
+        faktor = 1;
+        prec = 0;
+    }
+    else
+    {
+        if (entry->binarySize() < 1048576)
+        {
+            unit = "kB";
+            faktor = 1024;
+        }
+        else
+            if (entry->binarySize() < 1073741824)
+            {
+                unit = "MB";
+                faktor = 1048576;
+            }
+            else
+            {
+                unit = "GB";
+                faktor = 1073741824;
+            }
+        prec = 1;
+    }
+	Label_AttachmentSize->setText(QString::number((float)entry->binarySize()/(float)faktor,'f',prec) + " " + unit);
 	ButtonOpenAttachment->setEnabled(true);
 	ButtonSaveAttachment->setEnabled(true);
 	ButtonDeleteAttachment->setEnabled(true);
@@ -404,14 +447,15 @@ void CEditEntryDlg::OnCheckBoxExpiresNeverChanged(int state){
 		DateTime_Expire->setDisabled(true);
 }
 
-void CEditEntryDlg::OnCustomIcons(){
-	CSelectIconDlg dlg(db,Combo_IconPicker->currentIndex(),this);
+void CEditEntryDlg::OnButtonIcons(){
+	// CSelectIconDlg dlg(db,Combo_IconPicker->currentIndex(),this);
+	CSelectIconDlg dlg(db, IconIndex, this);
 	int r=dlg.exec();
-	if(r!=-1){
-		Combo_IconPicker->clear();
-		for(int i=0;i<db->numIcons();i++)
-			Combo_IconPicker->insertItem(i,db->icon(i),"");
-		Combo_IconPicker->setCurrentIndex(r);
+	if (r!=-1)
+	{
+		IconIndex=r;
+		Button_Icons->setIcon(db->icon(IconIndex));
+		setWindowIcon(db->icon(IconIndex));
 	}
 }
 

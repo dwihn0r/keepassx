@@ -55,7 +55,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 	public:
 		KeepassMainWindow (const QString& ArgFile,QWidget *parent=0, Qt::WFlags flags=0);
 		IDatabase* db;
-	bool Start;
+        bool Start;
 
 	signals:
 		void entryChanged();

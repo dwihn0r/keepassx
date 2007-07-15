@@ -77,7 +77,8 @@ Export_KeePassX_Xml export_KeePassX_Xml;
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt::WFlags flags):QMainWindow(parent,flags){
 	Start=true;
 	ShutingDown=false;
-	setupUi(this);
+	IsLocked=false;
+    setupUi(this);
 #ifdef QT_WS_MAC
 	setUnifiedTitleAndToolBarOnMac(true);
 #endif
@@ -95,13 +96,12 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	statusBar()->addWidget(StatusBarGeneral,15);
 	statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config->showStatusbar());
-	
+
 	NormalCentralWidget=QMainWindow::centralWidget();
 	LockedCentralWidget=new QWidget(this);
 	WorkspaceLockedWidget.setupUi(LockedCentralWidget);
 	LockedCentralWidget->setVisible(false);
-	IsLocked=false;
-		
+
 	setupConnections();
 
 	FileOpen=false;
@@ -160,26 +160,26 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnSearch()));
 	connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnGroupSearch()));
 	connect(EditAutoTypeAction,SIGNAL(triggered()),EntryView,SLOT(OnAutoType()));
-	
+
 	connect(ViewShowToolbarAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowToolbar(bool)));
 	connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
 	connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
 	connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
-	
+
 	connect(menuColumns,SIGNAL(triggered(QAction*)),this,SLOT(OnColumnVisibilityChanged(QAction*)));
 	connect(ViewToolButtonSize16Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize16(bool)));
 	connect(ViewToolButtonSize22Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize22(bool)));
 	connect(ViewToolButtonSize28Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize28(bool)));
 	connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
-	
+
 	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
 	connect(ExtrasPasswordGenAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasPasswordGen()));
 	connect(ExtrasShowExpiredEntriesAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasShowExpiredEntries()));
 	connect(ExtrasTrashCanAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasTrashCan()));
-	
+
 	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
-	
+
 	connect(EntryView,SIGNAL(itemActivated(QTreeWidgetItem*,int)),EntryView,SLOT(OnEntryActivated(QTreeWidgetItem*,int)));
 	connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
 	connect(GroupView,SIGNAL(groupChanged(IGroupHandle*)),EntryView,SLOT(OnGroupChanged(IGroupHandle*)));
@@ -211,10 +211,12 @@ void KeepassMainWindow::setupToolbar(){
 	toolBar->addAction(EditEditEntryAction);
 	toolBar->addAction(EditDeleteEntryAction);
 	toolBar->addSeparator();
-	toolBar->addAction(EditPasswordToClipboardAction);
 	toolBar->addAction(EditUsernameToClipboardAction);
-	toolBar->addSeparator();
-	QuickSearchEdit=new QLineEdit(toolBar);
+    toolBar->addAction(EditPasswordToClipboardAction);
+    toolBar->addSeparator();
+    toolBar->addAction(FileUnLockWorkspaceAction);
+    toolBar->addSeparator();
+    QuickSearchEdit=new QLineEdit(toolBar);
 	QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 	toolBar->addWidget(QuickSearchEdit);
 }
@@ -227,13 +229,14 @@ void KeepassMainWindow::setupIcons(){
 	FileSaveAsAction->setIcon(getIcon("filesaveas"));
 	FileCloseAction->setIcon(getIcon("fileclose"));
 	FileSettingsAction->setIcon(getIcon("dbsettings"));
+    FileUnLockWorkspaceAction->setIcon(getIcon("lock"));
 	FileExitAction->setIcon(getIcon("exit"));
 	EditNewEntryAction->setIcon(getIcon("newentry"));
 	EditEditEntryAction->setIcon(getIcon("editentry"));
 	EditDeleteEntryAction->setIcon(getIcon("deleteentry"));
-	EditPasswordToClipboardAction->setIcon(getIcon("copypwd"));
 	EditUsernameToClipboardAction->setIcon(getIcon("copyusername"));
-	EditCloneEntryAction->setIcon(getIcon("cloneentry"));
+    EditPasswordToClipboardAction->setIcon(getIcon("copypwd"));
+    EditCloneEntryAction->setIcon(getIcon("cloneentry"));
 	EditOpenUrlAction->setIcon(getIcon("openurl"));
 	EditSaveAttachmentAction->setIcon(getIcon("filesave"));
 	EditNewGroupAction->setIcon(getIcon("newgroup"));
@@ -241,11 +244,11 @@ void KeepassMainWindow::setupIcons(){
 	EditDeleteGroupAction->setIcon(getIcon("deletegroup"));
 	EditSearchAction->setIcon(getIcon("dbsearch"));
 	EditGroupSearchAction->setIcon(getIcon("groupsearch"));
-	ExtrasSettingsAction->setIcon(getIcon("appsettings"));
 	ExtrasShowExpiredEntriesAction->setIcon(getIcon("expired"));
 	ExtrasPasswordGenAction->setIcon(getIcon("generator"));
 	ExtrasTrashCanAction->setIcon(getIcon("trashcan"));
-	EditAutoTypeAction->setIcon(getIcon("autotype"));
+    ExtrasSettingsAction->setIcon(getIcon("appsettings"));
+    EditAutoTypeAction->setIcon(getIcon("autotype"));
 	HelpHandbookAction->setIcon(getIcon("manual"));
 	HelpAboutAction->setIcon(getIcon("help"));
 	SysTray->setIcon(getIcon("keepassx_large"));
@@ -263,9 +266,9 @@ void KeepassMainWindow::setupMenus(){
 	GroupView->ContextMenu->addAction(EditGroupSearchAction);
 	GroupView->ContextMenuSearchGroup->addAction(HideSearchResultsAction);
 
-	EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
 	EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
-	EntryView->ContextMenu->addAction(EditOpenUrlAction);
+    EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
+    EntryView->ContextMenu->addAction(EditOpenUrlAction);
 	EntryView->ContextMenu->addAction(EditSaveAttachmentAction);
 	EntryView->ContextMenu->addAction(EditAutoTypeAction);
 	EntryView->ContextMenu->addSeparator();
@@ -300,8 +303,11 @@ void KeepassMainWindow::setupMenus(){
 	}
 
 	SysTrayMenu = new QMenu(tr("KeePassX"),this);
+    SysTrayMenu->addAction(FileUnLockWorkspaceAction);
+    SysTrayMenu->addSeparator();
 	SysTrayMenu->addAction(FileExitAction);
 	SysTray->setContextMenu(SysTrayMenu);
+    SysTray->setToolTip(tr("%1 %2").arg(APP_NAME, APP_FUNC) + " - " + tr((IsLocked) ? "Locked" : "Unlocked"));
 
 	#define _add_import(name){\
 	QAction* import=new QAction(this);\
@@ -324,7 +330,9 @@ void KeepassMainWindow::setupMenus(){
 	//FileNewMenu->setShortcut(tr("Ctrl+N"));
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
 	FileSaveAction->setShortcut(tr("Ctrl+S"));
-	EditNewGroupAction->setShortcut(tr("Ctrl+G"));
+    FileUnLockWorkspaceAction->setShortcut(tr("Ctrl+L"));
+    FileExitAction->setShortcut(tr("Ctrl+X"));
+    EditNewGroupAction->setShortcut(tr("Ctrl+G"));
 	EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
 	EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
 	EditOpenUrlAction->setShortcut(tr("Ctrl+U"));
@@ -339,7 +347,7 @@ void KeepassMainWindow::setupMenus(){
 	FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
 	EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
 #endif
-	
+
 	ExtrasTrashCanAction->setVisible(false); //For KP 2.x only
 }
 
@@ -580,7 +588,7 @@ void KeepassMainWindow::updateDetailView(){
 	if(entry->expire()!=Date_Never){
 		int secs=QDateTime::currentDateTime().secsTo(entry->expire());
 		if(secs < 0)
-			templ.replace("%expire-timeleft%",tr("expired"));
+			templ.replace("%expire-timeleft%",tr("Expired"));
 		else{
 			int years=0;
 			int months=0;
@@ -618,7 +626,7 @@ void KeepassMainWindow::updateDetailView(){
 			if(!days && !years && !months)
 				out=tr("less than 1 day");
 
-			templ.replace("%expire-timeleft%",out);
+			templ.replace("%expire-timeleft%","in " + out);
 		}
 	}
 	else
@@ -673,8 +681,8 @@ switch(EntrySelection){
 else if(GroupSelection == SEARCHGROUP)
 switch(EntrySelection){
  case NONE:
-    EditPasswordToClipboardAction->setEnabled(false);
     EditUsernameToClipboardAction->setEnabled(false);
+    EditPasswordToClipboardAction->setEnabled(false);
     EditOpenUrlAction->setEnabled(false);
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
@@ -685,8 +693,8 @@ switch(EntrySelection){
 	EditAutoTypeAction->setEnabled(false);
     break;
  case SINGLE:
-    EditPasswordToClipboardAction->setEnabled(true);
     EditUsernameToClipboardAction->setEnabled(true);
+    EditPasswordToClipboardAction->setEnabled(true);
     EditOpenUrlAction->setEnabled(true);
     EditSaveAttachmentAction->setEnabled(true);
     EditEditEntryAction->setEnabled(true);
@@ -697,8 +705,8 @@ switch(EntrySelection){
 	EditAutoTypeAction->setEnabled(true);
     break;
  case MULTIPLE:
-    EditPasswordToClipboardAction->setEnabled(false);
     EditUsernameToClipboardAction->setEnabled(false);
+    EditPasswordToClipboardAction->setEnabled(false);
     EditOpenUrlAction->setEnabled(false);
     EditSaveAttachmentAction->setEnabled(false);
     EditEditEntryAction->setEnabled(false);
@@ -834,7 +842,7 @@ void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
 	EntryView->Columns[6]=ViewColumnsCreationAction->isChecked();
 	EntryView->Columns[7]=ViewColumnsLastChangeAction->isChecked();
 	EntryView->Columns[8]=ViewColumnsLastAccessAction->isChecked();
-	EntryView->Columns[9]=ViewColumnsAttachmentAction->isChecked();		
+	EntryView->Columns[9]=ViewColumnsAttachmentAction->isChecked();
 	EntryView->Columns[10]=ViewColumnsGroupAction->isChecked();
 	EntryView->updateColumns();
 	if(FileOpen) EntryView->refreshItems();
@@ -891,8 +899,8 @@ dlg.exec();
 
 void KeepassMainWindow::OnHelpHandbook(){
 	HelpBrowser->openAssistant();
-	
-	
+
+
 }
 
 void KeepassMainWindow::OnViewShowToolbar(bool show){
@@ -990,27 +998,33 @@ void KeepassMainWindow::OnExtrasShowExpiredEntries(){
 void KeepassMainWindow::OnExtrasTrashCan(){
 	TrashCanDialog dlg(this,db,db->expiredEntries());
 	if(dlg.exec()==QDialog::Accepted){
-		
+
 	}
-	
+
 }
 
 void KeepassMainWindow::OnDetailViewUrlClicked(const QUrl& url){
-	openBrowser(url.toString());	
+	openBrowser(url.toString());
 }
 
 void KeepassMainWindow::OnUnLockWorkspace(){
 	if(IsLocked){
-		LockedCentralWidget->setVisible(false);	
+		LockedCentralWidget->setVisible(false);
 		LockedCentralWidget->setParent(NULL);
 		setCentralWidget(NormalCentralWidget);
 		NormalCentralWidget->setVisible(true);
-		IsLocked=false;		
+        SysTray->setIcon(getIcon("keepassx_large"));
+        SysTray->setToolTip(tr("%1 %2").arg(APP_NAME, APP_FUNC) + " - " + tr("Unlocked"));
+        FileUnLockWorkspaceAction->setText(tr("&Lock Workspace"));
+		IsLocked=false;
 	} else {
-		NormalCentralWidget->setVisible(false);	
+		NormalCentralWidget->setVisible(false);
 		NormalCentralWidget->setParent(NULL);
 		setCentralWidget(LockedCentralWidget);
 		LockedCentralWidget->setVisible(true);
+        SysTray->setIcon(getIcon("keepassx_locked"));
+        SysTray->setToolTip(tr("%1 %2").arg(APP_NAME, APP_FUNC) + " - " + tr("Locked"));
+        FileUnLockWorkspaceAction->setText(tr("Un&lock Workspace"));
 		IsLocked=true;
 	}
 }

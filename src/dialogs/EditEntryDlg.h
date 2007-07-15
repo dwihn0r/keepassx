@@ -33,7 +33,9 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0);
 		~CEditEntryDlg();
 		void InitGroupComboBox();
+/* MX-TO-DO: Remove this declaration
 		void InitIconComboBox();
+*/
 		static void saveAttachment(IEntryHandle* pEntry, QWidget* ParentWidget=NULL);
 		
 		IEntryHandle* entry;
@@ -44,6 +46,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		QPixmap BannerPixmap;	
 	
 	public slots:
+		void OnTitleTextChanged(const QString&);
 		void OnPasswordwLostFocus();
 		void OnPasswordwTextChanged(const QString&);
 		void OnPasswordTextChanged(const QString&);
@@ -54,7 +57,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		void OnSaveAttachment();
 		void OnButtonGenPw();
 		void OnCheckBoxExpiresNeverChanged(int state);
-		void OnCustomIcons();
+		void OnButtonIcons();
 		void OnButtonOK();
 		void OnExpirePreset(QAction*);
 		void OnCalendar(QAction*);
@@ -64,6 +67,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		virtual void paintEvent(QPaintEvent*);
 		virtual void resizeEvent(QResizeEvent *);	
 
+		int IconIndex;
 };
 
 #endif

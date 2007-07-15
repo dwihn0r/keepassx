@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-  
+
 #include <QTreeWidget>
 #include <QPainter>
 #include <QPaintEvent>
@@ -37,7 +37,7 @@ ExpiredEntriesDialog::ExpiredEntriesDialog(QWidget* parent,IDatabase* database,c
 		item->setText(3,Entries[i]->expire().dateToString(Qt::LocalDate));
 		item->setIcon(0,database->icon(Entries[i]->group()->image()));
 		item->setIcon(1,database->icon(Entries[i]->image()));
-			
+
 	}
 	connect(treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(OnItemDoubleClicked(QTreeWidgetItem*,int)));
 }
@@ -51,12 +51,12 @@ void ExpiredEntriesDialog::paintEvent(QPaintEvent* event){
 }
 
 void ExpiredEntriesDialog::resizeEvent(QResizeEvent* event){
-	createBanner(&BannerPixmap,getPixmap("alarmclock"),tr("Expried Entries of the Database"),width());
-	QDialog::resizeEvent(event);	
+	createBanner(&BannerPixmap,getPixmap("alarmclock"),tr("Expired Entries in the Database"),width());
+	QDialog::resizeEvent(event);
 }
 
 void ExpiredEntriesDialog::OnItemDoubleClicked(QTreeWidgetItem* item, int column){
-	SelectedEntry=Entries[item->data(0,Qt::UserRole).toInt()];	
+	SelectedEntry=Entries[item->data(0,Qt::UserRole).toInt()];
 	accept();
 }
 

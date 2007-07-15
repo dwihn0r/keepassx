@@ -27,6 +27,8 @@
 #include <QIcon>
 #include <QFile>
 
+#define APP_NAME "KeePassX"
+#define APP_FUNC "Password Manager"
 #define KEEPASS_VERSION "0.2.3"
 #define BUILTIN_ICONS 62
 

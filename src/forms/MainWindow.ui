@@ -168,8 +168,8 @@
     <addaction name="EditEditGroupAction" />
     <addaction name="EditDeleteGroupAction" />
     <addaction name="separator" />
-    <addaction name="EditPasswordToClipboardAction" />
     <addaction name="EditUsernameToClipboardAction" />
+    <addaction name="EditPasswordToClipboardAction" />
     <addaction name="EditOpenUrlAction" />
     <addaction name="EditSaveAttachmentAction" />
     <addaction name="separator" />
@@ -225,11 +225,11 @@
     <property name="title" >
      <string>E&amp;xtras</string>
     </property>
-    <addaction name="ExtrasSettingsAction" />
     <addaction name="ExtrasPasswordGenAction" />
-    <addaction name="separator" />
     <addaction name="ExtrasShowExpiredEntriesAction" />
     <addaction name="ExtrasTrashCanAction" />
+    <addaction name="separator" />
+    <addaction name="ExtrasSettingsAction" />
    </widget>
    <addaction name="menuDatei" />
    <addaction name="menuBearbeiten" />
@@ -266,6 +266,11 @@
    <property name="text" >
     <string>Change &amp;Master Key...</string>
    </property>
+  </action>
+  <action name="FileUnLockWorkspaceAction" >
+    <property name="text" >
+      <string>&amp;Lock Workspace</string>
+    </property>
   </action>
   <action name="FileExitAction" >
    <property name="text" >
@@ -329,12 +334,12 @@
   </action>
   <action name="EditSearchAction" >
    <property name="text" >
-    <string>Search In Database...</string>
+    <string>Search in Database...</string>
    </property>
   </action>
   <action name="EditGroupSearchAction" >
    <property name="text" >
-    <string>Search in this group...</string>
+    <string>Search in this Group...</string>
    </property>
   </action>
   <action name="ViewShowEntryDetailsAction" >
@@ -533,21 +538,10 @@
    <property name="text" >
     <string>Show Expired Entries...</string>
    </property>
-   <property name="iconText" >
-    <string>Show Expired Entries...</string>
-   </property>
-   <property name="toolTip" >
-    <string>Show Expired Entries</string>
-   </property>
   </action>
   <action name="ExtrasTrashCanAction" >
    <property name="text" >
     <string>Recycle Bin...</string>
-   </property>
-  </action>
-  <action name="FileUnLockWorkspaceAction" >
-   <property name="text" >
-    <string>Lock Workspace</string>
    </property>
   </action>
  </widget>
