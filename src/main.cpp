@@ -37,6 +37,7 @@
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
 #include "plugins/interfaces/IGnomeInit.h"
+#include "plugins/interfaces/IIconTheme.h"
 #include "lib/FileDialogs.h"
 
 #include "main.h"
@@ -68,6 +69,7 @@ bool TrActive;
 QString DetailViewTemplate;
 
 QPixmap* EntryIcons;
+IIconTheme* IconLoader=NULL;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
@@ -134,8 +136,13 @@ int main(int argc, char **argv)
 				qWarning("Could not load desktop integration plugin:");
 				qWarning(CSTR(PluginLoadError));
 			}
-			else{
-				IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugin.instance());
+			else{	
+				QObject *plugininstance=plugin.instance();
+				IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugininstance);
+				IconLoader=qobject_cast<IIconTheme*>(plugininstance);
+				if(IconLoader==NULL){
+					qWarning("Error: Integration Plugin: Could not initialize IconTheme interface."); 
+				}
 				KpxFileDialogs::setPlugin(fdlg);
 				if(config->integrPlugin()==KpxConfig::KDE){
 					IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
@@ -350,13 +357,19 @@ const QIcon& getIcon(const QString& name){
 	QIcon* CachedIcon=IconCache.value(name);
 	if(CachedIcon)
 		return *CachedIcon;
-	QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
-	if(!IconFile.isFile() || !IconFile.exists() || !IconFile.isReadable()){
-		///TODO 0.2.3 error handling
-		qWarning("%s",CSTR(name));
+	QIcon* NewIcon=NULL;
+	if(IconLoader==NULL){
+		QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
+		if(!IconFile.isFile() || !IconFile.exists() || !IconFile.isReadable()){
+			///TODO 0.2.3 error handling
+			qWarning("%s",CSTR(name));
+		}
+		NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
+		IconCache.insert(name,NewIcon);
+	} else {
+		NewIcon=new QIcon(IconLoader->getIcon(name));
+		IconCache.insert(name,NewIcon);
 	}
-	QIcon* NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
-	IconCache.insert(name,NewIcon);
 	return *NewIcon;
 }
 
@@ -436,9 +449,9 @@ QMessageBox::critical(parent,QObject::tr("Error"),msg,QObject::tr("OK"));
 QString findPlugin(const QString& filename){
 	QFileInfo info;
 
-	info.setFile(AppDir+"/../lib/keepassx/"+filename);
+	info.setFile(AppDir+"/../lib/"+filename);
 	if(info.exists() && info.isFile())
-		return AppDir+"/../lib/keepassx/"+filename;
+		return AppDir+"/../lib/"+filename;
 
 	return QString();
 }

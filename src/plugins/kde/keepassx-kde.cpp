@@ -17,27 +17,74 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+
 #include <kapplication.h>
 #include <kfiledialog.h>
 #include <kcmdlineargs.h>
+#include <kiconloader.h>
+#include <QPixmap>
+#include <QHash>
 #include "keepassx-kde.h"
 
+QHash<QString,QString>IconMap;
 
 Q_EXPORT_PLUGIN2(keepassx_kde, KdePlugin)
 
-QString KdePlugin::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters){	
+
+void createIconMap(){
+	IconMap["alarmclock"]="alarmclock";
+	IconMap["appsettings"]="configure";
+	IconMap["autotype"]="input-keyboard";
+	IconMap["clock"]="chronometer";
+	IconMap["clonenetry"]="edit-copy";
+	IconMap["copypwd"]="kgpg-export-kgpg";
+	IconMap["copyusername"]="user";
+	IconMap["dbsearch"]="edit-find";
+	IconMap["dbsettings"]="configure";
+	IconMap["delete"]="edit-delete";
+	IconMap["delete-entry"]="edit-delete";
+	IconMap["delete-group"]="edit-delete";
+	IconMap["editentry"]="edit";
+	IconMap["editgroup"]="edit";
+	IconMap["exit"]="application-exit";
+	IconMap["expired"]="flag-red";
+	IconMap["fileclose"]="dialog-close";
+	IconMap["filedelete"]="edit-delete";
+	IconMap["filenew"]="document-new";
+	IconMap["fileopen"]="document-open";
+	IconMap["filesave"]="document-save";
+	IconMap["filesaveas"]="document-save-as";
+	IconMap["filesaveasdisabled"]="document-save-as"; ///FIXME
+	IconMap["generator"]="roll";
+	IconMap["groupsearch"]="file-find";
+	IconMap["help"]="help-contents";
+	IconMap["key"]="password";
+	IconMap["manual"]="help-contents";
+}
+
+QString KdePlugin::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){	
 	return KFileDialog::getOpenFileName();
 
 }
 
-
-QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters){
+QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
 	return QStringList();
 }
 
-QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,bool OverWriteWarn){return QString();}
+QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool OverWriteWarn){return QString();}
 
 QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
 	KCmdLineArgs::init(argc,argv,"keepassx","KeePassX","Cross Platform Password Manager","0.2.3");
+	createIconMap();
 	return dynamic_cast<QApplication*>( new KApplication() );
 }
+
+
+QIcon KdePlugin::getIcon(const QString& name){
+	KIconLoader loader;
+	QPixmap pxm=loader.loadIcon(IconMap.value(name),K3Icon::Desktop);
+	QIcon icon(pxm);
+	return icon;
+}
+
+

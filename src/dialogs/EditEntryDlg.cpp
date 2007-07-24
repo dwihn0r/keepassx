@@ -192,7 +192,7 @@ void CEditEntryDlg::InitGroupComboBox(){
 	QString Space;
 	groups=db->sortedGroups();
 	for(int i=0;i<groups.size();i++){
-		Space.fill(' ', 2 * (groups[i]->level() - 1));
+		Space.fill(' ', 2 * (groups[i]->level()));
 		Combo_Group->insertItem(i,db->icon(groups[i]->image()),Space+groups[i]->title());
 		if(groups[i]==entry->group()){
 			Combo_Group->setCurrentIndex(i);

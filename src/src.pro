@@ -114,6 +114,7 @@ HEADERS += lib/IniReader.h \
 	   plugins/interfaces/IFileDialog.h \
 	   plugins/interfaces/IKdeInit.h \
 	   plugins/interfaces/IGnomeInit.h \
+	   plugins/interfaces/IIconTheme.h \
 	   KpxConfig.h \
            KpxFirefox.h
 SOURCES += lib/UrlLabel.cpp \
