@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -24,9 +24,12 @@
 #include <kiconloader.h>
 #include <QPixmap>
 #include <QHash>
+#include <QStringList>
+#include <kurl.h>
 #include "keepassx-kde.h"
 
 QHash<QString,QString>IconMap;
+int LastFilter;
 
 Q_EXPORT_PLUGIN2(keepassx_kde, KdePlugin)
 
@@ -54,17 +57,40 @@ void createIconMap(){
 	IconMap["fileopen"]="document-open";
 	IconMap["filesave"]="document-save";
 	IconMap["filesaveas"]="document-save-as";
-	IconMap["filesaveasdisabled"]="document-save-as"; ///FIXME
+	IconMap["filesaveasdisabled"]="document-save-as"; ///FIXME needs to be grayed to reflect it's status
 	IconMap["generator"]="roll";
 	IconMap["groupsearch"]="file-find";
 	IconMap["help"]="help-contents";
 	IconMap["key"]="password";
 	IconMap["manual"]="help-contents";
+	IconMap["newentry"]="kgpg-key3-kpgp";
+	IconMap["newgroup"]="folder";
+	IconMap["ok"]="ok";
+	IconMap["openurl"]="network";
+	IconMap["search"]="edit-find";
 }
 
-QString KdePlugin::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){	
-	return KFileDialog::getOpenFileName();
+QString convertFilters(const QStringList& qtfilters){
+	QString kdefilters;
+	for(int i=0;i<qtfilters.size();i++){
+		int a=qtfilters[i].indexOf('(');
+		int b=qtfilters[i].indexOf(')');
+		QString exts=qtfilters[i].mid(a+1,b-a-1);
+		kdefilters+=exts;
+		kdefilters+='|';
+		kdefilters+=qtfilters[i];
+		if(i<qtfilters.size()-1)kdefilters+='\n';
+	}
+	return kdefilters;
+}
 
+
+QString KdePlugin::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){	
+	KFileDialog FileDlg(KUrl(dir),convertFilters(Filters),parent);
+	FileDlg.setMode(KFile::ExistingOnly | KFile::File);
+	if(!FileDlg.exec())return QString();
+	//LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
+	return FileDlg.selectedFiles()[0];
 }
 
 QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
@@ -82,7 +108,8 @@ QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
 
 QIcon KdePlugin::getIcon(const QString& name){
 	KIconLoader loader;
-	QPixmap pxm=loader.loadIcon(IconMap.value(name),K3Icon::Desktop);
+	QPixmap pxm=loader.loadIcon(IconMap.value(name),K3Icon::Desktop,0,K3Icon::DefaultState,NULL, true);
+	if(pxm.isNull())return QIcon();
 	QIcon icon(pxm);
 	return icon;
 }

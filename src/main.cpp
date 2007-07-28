@@ -358,7 +358,17 @@ const QIcon& getIcon(const QString& name){
 	if(CachedIcon)
 		return *CachedIcon;
 	QIcon* NewIcon=NULL;
-	if(IconLoader==NULL){
+	if(IconLoader){
+		NewIcon=new QIcon(IconLoader->getIcon(name));
+		if(NewIcon->isNull()){
+			delete NewIcon;
+			NewIcon=NULL;	
+		}
+		else
+			IconCache.insert(name,NewIcon);
+	}
+	if(!NewIcon)
+	{
 		QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
 		if(!IconFile.isFile() || !IconFile.exists() || !IconFile.isReadable()){
 			///TODO 0.2.3 error handling
@@ -366,10 +376,7 @@ const QIcon& getIcon(const QString& name){
 		}
 		NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
 		IconCache.insert(name,NewIcon);
-	} else {
-		NewIcon=new QIcon(IconLoader->getIcon(name));
-		IconCache.insert(name,NewIcon);
-	}
+	} 
 	return *NewIcon;
 }
 
