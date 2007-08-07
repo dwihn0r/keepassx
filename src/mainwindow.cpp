@@ -91,6 +91,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	setupIcons();
 	setStateFileOpen(false);
 	setupMenus();
+	DetailView->setVisible(config->showEntryDetails());
 	StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
 	StatusBarSelection=new QLabel(statusBar());
 	statusBar()->addWidget(StatusBarGeneral,15);
@@ -219,6 +220,7 @@ void KeepassMainWindow::setupToolbar(){
     QuickSearchEdit=new QLineEdit(toolBar);
 	QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 	toolBar->addWidget(QuickSearchEdit);
+	toolBar->setVisible(config->showToolbar());
 }
 
 void KeepassMainWindow::setupIcons(){
