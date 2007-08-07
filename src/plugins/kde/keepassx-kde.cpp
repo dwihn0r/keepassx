@@ -26,6 +26,7 @@
 #include <QHash>
 #include <QStringList>
 #include <kurl.h>
+#include <QByteArray>
 #include "keepassx-kde.h"
 
 QHash<QString,QString>IconMap;
@@ -100,7 +101,11 @@ QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QSt
 QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool OverWriteWarn){return QString();}
 
 QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
-	KCmdLineArgs::init(argc,argv,"keepassx","KeePassX","Cross Platform Password Manager","0.2.3");
+	KCmdLineArgs::init(argc,argv,QByteArray("keepassx"),
+					   			 QByteArray("none"),
+								 ki18n("KeePassX"),
+		 						 QByteArray("0.2.3"),
+								 ki18n("Cross Platform Password Manager"));
 	createIconMap();
 	return dynamic_cast<QApplication*>( new KApplication() );
 }
@@ -108,7 +113,7 @@ QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
 
 QIcon KdePlugin::getIcon(const QString& name){
 	KIconLoader loader;
-	QPixmap pxm=loader.loadIcon(IconMap.value(name),K3Icon::Desktop,0,K3Icon::DefaultState,NULL, true);
+	QPixmap pxm=loader.loadIcon(IconMap.value(name),K3Icon::Desktop,0,K3Icon::DefaultState,QStringList(),NULL,true);
 	if(pxm.isNull())return QIcon();
 	QIcon icon(pxm);
 	return icon;

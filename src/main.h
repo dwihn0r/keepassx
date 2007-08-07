@@ -40,6 +40,8 @@ void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,
 void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor);
 void openBrowser(QString url);
 void showErrMsg(const QString& msg,QWidget* parent=NULL);
+QString applicationFilePath();
+QString applicationDirPath();
 const QIcon& getIcon(const QString& name);
 const QPixmap* getPixmap(const QString& name);
 QString decodeFileError(QFile::FileError Code);

@@ -1,11 +1,12 @@
 /***************************************************************************
+ *   Copyright (C) 1992-2007 Trolltech ASA								   *
+ *                                                                         *
  *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   the Free Software Foundation; version 2 of the License.               *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -70,6 +71,7 @@ QString DetailViewTemplate;
 
 QPixmap* EntryIcons;
 IIconTheme* IconLoader=NULL;
+char ** argv;
 
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
@@ -95,15 +97,14 @@ void test_getAllWindowTitles(){
 	#endif	
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **_argv)
 {
-	//test_getAllWindowTitles();
-	//exit(0);
+	argv=_argv;
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
 	QApplication* app=NULL;
-	AppDir=QString(argv[0]);
-	AppDir.truncate(AppDir.lastIndexOf("/"));
+	AppDir=applicationDirPath();
 	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
+	qDebug(CSTR(QDir::current().absolutePath()));
 
 	//Load Config
 	if(ArgCfg.isEmpty()){
@@ -477,4 +478,84 @@ QString makePathRelative(const QString& AbsDir,const QString& CurDir){
 	for(int i=common;i<abs.size();i++)
 		rel.append(abs[i]+"/");
 	return rel;
+}
+
+
+QString applicationDirPath(){
+	QString filepath=applicationFilePath();
+	filepath.truncate(filepath.lastIndexOf("/"));	
+	return filepath;
+}
+
+QString applicationFilePath()
+{
+	#if defined( Q_WS_WIN )
+    QFileInfo filePath;
+    QT_WA({
+        wchar_t module_name[256];
+        GetModuleFileNameW(0, module_name, sizeof(module_name) / sizeof(wchar_t));
+        filePath = QString::fromUtf16((ushort *)module_name);
+    }, {
+        char module_name[256];
+        GetModuleFileNameA(0, module_name, sizeof(module_name));
+        filePath = QString::fromLocal8Bit(module_name);
+    });
+
+    return filePath.filePath();
+	#elif defined(Q_WS_MAC)
+    QString qAppFileName_str = qAppFileName();
+    if(!qAppFileName_str.isEmpty()) {
+        QFileInfo fi(qAppFileName_str);
+        return fi.exists() ? fi.canonicalFilePath() : QString();
+    }
+	#endif
+	#if defined( Q_OS_UNIX )
+	#ifdef Q_OS_LINUX
+    // Try looking for a /proc/<pid>/exe symlink first which points to
+    // the absolute path of the executable
+    QFileInfo pfi(QString::fromLatin1("/proc/%1/exe").arg(getpid()));
+    if (pfi.exists() && pfi.isSymLink())
+        return pfi.canonicalFilePath();
+	#endif
+
+    QString argv0 = QFile::decodeName(QByteArray(argv[0]));
+    QString absPath;
+
+    if (!argv0.isEmpty() && argv0.at(0) == QLatin1Char('/')) {
+        /*
+          If argv0 starts with a slash, it is already an absolute
+          file path.
+        */
+        absPath = argv0;
+    } else if (argv0.contains(QLatin1Char('/'))) {
+        /*
+          If argv0 contains one or more slashes, it is a file path
+          relative to the current directory.
+        */
+        absPath = QDir::current().absoluteFilePath(argv0);
+    } else {
+        /*
+          Otherwise, the file path has to be determined using the
+          PATH environment variable.
+        */
+        QByteArray pEnv = qgetenv("PATH");
+        QDir currentDir = QDir::current();
+        QStringList paths = QString::fromLocal8Bit(pEnv.constData()).split(QLatin1String(":"));
+        for (QStringList::const_iterator p = paths.constBegin(); p != paths.constEnd(); ++p) {
+            if ((*p).isEmpty())
+                continue;
+            QString candidate = currentDir.absoluteFilePath(*p + QLatin1Char('/') + argv0);
+            QFileInfo candidate_fi(candidate);
+            if (candidate_fi.exists() && !candidate_fi.isDir()) {
+                absPath = candidate;
+                break;
+            }
+        }
+    }
+
+    absPath = QDir::cleanPath(absPath);
+
+    QFileInfo fi(absPath);
+    return fi.exists() ? fi.canonicalFilePath() : QString();
+	#endif
 }
