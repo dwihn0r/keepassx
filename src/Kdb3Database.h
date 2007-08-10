@@ -1,11 +1,10 @@
 /***************************************************************************
  *   Copyright (C) 2005-2007 by Tarek Saidi                                *
- *   keepassx@gmail.com                                                    *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   the Free Software Foundation; version 2 of the License.               *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -39,6 +38,7 @@
 #include <QStringList>
 #include <QPixmap>
 #include <QMap>
+#include "main.h"
 #include "lib/SecString.h"
 #include "Database.h"
 
@@ -168,7 +168,7 @@ public:
 	virtual void addIcon(const QPixmap& icon);
 	virtual void removeIcon(int index);
 	virtual void replaceIcon(int index,const QPixmap& icon);
-	virtual int builtinIcons(){return 62;};
+	virtual int builtinIcons(){return BUILTIN_ICONS;};
 	virtual void authByPwd(QString& password);
 	virtual bool authByFile(QString& filename);
 	virtual bool authByFileAndPwd(QString& password, QString& filename);

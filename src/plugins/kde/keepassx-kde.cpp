@@ -4,8 +4,7 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   the Free Software Foundation; version 2 of the License.               *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -22,6 +21,7 @@
 #include <kfiledialog.h>
 #include <kcmdlineargs.h>
 #include <kiconloader.h>
+#include <kfilefiltercombo.h>
 #include <QPixmap>
 #include <QHash>
 #include <QStringList>
@@ -29,11 +29,12 @@
 #include <QByteArray>
 #include "keepassx-kde.h"
 
+#define CSTR(x)(x.toUtf8().data())
+
 QHash<QString,QString>IconMap;
 int LastFilter;
 
 Q_EXPORT_PLUGIN2(keepassx_kde, KdePlugin)
-
 
 void createIconMap(){
 	IconMap["alarmclock"]="alarmclock";
@@ -72,6 +73,15 @@ void createIconMap(){
 }
 
 QString convertFilters(const QStringList& qtfilters){
+	/*
+	Qt Filter Syntax:
+	StringList:       "DescrA (*.ext1 *.ext2 *.ext3)",
+	                  "DescrB (*.ext4)"
+	
+    KDE Filter Syntax:
+	Single String:   "*.ext1 *.ext2 *.ext3|DescrA\n*ext4|DescrB"
+	*/
+	
 	QString kdefilters;
 	for(int i=0;i<qtfilters.size();i++){
 		int a=qtfilters[i].indexOf('(');
@@ -86,19 +96,55 @@ QString convertFilters(const QStringList& qtfilters){
 }
 
 
+int getFilterIndex(const QStringList& qtfilters,const QString& KdeExtString){
+	int i;
+	bool found=false;
+	for(i=0;i<qtfilters.size();i++){
+		int a=qtfilters[i].indexOf('(');
+		int b=qtfilters[i].indexOf(')');
+		QString QtExtString=qtfilters[i].mid(a+1,b-a-1); // "*.ext1 *.ext2"
+		if(KdeExtString==QtExtString){
+			found=true;
+			break;
+		}
+	}
+	if(found)
+		return i;
+	else
+		return 0;
+}
+
+
 QString KdePlugin::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){	
 	KFileDialog FileDlg(KUrl(dir),convertFilters(Filters),parent);
+	//FileDlg.filterWidget()->setCurrentFilter(convertFilters(QStringList()<<Filters[SelectedFilter]));
 	FileDlg.setMode(KFile::ExistingOnly | KFile::File);
+	FileDlg.setOperationMode(KFileDialog::Opening);
 	if(!FileDlg.exec())return QString();
-	//LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
+	LastFilter=getFilterIndex(Filters,FileDlg.currentFilter());
 	return FileDlg.selectedFiles()[0];
 }
 
 QStringList KdePlugin::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
-	return QStringList();
+	KFileDialog FileDlg(KUrl(dir),convertFilters(Filters),parent);
+	//FileDlg.filterWidget()->setCurrentFilter(convertFilters(QStringList()<<Filters[SelectedFilter]));
+	FileDlg.setMode(KFile::ExistingOnly | KFile::Files);
+	FileDlg.setOperationMode(KFileDialog::Opening);
+	if(!FileDlg.exec())return QStringList();
+	LastFilter=getFilterIndex(Filters,FileDlg.currentFilter());
+	return FileDlg.selectedFiles();
 }
 
-QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool OverWriteWarn){return QString();}
+QString KdePlugin::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool OverWriteWarn){
+	KFileDialog FileDlg(KUrl(dir),convertFilters(Filters),parent);
+	//FileDlg.filterWidget()->setCurrentFilter(convertFilters(QStringList()<<Filters[SelectedFilter]));
+	FileDlg.setMode(KFile::File);
+	FileDlg.setOperationMode(KFileDialog::Saving);
+	if(!FileDlg.exec())return QString();	
+	LastFilter=getFilterIndex(Filters,FileDlg.currentFilter());
+	return FileDlg.selectedFiles()[0];
+
+}
 
 QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
 	KCmdLineArgs::init(argc,argv,QByteArray("keepassx"),

@@ -15,9 +15,6 @@ data.files += ../share/keepass/*
 TARGET = ../bin/keepassx
 
 unix: !macx{
-        isEmpty(PREFIX){
-            PREFIX = /usr/local
-        }
         target.path = $${PREFIX}/bin
         data.path = $${PREFIX}/share/keepass
         LIBS += -lXtst -lQtDBus

@@ -4,8 +4,8 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   the Free Software Foundation; version 2 of the License.               *
+
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -104,7 +104,29 @@ QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QStr
 	FileDlg.setConfirmOverwrite(ShowOverwriteWarning);
 	if(!FileDlg.exec())return QString();
 	LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
-	return FileDlg.selectedFiles().first();
+	
+	//Check whether the file has an extension which fits to the selected filter
+	QString filepath=FileDlg.selectedFiles()[0];
+	QString filename=filepath.right(filepath.length()-filepath.lastIndexOf("/")-1);
+	int a=Filters[LastFilter].indexOf('(');
+	int b=Filters[LastFilter].indexOf(')');
+	QStringList Extensions=Filters[LastFilter].mid(a+1,b-a-1).split(" ");
+	if(Extensions.contains("*"))
+		return filepath;
+	
+	for(int i=0;i<Extensions.size();i++)
+		Extensions[i].remove(0,2); //remove the *. from the extensions
+
+	if(filename.contains(".")){
+		int p=filename.lastIndexOf(".");
+		QString ext=filename.right(filename.size()-p-1).toLower();
+		if(Extensions.contains(ext))
+			return filepath;
+		else
+			return filepath+"."+Extensions[0];
+	}
+	else
+		return filepath+"."+Extensions[0];
 }
 
 int QtStandardFileDialogs::getLastFilter(){

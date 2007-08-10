@@ -1,24 +1,25 @@
-/*
-	100% free public domain implementation of the SHA-1 algorithm
-	by Dominik Reichl <dominik.reichl@t-online.de>
-
-	Version 1.5 - 2005-01-01
-	- 64-bit compiler compatibility added
-	- Made variable wiping optional (define SHA1_WIPE_VARIABLES)
-	- Removed unnecessary variable initializations
-	- ROL32 improvement for the Microsoft compiler (using _rotl)
-
-	======== Test Vectors (from FIPS PUB 180-1) ========
-
-	SHA1("abc") =
-		A9993E36 4706816A BA3E2571 7850C26C 9CD0D89D
-
-	SHA1("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq") =
-		84983E44 1C3BD26E BAAE4AA1 F95129E5 E54670F1
-
-	SHA1(A million repetitions of "a") =
-		34AA973C D4C4DAA4 F61EEB2B DBAD2731 6534016F
-*/
+/***************************************************************************
+ *   Implementation of the SHA-1 algorithm                                 *
+ *   by Dominik Reichl <dominik.reichl@t-online.de> (public domain)        *
+ *                                                                         *
+ *   Copyright (C) 2007 by Tarek Saidi                                     *
+ *   tarek.saidi@arcor.de                                                  *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; version 2 of the License.               *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
+ 
 #include "global.h"
 #include "sha1.h"
 

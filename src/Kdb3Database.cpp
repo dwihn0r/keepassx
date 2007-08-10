@@ -1,11 +1,10 @@
 /***************************************************************************
  *   Copyright (C) 2005-2007 by Tarek Saidi                                *
- *   keepassx@gmail.com                                                    *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   the Free Software Foundation; version 2 of the License.               *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -35,7 +34,6 @@
 #include "lib/random.h"
 using namespace std;
 #include "Kdb3Database.h"
-#include "main.h"
 #include "KpxConfig.h"
 
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
