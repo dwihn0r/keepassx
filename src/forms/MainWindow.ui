@@ -144,8 +144,14 @@
       <string>&amp;Import from...</string>
      </property>
     </widget>
+	<widget class="QMenu" name="menuBookmarks" >
+     <property name="title" >
+      <string>Bookmarks</string>
+     </property>
+    </widget>
     <addaction name="FileNewAction" />
     <addaction name="FileOpenAction" />
+	<addaction name="menuBookmarks" />
     <addaction name="FileCloseAction" />
     <addaction name="separator" />
     <addaction name="FileSaveAction" />
@@ -237,6 +243,11 @@
    <addaction name="menuExtras" />
    <addaction name="menuHilfe" />
   </widget>
+  <action name="ManageBookmarksAction" >
+   <property name="text" >
+    <string>Manage Bookmarks...</string>
+   </property>
+  </action>
   <action name="FileOpenAction" >
    <property name="text" >
     <string>&amp;Open Database...</string>
@@ -542,6 +553,16 @@
   <action name="ExtrasTrashCanAction" >
    <property name="text" >
     <string>Recycle Bin...</string>
+   </property>
+  </action>
+  <action name="AddBookmarkAction" >
+   <property name="text" >
+    <string>Add Bookmark...</string>
+   </property>
+  </action>
+  <action name="AddThisAsBookmarkAction" >
+   <property name="text" >
+    <string>Bookmark this Database...</string>
    </property>
   </action>
  </widget>

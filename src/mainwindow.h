@@ -69,6 +69,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnFileSettings();
 		void OnFileChangeKey();
 		void OnFileExit();
+		void OnBookmarkTriggered(QAction* action);
 		void OnSearch();
 		void OnGroupSearch();
 		void OnViewShowToolbar(bool);
@@ -120,6 +121,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void updateDetailView();
 		void exportDatabase(IExport* exporter,QStringList filters);
 		void saveLastFilename(const QString& filename);
+		void createBookmarkActions();
 		QLineEdit* QuickSearchEdit;
 		QLabel* StatusBarGeneral;
 		QLabel* StatusBarSelection;

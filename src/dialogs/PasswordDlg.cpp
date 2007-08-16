@@ -1,11 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -27,26 +26,31 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QStringList>
+#include <QPainter>
+#include <QPalette>
+#include <QMenu>
 
 #include "main.h"
 #include "KpxConfig.h"
 #include "PasswordDlg.h"
 #include "lib/FileDialogs.h"
+#include "lib/bookmarks.h"
 
 
-CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButton,bool ChangeKeyMode)
+CPasswordDialog::CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,bool IsAuto,bool ChangeKeyMode)
 : QDialog(parent)
 {
 	setupUi(this);
-	createBanner(Banner,getPixmap("key"),tr("Database Key"));
+	createBanner(&BannerPixmap,getPixmap("key"),tr("Database Key"),width());
+	Button_Bookmarks->setIcon(getIcon("bookmark"));
 	db=DB;
+	LastFile=filename;
+	setWindowTitle(LastFile);
 	QString mountDir=config->mountDir();
 	QDir media(mountDir);
 	if(media.exists()){
 		QStringList Paths;
-		Paths=media.entryList(QStringList()<<"*",QDir::Dirs);
-		Paths.erase(Paths.begin()); // delete "."
-		Paths.erase(Paths.begin()); // delete ".."
+		Paths=media.entryList(QStringList()<<"*",QDir::Dirs | QDir::NoDotAndDotDot);
 		for(int i=0;i<Paths.count();i++)
 			Combo_Dirs->addItem(mountDir+Paths[i]);
 	}
@@ -66,17 +70,47 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButt
 		}
 		// if(LastKeyType==Password){... is not required because it is already the default state.
 	}
+	
+	// Bookmarks //
+	QPalette palette=Button_Bookmarks->palette();
+	palette.setColor(QPalette::Active,QPalette::Button,config->bannerColor1());
+	palette.setColor(QPalette::Active,QPalette::Window,config->bannerColor2());
+	Button_Bookmarks->setPalette(palette);
+	palette=Label_Bookmark->palette();
+	palette.setColor(QPalette::Active,QPalette::WindowText,config->bannerTextColor());
+	Label_Bookmark->setPalette(palette);
+	
+	QMenu* BookmarkMenu=new QMenu(this);
+	QAction* action=new QAction(this);
+	action->setData(QString());
+	action->setText(tr("Last File"));
+	action->setIcon(getIcon("document"));
+	BookmarkMenu->addAction(action);
+	BookmarkMenu->addSeparator();	
+	for(int i=0;i<KpxBookmarks::count();i++){
+		QAction* action=new QAction(this);
+		action->setData(KpxBookmarks::path(i));
+		action->setText(KpxBookmarks::title(i));
+		action->setIcon(getIcon("document"));
+		BookmarkMenu->addAction(action);		
+	}
+	Button_Bookmarks->setMenu(BookmarkMenu);
+	if(!IsAuto || !config->featureBookmarks()){
+		Button_Bookmarks->hide();
+		Label_Bookmark->hide();
+	}
+			
+	connect(Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
+	connect(ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect(Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
+	connect(CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
+	connect(ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoModeDatabaseKey() ) );
+	connect(Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
+	connect(Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
+	connect(ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
+	connect(BookmarkMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnBookmarkTriggered(QAction*)));
 
-	connect( Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
-	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
-	connect( Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
-	connect( CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
-	connect( ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoModeDatabaseKey() ) );
-	connect( Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
-	connect( Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
-	connect( ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
-
-	ButtonExit->setVisible(ShowExitButton);
+	ButtonExit->setVisible(IsAuto);
 	Mode_Set=ChangeKeyMode;
 	if(!ChangeKeyMode){
 		Edit_PasswordRep->hide();
@@ -342,3 +376,18 @@ void CPasswordDialog::OnButtonExit(){
 	done(2);
 }
 
+void CPasswordDialog::paintEvent(QPaintEvent* event){
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);	
+}
+
+void CPasswordDialog::OnBookmarkTriggered(QAction* action){
+	BookmarkFilename=action->data().toString();
+	if(action->data().toString()==QString())
+		setWindowTitle(LastFile);
+	else
+		setWindowTitle(action->data().toString());
+	Label_Bookmark->setText(action->text());
+}

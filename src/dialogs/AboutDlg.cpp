@@ -1,11 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -48,18 +47,18 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	QString str;
 	str+="<b>"+tr("Team")+"</b><br>";
 	str+="<div style='margin-left:10px;'>";
-	str+="<u>"+tr("Tarek Saidi")+"</u><br>"+tr("Developer, Project Admin")+"<br>"+tr("tariq@users.berlios.de")+"<br>";
+	str+="<u>"+tr("Tarek Saidi")+"</u><br>"+tr("Developer, Project Admin")+"<br>"+tr("tarek_saidi@users.sf.net")+"<br>";
 	str+="<br>";
-	str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.berlios.de")+"<br>";
+	str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.sf.de")+"<br>";
+	str+="<br>";
+	str+="<u>"+tr("Jota Jota")+"</u><br>"+tr("Developer")+"<br>"+tr("myxself@users.sf.de")+"<br>";
 	str+="</div><br><div style='margin-left:0px;'>";
 	str+="<b>"+tr("Thanks To")+"</b>";
 	str+="</div><div style='margin-left:10px;'>";
 	str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
 	str+="<br>";
-	str+="</div><div style='margin-left:10px;'>";
 	str+="<u>"+tr("James Nicholls")+"</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
 	str+="<br>";
-	str+="</div><div style='margin-left:10px;'>";
 	str+="<u>"+tr("Constantin Makshin")+"</u><br>"+tr("Various fixes and improvements")+"<br>"+tr("dinosaur-rus@users.sourceforge.net")+"<br></div>";
 	Edit_Thanks->setHtml(str);
 }

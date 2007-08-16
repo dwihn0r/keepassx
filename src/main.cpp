@@ -43,6 +43,7 @@
 
 #include "main.h"
 #include "lib/FileDialogs.h"
+#include "lib/bookmarks.h"
 #include "KpxConfig.h"
 #include "Kdb3Database.h"
 #include "mainwindow.h"
@@ -216,6 +217,7 @@ int main(int argc, char **_argv)
 	else loadDefaultDetailViewTemplate();
 
 	loadImages();
+	KpxBookmarks::load(QDir::homePath()+"/.keepassx/bookmarks");
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
 

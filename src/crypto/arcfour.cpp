@@ -58,7 +58,6 @@ void CArcFour::prepareKey(){
 }
 
 void CArcFour::encrypt(const byte* src, byte* dst,int length){
-//qDebug("Key:%s",RawKey.data());
 		prepareKey();
         unsigned char x;
         unsigned char y;

@@ -1,0 +1,69 @@
+<ui version="4.0" >
+ <class>ManageBookmarksDlg</class>
+ <widget class="QDialog" name="ManageBookmarksDlg" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>452</width>
+    <height>360</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Manage Bookmarks</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QListWidget" name="ListWidget" />
+     </item>
+     <item>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QToolButton" name="Button_Add" />
+       </item>
+       <item>
+        <widget class="QToolButton" name="Button_Delete" />
+       </item>
+       <item>
+        <widget class="QToolButton" name="Button_Edit" />
+       </item>
+       <item>
+        <widget class="QToolButton" name="Button_Up" />
+       </item>
+       <item>
+        <widget class="QToolButton" name="Button_Down" />
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>161</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

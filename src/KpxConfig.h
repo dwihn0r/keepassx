@@ -56,7 +56,6 @@ public:
 	QBitArray columns(){return stringToBitArray(settings.value("UI/Columns","11111000000").toString(),11);}
 	QList<int> columnOrder(){return stringToIntArray(settings.value("UI/ColumnOrder","100,100,100,100,100,100,100,100,100,100,100").toString(),11);}
 	QList<int> columnSizes(){return stringToIntArray(settings.value("UI/ColumnSizes","15,10,10,10,10,10,10,10,10,10,10").toString(),11);}
-	bool enableBookmarkMenu(){return settings.value("Options/EnableBookmarkMenu",true).toBool();}
 	QStringList fileDlgHistory(unsigned index){return settings.value(QString("FileDlgHistory/ENTRY%1").arg(index)).toStringList();}
 	GrpTreeState groupTreeState(){return stringToGrpTreeState(settings.value("Options/GroupTreeState").toString());}
 	bool hidePasswords(){return settings.value("UI/HidePasswords",true).toBool();}
@@ -90,6 +89,7 @@ public:
 	bool askBeforeDelete(){return settings.value("Options/AskBeforeDelete",true).toBool();}
 	int autoTypePreGap(){return settings.value("Options/AutoTypePreGap",500).toInt();}
 	int autoTypeKeyStrokeDelay(){return settings.value("Options/AutoTypeKeyStrokeDelay",0).toInt();}
+	bool featureBookmarks(){return settings.value("Features/Bookmarks",true).toBool();}
 	
 	void setAlternatingRowColors(bool value){settings.setValue("Options/AlternatingRowColors",value);}
 	void setBannerColor1(const QColor& value){settings.setValue("Options/BannerColor1",colorToString(value));}
@@ -99,7 +99,6 @@ public:
 	void setColumns(const QBitArray& value){settings.setValue("UI/Columns",bitArrayToString(value));}
 	void setColumnOrder(const QList<int>& value){settings.setValue("UI/ColumnOrder",intArrayToString(value));}
 	void setColumnSizes(const QList<int>& value){settings.setValue("UI/ColumnSizes",intArrayToString(value));}
-	void setEnableBookmarkMenu(bool value){settings.setValue("Options/EnableBookmarkMenu",value);}
 	void setFileDlgHistory(unsigned index,const QStringList& value){settings.setValue(QString("FileDlgHistory/ENTRY%1").arg(index), value);}
 	void setGroupTreeState(GrpTreeState value){settings.setValue("Options/GroupTreeState",grpTreeStateToString(value));}
 	void setHidePasswords(bool value){settings.setValue("UI/HidePasswords",value);}
@@ -133,6 +132,7 @@ public:
 	void setAskBeforeDelete(bool value){settings.setValue("Options/AskBeforeDelete",value);}
 	void setAutoTypePreGap(int value){settings.setValue("Options/AutoTypePreGap",value);}
 	void setAutoTypeKeyStrokeDelay(int value){settings.setValue("Options/AutoTypeKeyStrokeDelay",value);}
+	void setFeatureBookmarks(bool value){settings.setValue("Features/Bookmarks",value);}
 
 	unsigned fileDlgHistorySize();
 	void clearFileDlgHistory(){settings.remove("FileDlgHistory");};

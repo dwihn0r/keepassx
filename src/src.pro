@@ -14,20 +14,24 @@ INSTALLS += target data
 data.files += ../share/keepass/*
 TARGET = ../bin/keepassx
 
-unix: !macx{
+isEmpty(PREFIX){
+	PREFIX = /usr
+}
+
+unix : !macx {
         target.path = $${PREFIX}/bin
         data.path = $${PREFIX}/share/keepass
         LIBS += -lXtst -lQtDBus
         SOURCES += lib/AutoType_X11.cpp
     }
 
-macx{
+macx {
     target.path = /Applications
     data.path = /Applications/keepass.app/Contents/share/keepass
     SOURCES += lib/AutoType_X11.cpp
 }
 
-win32{
+win32 {
     SOURCES += lib/AutoType_Win.cpp
     TARGET = ../$$TARGET
     QMAKE_LINK_OBJECT_SCRIPT = ../build/$$QMAKE_LINK_OBJECT_SCRIPT
@@ -50,7 +54,9 @@ FORMS += forms/EditGroupDlg.ui \
 	 forms/CalendarDlg.ui \
 	 forms/TrashCanDlg.ui \
 	 forms/ExpiredEntriesDlg.ui \
-	 forms/WorkspaceLockedWidget.ui
+	 forms/WorkspaceLockedWidget.ui \
+ forms/AddBookmarkDlg.ui \
+ forms/ManageBookmarksDlg.ui
 TRANSLATIONS += translations/keepass-de_DE.ts \
 		translations/keepass-ru_RU.ts \
 		translations/keepass-es_ES.ts \
@@ -113,7 +119,10 @@ HEADERS += lib/IniReader.h \
 	   plugins/interfaces/IGnomeInit.h \
 	   plugins/interfaces/IIconTheme.h \
 	   KpxConfig.h \
-           KpxFirefox.h
+           KpxFirefox.h \
+ 	   dialogs/AddBookmarkDlg.h \
+ lib/bookmarks.h \
+ dialogs/ManageBookmarksDlg.h
 SOURCES += lib/UrlLabel.cpp \
            main.cpp \
            mainwindow.cpp \
@@ -161,7 +170,10 @@ SOURCES += lib/UrlLabel.cpp \
 	   crypto/yarrow.cpp \
 	   lib/WaitAnimationWidget.cpp \
 	   KpxConfig.cpp \
-           KpxFirefox.cpp
+           KpxFirefox.cpp \
+           dialogs/AddBookmarkDlg.cpp \
+ lib/bookmarks.cpp \
+dialogs/ManageBookmarksDlg.cpp
 RESOURCES += res/resources.qrc
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
@@ -171,9 +183,8 @@ CONFIG += debug \
 qt \
 thread \
 warn_off \
-dbus \
 assistant
-QT += dbus xml
+QT += xml
 TEMPLATE = app
 INCLUDEPATH += . \
 lib \

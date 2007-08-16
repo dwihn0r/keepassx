@@ -23,6 +23,8 @@
 #include "main.h"
 #include "lib/UrlLabel.h"
 #include "Database.h"
+#include <QPixmap>
+#include <QPaintEvent>
 
 
 class CPasswordDialog : public QDialog, public Ui_PasswordDlg
@@ -32,17 +34,21 @@ class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 	private:
 		bool Mode_Set; //true = Set, false = Get
 		IDatabase* db;
+		QPixmap BannerPixmap;
 		void setStatePasswordOnly();
 		void setStateKeyFileOnly();
 		void setStateBoth();
 		bool doAuth();
+		virtual void paintEvent(QPaintEvent*);
+		QString LastFile;
 	
 	public:
 		QString keyfile;
 		QString password;
+		QString BookmarkFilename;
 		tKeyType KeyType;
 		bool OverwriteKeyFile;	
-		CPasswordDialog(QWidget* parent,IDatabase* DB,bool ShowExitButton = false, bool KeyMode_Set=false);
+		CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,bool ShowExitButton = false, bool KeyMode_Set=false);
 	
 	public slots:
 	    void OnOK();
@@ -55,6 +61,7 @@ class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 	    void OnCheckBox_BothChanged(int state);
 	    void ChangeEchoModeDatabaseKey();
 	    void OnComboTextChanged(const QString&);
+		void OnBookmarkTriggered(QAction* action);
 };
 
 #endif

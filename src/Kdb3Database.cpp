@@ -103,7 +103,7 @@ int Kdb3Database::numIcons(){
 
 bool Kdb3Database::parseMetaStream(const StdEntry& entry){
 
-	qDebug("%s",entry.Comment.toUtf8().data());
+	qDebug("Found Metastream: %s",entry.Comment.toUtf8().data());
 
 	if(entry.Comment=="KPX_GROUP_TREE_STATE"){
 		parseGroupTreeStateMetaStream(entry.Binary);
@@ -843,8 +843,7 @@ QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
 			handles.append(&EntryHandles[i]);
 	}
 	qSort(handles.begin(),handles.end(),EntryHandleLessThan);
-	foreach(IEntryHandle* h,handles){qDebug("+ %s (%i)",h->title().toUtf8().data(),(int)h->isValid());}
-
+	
 	return handles;
 }
 

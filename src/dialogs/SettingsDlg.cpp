@@ -103,6 +103,9 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	SpinBox_ClipboardTime->setValue(config->clipboardTimeOut());
 	CheckBox_ShowPasswords->setChecked(config->showPasswords());
 	CheckBox_ShowPasswords_PasswordDlg->setChecked(config->showPasswordsPasswordDlg());
+	
+	//Features
+	CheckBox_FeatureBookmarks->setChecked(config->featureBookmarks());
 
 
 	//Desktop Integration
@@ -186,7 +189,6 @@ void CSettingsDlg::apply(){
 	config->setShowSysTrayIcon(checkBox_ShowSysTrayIcon->isChecked());
 	config->setMinimizeToTray(checkBox_MinimizeToTray->isChecked());
 	config->setSaveFileDlgHistory(checkBox_SaveFileDlgHistory->isChecked());
-	config->setEnableBookmarkMenu(checkBox_EnableBookmarkMenu->isChecked());
 	if(Radio_GroupTreeRestore->isChecked())config->setGroupTreeState(KpxConfig::RestoreLast);
 	else if(Radio_GroupTreeExpand->isChecked())config->setGroupTreeState(KpxConfig::ExpandAll);
 	else config->setGroupTreeState(KpxConfig::DoNothing);
@@ -204,6 +206,9 @@ void CSettingsDlg::apply(){
 	config->setClipboardTimeOut(SpinBox_ClipboardTime->value());
 	config->setShowPasswords(CheckBox_ShowPasswords->isChecked());
 	config->setShowPasswordsPasswordDlg(CheckBox_ShowPasswords_PasswordDlg->isChecked());
+	
+	//Features
+	config->setFeatureBookmarks(CheckBox_FeatureBookmarks->isChecked());
 
 	//Desktop Integration
 	PluginsModified=Label_IntPlugin_Info->isVisible();

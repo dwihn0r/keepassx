@@ -462,7 +462,6 @@ void KeepassEntryView::OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisInde
 }
 
 int KeepassEntryView::logicalColIndex(int LstIndex){
-	qDebug("%i",LstIndex);
 	int c=-1;
 	for(int i=0;i<NUM_COLUMNS;i++){
 		if(Columns.at(i))c++;

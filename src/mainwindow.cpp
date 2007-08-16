@@ -42,6 +42,7 @@
 #include "lib/random.h"
 #include "lib/AutoType.h"
 #include "lib/FileDialogs.h"
+#include "lib/bookmarks.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 #include "import/Import_KeePassX_Xml.h"
@@ -59,12 +60,10 @@
 #include "dialogs/CustomizeDetailViewDlg.h"
 #include "dialogs/ExpiredEntriesDlg.h"
 #include "dialogs/TrashCanDlg.h"
+#include "dialogs/AddBookmarkDlg.h"
+#include "dialogs/ManageBookmarksDlg.h"
 
-//#include <QtDBus/QtDBus>
 #include <iostream>
-
-//QDBusServer* dbusServer;
-//QDBusConnection* dbusCon;
 
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;
@@ -116,21 +115,8 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	}
 	HelpBrowser = new QAssistantClient(QString(),this);
 	HelpBrowser->setArguments(QStringList()<< "-profile" << "/home/tarek/Documents/KeePassX/share/keepass/doc/keepassx.adp");
-
-	// DBus Server of Qt 4.2 does not work - 4.3 snapshot seems to work fine
-	/*
-	//dbusServer=new QDBusServer("unix:path=/tmp/KpxBus",this);
-	//qDebug("DBUS: %s",dbusServer->lastError().message().toAscii().data());
-	//QDBusConnection::connectToBus("unix:path=/tmp/KpxBus","MyKpxConnection");
-	//qDebug("DBUS: %s",dbusCon->lastError().message().toAscii().data());
-
-	KpxFirefox* fox=new KpxFirefox(NULL);
-	new KpxFirefoxAdaptor(fox);
-	QDBusConnection::sessionBus().registerService("org.keepassx.firefoxservice");
-	QDBusConnection::sessionBus().registerObject("/KpxFirefox",fox);
-	qDebug("DBUS: %s",QDBusConnection::sessionBus().lastError().message().toAscii().data());
-	*/
-
+	
+	createBookmarkActions();
 }
 
 void KeepassMainWindow::setupConnections(){
@@ -145,6 +131,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(FileUnLockWorkspaceAction,SIGNAL(triggered()), this, SLOT(OnUnLockWorkspace()));
 	connect(menuImport,SIGNAL(triggered(QAction*)),this,SLOT(OnImport(QAction*)));
 	connect(menuExport,SIGNAL(triggered(QAction*)),this,SLOT(OnExport(QAction*)));
+	connect(menuBookmarks,SIGNAL(triggered(QAction*)),this,SLOT(OnBookmarkTriggered(QAction*)));
 
 	connect(EditNewGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnNewGroup()));
 	connect(EditEditGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnEditGroup()));
@@ -252,6 +239,10 @@ void KeepassMainWindow::setupIcons(){
     EditAutoTypeAction->setIcon(getIcon("autotype"));
 	HelpHandbookAction->setIcon(getIcon("manual"));
 	HelpAboutAction->setIcon(getIcon("help"));
+	menuBookmarks->menuAction()->setIcon(getIcon("bookmark_folder"));
+	AddThisAsBookmarkAction->setIcon(getIcon("bookmark"));
+	AddBookmarkAction->setIcon(getIcon("bookmark_add"));
+	ManageBookmarksAction->setIcon(getIcon("bookmark_edit"));
 	SysTray->setIcon(getIcon("keepassx_large"));
 	if(config->showSysTrayIcon())
 		SysTray->show();
@@ -350,6 +341,7 @@ void KeepassMainWindow::setupMenus(){
 #endif
 
 	ExtrasTrashCanAction->setVisible(false); //For KP 2.x only
+	menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
 }
 
 void KeepassMainWindow::setupDatabaseConnections(IDatabase* DB){
@@ -367,12 +359,14 @@ void KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		config->setLastKeyLocation(QString());
 		config->setLastKeyType(PASSWORD);}
 	db=dynamic_cast<IDatabase*>(new Kdb3Database());
-	CPasswordDialog PasswordDlg(this,db,IsAuto,false);
-	PasswordDlg.setWindowTitle(filename);
+	CPasswordDialog PasswordDlg(this,filename,db,IsAuto,false);
 	switch(PasswordDlg.exec()){
 		case 0: return;
 		case 2: Start=false; return;
 	}
+	if(PasswordDlg.BookmarkFilename!=QString())
+		filename=PasswordDlg.BookmarkFilename;
+
 	GroupView->db=db;
 	EntryView->db=db;
 	setupDatabaseConnections(db);
@@ -432,7 +426,7 @@ bool KeepassMainWindow::closeDatabase(){
 void KeepassMainWindow::OnFileNewKdb(){
 	IDatabase* db_new=dynamic_cast<IDatabase*>(new Kdb3Database());
 	db_new->create();
-	CPasswordDialog dlg(this,db_new,false,true);
+	CPasswordDialog dlg(this,QString(),db_new,false,true);
 	dlg.setWindowTitle(tr("New Database"));
 	if(dlg.exec()==1){
 		if(FileOpen)
@@ -495,6 +489,7 @@ EntryView->setEnabled(IsOpen);
 DetailView->setEnabled(IsOpen);
 QuickSearchEdit->setEnabled(IsOpen);
 ExtrasShowExpiredEntriesAction->setEnabled(IsOpen);
+AddThisAsBookmarkAction->setEnabled(IsOpen);
 
 if(!IsOpen){
     EditNewGroupAction->setEnabled(false);
@@ -756,7 +751,7 @@ if(dlg.exec())setStateFileModified(true);
 }
 
 void KeepassMainWindow::OnFileChangeKey(){
-	CPasswordDialog dlg(this,db,false,true);
+	CPasswordDialog dlg(this,QString(),db,false,true);
 	if(dlg.exec())
 		setStateFileModified(true);
 }
@@ -777,7 +772,7 @@ void KeepassMainWindow::OnImport(QAction* action){
 	IDatabase* tmpdb=dynamic_cast<IDatabase*>(new Kdb3Database());
 	tmpdb->create();
 	if(dynamic_cast<IImport*>(action->data().value<QObject*>())->importDatabase(this,tmpdb)){
-			CPasswordDialog dlg(this,tmpdb,false,true);
+			CPasswordDialog dlg(this,QString(),tmpdb,false,true);
 			dlg.setWindowTitle(tr("Set Master Key"));
 			if(!dlg.exec()){
 				delete tmpdb;
@@ -890,6 +885,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 	if(dlg.exec()==QDialog::Accepted){
 		EntryView->setAlternatingRowColors(config->alternatingRowColors());
 		SysTray->setVisible(config->showSysTrayIcon());
+		menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
 	}
 }
 
@@ -1028,4 +1024,56 @@ void KeepassMainWindow::OnUnLockWorkspace(){
         FileUnLockWorkspaceAction->setText(tr("Un&lock Workspace"));
 		IsLocked=true;
 	}
+}
+
+void KeepassMainWindow::OnBookmarkTriggered(QAction* action){
+	if(action==AddBookmarkAction){
+		AddBookmarkDlg dlg(this);
+		if(dlg.exec()){
+			int id=dlg.ItemID;	
+			QAction* action=new QAction(this);
+			action->setData(id);
+			action->setText(KpxBookmarks::title(id));
+			action->setIcon(getIcon("document"));
+			menuBookmarks->addAction(action);	
+		}
+		return;
+	}
+	
+	if(action==ManageBookmarksAction){
+		ManageBookmarksDlg dlg(this);
+		dlg.exec();
+		menuBookmarks->clear();
+		createBookmarkActions();
+		return;			
+	}
+	
+	if(action==AddThisAsBookmarkAction){
+		AddBookmarkDlg dlg(this,db->file()->fileName());
+		if(dlg.exec()){
+			int id=dlg.ItemID;	
+			QAction* action=new QAction(this);
+			action->setData(id);
+			action->setText(KpxBookmarks::title(id));
+			action->setIcon(getIcon("document"));
+			menuBookmarks->addAction(action);	
+		}	
+		return;
+	}	
+	openDatabase(KpxBookmarks::path(action->data().toInt()));
+	
+}
+
+void KeepassMainWindow::createBookmarkActions(){
+	menuBookmarks->addAction(AddBookmarkAction);
+	menuBookmarks->addAction(AddThisAsBookmarkAction);
+	menuBookmarks->addAction(ManageBookmarksAction);
+	menuBookmarks->addSeparator();
+	for(int i=0;i<KpxBookmarks::count();i++){
+		QAction* action=new QAction(this);
+		action->setData(i);
+		action->setText(KpxBookmarks::title(i));
+		action->setIcon(getIcon("document"));
+		menuBookmarks->addAction(action);		
+	}	
 }

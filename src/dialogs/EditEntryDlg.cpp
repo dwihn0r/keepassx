@@ -37,6 +37,7 @@
 #include <qtoolbutton.h>
 #include <QShowEvent>
 #include <QResizeEvent>
+#include <math.h>
 
 #include "SelectIconDlg.h"
 #include "PasswordGenDlg.h"
@@ -348,27 +349,27 @@ void CEditEntryDlg::OnNewAttachment()
 	int prec;
 	if (entry->binarySize() < 1024)
     {
-        unit = "Bytes";
+        unit = tr("Bytes");
         faktor = 1;
         prec = 0;
     }
     else
     {
-        if (entry->binarySize() < 1048576)
+        if (entry->binarySize() < pow(2,20))
         {
-            unit = "kB";
+            unit = tr("kiB");
             faktor = 1024;
         }
         else
-            if (entry->binarySize() < 1073741824)
+            if (entry->binarySize() < pow(2,30))
             {
-                unit = "MB";
-                faktor = 1048576;
+                unit = tr("MiB");
+                faktor = pow(2,20);
             }
             else
             {
-                unit = "GB";
-                faktor = 1073741824;
+                unit = tr("GiB");
+                faktor = pow(2,30);
             }
         prec = 1;
     }
