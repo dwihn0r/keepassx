@@ -18,19 +18,19 @@
  ***************************************************************************/
 
 #include <qmessagebox.h>
-#include <qlabel.h>
-#include <qdialog.h>
-#include <qfile.h>
 #include <QPainter>
 
-#include "main.h"
 #include "AboutDlg.h"
+
 
 AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("KeePassX %1").arg(KEEPASS_VERSION),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
 	loadLicFromFile();
+
+    labelAppName->setText(tr(APP_DISPLAY_NAME));
+    labelAppFunc->setText(tr(" -  %1").arg(APP_LONG_FUNC));
 
 	QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
 	if(TrActive){
@@ -51,9 +51,9 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	str+="<br>";
 	str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.sf.de")+"<br>";
 	str+="<br>";
-	str+="<u>"+tr("Jota Jota")+"</u><br>"+tr("Developer")+"<br>"+tr("myxself@users.sf.de")+"<br>";
+	str+="<u>"+tr("Juan J Gonz&aacute;lez C&aacute;rdenas [Jota Jota]")+"</u><br>"+tr("Developer")+"<br>"+tr("myxelf@users.sf.net")+"<br>";
 	str+="</div><br><div style='margin-left:0px;'>";
-	str+="<b>"+tr("Thanks To")+"</b>";
+    str+="<b>"+tr("Thanks To")+"</b><br>";
 	str+="</div><div style='margin-left:10px;'>";
 	str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
 	str+="<br>";

@@ -16,7 +16,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
- 
+
 #ifndef _STD_DATABASE_H_
 #define _STD_DATABASE_H_
 
@@ -55,7 +55,7 @@ public:
 	class StdGroup;
 	class StdEntry;
 	class EntryHandle:public IEntryHandle{
-		
+
 		friend class Kdb3Database;
 		public:
 			EntryHandle(Kdb3Database* db);
@@ -91,6 +91,7 @@ public:
 			virtual KpxDateTime expire();
 			virtual QByteArray binary();
 			virtual quint32 binarySize();
+            virtual QString friendlySize();
 			virtual bool isValid() const;
 		private:
 			void invalidate(){valid=false;}
@@ -99,14 +100,14 @@ public:
 			Kdb3Database* pDB;
 			StdEntry* Entry;
 	};
-	
+
 	class GroupHandle:public IGroupHandle{
 		friend class Kdb3Database;
 		GroupHandle(Kdb3Database* db);
 		public:
 			virtual void setTitle(const QString& Title);
 			virtual void setImage(const quint32& ImageId);
-			void setOldImage(const quint32& ImageId);	
+			void setOldImage(const quint32& ImageId);
 			virtual QString title();
 			virtual quint32 image();
 			quint32 oldImage();
@@ -124,10 +125,10 @@ public:
 			StdGroup* Group;
 			Kdb3Database* pDB;
 	};
-	
+
 	friend class EntryHandle;
 	friend class GroupHandle;
-	
+
 	class StdEntry:public CEntry{
 		public:
 				quint32 OldImage;
@@ -135,7 +136,7 @@ public:
 				EntryHandle* Handle;
 				StdGroup* Group;
 	};
-	
+
 	class StdGroup:public CGroup{
 		public:
 			StdGroup():CGroup(){};
@@ -147,12 +148,12 @@ public:
 			QList<StdGroup*> Childs;
 			QList<StdEntry*> Entries;
 	};
-	
+
 	class TrashEntry: public StdEntry{
 		public:
-			QStringList GroupPath;					
+			QStringList GroupPath;
 	};
-	
+
 	virtual ~Kdb3Database(){};
 	virtual bool load(QString identifier);
 	virtual bool save();
@@ -179,12 +180,12 @@ public:
 	virtual void setCryptAlgorithm(CryptAlgorithm algo){Algorithm=algo;}
 	virtual CryptAlgorithm cryptAlgorithm(){return Algorithm;}
 	virtual unsigned int keyTransfRounds(){return KeyTransfRounds;}
-	virtual void setKeyTransfRounds(unsigned int rounds){KeyTransfRounds=rounds;}	
-	
+	virtual void setKeyTransfRounds(unsigned int rounds){KeyTransfRounds=rounds;}
+
 	virtual QList<IEntryHandle*> entries();
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group);
 	virtual QList<IEntryHandle*> expiredEntries();
-		
+
 	virtual IEntryHandle* cloneEntry(const IEntryHandle* entry);
 	virtual void deleteEntry(IEntryHandle* entry);
 	virtual void deleteEntries(QList<IEntryHandle*> entries);
@@ -196,7 +197,7 @@ public:
 	virtual QList<IEntryHandle*> trashEntries();
 	virtual void emptyTrash();
 
-	
+
 	virtual QList<IGroupHandle*> groups();
 	virtual QList<IGroupHandle*> sortedGroups();
 	virtual void deleteGroup(IGroupHandle* group);
@@ -204,9 +205,9 @@ public:
 	virtual IGroupHandle* addGroup(const CGroup* Group,IGroupHandle* Parent);
 	virtual bool isParent(IGroupHandle* parent, IGroupHandle* child);
 
-	
 
-	
+
+
 private:
 	QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
 	void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
@@ -239,7 +240,7 @@ private:
 	StdEntry* getEntry(EntryHandle* handle);
 	int getEntryListIndex(EntryHandle* handle);
 	EntryHandle* getHandle(StdEntry* entry);
-	
+
 	StdGroup* getGroup(quint32 Id);
 	void deleteGroup(StdGroup* group);
 

@@ -131,16 +131,9 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 		ButtonDeleteAttachment->setDisabled(true);
 		Label_AttachmentSize->setText("");
 	}
-	else{
-		QString unit;
-		int faktor;
-		int prec;
-		if(entry->binarySize()<1000){unit=" Byte";faktor=1;prec=0;}
-		else
-			if(entry->binarySize()<1000000){unit=" kB";faktor=1000;prec=1;}
-		else{unit=" MB";faktor=1000000;prec=1;}
-		Label_AttachmentSize->setText(QString::number((float)entry->binarySize()/(float)faktor,'f',prec)+unit);
-	}
+	else
+        Label_AttachmentSize->setText(entry->friendlySize());
+
 	if(entry->expire()==Date_Never){
 		DateTime_Expire->setDisabled(true);
 		CheckBox_ExpiresNever->setChecked(true);
@@ -344,36 +337,7 @@ void CEditEntryDlg::OnNewAttachment()
 	QFileInfo info(filename);
 	entry->setBinaryDesc(info.fileName());
 	Edit_Attachment->setText(entry->binaryDesc());
-	QString unit;
-	uint faktor;
-	int prec;
-	if (entry->binarySize() < 1024)
-    {
-        unit = tr("Bytes");
-        faktor = 1;
-        prec = 0;
-    }
-    else
-    {
-        if (entry->binarySize() < pow(2,20))
-        {
-            unit = tr("kiB");
-            faktor = 1024;
-        }
-        else
-            if (entry->binarySize() < pow(2,30))
-            {
-                unit = tr("MiB");
-                faktor = pow(2,20);
-            }
-            else
-            {
-                unit = tr("GiB");
-                faktor = pow(2,30);
-            }
-        prec = 1;
-    }
-	Label_AttachmentSize->setText(QString::number((float)entry->binarySize()/(float)faktor,'f',prec) + " " + unit);
+	Label_AttachmentSize->setText(entry->friendlySize());
 	ButtonOpenAttachment->setEnabled(true);
 	ButtonSaveAttachment->setEnabled(true);
 	ButtonDeleteAttachment->setEnabled(true);

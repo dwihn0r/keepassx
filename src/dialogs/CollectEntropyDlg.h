@@ -17,7 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-  
+
 #ifndef _COLLECT_ENTROPY_DLG_H_
 #define _COLLECT_ENTROPY_DLG_H_
 
@@ -26,12 +26,15 @@
 #include <QPaintEvent>
 #include <QShowEvent>
 
+#include "main.h"
+
+
 class CollectEntropyDlg: public QDialog, public Ui_CollectEntropyDlg{
 	Q_OBJECT
 	public:
 		CollectEntropyDlg(QWidget* parent);
 		~CollectEntropyDlg();
-		
+
 	private:
 		QPixmap BannerPixmap;
 		virtual void paintEvent(QPaintEvent* event);

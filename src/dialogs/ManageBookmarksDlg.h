@@ -22,7 +22,10 @@
 
 #include <QDialog>
 #include <QCloseEvent>
+#include <QPaintEvent>
 #include "ui_ManageBookmarksDlg.h"
+
+#include "main.h"
 
 class ManageBookmarksDlg : public QDialog, private Ui::ManageBookmarksDlg
 {
@@ -30,13 +33,15 @@ class ManageBookmarksDlg : public QDialog, private Ui::ManageBookmarksDlg
 	public:
 		ManageBookmarksDlg(QWidget* parent=0);
 	private:
+        QPixmap BannerPixmap;
+        virtual void paintEvent(QPaintEvent*);
 		virtual void closeEvent(QCloseEvent* event);
 	private slots:
-		void OnButtonUp();
+        void OnButtonAdd();
+        void OnButtonEdit();
+        void OnButtonDelete();
+        void OnButtonUp();
 		void OnButtonDown();
-		void OnButtonDelete();
-		void OnButtonAdd();
-		void OnButtonEdit();
 		void edit(QListWidgetItem*);
 };
 

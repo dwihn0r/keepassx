@@ -16,7 +16,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
- 
+
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
@@ -27,9 +27,14 @@
 #include <QIcon>
 #include <QFile>
 
-#define APP_NAME "KeePassX"
-#define APP_FUNC "Password Manager"
-#define KEEPASS_VERSION "0.2.3"
+#define APP_DISPLAY_NAME    "KeePassX"
+#define APP_CODE_NAME       "keepassx"
+
+#define APP_SHORT_FUNC      "Password Manager"
+#define APP_LONG_FUNC       "Cross Platform Password Manager"
+
+#define APP_VERSION         "0.2.3"
+
 #define BUILTIN_ICONS 65
 
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};

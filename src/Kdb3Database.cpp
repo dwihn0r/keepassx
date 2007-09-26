@@ -843,7 +843,7 @@ QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
 			handles.append(&EntryHandles[i]);
 	}
 	qSort(handles.begin(),handles.end(),EntryHandleLessThan);
-	
+
 	return handles;
 }
 
@@ -962,6 +962,43 @@ KpxDateTime	Kdb3Database::EntryHandle::lastAccess(){return Entry->LastAccess;}
 KpxDateTime	Kdb3Database::EntryHandle::expire(){return Entry->Expire;}
 QByteArray Kdb3Database::EntryHandle::binary(){return Entry->Binary;}
 quint32 Kdb3Database::EntryHandle::binarySize(){return Entry->Binary.size();}
+
+QString Kdb3Database::EntryHandle::friendlySize()
+{
+    quint32 binsize = binarySize();
+    QString unit;
+    uint    faktor;
+    int     prec;
+
+    if (binsize < 1024)
+    {
+        unit = tr("Bytes");
+        faktor = 1;
+        prec = 0;
+    }
+    else
+    {
+        if (binsize < 1048576)
+        {
+            unit = tr("KiB");
+            faktor = 1024;
+        }
+        else
+            if (binsize < 1073741824)
+            {
+                unit = tr("MiB");
+                faktor = 1048576;
+            }
+            else
+            {
+                unit = tr("GiB");
+                faktor = 1073741824;
+            }
+        prec = 1;
+    }
+    return (QString::number((float)binsize / (float)faktor, 'f', prec) + " " + unit);
+}
+
 int Kdb3Database::EntryHandle::visualIndex()const{return Entry->Index;}
 void Kdb3Database::EntryHandle::setVisualIndexDirectly(int i){Entry->Index=i;}
 bool Kdb3Database::EntryHandle::isValid()const{return valid;}
@@ -1637,7 +1674,7 @@ bool Kdb3Database::createKeyFile(const QString& filename,int length, bool Hex){
 
 
 void Kdb3Database::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,int Pos){
-	StdGroup* Parent;	
+	StdGroup* Parent;
 	StdGroup* Group=((GroupHandle*)groupHandle)->Group;
 	if(NewParent)
 		Parent=((GroupHandle*)NewParent)->Group;
@@ -1686,7 +1723,7 @@ void Kdb3Database::moveToTrash(IEntryHandle* entry){
 	TrashEntries.append(trash);
 	TrashHandles.append(EntryHandle(this));
 	TrashHandles.back().Entry=&TrashEntries.back();
-	TrashEntries.back().Handle=&TrashHandles.back();	
+	TrashEntries.back().Handle=&TrashHandles.back();
 }
 
 void Kdb3Database::emptyTrash(){

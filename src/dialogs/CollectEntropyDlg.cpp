@@ -21,8 +21,9 @@
 #include <QPainter>
 #include <QCursor>
 #include "crypto/yarrow.h"
+
 #include "CollectEntropyDlg.h"
-#include "main.h"
+
 
 CollectEntropyDlg::CollectEntropyDlg(QWidget* parent):QDialog(parent){
 	setupUi(this);
@@ -81,12 +82,12 @@ void CollectEntropyDlg::updateProgress(){
 		stackedWidget->setCurrentIndex(1);
 	}
 	else
-		progressBar->setValue(4*KeyCounter+4*MouseCounter);	
-	
+		progressBar->setValue(4*KeyCounter+4*MouseCounter);
+
 }
 
 void CollectEntropyDlg::showEvent(QShowEvent* event){
 	if(!event->spontaneous()){
-		Animation->start();	
-	}	
+		Animation->start();
+	}
 }

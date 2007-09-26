@@ -285,7 +285,7 @@
   </action>
   <action name="FileExitAction" >
    <property name="text" >
-    <string>E&amp;xit</string>
+    <string>Q&amp;uit</string>
    </property>
   </action>
   <action name="EditNewGroupAction" >

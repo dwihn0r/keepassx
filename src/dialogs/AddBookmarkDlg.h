@@ -21,7 +21,10 @@
 #define _ADDBOOKMARKDLG_H_
 
 #include <QDialog>
+#include <QPaintEvent>
 #include "ui_AddBookmarkDlg.h"
+
+#include "main.h"
 
 class AddBookmarkDlg : public QDialog, private Ui::AddBookmarkDlg
 {
@@ -30,11 +33,15 @@ class AddBookmarkDlg : public QDialog, private Ui::AddBookmarkDlg
 	public:
 		AddBookmarkDlg (QWidget* parent=0, QString DefaultFilename=QString(), int ItemID=-1);
 		int ItemID;
-	
-	private slots:
+
+    private:
+        QPixmap BannerPixmap;
+        virtual void paintEvent(QPaintEvent*);
+
+    private slots:
 		void OnButtonOk();
 		void OnButtonBrowse();
-	
+
 };
 
 #endif

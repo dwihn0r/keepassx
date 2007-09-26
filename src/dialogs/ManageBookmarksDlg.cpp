@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 #include <QListWidget>
-#include "main.h"
+#include <QPainter>
 #include "ManageBookmarksDlg.h"
 #include "lib/bookmarks.h"
 #include "dialogs/AddBookmarkDlg.h"
@@ -26,24 +26,65 @@
 ManageBookmarksDlg::ManageBookmarksDlg(QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
+    createBanner(&BannerPixmap,getPixmap("bookmark"),tr("Manage Bookmarks"),width());
+
 	for(int i=0;i<KpxBookmarks::count();i++){
 		QListWidgetItem* item=new QListWidgetItem(ListWidget);
 		item->setData(Qt::UserRole,i);
-		item->setText(KpxBookmarks::title(i));	
+		item->setText(KpxBookmarks::title(i));
 	}
-	connect(Button_Up,SIGNAL(clicked()),this,SLOT(OnButtonUp()));
+    connect(Button_Add,SIGNAL(clicked()),this,SLOT(OnButtonAdd()));
+    connect(Button_Edit,SIGNAL(clicked()),this,SLOT(OnButtonEdit()));
+    connect(Button_Delete,SIGNAL(clicked()),this,SLOT(OnButtonDelete()));
+    connect(Button_Up,SIGNAL(clicked()),this,SLOT(OnButtonUp()));
 	connect(Button_Down,SIGNAL(clicked()),this,SLOT(OnButtonDown()));
-	connect(Button_Delete,SIGNAL(clicked()),this,SLOT(OnButtonDelete()));
-	connect(Button_Add,SIGNAL(clicked()),this,SLOT(OnButtonAdd()));
-	connect(Button_Edit,SIGNAL(clicked()),this,SLOT(OnButtonEdit()));
 	connect(ListWidget,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(edit(QListWidgetItem*)));
 	connect(buttonBox->button(QDialogButtonBox::Close),SIGNAL(clicked()),this,SLOT(close()));
-	
-	Button_Up->setIcon(getIcon("up"));
-	Button_Down->setIcon(getIcon("down"));
-	Button_Delete->setIcon(getIcon("delete"));
+
+    Button_Add->setIcon(getIcon("bookmark_add"));
 	Button_Edit->setIcon(getIcon("bookmark_edit"));
-	Button_Add->setIcon(getIcon("bookmark_add"));
+    Button_Delete->setIcon(getIcon("bookmark_del"));
+    Button_Up->setIcon(getIcon("up"));
+    Button_Down->setIcon(getIcon("down"));
+}
+
+void ManageBookmarksDlg::paintEvent(QPaintEvent *event){
+    QDialog::paintEvent(event);
+    QPainter painter(this);
+    painter.setClipRegion(event->region());
+    painter.drawPixmap(QPoint(0,0),BannerPixmap);
+}
+
+
+
+void ManageBookmarksDlg::OnButtonAdd(){
+    AddBookmarkDlg dlg(this);
+    if(dlg.exec()){
+        int i=dlg.ItemID;
+        QListWidgetItem* item=new QListWidgetItem(ListWidget);
+        item->setData(Qt::UserRole,i);
+        item->setText(KpxBookmarks::title(i));
+    }
+    return;
+}
+
+void ManageBookmarksDlg::OnButtonEdit(){
+    QListWidgetItem* item=ListWidget->currentItem();
+    if(!item)return;
+    edit(item);
+}
+
+void ManageBookmarksDlg::OnButtonDelete(){
+    QListWidgetItem* item=ListWidget->currentItem();
+    if(!item)return;
+    int index=item->data(Qt::UserRole).toInt();
+    KpxBookmarks::remove(index);
+    delete item;
+    for(int i=0;i<ListWidget->count();i++){
+        int itemindex=ListWidget->item(i)->data(Qt::UserRole).toInt();
+        if(itemindex>index)
+            ListWidget->item(i)->setData(Qt::UserRole,itemindex-1);
+    }
 }
 
 
@@ -66,44 +107,17 @@ void ManageBookmarksDlg::OnButtonDown(){
 	ListWidget->insertItem(row,item);
 	ListWidget->setCurrentRow(row);
 }
-		
-void ManageBookmarksDlg::OnButtonDelete(){
-	QListWidgetItem* item=ListWidget->currentItem();
-	if(!item)return;
-	int index=item->data(Qt::UserRole).toInt();
-	KpxBookmarks::remove(index);
-	delete item;
-	for(int i=0;i<ListWidget->count();i++){
-		int itemindex=ListWidget->item(i)->data(Qt::UserRole).toInt();
-		if(itemindex>index)
-			ListWidget->item(i)->setData(Qt::UserRole,itemindex-1);
-	}
-}
 
-void ManageBookmarksDlg::OnButtonEdit(){
-	QListWidgetItem* item=ListWidget->currentItem();
-	if(!item)return;
-	edit(item);	
-}
+
 
 void ManageBookmarksDlg::edit(QListWidgetItem* item){
 	int i=item->data(Qt::UserRole).toInt();
 	AddBookmarkDlg dlg(this,QString(),i);
-	dlg.exec();	
-	item->setText(KpxBookmarks::title(i));	
+	dlg.exec();
+	item->setText(KpxBookmarks::title(i));
 }
 
 
-void ManageBookmarksDlg::OnButtonAdd(){
-		AddBookmarkDlg dlg(this);
-		if(dlg.exec()){
-			int i=dlg.ItemID;
-			QListWidgetItem* item=new QListWidgetItem(ListWidget);
-			item->setData(Qt::UserRole,i);
-			item->setText(KpxBookmarks::title(i));	
-		}
-		return;
-}
 
 void ManageBookmarksDlg::closeEvent(QCloseEvent * event){
 	QList<int> Order;
@@ -112,6 +126,6 @@ void ManageBookmarksDlg::closeEvent(QCloseEvent * event){
 	for(int i=0;i<KpxBookmarks::count();i++){
 		Order<<ListWidget->item(i)->data(Qt::UserRole).toInt();
 	}
-	KpxBookmarks::resort(Order);	
+	KpxBookmarks::resort(Order);
 	event->accept();
 }

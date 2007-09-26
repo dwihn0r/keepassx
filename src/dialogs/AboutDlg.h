@@ -21,9 +21,9 @@
 #define _ABOUTDIALOG_H_
 
 #include <QPaintEvent>
-#include <QPixmap>
 #include "ui_AboutDlg.h"
 #include "lib/UrlLabel.h"
+
 #include "main.h"
 
 
@@ -42,7 +42,7 @@ public slots:
 private:
 	QPixmap BannerPixmap;
 	inline void loadLicFromFile();
-	virtual void paintEvent(QPaintEvent*); 
+	virtual void paintEvent(QPaintEvent*);
 };
 
 #endif

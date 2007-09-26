@@ -18,9 +18,12 @@
  ***************************************************************************/
 
 #include <QFileInfo>
-#include "AddBookmarkDlg.h"
+#include <QPainter>
 #include "lib/FileDialogs.h"
 #include "lib/bookmarks.h"
+
+#include "AddBookmarkDlg.h"
+
 
 AddBookmarkDlg::AddBookmarkDlg(QWidget* parent, QString DefaultFilename, int _ItemID):QDialog(parent)
 {
@@ -30,16 +33,27 @@ AddBookmarkDlg::AddBookmarkDlg(QWidget* parent, QString DefaultFilename, int _It
 	connect(buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()),this,SLOT(OnButtonOk()));
 	connect(buttonBox->button(QDialogButtonBox::Cancel),SIGNAL(clicked()),this,SLOT(reject()));
 	if(ItemID==-1){
+        createBanner(&BannerPixmap,getPixmap("bookmark_add"),tr("Add Bookmark"),width());
+
 		if(DefaultFilename==QString())
 			OnButtonBrowse();
 		else
 			Edit_Filename->setText(DefaultFilename);
 	}
 	else {
-		Edit_Title->setText(KpxBookmarks::title(ItemID));
+        createBanner(&BannerPixmap,getPixmap("bookmark_edit"),tr("Edit Bookmark"),width());
+
+        Edit_Title->setText(KpxBookmarks::title(ItemID));
 		Edit_Filename->setText(KpxBookmarks::path(ItemID));
 		setWindowTitle(tr("Edit Bookmark"));
 	}
+}
+
+void AddBookmarkDlg::paintEvent(QPaintEvent *event){
+    QDialog::paintEvent(event);
+    QPainter painter(this);
+    painter.setClipRegion(event->region());
+    painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
 void AddBookmarkDlg::OnButtonBrowse(){
@@ -54,5 +68,5 @@ void AddBookmarkDlg::OnButtonOk(){
 		ItemID=KpxBookmarks::add(Edit_Title->text(),Edit_Filename->text());
 	else
 		KpxBookmarks::edit(Edit_Title->text(),Edit_Filename->text(),ItemID);
-	accept();	
+	accept();
 }

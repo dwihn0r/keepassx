@@ -93,9 +93,9 @@ void test_getAllWindowTitles(){
 			qDebug("%i %i: %s",i,p,XGetAtomName(pDisplay,atom[p]));
 		}
 		XFree(atom);
-		
+
 	}
-	#endif	
+	#endif
 }
 
 int main(int argc, char **_argv)
@@ -138,12 +138,12 @@ int main(int argc, char **_argv)
 				qWarning("Could not load desktop integration plugin:");
 				qWarning(CSTR(PluginLoadError));
 			}
-			else{	
+			else{
 				QObject *plugininstance=plugin.instance();
 				IFileDialog* fdlg=qobject_cast<IFileDialog*>(plugininstance);
 				IconLoader=qobject_cast<IIconTheme*>(plugininstance);
 				if(IconLoader==NULL){
-					qWarning("Error: Integration Plugin: Could not initialize IconTheme interface."); 
+					qWarning("Error: Integration Plugin: Could not initialize IconTheme interface.");
 				}
 				KpxFileDialogs::setPlugin(fdlg);
 				if(config->integrPlugin()==KpxConfig::KDE){
@@ -365,7 +365,7 @@ const QIcon& getIcon(const QString& name){
 		NewIcon=new QIcon(IconLoader->getIcon(name));
 		if(NewIcon->isNull()){
 			delete NewIcon;
-			NewIcon=NULL;	
+			NewIcon=NULL;
 		}
 		else
 			IconCache.insert(name,NewIcon);
@@ -379,7 +379,7 @@ const QIcon& getIcon(const QString& name){
 		}
 		NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
 		IconCache.insert(name,NewIcon);
-	} 
+	}
 	return *NewIcon;
 }
 
@@ -423,7 +423,7 @@ int i=1;
 		i++; }
 	for(i; i<argc;i++){
 		if(QString(argv[i])=="-help"){
-			cout << "KeePassX" << KEEPASS_VERSION << endl;
+			cout << "KeePassX" << APP_VERSION << endl;
 			cout << "Usage: keepass [Filename] [Options]" << endl;
 			cout << "  -help             This Help" << endl;
 			cout << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
@@ -485,7 +485,7 @@ QString makePathRelative(const QString& AbsDir,const QString& CurDir){
 
 QString applicationDirPath(){
 	QString filepath=applicationFilePath();
-	filepath.truncate(filepath.lastIndexOf("/"));	
+	filepath.truncate(filepath.lastIndexOf("/"));
 	return filepath;
 }
 

@@ -115,7 +115,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,QWidget *parent, Qt:
 	}
 	HelpBrowser = new QAssistantClient(QString(),this);
 	HelpBrowser->setArguments(QStringList()<< "-profile" << "/home/tarek/Documents/KeePassX/share/keepass/doc/keepassx.adp");
-	
+
 	createBookmarkActions();
 }
 
@@ -240,9 +240,9 @@ void KeepassMainWindow::setupIcons(){
 	HelpHandbookAction->setIcon(getIcon("manual"));
 	HelpAboutAction->setIcon(getIcon("help"));
 	menuBookmarks->menuAction()->setIcon(getIcon("bookmark_folder"));
-	AddThisAsBookmarkAction->setIcon(getIcon("bookmark"));
+	AddThisAsBookmarkAction->setIcon(getIcon("bookmark_this"));
 	AddBookmarkAction->setIcon(getIcon("bookmark_add"));
-	ManageBookmarksAction->setIcon(getIcon("bookmark_edit"));
+	ManageBookmarksAction->setIcon(getIcon("bookmark"));
 	SysTray->setIcon(getIcon("keepassx_large"));
 	if(config->showSysTrayIcon())
 		SysTray->show();
@@ -294,12 +294,12 @@ void KeepassMainWindow::setupMenus(){
 		case 28: ViewToolButtonSize28Action->setChecked(true); break;
 	}
 
-	SysTrayMenu = new QMenu(tr("KeePassX"),this);
+	SysTrayMenu = new QMenu(tr(APP_DISPLAY_NAME),this);
     SysTrayMenu->addAction(FileUnLockWorkspaceAction);
     SysTrayMenu->addSeparator();
 	SysTrayMenu->addAction(FileExitAction);
 	SysTray->setContextMenu(SysTrayMenu);
-    SysTray->setToolTip(tr("%1 %2").arg(APP_NAME, APP_FUNC) + " - " + tr((IsLocked) ? "Locked" : "Unlocked"));
+    SysTray->setToolTip(tr("%1 %2").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC) + " - " + tr((IsLocked) ? "Locked" : "Unlocked"));
 
 	#define _add_import(name){\
 	QAction* import=new QAction(this);\
@@ -323,7 +323,7 @@ void KeepassMainWindow::setupMenus(){
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
 	FileSaveAction->setShortcut(tr("Ctrl+S"));
     FileUnLockWorkspaceAction->setShortcut(tr("Ctrl+L"));
-    FileExitAction->setShortcut(tr("Ctrl+X"));
+    FileExitAction->setShortcut(tr("Ctrl+Q"));
     EditNewGroupAction->setShortcut(tr("Ctrl+G"));
 	EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
 	EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
@@ -1011,7 +1011,7 @@ void KeepassMainWindow::OnUnLockWorkspace(){
 		setCentralWidget(NormalCentralWidget);
 		NormalCentralWidget->setVisible(true);
         SysTray->setIcon(getIcon("keepassx_large"));
-        SysTray->setToolTip(tr("%1 %2").arg(APP_NAME, APP_FUNC) + " - " + tr("Unlocked"));
+        SysTray->setToolTip(tr("%1 %2").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC) + " - " + tr("Unlocked"));
         FileUnLockWorkspaceAction->setText(tr("&Lock Workspace"));
 		IsLocked=false;
 	} else {
@@ -1020,7 +1020,7 @@ void KeepassMainWindow::OnUnLockWorkspace(){
 		setCentralWidget(LockedCentralWidget);
 		LockedCentralWidget->setVisible(true);
         SysTray->setIcon(getIcon("keepassx_locked"));
-        SysTray->setToolTip(tr("%1 %2").arg(APP_NAME, APP_FUNC) + " - " + tr("Locked"));
+        SysTray->setToolTip(tr("%1 %2").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC) + " - " + tr("Locked"));
         FileUnLockWorkspaceAction->setText(tr("Un&lock Workspace"));
 		IsLocked=true;
 	}
@@ -1030,38 +1030,38 @@ void KeepassMainWindow::OnBookmarkTriggered(QAction* action){
 	if(action==AddBookmarkAction){
 		AddBookmarkDlg dlg(this);
 		if(dlg.exec()){
-			int id=dlg.ItemID;	
+			int id=dlg.ItemID;
 			QAction* action=new QAction(this);
 			action->setData(id);
 			action->setText(KpxBookmarks::title(id));
 			action->setIcon(getIcon("document"));
-			menuBookmarks->addAction(action);	
+			menuBookmarks->addAction(action);
 		}
 		return;
 	}
-	
+
 	if(action==ManageBookmarksAction){
 		ManageBookmarksDlg dlg(this);
 		dlg.exec();
 		menuBookmarks->clear();
 		createBookmarkActions();
-		return;			
+		return;
 	}
-	
+
 	if(action==AddThisAsBookmarkAction){
 		AddBookmarkDlg dlg(this,db->file()->fileName());
 		if(dlg.exec()){
-			int id=dlg.ItemID;	
+			int id=dlg.ItemID;
 			QAction* action=new QAction(this);
 			action->setData(id);
 			action->setText(KpxBookmarks::title(id));
 			action->setIcon(getIcon("document"));
-			menuBookmarks->addAction(action);	
-		}	
+			menuBookmarks->addAction(action);
+		}
 		return;
-	}	
+	}
 	openDatabase(KpxBookmarks::path(action->data().toInt()));
-	
+
 }
 
 void KeepassMainWindow::createBookmarkActions(){
@@ -1074,6 +1074,6 @@ void KeepassMainWindow::createBookmarkActions(){
 		action->setData(i);
 		action->setText(KpxBookmarks::title(i));
 		action->setIcon(getIcon("document"));
-		menuBookmarks->addAction(action);		
-	}	
+		menuBookmarks->addAction(action);
+	}
 }
