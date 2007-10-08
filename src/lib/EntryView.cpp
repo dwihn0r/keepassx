@@ -131,7 +131,7 @@ void KeepassEntryView::OnHeaderSectionClicked(int index){
 }
 
 void KeepassEntryView::OnSaveAttachment(){
-	Q_ASSERT(selectedItems().size()==1);
+	if (selectedItems().size() == 0) return;
 	CEditEntryDlg::saveAttachment(((EntryViewItem*)selectedItems().first())->EntryHandle,this);
 }
 
@@ -228,7 +228,16 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 
 
 void KeepassEntryView::OnNewEntry(){
-	IEntryHandle* NewEntry=db->newEntry(CurrentGroup);
+	IEntryHandle* NewEntry = NULL;
+	if (!CurrentGroup){// We must be viewing search results. Add the new entry to the first group.		
+		if (db->groups().size() > 0)
+			NewEntry=db->newEntry(db->sortedGroups()[0]);
+		else{
+			QMessageBox::critical(NULL,tr("Error"),tr("At least one group must exist before adding an entry."),tr("OK"));
+		}
+	}
+	else
+		NewEntry=db->newEntry(CurrentGroup);
 	CEditEntryDlg dlg(db,NewEntry,this,true);
 	if(!dlg.exec()){
 		db->deleteLastEntry();
@@ -257,16 +266,17 @@ void KeepassEntryView::OnEntryActivated(QTreeWidgetItem* item,int Column){
 }
 
 void KeepassEntryView::OnEditEntry(){
-	Q_ASSERT(selectedItems().size()==1);
+	if (selectedItems().size() == 0) return;
 	editEntry((EntryViewItem*)selectedItems().first());
 }
 
 void KeepassEntryView::OnEditOpenUrl(){
-	Q_ASSERT(selectedItems().size()==1);
+	if (selectedItems().size() == 0) return;
 	openBrowser(((EntryViewItem*)selectedItems().first())->text(logicalColIndex(2)));
 }
 
 void KeepassEntryView::OnUsernameToClipboard(){
+	if (selectedItems().size() == 0) return;
 	Clipboard->setText(((EntryViewItem*)selectedItems().first())->EntryHandle->username(),  QClipboard::Clipboard);
 	if(Clipboard->supportsSelection()){
 		Clipboard->setText(((EntryViewItem*)selectedItems().first())->EntryHandle->username(),QClipboard::Selection);
@@ -276,6 +286,7 @@ void KeepassEntryView::OnUsernameToClipboard(){
 }
 
 void KeepassEntryView::OnPasswordToClipboard(){
+	if (selectedItems().size() == 0) return;
 	SecString password;
 	password=((EntryViewItem*)selectedItems().first())->EntryHandle->password();
 	password.unlock();
@@ -581,7 +592,7 @@ void KeepassEntryView::removeDragItems(){
 }
 
 void KeepassEntryView::OnAutoType(){
-	Q_ASSERT(selectedItems().size()==1);
+	if (selectedItems().size() == 0) return;
 	QString error;
 	AutoType::perform(((EntryViewItem*)selectedItems().first())->EntryHandle,error);
 }

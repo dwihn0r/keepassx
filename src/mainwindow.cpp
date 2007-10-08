@@ -652,7 +652,7 @@ switch(EntrySelection){
     EditPasswordToClipboardAction->setEnabled(true);
     EditUsernameToClipboardAction->setEnabled(true);
     EditOpenUrlAction->setEnabled(true);
-    EditSaveAttachmentAction->setEnabled(true);
+    EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
     EditEditEntryAction->setEnabled(true);
     EditCloneEntryAction->setEnabled(true);
     EditCloneEntryAction->setText(tr("Clone Entry"));
@@ -692,7 +692,7 @@ switch(EntrySelection){
     EditUsernameToClipboardAction->setEnabled(true);
     EditPasswordToClipboardAction->setEnabled(true);
     EditOpenUrlAction->setEnabled(true);
-    EditSaveAttachmentAction->setEnabled(true);
+    EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
     EditEditEntryAction->setEnabled(true);
     EditCloneEntryAction->setEnabled(false);
     EditCloneEntryAction->setText(tr("Clone Entry"));
