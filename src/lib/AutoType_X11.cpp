@@ -60,27 +60,25 @@ Shortcut AutoType::shortcut;
 void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr){
 	QString indexStr;
 	if (nr==0)
-		indexStr = "Auto-Type: ";
+		indexStr = "Auto-Type:";
 	else
-		indexStr = QString("Auto-Type-%1: ").arg(nr);
+		indexStr = QString("Auto-Type-%1:").arg(nr);
 	QString str;
 	QString comment=entry->comment();
-	int c=comment.count(indexStr);
+	int c=comment.count(indexStr, Qt::CaseInsensitive);
 	if(c>1){
 		err=QCoreApplication::translate("AutoType","More than one 'Auto-Type:' key sequence found.\nAllowed is only one per entry.");
 		return;
 	}
-	if(c==1){
-		int indexLen = indexStr.length();
-		int start=comment.indexOf(indexStr)+indexLen;
-		int len;
-		if(comment.size()==indexLen)return;
-		for(len=0;len<comment.size();len++){
-			if(comment.size()==(start+len))break;
-			if(comment.at(start+len)==QChar('\n'))break;
-		}
-		if(!len)return;
-		str=comment.mid(start,len);
+	else if(c==1){
+		int start = comment.indexOf(indexStr,0,Qt::CaseInsensitive) + indexStr.length();
+		int end = comment.indexOf("\n", start);
+		if (end == -1)
+			end = comment.length();
+		
+		str=comment.mid(start,end-start).trimmed();
+		if (str.isEmpty())
+			return;
 	}
 	else
 		str="{USERNAME}{TAB}{PASSWORD}{ENTER}";
@@ -195,28 +193,28 @@ void AutoType::performGlobal(){
 	QList<IEntryHandle*> validEntries;
 	QList<int> entryNumbers;
 	QList<IEntryHandle*> entries = MainWin->db->entries();
-	QRegExp lineMatch("^Auto-Type-Window(?:-(\\d+)|): (.+)$", Qt::CaseSensitive, QRegExp::RegExp2);
+	QRegExp lineMatch("Auto-Type-Window(?:-(\\d+)|):([^\\n]+)", Qt::CaseInsensitive, QRegExp::RegExp2);
 	QDateTime now = QDateTime::currentDateTime();
 	for (int i=0; i<entries.size(); i++){
 		if (entries[i]->expire()!=Date_Never && entries[i]->expire()<now)
 			continue;
 		
 		bool hasWindowEntry=false;
-		QStringList lines=entries[i]->comment().split("\n", QString::SkipEmptyParts);
-		for (int j=0; j<lines.size(); j++){
-			QString line = lines[j].trimmed();
-			if (lineMatch.indexIn(line)==-1) continue;
+		QString comment = entries[i]->comment();
+		int offset = 0;
+		while ( (offset=lineMatch.indexIn(comment, offset))!=-1 ){
 			QStringList captured = lineMatch.capturedTexts();
+			offset += captured[0].length();
 			int nr;
 			QString entryWindow;
 			bool valid;
 			if (captured.size()==2){
 				nr = 0;
-				entryWindow = captured[1].toLower();
+				entryWindow = captured[1].trimmed().toLower();
 			}
 			else{
 				nr = captured[1].toInt();
-				entryWindow = captured[2].toLower();
+				entryWindow = captured[2].trimmed().toLower();
 			}
 			if (entryWindow.length()==0) continue;
 			
