@@ -171,7 +171,8 @@
  * Standard include files will probably be ok.
  */
 
-#include <qstring.h>     /* for memset(), memcpy(), and memcmp() */
+#include <QString>     /* for memset(), memcpy(), and memcmp() */
+#include <cstdlib>
 #include "twofish.h"
 
 
@@ -476,7 +477,7 @@
 
 
 void Twofish_fatal(char* msg){
-	qCritical("Twofish: Fatal Error");
+	qCritical("Twofish: Fatal Error: %s",msg);
 	exit(1);
 }
 

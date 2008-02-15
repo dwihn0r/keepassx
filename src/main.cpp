@@ -20,26 +20,27 @@
  ***************************************************************************/
 
 #include <iostream>
-#include <qapplication.h>
-#include <qlibrary.h>
-#include <qlocale.h>
-#include <qdir.h>
+#include <QLibraryInfo>
+#include <QLocale>
+#include <QDir>
 #include <QMessageBox>
 #include <QTranslator>
 #include <QPainter>
 #include <QImage>
 #include <QStyleFactory>
 #include <QProcess>
-#include <QLibraryInfo>
-#include <QPluginLoader>
 #include <QDesktopServices>
 #include <QUrl>
 
+/*
+#include <QLibary>
+#include <QPluginLoader>
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
 #include "plugins/interfaces/IGnomeInit.h"
 #include "plugins/interfaces/IIconTheme.h"
 #include "lib/FileDialogs.h"
+*/
 
 #include "main.h"
 #include "lib/FileDialogs.h"
@@ -48,18 +49,11 @@
 #include "Kdb3Database.h"
 #include "mainwindow.h"
 #include "crypto/yarrow.h"
-using namespace std;
-
-#ifdef Q_WS_X11
-	#include <X11/extensions/XTest.h>
-	#define XK_LATIN1
-	#define XK_MISCELLANY
-	#define XK_XKB_KEYS
-	#include <X11/keysymdef.h>
-	#include <X11/Xlib.h>
+#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
+#include "Application_X11.h"
 #endif
 
-#define CSTR(x)(x.toUtf8().data())
+using namespace std;
 
 QHash<QString,QPixmap*>PixmapCache;
 QHash<QString,QIcon*>IconCache;
@@ -71,32 +65,12 @@ bool TrActive;
 QString DetailViewTemplate;
 
 QPixmap* EntryIcons;
-IIconTheme* IconLoader=NULL;
+//IIconTheme* IconLoader=NULL; //TODO plugins
 char ** argv;
 
 inline void loadImages();
-inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang);
+inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang,bool& ArgMin,bool& ArgLock);
 bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
-
-void test_getAllWindowTitles(){
-	#ifdef Q_WS_X11
-	Display* pDisplay = XOpenDisplay( NULL );
-	Window r,p;
-	Window* c;
-	unsigned int num_ch=0;
-	XQueryTree(pDisplay,DefaultRootWindow(pDisplay),&r,&p,&c,&num_ch);
-	qDebug("%u",num_ch);
-	for(int i=0;i<num_ch;i++){
-		int num_prop=0;
-		Atom* atom=XListProperties(pDisplay,c[i],&num_prop);
-		for(int p=0;p<num_prop;p++){
-			qDebug("%i %i: %s",i,p,XGetAtomName(pDisplay,atom[p]));
-		}
-		XFree(atom);
-
-	}
-	#endif
-}
 
 int main(int argc, char **_argv)
 {
@@ -104,7 +78,9 @@ int main(int argc, char **_argv)
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
 	QApplication* app=NULL;
 	AppDir=applicationDirPath();
-	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang);
+	bool ArgMin = false;
+	bool ArgLock = false;
+	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang,ArgMin,ArgLock);
 	qDebug(CSTR(QDir::current().absolutePath()));
 
 	//Load Config
@@ -123,8 +99,8 @@ int main(int argc, char **_argv)
 	config = new KpxConfig(IniFilename);
 	fileDlgHistory.load();
 
-	//Plugins
-	if(config->integrPlugin()!=KpxConfig::NoIntegr){
+	// TODO Plugins
+	/*if(config->integrPlugin()!=KpxConfig::NoIntegr){
 		QString LibName="libkeepassx-";
 		if(config->integrPlugin()==KpxConfig::KDE)
 			LibName+="kde.so";
@@ -165,8 +141,13 @@ int main(int argc, char **_argv)
 			qWarning(CSTR(QString("Could not load desktop integration plugin: File '%1' not found.").arg(LibName)));
 			PluginLoadError=QObject::tr("Could not locate library file.");
 		}
-	}
-	if(!app) QApplication* app=new QApplication(argc,argv);
+	}*/
+	
+#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
+	if(!app) new KeepassApplication(argc,argv);
+#else
+	if(!app) new QApplication(argc,argv);
+#endif
 
 
 	//Internationalization
@@ -184,11 +165,13 @@ int main(int argc, char **_argv)
 	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
 						<< app->applicationDirPath()+"/../share/keepass/i18n/"
 						<< QDir::homePath()+"/.keepassx/" ))
-		{app->installTranslator(translator);
-		TrActive=true;}
+	{
+		app->installTranslator(translator);
+		TrActive=true;
+	}
 	else{
 		if(loc.name()!="en_US")
-		qWarning(QString("Kpx: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
+			qWarning(QString("Kpx: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
 				.arg(QLocale::languageToString(loc.language()))
 				.arg(QLocale::countryToString(loc.country())).toAscii());
 		delete translator;
@@ -202,41 +185,24 @@ int main(int argc, char **_argv)
 		app->installTranslator(qtTranslator);
 	else{
 		if(loc.name()!="en_US")
-		qWarning(QString("Qt: No Translation found for '%1 (%2)'using 'English (UnitedStates)'")
+			qWarning(QString("Qt: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
 				.arg(QLocale::languageToString(loc.language()))
 				.arg(QLocale::countryToString(loc.country())).toAscii());
 		delete qtTranslator;
 	}
 
 
-	QFile templ(QDir::homePath()+"/.keepassx/detailview-template.html"); ///FIXME ArgCfg
-	if(templ.open(QIODevice::ReadOnly)){
-		DetailViewTemplate=QString::fromUtf8(templ.readAll());
-		templ.close();
-	}
-	else loadDefaultDetailViewTemplate();
+	DetailViewTemplate=config->detailViewTemplate();
 
 	loadImages();
-	KpxBookmarks::load(QDir::homePath()+"/.keepassx/bookmarks");
+	KpxBookmarks::load();
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
 
-	int r=0;
-	KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile);
-	if(mainWin->Start){
-		mainWin->show();
-		r=app->exec();
-	}
+	QApplication::setQuitOnLastWindowClosed(false);
+	KeepassMainWindow *mainWin = new KeepassMainWindow(ArgFile,ArgMin,ArgLock);
+	int r=app->exec();
 	delete mainWin;
-
-	if(templ.open(QIODevice::WriteOnly)){
-		templ.write(DetailViewTemplate.toUtf8());
-		templ.close();
-	}
-	else{
-		qWarning("Failed to save detail view template: %s",decodeFileError(templ.error()).toUtf8().data());
-	}
-
 
 	fileDlgHistory.save();
 	delete app;
@@ -244,34 +210,6 @@ int main(int argc, char **_argv)
 	return r;
 }
 
-
-void loadDefaultDetailViewTemplate(){
-		QFile templ(":/default-detailview.html");
-		templ.open(QIODevice::ReadOnly);
-		DetailViewTemplate=QString::fromUtf8(templ.readAll());
-		templ.close();
-		DetailViewTemplate.replace("Group",QCoreApplication::translate("DetailViewTemplate","Group"));
-		DetailViewTemplate.replace("Title",QCoreApplication::translate("DetailViewTemplate","Title"));
-		DetailViewTemplate.replace("Username",QCoreApplication::translate("DetailViewTemplate","Username"));
-		DetailViewTemplate.replace("Password",QCoreApplication::translate("DetailViewTemplate","Password"));
-		DetailViewTemplate.replace("URL",QCoreApplication::translate("DetailViewTemplate","URL"));
-		DetailViewTemplate.replace("Creation",QCoreApplication::translate("DetailViewTemplate","Creation"));
-		DetailViewTemplate.replace("Last Access",QCoreApplication::translate("DetailViewTemplate","Last Access"));
-		DetailViewTemplate.replace("Last Modification",QCoreApplication::translate("DetailViewTemplate","Last Modification"));
-		DetailViewTemplate.replace("Expiration",QCoreApplication::translate("DetailViewTemplate","Expiration"));
-		DetailViewTemplate.replace("Comment",QCoreApplication::translate("DetailViewTemplate","Comment"));
-}
-
-//obsolete
-void createBanner(QLabel *Banner,const QPixmap* symbol,QString text){
-	QPixmap Pixmap;
-	createBanner(&Pixmap,symbol,text
-				   ,Banner->width()
-				   ,config->bannerColor1()
-			       ,config->bannerColor2()
-			       ,config->bannerTextColor());
-	Banner->setPixmap(Pixmap);
-}
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
 	createBanner(Pixmap,IconAlpha,Text,Width,config->bannerColor1(),config->bannerColor2(),config->bannerTextColor());
@@ -317,37 +255,62 @@ QString decodeFileError(QFile::FileError Code){
 		case QFile::PermissionsError: return QApplication::translate("FileErrors","The file could not be accessed.");
 		case QFile::CopyError: return QApplication::translate("FileErrors","The file could not be copied.");
 	}
+	return QString();
 }
 
-void openBrowser(QString UrlString){
+void openBrowser(IEntryHandle* entry){
+	QString url = entry->url();
+	url.replace("{TITLE}", entry->title(), Qt::CaseInsensitive);
+	url.replace("{USERNAME}", entry->username(), Qt::CaseInsensitive);
+	
+	if (url.contains("{PASSWORD}",Qt::CaseInsensitive)){
+		SecString password=entry->password();
+		password.unlock();
+		url.replace("{PASSWORD}", password, Qt::CaseInsensitive);
+	}
+	
+	openBrowser(url);
+}
+
+void openBrowser(const QString& UrlString){
+	if (UrlString.startsWith("cmd://") && UrlString.length()>6){
+		QProcess::startDetached(UrlString.right(UrlString.length()-6));
+		return;
+	}
+	
 	QUrl url(UrlString);
 	if(url.scheme().isEmpty())
 		url=QUrl("http://"+UrlString);
-	if(config->urlCmd().isEmpty()){
+	if(config->urlCmdDef()){
 		QDesktopServices::openUrl(url);
 	}
 	else{
-		QStringList args=config->urlCmd().arg(url.toString()).split(' ');
-		QString cmd=args.takeFirst();
-		QProcess::startDetached(cmd,args);
+		QByteArray UrlEncoded = url.toEncoded();
+		QString browser = config->urlCmd();
+		if (browser.contains("%u", Qt::CaseInsensitive))
+			browser.replace("%u", UrlEncoded, Qt::CaseInsensitive);
+		else if (browser.contains("%1"))
+			browser.replace("%1", UrlEncoded);
+		else
+			browser.append(" ").append(UrlEncoded);
+		QProcess::startDetached(browser);
 	}
 }
 
 ///TODO 0.2.3 remove
 void loadImg(QString name,QPixmap& Img){
-if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
- if(Img.load(AppDir+"/share/"+name)==false){
- QMessageBox::critical(0,QObject::tr("Error"),QObject::tr("File '%1' could not be found.")
-				   .arg(name),QObject::tr("OK"),0,0,2,1);
- exit(1);
-}}
-
+	if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
+		if(Img.load(AppDir+"/share/"+name)==false){
+			QMessageBox::critical(0,QApplication::translate("Main","Error"),
+				QApplication::translate("Main","File '%1' could not be found.")
+				.arg(name),QApplication::translate("Main","OK"),0,0,2,1);
+ 			exit(1);
+		}
+	}
 }
 
 ///TODO 0.2.3 remove
 void loadImages(){
-	bool small=true;
-	QString ThemeDir=AppDir+"/../share/keepass/icons/nuvola/32x32";
 	QPixmap tmpImg;
 	loadImg("clientic.png",tmpImg);
 	EntryIcons=new QPixmap[BUILTIN_ICONS];
@@ -361,7 +324,8 @@ const QIcon& getIcon(const QString& name){
 	if(CachedIcon)
 		return *CachedIcon;
 	QIcon* NewIcon=NULL;
-	if(IconLoader){
+	//TODO plugins
+	/*if(IconLoader){
 		NewIcon=new QIcon(IconLoader->getIcon(name));
 		if(NewIcon->isNull()){
 			delete NewIcon;
@@ -369,7 +333,7 @@ const QIcon& getIcon(const QString& name){
 		}
 		else
 			IconCache.insert(name,NewIcon);
-	}
+	}*/
 	if(!NewIcon)
 	{
 		QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
@@ -399,39 +363,45 @@ const QPixmap* getPixmap(const QString& name){
 
 
 bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& loc,const QStringList& paths){
-for(int i=0;i<paths.size();i++)
-	if(tr->load(prefix+loc+".qm",paths[i])) return true;
-for(int i=0;i<paths.size();i++){
-	QDir dir(paths[i]);
-	QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
-	for(int j=0;j<TrFiles.size();j++){
-		if(TrFiles[j].left(prefix.length()+2)==prefix+loc.left(2)){
-			if(tr->load(TrFiles[j],paths[i]))return true;
+	for(int i=0;i<paths.size();i++)
+		if(tr->load(prefix+loc+".qm",paths[i])) return true;
+	
+	for(int i=0;i<paths.size();i++){
+		QDir dir(paths[i]);
+		QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
+		for(int j=0;j<TrFiles.size();j++){
+			if(TrFiles[j].left(prefix.length()+2)==prefix+loc.left(2)){
+				if(tr->load(TrFiles[j],paths[i]))return true;
+			}
 		}
 	}
+	return false;
 }
-return false;
+
+void printHelp(){
+	cout << "KeePassX" << APP_VERSION << endl;
+	cout << "Usage: keepass [Filename] [Options]" << endl;
+	cout << "  -help             This Help" << endl;
+	cout << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
+	cout << "  -min              Start minimized." << endl;
+	cout << "  -lock             Start locked." << endl;
+	cout << "  -lang <LOCALE>    Use specified language instead of systems default." << endl;
+	cout << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
+	cout << "                    Examples: de     German" << endl;
+	cout << "                              de_CH  German(Switzerland)"<<endl;
+	cout << "                              pt_BR  Portuguese(Brazil)"<<endl;
 }
 
-
-
-void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang){
+void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang,bool& ArgMin, bool& ArgLock){
 if(argc>1){
-int i=1;
+	int i=1;
 	if(argv[i][0]!='-'){
 		ArgFile=QString::fromUtf8(argv[i]);
-		i++; }
-	for(i; i<argc;i++){
+		i++;
+	}
+	for(; i<argc; i++){
 		if(QString(argv[i])=="-help"){
-			cout << "KeePassX" << APP_VERSION << endl;
-			cout << "Usage: keepass [Filename] [Options]" << endl;
-			cout << "  -help             This Help" << endl;
-			cout << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
-			cout << "  -lang <LOCALE>    Use specified language instead of systems default." << endl;
-			cout << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
-			cout << "                    Examples: de     German" << endl;
-			cout << "                              de_CH  German(Switzerland)"<<endl;
-			cout << "                              pt_BR  Portuguese(Brazil)"<<endl;
+			printHelp();
 			exit(0);
 			}
 		else if(QString(argv[i])=="-cfg"){
@@ -439,21 +409,32 @@ int i=1;
 			else{ArgCfg=QString::fromUtf8(argv[i+1]); i++;}
 			}
 		else if(QString(argv[i])=="-lang"){
-			if(i-1==argc) cout << "Missing argument for -lang" << endl;
-			else{ArgLang=QString::fromUtf8(argv[i+1]); i++;}
-			}
-			else if(QString(argv[i])=="-test"){/*
-				if (testDatabase()) exit(0);
-				else exit(1);*/
-			}
-		else{cout << "** Unrecognized argument: " << argv[i] <<  endl;
-			exit(1);}
+			if(i-1==argc)
+				cout << "Missing argument for -lang" << endl;
+			else
+				ArgLang=QString::fromUtf8(argv[i+1]); i++;
+		}
+		else if(QString(argv[i])=="-min"){
+			ArgMin = true;
+		}
+		else if(QString(argv[i])=="-lock"){
+			ArgLock = true;
+		}
+		/*else if(QString(argv[i])=="-test"){
+			if (testDatabase()) exit(0);
+			else exit(1);
+		}*/
+		else{
+			cout << "** Unrecognized argument: " << argv[i] <<  endl << endl;
+			printHelp();
+			exit(1);
+		}
 	}
    }
 }
 
 void showErrMsg(const QString& msg,QWidget* parent){
-QMessageBox::critical(parent,QObject::tr("Error"),msg,QObject::tr("OK"));
+	QMessageBox::critical(parent,QApplication::translate("Main","Error"),msg,QApplication::translate("Main","OK"));
 }
 
 QString findPlugin(const QString& filename){

@@ -38,7 +38,7 @@ class ExpiredEntriesDialog:public QDialog, public Ui_ExpiredEntriesDialog{
 		virtual void resizeEvent(QResizeEvent *);
 	
 	private slots:
-		void OnItemDoubleClicked(QTreeWidgetItem*,int);
+		void OnItemDoubleClicked(QTreeWidgetItem*);
 	
 	
 };

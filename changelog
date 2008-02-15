@@ -1,16 +1,83 @@
 ---------------
-    0.2.3
+    0.2.2.6
 ---------------
--fixed to long Auto-Type delay
--fixed wrong text color in the password repeation box when using new Qt versions (Bug #???)
--fixed problem with the assignment of group icons (custom icons metastream format rev 3)
--more stable drag&drop implementation which also works under MacOSX 
+-bookmarks and the Detail View are saved in the config file
+-fixed bug that caused unlock not to work when 'Remember last opened file' is disabled or the the search is used
+-loading default Detail View didn't work
+
+---------------
+    0.2.2.5
+---------------
+-fixed critical bug that caused the database to be only opened/saved with the keyfile when keyfile and password were selected
+-fixed crash that could occur when locking a database that has unsaved changes
+-don't hide window to tray if a modal window is opened
+-auto-Type window is always on top and columns are automatically resized
+
+---------------
+    0.2.2.4
+---------------
+-window is now minimized to tray even if the unlock dialog is shown
+-fixed problem when restoring window using the tray icon
+-support custom commands and placeholders in entry urls
+-improved custom browser selection in the settings dialog
+-all dialogs use the native button order
+-window title indicates if there are unsaved changes
+-improved many translation strings
+
+---------------
+    0.2.2.3
+---------------
+-fixed a crash when the database is locked and KeePassX is restored
+-fixed KeePassX is not always properly minimized after auto-type
+-fixed global auto-type not working on non-ascii window titles
+-added a setting to optionally use entry titles to match window for global auto-type
+-added support for the delay command in auto-type
+-expired entries are not used for global auto-type
+-comparison of window titles is now always case-insensitive
+-fixed cmd option -help didn't work
+-output help on unrecognized argument
+-fixed typo in desktop file
+
+---------------
+    0.2.2.2
+---------------
+-added support for multiple Auto-Type-Window definitions
+ fully compatible to KeePass (http://keepass.info/help/base/autotype.html#autoglobal)
+-added settings and command line options to start minimized and/or locked
+-fixed window not always hidden when using 'Minimize to tray instead of taskbar'
+-added pixmap and desktop file
+-fixed a bunch of compiler warnings
+
+---------------
+    0.2.2.1
+---------------
+Changes by Felix Geyer:
+-added Global Auto-Type feature
+-added database locking feature
+-saves the sort column and order of the entry view
+-added options 'Minimize to tray instead of taskbar', 'Lock workspace when minimizing the main window' and 'Global Auto-Type Shortcut'
+-fixed Auto-Type while still holding modifier keys (ctrl, shift, ...) and caps lock
+-fixed Auto-Type puts space at the beginning when using custom Auto-Type format
+-fixed auto-typing of some non-Latin1 chars
+-fixed crash when trying to auto-type invalid chars
+-left click on the tray icon brings the main window to front when it's not the active window, otherwise hides it
+-fixed a bunch of compiler warnings
+-disabled all not yet working features
+
+Official changes:
+-system tray icon
+-fine tuning options for auto-type
+-fully customizable HTML based detail view
+-secure random number generator based on Yarrow including an optional entropy collector
+-new dialog to view expiered entries
+-calendar widget to edit expiration dates in a more confortable way
+-restructured password generator
+-much better appearance under MacOS X
+-final program icon
+-misc. visual improvements
 -new more robust and flexible database back-end api
 -replaced old AES implementation by the latest version of Brian Gladman's implementation.
--now using strong random number generator 'yarrow' instead of the standard library functions.
--final program icon
-
-
+-(maybe incomplete)
 
 ---------------
     0.2.2
@@ -30,6 +97,7 @@
 -alpha blending for banner icons
 -new standard banner icon
 -MacOS packages: all Qt libraries are now included in the application bundle (extra installation is not longer necessary)
+
 ---------------
     0.2.1
 ---------------
@@ -43,6 +111,7 @@
  for entries which don't expire
 -entry view now gets updated after changing the column setup
 -added menu entry to change the size of the toolbar icons
+
 ---------------
     0.2.0
 ---------------

@@ -41,7 +41,7 @@ SimplePasswordDialog::~SimplePasswordDialog()
 }
 
 void SimplePasswordDialog::OnTextChanged(const QString& txt){
-	if(txt==QString())
+	if(txt.isEmpty())
 		buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 	else
 		buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);

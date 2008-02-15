@@ -1,0 +1,8 @@
+Installation instructions for *nix:
+-----------------------------------
+1. qmake-qt4 / qmake
+   You have to use qmake of Qt >= 4.2.0, depending on your distro it is called qmake or qmake-qt4.
+   By default KeePassX is installed to /usr, you can change that by adding PREFIX=[PATH] to the qmake command.
+   You can also add RELEASE=1 to build KeePassX optimized.
+2. make
+3. make install

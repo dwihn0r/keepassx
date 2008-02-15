@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=KeePassX
+GenericName=Cross Platform Password Manager
+GenericName[fr]=Gestionnaire de mot de passe
+GenericName[de]=Passwortverwaltung
+Exec=keepassx
+Icon=keepassx.xpm
+Comment=Cross Platform Password Manager
+Comment[fr]=Gestionnaire de mot de passe
+Comment[de]=Passwortverwaltung
+Terminal=false
+Type=Application
+Categories=Qt;Utility;

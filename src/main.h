@@ -33,17 +33,21 @@
 #define APP_SHORT_FUNC      "Password Manager"
 #define APP_LONG_FUNC       "Cross Platform Password Manager"
 
-#define APP_VERSION         "0.2.3"
+#define APP_VERSION         "0.3.0"
 
 #define BUILTIN_ICONS 65
+
+#define CSTR(x)(x.toLocal8Bit().constData())
+
+class IEntryHandle;
 
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
 class KpxConfig;
 
-void createBanner(QLabel *Banner,const QPixmap* symbol,QString text);
 void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width);
 void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor);
-void openBrowser(QString url);
+void openBrowser(IEntryHandle* entry);
+void openBrowser(const QString& UrlString);
 void showErrMsg(const QString& msg,QWidget* parent=NULL);
 QString applicationFilePath();
 QString applicationDirPath();
@@ -52,7 +56,6 @@ const QPixmap* getPixmap(const QString& name);
 QString decodeFileError(QFile::FileError Code);
 QString findPlugin(const QString& filename);
 QString makePathRelative(const QString& Abs,const QString& Cur);
-void loadDefaultDetailViewTemplate();
 extern QString PluginLoadError;
 
 extern KpxConfig *config;

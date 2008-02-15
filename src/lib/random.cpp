@@ -19,8 +19,8 @@
  ***************************************************************************/
 #include <iostream>
 #include <fstream>
-#include <qdatetime.h>
-#include <qobject.h>
+#include <QDateTime>
+#include <QObject>
 #include "random.h"
 using namespace std;
 

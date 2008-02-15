@@ -22,10 +22,12 @@
  ***************************************************************************/
 
 #include "KpxConfig.h"
-#include <Qt>
+#include <QApplication>
+#include <QSettings>
 #include <QDir>
 
 KpxConfig::KpxConfig(const QString& filePath) : settings(filePath,QSettings::IniFormat){
+	configFile=filePath;
 	if (settings.contains("Options/GroupTreeRestore") && !settings.contains("Options/GroupTreeState")){
 		switch (settings.value("Options/GroupTreeRestore",1).toInt()){
 			case 0:
@@ -44,6 +46,34 @@ KpxConfig::KpxConfig(const QString& filePath) : settings(filePath,QSettings::Ini
 	if (urlCmd()=="<<default>>")
 		setUrlCmd(QString());
 }
+
+#ifdef GLOBAL_AUTOTYPE
+Shortcut KpxConfig::globalShortcut(){
+	Shortcut s;
+	s.key = settings.value("Options/GlobalShortcutKey",0).toUInt();
+	QBitArray mods = settings.value("Options/GlobalShortcutMods",QBitArray(5)).toBitArray();
+	if (mods.size()!=5)
+		mods = QBitArray(5);
+	s.ctrl = mods.testBit(0);
+	s.shift = mods.testBit(1);
+	s.alt = mods.testBit(2);
+	s.altgr = mods.testBit(3);
+	s.win = mods.testBit(4);
+	
+	return s;
+}
+
+void KpxConfig::setGlobalShortcut(const Shortcut& s){
+	settings.setValue("Options/GlobalShortcutKey", s.key);
+	QBitArray mods(5);
+	mods.setBit(0, s.ctrl);
+	mods.setBit(1, s.shift);
+	mods.setBit(2, s.alt);
+	mods.setBit(3, s.altgr);
+	mods.setBit(4, s.win);
+	settings.setValue("Options/GlobalShortcutMods", mods);
+}
+#endif
 
 unsigned KpxConfig::fileDlgHistorySize(){
 	settings.beginGroup("FileDlgHistory");
@@ -182,4 +212,36 @@ QString KpxConfig::keyTypeToString(tKeyType keyType){
 			res="Composite";
 	}
 	return res;
+}
+
+
+QString KpxConfig::detailViewTemplate(){
+	if (settings.contains("UI/DetailsView")){
+		return QString::fromUtf8( qUncompress(settings.value("UI/DetailsView").toByteArray()) );
+	}
+	else{
+		return defaultDetailViewTemplate();
+	}
+}
+
+QString KpxConfig::defaultDetailViewTemplate(){
+	QFile templ(":/default-detailview.html");
+	templ.open(QIODevice::ReadOnly);
+	QString value=QString::fromUtf8(templ.readAll());
+	templ.close();
+	value.replace("Group",QCoreApplication::translate("DetailViewTemplate","Group"));
+	value.replace("Title",QCoreApplication::translate("DetailViewTemplate","Title"));
+	value.replace("Username",QCoreApplication::translate("DetailViewTemplate","Username"));
+	value.replace("Password",QCoreApplication::translate("DetailViewTemplate","Password"));
+	value.replace("URL",QCoreApplication::translate("DetailViewTemplate","URL"));
+	value.replace("Creation",QCoreApplication::translate("DetailViewTemplate","Creation"));
+	value.replace("Last Access",QCoreApplication::translate("DetailViewTemplate","Last Access"));
+	value.replace("Last Modification",QCoreApplication::translate("DetailViewTemplate","Last Modification"));
+	value.replace("Expiration",QCoreApplication::translate("DetailViewTemplate","Expiration"));
+	value.replace("Comment",QCoreApplication::translate("DetailViewTemplate","Comment"));
+	return value;
+}
+
+void KpxConfig::setDetailViewTemplate(const QString& value){
+	settings.setValue("UI/DetailsView", qCompress(value.toUtf8(),9) );
 }

@@ -26,7 +26,7 @@
 
 QFile* ExporterBase::openFile(QWidget* parent, QString id, QStringList Filters){
 	QString filename=KpxFileDialogs::saveFile(parent,id,tr("Import File..."),Filters);
-	if(filename==QString())return NULL;
+	if(filename.isEmpty())return NULL;
 	QFile* file=new QFile(filename);
 	if(!file->open(QIODevice::ReadWrite|QIODevice::Truncate)){
 		QMessageBox::critical(parent,tr("Export Failed"),decodeFileError(file->error()));

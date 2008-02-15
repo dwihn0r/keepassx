@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>419</width>
-    <height>268</height>
+    <height>305</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -18,13 +18,13 @@
   <property name="minimumSize" >
    <size>
     <width>419</width>
-    <height>268</height>
+    <height>305</height>
    </size>
   </property>
   <property name="maximumSize" >
    <size>
     <width>419</width>
-    <height>268</height>
+    <height>309</height>
    </size>
   </property>
   <property name="windowTitle" >
@@ -65,7 +65,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -167,9 +167,6 @@
          </item>
          <item>
           <layout class="QVBoxLayout" >
-           <property name="spacing" >
-            <number>12</number>
-           </property>
            <property name="leftMargin" >
             <number>0</number>
            </property>
@@ -183,7 +180,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="LinkLabel" name="label_2" >
+            <widget class="LinkLabel" name="label_5" >
              <property name="text" >
               <string>http://keepassx.sourceforge.net</string>
              </property>
@@ -301,6 +298,13 @@ General Public License (GPL) version 2.</string>
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="ButtonBox" >
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Ok</set>
+     </property>
     </widget>
    </item>
   </layout>

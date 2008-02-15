@@ -27,7 +27,7 @@
 #include <QFont>
 #include <QLabel>
 #include <QTime>
-#include <qapplication.h>
+#include <QApplication>
 #include <QShowEvent>
 #include <QTranslator>
 #include <QDropEvent>
@@ -37,7 +37,7 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QSystemTrayIcon>
-#include <QAssistantClient>
+//#include <QAssistantClient> //TODO HelpBrowser
 #include <QUrl>
 
 #include "Kdb3Database.h"
@@ -52,9 +52,8 @@
 class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 	Q_OBJECT
 	public:
-		KeepassMainWindow (const QString& ArgFile,QWidget *parent=0, Qt::WFlags flags=0);
+		KeepassMainWindow (const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent=0, Qt::WFlags flags=0);
 		IDatabase* db;
-        bool Start;
 
 	signals:
 		void entryChanged();
@@ -85,9 +84,9 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnExtrasSettings();
 		void OnExtrasPasswordGen();
 		void OnExtrasShowExpiredEntries();
-		void OnExtrasTrashCan();
+		//void OnExtrasTrashCan(); //TODO TrashCan
 		void OnHelpAbout();
-		void OnHelpHandbook();
+		//void OnHelpHandbook(); //TODO Handbook
 		void OnItemExpanded(QTreeWidgetItem*);
 		void OnItemCollaped(QTreeWidgetItem*);
 		void OnShowSearchResults();
@@ -97,9 +96,14 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnExport(QAction*);
 		void OnDetailViewUrlClicked(const QUrl& url);
 		void OnUnLockWorkspace();
+		void OnLockClose();
 
 	private:
 		void closeEvent(QCloseEvent* event);
+		void hideEvent(QHideEvent* event);
+		void showEvent(QShowEvent* event);
+		void setLock();
+		void resetLock();
 		SelectionState GroupSelection, EntrySelection;
 		bool FileOpen;
 		bool ModFlag;
@@ -113,11 +117,12 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void setStateFileModified(bool);
 		void setStateGroupSelected(SelectionState s);
 		void setStateEntrySelected(SelectionState s);
-		void openDatabase(QString filename,bool IsAuto=false);
+		bool openDatabase(QString filename,bool IsAuto=false);
+		void fakeOpenDatabase(const QString& filename);
 		void setupDatabaseConnections(IDatabase* DB);
-		bool closeDatabase();
+		bool closeDatabase(bool lock=false);
 		void search(IGroupHandle* Group);
-		void removeFromSearchResults(int sID);
+		//void removeFromSearchResults(int sID);
 		void updateDetailView();
 		void exportDatabase(IExport* exporter,QStringList filters);
 		void saveLastFilename(const QString& filename);
@@ -129,11 +134,15 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		QSystemTrayIcon* SysTray;
 		QAction* ViewShowToolbarAction;
 		QMenu* SysTrayMenu;
-		QAssistantClient* HelpBrowser;
+		//QAssistantClient* HelpBrowser; //TODO HelpBrowser
 		QWidget* NormalCentralWidget;
 		QWidget* LockedCentralWidget;
 		Ui_WorkspaceLockedWidget WorkspaceLockedWidget;
 		bool ShutingDown;
+		bool InUnLock;
+		QList<int> lockGroup;
+		QDialog* unlockDlg;
+		QString currentFile;
 };
 
 #endif

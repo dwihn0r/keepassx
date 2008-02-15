@@ -22,10 +22,10 @@
 #include <QDir>
 #include <QFile>
 #include <QPixmap>
+#include <QPushButton>
 #include <QMessageBox>
 #include <QShowEvent>
 #include "SelectIconDlg.h"
-
 
 
 CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent, bool modal, Qt::WFlags fl):QDialog(parent,fl){
@@ -35,12 +35,14 @@ CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent
 	CtxMenu=new QMenu(this);
 	ReplaceAction=CtxMenu->addAction(getIcon("swap"),tr("Replace..."));
 	DeleteAction=CtxMenu->addAction(getIcon("delete"),tr("Delete"));
+	QPushButton* Button_AddIcon = ButtonBox->addButton(tr("Add Custom Icon"), QDialogButtonBox::ActionRole);
+	Button_PickIcon = ButtonBox->addButton(tr("Pick"), QDialogButtonBox::AcceptRole);
 	connect(Button_AddIcon, SIGNAL(clicked()), this, SLOT(OnAddIcon()));
 	connect(Button_PickIcon, SIGNAL(clicked()), this, SLOT(OnPickIcon()));
-	connect(Button_Cancel, SIGNAL(clicked()), this, SLOT(OnCancel()));
+	connect(ButtonBox, SIGNAL(rejected()), this, SLOT(OnCancel()));
 	connect(DeleteAction,SIGNAL(triggered()),this,SLOT(OnDelete()));
 	connect(ReplaceAction,SIGNAL(triggered()),this,SLOT(OnReplace()));
-	connect(List,SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),this,SLOT(OnSelectionChanged(QListWidgetItem*,QListWidgetItem*)));
+	connect(List,SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),this,SLOT(OnSelectionChanged(QListWidgetItem*)));
 }
 
 void CSelectIconDlg::updateView(){
@@ -64,12 +66,12 @@ void CSelectIconDlg::OnAddIcon(){
 	for(int i=0;i<filenames.size();i++){
 		QPixmap icon;
 		if(!icon.load(filenames[i])){
-			errors+=tr("%1: File could not be loaded.\n").arg(filenames[i].section("/",-1));
+			errors+=tr("%1: File could not be loaded.").arg(filenames[i].section("/",-1)).append("\n");
 			continue;}
 			dynamic_cast<ICustomIcons*>(db)->addIcon(icon.scaled(16,16,Qt::KeepAspectRatio,Qt::SmoothTransformation));
 	}
 	if(errors.size())
-		QMessageBox::warning(this,tr("Error"),tr("An error occured while loading the icon(s):\n%1").arg(errors));
+		QMessageBox::warning(this,tr("Error"),tr("An error occured while loading the icon(s):").append("\n").append(errors));
 	updateView();
 	List->setCurrentItem(List->item(List->count()-1));
 }
@@ -96,7 +98,7 @@ void CSelectIconDlg::OnDelete(){
 void CSelectIconDlg::OnReplace(){
 	QString filename=QFileDialog::getOpenFileName(this,tr("Add Icons..."),QDir::homePath(),tr("Images (%1)")
 		.arg("*.png *.jpeg *.jpg *.bmp *.gif *.bpm *.pgm *.ppm *.xbm *xpm"));
-	if(filename==QString())return;
+	if(filename.isEmpty())return;
 	QPixmap icon;
 	if(!icon.load(filename)){
 		QMessageBox::warning(this,tr("Error"),tr("An error occured while loading the icon."));
@@ -114,7 +116,7 @@ void CSelectIconDlg::OnCancel(){
 	done(-1);
 }
 
-void CSelectIconDlg::OnSelectionChanged(QListWidgetItem* cur,QListWidgetItem* prev){
+void CSelectIconDlg::OnSelectionChanged(QListWidgetItem* cur){
 	Button_PickIcon->setEnabled(cur);
 }
 

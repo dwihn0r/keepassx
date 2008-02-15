@@ -27,6 +27,7 @@
 #include <QMenu>
 #include "main.h"
 #include "CustomizeDetailViewDlg.h"
+#include "KpxConfig.h"
 
 bool DisableButtonSlots=false;
 
@@ -59,14 +60,14 @@ CustomizeDetailViewDialog::CustomizeDetailViewDialog(QWidget* parent):QDialog(pa
 	connect(BtnBold,SIGNAL(toggled(bool)),this,SLOT(OnBtnBold(bool)));
 	connect(BtnItalic,SIGNAL(toggled(bool)),this,SLOT(OnBtnItalic(bool)));
 	connect(BtnUnderline,SIGNAL(toggled(bool)),this,SLOT(OnBtnUnderline(bool)));
-	connect(BtnAlignLeft,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignLeft(bool)));
-	connect(BtnAlignRight,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignRight(bool)));
-	connect(BtnAlignCenter,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignCenter(bool)));
-	connect(BtnAlignBlock,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignBlock(bool)));
+	connect(BtnAlignLeft,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignLeft()));
+	connect(BtnAlignRight,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignRight()));
+	connect(BtnAlignCenter,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignCenter()));
+	connect(BtnAlignBlock,SIGNAL(toggled(bool)),this,SLOT(OnBtnAlignBlock()));
 	connect(BtnColor,SIGNAL(clicked()),this,SLOT(OnBtnColor()));
-	connect(ButtonSave,SIGNAL(clicked()),this,SLOT(OnSave()));
-	connect(ButtonCancel,SIGNAL(clicked()),this,SLOT(OnCancel()));
-	connect(ButtonRestore,SIGNAL(clicked()),this,SLOT(OnRestoreDefault()));
+	connect(ButtonBox,SIGNAL(accepted()),this,SLOT(OnSave()));
+	connect(ButtonBox,SIGNAL(rejected()),this,SLOT(OnCancel()));
+	connect(ButtonBox,SIGNAL(clicked(QAbstractButton*)),this,SLOT(OnRestoreDefault(QAbstractButton*)));
 	connect(tmplmenu,SIGNAL(triggered(QAction*)),this,SLOT(OnInsertTemplate(QAction*)));
 	connect(RichEdit,SIGNAL(cursorPositionChanged()),this,SLOT(OnCursorPositionChanged()));
 	connect(TabWidget,SIGNAL(currentChanged(int)),this,SLOT(OnTabChanged(int)));
@@ -160,25 +161,25 @@ void CustomizeDetailViewDialog::OnBtnUnderline(bool toggled){
 }
 
 
-void CustomizeDetailViewDialog::OnBtnAlignLeft(bool toggled){
+void CustomizeDetailViewDialog::OnBtnAlignLeft(){
 	if(DisableButtonSlots)return;
 	RichEdit->setAlignment(Qt::AlignLeft);
 	OnCursorPositionChanged();
 }
 
-void CustomizeDetailViewDialog::OnBtnAlignRight(bool toggled){
+void CustomizeDetailViewDialog::OnBtnAlignRight(){
 	if(DisableButtonSlots)return;
 	RichEdit->setAlignment(Qt::AlignRight);	
 	OnCursorPositionChanged();
 }
 
-void CustomizeDetailViewDialog::OnBtnAlignCenter(bool toggled){
+void CustomizeDetailViewDialog::OnBtnAlignCenter(){
 	if(DisableButtonSlots)return;	
 	RichEdit->setAlignment(Qt::AlignHCenter);	
 	OnCursorPositionChanged();
 }
 
-void CustomizeDetailViewDialog::OnBtnAlignBlock(bool toggled){
+void CustomizeDetailViewDialog::OnBtnAlignBlock(){
 	if(DisableButtonSlots)return;	
 	RichEdit->setAlignment(Qt::AlignJustify);	
 	OnCursorPositionChanged();
@@ -203,6 +204,8 @@ void CustomizeDetailViewDialog::OnSave(){
 	else if(TabWidget->currentIndex()==1)
 		DetailViewTemplate=HtmlEdit->toPlainText();
 	
+	config->setDetailViewTemplate(DetailViewTemplate);
+	
 	done(1);
 }
 
@@ -210,8 +213,10 @@ void CustomizeDetailViewDialog::OnCancel(){
 	done(0);
 }
 
-void CustomizeDetailViewDialog::OnRestoreDefault(){
-	loadDefaultDetailViewTemplate();
-	HtmlEdit->setPlainText(DetailViewTemplate);
-	RichEdit->setHtml(DetailViewTemplate);
+void CustomizeDetailViewDialog::OnRestoreDefault(QAbstractButton* button){
+	if (button==ButtonBox->button(QDialogButtonBox::RestoreDefaults)){
+		DetailViewTemplate = config->defaultDetailViewTemplate();
+		HtmlEdit->setPlainText(DetailViewTemplate);
+		RichEdit->setHtml(DetailViewTemplate);
+	}
 }

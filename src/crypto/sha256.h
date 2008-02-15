@@ -22,7 +22,7 @@
 #ifndef _SHA256_H
 #define _SHA256_H
 
-#include <qglobal.h>
+#include <QGlobalStatic>
 
 typedef struct
 {

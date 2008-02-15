@@ -20,8 +20,6 @@
 
 #include "main.h"
 
-#include <qcombobox.h>
-#include <qlineedit.h>
 #include <QShowEvent>
 #include "EditGroupDlg.h"
 #include "SelectIconDlg.h"
@@ -35,8 +33,8 @@ CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWid
 	group=new CGroup();
 	group->Title=handle->title();
 	group->Image=handle->image();
-	connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
+	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
 }
 
@@ -48,8 +46,8 @@ CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* pa
 	db=database;
 	group=Group;
 	handle=NULL;
-	connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
+	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
 }
 

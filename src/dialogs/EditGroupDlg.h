@@ -22,7 +22,7 @@
 #define EDITGROUPDLG_H
 
 #include "ui_EditGroupDlg.h"
-#include <qstring.h>
+#include <QString>
 #include <QShowEvent>
 #include "Database.h"
 

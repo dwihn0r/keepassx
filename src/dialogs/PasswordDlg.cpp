@@ -25,7 +25,6 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QMessageBox>
-#include <QStringList>
 #include <QPainter>
 #include <QPalette>
 #include <QMenu>
@@ -56,7 +55,7 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,
 	}
 
 	Combo_Dirs->setEditText(QString());
-	if(config->rememberLastKey() && !ChangeKeyMode){
+	if(config->rememberLastKey() && config->openLastFile() && !ChangeKeyMode){
 		switch(config->lastKeyType()){
 			case KEYFILE:
 				setStateKeyFileOnly();
@@ -101,24 +100,22 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,
 	}
 			
 	connect(Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
-	connect(ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect(ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect(Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
 	connect(CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
 	connect(ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoModeDatabaseKey() ) );
 	connect(Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
 	connect(Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
-	connect(ButtonExit, SIGNAL( clicked()),this,SLOT(OnButtonExit()));
 	connect(BookmarkMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnBookmarkTriggered(QAction*)));
 
-	ButtonExit->setVisible(IsAuto);
 	Mode_Set=ChangeKeyMode;
 	if(!ChangeKeyMode){
 		Edit_PasswordRep->hide();
 		Label_PasswordRep->hide();
-		connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+		connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
 		connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
 	}else{
-		connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK_Set() ) );
+		connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK_Set() ) );
 		connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse_Set() ) );
 	}
 
@@ -168,7 +165,7 @@ void CPasswordDialog::setStateBoth(){
 void CPasswordDialog::OnButtonBrowse()
 {
 	QString filename=KpxFileDialogs::openExistingFile(this,"PasswordDlg",tr("Select a Key File"),
-													  QStringList() << tr("All Files (*)") << tr("Key Files (*.key)"));
+													  QStringList()  << tr("Key Files (*.key)") << tr("All Files (*)"));
 	if(filename!=QString()){
 		Combo_Dirs->setEditText(filename);
 	}
@@ -178,7 +175,7 @@ void CPasswordDialog::OnButtonBrowse()
 void CPasswordDialog::OnButtonBrowse_Set()
 {
 	QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Select a Key File"),
-											  QStringList() << tr("All Files (*)") << tr("Key Files (*.key)"),
+											  QStringList() << tr("Key Files (*.key)") << tr("All Files (*)"),
 											  false);
 	if(filename!=QString()){
 		Combo_Dirs->setEditText(filename);
@@ -307,14 +304,14 @@ bool CPasswordDialog::doAuth(){
 	if(!password.isEmpty() && keyfile.isEmpty()){
 		DbAuth->authByPwd(password);
 	}
-	if(password.isEmpty() && !keyfile.isEmpty()){
+	else if(password.isEmpty() && !keyfile.isEmpty()){
 		if(!DbAuth->authByFile(keyfile))return false;
 	}
-	if(!password.isEmpty() && !keyfile.isEmpty()){
-		if(!DbAuth->authByFile(keyfile))return false;
+	else if(!password.isEmpty() && !keyfile.isEmpty()){
+		if(!DbAuth->authByFileAndPwd(password, keyfile))return false;
 	}
 
-	if(config->rememberLastKey()){
+	if(config->rememberLastKey() && config->openLastFile()){
 		QString KeyLocation=keyfile;
 		if(config->saveRelativePaths()){
 			KeyLocation=KeyLocation.left(KeyLocation.lastIndexOf("/"));
@@ -369,11 +366,6 @@ if(Edit_Password->echoMode()==QLineEdit::Normal){
 else{
 	Edit_Password->setEchoMode(QLineEdit::Normal);
 	Edit_PasswordRep->setEchoMode(QLineEdit::Normal);}
-}
-
-
-void CPasswordDialog::OnButtonExit(){
-	done(2);
 }
 
 void CPasswordDialog::paintEvent(QPaintEvent* event){

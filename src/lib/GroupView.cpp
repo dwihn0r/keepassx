@@ -41,12 +41,10 @@
 #define INSERT_AREA_WIDTH 4
 
 KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
-
 	db=NULL;
-	setHeaderLabels(QStringList()<<tr("Groups"));
 	ContextMenu=new QMenu(this);
 	ContextMenuSearchGroup=new QMenu(this);
-	connect(this,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,SLOT(OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+	connect(this,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this,SLOT(OnCurrentGroupChanged(QTreeWidgetItem*)));
 	connect(this,SIGNAL(itemExpanded(QTreeWidgetItem*)),this,SLOT(OnItemExpanded(QTreeWidgetItem*)));
 	connect(this,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollapsed(QTreeWidgetItem*)));
 }
@@ -167,7 +165,7 @@ void KeepassGroupView::contextMenuEvent(QContextMenuEvent* e){
 		ContextMenu->popup(e->globalPos());
 }
 
-void KeepassGroupView::OnCurrentGroupChanged(QTreeWidgetItem* cur,QTreeWidgetItem* prev){
+void KeepassGroupView::OnCurrentGroupChanged(QTreeWidgetItem* cur){
 	if(cur){
 		if(cur==SearchResultItem)
 			emit searchResultsSelected();
@@ -181,8 +179,8 @@ void KeepassGroupView::OnCurrentGroupChanged(QTreeWidgetItem* cur,QTreeWidgetIte
 
 void KeepassGroupView::setCurrentGroup(IGroupHandle* group){
 	bool found=false;
-	int i=0;
-	for(i;i<Items.size();i++)
+	int i;
+	for(i=0;i<Items.size();i++)
 		if(Items[i]->GroupHandle==group){found=true; break;}
 	if(!found)return;
 	setCurrentItem(Items[i]);	
@@ -194,13 +192,13 @@ void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
 	
 	if(event->mimeData()->hasFormat("application/x-keepassx-group")){
 		DragType=GroupDrag;
-		event->accept();
+		event->acceptProposedAction();
 		return;
 	}
 	if(event->mimeData()->hasFormat("application/x-keepassx-entry")){
 		DragType=EntryDrag;
 		memcpy(&EntryDragItems,event->mimeData()->data("application/x-keepassx-entry").data(),sizeof(void*));
-		event->accept();
+		event->acceptProposedAction();
 		return;
 	}
 	
@@ -371,7 +369,7 @@ void KeepassGroupView::entryDragMoveEvent( QDragMoveEvent * event ){
 		Item->setForeground(0,QBrush(QApplication::palette().color(QPalette::HighlightedText)));
 		LastHoverItem=Item;
 	}
-	event->accept();
+	event->acceptProposedAction();
 	return;
 	
 }
@@ -393,7 +391,7 @@ void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
 				InsLinePos=-1;
 				viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
 			}
-			event->accept();
+			event->acceptProposedAction();
 			return;
 		}
 		if(Item==DragItem || Item==SearchResultItem){
@@ -435,7 +433,7 @@ void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
 				InsLineStart=ItemRect.x();
 				viewport()->update(QRegion(0,InsLinePos-2,viewport()->width(),4));			
 			}
-			event->accept();
+			event->acceptProposedAction();
 			return;
 		}		
 		
@@ -486,7 +484,7 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 	mimeData->setData("application/x-keepassx-group",QByteArray());
 	drag->setMimeData(mimeData);
 
-	Qt::DropAction dropAction = drag->start(Qt::MoveAction);
+	drag->exec(Qt::MoveAction);
 }
 
 void KeepassGroupView::OnItemExpanded(QTreeWidgetItem* item){

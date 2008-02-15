@@ -26,7 +26,7 @@
 #include "Database.h"
 #include <QPaintEvent>
 
-class CDbSettingsDlg : public QDialog, public Ui_dbsettingdlg_base
+class CDbSettingsDlg : public QDialog, public Ui_DatabaseSettingsDlg
 {
 	Q_OBJECT
 	public:

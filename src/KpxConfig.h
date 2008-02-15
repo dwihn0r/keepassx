@@ -24,6 +24,7 @@
 #define _KPXCONFIG_H_
 
 #include "main.h"
+#include "AutoType.h"
 #include <QBitArray>
 #include <QByteArray>
 #include <QColor>
@@ -43,6 +44,8 @@
 
 class KpxConfig{
 public:
+	friend class KpxBookmarks;
+	
 	enum IntegrPluginType{NoIntegr,KDE,Gnome};
 	enum GrpTreeState{DoNothing,RestoreLast,ExpandAll};
 
@@ -56,6 +59,8 @@ public:
 	QBitArray columns(){return stringToBitArray(settings.value("UI/Columns","11111000000").toString(),11);}
 	QList<int> columnOrder(){return stringToIntArray(settings.value("UI/ColumnOrder","100,100,100,100,100,100,100,100,100,100,100").toString(),11);}
 	QList<int> columnSizes(){return stringToIntArray(settings.value("UI/ColumnSizes","15,10,10,10,10,10,10,10,10,10,10").toString(),11);}
+	int columnSort(){return settings.value("UI/ColumnSort",0).toInt();}
+	Qt::SortOrder columnSortOrder(){return static_cast<Qt::SortOrder>(settings.value("UI/ColumnSortOrder",Qt::AscendingOrder).toInt());}
 	QStringList fileDlgHistory(unsigned index){return settings.value(QString("FileDlgHistory/ENTRY%1").arg(index)).toStringList();}
 	GrpTreeState groupTreeState(){return stringToGrpTreeState(settings.value("Options/GroupTreeState").toString());}
 	bool hidePasswords(){return settings.value("UI/HidePasswords",true).toBool();}
@@ -68,6 +73,9 @@ public:
 	tKeyType lastKeyType(){return stringToKeyType(settings.value("Options/LastKeyType").toString());}
 	QRect mainWindowGeometry(const QRect& defaultValue){return settings.value("UI/MainWindowGeometry",defaultValue).toRect();}
 	bool minimizeToTray(){return settings.value("Options/MinimizeToTray",false).toBool();}
+	bool minimizeTray(){return settings.value("Options/MinimizeTray",false).toBool();}
+	bool startMinimized(){return settings.value("Options/StartMinimized",false).toBool();}
+	bool startLocked(){return settings.value("Options/StartLocked",false).toBool();}
 	QString mountDir(){return settings.value("Options/MountDir",DEFAULT_MOUNT_DIR).toString();}
 	bool openLastFile(){return settings.value("Options/OpenLastFile",true).toBool();}
 	QString pwGenCharList(){return settings.value("Options/PwGenCharList").toString();}
@@ -80,15 +88,23 @@ public:
 	bool showEntryDetails(){return settings.value("UI/ShowEntryDetails",true).toBool();}
 	bool showPasswords(){return settings.value("Options/ShowPasswords",false).toBool();}
 	bool showPasswordsPasswordDlg(){return settings.value("Options/ShowPasswordsPasswordDlg",false).toBool();}
+	bool lockOnMinimize(){return settings.value("Options/LockOnMinimize",false).toBool();}
 	bool showStatusbar(){return settings.value("UI/ShowStatusbar",true).toBool();}
 	bool showSysTrayIcon(){return settings.value("Options/ShowSysTrayIcon",false).toBool();}
 	bool showToolbar(){return settings.value("UI/ShowToolbar",true).toBool();}
 	int toolbarIconSize(){return settings.value("UI/ToolbarIconSize",16).toInt();}
 	QString urlCmd(){return settings.value("Options/UrlCmd").toString();}
+	bool urlCmdDef(){return settings.value("Options/UrlCmdDef",true).toBool();}
 	QByteArray vSplitterPos(){return settings.value("UI/VSplitterPos").toByteArray();}
 	bool askBeforeDelete(){return settings.value("Options/AskBeforeDelete",true).toBool();}
+#ifdef AUTOTYPE
 	int autoTypePreGap(){return settings.value("Options/AutoTypePreGap",500).toInt();}
 	int autoTypeKeyStrokeDelay(){return settings.value("Options/AutoTypeKeyStrokeDelay",0).toInt();}
+#endif
+#ifdef GLOBAL_AUTOTYPE
+	Shortcut globalShortcut();
+	bool entryTitlesMatch(){return settings.value("Options/EntryTitlesMatch",true).toBool();}
+#endif
 	bool featureBookmarks(){return settings.value("Features/Bookmarks",true).toBool();}
 	
 	void setAlternatingRowColors(bool value){settings.setValue("Options/AlternatingRowColors",value);}
@@ -99,6 +115,8 @@ public:
 	void setColumns(const QBitArray& value){settings.setValue("UI/Columns",bitArrayToString(value));}
 	void setColumnOrder(const QList<int>& value){settings.setValue("UI/ColumnOrder",intArrayToString(value));}
 	void setColumnSizes(const QList<int>& value){settings.setValue("UI/ColumnSizes",intArrayToString(value));}
+	void setColumnSort(int value){settings.setValue("UI/ColumnSort",value);}
+	void setColumnSortOrder(int value){settings.setValue("UI/ColumnSortOrder",value);}
 	void setFileDlgHistory(unsigned index,const QStringList& value){settings.setValue(QString("FileDlgHistory/ENTRY%1").arg(index), value);}
 	void setGroupTreeState(GrpTreeState value){settings.setValue("Options/GroupTreeState",grpTreeStateToString(value));}
 	void setHidePasswords(bool value){settings.setValue("UI/HidePasswords",value);}
@@ -111,6 +129,9 @@ public:
 	void setLastKeyType(tKeyType value){settings.setValue("Options/LastKeyType",keyTypeToString(value));}
 	void setMainWindowGeometry(const QRect& value){settings.setValue("UI/MainWindowGeometry",value);}
 	void setMinimizeToTray(bool value){settings.setValue("Options/MinimizeToTray",value);}
+	void setMinimizeTray(bool value){settings.setValue("Options/MinimizeTray",value);}
+	void setStartMinimized(bool value){settings.setValue("Options/StartMinimized",value);}
+	void setStartLocked(bool value){settings.setValue("Options/StartLocked",value);}
 	void setMountDir(const QString& value){settings.setValue("Options/MountDir",value);}
 	void setOpenLastFile(bool value){settings.setValue("Options/OpenLastFile",value);}
 	void setPwGenCharList(const QString& value){settings.setValue("Options/PwGenCharList",value);}
@@ -123,22 +144,35 @@ public:
 	void setShowEntryDetails(bool value){settings.setValue("UI/ShowEntryDetails",value);}
 	void setShowPasswords(bool value){settings.setValue("Options/ShowPasswords",value);}
 	void setShowPasswordsPasswordDlg(bool value){settings.setValue("Options/ShowPasswordsPasswordDlg",value);}
+	void setLockOnMinimize(bool value){settings.setValue("Options/LockOnMinimize",value);}
 	void setShowStatusbar(bool value){settings.setValue("UI/ShowStatusbar",value);}
 	void setShowSysTrayIcon(bool value){settings.setValue("Options/ShowSysTrayIcon",value);}
 	void setShowToolbar(bool value){settings.setValue("UI/ShowToolbar",value);}
 	void setToolbarIconSize(int value){settings.setValue("UI/ToolbarIconSize",value);}
 	void setUrlCmd(const QString& value){settings.setValue("Options/UrlCmd",value);}
+	void setUrlCmdDef(bool value){settings.setValue("Options/UrlCmdDef",value);}
 	void setVSplitterPos(const QByteArray& value){settings.setValue("UI/VSplitterPos",value);}
 	void setAskBeforeDelete(bool value){settings.setValue("Options/AskBeforeDelete",value);}
+#ifdef AUTOTYPE
 	void setAutoTypePreGap(int value){settings.setValue("Options/AutoTypePreGap",value);}
 	void setAutoTypeKeyStrokeDelay(int value){settings.setValue("Options/AutoTypeKeyStrokeDelay",value);}
+#endif
+#ifdef GLOBAL_AUTOTYPE
+	void setGlobalShortcut(const Shortcut& s);
+	void setEntryTitlesMatch(bool value){settings.setValue("Options/EntryTitlesMatch",value);}
+#endif
 	void setFeatureBookmarks(bool value){settings.setValue("Features/Bookmarks",value);}
 
 	unsigned fileDlgHistorySize();
 	void clearFileDlgHistory(){settings.remove("FileDlgHistory");};
+	
+	QString detailViewTemplate();
+	QString defaultDetailViewTemplate();
+	void setDetailViewTemplate(const QString& value);
 
 private:
 	QSettings settings;
+	QString configFile;
 
 	QColor stringToColor(const QString& str);
 	QBitArray stringToBitArray(const QString& str, unsigned count);

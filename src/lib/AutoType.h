@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2006 by Tarek Saidi, Felix Geyer                   *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -21,42 +21,30 @@
 #ifndef _AUTOTYPE_H_
 #define _AUTOTYPE_H_
 
-#include <QObject>
-#include <QWidget>
 #include <QString>
-#ifdef Q_WS_X11
-	#define XK_MISCELLANY
-	#define XK_XKB_KEYS
-	#define XK_3270
-	#include <X11/extensions/XTest.h>
-	#include <X11/keysymdef.h>
-	#include <X11/Xlib.h>
-#endif
 #include "Database.h"
 
-typedef struct tKeysymMap{
-	quint16 keysym;
-  	quint16 unicode;
+#ifdef GLOBAL_AUTOTYPE
+struct Shortcut{
+	bool ctrl, shift, alt, altgr, win;
+	quint32 key;
 };
-
-class AutoType:public QObject{
-public:
- static QWidget* MainWin;
- static void perform(IEntryHandle* entry,QString& errors);
-private:
-#ifdef Q_WS_X11
- static tKeysymMap KeysymMap[];
- static quint16 getKeysym(const QChar& unicode);
- static int getModifiers(Display*,KeySym,int);
- static void pressModifiers(Display*,int,bool Press=true);
- static void releaseModifiers(Display*,int);
- static void templateToKeysyms(const QString& Template, QList<quint16>& KeySymList,IEntryHandle* entry);
- static void stringToKeysyms(const QString& string,QList<quint16>& KeySymList);
 #endif
 
+#ifdef AUTOTYPE
+class KeepassMainWindow;
 
-
+class AutoType{
+	public:
+		static KeepassMainWindow* MainWin;
+		static void perform(IEntryHandle* entry, QString& err,bool hideWindow=true,int nr=0);
+#ifdef GLOBAL_AUTOTYPE
+		static Shortcut shortcut;
+		static void performGlobal();
+		static bool registerGlobalShortcut(const Shortcut& s);
+		static void unregisterGlobalShortcut();
+#endif // GLOBAL_AUTOTYPE
 };
-
+#endif // AUTOTYPE
 
 #endif

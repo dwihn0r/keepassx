@@ -48,8 +48,8 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 	public slots:
 		void OnTitleTextChanged(const QString&);
 		void OnPasswordwLostFocus();
-		void OnPasswordwTextChanged(const QString&);
-		void OnPasswordTextChanged(const QString&);
+		void OnPasswordwTextChanged();
+		void OnPasswordTextChanged();
 		void ChangeEchoMode();
 		void OnButtonCancel();
 		void OnNewAttachment();
@@ -60,7 +60,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		void OnButtonIcons();
 		void OnButtonOK();
 		void OnExpirePreset(QAction*);
-		void OnCalendar(QAction*);
+		void OnCalendar();
 		
 	private:		
 		virtual void showEvent(QShowEvent *);

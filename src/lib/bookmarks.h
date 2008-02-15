@@ -24,7 +24,7 @@
 
 class KpxBookmarks {	
 	public:
-		static bool load(const QString& file);
+		static void load();
 		static int add(const QString& Title,const QString& Path);
 		static void remove(int id);
 		static void edit(const QString& Title,const QString& Path, int Index);

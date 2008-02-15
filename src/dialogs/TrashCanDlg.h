@@ -41,7 +41,7 @@ class TrashCanDialog:public QDialog, public Ui_TrashCanDialog{
 		virtual void resizeEvent(QResizeEvent *);
 	
 	private slots:
-		void OnItemDoubleClicked(QTreeWidgetItem*,int);
+		void OnItemDoubleClicked(QTreeWidgetItem*);
 		void OnContextMenu(const QPoint&);
 	
 	

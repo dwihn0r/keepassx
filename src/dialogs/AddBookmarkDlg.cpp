@@ -35,7 +35,7 @@ AddBookmarkDlg::AddBookmarkDlg(QWidget* parent, QString DefaultFilename, int _It
 	if(ItemID==-1){
         createBanner(&BannerPixmap,getPixmap("bookmark_add"),tr("Add Bookmark"),width());
 
-		if(DefaultFilename==QString())
+		if(DefaultFilename.isEmpty())
 			OnButtonBrowse();
 		else
 			Edit_Filename->setText(DefaultFilename);

@@ -39,7 +39,7 @@ TrashCanDialog::TrashCanDialog(QWidget* parent,IDatabase* database,const QList<I
 		item->setIcon(1,database->icon(Entries[i]->image()));
 			
 	}
-	connect(treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(OnItemDoubleClicked(QTreeWidgetItem*,int)));
+	connect(treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(OnItemDoubleClicked(QTreeWidgetItem*)));
 	connect(treeWidget,SIGNAL(customContextMenuRequested(const QPoint&)),this,SLOT(OnContextMenu(const QPoint&)));
 	ContextMenu=new QMenu(this);
 	ContextMenu->addAction(getIcon("restore"),"Restore");
@@ -59,7 +59,7 @@ void TrashCanDialog::resizeEvent(QResizeEvent* event){
 	QDialog::resizeEvent(event);	
 }
 
-void TrashCanDialog::OnItemDoubleClicked(QTreeWidgetItem* item, int column){
+void TrashCanDialog::OnItemDoubleClicked(QTreeWidgetItem* item){
 	SelectedEntry=Entries[item->data(0,Qt::UserRole).toInt()];	
 	accept();
 }

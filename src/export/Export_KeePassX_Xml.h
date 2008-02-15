@@ -21,14 +21,16 @@
 #ifndef _EXPORT_KPX_XML_H_
 #define _EXPORT_KPX_XML_H_
 
-#include <QObject>
+#include <QDomElement>
 #include "Export.h"
 
-class Export_KeePassX_Xml:public IExport, public ExporterBase{
+class Export_KeePassX_Xml:public ExporterBase, public IExport{
+	Q_OBJECT
+	
 	public:
 		virtual bool exportDatabase(QWidget* GuiParent, IDatabase* Database);	
 		virtual QString identifier(){return "EXPORT_KEEPASSX_XML";}
-		virtual QString title(){return "KeePassX XML File";}
+		virtual QString title(){return tr("KeePassX XML File");}
 	private:
 		void addGroup(IGroupHandle* group,QDomElement& parent,QDomDocument& doc);
 		void addEntry(IEntryHandle* group,QDomElement& parent,QDomDocument& doc);

@@ -19,20 +19,42 @@ isEmpty(PREFIX){
 }
 
 unix : !macx {
+        !isEqual(AUTOTYPE,0){
+          DEFINES += AUTOTYPE
+          !isEqual(GLOBAL_AUTOTYPE,0){
+            DEFINES += GLOBAL_AUTOTYPE
+          }
+        }
         target.path = $${PREFIX}/bin
         data.path = $${PREFIX}/share/keepass
-        LIBS += -lXtst -lQtDBus
-        SOURCES += lib/AutoType_X11.cpp
+        pixmaps.files = ../share/pixmaps/*
+        pixmaps.path = $${PREFIX}/share/pixmaps
+        desktop.files = ../share/applications/*
+        desktop.path = $${PREFIX}/share/applications
+        INSTALLS += pixmaps desktop
+        contains(DEFINES,AUTOTYPE){
+          LIBS += -lXtst
+          SOURCES += lib/HelperX11.cpp lib/AutoType_X11.cpp
+          HEADERS += lib/HelperX11.h
+        }
+        contains(DEFINES,GLOBAL_AUTOTYPE){
+          SOURCES += Application_X11.cpp
+          HEADERS += Application_X11.h
+        }
     }
+
+contains(DEFINES,GLOBAL_AUTOTYPE){
+  FORMS += forms/AutoTypeDlg.ui
+  HEADERS += dialogs/AutoTypeDlg.h
+  SOURCES += dialogs/AutoTypeDlg.cpp
+}
 
 macx {
     target.path = /Applications
     data.path = /Applications/keepass.app/Contents/share/keepass
-    SOURCES += lib/AutoType_X11.cpp
 }
 
 win32 {
-    SOURCES += lib/AutoType_Win.cpp
     TARGET = ../$$TARGET
     QMAKE_LINK_OBJECT_SCRIPT = ../build/$$QMAKE_LINK_OBJECT_SCRIPT
 
@@ -52,7 +74,7 @@ FORMS += forms/EditGroupDlg.ui \
 	 forms/CollectEntropyDlg.ui \
 	 forms/CustomizeDetailViewDlg.ui \
 	 forms/CalendarDlg.ui \
-	 forms/TrashCanDlg.ui \
+#	 forms/TrashCanDlg.ui \
 	 forms/ExpiredEntriesDlg.ui \
 	 forms/WorkspaceLockedWidget.ui \
  forms/AddBookmarkDlg.ui \
@@ -91,12 +113,13 @@ HEADERS += lib/IniReader.h \
 	   dialogs/CustomizeDetailViewDlg.h \
 	   dialogs/CalendarDlg.h \
 	   dialogs/ExpiredEntriesDlg.h \
-	   dialogs/TrashCanDlg.h \
+#	   dialogs/TrashCanDlg.h \
            lib/random.h \
            Database.h \
-           lib/KdePlugin.h \
+#           lib/KdePlugin.h \
 	   lib/AutoType.h \
 	   lib/FileDialogs.h \
+	   lib/ShortcutWidget.h \
            global.h \
            main.h \
            lib/GroupView.h \
@@ -119,7 +142,7 @@ HEADERS += lib/IniReader.h \
 	   plugins/interfaces/IGnomeInit.h \
 	   plugins/interfaces/IIconTheme.h \
 	   KpxConfig.h \
-           KpxFirefox.h \
+#           KpxFirefox.h \
  	   dialogs/AddBookmarkDlg.h \
  lib/bookmarks.h \
  dialogs/ManageBookmarksDlg.h
@@ -153,15 +176,16 @@ SOURCES += lib/UrlLabel.cpp \
 	   dialogs/CustomizeDetailViewDlg.cpp \
 	   dialogs/CalendarDlg.cpp \
 	   dialogs/ExpiredEntriesDlg.cpp \
-	   dialogs/TrashCanDlg.cpp \
+#	   dialogs/TrashCanDlg.cpp \
            lib/random.cpp \
            Database.cpp \
-           lib/KdePlugin.cpp \
+#           lib/KdePlugin.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
 	   lib/FileDialogs.cpp \
            crypto/arcfour.cpp \
            lib/KpFileIconProvider.cpp \
+           lib/ShortcutWidget.cpp \
 	   crypto/aescrypt.c \
 	   crypto/aeskey.c \
 	   crypto/aestab.c \
@@ -170,7 +194,7 @@ SOURCES += lib/UrlLabel.cpp \
 	   crypto/yarrow.cpp \
 	   lib/WaitAnimationWidget.cpp \
 	   KpxConfig.cpp \
-           KpxFirefox.cpp \
+#           KpxFirefox.cpp \
            dialogs/AddBookmarkDlg.cpp \
  lib/bookmarks.cpp \
 dialogs/ManageBookmarksDlg.cpp
@@ -179,11 +203,12 @@ MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build/
 RCC_DIR = ../build/rcc
-CONFIG += debug \
-qt \
+CONFIG = qt \
+uic \
+resources \
 thread \
-warn_off \
-assistant
+stl \
+warn_off
 QT += xml
 TEMPLATE = app
 INCLUDEPATH += . \
@@ -194,3 +219,10 @@ export \
 import \
 dialogs \
 ./
+
+isEqual(RELEASE,1){
+  CONFIG += release
+}
+else{
+  CONFIG += debug
+}

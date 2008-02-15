@@ -30,8 +30,7 @@
 #define PWM_FLAG_TWOFISH		8
 #define PWM_STD_KEYENCROUNDS 	6000
 
-#include <qcolor.h>
-#include <qobject.h>
+#include <QColor>
 #include <QDateTime>
 #include <QDate>
 #include <QTime>

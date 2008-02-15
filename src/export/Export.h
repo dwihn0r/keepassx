@@ -34,6 +34,8 @@ class IExport{
 };
 
 class ExporterBase:public QObject{
+	Q_OBJECT
+	
 	protected:
 		virtual QFile* openFile(QWidget* GuiParent,QString id,QStringList Filter);
 };

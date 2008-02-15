@@ -17,51 +17,24 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QFile>
 #include "bookmarks.h"
 #include "main.h"
-#define CSTR(x)(x.toUtf8().data())
+#include "KpxConfig.h"
 
 QList<KpxBookmarks::BookmarkEntry> KpxBookmarks::Bookmarks;
-QString KpxBookmarks::filename;
 
-bool KpxBookmarks::load(const QString& _filename){
-	/* 
-      Fileformat:
-	   "Title1" "Path1"\n
-	   "Title2" "Path2"\n
-		...	 
-	*/
+void KpxBookmarks::load(){
+	if (!config->settings.contains("Bookmarks/size") || config->settings.value("Bookmarks/size").toInt()==0)
+		return;
 	
-	filename=_filename;
-	QFile file(filename);
-	if(!file.exists()){
-		return true;
-	}
-	if(!file.open(QIODevice::ReadOnly)){
-		qWarning("Reading bookmarks failed: %s",CSTR(decodeFileError(file.error())));
-		return false;		
-	}
-	QString content=QString::fromUtf8(file.readAll());
-	file.close();
-	content.replace("\r","");
-	QStringList lines=content.split("\n");
-	for(int i=0;i<lines.size();i++){
-		if(lines[i].simplified()==QString()) continue; //skip empty line
-		if(lines[i].count("\"")!=4){
-			qWarning("Bookmark parsing error: Skipping line %i.",i);
-			continue;		
-		}
-		int a_title=lines[i].indexOf("\"");
-		int b_title=lines[i].indexOf("\"",a_title+1);
-		int a_path=lines[i].indexOf("\"",b_title+1);
-		int b_path=lines[i].indexOf("\"",a_path+1);
+	int size = config->settings.value("Bookmarks/size").toInt();
+	for(int i=1;i<=size;i++){
 		BookmarkEntry entry;
-		entry.Title=lines[i].mid(a_title+1,b_title-a_title-1);
-		entry.Path=lines[i].mid(a_path+1,b_path-a_path-1);
-		Bookmarks << entry;
+		entry.Title = config->settings.value( QString("Bookmarks/%1/Title").arg(i) ).toString();
+		entry.Path = config->settings.value( QString("Bookmarks/%1/Path").arg(i) ).toString();
+		if (!entry.Title.isNull() && !entry.Path.isNull())
+			Bookmarks << entry;
 	}
-	return true;		
 }
 
 int KpxBookmarks::count(){
@@ -88,21 +61,19 @@ int KpxBookmarks::add(const QString& Title,const QString& Path){
 }
 
 bool KpxBookmarks::save(){
-	QFile file(filename);
-	if(!file.exists()){
-		return false;
+	for (int i=0;i<count();i++){
+		config->settings.setValue( QString("Bookmarks/%1/Title").arg(i+1), Bookmarks[i].Title );
+		config->settings.setValue( QString("Bookmarks/%1/Path").arg(i+1), Bookmarks[i].Path );
 	}
-	if(!file.open(QIODevice::WriteOnly | QIODevice::Truncate)){
-		qWarning("Writing bookmarks failed: %s",CSTR(decodeFileError(file.error())));
-		return false;		
+	config->settings.setValue("Bookmarks/size", count());
+	
+	// remove orphaned entries
+	int i = count()+1;
+	while ( config->settings.contains( QString("Bookmarks/%1/Title").arg(i) ) ){
+		config->settings.remove( QString("Bookmarks/%1/Title").arg(i) );
+		config->settings.remove( QString("Bookmarks/%1/Path").arg(i) );
+		i++;
 	}
-	QString data;
-	for(int i=0;i<Bookmarks.size();i++){
-		data+=QString("\"%1\" \"%2\"\n").arg(Bookmarks[i].Title)
-				                        .arg(Bookmarks[i].Path);		
-	}
-	file.write(data.toUtf8());
-	file.close();	
 }
 
 void KpxBookmarks::remove(int index){
@@ -120,7 +91,7 @@ void KpxBookmarks::edit(const QString& Title,const QString& Path,int i){
 void KpxBookmarks::resort(QList<int> order){
 	QList<BookmarkEntry> NewList;
 	for(int i=0;i<order.size();i++){
-		NewList << Bookmarks[order[i]];		
+		NewList << Bookmarks[order[i]];
 	}
 	Bookmarks=NewList;
 	save();

@@ -17,7 +17,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <qmessagebox.h>
+#include <QMessageBox>
 #include <QPainter>
 
 #include "AboutDlg.h"
@@ -26,41 +26,42 @@
 AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),QString("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
 	loadLicFromFile();
 
-    labelAppName->setText(tr(APP_DISPLAY_NAME));
-    labelAppFunc->setText(tr(" -  %1").arg(APP_LONG_FUNC));
+    labelAppName->setText(APP_DISPLAY_NAME);
+    labelAppFunc->setText(QString(" -  ").append(APP_LONG_FUNC));
 
 	QString AboutTr=tr("<b>Current Translation: None</b><br><br>","Please replace 'None' with the language of your translation");
 	if(TrActive){
 		AboutTr+=tr("<b>Author:</b> %1<br>").arg(tr("$TRANSLATION_AUTHOR"));
 		QString mail=tr("$TRANSLATION_AUTHOR_EMAIL","Here you can enter your email or homepage if you want.");
-		if(mail!=QString()){
+		if(!mail.isEmpty()){
 			AboutTr+=mail+"<br>";
 		}
 		AboutTr+="<br>";
 	}
-	Edit_Translation->setHtml(AboutTr+tr("\
-	Information on how to translate KeePassX can be found under:\n\
-	http://keepassx.sourceforge.net/"));
+	Edit_Translation->setHtml(AboutTr+tr("Information on how to translate KeePassX can be found under:")
+		+"<br>http://keepassx.sourceforge.net/");
 	QString str;
 	str+="<b>"+tr("Team")+"</b><br>";
 	str+="<div style='margin-left:10px;'>";
-	str+="<u>"+tr("Tarek Saidi")+"</u><br>"+tr("Developer, Project Admin")+"<br>"+tr("tarek_saidi@users.sf.net")+"<br>";
+	str+="<u>Tarek Saidi</u><br>"+tr("Developer, Project Admin")+"<br>tarek_saidi@users.sf.net<br>";
 	str+="<br>";
-	str+="<u>"+tr("Eugen Gorschenin")+"</u><br>"+tr("Web Designer")+"<br>"+tr("geugen@users.sf.de")+"<br>";
+	str+="<u>Eugen Gorschenin</u><br>"+tr("Web Designer")+"<br>geugen@users.sf.de<br>";
 	str+="<br>";
-	str+="<u>"+tr("Juan J Gonz&aacute;lez C&aacute;rdenas [Jota Jota]")+"</u><br>"+tr("Developer")+"<br>"+tr("myxelf@users.sf.net")+"<br>";
+	str+="<u>Juan J Gonz&aacute;lez C&aacute;rdenas [Jota Jota]</u><br>"+tr("Developer")+"<br>myxelf@users.sf.net<br>";
 	str+="</div><br><div style='margin-left:0px;'>";
     str+="<b>"+tr("Thanks To")+"</b><br>";
 	str+="</div><div style='margin-left:10px;'>";
-	str+="<u>"+tr("Matthias Miller")+"</u><br>"+tr("Patches for better MacOS X support")+"<br>"+tr("www.outofhanwell.com")+"<br></div>";
+	str+="<u>Matthias Miller</u><br>"+tr("Patches for better MacOS X support")+"<br>www.outofhanwell.com<br></div>";
 	str+="<br>";
-	str+="<u>"+tr("James Nicholls")+"</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
+	str+="<u>James Nicholls</u><br>"+tr("Main Application Icon")/*+"<br>"+tr("mailto:???")*/+"<br></div>";
 	str+="<br>";
-	str+="<u>"+tr("Constantin Makshin")+"</u><br>"+tr("Various fixes and improvements")+"<br>"+tr("dinosaur-rus@users.sourceforge.net")+"<br></div>";
+	str+="<u>Constantin Makshin</u><br>"+tr("Various fixes and improvements")+"<br>dinosaur-rus@users.sourceforge.net<br></div>";
 	Edit_Thanks->setHtml(str);
+	
+	connect(ButtonBox, SIGNAL(accepted()), SLOT(close()));
 }
 
 void AboutDialog::paintEvent(QPaintEvent *event){
@@ -87,7 +88,7 @@ return;
 
 if(!gpl.open(QIODevice::ReadOnly)){
 QMessageBox::critical(this,tr("Error"),tr("Could not open file '%1'")
-			  .arg("'license.txt'")+tr("The following error occured:\n%1").arg(gpl.errorString())
+			  .arg("'license.txt'")+"\n"+tr("The following error occured:")+"\n"+gpl.errorString()
 			  ,tr("OK"),0,0,2,1);
 return;
 }
@@ -100,7 +101,7 @@ delete buffer;
 }
 
 void AboutDialog::OnHomepageClicked(){
-openBrowser(tr("http://keepassx.sf.net"));
+openBrowser("http://keepassx.sf.net");
 }
 
 void AboutDialog::OnEMailClicked(){

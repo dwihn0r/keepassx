@@ -25,6 +25,8 @@
 #include "Database.h"
  
 class Import_GnuKeyRing:public QObject,public IImport{
+	Q_OBJECT
+	
 	public:
 		virtual QString importDatabase(QWidget* GuiParent, IDatabase* Database);
 		virtual QString name(){return "GnuKeyRing";}

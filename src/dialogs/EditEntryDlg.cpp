@@ -20,21 +20,16 @@
 
 #include "main.h"
 #include "KpxConfig.h"
-#include <qpushbutton.h>
-#include <qpalette.h>
-#include <qfont.h>
-#include <qlineedit.h>
-#include <qlabel.h>
+#include <QPalette>
+#include <QFont>
 #include <QProgressBar>
-#include <QTextEdit>
-#include <qpixmap.h>
-#include <qcolor.h>
-#include <qcombobox.h>
-#include <qpainter.h>
-#include <qpen.h>
+#include <QPixmap>
+#include <QColor>
+#include <QPainter>
+#include <QPen>
 #include <QFileDialog>
-#include <qmessagebox.h>
-#include <qtoolbutton.h>
+#include <QMessageBox>
+#include <QToolButton>
 #include <QShowEvent>
 #include <QResizeEvent>
 #include <math.h>
@@ -59,8 +54,8 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 
 	connect(Edit_Title, SIGNAL(textChanged(const QString&)), this, SLOT( OnTitleTextChanged(const QString&)));
 	connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
-	connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged(const QString&)));
-	connect(Edit_Password, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordTextChanged(const QString&)));
+	connect(Edit_Password_w, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordwTextChanged()));
+	connect(Edit_Password, SIGNAL(textChanged(const QString&)), this, SLOT( OnPasswordTextChanged()));
 	connect(ButtonEchoMode, SIGNAL(clicked()), this, SLOT( ChangeEchoMode()));
 	connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT( OnButtonCancel()));
 	connect(ButtonOpenAttachment, SIGNAL(clicked()), this, SLOT( OnNewAttachment()));
@@ -71,7 +66,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
 	connect(Button_Icons,SIGNAL(clicked()),this,SLOT(OnButtonIcons()));
 	connect(ExpirePresetsMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnExpirePreset(QAction*)));
-	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar(QAction*)));
+	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar()));
 
 	// QAction::data() contains the time until expiration in days.
 	ExpirePresetsMenu->addAction(tr("Today"))->setData(0);
@@ -281,7 +276,7 @@ void CEditEntryDlg::OnTitleTextChanged(const QString& txt)
     setWindowTitle((txt=="") ? tr("[Untitled Entry]") : txt);
 }
 
-void CEditEntryDlg::OnPasswordTextChanged(const QString& txt)
+void CEditEntryDlg::OnPasswordTextChanged()
 {
 Edit_Password_w->setText(QString());
 int bits=(Edit_Password->text().length()*8);
@@ -290,7 +285,7 @@ if(bits>128)bits=128;
 Progress_Quali->setValue(100*bits/128);
 }
 
-void CEditEntryDlg::OnPasswordwTextChanged(const QString& w)
+void CEditEntryDlg::OnPasswordwTextChanged()
 {
 
 if(QString::compare(Edit_Password_w->text(),Edit_Password->text().mid(0,(Edit_Password_w->text().length())))!=0){
@@ -430,7 +425,7 @@ void CEditEntryDlg::OnExpirePreset(QAction* action){
 	DateTime_Expire->setTime(QTime(0,0,0));
 }
 
-void CEditEntryDlg::OnCalendar(QAction* action){
+void CEditEntryDlg::OnCalendar(){
 	CalendarDialog dlg(this);
 	if(dlg.exec()==QDialog::Accepted){
 		CheckBox_ExpiresNever->setChecked(false);

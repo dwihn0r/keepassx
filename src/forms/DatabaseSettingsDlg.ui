@@ -1,139 +1,113 @@
-<ui version="4.0" stdsetdef="1" >
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>dbsettingdlg_base</class>
-  <widget class="QDialog" name="DatabaseSettingsDlg" >
+<ui version="4.0" >
+ <class>DatabaseSettingsDlg</class>
+ <widget class="QDialog" name="DatabaseSettingsDlg" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>213</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>440</width>
+    <height>213</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>440</width>
+    <height>213</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Database Settings</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox1" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>420</width>
+     <height>110</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Encryption</string>
+   </property>
+   <widget class="QLabel" name="textLabel2" >
     <property name="geometry" >
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>440</width>
-        <height>213</height>
-      </rect>
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
     </property>
-    <property name="sizePolicy" >
-      <sizepolicy>
-        <hsizetype>0</hsizetype>
-        <vsizetype>0</vsizetype>
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-      </sizepolicy>
+    <property name="text" >
+     <string>Algorithm:</string>
     </property>
-    <property name="minimumSize" >
-      <size>
-        <width>440</width>
-        <height>213</height>
-      </size>
+   </widget>
+   <widget class="QComboBox" name="ComboAlgo" >
+    <property name="geometry" >
+     <rect>
+      <x>109</x>
+      <y>30</y>
+      <width>300</width>
+      <height>21</height>
+     </rect>
     </property>
-    <property name="maximumSize" >
-      <size>
-        <width>440</width>
-        <height>213</height>
-      </size>
+   </widget>
+   <widget class="QLineEdit" name="EditRounds" >
+    <property name="geometry" >
+     <rect>
+      <x>180</x>
+      <y>70</y>
+      <width>230</width>
+      <height>21</height>
+     </rect>
     </property>
-    <property name="windowTitle" >
-      <string>Database Settings</string>
+   </widget>
+   <widget class="QLabel" name="textLabel3" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
     </property>
-    <widget class="QGroupBox" name="groupBox1" >
-      <property name="geometry" >
-        <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>420</width>
-          <height>110</height>
-        </rect>
-      </property>
-      <property name="title" >
-        <string>Encryption</string>
-      </property>
-      <widget class="QLabel" name="textLabel2" >
-        <property name="geometry" >
-          <rect>
-            <x>10</x>
-            <y>30</y>
-            <width>90</width>
-            <height>20</height>
-          </rect>
-        </property>
-        <property name="text" >
-          <string>Algorithm:</string>
-        </property>
-      </widget>
-      <widget class="QComboBox" name="ComboAlgo" >
-        <property name="geometry" >
-          <rect>
-            <x>109</x>
-            <y>30</y>
-            <width>300</width>
-            <height>21</height>
-          </rect>
-        </property>
-      </widget>
-      <widget class="QLineEdit" name="EditRounds" >
-        <property name="geometry" >
-          <rect>
-            <x>180</x>
-            <y>70</y>
-            <width>230</width>
-            <height>21</height>
-          </rect>
-        </property>
-      </widget>
-      <widget class="QLabel" name="textLabel3" >
-        <property name="geometry" >
-          <rect>
-            <x>10</x>
-            <y>70</y>
-            <width>150</width>
-            <height>20</height>
-          </rect>
-        </property>
-        <property name="text" >
-          <string>Encryption Rounds:</string>
-        </property>
-      </widget>
-    </widget>
-    <widget class="QPushButton" name="ButtonOK" >
-      <property name="geometry" >
-        <rect>
-          <x>210</x>
-          <y>180</y>
-          <width>102</width>
-          <height>23</height>
-        </rect>
-      </property>
-      <property name="text" >
-        <string>O&amp;K</string>
-      </property>
-      <property name="shortcut" >
-        <string>Ctrl+K</string>
-      </property>
-    </widget>
-    <widget class="QPushButton" name="ButtonCancel" >
-      <property name="geometry" >
-        <rect>
-          <x>320</x>
-          <y>180</y>
-          <width>102</width>
-          <height>23</height>
-        </rect>
-      </property>
-      <property name="text" >
-        <string>&amp;Cancel</string>
-      </property>
-      <property name="shortcut" >
-        <string>Ctrl+C</string>
-      </property>
-    </widget>
+    <property name="text" >
+     <string>Encryption Rounds:</string>
+    </property>
+   </widget>
   </widget>
-  <layoutdefault spacing="6" margin="11" />
-  <pixmapfunction></pixmapfunction>
-  <tabstops>
-    <tabstop>ComboAlgo</tabstop>
-    <tabstop>EditRounds</tabstop>
-    <tabstop>ButtonOK</tabstop>
-    <tabstop>ButtonCancel</tabstop>
-    <tabstop>pushButton1</tabstop>
-  </tabstops>
+  <widget class="QDialogButtonBox" name="ButtonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>12</x>
+     <y>180</y>
+     <width>411</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <tabstops>
+  <tabstop>ComboAlgo</tabstop>
+  <tabstop>EditRounds</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
 </ui>

@@ -20,6 +20,7 @@
 
 #include "Database.h"
 #include "lib/random.h"
+#include <QCoreApplication>
 
 KpxUuid::KpxUuid(){
 	Data.fill(0,16);
@@ -76,12 +77,12 @@ bool KpxUuid::operator!=(const KpxUuid& other)const{
 
 
 QString KpxDateTime::toString(Qt::DateFormat format) const{
-	if(*this==Date_Never)return QObject::tr("Never");
+	if(*this==Date_Never)return QCoreApplication::translate("Database","Never");
 	else return QDateTime::toString(format);
 }
 
 QString KpxDateTime::dateToString(Qt::DateFormat format) const{
-	if(*this==Date_Never)return QObject::tr("Never");
+	if(*this==Date_Never)return QCoreApplication::translate("Database","Never");
 	else return date().toString(format);
 }
 
@@ -107,7 +108,8 @@ bool KpxDateTime::operator<(const QDateTime& other){
 	if(*this==Date_Never && other==Date_Never)return false;
 	if(*this==Date_Never)return false;
 	if(other==Date_Never)return true;
-		
+	
+	return false;
 }
 
 

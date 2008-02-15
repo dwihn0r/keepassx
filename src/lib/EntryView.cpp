@@ -41,6 +41,7 @@ QList<EntryViewItem*>* pItems;
 KeepassEntryView* pEntryView;
 
 KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
+	ViewMode=Normal;
 	AutoResizeColumns=true;
 	header()->setResizeMode(QHeaderView::Interactive);
 	header()->setStretchLastSection(false);
@@ -51,6 +52,7 @@ KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 	ColumnOrder=config->columnOrder();
 
 	updateColumns();
+	header()->setSortIndicator(config->columnSort(), config->columnSortOrder());
 
 	connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized(int,int,int)));
 	connect(this,SIGNAL(itemSelectionChanged()),this,SLOT(OnItemsChanged()));
@@ -69,6 +71,8 @@ KeepassEntryView::~KeepassEntryView(){
 	config->setColumnSizes(ColumnSizes);
 	config->setColumns(Columns);
 	config->setColumnOrder(ColumnOrder);
+	config->setColumnSort(header()->sortIndicatorSection());
+	config->setColumnSortOrder(header()->sortIndicatorOrder());
 }
 
 void KeepassEntryView::OnGroupChanged(IGroupHandle* group){
@@ -106,14 +110,11 @@ bool sortSearchResultsLessThan(const IEntryHandle* a, const IEntryHandle* b){
 
 
 void KeepassEntryView::OnHeaderSectionClicked(int index){
-	if(header()->isSortIndicatorShown() && header()->sortIndicatorSection()==index){
+	if(header()->sortIndicatorSection()==index){
 		header()->setSortIndicator(index,header()->sortIndicatorOrder() ? Qt::DescendingOrder : Qt::AscendingOrder);
-		sortItems(index,header()->sortIndicatorOrder());
 	}
 	else{
 		header()->setSortIndicator(index,Qt::AscendingOrder);
-		header()->setSortIndicatorShown(true);
-		sortItems(index,Qt::AscendingOrder);
 	}
 
 	if(ViewMode==Normal){
@@ -272,7 +273,7 @@ void KeepassEntryView::OnEditEntry(){
 
 void KeepassEntryView::OnEditOpenUrl(){
 	if (selectedItems().size() == 0) return;
-	openBrowser(((EntryViewItem*)selectedItems().first())->text(logicalColIndex(2)));
+	openBrowser( ((EntryViewItem*)selectedItems().first())->EntryHandle );
 }
 
 void KeepassEntryView::OnUsernameToClipboard(){
@@ -360,7 +361,6 @@ void KeepassEntryView::showGroup(IGroupHandle* group){
 }
 
 void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){
-	header()->setSortIndicatorShown(false);
 	for(int i=0;i<entries.size();i++){
 		if(!entries[i]->isValid())continue;
 		EntryViewItem* item=new EntryViewItem(this);
@@ -480,6 +480,7 @@ int KeepassEntryView::logicalColIndex(int LstIndex){
 		if(i==LstIndex)return c;
 	}
 	Q_ASSERT(false);
+	return -1;
 }
 
 void KeepassEntryView::resizeColumns(){
@@ -514,8 +515,8 @@ void KeepassEntryView::resizeColumns(){
 }
 
 int KeepassEntryView::columnListIndex(int LogicalIndex){
-	int c=-1; int i=0;
-	for(i;i<NUM_COLUMNS;i++){
+	int c=-1; int i;
+	for(i=0;i<NUM_COLUMNS;i++){
 		if(Columns.at(i))c++;
 		if(i==10 && Columns.at(10) && ViewMode!=ShowSearchResults)c--;
 		if(c==LogicalIndex)break;
@@ -574,8 +575,7 @@ void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
 	mimeData->setData("text/plain;charset=UTF-8",DragItems.first()->text(0).toUtf8());
 	mimeData->setData("application/x-keepassx-entry",QByteArray((char*)&pDragItems,sizeof(void*)));
 	drag->setMimeData(mimeData);
-	drag->setPixmap(DragPixmap);
-	drag->start();
+	drag->exec(Qt::MoveAction);
 
 }
 
@@ -591,11 +591,13 @@ void KeepassEntryView::removeDragItems(){
 	}
 }
 
+#ifdef AUTOTYPE
 void KeepassEntryView::OnAutoType(){
 	if (selectedItems().size() == 0) return;
 	QString error;
 	AutoType::perform(((EntryViewItem*)selectedItems().first())->EntryHandle,error);
 }
+#endif
 
 void KeepassEntryView::paintEvent(QPaintEvent * event){
 QTreeWidget::paintEvent(event);
@@ -653,8 +655,8 @@ bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
 
 void KeepassEntryView::setCurrentEntry(IEntryHandle* entry){
 	bool found=false;
-	int i=0;
-	for(i;i<Items.size();i++)
+	int i;
+	for(i=0;i<Items.size();i++)
 		if(Items.at(i)->EntryHandle==entry){found=true; break;}
 	if(!found)return;
 	setCurrentItem(Items.at(i));

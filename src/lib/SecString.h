@@ -21,8 +21,8 @@
 #define _SECSTRING_H_
 
 #include <QByteArray>
-#include <qstring.h>
-#include <qglobal.h>
+#include <QString>
+#include <QGlobalStatic>
 #include "crypto/arcfour.h"
 
 //! QString based class with in-memory encryption of its content.

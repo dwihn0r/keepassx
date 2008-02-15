@@ -37,8 +37,8 @@ CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::W
 	ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));
 	ComboAlgo->setCurrentIndex(database->cryptAlgorithm()); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
 	EditRounds->setText(QString::number(database->keyTransfRounds()));		
-	connect( ButtonOK, SIGNAL( clicked() ), this, SLOT( OnOK() ) );
-	connect( ButtonCancel, SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
+	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
+	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 }
 
 CDbSettingsDlg::~CDbSettingsDlg()

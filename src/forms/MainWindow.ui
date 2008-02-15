@@ -34,40 +34,45 @@
      <number>9</number>
     </property>
     <item>
-      <widget class="QSplitter" name="VSplitter" >
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
+     <widget class="QSplitter" name="VSplitter" >
+      <property name="orientation" >
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="KeepassGroupView" name="GroupView" >
+       <property name="enabled" >
+        <bool>false</bool>
        </property>
-       <widget class="KeepassGroupView" name="GroupView" >
-        <property name="enabled" >
-         <bool>false</bool>
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <horstretch>30</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="acceptDrops" >
+        <bool>true</bool>
+       </property>
+       <property name="showDropIndicator" stdset="0" >
+        <bool>true</bool>
+       </property>
+       <property name="dragEnabled" >
+        <bool>false</bool>
+       </property>
+       <column>
+        <property name="text" >
+         <string>Groups</string>
         </property>
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-          <horstretch>30</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="acceptDrops" >
-         <bool>true</bool>
-        </property>
-        <property name="showDropIndicator" stdset="0" >
-         <bool>true</bool>
-        </property>
-        <property name="dragEnabled" >
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QSplitter" name="HSplitter" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-          <horstretch>70</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
-        </property>
+       </column>
+      </widget>
+      <widget class="QSplitter" name="HSplitter" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <horstretch>70</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+       </property>
        <widget class="KeepassEntryView" name="EntryView" >
         <property name="enabled" >
          <bool>false</bool>
@@ -84,32 +89,35 @@
         <property name="rootIsDecorated" >
          <bool>false</bool>
         </property>
+        <property name="sortingEnabled" >
+         <bool>true</bool>
+        </property>
        </widget>
-      <widget class="QTextBrowser" name="DetailView" >
-       <property name="enabled" >
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-         <horstretch>0</horstretch>
-         <verstretch>30</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize" >
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="readOnly" >
-        <bool>true</bool>
-       </property>
-       <property name="openLinks" >
-        <bool>false</bool>
-       </property>
+       <widget class="QTextBrowser" name="DetailView" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+          <horstretch>0</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
+        <property name="openLinks" >
+         <bool>false</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
- </widget>
     </item>
    </layout>
   </widget>
@@ -144,14 +152,14 @@
       <string>&amp;Import from...</string>
      </property>
     </widget>
-	<widget class="QMenu" name="menuBookmarks" >
+    <widget class="QMenu" name="menuBookmarks" >
      <property name="title" >
       <string>Bookmarks</string>
      </property>
     </widget>
     <addaction name="FileNewAction" />
     <addaction name="FileOpenAction" />
-	<addaction name="menuBookmarks" />
+    <addaction name="menuBookmarks" />
     <addaction name="FileCloseAction" />
     <addaction name="separator" />
     <addaction name="FileSaveAction" />
@@ -279,9 +287,9 @@
    </property>
   </action>
   <action name="FileUnLockWorkspaceAction" >
-    <property name="text" >
-      <string>&amp;Lock Workspace</string>
-    </property>
+   <property name="text" >
+    <string>&amp;Lock Workspace</string>
+   </property>
   </action>
   <action name="FileExitAction" >
    <property name="text" >
@@ -479,6 +487,9 @@
    <property name="text" >
     <string>&amp;KeePassX Handbook...</string>
    </property>
+   <property name="visible" >
+    <bool>false</bool>
+   </property>
   </action>
   <action name="HideSearchResultsAction" >
    <property name="text" >
@@ -553,6 +564,9 @@
   <action name="ExtrasTrashCanAction" >
    <property name="text" >
     <string>Recycle Bin...</string>
+   </property>
+   <property name="visible" >
+    <bool>false</bool>
    </property>
   </action>
   <action name="AddBookmarkAction" >

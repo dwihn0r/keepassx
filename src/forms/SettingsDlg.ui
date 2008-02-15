@@ -6,19 +6,25 @@
     <x>0</x>
     <y>0</y>
     <width>571</width>
-    <height>420</height>
+    <height>440</height>
    </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize" >
    <size>
     <width>571</width>
-    <height>420</height>
+    <height>440</height>
    </size>
   </property>
   <property name="maximumSize" >
    <size>
     <width>571</width>
-    <height>420</height>
+    <height>441</height>
    </size>
   </property>
   <property name="windowTitle" >
@@ -60,7 +66,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QTabWidget" name="tabWidget4" >
+    <widget class="QTabWidget" name="tabWidgetSettings" >
      <property name="tabPosition" >
       <enum>QTabWidget::North</enum>
      </property>
@@ -70,7 +76,7 @@
      <property name="currentIndex" >
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab" >
+     <widget class="QWidget" name="TabGeneral" >
       <property name="whatsThis" >
        <string>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</string>
       </property>
@@ -79,36 +85,74 @@
       </attribute>
       <layout class="QVBoxLayout" >
        <item>
-        <widget class="QCheckBox" name="checkBox_ShowSysTrayIcon" >
+        <widget class="QCheckBox" name="CheckBox_ShowSysTrayIcon" >
          <property name="text" >
           <string>Show system tray icon</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_MinimizeToTray" >
-         <property name="text" >
-          <string>Minimize to tray when clicking the main window's close button</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" >
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>25</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_MinimizeTray" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>Minimize to tray instead of taskbar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>25</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_CloseToTray" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>Minimize to tray when clicking the main window's close button</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" >
          <item>
           <widget class="QCheckBox" name="CheckBox_OpenLast" >
            <property name="text" >
@@ -120,40 +164,94 @@
           </widget>
          </item>
          <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>10</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          <layout class="QHBoxLayout" >
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>25</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Remember last key type and location</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
-           <property name="text" >
-            <string>Remember last key type and location</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" >
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>25</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBox_StartMinimized" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Start minimized</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          <layout class="QHBoxLayout" >
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>25</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBox_StartLocked" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Start locked</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -225,88 +323,6 @@
           <string>Always ask before deleting entries or groups</string>
          </property>
         </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QGridLayout" >
-           <property name="leftMargin" >
-            <number>0</number>
-           </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>0</number>
-           </property>
-           <property name="horizontalSpacing" >
-            <number>6</number>
-           </property>
-           <property name="verticalSpacing" >
-            <number>6</number>
-           </property>
-           <item row="0" column="0" >
-            <widget class="QLabel" name="label_3" >
-             <property name="text" >
-              <string>Group tree at start-up:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1" >
-            <widget class="QRadioButton" name="Radio_GroupTreeRestore" >
-             <property name="text" >
-              <string>Restore last state</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1" >
-            <widget class="QRadioButton" name="Radio_GroupTreeExpand" >
-             <property name="text" >
-              <string>Expand all items</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1" >
-            <widget class="QRadioButton" name="Radio_GroupTreeDoNothing" >
-             <property name="text" >
-              <string>Do not expand any item</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
        </item>
        <item>
         <spacer>
@@ -627,13 +643,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox" >
-         <property name="text" >
-          <string>Unified Title and Toolbar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <layout class="QHBoxLayout" >
          <property name="spacing" >
           <number>6</number>
@@ -673,6 +682,73 @@
         </layout>
        </item>
        <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <layout class="QGridLayout" >
+           <property name="leftMargin" >
+            <number>0</number>
+           </property>
+           <property name="topMargin" >
+            <number>0</number>
+           </property>
+           <property name="rightMargin" >
+            <number>0</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>0</number>
+           </property>
+           <property name="horizontalSpacing" >
+            <number>6</number>
+           </property>
+           <property name="verticalSpacing" >
+            <number>6</number>
+           </property>
+           <item row="0" column="0" >
+            <widget class="QLabel" name="label_3" >
+             <property name="text" >
+              <string>Group tree at start-up:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QRadioButton" name="Radio_GroupTreeRestore" >
+             <property name="text" >
+              <string>Restore last state</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" >
+            <widget class="QRadioButton" name="Radio_GroupTreeExpand" >
+             <property name="text" >
+              <string>Expand all items</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" >
+            <widget class="QRadioButton" name="Radio_GroupTreeDoNothing" >
+             <property name="text" >
+              <string>Do not expand any item</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -687,7 +763,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3" >
+     <widget class="QWidget" name="tabSecurity" >
       <attribute name="title" >
        <string>Security</string>
       </attribute>
@@ -816,6 +892,13 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="CheckBox_LockMinimize" >
+         <property name="text" >
+          <string>Lock workspace when minimizing the main window</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -830,7 +913,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite" >
+     <widget class="QWidget" name="tabFeatures" >
       <attribute name="title" >
        <string>Features</string>
       </attribute>
@@ -867,7 +950,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2" >
+     <widget class="QWidget" name="tabIntegration" >
       <attribute name="title" >
        <string>Desktop Integration</string>
       </attribute>
@@ -1015,7 +1098,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab" >
+     <widget class="QWidget" name="TabAdvanced" >
       <attribute name="title" >
        <string>Advanced</string>
       </attribute>
@@ -1036,7 +1119,7 @@
         <number>9</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="groupBox_3" >
+        <widget class="QGroupBox" name="Box_AutoType" >
          <property name="title" >
           <string>Auto-Type Fine Tuning</string>
          </property>
@@ -1122,52 +1205,30 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" >
-         <property name="leftMargin" >
-          <number>0</number>
+        <widget class="QGroupBox" name="Box_BrowserCmd" >
+         <property name="title" >
+          <string>Custom Browser Command</string>
          </property>
-         <property name="topMargin" >
-          <number>0</number>
+         <property name="checkable" >
+          <bool>true</bool>
          </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
-         <property name="horizontalSpacing" >
-          <number>6</number>
-         </property>
-         <property name="verticalSpacing" >
-          <number>6</number>
-         </property>
-         <item row="1" column="2" >
-          <widget class="QPushButton" name="Button_MountDirBrowse" >
-           <property name="minimumSize" >
-            <size>
-             <width>0</width>
-             <height>23</height>
-            </size>
-           </property>
-           <property name="maximumSize" >
-            <size>
-             <width>16777215</width>
-             <height>23</height>
-            </size>
-           </property>
-           <property name="text" >
-            <string>Browse...</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QLineEdit" name="Edit_MountDir" >
-           <property name="whatsThis" >
-            <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" >
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLineEdit" name="Edit_BrowserCmd" />
+          </item>
+          <item>
+           <widget class="QPushButton" name="Button_BrowserCmdBrowse" >
+            <property name="text" >
+             <string>Browse</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
           <widget class="QLabel" name="label_2" >
            <property name="text" >
             <string>Media Root:</string>
@@ -1177,45 +1238,17 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0" >
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Browser Command:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <item>
+          <widget class="QLineEdit" name="Edit_MountDir" >
+           <property name="whatsThis" >
+            <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" >
-          <widget class="QLineEdit" name="Edit_BrowserCmd" />
-         </item>
-         <item row="1" column="3" >
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Maximum</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="2" colspan="2" >
-          <widget class="QCheckBox" name="CheckBox_BrowserDefault" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
+         <item>
+          <widget class="QPushButton" name="Button_MountDirBrowse" >
            <property name="text" >
-            <string>System Default</string>
+            <string>Browse...</string>
            </property>
           </widget>
          </item>
@@ -1228,6 +1261,44 @@
          </property>
          <property name="text" >
           <string>Save relative paths (bookmarks and last file)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="Label_GlobalShortcut" >
+           <property name="text" >
+            <string>Global Auto-Type Shortcut:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="ShortcutWidget" name="Edit_GlobalShortcut" >
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="CheckBox_EntryTitlesMatch" >
+         <property name="text" >
+          <string>Use entry titles to match the window for Global Auto-Type</string>
          </property>
         </widget>
        </item>
@@ -1261,11 +1332,48 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11" />
+ <customwidgets>
+  <customwidget>
+   <class>ShortcutWidget</class>
+   <extends>QLineEdit</extends>
+   <header>lib/ShortcutWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
-  <tabstop>tabWidget4</tabstop>
+  <tabstop>tabWidgetSettings</tabstop>
+  <tabstop>CheckBox_ShowSysTrayIcon</tabstop>
+  <tabstop>CheckBox_MinimizeTray</tabstop>
+  <tabstop>CheckBox_CloseToTray</tabstop>
+  <tabstop>CheckBox_OpenLast</tabstop>
+  <tabstop>CheckBox_RememberLastKey</tabstop>
+  <tabstop>CheckBox_StartMinimized</tabstop>
+  <tabstop>CheckBox_StartLocked</tabstop>
+  <tabstop>checkBox_SaveFileDlgHistory</tabstop>
+  <tabstop>Button_ClearFileDlgHistory</tabstop>
+  <tabstop>checkBox_AskBeforeDelete</tabstop>
   <tabstop>ButtonColor1</tabstop>
-  <tabstop>ButtonTextColor</tabstop>
   <tabstop>ButtonColor2</tabstop>
+  <tabstop>ButtonTextColor</tabstop>
+  <tabstop>CheckBox_AlternatingRowColors</tabstop>
+  <tabstop>Button_CustomizeEntryDetails</tabstop>
+  <tabstop>Radio_GroupTreeRestore</tabstop>
+  <tabstop>Radio_GroupTreeExpand</tabstop>
+  <tabstop>Radio_GroupTreeDoNothing</tabstop>
+  <tabstop>CheckBox_ShowPasswords</tabstop>
+  <tabstop>CheckBox_ShowPasswords_PasswordDlg</tabstop>
+  <tabstop>SpinBox_ClipboardTime</tabstop>
+  <tabstop>CheckBox_LockMinimize</tabstop>
+  <tabstop>CheckBox_FeatureBookmarks</tabstop>
+  <tabstop>Radio_IntPlugin_None</tabstop>
+  <tabstop>Radio_IntPlugin_Gnome</tabstop>
+  <tabstop>Radio_IntPlugin_Kde</tabstop>
+  <tabstop>IntPlugin_Button_Config</tabstop>
+  <tabstop>SpinBox_AutoTypePreGap</tabstop>
+  <tabstop>SpinBox_AutoTypeKeyStrokeDelay</tabstop>
+  <tabstop>CheckBox_SaveRelativePaths</tabstop>
+  <tabstop>Edit_GlobalShortcut</tabstop>
+  <tabstop>CheckBox_EntryTitlesMatch</tabstop>
+  <tabstop>DialogButtons</tabstop>
  </tabstops>
  <resources/>
  <connections/>

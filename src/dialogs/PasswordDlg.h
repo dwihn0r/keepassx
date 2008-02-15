@@ -48,15 +48,14 @@ class CPasswordDialog : public QDialog, public Ui_PasswordDlg
 		QString BookmarkFilename;
 		tKeyType KeyType;
 		bool OverwriteKeyFile;	
-		CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,bool ShowExitButton = false, bool KeyMode_Set=false);
+		CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,bool IsAuto=false,bool ChangeKeyMode=false);
 	
-	public slots:
+	private slots:
 	    void OnOK();
 		void OnOK_Set();
 	    void OnCancel();
 	    void OnButtonBrowse();
 		void OnButtonBrowse_Set();
-	    void OnButtonExit();
 	    void OnPasswordChanged(const QString &txt);
 	    void OnCheckBox_BothChanged(int state);
 	    void ChangeEchoModeDatabaseKey();

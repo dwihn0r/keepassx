@@ -62,7 +62,7 @@ class KeepassGroupView:public QTreeWidget{
 		QList<QTreeWidgetItem*>* EntryDragItems;
 	
 	public slots:
-		void OnCurrentGroupChanged(QTreeWidgetItem*,QTreeWidgetItem*);
+		void OnCurrentGroupChanged(QTreeWidgetItem*);
 		void OnDeleteGroup();
 		void OnNewGroup();
 		void OnEditGroup();

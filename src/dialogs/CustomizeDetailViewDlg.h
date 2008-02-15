@@ -20,7 +20,7 @@
 #ifndef _CUSTOMIZE_DETAIL_VIEW_H_
 #define _CUSTOMIZE_DETAIL_VIEW_H_
 
-#include "ui_CustomizeDetailViewDlg.h";
+#include "ui_CustomizeDetailViewDlg.h"
 #include <QColor>
 #include <QAction>
 
@@ -33,14 +33,14 @@ class CustomizeDetailViewDialog : public QDialog, public Ui_CustomizeDetailViewD
 		void OnBtnBold(bool);
 		void OnBtnItalic(bool);
 		void OnBtnUnderline(bool);
-		void OnBtnAlignLeft(bool);
-		void OnBtnAlignRight(bool);
-		void OnBtnAlignCenter(bool);
-		void OnBtnAlignBlock(bool);
+		void OnBtnAlignLeft();
+		void OnBtnAlignRight();
+		void OnBtnAlignCenter();
+		void OnBtnAlignBlock();
 		void OnBtnColor();
 		void OnSave();
 		void OnCancel();
-		void OnRestoreDefault();
+		void OnRestoreDefault(QAbstractButton* button);
 		void OnInsertTemplate(QAction*);
 		void OnCursorPositionChanged();
 		void OnTabChanged(int index);

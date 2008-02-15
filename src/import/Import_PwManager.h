@@ -26,7 +26,9 @@
 #include "Import.h"
 
 
-class Import_PwManager:public IImport, public ImporterBase{
+class Import_PwManager:public ImporterBase, public IImport{
+	Q_OBJECT
+	
 	public:
 		virtual bool importDatabase(QWidget* GuiParent, IDatabase* Database);
 		virtual QString identifier(){return "PwManager";}

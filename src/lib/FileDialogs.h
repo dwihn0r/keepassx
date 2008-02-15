@@ -81,6 +81,7 @@ class KpxFileDialogs{
 
 class QtStandardFileDialogs:public QObject,public IFileDialog{
 	Q_OBJECT	
+	Q_INTERFACES(IFileDialog);
 		public:
 			QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);
 			QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);		

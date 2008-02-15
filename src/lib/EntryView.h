@@ -65,7 +65,6 @@ class KeepassEntryView:public QTreeWidget{
 		bool AutoResizeColumns;
 		QPoint DragStartPos;
 		QList<QTreeWidgetItem*> DragItems;
-		QPixmap DragPixmap;
 		IGroupHandle* CurrentGroup;
 		enum EntryViewMode {Normal, ShowSearchResults};
 		EntryViewMode ViewMode;
@@ -94,7 +93,9 @@ class KeepassEntryView:public QTreeWidget{
 		void OnCloneEntry();
 		void OnDeleteEntry();
 		void OnSaveAttachment();
+#ifdef AUTOTYPE
 		void OnAutoType();
+#endif
 		void removeDragItems();
 		void OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisIndex);
 		void OnEditOpenUrl();

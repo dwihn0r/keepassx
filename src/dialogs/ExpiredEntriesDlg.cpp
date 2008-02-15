@@ -39,7 +39,7 @@ ExpiredEntriesDialog::ExpiredEntriesDialog(QWidget* parent,IDatabase* database,c
 		item->setIcon(1,database->icon(Entries[i]->image()));
 
 	}
-	connect(treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(OnItemDoubleClicked(QTreeWidgetItem*,int)));
+	connect(treeWidget,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(OnItemDoubleClicked(QTreeWidgetItem*)));
 }
 
 
@@ -55,7 +55,7 @@ void ExpiredEntriesDialog::resizeEvent(QResizeEvent* event){
 	QDialog::resizeEvent(event);
 }
 
-void ExpiredEntriesDialog::OnItemDoubleClicked(QTreeWidgetItem* item, int column){
+void ExpiredEntriesDialog::OnItemDoubleClicked(QTreeWidgetItem* item){
 	SelectedEntry=Entries[item->data(0,Qt::UserRole).toInt()];
 	accept();
 }

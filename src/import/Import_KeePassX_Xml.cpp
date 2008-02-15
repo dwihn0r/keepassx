@@ -47,7 +47,7 @@ bool Import_KeePassX_Xml::importDatabase(QWidget* Parent, IDatabase* database){
 	QStringList GroupNames;
 	for(int i=0;i<TopLevelGroupNodes.count();i++){
 		if(TopLevelGroupNodes.at(i).toElement().tagName()!="group"){
-			qWarning("Import_KeePassX_Xml: Error: Unknow tag '%s'",TopLevelGroupNodes.at(i).toElement().tagName());
+			qWarning("Import_KeePassX_Xml: Error: Unknow tag '%s'",TopLevelGroupNodes.at(i).toElement().tagName().toUtf8().constData());
 			QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Parsing error: File is no valid KeePassX XML file."));		
 			return false;
 		}

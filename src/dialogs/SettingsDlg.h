@@ -27,6 +27,7 @@
 #include <QPaintEvent>
 #include "ui_SettingsDlg.h"
 #include "main.h"
+#include "lib/AutoType.h"
 
 class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 {
@@ -42,19 +43,27 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
     	virtual void OnColor2();
     	virtual void OnColor1();
 		void OnOtherButton(QAbstractButton*);
-		void OnIntPluginNone(bool);
-		void OnIntPluginGnome(bool);
-		void OnIntPluginKde(bool);
-		void OnCheckBoxOpenLastChanged(int state);
-		void OnCheckBoxBrowserDefaultChanged(int state);
+		void OnIntPluginNone();
+		void OnIntPluginGnome();
+		void OnIntPluginKde();
 		void OnMountDirBrowse();
+		void OnBrowserCmdBrowse();
 		void OnCustomizeEntryDetails();
-
+		
+	
+#ifdef GLOBAL_AUTOTYPE
+	private slots:
+		void resetGlobalShortcut();
+#endif
+	
 	private:
  		virtual void paintEvent(QPaintEvent*);
 		void apply();
  		QColor color1,color2,textcolor;
  		QPixmap BannerPixmap;
+#ifdef GLOBAL_AUTOTYPE
+		Shortcut pShortcut;
+#endif
 		static bool PluginsModified;
 
 };

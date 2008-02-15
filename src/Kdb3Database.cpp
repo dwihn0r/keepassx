@@ -20,10 +20,9 @@
 #include "global.h"
 #include <iostream>
 #include <time.h>
-#include <qfile.h>
-#include <qstringlist.h>
-#include <qobject.h>
-#include <qdatetime.h>
+#include <QFile>
+#include <QStringList>
+#include <QDateTime>
 #include <QSysInfo>
 #include <QBuffer>
 #include <QDir>
@@ -135,11 +134,13 @@ bool Kdb3Database::isMetaStream(StdEntry& p){
 
 
 bool Kdb3Database::parseCustomIconsMetaStreamV1(const QByteArray& dta){
+	Q_UNUSED(dta)
 	qDebug("Removed old CuIcMeSt v1");
 	return true;
 }
 
 bool Kdb3Database::parseCustomIconsMetaStreamV2(const QByteArray& dta){
+	Q_UNUSED(dta)
 	qDebug("Removed old CuIcMeSt v2");
 	return true;
 }
@@ -297,7 +298,7 @@ switch(FieldType)
 		entry->Expire=dateFromPackedStruct5(pData);
 		break;
 	case 0x000D:
-		entry->BinaryDesc=(char*)pData;
+		entry->BinaryDesc=QString::fromUtf8((char*)pData);
 		break;
 	case 0x000E:
 		if(FieldSize != 0)
@@ -525,13 +526,13 @@ RootGroup.Handle=NULL;
 		memcpyFromLEnd16(&FieldType, pField);
 		pField += 2; pos += 2;
 		if(pos >= total_size) {
-		 error=tr("Unexpected error: Offset is out of range. [G1]");
+		 error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
 		 return false; }
 
 		memcpyFromLEnd32(&FieldSize, pField);
 		pField += 4; pos += 4;
 		if(pos >= (total_size + FieldSize)){
-		 error=tr("Unexpected error: Offset is out of range. [G2]");
+		 error=tr("Unexpected error: Offset is out of range.").append(" [G2]");
 		return false;}
 
 		bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
@@ -542,7 +543,7 @@ RootGroup.Handle=NULL;
 		pField += FieldSize;
 		pos += FieldSize;
 		if(pos >= total_size) {
-		 error=tr("Unexpected error: Offset is out of range. [G1]");
+		 error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
 		 return false;}
 	}
 
@@ -555,13 +556,13 @@ StdEntry entry;
 		memcpyFromLEnd16(&FieldType, pField);
 		pField += 2; pos += 2;
 		if(pos >= total_size){
-		 error=tr("Unexpected error: Offset is out of range. [E1]");
+		 error=tr("Unexpected error: Offset is out of range.").append(" [E1]");
 		 return false;}
 
 		memcpyFromLEnd32(&FieldSize, pField);
 		pField += 4; pos += 4;
 		if(pos >= (total_size + FieldSize)) {
-		 error=tr("Unexpected error: Offset is out of range. [E2]");
+		 error=tr("Unexpected error: Offset is out of range.").append(" [E2]");
 		 return false; }
 
 		bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
@@ -574,7 +575,7 @@ StdEntry entry;
 		pField += FieldSize;
 		pos += FieldSize;
 		if(pos >= total_size) {
-		 error=tr("Unexpected error: Offset is out of range. [E3]");
+		 error=tr("Unexpected error: Offset is out of range.").append(" [E3]");
 		 return false; }
 	}
 
@@ -1200,7 +1201,8 @@ bool Kdb3Database::save(){
 	NumGroups = Groups.size();
 	NumEntries = Entries.size()+UnknownMetaStreams.size()+MetaStreams.size();
 
-	qSort(Entries.begin(),Entries.end(),StdEntryLessThan);
+	QList<StdEntry> saveEntries = Entries;
+	qSort(saveEntries.begin(),saveEntries.end(),StdEntryLessThan);
 
 	randomize(FinalRandomSeed,16);
 	randomize(TransfRandomSeed,32);
@@ -1209,7 +1211,7 @@ bool Kdb3Database::save(){
 	unsigned int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
 
 	serializeGroups(Groups,buffer,pos);
-	serializeEntries(Entries,buffer,pos);
+	serializeEntries(saveEntries,buffer,pos);
 	serializeEntries(UnknownMetaStreams,buffer,pos);
 	serializeEntries(MetaStreams,buffer,pos);
 	SHA256::hashBuffer(buffer+DB_HEADER_SIZE,ContentsHash,pos-DB_HEADER_SIZE);

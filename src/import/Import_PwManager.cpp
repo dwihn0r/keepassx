@@ -32,12 +32,18 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	QFile* file=openFile(GuiParent,identifier(),QStringList()<<tr("PwManager Files (*.pwm)")<<tr("All Files (*)"));
 	if(!file)return false;
 	QString password=getPassword(GuiParent);
-	if(password==QString()){delete file; return false;}
+	if(password.isEmpty()){delete file; return false;}
 	char* buffer=NULL;
 	int offset=0;
 	int len=0;
-	if(len=file->size()) buffer=new char[len];
-	else {QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is empty.")); delete file; return false;}
+	if(len=file->size()){
+		buffer=new char[len];
+	}
+	else {
+		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is empty."));
+		delete file;
+		return false;
+	}
 	file->read(buffer,len);
 	file->close();
 	delete file;

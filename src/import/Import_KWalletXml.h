@@ -23,7 +23,9 @@
 #include "Database.h"
 #include "Import.h"
 
-class Import_KWalletXml:public IImport, public ImporterBase{
+class Import_KWalletXml:public ImporterBase, public IImport{
+	Q_OBJECT
+	
 	public:
 		virtual bool importDatabase(QWidget* GuiParent, IDatabase* Database);
 		virtual QString identifier(){return "KWalletXml";}

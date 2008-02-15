@@ -21,6 +21,7 @@
 
 #include <QLineEdit>
 #include <QCheckBox>
+#include <QPushButton>
 #include <QRegExp>
 #include <QMessageBox>
 #include <QPainter>
@@ -32,8 +33,9 @@
 SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
+	QPushButton* Button_Search = ButtonBox->addButton(tr("Search"),QDialogButtonBox::ActionRole);
 	connect( Button_Search, SIGNAL( clicked() ), this, SLOT( OnSearch() ) );
-	connect( Button_Close, SIGNAL( clicked() ), this, SLOT( OnClose() ) );
+	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnClose() ) );
 	db=database;
 	group=Group;
 	createBanner(&BannerPixmap,getPixmap("search"),tr("Search"),width());

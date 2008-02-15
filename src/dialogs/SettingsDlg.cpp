@@ -19,11 +19,8 @@
 
 #include "main.h"
 #include "KpxConfig.h"
-#include <qpixmap.h>
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qcolordialog.h>
-#include <qlineedit.h>
+#include <QPixmap>
+#include <QColorDialog>
 #include <QFileDialog>
 #include <QDir>
 #include <QPainter>
@@ -40,29 +37,49 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(DialogButtons, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
 	connect(DialogButtons, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect(DialogButtons, SIGNAL( clicked(QAbstractButton*)), this, SLOT(OnOtherButton(QAbstractButton*)));
-
+	
+	connect(CheckBox_ShowSysTrayIcon, SIGNAL( toggled(bool) ), CheckBox_CloseToTray, SLOT( setEnabled(bool) ) );
+	connect(CheckBox_ShowSysTrayIcon, SIGNAL( toggled(bool) ), CheckBox_MinimizeTray, SLOT( setEnabled(bool) ) );
+	connect(CheckBox_OpenLast, SIGNAL( toggled(bool) ), CheckBox_RememberLastKey, SLOT( setEnabled(bool) ) );
+	connect(CheckBox_OpenLast, SIGNAL( toggled(bool) ), CheckBox_StartMinimized, SLOT( setEnabled(bool) ) );
+	connect(CheckBox_OpenLast, SIGNAL( toggled(bool) ), CheckBox_StartLocked, SLOT( setEnabled(bool) ) );
+	
 	connect(Button_ClearFileDlgHistory, SIGNAL(clicked()), &fileDlgHistory, SLOT(clear()));
 	connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 	connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
 	connect(ButtonTextColor, SIGNAL( clicked() ), this, SLOT( OnTextColor() ) );
-	connect(CheckBox_OpenLast,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxOpenLastChanged(int)));
 	connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
+	connect(Button_BrowserCmdBrowse,SIGNAL(clicked()),this,SLOT(OnBrowserCmdBrowse()));
 
-	connect(Radio_IntPlugin_None,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginNone(bool)));
-	connect(Radio_IntPlugin_Gnome,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginGnome(bool)));
-	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde(bool)));
+	connect(Radio_IntPlugin_None,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginNone()));
+	connect(Radio_IntPlugin_Gnome,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginGnome()));
+	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde()));
 
-	connect(CheckBox_BrowserDefault,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxBrowserDefaultChanged(int)));
 	connect(Button_CustomizeEntryDetails,SIGNAL(clicked()),this,SLOT(OnCustomizeEntryDetails()));
-
+	
+#if !defined(AUTOTYPE)
+	Box_AutoType->setVisible(false);
+#endif
+#if !defined(GLOBAL_AUTOTYPE)
+	Label_GlobalShortcut->setVisible(false);
+	Edit_GlobalShortcut->setVisible(false);
+#endif
+	
+#ifdef GLOBAL_AUTOTYPE
+	pShortcut = AutoType::shortcut;
+	connect(this,SIGNAL(rejected()),SLOT(resetGlobalShortcut()));
+#endif
 
 	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width());
 
 	//General
 	CheckBox_OpenLast->setChecked(config->openLastFile());
 	CheckBox_RememberLastKey->setChecked(config->rememberLastKey());
-	checkBox_ShowSysTrayIcon->setChecked(config->showSysTrayIcon());
-	checkBox_MinimizeToTray->setChecked(config->minimizeToTray());
+	CheckBox_ShowSysTrayIcon->setChecked(config->showSysTrayIcon());
+	CheckBox_CloseToTray->setChecked(config->minimizeToTray());
+	CheckBox_MinimizeTray->setChecked(config->minimizeTray());
+	CheckBox_StartMinimized->setChecked(config->startMinimized());
+	CheckBox_StartLocked->setChecked(config->startLocked());
 	checkBox_SaveFileDlgHistory->setChecked(config->saveFileDlgHistory());
 	checkBox_AskBeforeDelete->setChecked(config->askBeforeDelete());
 
@@ -103,13 +120,15 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	SpinBox_ClipboardTime->setValue(config->clipboardTimeOut());
 	CheckBox_ShowPasswords->setChecked(config->showPasswords());
 	CheckBox_ShowPasswords_PasswordDlg->setChecked(config->showPasswordsPasswordDlg());
+	CheckBox_LockMinimize->setChecked(config->lockOnMinimize());
 	
 	//Features
 	CheckBox_FeatureBookmarks->setChecked(config->featureBookmarks());
 
 
-	//Desktop Integration
-	if(PluginLoadError==QString())
+	// TODO Desktop Integration
+	tabWidgetSettings->removeTab(tabWidgetSettings->indexOf(tabIntegration));
+	/*if(PluginLoadError==QString())
 		Label_IntPlugin_Error->hide();
 	else
 		Label_IntPlugin_Error->setText(QString("<html><p style='font-weight:600; color:#8b0000;'>%1</p></body></html>")
@@ -126,24 +145,23 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 			Radio_IntPlugin_None->setChecked(true);
 	}
 	if(!PluginsModified)
-		Label_IntPlugin_Info->hide();
+		Label_IntPlugin_Info->hide();*/
 
 
 	//Advanced
-	QString BrowserCmd=config->urlCmd();
-	if(BrowserCmd.isEmpty()){
-		CheckBox_BrowserDefault->setChecked(true);
-		Edit_BrowserCmd->setDisabled(true);
-	}
-	else{
-		Edit_BrowserCmd->setText(BrowserCmd);
-		CheckBox_BrowserDefault->setChecked(false);
-	}
+	Box_BrowserCmd->setChecked(!config->urlCmdDef());
+	Edit_BrowserCmd->setText(config->urlCmd());
 
 	Edit_MountDir->setText(config->mountDir());
 	CheckBox_SaveRelativePaths->setChecked(config->saveRelativePaths());
+#ifdef AUTOTYPE
 	SpinBox_AutoTypePreGap->setValue(config->autoTypePreGap());
 	SpinBox_AutoTypeKeyStrokeDelay->setValue(config->autoTypeKeyStrokeDelay());
+#endif
+#ifdef GLOBAL_AUTOTYPE
+	Edit_GlobalShortcut->setShortcut(config->globalShortcut());
+	CheckBox_EntryTitlesMatch->setChecked(config->entryTitlesMatch());
+#endif
 }
 
 CSettingsDlg::~CSettingsDlg()
@@ -155,16 +173,6 @@ void CSettingsDlg::paintEvent(QPaintEvent *event){
 	QPainter painter(this);
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
-}
-
-void CSettingsDlg::OnCheckBoxBrowserDefaultChanged(int state){
-	if(state==Qt::Checked){
-		Edit_BrowserCmd->setDisabled(true);
-		Edit_BrowserCmd->setText(QString());
-	}
-	else{
-		Edit_BrowserCmd->setDisabled(false);
-	}
 }
 
 void CSettingsDlg::OnOK()
@@ -184,10 +192,13 @@ void CSettingsDlg::OnOtherButton(QAbstractButton* button){
 }
 
 void CSettingsDlg::apply(){
-
+	
 	//General
-	config->setShowSysTrayIcon(checkBox_ShowSysTrayIcon->isChecked());
-	config->setMinimizeToTray(checkBox_MinimizeToTray->isChecked());
+	config->setShowSysTrayIcon(CheckBox_ShowSysTrayIcon->isChecked());
+	config->setMinimizeToTray(CheckBox_CloseToTray->isChecked());
+	config->setMinimizeTray(CheckBox_MinimizeTray->isChecked());
+	config->setStartMinimized(CheckBox_StartMinimized->isChecked());
+	config->setStartLocked(CheckBox_StartLocked->isChecked());
 	config->setSaveFileDlgHistory(checkBox_SaveFileDlgHistory->isChecked());
 	if(Radio_GroupTreeRestore->isChecked())config->setGroupTreeState(KpxConfig::RestoreLast);
 	else if(Radio_GroupTreeExpand->isChecked())config->setGroupTreeState(KpxConfig::ExpandAll);
@@ -206,27 +217,32 @@ void CSettingsDlg::apply(){
 	config->setClipboardTimeOut(SpinBox_ClipboardTime->value());
 	config->setShowPasswords(CheckBox_ShowPasswords->isChecked());
 	config->setShowPasswordsPasswordDlg(CheckBox_ShowPasswords_PasswordDlg->isChecked());
+	config->setLockOnMinimize(CheckBox_LockMinimize->isChecked());
 	
 	//Features
 	config->setFeatureBookmarks(CheckBox_FeatureBookmarks->isChecked());
 
-	//Desktop Integration
-	PluginsModified=Label_IntPlugin_Info->isVisible();
+	//TODO Desktop Integration
+	/*PluginsModified=Label_IntPlugin_Info->isVisible();
 	if(Radio_IntPlugin_Kde->isChecked())config->setIntegrPlugin(KpxConfig::KDE);
 	else if(Radio_IntPlugin_Gnome->isChecked())config->setIntegrPlugin(KpxConfig::Gnome);
-	else config->setIntegrPlugin(KpxConfig::NoIntegr);
+	else config->setIntegrPlugin(KpxConfig::NoIntegr);*/
 
 	//Advanced
+	config->setUrlCmdDef(!Box_BrowserCmd->isChecked());
 	config->setUrlCmd(Edit_BrowserCmd->text());
 	config->setMountDir(Edit_MountDir->text());
 	if(!config->mountDir().isEmpty() && config->mountDir().right(1)!="/")
 		config->setMountDir(config->mountDir()+"/");
-	if(CheckBox_BrowserDefault->isChecked())config->setUrlCmd(QString());
-	else config->setUrlCmd(Edit_BrowserCmd->text());
 	config->setSaveRelativePaths(CheckBox_SaveRelativePaths->isChecked());
+#ifdef AUTOTYPE
 	config->setAutoTypePreGap(SpinBox_AutoTypePreGap->value());
 	config->setAutoTypeKeyStrokeDelay(SpinBox_AutoTypeKeyStrokeDelay->value());
-
+#endif
+#ifdef GLOBAL_AUTOTYPE
+	config->setGlobalShortcut(Edit_GlobalShortcut->shortcut());
+	config->setEntryTitlesMatch(CheckBox_EntryTitlesMatch->isChecked());
+#endif
 }
 
 void CSettingsDlg::OnTextColor()
@@ -270,31 +286,29 @@ void CSettingsDlg::OnColor1()
 	}
 }
 
-void CSettingsDlg::OnCheckBoxOpenLastChanged(int state){
-if(state==Qt::Checked){
-	CheckBox_RememberLastKey->setEnabled(true);
-}else{
-	CheckBox_RememberLastKey->setEnabled(false);
-	CheckBox_RememberLastKey->setChecked(false);
-}
-}
-
 void CSettingsDlg::OnMountDirBrowse(){
-QString dir=QFileDialog::getExistingDirectory(this,tr("Select a directory..."),"/");
-if(dir!=QString()){
-	Edit_MountDir->setText(dir);
-}
+	QString dir=QFileDialog::getExistingDirectory(this,tr("Select a directory..."));
+	if(!dir.isEmpty()){
+		Edit_MountDir->setText(dir);
+	}
 }
 
-void CSettingsDlg::OnIntPluginNone(bool toggled){
+void CSettingsDlg::OnBrowserCmdBrowse(){
+	QString filename=QFileDialog::getOpenFileName(this,tr("Select an executable..."));
+	if(!filename.isEmpty()){
+		Edit_BrowserCmd->setText(filename);
+	}
+}
+
+void CSettingsDlg::OnIntPluginNone(){
 	Label_IntPlugin_Info->show();
 }
 
-void CSettingsDlg::OnIntPluginGnome(bool toggled){
+void CSettingsDlg::OnIntPluginGnome(){
 	Label_IntPlugin_Info->show();
 }
 
-void CSettingsDlg::OnIntPluginKde(bool toggled){
+void CSettingsDlg::OnIntPluginKde(){
 	Label_IntPlugin_Info->show();
 }
 
@@ -303,3 +317,10 @@ void CSettingsDlg::OnCustomizeEntryDetails(){
 	CustomizeDetailViewDialog dlg(this);
 	dlg.exec();
 }
+
+#ifdef GLOBAL_AUTOTYPE
+void CSettingsDlg::resetGlobalShortcut(){
+	AutoType::unregisterGlobalShortcut();
+	AutoType::registerGlobalShortcut(pShortcut);
+}
+#endif

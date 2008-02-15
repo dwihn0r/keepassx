@@ -58,12 +58,12 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	connect(Edit_chars,SIGNAL(textEdited(const QString&)),this,SLOT(OnCharsChanged(const QString&)));
 
 	if(!StandAloneMode){
-		AcceptButton=DialogButtons->addButton(tr("Accept"),QDialogButtonBox::AcceptRole);
+		AcceptButton=DialogButtons->addButton(QDialogButtonBox::Ok);
 		AcceptButton->setDisabled(true);
 		DialogButtons->addButton(QDialogButtonBox::Cancel);
 	}
 	else{
-		DialogButtons->addButton(tr("OK"),QDialogButtonBox::AcceptRole);
+		DialogButtons->addButton(QDialogButtonBox::Close);
 		AcceptButton=NULL;
 	}
 
@@ -259,7 +259,7 @@ void CGenPwDialog::estimateQuality(){
 	Progress_Quali->setFormat(tr("%1 Bits").arg((int)bits));
 	Progress_Quali->update();
 	if(bits>128)bits=128;
-	Progress_Quali->setValue(bits);
+	Progress_Quali->setValue((int)bits);
 }
 
 void CGenPwDialog::OnCharsChanged(const QString& str){

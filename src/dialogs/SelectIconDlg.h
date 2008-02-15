@@ -39,7 +39,7 @@ public slots:
  void OnCancel();
  void OnDelete();
  void OnReplace();
- void OnSelectionChanged(QListWidgetItem*,QListWidgetItem*);
+ void OnSelectionChanged(QListWidgetItem*);
 
 private:
 	int Id;
@@ -48,6 +48,7 @@ private:
 	QMenu* CtxMenu;
 	QAction* DeleteAction;
 	QAction* ReplaceAction;
+	QPushButton* Button_PickIcon;
 
 protected:
  virtual void contextMenuEvent(QContextMenuEvent *event);

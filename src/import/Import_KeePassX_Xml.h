@@ -25,7 +25,9 @@
 #include "Import.h"
 
 
-class Import_KeePassX_Xml:public IImport, public ImporterBase{
+class Import_KeePassX_Xml:public ImporterBase, public IImport{
+	Q_OBJECT
+	
 	public:
 		virtual bool importDatabase(QWidget* GuiParent, IDatabase* Database);
 		virtual QString identifier(){return "KeePassX_Xml";}

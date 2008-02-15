@@ -34,6 +34,8 @@ class IImport{
 };
 
 class ImporterBase:public QObject{
+	Q_OBJECT
+	
 	protected:
 		virtual QFile* openFile(QWidget* GuiParent,QString id,QStringList Filter);
 		virtual QString getPassword(QWidget* GuiParent);
