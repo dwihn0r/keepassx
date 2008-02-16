@@ -961,7 +961,9 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 #endif
 
 	config->setMainWindowGeometry(geometry());
-	config->setVSplitterPos(VSplitter->saveState());
+	// workaround if window has never been visible
+	if (isVisible() || VSplitter->sizes()[0]!=VSplitter->sizes()[1])
+		config->setVSplitterPos(VSplitter->saveState());
 	if (config->showEntryDetails())
 		config->setHSplitterPos(HSplitter->saveState());
 	config->setShowStatusbar(statusBar()->isVisible());
