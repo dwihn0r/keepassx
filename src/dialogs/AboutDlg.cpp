@@ -42,7 +42,7 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 		AboutTr+="<br>";
 	}
 	Edit_Translation->setHtml(AboutTr+tr("Information on how to translate KeePassX can be found under:")
-		+"<br>http://keepassx.sourceforge.net/");
+		+"<br>http://www.keepassx.org/");
 	QString str;
 	str+="<b>"+tr("Team")+"</b><br>";
 	str+="<div style='margin-left:10px;'>";
@@ -77,34 +77,29 @@ close();
 }
 
 void AboutDialog::loadLicFromFile(){
-
-QFile gpl(AppDir+"/../share/keepass/license.html");
-if(!gpl.exists()){
-QMessageBox::critical(this,tr("Error"),tr("File '%1' could not be found.")
-			  .arg("'license.html'")+"\n"+tr("Make sure that the program is installed correctly.")
-			  ,tr("OK"),0,0,2,1);
-return;
-}
-
-if(!gpl.open(QIODevice::ReadOnly)){
-QMessageBox::critical(this,tr("Error"),tr("Could not open file '%1'")
-			  .arg("'license.txt'")+"\n"+tr("The following error occured:")+"\n"+gpl.errorString()
-			  ,tr("OK"),0,0,2,1);
-return;
-}
-
-char* buffer=new char[gpl.size()];
-long l=gpl.read(buffer,gpl.size());
-gpl.close();
-Edit_License->setHtml(QString::fromUtf8(buffer,l));
-delete buffer;
+	QString filename;
+	filename = AppDir+"/../share/keepass/license.html";
+	if (!QFile::exists(filename)){
+		filename = AppDir+"/share/license.html";
+		if (!QFile::exists(filename)){
+			filename.clear();
+		}
+	}
+	QFile gpl(filename);
+	if (filename.isEmpty() || !gpl.open(QIODevice::ReadOnly)){
+		QMessageBox::critical(this,tr("Error"),tr("File '%1' could not be found.")
+			.arg("'license.html'")+"\n"+tr("Make sure that the program is installed correctly.")
+			,tr("OK"),0,0,2,1);
+	}
+	
+	Edit_License->setHtml(QString::fromUtf8(gpl.readAll()));
 }
 
 void AboutDialog::OnHomepageClicked(){
-openBrowser("http://keepassx.sf.net");
+	openBrowser("http://www.keepassx.org/");
 }
 
 void AboutDialog::OnEMailClicked(){
-openBrowser("mailto:keepassx@gmail.com");
+	openBrowser("mailto:keepassx@gmail.com");
 }
 

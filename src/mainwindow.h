@@ -92,6 +92,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnShowSearchResults();
 		void OnEntryChanged(SelectionState);
 		void OnSysTrayActivated(QSystemTrayIcon::ActivationReason);
+		void restoreWindow();
 		void OnImport(QAction*);
 		void OnExport(QAction*);
 		void OnDetailViewUrlClicked(const QUrl& url);

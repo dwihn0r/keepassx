@@ -65,7 +65,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -183,9 +183,6 @@
             <widget class="LinkLabel" name="label_5" >
              <property name="text" >
               <string>http://keepassx.sourceforge.net</string>
-             </property>
-             <property name="buddy" >
-              <cstring></cstring>
              </property>
             </widget>
            </item>

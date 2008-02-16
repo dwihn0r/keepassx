@@ -52,6 +52,9 @@
 #if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
 #include "Application_X11.h"
 #endif
+#ifdef Q_WS_WIN
+#include <windows.h>
+#endif
 
 using namespace std;
 
@@ -60,6 +63,7 @@ QHash<QString,QIcon*>IconCache;
 
 KpxConfig *config;
 QString  AppDir;
+QString HomeDir;
 QString PluginLoadError;
 bool TrActive;
 QString DetailViewTemplate;
@@ -78,6 +82,15 @@ int main(int argc, char **_argv)
 	QString ArgFile,ArgCfg,ArgLang,IniFilename;
 	QApplication* app=NULL;
 	AppDir=applicationDirPath();
+#if defined Q_WS_WIN
+	HomeDir = QString::fromLocal8Bit(qgetenv("APPDATA").constData());
+	if(!HomeDir.isEmpty() && QFile::exists(HomeDir))
+		HomeDir = QDir::fromNativeSeparators(HomeDir)+"/KeePassX";
+	else
+		HomeDir = QDir::homePath()+"/KeePassX";
+#else
+	HomeDir = QDir::homePath()+"/.keepassx";
+#endif
 	bool ArgMin = false;
 	bool ArgLock = false;
 	parseCmdLineArgs(argc,argv,ArgFile,ArgCfg,ArgLang,ArgMin,ArgLock);
@@ -85,12 +98,12 @@ int main(int argc, char **_argv)
 
 	//Load Config
 	if(ArgCfg.isEmpty()){
-		if(!QDir(QDir::homePath()+"/.keepassx").exists()){
+		if(!QDir(HomeDir).exists()){
 			QDir conf(QDir::homePath());
-			if(!conf.mkdir(".keepassx")){
-				cout << "Warning: Could not create directory '~/.keepassx'." << endl;}
+			if(!QDir().mkpath(HomeDir))
+				qDebug("Warning: Could not create directory '%s'", CSTR(HomeDir));
 		}
-		IniFilename=QDir::homePath()+"/.keepassx/config";
+		IniFilename=HomeDir+"/config";
 	}
 	else
 		IniFilename=ArgCfg;
@@ -163,8 +176,9 @@ int main(int argc, char **_argv)
 	qtTranslator=new QTranslator;
 
 	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
-						<< app->applicationDirPath()+"/../share/keepass/i18n/"
-						<< QDir::homePath()+"/.keepassx/" ))
+						<< AppDir+"/../share/keepass/i18n/"
+						<< AppDir+"/share/i18n/"
+						<< HomeDir))
 	{
 		app->installTranslator(translator);
 		TrActive=true;
@@ -177,18 +191,21 @@ int main(int argc, char **_argv)
 		delete translator;
 		TrActive=false;
 	}
-
-	if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
-						<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-						<< app->applicationDirPath()+"/../share/keepass/i18n/"
-						<< QDir::homePath()+"/.keepass/" ))
-		app->installTranslator(qtTranslator);
-	else{
-		if(loc.name()!="en_US")
-			qWarning(QString("Qt: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
-				.arg(QLocale::languageToString(loc.language()))
-				.arg(QLocale::countryToString(loc.country())).toAscii());
-		delete qtTranslator;
+	
+	if(TrActive){
+		if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
+							<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
+							<< AppDir+"/../share/keepass/i18n/"
+							<< AppDir+"/share/i18n/"
+							<< HomeDir))
+			app->installTranslator(qtTranslator);
+		else{
+			if(loc.name()!="en_US")
+				qWarning(QString("Qt: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
+					.arg(QLocale::languageToString(loc.language()))
+					.arg(QLocale::countryToString(loc.country())).toAscii());
+			delete qtTranslator;
+		}
 	}
 
 
@@ -281,7 +298,7 @@ void openBrowser(const QString& UrlString){
 	QUrl url(UrlString);
 	if(url.scheme().isEmpty())
 		url=QUrl("http://"+UrlString);
-	if(config->urlCmdDef()){
+	if(config->urlCmdDef() || url.scheme()=="mailto"){
 		QDesktopServices::openUrl(url);
 	}
 	else{
@@ -297,22 +314,22 @@ void openBrowser(const QString& UrlString){
 	}
 }
 
-///TODO 0.2.3 remove
-void loadImg(QString name,QPixmap& Img){
-	if(Img.load(AppDir+"/../share/keepass/icons/"+name)==false){
-		if(Img.load(AppDir+"/share/"+name)==false){
-			QMessageBox::critical(0,QApplication::translate("Main","Error"),
-				QApplication::translate("Main","File '%1' could not be found.")
-				.arg(name),QApplication::translate("Main","OK"),0,0,2,1);
- 			exit(1);
-		}
+QString getImageFile(const QString& name){
+	if (QFile::exists(AppDir+"/../share/keepass/icons/"+name))
+		return AppDir+"/../share/keepass/icons/"+name;
+	else if (QFile::exists(AppDir+"/share/icons/"+name))
+		return AppDir+"/share/icons/"+name;
+	else{
+		QMessageBox::critical(0,QApplication::translate("Main","Error"),
+			QApplication::translate("Main","File '%1' could not be found.")
+			.arg(name),QApplication::translate("Main","OK"),0,0,2,1);
+		exit(1);
 	}
 }
 
 ///TODO 0.2.3 remove
 void loadImages(){
-	QPixmap tmpImg;
-	loadImg("clientic.png",tmpImg);
+	QPixmap tmpImg(getImageFile("clientic.png"));
 	EntryIcons=new QPixmap[BUILTIN_ICONS];
 	for(int i=0;i<BUILTIN_ICONS;i++){
 	EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
@@ -336,12 +353,7 @@ const QIcon& getIcon(const QString& name){
 	}*/
 	if(!NewIcon)
 	{
-		QFileInfo IconFile(AppDir+"/../share/keepass/icons/"+name+".png");
-		if(!IconFile.isFile() || !IconFile.exists() || !IconFile.isReadable()){
-			///TODO 0.2.3 error handling
-			qWarning("%s",CSTR(name));
-		}
-		NewIcon=new QIcon(AppDir+"/../share/keepass/icons/"+name+".png");
+		NewIcon=new QIcon(getImageFile(name+".png"));
 		IconCache.insert(name,NewIcon);
 	}
 	return *NewIcon;
@@ -351,11 +363,7 @@ const QPixmap* getPixmap(const QString& name){
 	QPixmap* CachedPixmap=PixmapCache.value(name);
 	if(CachedPixmap)
 		return CachedPixmap;
-	QImage img;
-	if(!img.load(AppDir+"/../share/keepass/icons/"+name+".png")){
-		///TODO 0.2.3 error handling
-		qWarning("%s",CSTR(name));
-	}
+	QImage img(getImageFile(name+".png"));
 	QPixmap* NewPixmap=new QPixmap(QPixmap::fromImage(img));
 	PixmapCache.insert(name,NewPixmap);
 	return NewPixmap;
@@ -380,7 +388,7 @@ bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& loc,co
 
 void printHelp(){
 	cout << "KeePassX" << APP_VERSION << endl;
-	cout << "Usage: keepass [Filename] [Options]" << endl;
+	cout << "Usage: keepassx  [Filename] [Options]" << endl;
 	cout << "  -help             This Help" << endl;
 	cout << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
 	cout << "  -min              Start minimized." << endl;
@@ -437,6 +445,8 @@ void showErrMsg(const QString& msg,QWidget* parent){
 	QMessageBox::critical(parent,QApplication::translate("Main","Error"),msg,QApplication::translate("Main","OK"));
 }
 
+//TODO Plugins
+/*
 QString findPlugin(const QString& filename){
 	QFileInfo info;
 
@@ -446,7 +456,7 @@ QString findPlugin(const QString& filename){
 
 	return QString();
 }
-
+*/
 
 QString makePathRelative(const QString& AbsDir,const QString& CurDir){
 	QStringList abs=AbsDir.split('/');

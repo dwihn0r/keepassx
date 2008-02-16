@@ -18,12 +18,14 @@
  ***************************************************************************/
 
 #include "ShortcutWidget.h"
+
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_X11)
+
 #include <QKeyEvent>
 #include <QX11Info>
 #include <QPalette>
 #include "HelperX11.h"
 
-#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_X11)
 ShortcutWidget::ShortcutWidget(QWidget* parent) : QLineEdit(parent), lock(false), failed(false){
 }
 

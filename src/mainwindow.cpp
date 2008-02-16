@@ -78,7 +78,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	InUnLock=false;
 	unlockDlg=NULL;
     setupUi(this);
-#ifdef QT_WS_MAC
+#ifdef Q_WS_MAC
 	setUnifiedTitleAndToolBarOnMac(true);
 #endif
 #ifdef AUTOTYPE
@@ -218,6 +218,7 @@ void KeepassMainWindow::setupConnections(){
 
 void KeepassMainWindow::setupToolbar(){
 	toolBar=new QToolBar(this);
+	toolBar->setMovable(false);
 	addToolBar(toolBar);
 	toolBar->setIconSize(QSize(config->toolbarIconSize(),config->toolbarIconSize()));
 	ViewShowToolbarAction=toolBar->toggleViewAction();
@@ -269,6 +270,8 @@ void KeepassMainWindow::setupIcons(){
     ExtrasSettingsAction->setIcon(getIcon("appsettings"));
 #ifdef AUTOTYPE
     EditAutoTypeAction->setIcon(getIcon("autotype"));
+#else
+	EditAutoTypeAction->setVisible(false);
 #endif
 	//HelpHandbookAction->setIcon(getIcon("manual")); //TODO Handbook
 	HelpAboutAction->setIcon(getIcon("help"));
@@ -982,7 +985,11 @@ void KeepassMainWindow::hideEvent(QHideEvent* event){
 		if (config->lockOnMinimize() && !IsLocked && FileOpen)
 			OnUnLockWorkspace();
 		if (config->showSysTrayIcon() && config->minimizeTray()){
-			setVisible(false);
+#ifdef Q_WS_WIN
+			QTimer::singleShot(100, this, SLOT(hide()));
+#else
+			hide();
+#endif
 			event->accept();
 			return;
 		}
@@ -1091,11 +1098,20 @@ void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason rea
 			hide();
 		}
 		else{
-			showNormal();
-			if (IsLocked)
-				OnUnLockWorkspace();
+#ifdef Q_WS_WIN
+			QTimer::singleShot(100, this, SLOT(restoreWindow()));
+#else
+			restoreWindow();
+#endif
 		}
 	}
+}
+
+void KeepassMainWindow::restoreWindow(){
+	showNormal();
+	activateWindow();
+	if (IsLocked)
+		OnUnLockWorkspace();
 }
 
 void KeepassMainWindow::OnExtrasPasswordGen(){

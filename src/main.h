@@ -54,12 +54,13 @@ QString applicationDirPath();
 const QIcon& getIcon(const QString& name);
 const QPixmap* getPixmap(const QString& name);
 QString decodeFileError(QFile::FileError Code);
-QString findPlugin(const QString& filename);
+//QString findPlugin(const QString& filename); //TODO Plugins
 QString makePathRelative(const QString& Abs,const QString& Cur);
 extern QString PluginLoadError;
 
 extern KpxConfig *config;
 extern QString AppDir;
+extern QString HomeDir;
 extern bool TrActive;
 extern QString DetailViewTemplate;
 extern QPixmap *EntryIcons;

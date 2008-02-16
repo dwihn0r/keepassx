@@ -21,7 +21,10 @@
 #define SHORTCUT_WIDGET_H
 
 #include <QLineEdit>
+
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_X11)
 #include "lib/AutoType.h"
+#endif
 
 class ShortcutWidget : public QLineEdit{
 	Q_OBJECT
