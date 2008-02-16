@@ -28,9 +28,9 @@
 
 class KdePlugin:public QObject,public IFileDialog,public IKdeInit,public IIconTheme{
 	Q_OBJECT
-	Q_INTERFACES(IFileDialog)
-	Q_INTERFACES(IKdeInit)
-	Q_INTERFACES(IIconTheme)
+	Q_INTERFACES(IFileDialog);
+	Q_INTERFACES(IKdeInit);
+	Q_INTERFACES(IIconTheme);
 	public:
 		virtual QString openExistingFileDialog(QWidget* parent,QString title,QString dir,
 							QStringList Filters, int SelectedFilter);

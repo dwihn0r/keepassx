@@ -29,6 +29,7 @@ class KeepassApplication : public QApplication
 	public:
 		KeepassApplication(int& argc, char** argv);
 		bool x11EventFilter(XEvent* event);
+		static bool x11KeyEvent(XEvent* event);
 };
 
 #endif // APPLICATION_X11_H

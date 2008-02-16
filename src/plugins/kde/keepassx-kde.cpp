@@ -153,7 +153,11 @@ QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
 		 						 QByteArray("0.2.3"),
 								 ki18n("Cross Platform Password Manager"));
 	createIconMap();
+#ifdef GLOBAL_AUTOTYPE
+	return dynamic_cast<QApplication*>( new KpKApplication() );
+#else
 	return dynamic_cast<QApplication*>( new KApplication() );
+#emdif
 }
 
 
