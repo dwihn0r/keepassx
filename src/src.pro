@@ -91,7 +91,8 @@ TRANSLATIONS += translations/keepass-de_DE.ts \
                 translations/keepass-ru_RU.ts \
                 translations/keepass-es_ES.ts \
                 translations/keepass-fr_FR.ts \
-                translations/keepass-cs_CS.ts \
+                translations/keepass-cs_CZ.ts \
+                translations/keepass-ja_JP.ts \
                 translations/keepass-xx_XX.ts
 
 HEADERS += lib/UrlLabel.h \

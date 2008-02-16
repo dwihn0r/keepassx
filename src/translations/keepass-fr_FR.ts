@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation type="unfinished">N&apos;a pas pu ouvrir le fichier &apos;%1&apos;</translation>
+        <translation type="obsolete">N&apos;a pas pu ouvrir le fichier &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The following error occured:
@@ -119,19 +119,11 @@
         <translation type="obsolete">http://keepassx.sf.net</translation>
     </message>
     <message>
-        <source>Unofficial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following error occured:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -190,10 +182,6 @@ KeePassX  est  distribué  sous  les  termes  de  la&lt;br&gt; Licence Publique 
     </message>
     <message>
         <source>AppFunc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>http://sniperbeamer.fobos.de/keepassx/</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -875,6 +863,10 @@ S&apos;il vous plait, vérifier vos permissions.</translation>
     <message>
         <source>Select a directory...</source>
         <translation>Sélectionner un répertoire....</translation>
+    </message>
+    <message>
+        <source>Select an executable...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2981,7 +2973,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Browser Command:</source>
-        <translation>Commande du navigateur:</translation>
+        <translation type="obsolete">Commande du navigateur:</translation>
     </message>
     <message>
         <source>Securi&amp;ty</source>
@@ -3148,10 +3140,6 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3181,6 +3169,14 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     </message>
     <message>
         <source>Use entry titles to match the window for Global Auto-Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Browser Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

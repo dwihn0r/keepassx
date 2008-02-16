@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation type="unfinished">Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
+        <translation type="obsolete">Datei &apos;%1&apos; konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>The following error occured:
@@ -89,19 +89,11 @@
 %1</translation>
     </message>
     <message>
-        <source>Unofficial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Information on how to translate KeePassX can be found under:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following error occured:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -161,10 +153,6 @@ General Public License (GPL) Version 2.</translation>
     </message>
     <message>
         <source>AppFunc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>http://sniperbeamer.fobos.de/keepassx/</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -796,6 +784,10 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
     <message>
         <source>Select a directory...</source>
         <translation>Verzeichnis wählen...</translation>
+    </message>
+    <message>
+        <source>Select an executable...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2830,7 +2822,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Browser Command:</source>
-        <translation>Browser Befehl:</translation>
+        <translation type="obsolete">Browser Befehl:</translation>
     </message>
     <message>
         <source>Securi&amp;ty</source>
@@ -2997,10 +2989,6 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3030,6 +3018,14 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     </message>
     <message>
         <source>Use entry titles to match the window for Global Auto-Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Browser Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

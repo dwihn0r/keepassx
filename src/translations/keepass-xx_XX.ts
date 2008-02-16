@@ -2,10 +2,6 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>Unofficial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
         <translation type="unfinished"></translation>
@@ -75,14 +71,6 @@
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Could not open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following error occured:</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AboutDlg</name>
@@ -96,10 +84,6 @@
     </message>
     <message>
         <source>AppFunc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>http://sniperbeamer.fobos.de/keepassx/</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -535,6 +519,10 @@ Please check your input.</source>
     </message>
     <message>
         <source>Select a directory...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an executable...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2291,11 +2279,11 @@ to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Browse...</source>
+        <source>Custom Browser Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
+        <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2303,11 +2291,11 @@ to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Browser Command:</source>
+        <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Default</source>
+        <source>Browse...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

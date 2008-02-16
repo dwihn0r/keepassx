@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation type="unfinished">No se pudo abrir fichero &apos;%1&apos;</translation>
+        <translation type="obsolete">No se pudo abrir fichero &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The following error occured:
@@ -85,19 +85,11 @@
 %1</translation>
     </message>
     <message>
-        <source>Unofficial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following error occured:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -137,10 +129,6 @@
     </message>
     <message>
         <source>AppFunc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>http://sniperbeamer.fobos.de/keepassx/</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -717,6 +705,10 @@ Please check your permissions.</source>
     <message>
         <source>Select a directory...</source>
         <translation>Seleccione un directorio...</translation>
+    </message>
+    <message>
+        <source>Select an executable...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2711,7 +2703,7 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     </message>
     <message>
         <source>Browser Command:</source>
-        <translation>Comando del Navegador:</translation>
+        <translation type="obsolete">Comando del Navegador:</translation>
     </message>
     <message>
         <source>Securi&amp;ty</source>
@@ -2874,10 +2866,6 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2907,6 +2895,14 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
     </message>
     <message>
         <source>Use entry titles to match the window for Global Auto-Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Browser Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

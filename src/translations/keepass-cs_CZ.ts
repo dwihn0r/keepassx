@@ -8,32 +8,44 @@
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation type="unfinished">&lt;b&gt;Current Translation: Russian&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
+        <translation type="unfinished">&lt;b&gt;Aktuální překlad: český&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Автор:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation type="unfinished">&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR</source>
-        <translation type="unfinished">Дмитрий Функ</translation>
+        <translation type="unfinished">Marek Straka</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation type="unfinished">dmitry.funk@gmail.com</translation>
+        <translation type="unfinished">marek@straka.info (&lt;a href=&quot;http://marek.straka.info&quot;&gt;marek.straka.info&lt;/a&gt;)</translation>
     </message>
     <message>
         <source>Team</source>
-        <translation type="unfinished">Комманда разработчиков</translation>
+        <translation type="unfinished">Vývojová skupina</translation>
+    </message>
+    <message>
+        <source>Tarek Saidi</source>
+        <translation type="obsolete">Tarek Saidi</translation>
     </message>
     <message>
         <source>Developer, Project Admin</source>
-        <translation type="unfinished">Разработчик, руководитель проекта</translation>
+        <translation type="unfinished">Vývojář, vedoucí projektu</translation>
+    </message>
+    <message>
+        <source>tariq@users.berlios.de</source>
+        <translation type="obsolete">tariq@users.berlios.de</translation>
+    </message>
+    <message>
+        <source>Eugen Gorschenin</source>
+        <translation type="obsolete">Eugen Gorschenin</translation>
     </message>
     <message>
         <source>Web Designer</source>
-        <translation type="unfinished">Web дизайнер</translation>
+        <translation type="unfinished">Webový designér</translation>
     </message>
     <message>
         <source>geugen@users.berlios.de</source>
@@ -41,19 +53,27 @@
     </message>
     <message>
         <source>Thanks To</source>
-        <translation type="unfinished">Благодарность</translation>
+        <translation type="unfinished">Poděkování</translation>
+    </message>
+    <message>
+        <source>Matthias Miller</source>
+        <translation type="obsolete">Matthias Miller</translation>
     </message>
     <message>
         <source>Patches for better MacOS X support</source>
-        <translation type="unfinished">Исправления для улучшения поддержки MacOS X</translation>
+        <translation type="unfinished">Patches pro lepší MacOS X podporu</translation>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
         <translation type="obsolete">www.outofhanwell.com</translation>
     </message>
     <message>
+        <source>James Nicholls</source>
+        <translation type="obsolete">James Nicholls</translation>
+    </message>
+    <message>
         <source>Main Application Icon</source>
-        <translation type="unfinished">Значок программы</translation>
+        <translation type="unfinished">Hlavní ikonka aplikace</translation>
     </message>
     <message>
         <source>Various fixes and improvements</source>
@@ -61,15 +81,15 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation type="unfinished">Chyba</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished">Файл &apos;%1&apos; не найден.</translation>
+        <translation type="unfinished">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation type="unfinished">Убедитесь что программа установлена корректно.</translation>
+        <translation type="unfinished">Ujistěte se, že program je správně nainstalován.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -77,7 +97,13 @@
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation type="obsolete">Невозможно открыть файл &apos;%1&apos;</translation>
+        <translation type="obsolete">Nelze otevřít soubor &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>The following error occured:
+%1</source>
+        <translation type="obsolete">Vyskytl se následující problém:
+%1</translation>
     </message>
     <message>
         <source>http://keepassx.sf.net</source>
@@ -96,35 +122,35 @@
     <name>AboutDlg</name>
     <message>
         <source>About</source>
-        <translation>О программе</translation>
+        <translation>O aplikaci</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Лицензия</translation>
+        <translation>Licence</translation>
     </message>
     <message>
         <source>Translation</source>
-        <translation>Перевод</translation>
+        <translation>Překlad</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Кроссплатформенный менеджер паролей&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - multiplatformní správce hesel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copyright (C) 2005 - 2006 Tarek Saidi 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
-        <translation type="obsolete">Copyright (C) 2005 - 2006 Tarek Saidi 
-KeePassX is distributed under the terms of the 
-General Public License (GPL) version 2.</translation>
+        <translation type="obsolete">Copyright (C) 2005 - 2006 Tarek Saidi
+KeePassX je šířen pod podmínkami
+General Public License (GPL) verze 2.</translation>
     </message>
     <message>
         <source>Credits</source>
-        <translation>Благодарности</translation>
+        <translation>Poděkování</translation>
     </message>
     <message>
         <source>http://keepassx.sourceforge.net</source>
-        <translation>keepassx@gmail.com</translation>
+        <translation>http://keepassx.sourceforge.net</translation>
     </message>
     <message>
         <source>keepassx@gmail.com</source>
@@ -153,7 +179,7 @@ General Public License (GPL) version 2.</source>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished">Название:</translation>
+        <translation type="unfinished">Název:</translation>
     </message>
     <message>
         <source>File:</source>
@@ -161,7 +187,7 @@ General Public License (GPL) version 2.</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished">Обзор...</translation>
+        <translation type="unfinished">Projít...</translation>
     </message>
     <message>
         <source>Edit Bookmark</source>
@@ -181,11 +207,18 @@ General Public License (GPL) version 2.</source>
     <message>
         <source>More than one &apos;Auto-Type:&apos; key sequence found.
 Allowed is only one per entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nalezena více než jedna &apos;Auto-Type:&apos; klíčová sekvence
+Je dovolena pouze jedna na každý záznam.</translation>
+    </message>
+    <message>
+        <source>Syntax Error in Auto-Type sequence near character %1
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
+        <translation type="obsolete">Chyba syntaxe v Auto-Type sekvenci poblíž znaku %1
+<byte value="x9"/>Nalezeno &apos;{&apos; bez uzavření &apos;}&apos;</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Ошибка</translation>
+        <translation type="obsolete">Chyba</translation>
     </message>
     <message>
         <source>Syntax Error in Auto-Type sequence near character %1
@@ -213,15 +246,15 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation type="unfinished">Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Имя</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Отмена</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <source>Auto-Type</source>
@@ -236,15 +269,15 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Ошибка</translation>
+        <translation type="obsolete">Chyba</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation type="obsolete">Файл &apos;%1&apos; не найден.</translation>
+        <translation type="obsolete">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation type="obsolete">Убедитесь что программа установлена корректно.</translation>
+        <translation type="obsolete">Ujistěte se, že program je správně nainstalován.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -252,37 +285,59 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>Could not open file &apos;%1&apos;</source>
-        <translation type="obsolete">Невозможно открыть файл &apos;%1&apos;</translation>
+        <translation type="obsolete">Nelze otevřít soubor &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>The following error occured:
+%1</source>
+        <translation type="obsolete">Vyskytl se následující problém:
+%1</translation>
     </message>
     <message>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation type="obsolete">&lt;b&gt;Current Translation: Russian&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Aktuální překlad: český&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Автор:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation type="obsolete">dmitry.funk@gmail.com</translation>
+        <translation type="obsolete">marek@straka.info (&lt;a href=&quot;http://marek.straka.info&quot;&gt;marek.straka.info&lt;/a&gt;)</translation>
+    </message>
+    <message>
+        <source>Matthias Miller</source>
+        <translation type="obsolete">Matthias Miller</translation>
+    </message>
+    <message>
+        <source>Eugen Gorschenin</source>
+        <translation type="obsolete">Eugen Gorschenin</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR</source>
-        <translation type="obsolete">Дмитрий Функ</translation>
+        <translation type="obsolete">Marek Straka</translation>
     </message>
     <message>
         <source>Team</source>
-        <translation type="obsolete">Комманда разработчиков</translation>
+        <translation type="obsolete">Vývojová skupina</translation>
+    </message>
+    <message>
+        <source>Tarek Saidi</source>
+        <translation type="obsolete">Tarek Saidi</translation>
     </message>
     <message>
         <source>Developer, Project Admin</source>
-        <translation type="obsolete">Разработчик, руководитель проекта</translation>
+        <translation type="obsolete">Vývojář, vedoucí projektu</translation>
+    </message>
+    <message>
+        <source>tariq@users.berlios.de</source>
+        <translation type="obsolete">tariq@users.berlios.de</translation>
     </message>
     <message>
         <source>Web Designer</source>
-        <translation type="obsolete">Web дизайнер</translation>
+        <translation type="obsolete">Webový designér</translation>
     </message>
     <message>
         <source>geugen@users.berlios.de</source>
@@ -290,11 +345,11 @@ Allowed is only one per entry.</source>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation type="obsolete">Благодарность</translation>
+        <translation type="obsolete">Poděkování</translation>
     </message>
     <message>
         <source>Patches for better MacOS X support</source>
-        <translation type="obsolete">Исправления для улучшения поддержки MacOS X</translation>
+        <translation type="obsolete">Patches pro lepší MacOS X podporu</translation>
     </message>
     <message>
         <source>www.outofhanwell.com</source>
@@ -303,12 +358,16 @@ Allowed is only one per entry.</source>
     <message>
         <source>Information on how to translate KeePassX can be found under:
 http://keepassx.sourceforge.net/</source>
-        <translation type="obsolete">Информацию по переводу KeePassX можно найти на:
+        <translation type="obsolete">Informace o tom jak přeložit KeePassX lze nalézt zde:
 http://keepassx.sourceforge.net/</translation>
     </message>
     <message>
+        <source>James Nicholls</source>
+        <translation type="obsolete">James Nicholls</translation>
+    </message>
+    <message>
         <source>Main Application Icon</source>
-        <translation type="obsolete">Значок программы</translation>
+        <translation type="obsolete">Hlavní ikonka aplikace</translation>
     </message>
     <message>
         <source>http://keepassx.sf.net</source>
@@ -319,19 +378,19 @@ http://keepassx.sourceforge.net/</translation>
     <name>CDbSettingsDlg</name>
     <message>
         <source>AES(Rijndael):  256 Bit   (default)</source>
-        <translation>AES(Rijndael):  256 бит   (по умолчанию)</translation>
+        <translation>AES(Rijndael):  256 Bitů   (standartní)</translation>
     </message>
     <message>
         <source>Twofish:  256 Bit</source>
-        <translation>Twofish:  256 бит</translation>
+        <translation>Twofish:  256 Bitů</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Varování</translation>
     </message>
     <message>
         <source>Please determine the number of encryption rounds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím zadejte počet šifrovacích kol.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -339,32 +398,32 @@ http://keepassx.sourceforge.net/</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>&apos;%1&apos; is not valid integer value.</source>
-        <translation>&apos;%1&apos; не корректное целое значение.</translation>
+        <translation>&apos;%1&apos; není platná integer hodnota.</translation>
     </message>
     <message>
         <source>The number of encryption rounds have to be greater than 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet kol zašifrování musí být větší než 0.</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Настройки</translation>
+        <translation>Nastavení</translation>
     </message>
 </context>
 <context>
     <name>CEditEntryDlg</name>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Upozornění</translation>
     </message>
     <message>
         <source>Password and password repetition are not equal.
 Please check your input.</source>
-        <translation>Пароль и повтор пароля не эквивалентны.
-Проверьте введённые данные.</translation>
+        <translation>Heslo a opakované heslo nejsou stejné
+Prosím zkontrolujte zadané údaje.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -372,64 +431,71 @@ Please check your input.</source>
     </message>
     <message>
         <source>Save Attachment...</source>
-        <translation>Сохранить вложение...</translation>
+        <translation>Uložit přílohu...</translation>
     </message>
     <message>
         <source>Overwrite?</source>
-        <translation type="obsolete">Перезаписать?</translation>
+        <translation type="obsolete">Přepsat?</translation>
+    </message>
+    <message>
+        <source>A file with this name already exists.
+Do you want to replace it?</source>
+        <translation type="obsolete">Soubor s tímto jménem již existuje.
+Chcete ho přepsat?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="obsolete">Нет</translation>
+        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Could not remove old file.</source>
-        <translation type="obsolete">Невозможно удалить старый файл.</translation>
+        <translation type="obsolete">Nelze odstranit starý soubor.</translation>
     </message>
     <message>
         <source>Could not create new file.</source>
-        <translation type="obsolete">Невозможно создать новый файл.</translation>
+        <translation type="obsolete">Nelze vytvořit nový soubor.</translation>
     </message>
     <message>
         <source>Error while writing the file.</source>
-        <translation>Ошибка записи в файл.</translation>
+        <translation>Chyba při zápisu souboru.</translation>
     </message>
     <message>
         <source>Delete Attachment?</source>
-        <translation>Удалить вложение?</translation>
+        <translation>Smazat přílohu?</translation>
     </message>
     <message>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chystáte se smazat přílohu tohoto záznamu.
+Jste si tím jistí?</translation>
     </message>
     <message>
         <source>No, Cancel</source>
-        <translation>Нет, Отмена</translation>
+        <translation>Ne, zrušit</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Изменить запись</translation>
+        <translation type="unfinished">Upravit záznam</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Невозможно открыть файл.</translation>
+        <translation>Nelze otevřít soubor.</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation>%1 бит</translation>
+        <translation>%1 bitů</translation>
     </message>
     <message>
         <source>Add Attachment...</source>
-        <translation>Добавить вложение...</translation>
+        <translation>Připojit přílohu...</translation>
     </message>
     <message>
         <source>The chosen entry has no attachment or it is empty.</source>
@@ -480,11 +546,11 @@ Are you sure?</source>
     <name>CGenPwDialog</name>
     <message>
         <source>Notice</source>
-        <translation type="unfinished">Предупреждение</translation>
+        <translation>Poznámka</translation>
     </message>
     <message>
         <source>You need to enter at least one character</source>
-        <translation>Необходимо ввести более одного символа</translation>
+        <translation>Je nutné vložit minimálně jeden znak</translation>
     </message>
     <message>
         <source>OK</source>
@@ -492,19 +558,19 @@ Are you sure?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Ошибка</translation>
+        <translation type="obsolete">Chyba</translation>
     </message>
     <message>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
-        <translation type="obsolete">Невозможно открыть &apos;/dev/random&apos; или &apos;/dev/urandom&apos;.</translation>
+        <translation type="obsolete">Nelze otevřít  &apos;/dev/random&apos; nebo &apos;/dev/urandom&apos;.</translation>
     </message>
     <message>
         <source>Password Generator</source>
-        <translation>Генератор паролей</translation>
+        <translation>Generátor hesla</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation type="obsolete">%1 бит</translation>
+        <translation type="obsolete">%1 bitů</translation>
     </message>
     <message>
         <source>%1 Bits</source>
@@ -519,102 +585,109 @@ Are you sure?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Please enter a Password.</source>
-        <translation>Введите пароль.</translation>
+        <translation>Vložte prosím heslo.</translation>
     </message>
     <message>
         <source>Please choose a key file.</source>
-        <translation>Выберите файл-ключ.</translation>
+        <translation>Vyberte prosím soubor s klíčem.</translation>
     </message>
     <message>
         <source>Please enter a Password or select a key file.</source>
-        <translation>Введите пароль или выберите файл-ключ.</translation>
+        <translation>Vložte prosím heslo nebo vyberte soubor s klíčem.</translation>
     </message>
     <message>
         <source>Database Key</source>
-        <translation>Ключ базы паролей</translation>
+        <translation>Klíč k databázi</translation>
     </message>
     <message>
         <source>Select a Key File</source>
-        <translation>Выбор файл-ключа</translation>
+        <translation>Vyberte soubor s klíčem</translation>
     </message>
     <message>
         <source>*.key</source>
         <translation type="obsolete">*.key</translation>
     </message>
     <message>
+        <source>Unexpected Error: File does not exist.</source>
+        <translation type="obsolete">Neočekávaná chyba: Soubor neexistuje.</translation>
+    </message>
+    <message>
         <source>The selected key file or directory does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybraný soubor s klíčem nebo adresář neexistuje.</translation>
     </message>
     <message>
         <source>The given directory does not contain any key files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Daný adresář neobsahuje žádné soubory s klíči.</translation>
     </message>
     <message>
         <source>The given directory contains more then one key file.
 Please specify the key file directly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Daný adresář obsahuje více než jeden klíč.
+Zadejte prosím klíč přímo.</translation>
     </message>
     <message>
         <source>The key file found in the given directory is not readable.
 Please check your permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nalezený soubor s klíčem v zadaném adresáři nelze přečíst.
+Zkontrolujte prosím parametry souboru.</translation>
     </message>
     <message>
         <source>Key file could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor s klíčem nemohl být nalezen.</translation>
     </message>
     <message>
         <source>Key file is not readable.
 Please check your permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor s klíčem nelze přečíst.
+Zkontrolujte prosím parametry souboru.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Upozornění</translation>
     </message>
     <message>
         <source>Password an password repetition are not equal.
 Please check your input.</source>
-        <translation>Пароль и повтор пароля не эквивалентны.
-Проверьте введённые данные.</translation>
+        <translation>Heslo a opakované heslo nejsou stejné.
+Zkontrolujte zadané údaje.</translation>
     </message>
     <message>
         <source>Please enter a password or select a key file.</source>
-        <translation>Введите пароль или выберите файл-ключ.</translation>
+        <translation>Prosím vložte heslo nebo vyberte soubor s klíčem.</translation>
     </message>
     <message>
         <source>A file with the name &apos;pwsafe.key&apos; already exisits in the given directory.
 Do you want to replace it?</source>
-        <translation type="obsolete">Файл с именем &apos;pwsafe.key&apos; уже существует в данной директории.
-Заменить его?</translation>
+        <translation type="obsolete">Soubor se jménem &apos;pwsafe.key&apos; již v zadaném adresáři existuje.
+Chcete ho přepsat?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="obsolete">Да</translation>
+        <translation type="obsolete">Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="obsolete">Нет</translation>
+        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <source>The exisiting file is not writable.</source>
-        <translation type="obsolete">Сужествующий файл незаписываем.</translation>
+        <translation type="obsolete">Existující soubor není zapisovatelný.</translation>
     </message>
     <message>
         <source>A file with the this name already exisits.
 Do you want to replace it?</source>
-        <translation type="obsolete">Файл с таким именем уже существует.
-Заменить его?</translation>
+        <translation type="obsolete">Soubor s tímto jménem již existuje.
+Chcete ho zaměnit?</translation>
     </message>
     <message>
         <source>The selected key file or directory is not readable.
 Please check your permissions.</source>
-        <translation>Выбранный файл-ключ или директория нечитаемы.
-Проверьте права доступа.</translation>
+        <translation>Vybraný soubor s klíčem nebo adresář nelze otevřít.
+Prosím zkontrolujte jeho parametry.</translation>
     </message>
     <message>
         <source>All Files (*)</source>
@@ -642,7 +715,7 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation type="unfinished">Zrušit</translation>
     </message>
     <message>
         <source>Key file could not be created.
@@ -658,11 +731,11 @@ Please check your permissions.</source>
     <name>CSearchDlg</name>
     <message>
         <source>Notice</source>
-        <translation type="obsolete">Предупреждение</translation>
+        <translation type="obsolete">Poznámka</translation>
     </message>
     <message>
         <source>Please enter a search string.</source>
-        <translation type="obsolete">Введите строку для поиска.</translation>
+        <translation type="obsolete">Prosím vložte hledaný řetězec.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -670,46 +743,46 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Search</source>
-        <translation type="obsolete">Поиск</translation>
+        <translation type="obsolete">Vyhledat</translation>
     </message>
 </context>
 <context>
     <name>CSelectIconDlg</name>
     <message>
         <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Add Icons...</source>
-        <translation>Добавить значок...</translation>
+        <translation>Přidat ikonky...</translation>
     </message>
     <message>
         <source>Images (%1)</source>
-        <translation>Изображение (%1)</translation>
+        <translation>Obrázky (%1)</translation>
     </message>
     <message>
         <source>%1: File could not be loaded.
 </source>
-        <translation type="obsolete">%1: Файл не может быть загружен.
+        <translation type="obsolete">%1: Soubor nemohl být otevřen.
 </translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Replace...</source>
-        <translation>Заменить...</translation>
+        <translation>Zaměnit...</translation>
     </message>
     <message>
         <source>An error occured while loading the icon(s):
 %1</source>
-        <translation type="obsolete">Ошибка при загрузке значков:
+        <translation type="obsolete">Vyskytla se chyba během otevírání ikonky (ikonek):
 %1</translation>
     </message>
     <message>
         <source>An error occured while loading the icon.</source>
-        <translation>Ошибка при загрузке значка.</translation>
+        <translation>Během otevírání ikonky se vyskytla chyba.</translation>
     </message>
     <message>
         <source>Add Custom Icon</source>
@@ -717,7 +790,7 @@ Please check your permissions.</source>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="unfinished">Выбрать</translation>
+        <translation type="unfinished">Vybrat</translation>
     </message>
     <message>
         <source>%1: File could not be loaded.</source>
@@ -732,11 +805,11 @@ Please check your permissions.</source>
     <name>CSettingsDlg</name>
     <message>
         <source>Settings</source>
-        <translation>Настройки</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Select a directory...</source>
-        <translation>Выберите директорию...</translation>
+        <translation>Výběr adresáře...</translation>
     </message>
     <message>
         <source>Select an executable...</source>
@@ -781,15 +854,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation type="unfinished">Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Имя</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Пароль</translation>
+        <translation type="unfinished">Heslo</translation>
     </message>
     <message>
         <source>Url</source>
@@ -797,7 +870,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Комментарий</translation>
+        <translation type="unfinished">Komentář</translation>
     </message>
     <message>
         <source>Attachment Name</source>
@@ -977,33 +1050,33 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Отмена</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
 </context>
 <context>
     <name>Database</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished">Никогда</translation>
+        <translation type="unfinished">Nikdy</translation>
     </message>
 </context>
 <context>
     <name>DatabaseSettingsDlg</name>
     <message>
         <source>Database Settings</source>
-        <translation type="unfinished">Н&amp;астройки базы паролей...</translation>
+        <translation type="unfinished">Nastavení databáze</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation type="unfinished">Шифрование</translation>
+        <translation type="unfinished">Zašifrování</translation>
     </message>
     <message>
         <source>Algorithm:</source>
-        <translation type="unfinished">Алгоритм:</translation>
+        <translation type="unfinished">Algoritmus:</translation>
     </message>
     <message>
         <source>Encryption Rounds:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Počet kol zašifrování:</translation>
     </message>
 </context>
 <context>
@@ -1014,27 +1087,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation type="unfinished">Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Имя</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Пароль</translation>
+        <translation type="unfinished">Heslo</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation type="unfinished">Ссылка</translation>
+        <translation type="unfinished">URL</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation type="unfinished">Создание</translation>
+        <translation type="unfinished">Vytvoření</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation type="unfinished">Последний доступ</translation>
+        <translation type="unfinished">Poslední přístup</translation>
     </message>
     <message>
         <source>Last Modification</source>
@@ -1046,54 +1119,54 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished">Комментарий</translation>
+        <translation type="unfinished">Komentář</translation>
     </message>
 </context>
 <context>
     <name>EditEntryDialog</name>
     <message>
         <source>Edit Entry</source>
-        <translation>Изменить запись</translation>
+        <translation>Úprava záznamu</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Имя:</translation>
+        <translation>Uživatel:</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Повтор пароля:</translation>
+        <translation>Zopakování hesla:</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Название:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation>Ссылка:</translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Пароль:</translation>
+        <translation>Heslo:</translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Качество:</translation>
+        <translation>Úroveň zajištění:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Комментарий:</translation>
+        <translation>Komentář:</translation>
     </message>
     <message>
         <source>Expires:</source>
-        <translation>Окончание:</translation>
+        <translation>Platnost vyprší:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation>Группа:</translation>
+        <translation>Skupina:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Отмена</translation>
+        <translation type="obsolete">&amp;zrušit</translation>
     </message>
     <message>
         <source>Alt+C</source>
@@ -1105,11 +1178,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Значок:</translation>
+        <translation>Ikonka:</translation>
     </message>
     <message>
         <source>Ge&amp;n.</source>
-        <translation>&amp;Генерация.</translation>
+        <translation>Ge&amp;n.</translation>
     </message>
     <message>
         <source>...</source>
@@ -1125,11 +1198,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Never</source>
-        <translation>Никогда</translation>
+        <translation>Nikdy</translation>
     </message>
     <message>
         <source>Attachment:</source>
-        <translation>Вложение:</translation>
+        <translation>Příloha:</translation>
     </message>
     <message>
         <source>&gt;</source>
@@ -1137,26 +1210,26 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation>%1 бит</translation>
+        <translation>%1 bitů</translation>
     </message>
 </context>
 <context>
     <name>EditGroupDialog</name>
     <message>
         <source>Group Properties</source>
-        <translation>Параметры группы</translation>
+        <translation>Vlastnosti skupiny</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Название:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Значок:</translation>
+        <translation>Ikonka:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Отмена</translation>
+        <translation type="obsolete">&amp;zrušit</translation>
     </message>
     <message>
         <source>Alt+C</source>
@@ -1191,11 +1264,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation type="unfinished">Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Имя</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expired</source>
@@ -1225,7 +1298,7 @@ p, li { white-space: pre-wrap; }
     <name>Export_Txt</name>
     <message>
         <source>Could not open file (FileError=%1)</source>
-        <translation type="obsolete">Невозможно открыть файл  (FileError=%1)</translation>
+        <translation type="obsolete">Nelze otevřít soubor (FileError=%1)</translation>
     </message>
     <message>
         <source>All Files (*)</source>
@@ -1334,59 +1407,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Generator</source>
-        <translation>Генератор паролей</translation>
+        <translation>Generátor hesla</translation>
     </message>
     <message>
         <source>Accep&amp;t</source>
-        <translation type="obsolete">&amp;Принять</translation>
+        <translation type="obsolete">Převzí&amp;t</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Отмена</translation>
+        <translation type="obsolete">&amp;zrušit</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Генерировать</translation>
+        <translation>Vygenerovat</translation>
     </message>
     <message>
         <source>New Password:</source>
-        <translation>Новый пароль:</translation>
+        <translation>Nové heslo:</translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Качество:</translation>
+        <translation>Kvalita:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Опции</translation>
+        <translation>Volby</translation>
     </message>
     <message>
         <source>&amp;Upper Letters</source>
-        <translation>&amp;Прописные буквы</translation>
+        <translation>&amp;Velká písmena</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
-        <translation>&amp;Строчные буквы</translation>
+        <translation>&amp;Malá písmena</translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
-        <translation>&amp;Цифры</translation>
+        <translation>Čís&amp;la</translation>
     </message>
     <message>
         <source>&amp;Special Characters</source>
-        <translation>&amp;Специальные символы</translation>
+        <translation>&amp;Zvláštní znaky</translation>
     </message>
     <message>
         <source>Minus</source>
-        <translation>Знак минуса</translation>
+        <translation>Minus</translation>
     </message>
     <message>
         <source>U&amp;nderline</source>
-        <translation>По&amp;дчёркивание</translation>
+        <translation>Po&amp;dtržítko</translation>
     </message>
     <message>
         <source>h&amp;igher ANSI-Characters</source>
-        <translation type="obsolete">ANSI-символы &amp;второй половины таблицы</translation>
+        <translation type="obsolete">&amp;Speciální ANSI znaky</translation>
     </message>
     <message>
         <source>Alt+H</source>
@@ -1394,7 +1467,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>&amp;Только следующие символы:</translation>
+        <translation>Používat &amp;jen následující znaky: </translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -1402,15 +1475,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Length:</source>
-        <translation>Длинна:</translation>
+        <translation>Délka:</translation>
     </message>
     <message>
         <source>Use &quot;/dev/rando&amp;m&quot;</source>
-        <translation type="obsolete">Использовать  &quot;/dev/rando&amp;m&quot;</translation>
+        <translation type="obsolete">Použít &quot;/dev/rando&amp;m&quot;</translation>
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Только следующие &amp;группы символов:</translation>
+        <translation>Použít následující &amp;skupiny znaků:</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -1418,7 +1491,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>White &amp;Spaces</source>
-        <translation>&amp;Пробелы</translation>
+        <translation>Me&amp;zery</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -1449,15 +1522,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Neplatná XML data (viz stdout pro podrobnosti).</translation>
     </message>
     <message>
         <source>Invalid XML file.</source>
-        <translation type="unfinished">Неверный файл XML.</translation>
+        <translation type="unfinished">Neplatný XML soubor.</translation>
     </message>
     <message>
         <source>Document does not contain data.</source>
-        <translation type="unfinished">Документ не содержит данных.</translation>
+        <translation type="unfinished">Dokument neobsahuje žádná data.</translation>
     </message>
 </context>
 <context>
@@ -1500,39 +1573,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File is empty.</source>
-        <translation type="unfinished">Файл пуст.</translation>
+        <translation type="unfinished">Soubor je prázdný.</translation>
     </message>
     <message>
         <source>File is no valid PwManager file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubor není ve formátu PwManager.</translation>
     </message>
     <message>
         <source>Unsupported file version.</source>
-        <translation type="unfinished">Неподдерживаемая версия файла.</translation>
+        <translation type="unfinished">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
         <source>Unsupported hash algorithm.</source>
-        <translation type="unfinished">Неподдерживаемы хэш алгоритм.</translation>
+        <translation type="unfinished">Nepodporovaný hash algoritmus.</translation>
     </message>
     <message>
         <source>Unsupported encryption algorithm.</source>
-        <translation type="unfinished">Неизвестный алгоритм шифрования.</translation>
+        <translation type="unfinished">Nepodporovaný šifrovací algoritmus.</translation>
     </message>
     <message>
         <source>Compressed files are not supported yet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zkompresované soubory nejsou ještě  podporovány.</translation>
     </message>
     <message>
         <source>Wrong password.</source>
-        <translation type="unfinished">Неверный пароль.</translation>
+        <translation type="unfinished">Chybné heslo.</translation>
     </message>
     <message>
         <source>File is damaged (hash test failed).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubor je poškozen (hast test selhall).</translation>
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Neplatná XML data (viz stdout pro podrobnosti).</translation>
     </message>
 </context>
 <context>
@@ -1550,34 +1623,55 @@ p, li { white-space: pre-wrap; }
     <name>Kdb3Database</name>
     <message>
         <source>Could not open file.</source>
-        <translation type="unfinished">Невозможно открыть файл.</translation>
-    </message>
-    <message>
-        <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
+        <translation type="unfinished">Neočekávaná velikost souboru (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
+    </message>
+    <message>
         <source>Wrong Signature</source>
-        <translation type="unfinished">Неверная сигнатура</translation>
+        <translation type="unfinished">Chybný podpis</translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
-        <translation type="unfinished">Неподдерживаемая версия файла.</translation>
+        <translation type="unfinished">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
         <source>Unknown Encryption Algorithm.</source>
-        <translation type="unfinished">Неизвестный алгоритм шифрования.</translation>
+        <translation type="unfinished">Neznámý algoritmus zašifrování.</translation>
     </message>
     <message>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
-        <translation type="unfinished">Расшифровка прервана.
-Ключ неверен или файл повреждён.</translation>
+        <translation type="unfinished">Rozšifrování se nepodařilo.
+Buď je nesprávný klíč nebo je soubor poškozen.</translation>
     </message>
     <message>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hash test selhal.
+Klíč je chybný nebo je soubor poškozen.</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [G1]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G1]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [G2]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G2]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E1]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E1]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E2]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E2]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E3]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E3]</translation>
     </message>
     <message>
         <source>Invalid group tree.</source>
@@ -1593,7 +1687,7 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Could not open file for writing.</source>
-        <translation type="unfinished">Невозможно открыть файл для записи.</translation>
+        <translation type="unfinished">Nebylo možné otevřít soubor pro zápis.</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range.</source>
@@ -1623,47 +1717,47 @@ The key is wrong or the file is damaged.</source>
     <name>KeepassEntryView</name>
     <message>
         <source>Title</source>
-        <translation>Название</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Имя</translation>
+        <translation>Uživatelské jméno</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>Ссылка</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Пароль</translation>
+        <translation>Heslo</translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation>Комментарий</translation>
+        <translation>Komentáře</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Окончание</translation>
+        <translation>Vyprší</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Создание</translation>
+        <translation>Vytvoření</translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Последнее изменение</translation>
+        <translation>Poslední změna</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Последний доступ</translation>
+        <translation>Poslední přístup</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Вложение</translation>
+        <translation>Příloha</translation>
     </message>
     <message>
         <source>%1 items</source>
-        <translation type="obsolete">%1 пунктов</translation>
+        <translation type="obsolete">%1 položky</translation>
     </message>
     <message>
         <source>Are you sure you want delete this entry?</source>
@@ -1683,7 +1777,7 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation type="unfinished">Chyba</translation>
     </message>
     <message>
         <source>At least one group must exist before adding an entry.</source>
@@ -1698,11 +1792,11 @@ The key is wrong or the file is damaged.</source>
     <name>KeepassGroupView</name>
     <message>
         <source>Search Results</source>
-        <translation>Результаты поиска</translation>
+        <translation>Výsledky hledání</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="obsolete">Группы</translation>
+        <translation type="obsolete">Skupiny</translation>
     </message>
     <message>
         <source>Delete?</source>
@@ -1777,7 +1871,13 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>Chyba</translation>
+    </message>
+    <message>
+        <source>The following error occured while opening the database:
+%1</source>
+        <translation type="obsolete">Při otevírání databáze se objevila následující chyba:
+%1 </translation>
     </message>
     <message>
         <source>OK</source>
@@ -1785,25 +1885,25 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Save modified file?</source>
-        <translation>Сохранить изменения файла?</translation>
+        <translation>Uložit změněný soubor?</translation>
     </message>
     <message>
         <source>The current file was modified. Do you want
 to save the changes?</source>
-        <translation>Текущий файл был изменён. Хотите
-сохранить изменения?</translation>
+        <translation>Aktuální soubor byl změněn. Mají být
+změny uloženy? </translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <source>KeePassX - %1</source>
@@ -1811,69 +1911,79 @@ to save the changes?</source>
     </message>
     <message>
         <source>&lt;B&gt;Group: &lt;/B&gt;%1  &lt;B&gt;Title: &lt;/B&gt;%2  &lt;B&gt;Username: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Password: &lt;/B&gt;%5  &lt;B&gt;Creation: &lt;/B&gt;%6  &lt;B&gt;Last Change: &lt;/B&gt;%7  &lt;B&gt;LastAccess: &lt;/B&gt;%8  &lt;B&gt;Expires: &lt;/B&gt;%9</source>
-        <translation type="obsolete">&lt;B&gt;Группа: &lt;/B&gt;%1  &lt;B&gt;Название: &lt;/B&gt;%2  &lt;B&gt;Имя: &lt;/B&gt;%3  &lt;B&gt;Ссылка: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создано: &lt;/B&gt;%6  &lt;B&gt;Изменено: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Окончание: &lt;/B&gt;%9</translation>
+        <translation type="obsolete">&lt;B&gt;Skupina: &lt;/B&gt;%1  &lt;B&gt;Název: &lt;/B&gt;%2  &lt;B&gt;Uživ. jméno: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Heslo: &lt;/B&gt;%5  &lt;B&gt;Vytvořeno: &lt;/B&gt;%6  &lt;B&gt;Poslední změna: &lt;/B&gt;%7  &lt;B&gt;Poslední přístup: &lt;/B&gt;%8  &lt;B&gt;Vyprší: &lt;/B&gt;%9</translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Дублировать запись</translation>
+        <translation>Naklonovat záznam</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Удалить запись</translation>
+        <translation>Smazat záznam</translation>
     </message>
     <message>
         <source>Clone Entries</source>
-        <translation>Дублировать записи</translation>
+        <translation>Naklonovat záznamy</translation>
     </message>
     <message>
         <source>Delete Entries</source>
-        <translation>Удалить записи</translation>
+        <translation>Smazat záznamy</translation>
     </message>
     <message>
         <source>File could not be saved.
 %1</source>
-        <translation type="obsolete">Невозможно сохранить файл.
+        <translation type="obsolete">Soubor nemohl být uložen.
 %1</translation>
     </message>
     <message>
         <source>Save Database As...</source>
-        <translation type="obsolete">Сохранить базу паролей как...</translation>
+        <translation type="obsolete">Uložit databázi jako ...</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Готов</translation>
+        <translation>Připraveno</translation>
     </message>
     <message>
         <source>[new]</source>
-        <translation type="obsolete">[новый]</translation>
+        <translation type="obsolete">[nový]</translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Открыть базу паролей...</translation>
+        <translation>Otevřít databázi ...</translation>
     </message>
     <message>
         <source>Loading Database...</source>
-        <translation>Загрузка базы паролей...</translation>
+        <translation>Otevírání databáze ...</translation>
     </message>
     <message>
         <source>Loading Failed</source>
-        <translation>Ошибка загрузки</translation>
+        <translation>Otevření selhalo</translation>
+    </message>
+    <message>
+        <source>Could not create key file. The following error occured:
+%1</source>
+        <translation type="obsolete">Nebylo možné vytvořit klíčový soubor. Vyskytla se následující chyba:
+%1</translation>
     </message>
     <message>
         <source>Export To...</source>
-        <translation type="obsolete">Экспорт в...</translation>
+        <translation type="obsolete">Vyexportovat do ...</translation>
+    </message>
+    <message>
+        <source>KeePassX [new]</source>
+        <translation type="obsolete">KeePassX [new]</translation>
     </message>
     <message>
         <source>Unknown error in Import_PwManager::importFile()()</source>
-        <translation type="obsolete">Неизвестная ошибка в Import_PwManager::importFile()()</translation>
+        <translation type="obsolete">Neznámá chyba v Import_PwManager::importFile()()</translation>
     </message>
     <message>
         <source>Unknown error in Import_KWalletXml::importFile()</source>
-        <translation type="obsolete">Неизвестная ошибка в Import_KWalletXml::importFile()</translation>
+        <translation type="obsolete">Neznámaá chyba v Import_KWalletXml::importFile()</translation>
     </message>
     <message>
         <source>Unknown error in PwDatabase::openDatabase()</source>
-        <translation type="obsolete">Неизвестная ошибка в PwDatabase::openDatabase()</translation>
+        <translation type="obsolete">Neznámá chyba v PwDatabase::openDatabase()</translation>
     </message>
     <message>
         <source>Ctrl+V</source>
@@ -1881,7 +1991,7 @@ to save the changes?</source>
     </message>
     <message>
         <source>Show Toolbar</source>
-        <translation type="unfinished">Отобразить панель инструментов</translation>
+        <translation type="unfinished">Panel nástrojů</translation>
     </message>
     <message>
         <source>KeePassX</source>
@@ -1988,11 +2098,11 @@ to save the changes?</source>
     <name>Main</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation type="unfinished">Chyba</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished">Файл &apos;%1&apos; не найден.</translation>
+        <translation type="unfinished">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2007,147 +2117,147 @@ to save the changes?</source>
     </message>
     <message>
         <source>Columns</source>
-        <translation>Столбцы</translation>
+        <translation>Sloupečky</translation>
     </message>
     <message>
         <source>PwManager File (*.pwm)</source>
-        <translation type="obsolete">Файл PwManager (*.pwm)</translation>
+        <translation type="obsolete">PwManager souboru (*.pwm)</translation>
     </message>
     <message>
         <source>KWallet XML-File (*.xml)</source>
-        <translation type="obsolete">XML-файл KWallet (*.xml)</translation>
+        <translation type="obsolete">KWallet XML-souboru (*.xml)</translation>
     </message>
     <message>
         <source>Add New Group...</source>
-        <translation>Добавить новую группу...</translation>
+        <translation>Přidat novou skupinu...</translation>
     </message>
     <message>
         <source>Edit Group...</source>
-        <translation>Изменить группу...</translation>
+        <translation>Upravit skupinu...</translation>
     </message>
     <message>
         <source>Delete Group</source>
-        <translation>Удалить группу</translation>
+        <translation>Smazat skupinu</translation>
     </message>
     <message>
         <source>Copy Password to Clipboard</source>
-        <translation>Скопировать &amp;пароль в буфер обмена</translation>
+        <translation>Zkopírovat heslo do schránky</translation>
     </message>
     <message>
         <source>Copy Username to Clipboard</source>
-        <translation>Скопировать имя в буфер обмена</translation>
+        <translation>Zkopírovat uživatelské jméno do schránky</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>Открыть &amp;ссылку</translation>
+        <translation>Otevřít URL</translation>
     </message>
     <message>
         <source>Save Attachment As...</source>
-        <translation>Сохранить вложение как...</translation>
+        <translation>Uložit přílohu jako...</translation>
     </message>
     <message>
         <source>Add New Entry...</source>
-        <translation>Добавить новую запись...</translation>
+        <translation>Přidat novou položku...</translation>
     </message>
     <message>
         <source>View/Edit Entry...</source>
-        <translation>Просмотр/правка записи...</translation>
+        <translation>Zobrazit/upravit položku...</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Удалить запись</translation>
+        <translation>Smazat položku</translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Дублировать запись</translation>
+        <translation>Naklonovat položku</translation>
     </message>
     <message>
         <source>Search In Database...</source>
-        <translation type="obsolete">Поиск в базе паролей...</translation>
+        <translation type="obsolete">Vyhledat v databázi...</translation>
     </message>
     <message>
         <source>Search in this group...</source>
-        <translation type="obsolete">Поиск в текущей группе...</translation>
+        <translation type="obsolete">Vyhledat v této skupině...</translation>
     </message>
     <message>
         <source>Show Toolbar</source>
-        <translation type="obsolete">Отобразить панель инструментов</translation>
+        <translation type="obsolete">Panel nástrojů</translation>
     </message>
     <message>
         <source>Show Entry Details</source>
-        <translation>Отобразить данные записи</translation>
+        <translation>Detaily položky</translation>
     </message>
     <message>
         <source>Hide Usernames</source>
-        <translation>Скрыть имена</translation>
+        <translation>Skrýt uživatelská jména</translation>
     </message>
     <message>
         <source>Hide Passwords</source>
-        <translation>Скрыть пароли</translation>
+        <translation>Skrýt hesla</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Название</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Имя</translation>
+        <translation>Uživatel</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>Ссылка</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Пароль</translation>
+        <translation>Heslo</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Комментарий</translation>
+        <translation>Komentář</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Окончание</translation>
+        <translation>Platnost</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Создание</translation>
+        <translation>Vytvoření</translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Последнее изменение</translation>
+        <translation>Poslední změna</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Последний доступ</translation>
+        <translation>Poslední přístup</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Вложение</translation>
+        <translation>Příloha</translation>
     </message>
     <message>
         <source>Show Statusbar</source>
-        <translation>Отобразить панель статуса</translation>
+        <translation>Stavový řádek</translation>
     </message>
     <message>
         <source>Plain Text (*.txt)</source>
-        <translation type="obsolete">Plain Text (*.txt)</translation>
+        <translation type="obsolete">Jednoduchého textu (*.txt)</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Скрыть</translation>
+        <translation>Skrýt</translation>
     </message>
     <message>
         <source>Perform AutoType</source>
-        <translation>Применить автоввод</translation>
+        <translation>Provádět autodoplňování</translation>
     </message>
     <message>
         <source>Type Here</source>
-        <translation type="obsolete">Ввести сюда</translation>
+        <translation type="obsolete">Psát zde</translation>
     </message>
     <message>
         <source>Toolbar Icon Size</source>
-        <translation>Размер значков панели инструментов</translation>
+        <translation>Velikost ikonek na panelu nástrojů</translation>
     </message>
     <message>
         <source>16x16</source>
@@ -2163,75 +2273,75 @@ to save the changes?</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Вид</translation>
+        <translation>&amp;Zobrazit</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Файл</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;Import from...</source>
-        <translation>&amp;Импортировать из...</translation>
+        <translation>&amp;Importovat z ...</translation>
     </message>
     <message>
         <source>&amp;Export to...</source>
-        <translation>&amp;Экспортировать в...</translation>
+        <translation>&amp;Exportovat do ...</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Правка</translation>
+        <translation>&amp;Upravit</translation>
     </message>
     <message>
         <source>E&amp;xtras</source>
-        <translation>&amp;Дополнительно</translation>
+        <translation>&amp;Doplňky</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Справка</translation>
+        <translation>&amp;Nápověda</translation>
     </message>
     <message>
         <source>&amp;New Database...</source>
-        <translation type="obsolete">Со&amp;здать базу паролей...</translation>
+        <translation type="obsolete">Nová &amp;databáze...</translation>
     </message>
     <message>
         <source>&amp;Open Database...</source>
-        <translation>&amp;Открыть базу паролей...</translation>
+        <translation>&amp;Otevřít databázi...</translation>
     </message>
     <message>
         <source>&amp;Close Database</source>
-        <translation>&amp;Закрыть базу паролей</translation>
+        <translation>Za&amp;vřít databázi</translation>
     </message>
     <message>
         <source>&amp;Save Database</source>
-        <translation>&amp;Сохранить базу паролей</translation>
+        <translation>Uloži&amp;t databázi</translation>
     </message>
     <message>
         <source>Save Database &amp;As...</source>
-        <translation>Сохранить базу паролей &amp;как...</translation>
+        <translation>Uložit databázi &amp;jako...</translation>
     </message>
     <message>
         <source>&amp;Database Settings...</source>
-        <translation>Н&amp;астройки базы паролей...</translation>
+        <translation>Nastavení data&amp;báze...</translation>
     </message>
     <message>
         <source>Change &amp;Master Key...</source>
-        <translation>&amp;Изменить основной пароль...</translation>
+        <translation>Změnit &amp;master klíč...</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="obsolete">В&amp;ыход</translation>
+        <translation type="obsolete">Uk&amp;ončit</translation>
     </message>
     <message>
         <source>&amp;Settings...</source>
-        <translation>&amp;Настройка...</translation>
+        <translation>N&amp;astavení...</translation>
     </message>
     <message>
         <source>&amp;About...</source>
-        <translation>&amp;О программе...</translation>
+        <translation>O a&amp;plikaci...</translation>
     </message>
     <message>
         <source>&amp;KeePassX Handbook...</source>
-        <translation>&amp;Руководство &quot;KeePassX&quot;...</translation>
+        <translation>&amp;KeePassX příručka...</translation>
     </message>
     <message>
         <source>Standard KeePass Single User Database (*.kdb)</source>
@@ -2263,7 +2373,7 @@ to save the changes?</source>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished">Группы</translation>
+        <translation type="unfinished">Skupiny</translation>
     </message>
     <message>
         <source>Bookmarks</source>
@@ -2309,7 +2419,7 @@ to save the changes?</source>
     <name>PasswordDlg</name>
     <message>
         <source>TextLabel</source>
-        <translation type="obsolete">ТекстЛабел</translation>
+        <translation type="obsolete">Textová nálepka</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2321,27 +2431,27 @@ to save the changes?</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Отмена</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <source>Enter a Password and/or choose a key file.</source>
-        <translation>Введите пароль и/или выберите файл-ключ.</translation>
+        <translation>Vložit heslo nebo vybrat soubor s klíčem.</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Ключ</translation>
+        <translation>Klíč</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Пароль:</translation>
+        <translation>Heslo:</translation>
     </message>
     <message>
         <source>Key file or directory:</source>
-        <translation>Папка с файл-ключом:</translation>
+        <translation>Soubor s klíčem nebo adresář:</translation>
     </message>
     <message>
         <source>&amp;Browse...</source>
-        <translation>&amp;Обзор...</translation>
+        <translation>&amp;Projít...</translation>
     </message>
     <message>
         <source>Alt+B</source>
@@ -2349,15 +2459,15 @@ to save the changes?</source>
     </message>
     <message>
         <source>Use Password AND Key File</source>
-        <translation>Использовать пароль И файл-ключ</translation>
+        <translation>Použít heslo současně se souborem s klíčem</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation type="obsolete">Выход</translation>
+        <translation type="obsolete">Ukončit</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Повтор пароля:</translation>
+        <translation>Zopakování hesla:</translation>
     </message>
     <message>
         <source>Last File</source>
@@ -2368,48 +2478,88 @@ to save the changes?</source>
     <name>PwDatabase</name>
     <message>
         <source>Unknown Error</source>
-        <translation type="obsolete">Неизвестная ошибка</translation>
+        <translation type="obsolete">Neznámá chyba</translation>
+    </message>
+    <message>
+        <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
+        <translation type="obsolete">Neočekávaná velikost souboru (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
         <source>Wrong Signature</source>
-        <translation type="obsolete">Неверная сигнатура</translation>
+        <translation type="obsolete">Chybný podpis</translation>
+    </message>
+    <message>
+        <source>AES-Init Failed</source>
+        <translation type="obsolete">AES-Init selhal</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [G1]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G1]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [G2]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G2]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E1]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E1]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E2]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E2]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E3]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E3]</translation>
+    </message>
+    <message>
+        <source>Hash test failed.
+The key is wrong or the file is damaged.</source>
+        <translation type="obsolete">Hash test selhal.
+Klíč je chybný nebo je soubor poškozen.</translation>
     </message>
     <message>
         <source>Could not open key file.</source>
-        <translation type="obsolete">Невозможно открыть файл-ключ.</translation>
+        <translation type="obsolete">Nebylo možné otevřít soubor s klíčem.</translation>
     </message>
     <message>
         <source>Key file could not be written.</source>
-        <translation type="obsolete">Файл-ключ не записываем.</translation>
+        <translation type="obsolete">Soubor s klíčem nemohl být uložen.</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation type="obsolete">Невозможно открыть файл.</translation>
+        <translation type="obsolete">Nebylo možné otevřít soubor.</translation>
     </message>
     <message>
         <source>Could not open file for writing.</source>
-        <translation type="obsolete">Невозможно открыть файл для записи.</translation>
+        <translation type="obsolete">Nebylo možné otevřít soubor pro zápis.</translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
-        <translation type="obsolete">Неподдерживаемая версия файла.</translation>
+        <translation type="obsolete">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
         <source>Unknown Encryption Algorithm.</source>
-        <translation type="obsolete">Неизвестный алгоритм шифрования.</translation>
+        <translation type="obsolete">Neznámý algoritmus zašifrování.</translation>
     </message>
     <message>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
-        <translation type="obsolete">Расшифровка прервана.
-Ключ неверен или файл повреждён.</translation>
+        <translation type="obsolete">Rozšifrování se nepodařilo.
+Buď je nesprávný klíč nebo je soubor poškozen.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Warning</source>
-        <translation type="obsolete">Внимание</translation>
+        <translation type="obsolete">Upozornění</translation>
+    </message>
+    <message>
+        <source>Could not save configuration file.
+Make sure you have write access to &apos;~/.keepass&apos;.</source>
+        <translation type="obsolete">Nebylo možné uložit konfigurační soubor,
+Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2417,68 +2567,88 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation type="obsolete">Файл &apos;%1&apos; не найден.</translation>
+        <translation type="obsolete">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
         <source>File not found.</source>
-        <translation type="obsolete">Файл не найден.</translation>
+        <translation type="obsolete">Soubor nenalezen.</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation type="obsolete">Невозможно открыть файл.</translation>
+        <translation type="obsolete">Nebylo možné otevřít soubor.</translation>
+    </message>
+    <message>
+        <source>File is no valid PwManager file.</source>
+        <translation type="obsolete">Soubor není ve formátu PwManager.</translation>
     </message>
     <message>
         <source>Unsupported file version.</source>
-        <translation type="obsolete">Неподдерживаемая версия файла.</translation>
+        <translation type="obsolete">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
         <source>Unsupported hash algorithm.</source>
-        <translation type="obsolete">Неподдерживаемы хэш алгоритм.</translation>
+        <translation type="obsolete">Nepodporovaný hash algoritmus.</translation>
     </message>
     <message>
         <source>Unsupported encryption algorithm.</source>
-        <translation type="obsolete">Неизвестный алгоритм шифрования.</translation>
+        <translation type="obsolete">Nepodporovaný šifrovací algoritmus.</translation>
+    </message>
+    <message>
+        <source>Compressed files are not supported yet.</source>
+        <translation type="obsolete">Zkompresované soubory nejsou ještě  podporovány.</translation>
     </message>
     <message>
         <source>Wrong password.</source>
-        <translation type="obsolete">Неверный пароль.</translation>
+        <translation type="obsolete">Chybné heslo.</translation>
+    </message>
+    <message>
+        <source>File is damaged (hash test failed).</source>
+        <translation type="obsolete">Soubor je poškozen (hast test selhall).</translation>
+    </message>
+    <message>
+        <source>Invalid XML data (see stdout for details).</source>
+        <translation type="obsolete">Neplatná XML data (viz stdout pro podrobnosti).</translation>
     </message>
     <message>
         <source>File is empty.</source>
-        <translation type="obsolete">Файл пуст.</translation>
+        <translation type="obsolete">Soubor je prázdný.</translation>
+    </message>
+    <message>
+        <source>Invalid XML file (see stdout for details).</source>
+        <translation type="obsolete">Neplatný XML soubor (viz stdout pro detaily).</translation>
     </message>
     <message>
         <source>Invalid XML file.</source>
-        <translation type="obsolete">Неверный файл XML.</translation>
+        <translation type="obsolete">Neplatný XML soubor.</translation>
     </message>
     <message>
         <source>Document does not contain data.</source>
-        <translation type="obsolete">Документ не содержит данных.</translation>
+        <translation type="obsolete">Dokument neobsahuje žádná data.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Ошибка</translation>
+        <translation type="obsolete">Chyba</translation>
     </message>
     <message>
         <source>Warning:</source>
-        <translation type="obsolete">Внимание:</translation>
+        <translation type="obsolete">Upozornění:</translation>
     </message>
     <message>
         <source>Invalid RGB color value.
 </source>
-        <translation type="obsolete">Неверное значение цвета RGB.
+        <translation type="obsolete">Neplatná RGB hodnota barvy.
 </translation>
     </message>
     <message>
         <source>Never</source>
-        <translation type="obsolete">Никогда</translation>
+        <translation type="obsolete">Nikdy</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Поиск</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2493,7 +2663,7 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>A&amp;nhang</source>
-        <translation type="unfinished"></translation>
+        <translation>Přílo&amp;ha</translation>
     </message>
     <message>
         <source>Alt+N</source>
@@ -2509,15 +2679,15 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Search...</source>
-        <translation>Поиск...</translation>
+        <translation>Hledat...</translation>
     </message>
     <message>
         <source>Search For:</source>
-        <translation>Поиск:</translation>
+        <translation>Vyhledat:</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation>Регулярное &amp;выражение</translation>
+        <translation>Regulární &amp;výraz</translation>
     </message>
     <message>
         <source>Alt+X</source>
@@ -2525,23 +2695,23 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation>&amp;С учётом регистра</translation>
+        <translation>S &amp;ohledem na velikost písmene</translation>
     </message>
     <message>
         <source>Include:</source>
-        <translation>Включая:</translation>
+        <translation>Vložit:</translation>
     </message>
     <message>
         <source>&amp;Titles</source>
-        <translation>&amp;Название</translation>
+        <translation>&amp;Názvy</translation>
     </message>
     <message>
         <source>&amp;Usernames</source>
-        <translation>&amp;Имя</translation>
+        <translation>Uživatelská &amp;jména</translation>
     </message>
     <message>
         <source>C&amp;omments</source>
-        <translation>Ко&amp;мментарий</translation>
+        <translation>Ko&amp;mentáře</translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -2549,7 +2719,7 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>U&amp;RLs</source>
-        <translation>&amp;Ссылки</translation>
+        <translation>U&amp;RLs</translation>
     </message>
     <message>
         <source>Alt+R</source>
@@ -2557,15 +2727,15 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Pass&amp;words</source>
-        <translation>&amp;Пароли</translation>
+        <translation>He&amp;sla</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="obsolete">Поиск</translation>
+        <translation type="obsolete">Hledat</translation>
     </message>
     <message>
         <source>Clo&amp;se</source>
-        <translation type="obsolete">&amp;Закрыть</translation>
+        <translation type="obsolete">U&amp;zavřít</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -2573,33 +2743,33 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Include Subgroups (recursive)</source>
-        <translation>Включая подгруппы (рекурсивно)</translation>
+        <translation>Vložit podskupiny (rekurzívně)</translation>
     </message>
 </context>
 <context>
     <name>SelectIconDlg</name>
     <message>
         <source>Icon Selection</source>
-        <translation>Выбор значка</translation>
+        <translation>Výběr ikonky</translation>
     </message>
     <message>
         <source>Add Custom Icon...</source>
-        <translation type="obsolete">Добавить свой значок...</translation>
+        <translation type="obsolete">Přidat vlastní ikonku...</translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="obsolete">Выбрать</translation>
+        <translation type="obsolete">Vybrat</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Отмена</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
-    <message>
-        <source>Alt+&#xd6;</source>
-        <translation type="obsolete">Alt+Ö</translation>
+    <message encoding="UTF-8">
+        <source>Alt+Ö</source>
+        <translation>Alt+Ö</translation>
     </message>
     <message>
         <source>O&amp;K</source>
@@ -2615,23 +2785,23 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Настройки</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Отмена</translation>
+        <translation type="obsolete">&amp;Zrušit</translation>
     </message>
     <message>
         <source>Clear clipboard after:</source>
-        <translation>Буфер будет очищен через:</translation>
+        <translation>Smazat schránku po:</translation>
     </message>
     <message>
         <source>Seconds</source>
-        <translation>секунд</translation>
+        <translation>Sekundách</translation>
     </message>
     <message>
         <source>Sh&amp;ow passwords in plain text by default</source>
-        <translation type="obsolete">&amp;Отображать пароли в текстовом виде по умолчанию</translation>
+        <translation type="obsolete">Zobrazovat &amp;hesla vždy jako obyčejný text</translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -2639,27 +2809,27 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Appea&amp;rance</source>
-        <translation>&amp;Внешний вид</translation>
+        <translation>Zo&amp;brazení</translation>
     </message>
     <message>
         <source>Banner Color</source>
-        <translation>Цвет банера</translation>
+        <translation>Barva banneru</translation>
     </message>
     <message>
         <source>Text Color:</source>
-        <translation>Цвет текста:</translation>
+        <translation>Barva textu:</translation>
     </message>
     <message>
         <source>Change...</source>
-        <translation>Изменить...</translation>
+        <translation>Změnit...</translation>
     </message>
     <message>
         <source>Color 2:</source>
-        <translation>Цвет 2:</translation>
+        <translation>Barva 2:</translation>
     </message>
     <message>
         <source>C&amp;hange...</source>
-        <translation>&amp;Изменить</translation>
+        <translation>Z&amp;měnit...</translation>
     </message>
     <message>
         <source>Alt+H</source>
@@ -2667,43 +2837,43 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Color 1:</source>
-        <translation>Цвет 1:</translation>
+        <translation>Barva 1:</translation>
     </message>
     <message>
         <source>Expand group tree when opening a database</source>
-        <translation type="obsolete">Раскрывать дерево групп при открытии базы паролей</translation>
+        <translation type="obsolete">Při otevření databáze rozvinout skupiny ve stromové struktuře </translation>
     </message>
     <message>
         <source>&amp;Other</source>
-        <translation type="obsolete">&amp;Другой</translation>
+        <translation type="obsolete">&amp;Ostatní</translation>
     </message>
     <message>
         <source>Browser Command:</source>
-        <translation type="obsolete">Комманда браузера:</translation>
+        <translation type="obsolete">Příkaz pro prohlížeč:</translation>
     </message>
     <message>
         <source>Securi&amp;ty</source>
-        <translation type="obsolete">Безопасность</translation>
+        <translation type="obsolete">&amp;Bezpečnost</translation>
     </message>
     <message>
         <source>Alternating Row Colors</source>
-        <translation>Изменённые цвета столбцов</translation>
+        <translation>Střídavě barevné podklady řádků</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Обзор...</translation>
+        <translation>Projít...</translation>
     </message>
     <message>
         <source>Remember last key type and location</source>
-        <translation>Запоминать последний тип и положение ключа</translation>
+        <translation>Zapamatovat naposledy napsaný klíč a umístění</translation>
     </message>
     <message>
         <source>Mounting Root:</source>
-        <translation type="obsolete">Корень монтирования:</translation>
+        <translation type="obsolete">Mountovat jako Root:</translation>
     </message>
     <message>
         <source>Remember last opened file</source>
-        <translation>Запоминать последний открытый файл</translation>
+        <translation>Zapamatovat naposledy otevřený soubor</translation>
     </message>
     <message>
         <source>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</source>
@@ -2719,10 +2889,6 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Alt+Ö</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2933,55 +3099,77 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Enter your Password</source>
-        <translation>Введите пароль:</translation>
+        <translation>Vložit heslo</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Пароль:</translation>
+        <translation>Heslo:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Отмена</translation>
+        <translation type="obsolete">&amp;Zrušit</translation>
     </message>
 </context>
 <context>
     <name>StandardDatabase</name>
     <message>
-        <source>Could not open file.</source>
-        <translation type="obsolete">Невозможно открыть файл.</translation>
+        <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
+        <translation type="obsolete">Neočekávaná velikost souboru (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
         <source>Wrong Signature</source>
-        <translation type="obsolete">Неверная сигнатура</translation>
+        <translation type="obsolete">Chybný podpis</translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
-        <translation type="obsolete">Неподдерживаемая версия файла.</translation>
+        <translation type="obsolete">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
         <source>Unknown Encryption Algorithm.</source>
-        <translation type="obsolete">Неизвестный алгоритм шифрования.</translation>
+        <translation type="obsolete">Neznámý algoritmus zašifrování.</translation>
     </message>
     <message>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
-        <translation type="obsolete">Расшифровка прервана.
-Ключ неверен или файл повреждён.</translation>
+        <translation type="obsolete">Rozšifrování se nepodařilo.
+Buď je nesprávný klíč nebo je soubor poškozen.</translation>
+    </message>
+    <message>
+        <source>Hash test failed.
+The key is wrong or the file is damaged.</source>
+        <translation type="obsolete">Hash test selhal.
+Klíč je chybný nebo je soubor poškozen.</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [G1]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G1]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [G2]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G2]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E1]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E1]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E2]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E2]</translation>
+    </message>
+    <message>
+        <source>Unexpected error: Offset is out of range. [E3]</source>
+        <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E3]</translation>
     </message>
     <message>
         <source>Could not open file for writing.</source>
-        <translation type="obsolete">Невозможно открыть файл для записи.</translation>
+        <translation type="obsolete">Nebylo možné otevřít soubor pro zápis.</translation>
     </message>
 </context>
 <context>
     <name>TrashCanDialog</name>
     <message>
         <source>Title</source>
-        <translation type="obsolete">Название</translation>
-    </message>
-    <message>
-        <source>Username</source>
-        <translation type="obsolete">Имя</translation>
+        <translation type="obsolete">Název</translation>
     </message>
 </context>
 <context>
@@ -3010,19 +3198,23 @@ p, li { white-space: pre-wrap; }
     <name>dbsettingdlg_base</name>
     <message>
         <source>Database Settings</source>
-        <translation type="obsolete">Н&amp;астройки базы паролей...</translation>
+        <translation type="obsolete">Nastavení databáze</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation type="obsolete">Шифрование</translation>
+        <translation type="obsolete">Zašifrování</translation>
     </message>
     <message>
         <source>Algorithm:</source>
-        <translation type="obsolete">Алгоритм:</translation>
+        <translation type="obsolete">Algoritmus:</translation>
     </message>
     <message>
         <source>?</source>
         <translation type="obsolete">?</translation>
+    </message>
+    <message>
+        <source>Encryption Rounds:</source>
+        <translation type="obsolete">Počet kol zašifrování:</translation>
     </message>
     <message>
         <source>O&amp;K</source>
@@ -3034,7 +3226,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Отмена</translation>
+        <translation type="obsolete">&amp;Zrušit</translation>
     </message>
     <message>
         <source>Ctrl+C</source>
