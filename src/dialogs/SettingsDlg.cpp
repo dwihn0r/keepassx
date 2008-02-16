@@ -162,6 +162,9 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	Edit_GlobalShortcut->setShortcut(config->globalShortcut());
 	CheckBox_EntryTitlesMatch->setChecked(config->entryTitlesMatch());
 #endif
+	
+	adjustSize();
+	resize( size() + QSize(50,20) );
 }
 
 CSettingsDlg::~CSettingsDlg()
