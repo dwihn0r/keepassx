@@ -25,6 +25,7 @@
 #include <QApplication>
 #include <QSettings>
 #include <QDir>
+#include <QLayout>
 
 KpxConfig::KpxConfig(const QString& filePath) : settings(filePath,QSettings::IniFormat){
 	configFile=filePath;
@@ -214,6 +215,26 @@ QString KpxConfig::keyTypeToString(tKeyType keyType){
 	return res;
 }
 
+QRect KpxConfig::dialogGeometry(const QWidget* widget){
+	Q_ASSERT(widget->parentWidget()!=NULL && widget->parentWidget()->window()!=NULL);
+	QSize size = settings.value(QString("UI/%1Size").arg(widget->objectName()),widget->size()).toSize();
+	QSize minSize = widget->minimumSize();
+	if (size.width() < minSize.width() || size.height() < minSize.height())
+		size = minSize;
+	if (minSize.isNull() && widget->layout()!=NULL){
+		minSize = widget->layout()->minimumSize();
+		if (size.width() < minSize.width() || size.height() < minSize.height())
+			size = minSize;
+	}
+	
+	QRect rect(QPoint(), size);
+	rect.moveCenter( widget->parentWidget()->window()->geometry().center() );
+	return rect;
+}
+
+void KpxConfig::setDialogGeometry(const QWidget* widget){
+	settings.setValue(QString("UI/%1Size").arg(widget->objectName()),widget->size());
+}
 
 QString KpxConfig::detailViewTemplate(){
 	if (settings.contains("UI/DetailsView")){

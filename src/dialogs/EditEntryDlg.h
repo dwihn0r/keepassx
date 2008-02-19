@@ -30,7 +30,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 {
 	Q_OBJECT
 	public:
-		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0);
+		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0,  bool modal = FALSE, bool newEntry = FALSE);
 		~CEditEntryDlg();
 		void InitGroupComboBox();
 /* MX-TO-DO: Remove this declaration
@@ -45,7 +45,7 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		QList<IGroupHandle*> groups;
 		QPixmap BannerPixmap;	
 	
-	public slots:
+	private slots:
 		void OnTitleTextChanged(const QString&);
 		void OnPasswordwLostFocus();
 		void OnPasswordwTextChanged();
@@ -61,13 +61,14 @@ class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
 		void OnButtonOK();
 		void OnExpirePreset(QAction*);
 		void OnCalendar();
+		void OnClose();
 		
 	private:		
-		virtual void showEvent(QShowEvent *);
 		virtual void paintEvent(QPaintEvent*);
 		virtual void resizeEvent(QResizeEvent *);	
 
 		int IconIndex;
+		bool pNewEntry;
 };
 
 #endif

@@ -41,16 +41,19 @@
 
 
 
-CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent,  bool modal, Qt::WFlags fl)
-: QDialog(parent,fl)
+CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent,  bool modal, bool newEntry)
+: QDialog(parent)
 {
 	Q_ASSERT(_db);
 	Q_ASSERT(_entry);
 	entry=_entry;
 	db=_db;
+	pNewEntry=newEntry;
 	setupUi(this);
 	ModFlag=false;
 	QMenu *ExpirePresetsMenu=new QMenu();
+	
+	setGeometry( config->dialogGeometry(this) );
 
 	connect(Edit_Title, SIGNAL(textChanged(const QString&)), this, SLOT( OnTitleTextChanged(const QString&)));
 	connect(Edit_Password_w, SIGNAL(editingFinished()), this, SLOT(OnPasswordwLostFocus()));
@@ -67,6 +70,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(Button_Icons,SIGNAL(clicked()),this,SLOT(OnButtonIcons()));
 	connect(ExpirePresetsMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnExpirePreset(QAction*)));
 	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar()));
+	connect(this, SIGNAL(finished(int)), this, SLOT(OnClose()));
 
 	// QAction::data() contains the time until expiration in days.
 	ExpirePresetsMenu->addAction(tr("Today"))->setData(0);
@@ -144,17 +148,8 @@ CEditEntryDlg::~CEditEntryDlg()
 
 }
 
-
-void CEditEntryDlg::showEvent(QShowEvent *event){
-
-if(event->spontaneous()==false){
-
-
-}
-}
-
 void CEditEntryDlg::resizeEvent(QResizeEvent *event){
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Edit Entry"),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),pNewEntry?tr("New Entry"):tr("Edit Entry"),width());
 	QDialog::resizeEvent(event);
 }
 
@@ -434,3 +429,6 @@ void CEditEntryDlg::OnCalendar(){
 	}
 }
 
+void CEditEntryDlg::OnClose(){
+	config->setDialogGeometry(this);
+}

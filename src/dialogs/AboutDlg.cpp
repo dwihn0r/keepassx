@@ -71,11 +71,6 @@ void AboutDialog::paintEvent(QPaintEvent *event){
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
-void AboutDialog::OnClose()
-{
-close();
-}
-
 void AboutDialog::loadLicFromFile(){
 	QString filename;
 	filename = AppDir+"/../share/keepass/license.html";

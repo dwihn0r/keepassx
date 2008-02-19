@@ -30,84 +30,65 @@
   <property name="windowTitle" >
    <string>Database Settings</string>
   </property>
-  <widget class="QGroupBox" name="groupBox1" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>420</width>
-     <height>110</height>
-    </rect>
-   </property>
-   <property name="title" >
-    <string>Encryption</string>
-   </property>
-   <widget class="QLabel" name="textLabel2" >
-    <property name="geometry" >
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>90</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Algorithm:</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="ComboAlgo" >
-    <property name="geometry" >
-     <rect>
-      <x>109</x>
-      <y>30</y>
-      <width>300</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="EditRounds" >
-    <property name="geometry" >
-     <rect>
-      <x>180</x>
-      <y>70</y>
-      <width>230</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="textLabel3" >
-    <property name="geometry" >
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>150</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Encryption Rounds:</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QDialogButtonBox" name="ButtonBox" >
-   <property name="geometry" >
-    <rect>
-     <x>12</x>
-     <y>180</y>
-     <width>411</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="standardButtons" >
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" >
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>50</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox1" >
+     <property name="title" >
+      <string>Encryption</string>
+     </property>
+     <layout class="QGridLayout" >
+      <property name="horizontalSpacing" >
+       <number>15</number>
+      </property>
+      <item row="0" column="0" >
+       <widget class="QLabel" name="textLabel2" >
+        <property name="text" >
+         <string>Algorithm:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QComboBox" name="ComboAlgo" />
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="textLabel3" >
+        <property name="text" >
+         <string>Encryption Rounds:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLineEdit" name="EditRounds" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="ButtonBox" >
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11" />
- <tabstops>
-  <tabstop>ComboAlgo</tabstop>
-  <tabstop>EditRounds</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -70,8 +70,6 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(this,SIGNAL(rejected()),SLOT(resetGlobalShortcut()));
 #endif
 
-	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width());
-
 	//General
 	CheckBox_OpenLast->setChecked(config->openLastFile());
 	CheckBox_RememberLastKey->setChecked(config->rememberLastKey());
@@ -176,6 +174,11 @@ void CSettingsDlg::paintEvent(QPaintEvent *event){
 	QPainter painter(this);
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
+}
+
+void CSettingsDlg::resizeEvent(QResizeEvent* event){
+	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width());
+	QDialog::resizeEvent(event);
 }
 
 void CSettingsDlg::OnOK()

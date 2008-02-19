@@ -166,6 +166,9 @@ public:
 	unsigned fileDlgHistorySize();
 	void clearFileDlgHistory(){settings.remove("FileDlgHistory");};
 	
+	QRect dialogGeometry(const QWidget* widget);
+	void setDialogGeometry(const QWidget* widget);
+	
 	QString detailViewTemplate();
 	QString defaultDetailViewTemplate();
 	void setDetailViewTemplate(const QString& value);

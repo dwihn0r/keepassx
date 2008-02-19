@@ -239,7 +239,7 @@ void KeepassEntryView::OnNewEntry(){
 	}
 	else
 		NewEntry=db->newEntry(CurrentGroup);
-	CEditEntryDlg dlg(db,NewEntry,this,true);
+	CEditEntryDlg dlg(db,NewEntry,this,true,true);
 	if(!dlg.exec()){
 		db->deleteLastEntry();
 	}

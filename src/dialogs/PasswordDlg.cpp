@@ -44,7 +44,10 @@ CPasswordDialog::CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,
 	Button_Bookmarks->setIcon(getIcon("bookmark"));
 	db=DB;
 	LastFile=filename;
-	setWindowTitle(LastFile);
+	if (ChangeKeyMode)
+		setWindowTitle(tr("Change Master Key"));
+	else
+		setWindowTitle(LastFile);
 	QString mountDir=config->mountDir();
 	QDir media(mountDir);
 	if(media.exists()){

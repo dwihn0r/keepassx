@@ -26,23 +26,21 @@
 
 #include "main.h"
 
-
-
 class AboutDialog : public QDialog, public Ui_AboutDlg
 {
-  Q_OBJECT
-public:
-  AboutDialog(QWidget* parent);
+	Q_OBJECT
 
+	public:
+		AboutDialog(QWidget* parent);
 
-public slots:
-    virtual void OnClose();
-    void OnHomepageClicked();
-    void OnEMailClicked();
-private:
-	QPixmap BannerPixmap;
-	inline void loadLicFromFile();
-	virtual void paintEvent(QPaintEvent*);
+	private slots:
+		void OnHomepageClicked();
+		void OnEMailClicked();
+
+	private:
+		QPixmap BannerPixmap;
+		inline void loadLicFromFile();
+		virtual void paintEvent(QPaintEvent*);
 };
 
 #endif

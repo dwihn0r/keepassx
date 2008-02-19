@@ -36,7 +36,7 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 		CSettingsDlg(QWidget* parent);
 		~CSettingsDlg();
 
-	public slots:
+	private slots:
     	virtual void OnCancel();
     	virtual void OnOK();
     	virtual void OnTextColor();
@@ -58,6 +58,7 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 	
 	private:
  		virtual void paintEvent(QPaintEvent*);
+		virtual void resizeEvent(QResizeEvent*);
 		void apply();
  		QColor color1,color2,textcolor;
  		QPixmap BannerPixmap;
