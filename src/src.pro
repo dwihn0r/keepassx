@@ -50,6 +50,7 @@ macx {
     isEmpty(PREFIX):PREFIX = /Applications
     target.path = $${PREFIX}
     data.path = $${PREFIX}/keepassx.app/Contents/share/keepass
+    LIBS += -framework CoreFoundation
 }
 
 isEqual(QMAKE_WIN32,1) {

@@ -31,6 +31,9 @@
 #include <QProcess>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QCoreApplication>
+#include <QVarLengthArray>
+
 
 /*
 #include <QLibary>
@@ -54,6 +57,9 @@
 #endif
 #ifdef Q_WS_WIN
 #include <windows.h>
+#endif
+#ifdef Q_WS_MAC
+#include <Carbon/Carbon.h>
 #endif
 
 using namespace std;
@@ -496,13 +502,21 @@ QString applicationFilePath()
 
     return filePath.filePath();
 	#elif defined(Q_WS_MAC)
-    QString qAppFileName_str = qAppFileName();
-    if(!qAppFileName_str.isEmpty()) {
-        QFileInfo fi(qAppFileName_str);
-        return fi.exists() ? fi.canonicalFilePath() : QString();
-    }
-	#endif
-	#if defined( Q_OS_UNIX )
+	
+	CFURLRef bundleURL(CFBundleCopyExecutableURL(CFBundleGetMainBundle()));
+	assert(bundleURL);
+	CFStringRef cfPath(CFURLCopyFileSystemPath(bundleURL, kCFURLPOSIXPathStyle));
+	assert(cfPath);
+    CFIndex length = CFStringGetLength(cfPath);
+    const UniChar *chars = CFStringGetCharactersPtr(cfPath);
+    if (chars)
+        return QString(reinterpret_cast<const QChar *>(chars), length);
+
+    QVarLengthArray<UniChar> buffer(length);
+    CFStringGetCharacters(cfPath, CFRangeMake(0, length), buffer.data());
+    return QString(reinterpret_cast<const QChar *>(buffer.constData()), length);
+
+	#elif defined( Q_OS_UNIX )
 	#ifdef Q_OS_LINUX
     // Try looking for a /proc/<pid>/exe symlink first which points to
     // the absolute path of the executable
