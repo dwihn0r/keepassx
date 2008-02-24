@@ -79,6 +79,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	CheckBox_StartMinimized->setChecked(config->startMinimized());
 	CheckBox_StartLocked->setChecked(config->startLocked());
 	checkBox_SaveFileDlgHistory->setChecked(config->saveFileDlgHistory());
+	CheckBox_AutoSave->setChecked(config->autoSave());
 	checkBox_AskBeforeDelete->setChecked(config->askBeforeDelete());
 
 	switch(config->groupTreeState()){
@@ -211,6 +212,7 @@ void CSettingsDlg::apply(){
 	else config->setGroupTreeState(KpxConfig::DoNothing);
 	config->setOpenLastFile(CheckBox_OpenLast->isChecked());
 	config->setRememberLastKey(CheckBox_RememberLastKey->isChecked());
+	config->setAutoSave(CheckBox_AutoSave->isChecked());
 	config->setAskBeforeDelete(checkBox_AskBeforeDelete->isChecked());
 
 	//Appearence

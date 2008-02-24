@@ -35,6 +35,7 @@ class ManageBookmarksDlg : public QDialog, private Ui::ManageBookmarksDlg
 	private:
         QPixmap BannerPixmap;
         virtual void paintEvent(QPaintEvent*);
+		virtual void resizeEvent(QResizeEvent*);
 		virtual void closeEvent(QCloseEvent* event);
 	private slots:
         void OnButtonAdd();

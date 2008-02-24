@@ -29,6 +29,7 @@ class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 	
 	protected:
 		void paintEvent(QPaintEvent* event);
+		void resizeEvent(QResizeEvent* event);
 	
 	private slots:
 		void itemSelected(QTreeWidgetItem* item);

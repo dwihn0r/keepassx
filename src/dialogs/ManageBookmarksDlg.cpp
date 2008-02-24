@@ -26,7 +26,6 @@
 ManageBookmarksDlg::ManageBookmarksDlg(QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
-    createBanner(&BannerPixmap,getPixmap("bookmark"),tr("Manage Bookmarks"),width());
 
 	for(int i=0;i<KpxBookmarks::count();i++){
 		QListWidgetItem* item=new QListWidgetItem(ListWidget);
@@ -55,7 +54,10 @@ void ManageBookmarksDlg::paintEvent(QPaintEvent *event){
     painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
-
+void ManageBookmarksDlg::resizeEvent(QResizeEvent* event){
+	createBanner(&BannerPixmap,getPixmap("bookmark"),tr("Manage Bookmarks"),width());
+	QDialog::resizeEvent(event);
+}
 
 void ManageBookmarksDlg::OnButtonAdd(){
     AddBookmarkDlg dlg(this);

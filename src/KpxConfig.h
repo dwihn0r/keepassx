@@ -78,6 +78,7 @@ public:
 	bool startLocked(){return settings.value("Options/StartLocked",false).toBool();}
 	QString mountDir(){return settings.value("Options/MountDir",DEFAULT_MOUNT_DIR).toString();}
 	bool openLastFile(){return settings.value("Options/OpenLastFile",true).toBool();}
+	bool autoSave(){return settings.value("Options/AutoSave",false).toBool();}
 	QString pwGenCharList(){return settings.value("Options/PwGenCharList").toString();}
 	int pwGenLength(){return settings.value("Options/PwGenLength",25).toInt();}
 	QBitArray pwGenOptions(){return stringToBitArray(settings.value("Options/PwGenOptions","1111100001").toString(),10);}
@@ -134,6 +135,7 @@ public:
 	void setStartLocked(bool value){settings.setValue("Options/StartLocked",value);}
 	void setMountDir(const QString& value){settings.setValue("Options/MountDir",value);}
 	void setOpenLastFile(bool value){settings.setValue("Options/OpenLastFile",value);}
+	void setAutoSave(bool value){settings.setValue("Options/AutoSave",value);}
 	void setPwGenCharList(const QString& value){settings.setValue("Options/PwGenCharList",value);}
 	void setPwGenLength(int value){settings.setValue("Options/PwGenLength",value);}
 	void setPwGenOptions(const QBitArray& value){settings.setValue("Options/PwGenOptions",bitArrayToString(value));}

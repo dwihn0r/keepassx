@@ -25,21 +25,25 @@
 
 AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers){
 	setupUi(this);
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Auto-Type"),width());
+	
 	setAttribute(Qt::WA_DeleteOnClose);
 	setWindowFlags(windowFlags()|Qt::WindowStaysOnTopHint);
 	setGeometry( QRect(QApplication::desktop()->screenGeometry(QCursor::pos()).center() - rect().center(), size()) );
 	setWindowIcon(getIcon("keepassx"));
 	entryList->setAlternatingRowColors(config->alternatingRowColors());
 	
+	bool hideUsernames = config->hideUsernames();
+	if (hideUsernames)
+		entryList->setHeaderLabels(QStringList() << tr("Group") << tr("Title"));
+	else
+		entryList->setHeaderLabels(QStringList() << tr("Group") << tr("Title") << tr("Username"));
+	
 	QList<QTreeWidgetItem*> itemList;
 	AutoTypeEntry autoTypeEntry;
 	for (int i=0; i<entries.size(); i++){
 		QStringList cols;
 		cols << entries[i]->group()->title() << entries[i]->title();
-		if (config->hideUsernames())
-			cols << "****";
-		else
+		if (!hideUsernames)
 			cols << entries[i]->username();
 		
 		QTreeWidgetItem* widgetItem = new QTreeWidgetItem(cols);
@@ -55,7 +59,12 @@ AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers){
 	
 	entryList->resizeColumnToContents(0);
 	entryList->resizeColumnToContents(1);
-	entryList->resizeColumnToContents(2);
+	if (!hideUsernames)
+		entryList->resizeColumnToContents(2);
+	
+	entryList->setColumnWidth(0, entryList->columnWidth(0)+10);
+	if (!hideUsernames)
+		entryList->setColumnWidth(1, entryList->columnWidth(1)+10);
 	
 	connect(ButtonBox, SIGNAL(rejected()), SLOT(close()));
 	connect(entryList, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(itemSelected(QTreeWidgetItem*)));
@@ -75,6 +84,10 @@ void AutoTypeDlg::paintEvent(QPaintEvent* event){
 	QPainter painter(this);
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
+}
+
+void AutoTypeDlg::resizeEvent(QResizeEvent* event){
+	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Auto-Type"),width());
 }
 
 void AutoTypeDlg::itemSelected(QTreeWidgetItem* item){

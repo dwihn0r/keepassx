@@ -38,7 +38,7 @@
 #include <QStatusBar>
 
 
-#include "KpxFirefox.h"
+//#include "KpxFirefox.h"
 #include "lib/random.h"
 #include "lib/AutoType.h"
 #include "lib/FileDialogs.h"
@@ -357,8 +357,9 @@ void KeepassMainWindow::setupMenus(){
 	_add_export(export_Txt);
 	_add_export(export_KeePassX_Xml);
 
-	//FileNewMenu->setShortcut(tr("Ctrl+N"));
+	FileNewAction->setShortcut(tr("Ctrl+N"));
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
+	FileCloseAction->setShortcut(tr("Ctrl+W"));
 	FileSaveAction->setShortcut(tr("Ctrl+S"));
     FileUnLockWorkspaceAction->setShortcut(tr("Ctrl+L"));
     FileExitAction->setShortcut(tr("Ctrl+Q"));
@@ -371,11 +372,12 @@ void KeepassMainWindow::setupMenus(){
 	EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
 	EditCloneEntryAction->setShortcut(tr("Ctrl+K"));
 	EditSearchAction->setShortcut(tr("Ctrl+F"));
+	ExtrasPasswordGenAction->setShortcut(tr("Ctrl+P"));
+	ExtrasShowExpiredEntriesAction->setShortcut(tr("Ctrl+X"));
 #ifdef AUTOTYPE
 	EditAutoTypeAction->setShortcut(tr("Ctrl+V"));
 #endif
 #ifdef Q_WS_MAC
-	FileCloseAction->setShortcut(tr("Ctrl+W"));
 	FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
 	EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
 #endif
@@ -471,11 +473,17 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 	Q_ASSERT(FileOpen);
 	Q_ASSERT(db!=NULL);
 	if(ModFlag){
-		int r=QMessageBox::question(this,tr("Save modified file?"),
-				tr("The current file was modified. Do you want\nto save the changes?"),tr("Yes"),tr("No"),tr("Cancel"),2,2);
-		if(r==2)return false;	//Abbrechen
-		if(r==0)				//Ja (Datei speichern)
-		if(!OnFileSave())return false;
+		if(config->autoSave()){
+			if(!OnFileSave()) return false;
+		}
+		else{
+			QMessageBox::StandardButton r=QMessageBox::question(this,tr("Save modified file?"),
+							tr("The current file was modified. Do you want\nto save the changes?"),
+							QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel, QMessageBox::Yes);
+			if(r==QMessageBox::Cancel) return false; //Cancel
+			if(r==QMessageBox::Yes) //Yes (Save file)
+				if(!OnFileSave()) return false;
+		}
 	}
 	db->close();
 	delete db;

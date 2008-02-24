@@ -1,8 +1,5 @@
-Database:
-  -need to change the interface of the generic Database class so that no direct references
-   or pointers to group or entry objects are used:
-   1. approach: CEntry e=getEntry( ...by any attrib...); //get a COPY
-		e.Title="Blubb";
-		setEntey(e);
-   2. approach: EntryID id=getEntryID(...by any attrib...); //get an ID (maybe the list index)
-		setEntryTitle(id,"Blubb");
+Mass modify entries
+Backup group (exclude from search)
+Improve password generator
+Manually select language
+kde4 plugin: clear klipper history

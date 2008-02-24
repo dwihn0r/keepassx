@@ -154,7 +154,7 @@
     </widget>
     <widget class="QMenu" name="menuBookmarks" >
      <property name="title" >
-      <string>Bookmarks</string>
+      <string>&amp;Bookmarks</string>
      </property>
     </widget>
     <addaction name="FileNewAction" />
@@ -202,7 +202,7 @@
     </property>
     <widget class="QMenu" name="menuTool_Button_Sizes" >
      <property name="title" >
-      <string>Toolbar Icon Size</string>
+      <string>&amp;Toolbar Icon Size</string>
      </property>
      <addaction name="ViewToolButtonSize16Action" />
      <addaction name="ViewToolButtonSize22Action" />
@@ -210,7 +210,7 @@
     </widget>
     <widget class="QMenu" name="menuColumns" >
      <property name="title" >
-      <string>Columns</string>
+      <string>&amp;Columns</string>
      </property>
      <addaction name="ViewColumnsGroupAction" />
      <addaction name="separator" />
@@ -253,7 +253,7 @@
   </widget>
   <action name="ManageBookmarksAction" >
    <property name="text" >
-    <string>Manage Bookmarks...</string>
+    <string>&amp;Manage Bookmarks...</string>
    </property>
   </action>
   <action name="FileOpenAction" >
@@ -366,7 +366,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Show Entry Details</string>
+    <string>Show &amp;Entry Details</string>
    </property>
   </action>
   <action name="ViewHideUsernamesAction" >
@@ -374,7 +374,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Hide Usernames</string>
+    <string>Hide &amp;Usernames</string>
    </property>
   </action>
   <action name="ViewHidePasswordsAction" >
@@ -382,7 +382,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Hide Passwords</string>
+    <string>Hide &amp;Passwords</string>
    </property>
   </action>
   <action name="ViewColumnsTitleAction" >
@@ -390,7 +390,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Title</string>
+    <string>&amp;Title</string>
    </property>
   </action>
   <action name="ViewColumnsUsernameAction" >
@@ -398,7 +398,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Username</string>
+    <string>User&amp;name</string>
    </property>
   </action>
   <action name="ViewColumnsUrlAction" >
@@ -406,7 +406,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>URL</string>
+    <string>&amp;URL</string>
    </property>
   </action>
   <action name="ViewColumnsPasswordAction" >
@@ -414,7 +414,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Password</string>
+    <string>&amp;Password</string>
    </property>
   </action>
   <action name="ViewColumnsCommentAction" >
@@ -422,7 +422,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Comment</string>
+    <string>&amp;Comment</string>
    </property>
   </action>
   <action name="ViewColumnsExpireAction" >
@@ -430,7 +430,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Expires</string>
+    <string>E&amp;xpires</string>
    </property>
   </action>
   <action name="ViewColumnsCreationAction" >
@@ -438,7 +438,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Creation</string>
+    <string>C&amp;reation</string>
    </property>
   </action>
   <action name="ViewColumnsLastChangeAction" >
@@ -446,7 +446,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Last Change</string>
+    <string>&amp;Last Change</string>
    </property>
   </action>
   <action name="ViewColumnsLastAccessAction" >
@@ -454,7 +454,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Last Access</string>
+    <string>Last &amp;Access</string>
    </property>
   </action>
   <action name="ViewColumnsAttachmentAction" >
@@ -462,7 +462,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Attachment</string>
+    <string>A&amp;ttachment</string>
    </property>
   </action>
   <action name="ExtrasSettingsAction" >
@@ -480,7 +480,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Show Statusbar</string>
+    <string>Show &amp;Statusbar</string>
    </property>
   </action>
   <action name="HelpHandbookAction" >
@@ -506,7 +506,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>16x16</string>
+    <string>&amp;16x16</string>
    </property>
   </action>
   <action name="ViewToolButtonSize22Action" >
@@ -514,7 +514,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>22x22</string>
+    <string>&amp;22x22</string>
    </property>
   </action>
   <action name="ViewToolButtonSize28Action" >
@@ -522,7 +522,7 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>28x28</string>
+    <string>2&amp;8x28</string>
    </property>
   </action>
   <action name="FileNewKdbAction" >
@@ -553,12 +553,12 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Group (search results only)</string>
+    <string>&amp;Group (search results only)</string>
    </property>
   </action>
   <action name="ExtrasShowExpiredEntriesAction" >
    <property name="text" >
-    <string>Show Expired Entries...</string>
+    <string>Show &amp;Expired Entries...</string>
    </property>
   </action>
   <action name="ExtrasTrashCanAction" >
@@ -571,12 +571,12 @@
   </action>
   <action name="AddBookmarkAction" >
    <property name="text" >
-    <string>Add Bookmark...</string>
+    <string>&amp;Add Bookmark...</string>
    </property>
   </action>
   <action name="AddThisAsBookmarkAction" >
    <property name="text" >
-    <string>Bookmark this Database...</string>
+    <string>Bookmark &amp;this Database...</string>
    </property>
   </action>
  </widget>

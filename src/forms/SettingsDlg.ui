@@ -300,6 +300,13 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="CheckBox_AutoSave" >
+         <property name="text" >
+          <string>Automatically save database on exit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="checkBox_AskBeforeDelete" >
          <property name="text" >
           <string>Always ask before deleting entries or groups</string>
@@ -1280,7 +1287,7 @@
        <item>
         <widget class="QCheckBox" name="CheckBox_EntryTitlesMatch" >
          <property name="text" >
-          <string>Use entry titles to match the window for Global Auto-Type</string>
+          <string>Use entries' title to match the window for Global Auto-Type</string>
          </property>
         </widget>
        </item>
@@ -1352,6 +1359,11 @@
   <tabstop>IntPlugin_Button_Config</tabstop>
   <tabstop>SpinBox_AutoTypePreGap</tabstop>
   <tabstop>SpinBox_AutoTypeKeyStrokeDelay</tabstop>
+  <tabstop>Box_BrowserCmd</tabstop>
+  <tabstop>Edit_BrowserCmd</tabstop>
+  <tabstop>Button_BrowserCmdBrowse</tabstop>
+  <tabstop>Edit_MountDir</tabstop>
+  <tabstop>Button_MountDirBrowse</tabstop>
   <tabstop>CheckBox_SaveRelativePaths</tabstop>
   <tabstop>Edit_GlobalShortcut</tabstop>
   <tabstop>CheckBox_EntryTitlesMatch</tabstop>

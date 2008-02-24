@@ -270,12 +270,14 @@
   <tabstop>Edit_Search</tabstop>
   <tabstop>checkBox_Cs</tabstop>
   <tabstop>checkBox_regExp</tabstop>
+  <tabstop>checkBox_Recursive</tabstop>
   <tabstop>checkBox_Title</tabstop>
   <tabstop>checkBox_Username</tabstop>
   <tabstop>checkBox_Password</tabstop>
   <tabstop>checkBox_Comment</tabstop>
   <tabstop>checkBox_URL</tabstop>
   <tabstop>checkBox_Attachment</tabstop>
+  <tabstop>ButtonBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>
