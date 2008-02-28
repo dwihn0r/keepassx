@@ -1,35 +1,34 @@
 
-DEPENDPATH += crypto \
-              dialogs \
-              export \
-              forms \
-              import \
-              lib \
-              translations \
-              res
+CONFIG = qt uic resources thread stl warn_off release
+QT += xml
 
-win32:QMAKE_WIN32 = 1
+DEPENDPATH += crypto dialogs export forms import lib translations res
+INCLUDEPATH += . lib crypto plugins/interfaces export import dialogs
 
 MOC_DIR = ../build/moc
 UI_DIR = ../build/ui
 OBJECTS_DIR = ../build
 RCC_DIR = ../build/rcc
 
-INSTALLS += target data
-data.files += ../share/keepass/*
-TARGET = ../bin/keepassx
+isEqual(DEBUG,1) {
+   CONFIG += debug
+}
 
-unix : !macx : !isEqual(QMAKE_WIN32,1) {
+
+#-------------------------------------------------------------------------------
+#   Platform Specific: Unix (except MacOS X)
+#-------------------------------------------------------------------------------
+unix : !macx {
     isEmpty(PREFIX):PREFIX = /usr
-
     !isEqual(AUTOTYPE,0) {
         DEFINES += AUTOTYPE
         !isEqual(GLOBAL_AUTOTYPE,0) {
             DEFINES += GLOBAL_AUTOTYPE
         }
     }
-    target.path = $${PREFIX}/bin
-    data.path = $${PREFIX}/share/keepass
+    TARGET = ../bin/keepassx
+    TARGET.path = $${PREFIX}/bin
+    data.path = $${PREFIX}/share
     pixmaps.files = ../share/pixmaps/*
     pixmaps.path = $${PREFIX}/share/pixmaps
     desktop.files = ../share/applications/*
@@ -44,29 +43,57 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
         SOURCES += Application_X11.cpp
         HEADERS += Application_X11.h
     }
+    isEqual(BUILD_FOR_LSB,1) {
+       QMAKE_CXX = lsbcc
+    }
 }
 
+
+#-------------------------------------------------------------------------------
+#   Platform Specific: MacOS X
+#-------------------------------------------------------------------------------
 macx {
     isEmpty(PREFIX):PREFIX = /Applications
-    target.path = $${PREFIX}
-    data.path = $${PREFIX}/keepassx.app/Contents/share/keepass
+    TARGET = ../bin/KeePassX
+    TARGET.path = $${PREFIX}
+    data.path = Contents/Resources
+    isEmpty(QT_FRAMEWORK_DIR) : QT_FRAMEWORK_DIR = /Library/Frameworks
+    private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
+    private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtGui.framework
+    private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtXml.framework
+    private_frameworks.path = Contents/Frameworks
+    QMAKE_BUNDLE_DATA += data private_frameworks
     LIBS += -framework CoreFoundation
+    ICON = ../share/macx_bundle/icon.icns
+    CONFIG += app_bundle
+    isEqual(ARCH,UNIVERSAL) : CONFIG += x86 ppc
+    isEqual(ARCH,INTEL) : CONFIG += x86
+    isEqual(ARCH,PPC) : CONFIG += ppc
 }
 
-isEqual(QMAKE_WIN32,1) {
+#-------------------------------------------------------------------------------
+#   Platform Specific: Windows
+#-------------------------------------------------------------------------------
+win32 {
+    CONFIG += windows
     isEmpty(PREFIX):PREFIX = "C:/Program files/KeePassX"
-
-    target.path = $${PREFIX}
+    TARGET = ../bin/KeePassX
+    TARGET.path = $${PREFIX}
     data.path = $${PREFIX}/share
     RC_FILE = ../share/ico/keepassx.rc
     QMAKE_LINK_OBJECT_SCRIPT = $${OBJECTS_DIR}/$${QMAKE_LINK_OBJECT_SCRIPT}
 }
+
+
+data.files += ../share/keepassx
+INSTALLS += TARGET data
 
 contains(DEFINES,GLOBAL_AUTOTYPE) {
     FORMS += forms/AutoTypeDlg.ui
     HEADERS += dialogs/AutoTypeDlg.h
     SOURCES += dialogs/AutoTypeDlg.cpp
 }
+
 
 FORMS += forms/EditGroupDlg.ui \
          forms/SearchDlg.ui \
@@ -210,30 +237,3 @@ SOURCES += lib/UrlLabel.cpp \
            dialogs/ManageBookmarksDlg.cpp
 
 RESOURCES += res/resources.qrc
-CONFIG = qt \
-         uic \
-         resources \
-         thread \
-         stl \
-         warn_off
-QT += xml
-TEMPLATE = app
-INCLUDEPATH += . \
-               lib \
-               crypto \
-               plugins/interfaces \
-               export \
-               import \
-               dialogs \
-               ./
-
-isEqual(RELEASE,1) {
-  CONFIG += release
-}
-else {
-  CONFIG += debug
-}
-
-isEqual(QMAKE_WIN32,1) {
-  CONFIG += windows
-}

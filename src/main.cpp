@@ -70,6 +70,7 @@ QHash<QString,QIcon*>IconCache;
 KpxConfig *config;
 QString  AppDir;
 QString HomeDir;
+QString DataDir;
 QString PluginLoadError;
 bool TrActive;
 QString DetailViewTemplate;
@@ -96,6 +97,12 @@ int main(int argc, char **_argv)
 		HomeDir = QDir::homePath()+"/KeePassX";
 #else
 	HomeDir = QDir::homePath()+"/.keepassx";
+#endif
+
+#if defined Q_WS_MACX
+	DataDir=AppDir+"/../Resources/keepassx";
+#else
+	DataDir=AppDir+"/../share/keepassx";
 #endif
 	bool ArgMin = false;
 	bool ArgLock = false;
@@ -182,8 +189,7 @@ int main(int argc, char **_argv)
 	qtTranslator=new QTranslator;
 
 	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
-						<< AppDir+"/../share/keepass/i18n/"
-						<< AppDir+"/share/i18n/"
+						<< DataDir+"/i18n/"
 						<< HomeDir))
 	{
 		app->installTranslator(translator);
@@ -201,8 +207,7 @@ int main(int argc, char **_argv)
 	if(TrActive){
 		if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
 							<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-							<< AppDir+"/../share/keepass/i18n/"
-							<< AppDir+"/share/i18n/"
+							<< DataDir+"/i18n/"
 							<< HomeDir))
 			app->installTranslator(qtTranslator);
 		else{
@@ -321,10 +326,8 @@ void openBrowser(const QString& UrlString){
 }
 
 QString getImageFile(const QString& name){
-	if (QFile::exists(AppDir+"/../share/keepass/icons/"+name))
-		return AppDir+"/../share/keepass/icons/"+name;
-	else if (QFile::exists(AppDir+"/share/icons/"+name))
-		return AppDir+"/share/icons/"+name;
+	if (QFile::exists(DataDir+"/icons/"+name))
+		return DataDir+"/icons/"+name;
 	else{
 		QMessageBox::critical(0,QApplication::translate("Main","Error"),
 			QApplication::translate("Main","File '%1' could not be found.")
@@ -501,12 +504,13 @@ QString applicationFilePath()
     });
 
     return filePath.filePath();
-	#elif defined(Q_WS_MAC)
 	
+	#elif defined(Q_WS_MAC)
+
 	CFURLRef bundleURL(CFBundleCopyExecutableURL(CFBundleGetMainBundle()));
-	assert(bundleURL);
+	//assert(bundleURL);
 	CFStringRef cfPath(CFURLCopyFileSystemPath(bundleURL, kCFURLPOSIXPathStyle));
-	assert(cfPath);
+	//assert(cfPath);
     CFIndex length = CFStringGetLength(cfPath);
     const UniChar *chars = CFStringGetCharactersPtr(cfPath);
     if (chars)
