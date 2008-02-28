@@ -153,9 +153,9 @@ void KeepassEntryView::OnDeleteEntry(){
 	if(config->askBeforeDelete()){
 		QString text;
 		if(entries.size()==1)
-			text=tr("Are you sure you want delete this entry?");
+			text=tr("Are you sure you want to delete this entry?");
 		else
-			text=tr("Are you sure you want delete these %1 entries?").arg(entries.size());
+			text=tr("Are you sure you want to delete these %1 entries?").arg(entries.size());
 		if(QMessageBox::question(this,tr("Delete?"),text,QMessageBox::Yes | QMessageBox::No,QMessageBox::No)==QMessageBox::No)
 			return;			
 	}

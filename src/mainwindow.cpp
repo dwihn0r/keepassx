@@ -535,12 +535,11 @@ void KeepassMainWindow::OnFileNewKdb(){
 
 }
 
+// TODO Kxdb
+/*
 void KeepassMainWindow::OnFileNewKxdb(){
-
-
-
 }
-
+*/
 
 void KeepassMainWindow::OnFileOpen(){
 	/*QFileDialog FileDlg(this,tr("Open Database..."),QDir::homePath());

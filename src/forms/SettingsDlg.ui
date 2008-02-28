@@ -302,7 +302,7 @@
        <item>
         <widget class="QCheckBox" name="CheckBox_AutoSave" >
          <property name="text" >
-          <string>Automatically save database on exit</string>
+          <string>Automatically save database on exit and workspace locking</string>
          </property>
         </widget>
        </item>

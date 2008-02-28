@@ -60,7 +60,7 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 
 	private slots:
 		void OnFileNewKdb();
-		void OnFileNewKxdb();
+		//void OnFileNewKxdb(); // TODO Kxdb
 		void OnFileOpen();
 		void OnFileClose();
 		bool OnFileSave();
