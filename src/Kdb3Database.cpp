@@ -367,9 +367,9 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 			Groups[i].Index=RootGroup.Childs.size();
 			RootGroup.Childs.append(&Groups[i]);
 			continue;}
-		int j=i-1;
+		int j;
 		//the first item with a lower level is the parent
-		for(j;j>=0;j--){
+		for(j=i-1;j>=0;j--){
 			if(Levels[j]<Levels[i]){
 				if(Levels[i]-Levels[j]!=1)return false;
 				break;
@@ -507,7 +507,6 @@ if(memcmp(ContentsHash, FinalKey, 32) != 0){
 	KeyError=true;
 	return false;}
 
-unsigned long tmp_id=0;
 unsigned long pos = DB_HEADER_SIZE;
 quint16 FieldType;
 quint32 FieldSize;
@@ -584,7 +583,6 @@ if(!createGroupTree(Levels)){
 	return false;
 }
 
-unsigned long CurGID, g, e, z, num;
 delete [] buffer;
 
 //Remove the metastreams from the entry list
@@ -760,8 +758,6 @@ void Kdb3Database::authByPwd(QString& Password){
 	QByteArray lat,utf;
 	utf=Password.toUtf8();
 	lat=Password.toLatin1();
-	char *Lat=lat.data();
-	char *Utf=utf.data();
 	return;
 }
 
@@ -850,7 +846,6 @@ QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
 
 void Kdb3Database::deleteEntry(IEntryHandle* entry){
 	if(!entry)return;
-	StdGroup* Group=((EntryHandle*)entry)->Entry->Group;
 	int j;
 	for(j=0;j<Entries.size();j++){
 		if(&Entries[j]==((EntryHandle*)entry)->Entry)

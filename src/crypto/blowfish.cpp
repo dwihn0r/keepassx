@@ -227,7 +227,7 @@ static const uint32_t ps[BLOWFISH_ROUNDS + 2] = {
 };
 
 Blowfish::Blowfish()
-{	static bool mustSelfTest = false;
+{
 }
 
 void Blowfish::burn_stack(int bytes)

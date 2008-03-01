@@ -33,7 +33,7 @@ class KpxBookmarks {
 		static QString title(int Index);
 		static QString path(int Index);
 	private:
-		static bool save();
+		static void save();
 		class BookmarkEntry {
 			public:
 				QString Title;

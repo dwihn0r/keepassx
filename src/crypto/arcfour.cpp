@@ -36,7 +36,6 @@ RawKey=QByteArray((const char*)key_data_ptr,key_data_len);
 }
 
 void CArcFour::prepareKey(){
- unsigned char swapByte;
  unsigned char index1;
  unsigned char index2;
  unsigned char* state;

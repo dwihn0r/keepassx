@@ -473,8 +473,8 @@ QString makePathRelative(const QString& AbsDir,const QString& CurDir){
 	QStringList abs=AbsDir.split('/');
 	QStringList cur=CurDir.split('/');
 	QString rel="./";
-	int common=0;
-	for(common; common < abs.size() && common < cur.size(); common++){
+	int common;
+	for(common=0; common < abs.size() && common < cur.size(); common++){
 		if(abs[common]!=cur[common])break;
 	}
 	for(int i=0;i<cur.size()-common;i++)

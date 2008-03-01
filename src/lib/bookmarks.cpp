@@ -60,7 +60,7 @@ int KpxBookmarks::add(const QString& Title,const QString& Path){
 	return Bookmarks.size()-1;
 }
 
-bool KpxBookmarks::save(){
+void KpxBookmarks::save(){
 	for (int i=0;i<count();i++){
 		config->settings.setValue( QString("Bookmarks/%1/Title").arg(i+1), Bookmarks[i].Title );
 		config->settings.setValue( QString("Bookmarks/%1/Path").arg(i+1), Bookmarks[i].Path );

@@ -55,7 +55,7 @@ void WaitAnimationWidget::stop(){
 
 void WaitAnimationWidget::setRefreshRate(int fps){
 	DiffAngle=1.0f/((60.0f/(float)speed)*(float)fps);
-	timer.setInterval((1.0f/(float)fps)*1000.0f);
+	timer.setInterval((int) ((1.0f/(float)fps)*1000.0f));
 }
 
 void WaitAnimationWidget::refreshAnimation(){

@@ -97,12 +97,11 @@ void KeepassEntryView::OnItemsChanged(){
 }
 
 bool sortSearchResultsLessThan(const IEntryHandle* a, const IEntryHandle* b){
-	int indexA=0;
-	int indexB=0;
-	for(indexA;indexA<pItems->size();indexA++){
+	int indexA, indexB;
+	for(indexA=0;indexA<pItems->size();indexA++){
 		if((*pItems)[indexA]->EntryHandle==a)break;
 	}
-	for(indexB;indexB<pItems->size();indexB++){
+	for(indexB=0;indexB<pItems->size();indexB++){
 		if((*pItems)[indexB]->EntryHandle==b)break;
 	}
 	return pEntryView->indexOfTopLevelItem((*pItems)[indexA])<pEntryView->indexOfTopLevelItem((*pItems)[indexB]);

@@ -1099,7 +1099,6 @@ void KeepassMainWindow::OnViewToolbarIconSize28(bool state){
 
 void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason reason){
 	if(reason!=QSystemTrayIcon::Context){
-		bool unlockActive = (unlockDlg!=NULL && unlockDlg->isActiveWindow());
 		if (isVisible()){
 			if (unlockDlg!=NULL)
 				unlockDlg->reject();

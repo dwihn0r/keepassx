@@ -31,7 +31,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
         }
     }
     TARGET = ../bin/keepassx
-    TARGET.path = $${PREFIX}/bin
+    target.path = $${PREFIX}/bin
     data.path = $${PREFIX}/share
     pixmaps.files = ../share/pixmaps/*
     pixmaps.path = $${PREFIX}/share/pixmaps
@@ -59,7 +59,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
 macx {
     isEmpty(PREFIX):PREFIX = /Applications
     TARGET = ../bin/KeePassX
-    TARGET.path = $${PREFIX}
+    target.path = $${PREFIX}
     data.path = Contents/Resources
     isEmpty(QT_FRAMEWORK_DIR) : QT_FRAMEWORK_DIR = /Library/Frameworks
     private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
@@ -82,7 +82,7 @@ isEqual(QMAKE_WIN32,1) {
     CONFIG += windows
     isEmpty(PREFIX):PREFIX = "C:/Program files/KeePassX"
     TARGET = ../bin/KeePassX
-    TARGET.path = $${PREFIX}
+    target.path = $${PREFIX}
     data.path = $${PREFIX}/share
     RC_FILE = ../share/ico/keepassx.rc
     QMAKE_LINK_OBJECT_SCRIPT = $${OBJECTS_DIR}/$${QMAKE_LINK_OBJECT_SCRIPT}
@@ -90,7 +90,7 @@ isEqual(QMAKE_WIN32,1) {
 
 
 data.files += ../share/keepassx
-INSTALLS += TARGET data
+INSTALLS += target data
 
 contains(DEFINES,GLOBAL_AUTOTYPE) {
     FORMS += forms/AutoTypeDlg.ui
