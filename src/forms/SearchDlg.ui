@@ -34,18 +34,6 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>9</number>
-   </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>9</number>
-   </property>
    <item>
     <spacer>
      <property name="orientation" >
@@ -64,18 +52,6 @@
    </item>
    <item>
     <layout class="QGridLayout" >
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
-      <number>0</number>
-     </property>
      <property name="horizontalSpacing" >
       <number>4</number>
      </property>
@@ -104,18 +80,6 @@
         <string>Include:</string>
        </property>
        <layout class="QGridLayout" >
-        <property name="leftMargin" >
-         <number>9</number>
-        </property>
-        <property name="topMargin" >
-         <number>9</number>
-        </property>
-        <property name="rightMargin" >
-         <number>9</number>
-        </property>
-        <property name="bottomMargin" >
-         <number>9</number>
-        </property>
         <property name="horizontalSpacing" >
          <number>6</number>
         </property>
@@ -188,18 +152,6 @@
      <item row="1" column="1" >
       <layout class="QVBoxLayout" >
        <property name="spacing" >
-        <number>0</number>
-       </property>
-       <property name="leftMargin" >
-        <number>0</number>
-       </property>
-       <property name="topMargin" >
-        <number>0</number>
-       </property>
-       <property name="rightMargin" >
-        <number>0</number>
-       </property>
-       <property name="bottomMargin" >
         <number>0</number>
        </property>
        <item>

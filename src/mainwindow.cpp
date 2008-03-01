@@ -77,6 +77,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	IsLocked=false;
 	InUnLock=false;
 	unlockDlg=NULL;
+	db=NULL;
     setupUi(this);
 #ifdef Q_WS_MAC
 	setUnifiedTitleAndToolBarOnMac(true);

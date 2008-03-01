@@ -34,18 +34,6 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>9</number>
-   </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>9</number>
-   </property>
    <item>
     <spacer>
      <property name="orientation" >
@@ -74,18 +62,6 @@
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
-       </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
        </property>
        <item>
         <layout class="QHBoxLayout" >
@@ -137,18 +113,6 @@
          <property name="spacing" >
           <number>6</number>
          </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
          <item>
           <spacer>
            <property name="orientation" >
@@ -167,18 +131,6 @@
          </item>
          <item>
           <layout class="QVBoxLayout" >
-           <property name="leftMargin" >
-            <number>0</number>
-           </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>0</number>
-           </property>
            <item>
             <widget class="LinkLabel" name="label_5" >
              <property name="text" >
@@ -216,18 +168,6 @@ General Public License (GPL) version 2.</string>
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
        <item>
         <widget class="QTextEdit" name="Edit_Thanks" >
          <property name="readOnly" >
@@ -245,18 +185,6 @@ General Public License (GPL) version 2.</string>
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
        <item>
         <widget class="QTextEdit" name="Edit_Translation" >
          <property name="readOnly" >
@@ -273,18 +201,6 @@ General Public License (GPL) version 2.</string>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
-       </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
        </property>
        <item>
         <widget class="QTextEdit" name="Edit_License" >

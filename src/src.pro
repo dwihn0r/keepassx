@@ -1,5 +1,5 @@
 
-CONFIG = qt uic resources thread stl warn_off release
+CONFIG = qt uic resources thread stl warn_off
 QT += xml
 
 DEPENDPATH += crypto dialogs export forms import lib translations res
@@ -11,14 +11,18 @@ OBJECTS_DIR = ../build
 RCC_DIR = ../build/rcc
 
 isEqual(DEBUG,1) {
-   CONFIG += debug
+  CONFIG += debug
+}
+else {
+  CONFIG += release
 }
 
+win32:QMAKE_WIN32 = 1
 
 #-------------------------------------------------------------------------------
 #   Platform Specific: Unix (except MacOS X)
 #-------------------------------------------------------------------------------
-unix : !macx {
+unix : !macx : !isEqual(QMAKE_WIN32,1) {
     isEmpty(PREFIX):PREFIX = /usr
     !isEqual(AUTOTYPE,0) {
         DEFINES += AUTOTYPE
@@ -74,7 +78,7 @@ macx {
 #-------------------------------------------------------------------------------
 #   Platform Specific: Windows
 #-------------------------------------------------------------------------------
-win32 {
+isEqual(QMAKE_WIN32,1) {
     CONFIG += windows
     isEmpty(PREFIX):PREFIX = "C:/Program files/KeePassX"
     TARGET = ../bin/KeePassX
@@ -179,7 +183,7 @@ HEADERS += lib/UrlLabel.h \
 #           plugins/interfaces/IGnomeInit.h \
            plugins/interfaces/IIconTheme.h \
            KpxConfig.h \
-#          KpxFirefox.h \
+#           KpxFirefox.h \
            dialogs/AddBookmarkDlg.h \
            lib/bookmarks.h \
            dialogs/ManageBookmarksDlg.h

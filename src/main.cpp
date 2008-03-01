@@ -101,6 +101,8 @@ int main(int argc, char **_argv)
 
 #if defined Q_WS_MACX
 	DataDir=AppDir+"/../Resources/keepassx";
+#elif defined Q_WS_WIN
+	DataDir=AppDir+"/share";
 #else
 	DataDir=AppDir+"/../share/keepassx";
 #endif
