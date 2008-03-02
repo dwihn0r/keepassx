@@ -63,6 +63,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 #if !defined(GLOBAL_AUTOTYPE)
 	Label_GlobalShortcut->setVisible(false);
 	Edit_GlobalShortcut->setVisible(false);
+	CheckBox_EntryTitlesMatch->setVisible(false);
 #endif
 	
 #ifdef GLOBAL_AUTOTYPE

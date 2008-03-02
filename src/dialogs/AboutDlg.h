@@ -33,13 +33,8 @@ class AboutDialog : public QDialog, public Ui_AboutDlg
 	public:
 		AboutDialog(QWidget* parent);
 
-	private slots:
-		void OnHomepageClicked();
-		void OnEMailClicked();
-
 	private:
 		QPixmap BannerPixmap;
-		inline void loadLicFromFile();
 		virtual void paintEvent(QPaintEvent*);
 };
 

@@ -27,7 +27,6 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
 	createBanner(&BannerPixmap,getPixmap("keepassx_large"),QString("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
-	loadLicFromFile();
 
     labelAppName->setText(APP_DISPLAY_NAME);
     labelAppFunc->setText(QString(" -  ").append(APP_LONG_FUNC));
@@ -61,6 +60,15 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	str+="<u>Constantin Makshin</u><br>"+tr("Various fixes and improvements")+"<br>dinosaur-rus@users.sourceforge.net<br></div>";
 	Edit_Thanks->setHtml(str);
 	
+	QFile gpl(DataDir+"/license.html");
+	if (!gpl.open(QIODevice::ReadOnly)){
+		QMessageBox::critical(this,tr("Error"),tr("File '%1' could not be found.")
+				.arg("'license.html'")+"\n"+tr("Make sure that the program is installed correctly.")
+				,tr("OK"),0,0,2,1);
+	}
+	
+	Edit_License->setHtml(QString::fromUtf8(gpl.readAll()));
+	
 	connect(ButtonBox, SIGNAL(accepted()), SLOT(close()));
 }
 
@@ -70,31 +78,3 @@ void AboutDialog::paintEvent(QPaintEvent *event){
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
-
-void AboutDialog::loadLicFromFile(){
-	QString filename;
-	filename = AppDir+"/../share/keepass/license.html";
-	if (!QFile::exists(filename)){
-		filename = AppDir+"/share/license.html";
-		if (!QFile::exists(filename)){
-			filename.clear();
-		}
-	}
-	QFile gpl(filename);
-	if (filename.isEmpty() || !gpl.open(QIODevice::ReadOnly)){
-		QMessageBox::critical(this,tr("Error"),tr("File '%1' could not be found.")
-			.arg("'license.html'")+"\n"+tr("Make sure that the program is installed correctly.")
-			,tr("OK"),0,0,2,1);
-	}
-	
-	Edit_License->setHtml(QString::fromUtf8(gpl.readAll()));
-}
-
-void AboutDialog::OnHomepageClicked(){
-	openBrowser("http://www.keepassx.org/");
-}
-
-void AboutDialog::OnEMailClicked(){
-	openBrowser("mailto:keepassx@gmail.com");
-}
-

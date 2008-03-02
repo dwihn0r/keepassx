@@ -940,6 +940,66 @@
         <number>6</number>
        </property>
        <item>
+        <widget class="QGroupBox" name="Box_BrowserCmd" >
+         <property name="title" >
+          <string>Custom Browser Command</string>
+         </property>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLineEdit" name="Edit_BrowserCmd" />
+          </item>
+          <item>
+           <widget class="QPushButton" name="Button_BrowserCmdBrowse" >
+            <property name="text" >
+             <string>Browse</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="label_2" >
+           <property name="text" >
+            <string>Media Root:</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Edit_MountDir" >
+           <property name="whatsThis" >
+            <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Button_MountDirBrowse" >
+           <property name="text" >
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="CheckBox_SaveRelativePaths" >
+         <property name="whatsThis" >
+          <string>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</string>
+         </property>
+         <property name="text" >
+          <string>Save relative paths (bookmarks and last file)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QGroupBox" name="Box_AutoType" >
          <property name="title" >
           <string>Auto-Type Fine Tuning</string>
@@ -1011,66 +1071,6 @@
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="Box_BrowserCmd" >
-         <property name="title" >
-          <string>Custom Browser Command</string>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-         <layout class="QHBoxLayout" >
-          <item>
-           <widget class="QLineEdit" name="Edit_BrowserCmd" />
-          </item>
-          <item>
-           <widget class="QPushButton" name="Button_BrowserCmdBrowse" >
-            <property name="text" >
-             <string>Browse</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Media Root:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="Edit_MountDir" >
-           <property name="whatsThis" >
-            <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Button_MountDirBrowse" >
-           <property name="text" >
-            <string>Browse...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_SaveRelativePaths" >
-         <property name="whatsThis" >
-          <string>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</string>
-         </property>
-         <property name="text" >
-          <string>Save relative paths (bookmarks and last file)</string>
-         </property>
         </widget>
        </item>
        <item>
@@ -1159,6 +1159,7 @@
   <tabstop>CheckBox_StartLocked</tabstop>
   <tabstop>checkBox_SaveFileDlgHistory</tabstop>
   <tabstop>Button_ClearFileDlgHistory</tabstop>
+  <tabstop>CheckBox_AutoSave</tabstop>
   <tabstop>checkBox_AskBeforeDelete</tabstop>
   <tabstop>ButtonColor1</tabstop>
   <tabstop>ButtonColor2</tabstop>
@@ -1177,14 +1178,14 @@
   <tabstop>Radio_IntPlugin_Gnome</tabstop>
   <tabstop>Radio_IntPlugin_Kde</tabstop>
   <tabstop>IntPlugin_Button_Config</tabstop>
-  <tabstop>SpinBox_AutoTypePreGap</tabstop>
-  <tabstop>SpinBox_AutoTypeKeyStrokeDelay</tabstop>
   <tabstop>Box_BrowserCmd</tabstop>
   <tabstop>Edit_BrowserCmd</tabstop>
   <tabstop>Button_BrowserCmdBrowse</tabstop>
   <tabstop>Edit_MountDir</tabstop>
   <tabstop>Button_MountDirBrowse</tabstop>
   <tabstop>CheckBox_SaveRelativePaths</tabstop>
+  <tabstop>SpinBox_AutoTypePreGap</tabstop>
+  <tabstop>SpinBox_AutoTypeKeyStrokeDelay</tabstop>
   <tabstop>Edit_GlobalShortcut</tabstop>
   <tabstop>CheckBox_EntryTitlesMatch</tabstop>
   <tabstop>DialogButtons</tabstop>

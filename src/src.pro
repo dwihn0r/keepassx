@@ -32,7 +32,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
     }
     TARGET = ../bin/keepassx
     target.path = $${PREFIX}/bin
-    data.path = $${PREFIX}/share
+    data.path = $${PREFIX}/share/keepassx
     pixmaps.files = ../share/pixmaps/*
     pixmaps.path = $${PREFIX}/share/pixmaps
     desktop.files = ../share/applications/*
@@ -48,7 +48,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
         HEADERS += Application_X11.h
     }
     isEqual(BUILD_FOR_LSB,1) {
-       QMAKE_CXX = lsbcc
+        QMAKE_CXX = lsbcc
     }
 }
 
@@ -60,7 +60,7 @@ macx {
     isEmpty(PREFIX):PREFIX = /Applications
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
-    data.path = Contents/Resources
+    data.path = Contents/Resources/keepassx
     isEmpty(QT_FRAMEWORK_DIR) : QT_FRAMEWORK_DIR = /Library/Frameworks
     private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
     private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtGui.framework
@@ -84,12 +84,17 @@ isEqual(QMAKE_WIN32,1) {
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
     data.path = $${PREFIX}/share
-    RC_FILE = ../share/ico/keepassx.rc
+    !isEqual(INSTALL_QTLIB,0) {
+        qt_libs.files = $${QMAKE_LIBDIR_QT}/QtCore4.dll $${QMAKE_LIBDIR_QT}/QtGui4.dll $${QMAKE_LIBDIR_QT}/QtXml4.dll
+        qt_libs.path = $${PREFIX}
+        INSTALLS += qt_libs
+    }
+    RC_FILE = ../share/win_ico/keepassx.rc
     QMAKE_LINK_OBJECT_SCRIPT = $${OBJECTS_DIR}/$${QMAKE_LINK_OBJECT_SCRIPT}
 }
 
 
-data.files += ../share/keepassx
+data.files += ../share/keepassx/*
 INSTALLS += target data
 
 contains(DEFINES,GLOBAL_AUTOTYPE) {
