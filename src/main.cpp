@@ -439,6 +439,11 @@ if(argc>1){
 		else if(QString(argv[i])=="-lock"){
 			ArgLock = true;
 		}
+		else if(QString(argv[i]).left(5)=="-psn_"){
+			// something like a pid or so, passed when starting an app bundle under MacOS X
+			// ignore
+			continue;
+		}
 		/*else if(QString(argv[i])=="-test"){
 			if (testDatabase()) exit(0);
 			else exit(1);

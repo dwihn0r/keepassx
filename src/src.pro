@@ -32,6 +32,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
     }
     TARGET = ../bin/keepassx
     target.path = $${PREFIX}/bin
+    data.files += ../share/keepassx/*
     data.path = $${PREFIX}/share/keepassx
     pixmaps.files = ../share/pixmaps/*
     pixmaps.path = $${PREFIX}/share/pixmaps
@@ -47,9 +48,6 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
         SOURCES += Application_X11.cpp
         HEADERS += Application_X11.h
     }
-    isEqual(BUILD_FOR_LSB,1) {
-        QMAKE_CXX = lsbcc
-    }
 }
 
 
@@ -60,14 +58,21 @@ macx {
     isEmpty(PREFIX):PREFIX = /Applications
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
-    data.path = Contents/Resources/keepassx
-    isEmpty(QT_FRAMEWORK_DIR) : QT_FRAMEWORK_DIR = /Library/Frameworks
-    private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
-    private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtGui.framework
-    private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtXml.framework
-    private_frameworks.path = Contents/Frameworks
-    QMAKE_BUNDLE_DATA += data private_frameworks
+    data.files += ../share/keepassx
+    data.path = Contents/Resources
     LIBS += -framework CoreFoundation
+    isEqual(LINK,DYNAMIC) {
+    	isEmpty(QT_FRAMEWORK_DIR) : QT_FRAMEWORK_DIR = /Library/Frameworks
+    	private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
+    	private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtGui.framework
+    	private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtXml.framework
+    	private_frameworks.path = Contents/Frameworks
+	QMAKE_BUNDLE_DATA +=  private_frameworks
+    }
+    isEqual(LINK,STATIC){
+    	LIBS += -framework Carbon -framework AppKit -lz
+    }
+    QMAKE_BUNDLE_DATA += data
     ICON = ../share/macx_bundle/icon.icns
     CONFIG += app_bundle
     isEqual(ARCH,UNIVERSAL) : CONFIG += x86 ppc
@@ -83,6 +88,7 @@ isEqual(QMAKE_WIN32,1) {
     isEmpty(PREFIX):PREFIX = "C:/Program files/KeePassX"
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
+    data.files += ../share/keepassx/*
     data.path = $${PREFIX}/share
     !isEqual(INSTALL_QTLIB,0) {
         qt_libs.files = $${QMAKE_LIBDIR_QT}/QtCore4.dll $${QMAKE_LIBDIR_QT}/QtGui4.dll $${QMAKE_LIBDIR_QT}/QtXml4.dll
@@ -94,7 +100,6 @@ isEqual(QMAKE_WIN32,1) {
 }
 
 
-data.files += ../share/keepassx/*
 INSTALLS += target data
 
 contains(DEFINES,GLOBAL_AUTOTYPE) {
