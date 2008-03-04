@@ -55,7 +55,7 @@ extern "C"
 #elif ULONG_MAX == 0xfffffffful
   typedef	unsigned long   uint_32t;
 #elif defined( _CRAY )
-# error This code needs 32-bit data types, which Cray machines don't provide 
+# error This code needs 32-bit data types, which Cray machines do not provide
 #else
 # error Please define uint_32t as a 32-bit unsigned integer type in tdefs.h
 #endif

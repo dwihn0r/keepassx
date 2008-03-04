@@ -32,8 +32,8 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
     }
     TARGET = ../bin/keepassx
     target.path = $${PREFIX}/bin
-    data.files += ../share/keepassx/*
-    data.path = $${PREFIX}/share/keepassx
+    data.files += ../share/keepassx
+    data.path = $${PREFIX}/share
     pixmaps.files = ../share/pixmaps/*
     pixmaps.path = $${PREFIX}/share/pixmaps
     desktop.files = ../share/applications/*
