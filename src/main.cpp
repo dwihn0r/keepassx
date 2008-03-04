@@ -62,12 +62,15 @@ void initAppPaths(int argc, char **argv);
 
 int main(int argc, char **argv)
 {
-	QApplication* app=new QApplication(argc,argv);
+	QApplication* app;
+#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
+	app = new KeepassApplication(argc,argv);
+#else
+	app = new QApplication(argc,argv);
+#endif
 	initAppPaths(argc,argv);
 	CmdLineArgs args;
-	args.parse(app->arguments());
-	delete app;
-	app=NULL;
+	args.parse(QApplication::arguments());
 	qDebug(CSTR(AppDir));
 	qDebug(CSTR(DataDir));
 	//Load Config
@@ -130,13 +133,6 @@ int main(int argc, char **argv)
 		}
 	}*/
 	
-#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
-	if(!app) new KeepassApplication(argc,argv);
-#else
-	if(!app) new QApplication(argc,argv);
-#endif
-
-
 	//Internationalization
 	QLocale loc;
 	if(!args.language().size())
