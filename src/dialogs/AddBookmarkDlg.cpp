@@ -19,6 +19,7 @@
 
 #include <QFileInfo>
 #include <QPainter>
+#include "lib/tools.h"
 #include "lib/FileDialogs.h"
 #include "lib/bookmarks.h"
 

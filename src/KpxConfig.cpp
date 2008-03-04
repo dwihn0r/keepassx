@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QDir>
 #include <QLayout>
+#include <QWidget>
 
 KpxConfig::KpxConfig(const QString& filePath) : settings(filePath,QSettings::IniFormat){
 	configFile=filePath;

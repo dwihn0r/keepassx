@@ -35,6 +35,7 @@
 #include "EntryView.h"
 #include "dialogs/EditEntryDlg.h"
 #include "lib/AutoType.h"
+#include "Database.h"
 
 // just for the lessThan funtion
 QList<EntryViewItem*>* pItems;

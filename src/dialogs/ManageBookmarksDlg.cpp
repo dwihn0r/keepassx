@@ -19,6 +19,7 @@
 
 #include <QListWidget>
 #include <QPainter>
+#include "lib/tools.h"
 #include "ManageBookmarksDlg.h"
 #include "lib/bookmarks.h"
 #include "dialogs/AddBookmarkDlg.h"

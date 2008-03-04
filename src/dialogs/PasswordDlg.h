@@ -21,6 +21,7 @@
 #define PASSWORDDIALOG_H
 #include "ui_PasswordDlg.h"
 #include "main.h"
+#include "lib/tools.h"
 #include "lib/UrlLabel.h"
 #include "Database.h"
 #include <QPixmap>

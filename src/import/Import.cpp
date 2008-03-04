@@ -19,6 +19,8 @@
  ***************************************************************************/
 
 #include <QMessageBox>
+#include <QFile>
+#include "lib/tools.h"
 #include "main.h"
 #include "Import.h"
 #include "lib/FileDialogs.h"

@@ -19,7 +19,8 @@
 
 #include <QMessageBox>
 #include <QPainter>
-
+#include <QFile>
+#include "lib/tools.h"
 #include "AboutDlg.h"
 
 

@@ -25,6 +25,8 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QShowEvent>
+#include <QFile>
+#include "lib/tools.h"
 #include "SelectIconDlg.h"
 
 

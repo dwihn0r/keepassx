@@ -20,6 +20,9 @@
 
 #include <QPainter>
 #include <QCursor>
+#include <QFile>
+#include "lib/tools.h"
+
 #include "crypto/yarrow.h"
 
 #include "CollectEntropyDlg.h"

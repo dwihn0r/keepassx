@@ -23,7 +23,7 @@
 #ifndef _KPXCONFIG_H_
 #define _KPXCONFIG_H_
 
-#include "main.h"
+#include "lib/tools.h"
 #include "AutoType.h"
 #include <QBitArray>
 #include <QByteArray>

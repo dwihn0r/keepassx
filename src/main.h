@@ -37,27 +37,11 @@
 
 #define BUILTIN_ICONS 65
 
-#define CSTR(x)(x.toLocal8Bit().constData())
 
-class IEntryHandle;
-
-typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
-class KpxConfig;
-
-void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width);
-void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width, QColor Color1, QColor Color2, QColor TextColor);
-void openBrowser(IEntryHandle* entry);
-void openBrowser(const QString& UrlString);
-void showErrMsg(const QString& msg,QWidget* parent=NULL);
-QString applicationFilePath();
-QString applicationDirPath();
-const QIcon& getIcon(const QString& name);
-const QPixmap* getPixmap(const QString& name);
-QString decodeFileError(QFile::FileError Code);
 //QString findPlugin(const QString& filename); //TODO Plugins
-QString makePathRelative(const QString& Abs,const QString& Cur);
-extern QString PluginLoadError;
 
+class KpxConfig;
+extern QString PluginLoadError;
 extern KpxConfig *config;
 extern QString AppDir;
 extern QString HomeDir;
@@ -66,5 +50,27 @@ extern bool TrActive;
 extern QString DetailViewTemplate;
 extern QPixmap *EntryIcons;
 
+
+class CmdLineArgs {
+public:
+	CmdLineArgs();
+	bool parse(const QStringList& argv);
+	static void printHelp();
+	QString error() {return Error;}
+	QString file() {return File;}
+	QString configLocation() {return ConfigLocation;}
+	QString language() {return Language;}
+	bool startMinimized() {return StartMinimized;}
+	bool startLocked() {return StartLocked;}
+	bool help() {return Help;}
+private:
+	QString Error;
+	QString File;
+	QString ConfigLocation;
+	QString Language;
+	bool StartMinimized;
+	bool StartLocked;
+	bool Help;
+};
 
 #endif

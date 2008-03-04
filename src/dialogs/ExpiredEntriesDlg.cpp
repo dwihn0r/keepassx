@@ -22,6 +22,7 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QResizeEvent>
+#include "lib/tools.h"
 #include "main.h"
 #include "ExpiredEntriesDlg.h"
 

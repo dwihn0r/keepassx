@@ -1,11 +1,12 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 1992-2008 Trolltech ASA								   *
+ *                                                                         *
+ *   Copyright (C) 2005-2008 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -18,53 +19,25 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-#include "UrlLabel.h"
+#include <Carbon/Carbon.h>
 #include "main.h"
-#include "lib/tools.h"
-#include <QFont>
-#include <QColor>
-#include <QCursor>
-#include <QFontMetrics>
-#include <QMouseEvent>
-#include <QLabel>
-#include <QPalette>
 
-LinkLabel::LinkLabel(QWidget *parent,const QString& text, int x, int y,Qt::WFlags f) : QLabel(parent,f){
-QFont font(parentWidget()->font()); font.setUnderline(true);
-setFont(font);
-QPalette palette;
-palette.setColor(foregroundRole(),QColor(20,20,255));
-setPalette(palette);
-setCursor(Qt::PointingHandCursor);
-setText(text);
-setPos(x,y);
-}
-
-LinkLabel::~LinkLabel(){
-
-}
-
-QString LinkLabel::url(){
-if(URL!=QString())return URL;
-if(text().contains("@"))
-	return QString("mailto:")+text();
-else return text();
-}
-
-void LinkLabel::mouseReleaseEvent(QMouseEvent* event){
-	if(event->button()==Qt::LeftButton){
-		emit clicked();
-		openBrowser(url());
+void initAppPaths() {
+	CFURLRef bundleURL(CFBundleCopyExecutableURL(CFBundleGetMainBundle()));
+	//assert(bundleURL);
+	CFStringRef cfPath(CFURLCopyFileSystemPath(bundleURL, kCFURLPOSIXPathStyle));
+	//assert(cfPath);
+	CFIndex length = CFStringGetLength(cfPath);
+	const UniChar *chars = CFStringGetCharactersPtr(cfPath);
+	if (chars) {
+		AppDir = QString(reinterpret_cast<const QChar *>(chars), length);
 	}
-}
-
-void LinkLabel::setPos(int x,int y){
-QFontMetrics fm(font());
-setGeometry(x,y,fm.width(text()),fm.height());
-}
-
-void LinkLabel::setText(const QString& text){
-QLabel::setText(text);
-setPos(geometry().x(),geometry().y());
+	else {	
+		QVarLengthArray<UniChar> buffer(length);
+		CFStringGetCharacters(cfPath, CFRangeMake(0, length), buffer.data());
+		AppDir = QString(reinterpret_cast<const QChar *>(buffer.constData()), length);
+	}
+	AppDir.truncate(AppDir.lastIndexOf("/"));
+	HomeDir = QDir::homePath()+"/.keepassx";
+	DataDir=AppDir+"/../Resources/keepassx";	
 }
