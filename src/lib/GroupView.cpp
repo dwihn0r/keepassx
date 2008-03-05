@@ -220,10 +220,6 @@ void KeepassGroupView::dragLeaveEvent ( QDragLeaveEvent * event ){
 }
 
 void KeepassGroupView::entryDropEvent( QDropEvent * event ){
-	if(LastHoverItem){
-		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
-		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
-	}
 	GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
 	if(!Item){
 		event->ignore();
@@ -233,40 +229,41 @@ void KeepassGroupView::entryDropEvent( QDropEvent * event ){
 		if(Item->GroupHandle==((EntryViewItem*)(*EntryDragItems)[0])->EntryHandle->group())
 			return;
 		for(int i=0;i<EntryDragItems->size();i++){
-			db->moveEntry(((EntryViewItem*)(*EntryDragItems)[i])->EntryHandle,Item->GroupHandle);					
+			db->moveEntry(((EntryViewItem*)(*EntryDragItems)[i])->EntryHandle,Item->GroupHandle);
 		}
 		emit entriesDropped();
 		emit fileModified();
-		}
+	}
 	
 }
 
 
 void KeepassGroupView::dropEvent( QDropEvent * event ){
+	if(LastHoverItem){
+		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
+		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
+	}
 	
 	if(DragType==EntryDrag){
 		entryDropEvent(event);
 		return;
 	}
-	
-	if(LastHoverItem){
-		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
-		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));
-	}
+
 	if(InsLinePos!=-1){
 		int RemoveLine=InsLinePos;
 		InsLinePos=-1;
 		viewport()->update(QRegion(0,RemoveLine-2,viewport()->width(),4));
 	}
 	GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
+	
 	if(!Item){
 		qDebug("Append at the end");
 		db->moveGroup(DragItem->GroupHandle,NULL,-1);
 		if(DragItem->parent()){
-			DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));			
+			DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));
 		}
 		else{
-			takeTopLevelItem(indexOfTopLevelItem(DragItem));			
+			takeTopLevelItem(indexOfTopLevelItem(DragItem));
 		}
 		insertTopLevelItem(topLevelItemCount(),DragItem);
 		if(topLevelItemCount()>1){
@@ -278,6 +275,9 @@ void KeepassGroupView::dropEvent( QDropEvent * event ){
 		emit fileModified();
 	}
 	else{
+		if (DragItem->GroupHandle==Item->GroupHandle)
+			return;
+		
 		QRect ItemRect=visualItemRect(Item);
 		if(event->pos().y()>ItemRect.y()+2 && event->pos().y()<ItemRect.y()+ItemRect.height()-2){
 			qDebug("Append as child of '%s'",((char*)Item->text(0).toUtf8().data()));
