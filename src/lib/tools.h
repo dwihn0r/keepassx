@@ -19,11 +19,6 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-#include <QFile>
-#include <QString>
-#include <QPixmap>
-#include <QIcon>
-
 #define CSTR(x)(x.toLocal8Bit().constData())
 class IEntryHandle;
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
@@ -37,5 +32,6 @@ void showErrMsg(const QString& msg,QWidget* parent=NULL);
 QString decodeFileError(QFile::FileError Code);
 QString makePathRelative(const QString& Abs,const QString& Cur);
 QString getImageFile(const QString& name);
+bool createKeyFile(const QString& filename,QString* err, int length=32, bool Hex=true);
 
 #endif //TOOLS_H

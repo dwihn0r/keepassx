@@ -20,7 +20,6 @@
 #ifndef APPLICATION_X11_H
 #define APPLICATION_X11_H
 
-#include <QApplication>
 
 class KeepassApplication : public QApplication
 {

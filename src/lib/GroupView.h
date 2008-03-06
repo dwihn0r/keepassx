@@ -20,10 +20,7 @@
 #ifndef _GROUP_VIEW_H_
 #define _GROUP_VIEW_H_
 
-#include <QTreeWidget>
-#include <QLine>
-#include <QContextMenuEvent>
-#include "../Kdb3Database.h"
+#include "Kdb3Database.h"
 
 class GroupViewItem;
 

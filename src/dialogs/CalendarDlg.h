@@ -20,7 +20,6 @@
 #ifndef _CALENDAR_DLG_H_
 #define _CALENDAR_DLG_H_
 
-#include <QDate>
 #include "ui_CalendarDlg.h"
  
 class CalendarDialog:public QDialog, public Ui_CalendarDialog{

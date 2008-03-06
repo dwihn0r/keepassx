@@ -19,11 +19,6 @@
  ***************************************************************************/
 #ifndef _IMPORT_H_
 #define _IMPORT_H_
-
-#include <QWidget>
-#include <QFile>
-
-#include "Database.h"
  
 class IImport{
 	public:

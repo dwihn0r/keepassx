@@ -18,27 +18,11 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "main.h"
-#include "KpxConfig.h"
-#include <QPalette>
-#include <QFont>
-#include <QProgressBar>
-#include <QPixmap>
-#include <QColor>
-#include <QPainter>
-#include <QPen>
 #include <QFileDialog>
-#include <QMessageBox>
-#include <QToolButton>
-#include <QShowEvent>
-#include <QResizeEvent>
-#include <math.h>
-
 #include "SelectIconDlg.h"
 #include "PasswordGenDlg.h"
 #include "EditEntryDlg.h"
 #include "CalendarDlg.h"
-
 
 
 CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent,  bool modal, bool newEntry)

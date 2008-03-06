@@ -17,24 +17,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QDragEnterEvent>
-#include <QDragMoveEvent>
-#include <QDragLeaveEvent>
-#include <QDropEvent>
-#include <QPaintEvent>
-#include <QMouseEvent>
-#include <QApplication>
-#include <QFont>
-#include <QFontMetrics>
-#include <QSize>
-#include <QPixmap>
-#include <QPainter>
-#include <QPen>
-#include <QBrush>
-#include <QMenu>
-#include <QMessageBox>
-#include "KpxConfig.h"
-#include "main.h"
+
 #include "EntryView.h"
 #include "GroupView.h"
 #include "dialogs/EditGroupDlg.h"

@@ -17,4 +17,10 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#ifndef RANDOM_H_
+#define RANDOM_H_
+
 extern void getRandomBytes(void* buffer,int NumBlocks,int BlockSize=1,bool Strong=false);
+
+
+#endif

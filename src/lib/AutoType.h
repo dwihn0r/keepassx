@@ -21,9 +21,6 @@
 #ifndef _AUTOTYPE_H_
 #define _AUTOTYPE_H_
 
-#include <QString>
-#include "Database.h"
-
 #ifdef GLOBAL_AUTOTYPE
 struct Shortcut{
 	bool ctrl, shift, alt, altgr, win;

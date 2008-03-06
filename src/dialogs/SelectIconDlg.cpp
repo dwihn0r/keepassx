@@ -16,18 +16,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
- 
-#include <QStringList>
+
 #include <QFileDialog>
-#include <QDir>
-#include <QFile>
-#include <QPixmap>
-#include <QPushButton>
-#include <QMessageBox>
-#include <QShowEvent>
-#include <QFile>
-#include "lib/tools.h"
-#include "SelectIconDlg.h"
+#include "dialogs/SelectIconDlg.h"
 
 
 CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent, bool modal, Qt::WFlags fl):QDialog(parent,fl){

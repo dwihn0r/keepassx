@@ -1,4 +1,16 @@
 ---------------
+    0.3.1
+---------------
+- made key/password dialog more user friendly
+- program accepts Qt command line switches like "-style" again
+
+---------------
+    0.3.0a
+---------------
+- fixed bug which prevented MacOS X bundle from starting (Bug #1906517)
+- fixed error message about missing license file when opening about dialog (Bug #1906696)
+
+---------------
     0.3.0
 ---------------
 - many bug fixes

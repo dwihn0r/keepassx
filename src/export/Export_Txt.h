@@ -20,7 +20,6 @@
 #ifndef _EXPORT_TXT_H_
 #define _EXPORT_TXT_H_
 
-#include <QObject>
 #include "Export.h"
 
 class Export_Txt:public ExporterBase, public IExport{

@@ -20,11 +20,7 @@
 #ifndef _ADDBOOKMARKDLG_H_
 #define _ADDBOOKMARKDLG_H_
 
-#include <QDialog>
-#include <QPaintEvent>
 #include "ui_AddBookmarkDlg.h"
-
-#include "main.h"
 
 class AddBookmarkDlg : public QDialog, private Ui::AddBookmarkDlg
 {

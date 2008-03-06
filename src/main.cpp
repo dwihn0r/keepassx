@@ -19,10 +19,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtCore>
-#include <QMessageBox>
-#include <iostream>
-
 /*
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
@@ -31,12 +27,10 @@
 #include "lib/FileDialogs.h"
 */
 
-#include "main.h"
-#include "lib/FileDialogs.h"
-#include "lib/bookmarks.h"
-#include "KpxConfig.h"
-#include "Kdb3Database.h"
+#include <QTranslator>
+#include <QLibraryInfo>
 #include "mainwindow.h"
+#include "main.h"
 #include "crypto/yarrow.h"
 #if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
 	#include "Application_X11.h"
@@ -55,10 +49,6 @@ QString DetailViewTemplate;
 QPixmap* EntryIcons;
 //IIconTheme* IconLoader=NULL; //TODO plugins
 
-inline void loadImages();
-inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang,bool& ArgMin,bool& ArgLock);
-bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
-void initAppPaths();
 
 int main(int argc, char **argv)
 {
@@ -68,7 +58,7 @@ int main(int argc, char **argv)
 #else
 	app = new QApplication(argc,argv);
 #endif
-	initAppPaths();
+	initAppPaths(argc,argv);
 	CmdLineArgs args;
 	args.parse(QApplication::arguments());
 	qDebug(CSTR(AppDir));
@@ -243,7 +233,8 @@ bool CmdLineArgs::parse(const QStringList& argv){
 				Error=QString("Expected a path as argument for '-cfg' but got '%1.'").arg(argv[i+1]);
 				return false;
 			}
-			ConfigLocation=argv[i+1];
+			QFileInfo file(argv[i+1]);
+			ConfigLocation=file.absolutePath();
 			i++;
 			continue;
 		}
@@ -268,6 +259,10 @@ bool CmdLineArgs::parse(const QStringList& argv){
 			StartLocked=true;
 			continue;
 		}
+		if(i==1){
+			File=argv[1];
+			continue;
+		}
 		Error=QString("** Unrecognized argument: '%1'").arg(argv[i]);
 		return false;
 	}
@@ -288,6 +283,10 @@ void CmdLineArgs::printHelp(){
 	cout << "                              pt_BR  Portuguese(Brazil)"<<endl;
 }
 
+
+
+
+
 //TODO Plugins
 /*
 QString findPlugin(const QString& filename){
@@ -300,3 +299,8 @@ QString findPlugin(const QString& filename){
 	return QString();
 }
 */
+
+
+
+
+

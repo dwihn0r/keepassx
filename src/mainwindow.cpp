@@ -17,53 +17,18 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "mainwindow.h"
-
-#include <QToolButton>
 #include <QToolBar>
-#include <QMenuBar>
-#include <QAction>
-#include <QImage>
-#include <QClipboard>
-#include <QApplication>
-#include <QColor>
-#include <QLocale>
-#include <QMessageBox>
-#include <QPixmap>
-#include <QDropEvent>
-#include <QLabel>
-#include <QShowEvent>
-#include <QWidget>
-#include <QFileDialog>
 #include <QStatusBar>
-
-
-//#include "KpxFirefox.h"
-#include "lib/random.h"
+#include "mainwindow.h"
 #include "lib/AutoType.h"
 #include "lib/FileDialogs.h"
-#include "lib/bookmarks.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 #include "import/Import_KeePassX_Xml.h"
 #include "export/Export_Txt.h"
 #include "export/Export_KeePassX_Xml.h"
 
-#include "dialogs/AboutDlg.h"
-#include "dialogs/SearchDlg.h"
-#include "dialogs/SettingsDlg.h"
-#include "dialogs/DatabaseSettingsDlg.h"
-#include "dialogs/PasswordDlg.h"
-#include "dialogs/SimplePasswordDlg.h"
-#include "dialogs/PasswordGenDlg.h"
-#include "dialogs/CollectEntropyDlg.h"
-#include "dialogs/CustomizeDetailViewDlg.h"
-#include "dialogs/ExpiredEntriesDlg.h"
-//#include "dialogs/TrashCanDlg.h" //TODO TrashCan
-#include "dialogs/AddBookmarkDlg.h"
-#include "dialogs/ManageBookmarksDlg.h"
-
-#include <iostream>
+#include "dialogs/dialogs.h"
 
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;
@@ -408,25 +373,29 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		config->setLastKeyType(PASSWORD);
 	}
 	db=dynamic_cast<IDatabase*>(new Kdb3Database());
-	CPasswordDialog PasswordDlg(this,filename,db,(IsAuto&&!InUnLock),false);
+	PasswordDialog::DlgFlags flags=PasswordDialog::Flag_None;
+	if(IsAuto)
+		flags = PasswordDialog::Flag_Auto;
+	PasswordDialog dlg(this,PasswordDialog::Mode_Ask,flags,filename);
 	if (InUnLock){
-		PasswordDlg.setWindowModality(Qt::WindowModal);
-		unlockDlg = &PasswordDlg;
+		dlg.setWindowModality(Qt::WindowModal);
+		unlockDlg = &dlg;
 	}
-	bool rejected = (PasswordDlg.exec()==QDialog::Rejected);
+	bool rejected = (dlg.exec()==PasswordDialog::Exit_Cancel);
 	if (InUnLock)
 		unlockDlg = NULL;
 	if (rejected)
 		return false;
 	
-	if(PasswordDlg.BookmarkFilename!=QString())
-		filename=PasswordDlg.BookmarkFilename;
+	if(dlg.selectedBookmark()!=QString())
+		filename=dlg.selectedBookmark();
 
 	GroupView->db=db;
 	EntryView->db=db;
 	setupDatabaseConnections(db);
 	QString err;
 	StatusBarGeneral->setText(tr("Loading Database..."));
+	db->setKey(dlg.password(),dlg.keyFile());
 	if(db->load(filename)==true){
 		if (IsLocked)
 			resetLock();
@@ -442,10 +411,10 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		StatusBarGeneral->setText(tr("Loading Failed"));
 		QString error=db->getError();
 		if(error.isEmpty())error=tr("Unknown error while loading database.");
-		QMessageBox::critical(this,tr("Error")
-								,QString("%1\n%2").arg(tr("The following error occured while opening the database:"))
-								.arg(error));
-		if(dynamic_cast<IFilePasswordAuth*>(db)->isKeyError()){
+		QMessageBox::critical(this,tr("Error"),
+		                      QString("%1\n%2").arg(tr("The following error occured while opening the database:"))
+		                      .arg(error));
+		if(db->isKeyError()){
 			delete db;
 			return openDatabase(filename,IsAuto);
 		}
@@ -510,14 +479,14 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 void KeepassMainWindow::OnFileNewKdb(){
 	IDatabase* db_new=dynamic_cast<IDatabase*>(new Kdb3Database());
 	db_new->create();
-	CPasswordDialog dlg(this,QString(),db_new,false,true);
-	dlg.setWindowTitle(tr("New Database"));
-	if(dlg.exec()==1){
+	PasswordDialog dlg(this,PasswordDialog::Mode_Set,PasswordDialog::Flag_None,"New Database");
+	if(dlg.exec()==PasswordDialog::Exit_Ok){
 		if(FileOpen)
 			if(!closeDatabase())return;
 		if (IsLocked)
 			resetLock();
-		db=dynamic_cast<IDatabase*>(db_new);
+		db=db_new;		
+		db->setKey(dlg.password(),dlg.keyFile());		
 		setWindowTitle(QString("[%1][*] - KeePassX").arg(tr("new")));
 		GroupView->db=db;
 		EntryView->db=db;
@@ -533,7 +502,6 @@ void KeepassMainWindow::OnFileNewKdb(){
 	else{
 		delete db_new;
 	}
-
 }
 
 // TODO Kxdb
@@ -854,9 +822,13 @@ void KeepassMainWindow::OnFileSettings(){
 }
 
 void KeepassMainWindow::OnFileChangeKey(){
-	CPasswordDialog dlg(this,QString(),db,false,true);
-	if(dlg.exec())
+	QFile* file=db->file();
+	QString filename = file ? file->fileName() : QString();
+	PasswordDialog dlg(this,PasswordDialog::Mode_Change,PasswordDialog::Flag_None,filename);
+	if(dlg.exec()==PasswordDialog::Exit_Ok){
 		setStateFileModified(true);
+		db->setKey(dlg.password(),dlg.keyFile());
+	}
 }
 
 void KeepassMainWindow::OnFileExit(){
@@ -875,25 +847,24 @@ void KeepassMainWindow::OnImport(QAction* action){
 	IDatabase* tmpdb=dynamic_cast<IDatabase*>(new Kdb3Database());
 	tmpdb->create();
 	if(dynamic_cast<IImport*>(action->data().value<QObject*>())->importDatabase(this,tmpdb)){
-			CPasswordDialog dlg(this,QString(),tmpdb,false,true);
-			dlg.setWindowTitle(tr("Set Master Key"));
-			if(!dlg.exec()){
-				delete tmpdb;
-				return;
-			}
-			db=tmpdb;
-			GroupView->db=db;
-			EntryView->db=db;
-			setupDatabaseConnections(db);
-			setWindowTitle(QString("[%1][*] - KeePassX").arg(tr("new")));
-			GroupView->createItems();
-			EntryView->showGroup(NULL);
-			setStateFileOpen(true);
-			setStateFileModified(true);
+		PasswordDialog dlg(this,PasswordDialog::Mode_Set,PasswordDialog::Flag_None,QString());
+		if(dlg.exec()!=PasswordDialog::Exit_Ok){
+			delete tmpdb;
+			return;
+		}
+		db=tmpdb;
+		db->setKey(dlg.password(),dlg.keyFile());
+		GroupView->db=db;
+		EntryView->db=db;
+		setupDatabaseConnections(db);
+		setWindowTitle(QString("[%1][*] - KeePassX").arg(tr("new")));
+		GroupView->createItems();
+		EntryView->showGroup(NULL);
+		setStateFileOpen(true);
+		setStateFileModified(true);
 	}
 	else
 		delete tmpdb;
-
 }
 
 /*

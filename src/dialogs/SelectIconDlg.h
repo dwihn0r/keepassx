@@ -21,11 +21,6 @@
 #ifndef _SELECT_ICON_DLG_
 #define _SELECT_ICON_DLG_
 
-#include <QContextMenuEvent>
-#include <QMenu>
-#include <QAction>
-#include "main.h"
-#include "Database.h"
 #include "ui_SelectIconDlg.h"
 
 class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{

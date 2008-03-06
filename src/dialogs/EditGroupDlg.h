@@ -22,9 +22,6 @@
 #define EDITGROUPDLG_H
 
 #include "ui_EditGroupDlg.h"
-#include <QString>
-#include <QShowEvent>
-#include "Database.h"
 
 class CEditGroupDialog : public QDialog, public Ui_EditGroupDialog
 {

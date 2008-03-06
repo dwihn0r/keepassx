@@ -1,11 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tarek Saidi                                     *
- *   tarek@linux                                                           *
+ *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -17,51 +16,69 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+
 #ifndef PASSWORDDIALOG_H
 #define PASSWORDDIALOG_H
-#include "ui_PasswordDlg.h"
-#include "main.h"
-#include "lib/tools.h"
-#include "lib/UrlLabel.h"
-#include "Database.h"
+
 #include <QPixmap>
 #include <QPaintEvent>
+#include "ui_PasswordDlg.h"
+#include "main.h"
+#include "lib/UrlLabel.h"
+#include "Database.h"
 
 
-class CPasswordDialog : public QDialog, public Ui_PasswordDlg
-{
- 	Q_OBJECT
-
-	private:
-		bool Mode_Set; //true = Set, false = Get
-		IDatabase* db;
-		QPixmap BannerPixmap;
-		void setStatePasswordOnly();
-		void setStateKeyFileOnly();
-		void setStateBoth();
-		bool doAuth();
-		virtual void paintEvent(QPaintEvent*);
-		QString LastFile;
+class PasswordDialog : public QDialog, public Ui_PasswordDlg {
+Q_OBJECT
+public:
+	enum DlgMode {
+		Mode_Ask,     // Normal password entry when opening a database
+		Mode_Set,     // Setting password for the first time after creating a new database
+		Mode_Change   // Changing the password of a database
+	};
 	
-	public:
-		QString keyfile;
-		QString password;
-		QString BookmarkFilename;
-		tKeyType KeyType;
-		bool OverwriteKeyFile;	
-		CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,bool IsAuto=false,bool ChangeKeyMode=false);
+	enum DlgFlags {
+		Flag_None = 0x00, 
+		Flag_Auto = 0x01  // Dialog was automatically opened on start-up	
+	};
 	
-	private slots:
-	    void OnOK();
-		void OnOK_Set();
-	    void OnCancel();
-	    void OnButtonBrowse();
-		void OnButtonBrowse_Set();
-	    void OnPasswordChanged(const QString &txt);
-	    void OnCheckBox_BothChanged(int state);
-	    void ChangeEchoModeDatabaseKey();
-	    void OnComboTextChanged(const QString&);
-		void OnBookmarkTriggered(QAction* action);
+	enum DlgExit {
+		Exit_Ok,
+		Exit_Cancel,
+		Exit_Quit
+	};
+	
+	typedef bool (KeyFileGenProc)(const QString& filename,QString* error);
+		
+	PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const QString& filename=QString());
+	
+	// result functions
+	QString selectedBookmark();
+	QString keyFile();
+	QString password();
+	
+public slots:
+	void OnOK();
+	void OnCancel();
+	void OnButtonBrowse();
+	void OnButtonQuit();
+	void OnGenKeyFile();
+	void OnButtonBack();
+	void ChangeEchoModeDatabaseKey();
+	void OnBookmarkTriggered(QAction* action);
+	void OnCheckBoxesChanged(int state);
+
+private:
+	DlgMode Mode;
+	QPixmap BannerPixmap;
+	QString BookmarkFilename;
+	QString Filename;
+	QString Password;
+	QString KeyFile;
+	void setStatePasswordOnly();
+	void setStateKeyFileOnly();
+	void setStateBoth();
+	virtual void paintEvent(QPaintEvent*);
 };
 
 #endif

@@ -21,14 +21,6 @@
 #ifndef _DATABASE_H_
 #define _DATABASE_H_
 
-#include <QList>
-#include <QDateTime>
-#include <QFile>
-#include <QPixmap>
-#include <QByteArray>
-#include "lib/SecString.h"
-using namespace std;
-
 extern const QDateTime Date_Never;
 
 typedef enum CryptAlgorithm{
@@ -246,6 +238,9 @@ This is the common base interface for databases. Every database class must imple
 class IDatabase:public QObject{
 public:
 	virtual ~IDatabase(){};
+	
+	virtual bool setKey(const QString& password,const QString& keyfile)=0;
+	virtual bool isKeyError()=0;
 
 	//! Loads a database.
    	/*! It is not allowed to call this function if a database is already loaded.
@@ -407,23 +402,6 @@ public:
 	//! Empty the recycle bin.
 	virtual void emptyTrash()=0;
 
-};
-
-
-//! Interface for password/file based authentication
-class IFilePasswordAuth{
-public:
-	virtual void authByPwd(QString& password)=0;
-	virtual bool authByFile(QString& filename)=0;
-	virtual bool authByFileAndPwd(QString& password, QString& filename)=0;
-	/*! Creates a key file.
-		\param filename Filename of the new key file.
-		\param length Length of the key file.
-		\param Hex Wether the key file should be binary or hexadecimal ASCII code. If Hex is true the real file size will be double of length.
-		\return TRUE if the creation was successfull, otherwise FALSE.
-	*/
-	virtual bool createKeyFile(const QString& filename,int length=32, bool Hex=false)=0;
-	virtual bool isKeyError()=0;
 };
 
 class IKdbSettings{

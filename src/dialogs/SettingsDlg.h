@@ -21,12 +21,7 @@
 #ifndef SETTINGSDLG_H
 #define SETTINGSDLG_H
 
-
-#include <QColor>
-#include <QPixmap>
-#include <QPaintEvent>
 #include "ui_SettingsDlg.h"
-#include "main.h"
 #include "lib/AutoType.h"
 
 class CSettingsDlg : public QDialog, public Ui_SettingsDialog

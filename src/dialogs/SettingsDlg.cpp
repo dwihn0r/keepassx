@@ -17,16 +17,10 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "main.h"
-#include "KpxConfig.h"
-#include <QPixmap>
-#include <QColorDialog>
 #include <QFileDialog>
-#include <QDir>
-#include <QPainter>
-#include "SettingsDlg.h"
-#include "CustomizeDetailViewDlg.h"
-#include "FileDialogs.h"
+#include <QColorDialog>
+#include "dialogs/SettingsDlg.h"
+#include "dialogs/CustomizeDetailViewDlg.h"
 
 bool CSettingsDlg::PluginsModified=false;
 

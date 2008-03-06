@@ -1,5 +1,5 @@
 
-CONFIG = qt uic resources thread stl warn_off
+CONFIG = qt uic resources thread stl warn_off precompile_header
 QT += xml
 
 DEPENDPATH += crypto dialogs export forms import lib translations res
@@ -10,102 +10,102 @@ UI_DIR = ../build/ui
 OBJECTS_DIR = ../build
 RCC_DIR = ../build/rcc
 
-isEqual(DEBUG,1) {
-  CONFIG += debug
+isEqual(DEBUG,1){
+    CONFIG += debug
 }
 else {
-  CONFIG += release
+    CONFIG += release
 }
 
-win32:QMAKE_WIN32 = 1
+win32 : QMAKE_WIN32 = 1
 
 #-------------------------------------------------------------------------------
 #   Platform Specific: Unix (except MacOS X)
 #-------------------------------------------------------------------------------
-unix : !macx : !isEqual(QMAKE_WIN32,1) {
-    isEmpty(PREFIX):PREFIX = /usr
-    !isEqual(AUTOTYPE,0) {
-        DEFINES += AUTOTYPE
-        !isEqual(GLOBAL_AUTOTYPE,0) {
-            DEFINES += GLOBAL_AUTOTYPE
+unix : !macx : !isEqual(QMAKE_WIN32,1){
+            isEmpty(PREFIX): PREFIX = /usr
+            !isEqual(AUTOTYPE,0){
+                DEFINES += AUTOTYPE
+                !isEqual(GLOBAL_AUTOTYPE,0){
+                    DEFINES += GLOBAL_AUTOTYPE
+                }
+            }
+            TARGET = ../bin/keepassx
+            target.path = $${PREFIX}/bin
+            data.files += ../share/keepassx
+            data.path = $${PREFIX}/share
+            pixmaps.files = ../share/pixmaps/*
+            pixmaps.path = $${PREFIX}/share/pixmaps
+            desktop.files = ../share/applications/*
+            desktop.path = $${PREFIX}/share/applications
+            INSTALLS += pixmaps desktop
+            contains(DEFINES,AUTOTYPE){
+                LIBS += -lXtst
+                SOURCES += lib/HelperX11.cpp lib/AutoType_X11.cpp
+                HEADERS += lib/HelperX11.h
+            }
+            contains(DEFINES,GLOBAL_AUTOTYPE){
+                SOURCES += Application_X11.cpp
+                HEADERS += Application_X11.h
+            }
+            SOURCES += main_unix.cpp
         }
-    }
-    TARGET = ../bin/keepassx
-    target.path = $${PREFIX}/bin
-    data.files = ../share/keepassx
-    data.path = $${PREFIX}/share
-    pixmaps.files = ../share/pixmaps/*
-    pixmaps.path = $${PREFIX}/share/pixmaps
-    desktop.files = ../share/applications/*
-    desktop.path = $${PREFIX}/share/applications
-    INSTALLS += pixmaps desktop
-    contains(DEFINES,AUTOTYPE) {
-        LIBS += -lXtst
-        SOURCES += lib/HelperX11.cpp lib/AutoType_X11.cpp
-        HEADERS += lib/HelperX11.h
-    }
-    contains(DEFINES,GLOBAL_AUTOTYPE) {
-        SOURCES += Application_X11.cpp
-        HEADERS += Application_X11.h
-    }
-	SOURCES += main_unix.cpp
-}
 
 
 #-------------------------------------------------------------------------------
 #   Platform Specific: MacOS X
 #-------------------------------------------------------------------------------
 macx {
-    isEmpty(PREFIX):PREFIX = /Applications
+    isEmpty(PREFIX): PREFIX = /Applications
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
-    data.files = ../share/keepassx
+    data.files += ../share/keepassx
     data.path = Contents/Resources
     LIBS += -framework CoreFoundation
-    isEqual(LINK,DYNAMIC) {
-    	isEmpty(QT_FRAMEWORK_DIR) : QT_FRAMEWORK_DIR = /Library/Frameworks
-    	private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
-    	private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtGui.framework
-    	private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtXml.framework
-    	private_frameworks.path = Contents/Frameworks
-	QMAKE_BUNDLE_DATA +=  private_frameworks
+    isEqual(LINK,DYNAMIC){
+        isEmpty(QT_FRAMEWORK_DIR): QT_FRAMEWORK_DIR = /Library/Frameworks
+        private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
+        private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtGui.framework
+        private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtXml.framework
+        private_frameworks.path = Contents/Frameworks
+        QMAKE_BUNDLE_DATA +=  private_frameworks
     }
     isEqual(LINK,STATIC){
-    	LIBS += -framework Carbon -framework AppKit -lz
+        LIBS += -framework Carbon -framework AppKit -lz
     }
     QMAKE_BUNDLE_DATA += data
     ICON = ../share/macx_bundle/icon.icns
     CONFIG += app_bundle
-    isEqual(ARCH,UNIVERSAL) : CONFIG += x86 ppc
-    isEqual(ARCH,INTEL) : CONFIG += x86
-    isEqual(ARCH,PPC) : CONFIG += ppc
-	SOURCES += main_macx.cpp
+    isEqual(ARCH,UNIVERSAL): CONFIG += x86 ppc
+    isEqual(ARCH,INTEL): CONFIG += x86
+    isEqual(ARCH,PPC): CONFIG += ppc
+    SOURCES += main_macx.cpp
 }
 
 #-------------------------------------------------------------------------------
 #   Platform Specific: Windows
 #-------------------------------------------------------------------------------
-isEqual(QMAKE_WIN32,1) {
+isEqual(QMAKE_WIN32,1){
     CONFIG += windows
-    isEmpty(PREFIX):PREFIX = "C:/Program files/KeePassX"
+    isEmpty(PREFIX): PREFIX = "C:/Program files/KeePassX"
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
-    data.files = ../share/keepassx/*
+    data.files += ../share/keepassx/*
     data.path = $${PREFIX}/share
-    !isEqual(INSTALL_QTLIB,0) {
+    !isEqual(INSTALL_QTLIB,0){
         qt_libs.files = $${QMAKE_LIBDIR_QT}/QtCore4.dll $${QMAKE_LIBDIR_QT}/QtGui4.dll $${QMAKE_LIBDIR_QT}/QtXml4.dll
         qt_libs.path = $${PREFIX}
         INSTALLS += qt_libs
     }
     RC_FILE = ../share/win_ico/keepassx.rc
     QMAKE_LINK_OBJECT_SCRIPT = $${OBJECTS_DIR}/$${QMAKE_LINK_OBJECT_SCRIPT}
-	SOURCES += main_win32.cpp
+    SOURCES += main_win32.cpp
 }
 
 
 INSTALLS += target data
 
-contains(DEFINES,GLOBAL_AUTOTYPE) {
+contains(DEFINES,GLOBAL_AUTOTYPE){
     FORMS += forms/AutoTypeDlg.ui
     HEADERS += dialogs/AutoTypeDlg.h
     SOURCES += dialogs/AutoTypeDlg.cpp
@@ -180,7 +180,6 @@ HEADERS += lib/UrlLabel.h \
            lib/GroupView.h \
            lib/EntryView.h \
            crypto/arcfour.h \
-           lib/KpFileIconProvider.h \
            crypto/aes_edefs.h \
            crypto/aes_tdefs.h \
            crypto/aes.h \
@@ -200,7 +199,9 @@ HEADERS += lib/UrlLabel.h \
 #           KpxFirefox.h \
            dialogs/AddBookmarkDlg.h \
            lib/bookmarks.h \
-           dialogs/ManageBookmarksDlg.h
+           dialogs/ManageBookmarksDlg.h \
+	dialogs/dialogs.h
+
 SOURCES += lib/UrlLabel.cpp \
            main.cpp \
            mainwindow.cpp \
@@ -240,12 +241,7 @@ SOURCES += lib/UrlLabel.cpp \
            lib/EntryView.cpp \
            lib/FileDialogs.cpp \
            crypto/arcfour.cpp \
-           lib/KpFileIconProvider.cpp \
            lib/ShortcutWidget.cpp \
-           crypto/aescrypt.c \
-           crypto/aeskey.c \
-           crypto/aestab.c \
-           crypto/aes_modes.c \
            crypto/sha256.cpp \
            crypto/yarrow.cpp \
            lib/WaitAnimationWidget.cpp \
@@ -253,6 +249,12 @@ SOURCES += lib/UrlLabel.cpp \
 #           KpxFirefox.cpp \
            dialogs/AddBookmarkDlg.cpp \
            lib/bookmarks.cpp \
-           dialogs/ManageBookmarksDlg.cpp
+           dialogs/ManageBookmarksDlg.cpp \
+	crypto/aescrypt.c \
+	crypto/aeskey.c \
+	crypto/aes_modes.c \
+	crypto/aestab.c
+
+PRECOMPILED_HEADER = keepassx.h
 
 RESOURCES += res/resources.qrc

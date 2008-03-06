@@ -20,10 +20,8 @@
 
 #ifndef EDITENTRYDLG_H
 #define EDITENTRYDLG_H
+
 #include "ui_EditEntryDlg.h"
-#include <QPixmap>
-#include <QShowEvent>
-#include "main.h"
 #include "Kdb3Database.h"
 
 class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog

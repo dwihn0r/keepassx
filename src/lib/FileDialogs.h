@@ -19,11 +19,7 @@
  ***************************************************************************/
 #ifndef _FILE_DIALOGS_H_
 #define _FILE_DIALOGS_H_
- 
-#include <QObject>
-#include <QFileDialog>
-#include <QList>
-#include <QHash>
+
 #include "plugins/interfaces/IFileDialog.h"
 
 

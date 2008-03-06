@@ -20,7 +20,7 @@
  
 #ifndef _IMPORT_KWALLET_H_
 #define _IMPORT_KWALLET_H_
-#include "Database.h"
+
 #include "Import.h"
 
 class Import_KWalletXml:public ImporterBase, public IImport{

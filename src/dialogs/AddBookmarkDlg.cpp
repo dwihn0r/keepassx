@@ -17,11 +17,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QFileInfo>
-#include <QPainter>
-#include "lib/tools.h"
-#include "lib/FileDialogs.h"
-#include "lib/bookmarks.h"
 
 #include "AddBookmarkDlg.h"
 

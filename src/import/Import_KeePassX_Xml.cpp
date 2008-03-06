@@ -18,9 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
  
-#include <QStringList>
-#include <QMessageBox>
-#include <QtXml>
+
 #include "Import_KeePassX_Xml.h"
 
 bool Import_KeePassX_Xml::importDatabase(QWidget* Parent, IDatabase* database){

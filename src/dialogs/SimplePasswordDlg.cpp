@@ -18,10 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QLineEdit>
-#include <QPushButton>
-#include "main.h"
-#include "KpxConfig.h"
+
 #include "SimplePasswordDlg.h"
 
 SimplePasswordDialog::SimplePasswordDialog(QWidget* parent,  bool modal, Qt::WFlags fl)

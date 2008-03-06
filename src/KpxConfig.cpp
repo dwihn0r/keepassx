@@ -21,12 +21,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "KpxConfig.h"
-#include <QApplication>
-#include <QSettings>
-#include <QDir>
 #include <QLayout>
-#include <QWidget>
 
 KpxConfig::KpxConfig(const QString& filePath) : settings(filePath,QSettings::IniFormat){
 	configFile=filePath;

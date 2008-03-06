@@ -20,11 +20,7 @@
 #ifndef _ABOUTDIALOG_H_
 #define _ABOUTDIALOG_H_
 
-#include <QPaintEvent>
 #include "ui_AboutDlg.h"
-#include "lib/UrlLabel.h"
-
-#include "main.h"
 
 class AboutDialog : public QDialog, public Ui_AboutDlg
 {

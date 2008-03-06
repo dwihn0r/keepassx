@@ -17,23 +17,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "global.h"
-#include <iostream>
-#include <time.h>
-#include <QFile>
-#include <QStringList>
-#include <QDateTime>
-#include <QSysInfo>
 #include <QBuffer>
-#include <QDir>
-#include "crypto/twoclass.h"
-#include "crypto/aescpp.h"
-#include "crypto/sha256.h"
-#include "crypto/yarrow.h"
-#include "lib/random.h"
-using namespace std;
 #include "Kdb3Database.h"
-#include "KpxConfig.h"
+
 
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 
@@ -739,29 +725,26 @@ bool Kdb3Database::convHexToBinaryKey(char* HexKey, char* dst){
 	return true;
 }
 
-/*
-void Kdb3Database::authByPwd(QString& Password){
-	if(!Password.size()) {
-		memcpy(RawMasterKey,QByteArray(32,'\0').data(),32);
-		return;
-	}
-	SHA256::hashBuffer(Password.toUtf8().data(),RawMasterKey,Password.toUtf8().size());
-	return;
-}*/
+bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
+	if(!password.isEmpty() && !keyfile.isEmpty())
+		return setCompositeKey(password,keyfile);
+	if(!password.isEmpty())
+		return setPasswordKey(password);
+	if(!keyfile.isEmpty())
+		return setFileKey(keyfile);
+	assert(false);	
+}
 
-void Kdb3Database::authByPwd(QString& Password){
-	if(!Password.size()) {
-		memcpy(RawMasterKey,QByteArray(32,'\0').data(),32);
-		return;
-	}
+bool Kdb3Database::setPasswordKey(const QString& Password){
+	assert(Password.size());
 	SHA256::hashBuffer(Password.toLatin1().data(),RawMasterKey,Password.toLatin1().size());
 	QByteArray lat,utf;
 	utf=Password.toUtf8();
 	lat=Password.toLatin1();
-	return;
+	return true;
 }
 
-bool Kdb3Database::authByFile(QString& filename){
+bool Kdb3Database::setFileKey(const QString& filename){
 	QFile file(filename);
 	if(!file.open(QIODevice::ReadOnly|QIODevice::Unbuffered)){
 		error=decodeFileError(file.error());
@@ -799,14 +782,13 @@ bool Kdb3Database::authByFile(QString& filename){
 	return true;
 }
 
-bool Kdb3Database::authByFileAndPwd(QString& Password, QString& filename){
+bool Kdb3Database::setCompositeKey(const QString& Password,const QString& filename){
 	unsigned char PasswordKey[32];
 	unsigned char FileKey[32];
-	if(!authByFile(filename))return false;
+	if(!setFileKey(filename))return false;
 	memcpy(FileKey,RawMasterKey,32);
-	authByPwd(Password);
+	setPasswordKey(Password);
 	memcpy(PasswordKey,RawMasterKey,32);
-
 	SHA256 sha;
 	sha.update(PasswordKey,32);
 	sha.update(FileKey,32);
@@ -1635,38 +1617,6 @@ void Kdb3Database::rebuildIndices(QList<StdGroup*>& list){
 	for(int i=0;i<list.size();i++){
 		list[i]->Index=i;
 	}
-}
-
-bool Kdb3Database::createKeyFile(const QString& filename,int length, bool Hex){
-	QFile file(filename);
-	if(!file.open(QIODevice::WriteOnly|QIODevice::Truncate|QIODevice::Unbuffered)){
-		error=decodeFileError(file.error());
-		return false;
-	}
-	if(Hex)length*=2;
-	unsigned char* key=new unsigned char[length];
-	randomize(key,length);
-	if(Hex){
-		for(int i=0; i<length; i+=2){
-			unsigned char dig1,dig2;
-			dig1=key[i]/16;
-			key[i]-=(16*dig1);
-			dig2=key[i];
-			if(dig1>9)key[i]='A'+dig1-10;
-			else key[i]='0'+dig1;
-			if(dig2>9)key[i+1]='A'+dig2-10;
-			else key[i+1]='0'+dig2;
-		}
-	}
-	if(file.write((char*)key,length)==-1){
-		delete [] key;
-		error=decodeFileError(file.error());
-		file.close();
-		return false;
-	}
-	file.close();
-	delete [] key;
-	return true;
 }
 
 

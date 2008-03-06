@@ -21,15 +21,7 @@
 #ifndef _ENTRY_VIEW_H_
 #define _ENTRY_VIEW_H_
 
-#include <QMenu>
-#include <QTreeWidget>
-#include <QContextMenuEvent>
-#include <QHeaderView>
-#include <QTimer>
-#include <QClipboard>
-#include <QBitArray>
-#include <QList>
-#include "../Kdb3Database.h"
+#include "Kdb3Database.h"
 
 #define NUM_COLUMNS 11
 

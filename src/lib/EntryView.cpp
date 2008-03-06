@@ -18,24 +18,12 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-#include <QDragEnterEvent>
-#include <QDragMoveEvent>
-#include <QDragLeaveEvent>
-#include <QDropEvent>
-#include <QMouseEvent>
 #include <QHeaderView>
-#include <QTime>
-#include <QApplication>
-#include <QPainter>
-#include <QPair>
-#include <QMessageBox>
-#include "main.h"
-#include "KpxConfig.h"
-#include "EntryView.h"
-#include "dialogs/EditEntryDlg.h"
+#include <QClipboard>
+#include <QFileDialog>
 #include "lib/AutoType.h"
-#include "Database.h"
+#include "lib/EntryView.h"
+#include "dialogs/EditEntryDlg.h"
 
 // just for the lessThan funtion
 QList<EntryViewItem*>* pItems;

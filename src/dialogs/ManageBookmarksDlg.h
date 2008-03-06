@@ -20,9 +20,6 @@
 #ifndef MANAGEBOOKMARKSDLG_H
 #define MANAGEBOOKMARKSDLG_H
 
-#include <QDialog>
-#include <QCloseEvent>
-#include <QPaintEvent>
 #include "ui_ManageBookmarksDlg.h"
 
 #include "main.h"

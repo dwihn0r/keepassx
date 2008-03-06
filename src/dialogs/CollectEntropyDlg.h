@@ -22,12 +22,6 @@
 #define _COLLECT_ENTROPY_DLG_H_
 
 #include "ui_CollectEntropyDlg.h"
-#include <QDialog>
-#include <QPaintEvent>
-#include <QShowEvent>
-
-#include "main.h"
-
 
 class CollectEntropyDlg: public QDialog, public Ui_CollectEntropyDlg{
 	Q_OBJECT

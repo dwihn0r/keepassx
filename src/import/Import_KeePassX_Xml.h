@@ -21,7 +21,6 @@
 #ifndef _IMPORT_KPX_XML_H_
 #define _IMPORT_KPX_XML_H_
 
-#include <QDomElement>
 #include "Import.h"
 
 

@@ -17,6 +17,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+
 #include "Application_X11.h"
 #include "lib/AutoType.h"
 #include "lib/HelperX11.h"

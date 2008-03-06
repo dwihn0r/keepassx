@@ -20,15 +20,6 @@
 
 
 #include "UrlLabel.h"
-#include "main.h"
-#include "lib/tools.h"
-#include <QFont>
-#include <QColor>
-#include <QCursor>
-#include <QFontMetrics>
-#include <QMouseEvent>
-#include <QLabel>
-#include <QPalette>
 
 LinkLabel::LinkLabel(QWidget *parent,const QString& text, int x, int y,Qt::WFlags f) : QLabel(parent,f){
 QFont font(parentWidget()->font()); font.setUnderline(true);

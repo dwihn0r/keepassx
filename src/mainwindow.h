@@ -21,27 +21,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QImage>
-#include <QPixmap>
-#include <QPainter>
-#include <QFont>
-#include <QLabel>
-#include <QTime>
-#include <QApplication>
-#include <QShowEvent>
-#include <QTranslator>
-#include <QDropEvent>
-#include <QListWidget>
-#include <QTreeWidget>
-#include <QClipboard>
-#include <QTimer>
-#include <QToolButton>
 #include <QSystemTrayIcon>
-//#include <QAssistantClient> //TODO HelpBrowser
-#include <QUrl>
-
-#include "Kdb3Database.h"
-#include "KpxConfig.h"
 #include "lib/EntryView.h"
 #include "lib/GroupView.h"
 #include "export/Export.h"

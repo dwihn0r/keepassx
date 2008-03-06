@@ -16,12 +16,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/ 
-#include <QtCore>
-#include <QtGui>
-#include "KpxConfig.h"
-#include "main.h"
-#include "lib/tools.h"
 
+#include <QProcess>
+#include <QDesktopServices>
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
 	createBanner(Pixmap,IconAlpha,Text,Width,config->bannerColor1(),config->bannerColor2(),config->bannerTextColor());
@@ -174,6 +171,40 @@ const QPixmap* getPixmap(const QString& name){
 	QPixmap* NewPixmap=new QPixmap(QPixmap::fromImage(img));
 	PixmapCache.insert(name,NewPixmap);
 	return NewPixmap;
+}
+
+
+bool createKeyFile(const QString& filename,QString* error,int length, bool Hex){
+	QFile file(filename);
+	if(!file.open(QIODevice::WriteOnly|QIODevice::Truncate|QIODevice::Unbuffered)){
+		*error=decodeFileError(file.error());
+		return false;
+	}
+	if(Hex)length*=2;
+	unsigned char* key=new unsigned char[length];
+	randomize(key,length);
+	if(Hex){
+		// convert binary data to hex code (8 bit ==> 2 digits)
+		for(int i=0; i<length; i+=2){
+			unsigned char dig1,dig2;
+			dig1=key[i]/16;
+			key[i]-=(16*dig1);
+			dig2=key[i];
+			if(dig1>9)key[i]='A'+dig1-10;
+			else key[i]='0'+dig1;
+			if(dig2>9)key[i+1]='A'+dig2-10;
+			else key[i+1]='0'+dig2;
+		}
+	}
+	if(file.write((char*)key,length)==-1){
+		delete [] key;
+		*error=decodeFileError(file.error());
+		file.close();
+		return false;
+	}
+	file.close();
+	delete [] key;
+	return true;
 }
 
 

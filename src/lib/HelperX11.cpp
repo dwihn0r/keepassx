@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 #include "HelperX11.h"
-
 #include <QX11Info>
 
 int HelperX11::getModifiers(Display *d,KeySym keysym, int keycode){

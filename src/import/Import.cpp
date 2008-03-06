@@ -18,12 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QMessageBox>
-#include <QFile>
-#include "lib/tools.h"
-#include "main.h"
+
 #include "Import.h"
-#include "lib/FileDialogs.h"
 #include "dialogs/SimplePasswordDlg.h"
 
 QFile* ImporterBase::openFile(QWidget* parent, QString id, QStringList Filters){

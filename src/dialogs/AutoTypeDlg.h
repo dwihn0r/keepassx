@@ -18,7 +18,6 @@
  ***************************************************************************/
 
 #include "ui_AutoTypeDlg.h"
-#include "Database.h"
 
 class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 {

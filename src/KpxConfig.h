@@ -23,14 +23,7 @@
 #ifndef _KPXCONFIG_H_
 #define _KPXCONFIG_H_
 
-#include "lib/tools.h"
-#include "AutoType.h"
-#include <QBitArray>
-#include <QByteArray>
-#include <QColor>
-#include <QList>
-#include <QSettings>
-#include <QString>
+#include "lib/AutoType.h"
 
 #if defined(Q_WS_MAC)
 #	define DEFAULT_MOUNT_DIR "/Volumes/"

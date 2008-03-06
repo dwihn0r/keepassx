@@ -18,16 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
   
-#include <QTextCursor>
-#include <QTextBlockFormat>
-#include <QLineEdit>
-#include <QPushButton>
 #include <QColorDialog>
-#include <QPixmap>
-#include <QMenu>
-#include "main.h"
 #include "CustomizeDetailViewDlg.h"
-#include "KpxConfig.h"
 
 bool DisableButtonSlots=false;
 

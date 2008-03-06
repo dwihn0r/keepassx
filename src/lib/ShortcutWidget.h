@@ -20,7 +20,6 @@
 #ifndef SHORTCUT_WIDGET_H
 #define SHORTCUT_WIDGET_H
 
-#include <QLineEdit>
 
 #if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_X11)
 #include "lib/AutoType.h"

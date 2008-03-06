@@ -18,18 +18,14 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtCore>
-#include "KpxConfig.h"
-#include "AutoType.h"
-#include "mainwindow.h"
-#include <QList>
-#include <QChar>
 #include <QX11Info>
-#include "HelperX11.h"
 #include <X11/Xutil.h>
+#include "mainwindow.h"
+#include "HelperX11.h"
+#include "AutoType.h"
 
 #ifdef GLOBAL_AUTOTYPE
-#include "dialogs/AutoTypeDlg.h"
+	#include "dialogs/AutoTypeDlg.h"
 #endif
 
 enum AutoTypeActionType{

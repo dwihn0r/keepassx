@@ -18,14 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QFile>
-#include <iostream>
-#include <QMessageBox>
-#include <QtXml>
-#include "crypto/blowfish.h"
-#include "crypto/sha1.h"
+
 #include "Import_PwManager.h"
-using namespace std;
+
 
 bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){	
 	database=db;
@@ -115,7 +110,7 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	if(!parseXmlContent((char*)xml)){
 		delete [] xml;
 		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Invalid XML data (see stdout for details).")); return false;}
-	dynamic_cast<IFilePasswordAuth*>(database)->authByPwd(password);
+	database->setKey(password,QString());
 	return true;
 }
 

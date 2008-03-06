@@ -19,15 +19,7 @@
  ***************************************************************************/
 
 
-#include <QLineEdit>
-#include <QCheckBox>
-#include <QPushButton>
-#include <QRegExp>
-#include <QMessageBox>
-#include <QPainter>
-#include "main.h"
-#include "KpxConfig.h"
-#include "SearchDlg.h"
+#include "dialogs/SearchDlg.h"
 
 
 SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* parent):QDialog(parent)

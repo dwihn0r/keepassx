@@ -20,9 +20,7 @@
 
 #ifndef _IMPORT_PWMANAGER_
 #define _IMPORT_PWMANAGER_
-#include <QDomElement>
-#include <QString>
-#include "Database.h"
+
 #include "Import.h"
 
 

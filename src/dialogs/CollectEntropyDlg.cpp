@@ -18,13 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QPainter>
-#include <QCursor>
-#include <QFile>
-#include "lib/tools.h"
 
 #include "crypto/yarrow.h"
-
 #include "CollectEntropyDlg.h"
 
 

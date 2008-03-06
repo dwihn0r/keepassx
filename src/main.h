@@ -20,36 +20,10 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
-#include <QLabel>
-#include <QPixmap>
-#include <QString>
-#include <QColor>
-#include <QIcon>
-#include <QFile>
-
-#define APP_DISPLAY_NAME    "KeePassX"
-#define APP_CODE_NAME       "keepassx"
-
-#define APP_SHORT_FUNC      "Password Manager"
-#define APP_LONG_FUNC       "Cross Platform Password Manager"
-
-#define APP_VERSION         "0.3.0a"
-
-#define BUILTIN_ICONS 65
-
-
 //QString findPlugin(const QString& filename); //TODO Plugins
-
-class KpxConfig;
-extern QString PluginLoadError;
-extern KpxConfig *config;
-extern QString AppDir;
-extern QString HomeDir;
-extern QString DataDir;
-extern bool TrActive;
-extern QString DetailViewTemplate;
-extern QPixmap *EntryIcons;
-
+void loadImages();
+bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
+void initAppPaths(int argc, char **argv);
 
 class CmdLineArgs {
 public:

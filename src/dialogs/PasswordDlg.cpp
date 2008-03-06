@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2008 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -17,372 +17,334 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QFileDialog>
-#include <QDir>
-#include <QStringList>
-#include <QCheckBox>
-#include <QLineEdit>
-#include <QComboBox>
-#include <QPushButton>
-#include <QMessageBox>
-#include <QPainter>
-#include <QPalette>
-#include <QMenu>
+#include <QTimer>
+#include "dialogs/PasswordDlg.h"
 
-#include "main.h"
-#include "KpxConfig.h"
-#include "PasswordDlg.h"
-#include "lib/FileDialogs.h"
-#include "lib/bookmarks.h"
-
-
-CPasswordDialog::CPasswordDialog(QWidget* parent,QString filename,IDatabase* DB,bool IsAuto,bool ChangeKeyMode)
+PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const QString& filename)
 : QDialog(parent)
 {
 	setupUi(this);
-	createBanner(&BannerPixmap,getPixmap("key"),tr("Database Key"),width());
-	Button_Bookmarks->setIcon(getIcon("bookmark"));
-	db=DB;
-	LastFile=filename;
-	if (ChangeKeyMode)
-		setWindowTitle(tr("Change Master Key"));
-	else
-		setWindowTitle(LastFile);
-	QString mountDir=config->mountDir();
-	QDir media(mountDir);
-	if(media.exists()){
+	Mode=mode;
+	Filename=filename;
+	QString BannerTitle;
+	if(Mode==Mode_Ask){
+		BannerTitle=tr("Enter Master Key");
+	}
+	else if(Mode==Mode_Set){
+		BannerTitle=tr("Set Master Key");
+	}
+	else if(Mode==Mode_Change){
+		BannerTitle=tr("Change Master Key");
+	}
+	
+	if(filename==QString()){
+		setWindowTitle(tr("Database Key"));
+	}
+	else {
+		setWindowTitle(filename);
+	}
+	
+	// Add list of subdirs in the mounting dir to the combobox.
+	// For example making /media/cd1 and /media/myflashdrive to two entries cd1 and myflashdrive in the combobox
+	QDir mountDir(config->mountDir());
+	if(mountDir.exists()){
 		QStringList Paths;
-		Paths=media.entryList(QStringList()<<"*",QDir::Dirs | QDir::NoDotAndDotDot);
+		Paths=mountDir.entryList(QStringList()<<"*",QDir::Dirs | QDir::NoDotAndDotDot);
 		for(int i=0;i<Paths.count();i++)
-			Combo_Dirs->addItem(mountDir+Paths[i]);
+			Combo_KeyFile->addItem(config->mountDir()+Paths[i]);
 	}
-
-	Combo_Dirs->setEditText(QString());
-	if(config->rememberLastKey() && config->openLastFile() && !ChangeKeyMode){
+	Combo_KeyFile->setEditText(QString());
+	
+	if(config->rememberLastKey() && Mode!=Mode_Change && Mode!=Mode_Set){
 		switch(config->lastKeyType()){
-			case KEYFILE:
-				setStateKeyFileOnly();
-				Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
-				break;
+		case PASSWORD:
+			Check_Password->setChecked(true);
+			Check_KeyFile->setChecked(false);
+			Combo_KeyFile->setEditText("");
+			break;
+			
+		case KEYFILE:
+			Check_Password->setChecked(false);
+			Check_KeyFile->setChecked(true);
+			Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+			break;
 
-			case BOTH:
-				setStateBoth();
-				CheckBox_Both->setChecked(true);
-				Combo_Dirs->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+		case BOTH:
+			Check_Password->setChecked(true);
+			Check_KeyFile->setChecked(true);
+			Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+			break;
 		}
-		// if(LastKeyType==Password){... is not required because it is already the default state.
+	}
+
+	if(Mode!=Mode_Set && Mode!=Mode_Change){
+		Button_GenKeyFile->hide();
+	}
+	if(flags & Flag_Auto){
+		/*
+		QPushButton* Button_Quit = buttonBox->addButton(tr("Quit"),QDialogButtonBox::DestructiveRole);
+		connect(Button_Quit,SIGNAL(clicked()),this,SLOT(OnButtonQuit()));
+		*/
+		if(config->rememberLastKey()){
+			switch(config->lastKeyType()){
+			case PASSWORD:
+				Check_Password->setChecked(true);
+				Check_KeyFile->setChecked(false);
+				break;
+			case KEYFILE:
+				Check_Password->setChecked(false);
+				Check_KeyFile->setChecked(true);
+				Combo_KeyFile->setEditText(config->lastKeyLocation());
+				break;
+			case BOTH:
+				Check_Password->setChecked(true);
+				Check_KeyFile->setChecked(true);
+				Combo_KeyFile->setEditText(config->lastKeyLocation());
+				break;				
+			}
+		}
 	}
 	
-	// Bookmarks //
-	QPalette palette=Button_Bookmarks->palette();
-	palette.setColor(QPalette::Active,QPalette::Button,config->bannerColor1());
-	palette.setColor(QPalette::Active,QPalette::Window,config->bannerColor2());
-	Button_Bookmarks->setPalette(palette);
-	palette=Label_Bookmark->palette();
-	palette.setColor(QPalette::Active,QPalette::WindowText,config->bannerTextColor());
-	Label_Bookmark->setPalette(palette);
-	
-	QMenu* BookmarkMenu=new QMenu(this);
-	QAction* action=new QAction(this);
-	action->setData(QString());
-	action->setText(tr("Last File"));
-	action->setIcon(getIcon("document"));
-	BookmarkMenu->addAction(action);
-	BookmarkMenu->addSeparator();	
-	for(int i=0;i<KpxBookmarks::count();i++){
+	// Setting up the bookmark button
+	if(Mode==Mode_Ask && config->featureBookmarks()){
+		// Button Color
+		QPalette palette=Button_Bookmarks->palette();
+		palette.setColor(QPalette::Active,QPalette::Button,config->bannerColor1());
+		palette.setColor(QPalette::Active,QPalette::Window,config->bannerColor2());
+		Button_Bookmarks->setPalette(palette);
+		palette=Label_Bookmark->palette();
+		palette.setColor(QPalette::Active,QPalette::WindowText,config->bannerTextColor());
+		Label_Bookmark->setPalette(palette);		
+		// Create menu and add "last file" menu entry
+		QMenu* BookmarkMenu=new QMenu(this);
 		QAction* action=new QAction(this);
-		action->setData(KpxBookmarks::path(i));
-		action->setText(KpxBookmarks::title(i));
+		action->setData(QString());
+		action->setText(tr("Last File"));
 		action->setIcon(getIcon("document"));
-		BookmarkMenu->addAction(action);		
+		BookmarkMenu->addAction(action);
+		BookmarkMenu->addSeparator();
+		// Adding all existing bookmarks
+		for(int i=0;i<KpxBookmarks::count();i++){
+			QAction* action=new QAction(this);
+			action->setData(KpxBookmarks::path(i));
+			action->setText(KpxBookmarks::title(i));
+			action->setIcon(getIcon("document"));
+			BookmarkMenu->addAction(action);		
+		}
+		Button_Bookmarks->setMenu(BookmarkMenu);
+		connect(BookmarkMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnBookmarkTriggered(QAction*)));
 	}
-	Button_Bookmarks->setMenu(BookmarkMenu);
-	if(!IsAuto || !config->featureBookmarks()){
+	else {
 		Button_Bookmarks->hide();
 		Label_Bookmark->hide();
 	}
-			
-	connect(Combo_Dirs, SIGNAL( editTextChanged(const QString&) ),this, SLOT( OnComboTextChanged(const QString&)));
-	connect(ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
-	connect(Edit_Password, SIGNAL( textChanged(const QString&) ), this, SLOT( OnPasswordChanged(const QString&) ) );
-	connect(CheckBox_Both, SIGNAL( stateChanged(int) ), this, SLOT( OnCheckBox_BothChanged(int) ) );
+	
+	connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL( clicked() ), this, SLOT( OnCancel() ) );
 	connect(ButtonChangeEchoMode, SIGNAL( clicked() ), this, SLOT( ChangeEchoModeDatabaseKey() ) );
 	connect(Edit_Password, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
-	connect(Edit_PasswordRep, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
-	connect(BookmarkMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnBookmarkTriggered(QAction*)));
-
-	Mode_Set=ChangeKeyMode;
-	if(!ChangeKeyMode){
-		Edit_PasswordRep->hide();
-		Label_PasswordRep->hide();
-		connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
-		connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
-	}else{
-		connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK_Set() ) );
-		connect( ButtonBrowse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse_Set() ) );
-	}
-
+	connect(Edit_PwRepeat, SIGNAL( returnPressed() ), this, SLOT( OnOK() ) );
+	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL( clicked() ), this, SLOT( OnOK() ) );
+	connect(Button_Browse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
+	connect(Button_GenKeyFile,SIGNAL(clicked()),this,SLOT(OnGenKeyFile()));
+	connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged(int)));
+	connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged(int)));
+	connect(Button_Back,SIGNAL(clicked()),this,SLOT(OnButtonBack()));
 	if(!config->showPasswordsPasswordDlg())ChangeEchoModeDatabaseKey();
+	
+	adjustSize();
+	setMaximumSize(size());
+	setMinimumSize(size());
+	createBanner(&BannerPixmap,getPixmap("key"),BannerTitle,width());
+	Button_Bookmarks->setIcon(getIcon("bookmark"));
+	OnCheckBoxesChanged(0);
 }
 
 
-void CPasswordDialog::setStatePasswordOnly(){
-	Combo_Dirs->setEnabled(false);
-	ButtonBrowse->setEnabled(false);
-	Label_KeyFile->setEnabled(false);
-	Label_Password->setEnabled(true);
-	Label_PasswordRep->setEnabled(true);
-	Edit_Password->setEnabled(true);
-	Edit_PasswordRep->setEnabled(true);
-	ButtonChangeEchoMode->setEnabled(true);
-	KeyType=PASSWORD;
-}
-
-
-void CPasswordDialog::setStateKeyFileOnly(){
-	Combo_Dirs->setEnabled(true);
-	ButtonBrowse->setEnabled(true);
-	Label_KeyFile->setEnabled(true);
-	Label_Password->setEnabled(false);
-	Label_PasswordRep->setEnabled(false);
-	Edit_Password->setEnabled(false);
-	Edit_PasswordRep->setEnabled(false);
-	ButtonChangeEchoMode->setEnabled(false);
-	KeyType=KEYFILE;
-}
-
-
-void CPasswordDialog::setStateBoth(){
-	Combo_Dirs->setEnabled(true);
-	ButtonBrowse->setEnabled(true);
-	Label_KeyFile->setEnabled(true);
-	Label_Password->setEnabled(true);
-	Label_PasswordRep->setEnabled(true);
-	Edit_Password->setEnabled(true);
-	Edit_PasswordRep->setEnabled(true);
-	ButtonChangeEchoMode->setEnabled(true);
-	KeyType=BOTH;
-}
-
-
-void CPasswordDialog::OnButtonBrowse()
+void PasswordDialog::OnButtonBrowse()
 {
 	QString filename=KpxFileDialogs::openExistingFile(this,"PasswordDlg",tr("Select a Key File"),
-													  QStringList()  << tr("Key Files (*.key)") << tr("All Files (*)"));
-	if(filename!=QString()){
-		Combo_Dirs->setEditText(filename);
-	}
-	return;
+                                                      QStringList() << tr("All Files (*)")
+		                                                            << tr("Key Files (*.key)"));
+	if(filename!=QString())
+		Combo_KeyFile->setEditText(filename);
 }
 
-void CPasswordDialog::OnButtonBrowse_Set()
+void PasswordDialog::OnCancel()
 {
-	QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Select a Key File"),
-											  QStringList() << tr("Key Files (*.key)") << tr("All Files (*)"),
-											  false);
-	if(filename!=QString()){
-		Combo_Dirs->setEditText(filename);
+	done(Exit_Cancel);
+}
+
+void PasswordDialog::OnOK(){	
+	if(stackedWidget->currentIndex()==1){
+		if(Password==Edit_PwRepeat->text()){
+			done(Exit_Ok);
+		}
+		Edit_PwRepeat->clear();
+		Edit_PwRepeat->setFocus(Qt::OtherFocusReason);
+		Label_Unequal->show();
+		QTimer::singleShot(2000,Label_Unequal,SLOT(hide()));
+		return;
 	}
-	return;
-}
-
-void CPasswordDialog::OnCancel()
-{
-	done(0);
-}
-
-void CPasswordDialog::OnOK(){
-	password=Edit_Password->text();
-	keyfile=Combo_Dirs->currentText();
-
-	if(password.isEmpty() && keyfile.isEmpty()){
-		QMessageBox::warning(this,tr("Error"),tr("Please enter a Password or select a key file."),tr("OK"),"","",0,0);
+	
+	Password=Edit_Password->text();
+	KeyFile=Combo_KeyFile->currentText();
+	
+	if(!Check_Password->isChecked() && !Check_KeyFile->isChecked()){
+		showErrMsg(tr("Please enter a Password or select a key file."),this);
+		return;
+	}
+	
+	if(Check_Password->isChecked() && Password.isEmpty()){
+		showErrMsg(tr("Please enter a Password."));
+		return;
+	}
+	
+	if(Check_KeyFile->isChecked() && KeyFile.isEmpty()){
+		showErrMsg(tr("Please provide a key file."));
 		return;
 	}
 
-	if(KeyType==BOTH){
-		if(password.isEmpty()){
-			QMessageBox::warning(this,tr("Error"),tr("Please enter a Password."),tr("OK"),"","",0,0);
-			return;}
-		if(keyfile.isEmpty()){
-			QMessageBox::warning(this,tr("Error"),tr("Please choose a key file."),tr("OK"),"","",0,0);
-			return;}
-	}
-
-	if(KeyType==BOTH || KeyType==KEYFILE){
-		QFileInfo fileinfo(keyfile);
+	if(Check_KeyFile->isChecked()){		
+		/* Check wether key path exists and is readable */
+		QFileInfo fileinfo(KeyFile);
 		if(!fileinfo.exists()){
-			QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory does not exist."),tr("OK"),"","",0,0);
+			showErrMsg(tr("%1:\nNo such file or directory.").arg(KeyFile),this);
 			return;
 		}
 		if(!fileinfo.isReadable()){
-			QMessageBox::warning(this,tr("Error"),tr("The selected key file or directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
+			showErrMsg(tr("The selected key file or directory is not readable."),this);
 			return;
 		}
+		
+		/* If the given path is a directory, we need to find the key file in it */ 
 		if(fileinfo.isDir()){
-			if(keyfile.right(1)!="/")keyfile+="/";
-			QFile file(keyfile+"pwsafe.key");
-			if(!file.exists()){
-				QDir dir(keyfile);
+			if(KeyFile.right(1)!="/")KeyFile+="/";			
+			// First, we try to find $path/pwsafe.key
+			QFile file(KeyFile+"pwsafe.key");
+			if(file.exists())
+				KeyFile+="pwsafe.key";
+			else{
+				// If pwsafe.key does not exist, we try to see if there is exactly one file in the
+				// given directory which has the extension *.key.
+				QDir dir(KeyFile);
 				QStringList files;
 				files=dir.entryList(QStringList()<<"*.key",QDir::Files);
+				// No Key Files
 				if(!files.size()){
-					QMessageBox::warning(this,tr("Error"),tr("The given directory does not contain any key files."),tr("OK"),"","",0,0);
-					return;}
+					showErrMsg(tr("The given directory does not contain any key files."),this);
+					return;
+				}
+				// More than one key file
 				if(files.size()>1){
-					QMessageBox::warning(this,tr("Error"),tr("The given directory contains more then one key file.\nPlease specify the key file directly."),tr("OK"),"","",0,0);
-					return;}
-				QFile file(keyfile+files[0]);
-				Q_ASSERT(file.exists());
-				if(!QFileInfo(file).isReadable()){
-					QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-					return;}
-				keyfile+=files[0];
+					showErrMsg(tr("The given directory contains more then one key files.\n"
+					              "Please specify the key file directly."),this);
+					return;
 				}
-			else{ /* pwsafe.key exists */
-				if(!QFileInfo(file).isReadable()){
-					QMessageBox::warning(this,tr("Error"),tr("The key file found in the given directory is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-					return;}
-				keyfile+="pwsafe.key";
-				}
-		}
-		else{ /* not a directory */
-			QFile file(keyfile);
-			if(!file.exists()){
-				QMessageBox::warning(this,tr("Error"),tr("Key file could not be found."),tr("OK"),"","",0,0);
-				return;}
-			if(!QFileInfo(file).isReadable()){
-				QMessageBox::warning(this,tr("Error"),tr("Key file is not readable.\nPlease check your permissions."),tr("OK"),"","",0,0);
-				return;}
-		}
-
-	}
-if(doAuth())done(1);
-}
-
-void CPasswordDialog::OnOK_Set(){
-	password=Edit_Password->text();
-	if(password!=Edit_PasswordRep->text()){
-		QMessageBox::warning(this,tr("Warning"),tr("Password an password repetition are not equal.\nPlease check your input."),tr("OK"),"","",0,0);
-		return;
-	}
-	keyfile=Combo_Dirs->currentText();
-	if(password.isEmpty() && keyfile.isEmpty()){
-		QMessageBox::warning(this,tr("Error"),tr("Please enter a password or select a key file."),tr("OK"),"","",0,0);
-		return;
-	}
-
-	if(!keyfile.isEmpty()){
-		QFile file(keyfile);
-		if(QFileInfo(file).isDir()){
-			if(keyfile.right(1)!="/")keyfile+="/";
-			keyfile+="pwsafe.key";
-		}
-		if(file.exists()){
-			switch(QMessageBox::question(this,tr("File exists."),tr("A file with the selected name already exists, should this file be used as key file or do you want to overwrite it with a newly generated one?"),
-					tr("Use"),tr("Overwrite"),tr("Cancel"),0,2)){
-							case 0:
-								OverwriteKeyFile=false;
-								break;
-							case 1:
-								OverwriteKeyFile=true;
-								break;
-							case 2:
-								return;
+				KeyFile+=files[0];
 			}
-		}
-		IFilePasswordAuth* DbAuth=dynamic_cast<IFilePasswordAuth*>(db);
-		if(OverwriteKeyFile){
-			if(!DbAuth->createKeyFile(keyfile,32,true)){
-				QMessageBox::warning(this,tr("Error"),tr("Key file could not be created.\n%1").arg(db->getError()),tr("OK"),"","",0,0);
+			
+			// Check again whether the found file exists and is readable
+			QFileInfo fileinfo(KeyFile);
+			if(!fileinfo.exists()){
+				showErrMsg(tr("%1:\nNo such file or directory.").arg(KeyFile),this);
 				return;
 			}
-		}
+			if(!fileinfo.isReadable()){
+				showErrMsg(tr("%1:\nFile is not readable."),this);
+				return;
+			}			
+		}		
+
 	}
-	if(doAuth())done(1);
+	
+	if(Check_Password->isChecked() && (Mode==Mode_Set || Mode==Mode_Change)){
+		Edit_PwRepeat->clear();
+		Label_Unequal->hide();
+		stackedWidget->setCurrentIndex(1);
+		Edit_PwRepeat->setFocus(Qt::OtherFocusReason);
+		return;
+	}
+	
+	done(Exit_Ok);
 }
 
-bool CPasswordDialog::doAuth(){
-	IFilePasswordAuth* DbAuth=dynamic_cast<IFilePasswordAuth*>(db);
-	if(!password.isEmpty() && keyfile.isEmpty()){
-		DbAuth->authByPwd(password);
-	}
-	else if(password.isEmpty() && !keyfile.isEmpty()){
-		if(!DbAuth->authByFile(keyfile))return false;
-	}
-	else if(!password.isEmpty() && !keyfile.isEmpty()){
-		if(!DbAuth->authByFileAndPwd(password, keyfile))return false;
-	}
-
-	if(config->rememberLastKey() && config->openLastFile()){
-		QString KeyLocation=keyfile;
-		if(config->saveRelativePaths()){
-			KeyLocation=KeyLocation.left(KeyLocation.lastIndexOf("/"));
-			KeyLocation=makePathRelative(KeyLocation,QDir::currentPath())+keyfile.right(keyfile.length()-keyfile.lastIndexOf("/")-1);
-		}
-		config->setLastKeyLocation(KeyLocation);
-		config->setLastKeyType(KeyType);
-	}
-	return true;
-
+void PasswordDialog::OnCheckBoxesChanged(int state){
+	Edit_Password->setEnabled(Check_Password->isChecked());
+	Combo_KeyFile->setEnabled(Check_KeyFile->isChecked());
+	Button_Browse->setEnabled(Check_KeyFile->isChecked());
+	Button_GenKeyFile->setEnabled(Check_KeyFile->isChecked());	
 }
 
-void CPasswordDialog::OnPasswordChanged(const QString &txt){
-Edit_PasswordRep->setText(QString());
-if(CheckBox_Both->isChecked() || txt.isEmpty())
-	setStateBoth();
-else
-	setStatePasswordOnly();
-}
-
-void CPasswordDialog::OnComboTextChanged(const QString& txt){
-if(CheckBox_Both->isChecked() || txt.isEmpty())
-	setStateBoth();
-else
-	setStateKeyFileOnly();
-}
-
-
-
-void CPasswordDialog::OnCheckBox_BothChanged(int state){
-if(state==Qt::Checked)
-	setStateBoth();
-if(state==Qt::Unchecked){
-	if(!Edit_Password->text().isEmpty() && !Combo_Dirs->currentText().isEmpty()){
-		Combo_Dirs->setEditText(QString());
-		setStatePasswordOnly();
+void PasswordDialog::ChangeEchoModeDatabaseKey(){
+	if(Edit_Password->echoMode()==QLineEdit::Normal){
+		Edit_Password->setEchoMode(QLineEdit::Password);
+		Edit_PwRepeat->setEchoMode(QLineEdit::Password);
 	}
 	else{
-		if(Edit_Password->text().isEmpty())
-			setStateKeyFileOnly();
-		else
-			setStatePasswordOnly();
+		Edit_Password->setEchoMode(QLineEdit::Normal);
+		Edit_PwRepeat->setEchoMode(QLineEdit::Normal);
 	}
 }
 
+void PasswordDialog::OnButtonQuit(){
+	done(Exit_Quit);
 }
 
-void CPasswordDialog::ChangeEchoModeDatabaseKey(){
-if(Edit_Password->echoMode()==QLineEdit::Normal){
-	Edit_Password->setEchoMode(QLineEdit::Password);
-	Edit_PasswordRep->setEchoMode(QLineEdit::Password);}
-else{
-	Edit_Password->setEchoMode(QLineEdit::Normal);
-	Edit_PasswordRep->setEchoMode(QLineEdit::Normal);}
-}
-
-void CPasswordDialog::paintEvent(QPaintEvent* event){
+void PasswordDialog::paintEvent(QPaintEvent* event){
 	QDialog::paintEvent(event);
 	QPainter painter(this);
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);	
 }
 
-void CPasswordDialog::OnBookmarkTriggered(QAction* action){
-	BookmarkFilename=action->data().toString();
+void PasswordDialog::OnBookmarkTriggered(QAction* action){
 	if(action->data().toString()==QString())
-		setWindowTitle(LastFile);
+		setWindowTitle(Filename);
 	else
 		setWindowTitle(action->data().toString());
 	Label_Bookmark->setText(action->text());
+	BookmarkFilename=action->data().toString();
 }
+
+void PasswordDialog::OnGenKeyFile(){
+	QString filename=KpxFileDialogs::saveFile(this,"PasswordDlg",tr("Create Key File..."),
+	                                          QStringList() << tr("All Files (*)")
+	                                                        << tr("Key Files (*.key)"));
+	if(!filename.isEmpty()){
+		QString error;
+		if(!createKeyFile(filename,&error,32,true)){
+			showErrMsg(error,this);
+			return;
+		}
+		else {
+			if(Check_KeyFile->isChecked())
+				Combo_KeyFile->setEditText(filename);
+			return;
+		}
+	}	
+}
+
+QString PasswordDialog::password(){
+	if(Check_Password->isChecked())
+		return Edit_Password->text();
+	else
+		return QString();
+}
+
+
+QString PasswordDialog::keyFile(){
+	if(Check_KeyFile->isChecked())
+		return Combo_KeyFile->currentText();
+	else
+		return QString();
+}
+
+QString PasswordDialog::selectedBookmark(){
+	return BookmarkFilename;
+}
+
+void PasswordDialog::OnButtonBack(){
+	stackedWidget->setCurrentIndex(0);
+	Edit_PwRepeat->clear();	
+}
+

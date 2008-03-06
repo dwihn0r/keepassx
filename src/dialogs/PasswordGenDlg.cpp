@@ -18,18 +18,10 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QSpinBox>
-#include <QMessageBox>
-#include <QRadioButton>
-#include <QLineEdit>
-#include <QCheckBox>
-#include <QProgressBar>
-#include <QPainter>
-#include <math.h>
-#include "PasswordGenDlg.h"
-#include "CollectEntropyDlg.h"
+
+#include "dialogs/PasswordGenDlg.h"
+#include "dialogs/CollectEntropyDlg.h"
 #include "crypto/yarrow.h"
-#include "KpxConfig.h"
 
 bool CGenPwDialog::EntropyCollected=false;
 

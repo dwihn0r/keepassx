@@ -20,10 +20,6 @@
 #ifndef _EXPORT_H_
 #define _EXPORT_H_
 
-#include <QWidget>
-#include <QFile>
-
-#include "Database.h"
  
 class IExport{
 	public:

@@ -18,9 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "main.h"
 
-#include <QShowEvent>
 #include "EditGroupDlg.h"
 #include "SelectIconDlg.h"
 

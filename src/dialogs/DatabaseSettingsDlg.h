@@ -22,9 +22,6 @@
 #define DBSETTINGSDLG_H
 
 #include "ui_DatabaseSettingsDlg.h"
-#include "main.h"
-#include "Database.h"
-#include <QPaintEvent>
 
 class CDbSettingsDlg : public QDialog, public Ui_DatabaseSettingsDlg
 {

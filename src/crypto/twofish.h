@@ -1,3 +1,5 @@
+#ifndef TWOFISH_H_
+#define TWOFISH_H_
 /*
  * Fast, portable, and easy-to-use Twofish implementation, 
  * Version 0.3.
@@ -177,3 +179,5 @@ extern void Twofish_decrypt(
                             Twofish_Byte c[16], 
                             Twofish_Byte p[16]
                             );
+
+#endif

@@ -21,10 +21,7 @@
 #ifndef GENPWDIALOG_H
 #define GENPWDIALOG_H
 
-#include <QPixmap>
-#include <QPaintEvent>
 #include "ui_PasswordGenDlg.h"
-#include "main.h"
 #include "EditEntryDlg.h"
 
 class CGenPwDialog : public QDialog, public Ui_GenPwDlg

@@ -20,8 +20,6 @@
 
 #ifndef _LINKLABEL_H_
 #define _LINKLABEL_H_
-#include <QLabel>
-#include <QMouseEvent>
 
 class LinkLabel : public QLabel{
 Q_OBJECT

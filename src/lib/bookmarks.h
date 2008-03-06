@@ -19,9 +19,6 @@
 #ifndef _BOOKMARKS_H_
 #define _BOOKMARKS_H_
 
-#include <QString>
-#include <QList>
-
 class KpxBookmarks {	
 	public:
 		static void load();

@@ -30,25 +30,13 @@
 #define PWM_FLAG_TWOFISH		8
 #define PWM_STD_KEYENCROUNDS 	6000
 
-#include <QColor>
-#include <QDateTime>
-#include <QDate>
-#include <QTime>
-#include <QStringList>
-#include <QPixmap>
-#include <QMap>
-#include "main.h"
-#include "lib/SecString.h"
-#include "Database.h"
-
-
 void memcpyFromLEnd32(quint32* dst,const char* src);
 void memcpyFromLEnd16(quint16* dst,const char* src);
 void memcpyToLEnd32(char* src,const quint32* dst);
 void memcpyToLEnd16(char* src,const quint16* dst);
 
 //! Implementation of the standard KeePassX database.
-class Kdb3Database:public ICustomIcons,public IDatabase, public IFilePasswordAuth, public IKdbSettings{
+class Kdb3Database:public ICustomIcons,public IDatabase, public IKdbSettings{
 Q_OBJECT
 public:
 	class StdGroup;
@@ -169,10 +157,6 @@ public:
 	virtual void removeIcon(int index);
 	virtual void replaceIcon(int index,const QPixmap& icon);
 	virtual int builtinIcons(){return BUILTIN_ICONS;};
-	virtual void authByPwd(QString& password);
-	virtual bool authByFile(QString& filename);
-	virtual bool authByFileAndPwd(QString& password, QString& filename);
-	virtual bool createKeyFile(const QString& filename,int length=32, bool Hex=false);
 	virtual QList<IEntryHandle*> search(IGroupHandle* Group,const QString& SearchString, bool CaseSensitve, bool RegExp,bool Recursive,bool* Fields);
 	virtual QFile* file(){return File;}
 	virtual bool changeFile(const QString& filename);
@@ -180,6 +164,10 @@ public:
 	virtual CryptAlgorithm cryptAlgorithm(){return Algorithm;}
 	virtual unsigned int keyTransfRounds(){return KeyTransfRounds;}
 	virtual void setKeyTransfRounds(unsigned int rounds){KeyTransfRounds=rounds;}
+	virtual bool setKey(const QString& password, const QString& keyfile);
+	virtual bool setPasswordKey(const QString& password);
+	virtual bool setFileKey(const QString& filename);
+	virtual bool setCompositeKey(const QString& password,const QString& filename);
 
 	virtual QList<IEntryHandle*> entries();
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group);

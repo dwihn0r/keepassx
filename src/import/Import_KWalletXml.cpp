@@ -18,11 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "Import_KWalletXml.h"
-#include <QFile>
-#include <QtXml>
-#include <QMessageBox>
 
+#include "Import_KWalletXml.h"
 
 bool Import_KWalletXml::importDatabase(QWidget* GuiParent, IDatabase* db){
 	QFile* file=openFile(GuiParent,identifier(),QStringList()<<tr("XML Files (*.xml)")<<tr("All Files (*)"));

@@ -18,14 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
  
-#include <QPainter>
-#include <QComboBox>
-#include <QLineEdit>
-#include <QMessageBox>
-#include <QShowEvent>
-#include <QFile>
-#include "lib/tools.h"
-#include "main.h"
+
 #include "DatabaseSettingsDlg.h"
 
 

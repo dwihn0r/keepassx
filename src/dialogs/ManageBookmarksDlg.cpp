@@ -17,11 +17,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QListWidget>
-#include <QPainter>
-#include "lib/tools.h"
-#include "ManageBookmarksDlg.h"
-#include "lib/bookmarks.h"
+
+#include "dialogs/ManageBookmarksDlg.h"
 #include "dialogs/AddBookmarkDlg.h"
 
 ManageBookmarksDlg::ManageBookmarksDlg(QWidget* parent):QDialog(parent)

@@ -21,7 +21,6 @@
 #ifndef _EXPORT_KPX_XML_H_
 #define _EXPORT_KPX_XML_H_
 
-#include <QDomElement>
 #include "Export.h"
 
 class Export_KeePassX_Xml:public ExporterBase, public IExport{

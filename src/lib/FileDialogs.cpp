@@ -18,11 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QDir>
-#include "main.h"
-#include "KpxConfig.h"
-#include "FileDialogs.h"
-
+#include <QFileDialog>
 
 IFileDialog* KpxFileDialogs::iFileDialog=NULL;
 QtStandardFileDialogs DefaultQtDlgs;

@@ -21,10 +21,8 @@
 #ifndef _EXP_ENTRIES_DLG_
 #define _EXP_ENTRIES_DLG_
 
-#include <QList>
-#include <QPixmap>
 #include "ui_ExpiredEntriesDlg.h"
-#include "Database.h"
+
 
 class ExpiredEntriesDialog:public QDialog, public Ui_ExpiredEntriesDialog{
 	Q_OBJECT

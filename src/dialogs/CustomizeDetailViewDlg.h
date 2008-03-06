@@ -21,8 +21,6 @@
 #define _CUSTOMIZE_DETAIL_VIEW_H_
 
 #include "ui_CustomizeDetailViewDlg.h"
-#include <QColor>
-#include <QAction>
 
 class CustomizeDetailViewDialog : public QDialog, public Ui_CustomizeDetailViewDialog{
 	Q_OBJECT

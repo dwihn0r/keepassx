@@ -20,11 +20,7 @@
 #ifndef SEARCHDLG_H
 #define SEARCHDLG_H
 
-#include <QPaintEvent>
-#include <QPixmap>
 #include "ui_SearchDlg.h"
-#include "main.h"
-#include "Database.h"
 
 class SearchDialog : public QDialog, public Ui_Search_Dlg
 {

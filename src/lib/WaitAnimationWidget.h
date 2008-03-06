@@ -17,12 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-  
-#include <QWidget>
-#include <QPaintEvent>
-#include <QResizeEvent>
-#include <QTimer>
-#include <QPointF>
+
 
 class WaitAnimationWidget:public QWidget{
 	Q_OBJECT
