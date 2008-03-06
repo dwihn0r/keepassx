@@ -199,8 +199,7 @@ HEADERS += lib/UrlLabel.h \
 #           KpxFirefox.h \
            dialogs/AddBookmarkDlg.h \
            lib/bookmarks.h \
-           dialogs/ManageBookmarksDlg.h \
-	dialogs/dialogs.h
+           dialogs/ManageBookmarksDlg.h
 
 SOURCES += lib/UrlLabel.cpp \
            main.cpp \

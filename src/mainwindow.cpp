@@ -28,7 +28,19 @@
 #include "export/Export_Txt.h"
 #include "export/Export_KeePassX_Xml.h"
 
-#include "dialogs/dialogs.h"
+#include "dialogs/AboutDlg.h"
+#include "dialogs/SearchDlg.h"
+#include "dialogs/SettingsDlg.h"
+#include "dialogs/DatabaseSettingsDlg.h"
+#include "dialogs/PasswordDlg.h"
+#include "dialogs/SimplePasswordDlg.h"
+#include "dialogs/PasswordGenDlg.h"
+#include "dialogs/CollectEntropyDlg.h"
+#include "dialogs/CustomizeDetailViewDlg.h"
+#include "dialogs/ExpiredEntriesDlg.h"
+//#include "dialogs/TrashCanDlg.h" //TODO TrashCan
+#include "dialogs/AddBookmarkDlg.h"
+#include "dialogs/ManageBookmarksDlg.h"
 
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;
