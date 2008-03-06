@@ -32,7 +32,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1) {
     }
     TARGET = ../bin/keepassx
     target.path = $${PREFIX}/bin
-    data.files += ../share/keepassx
+    data.files = ../share/keepassx
     data.path = $${PREFIX}/share
     pixmaps.files = ../share/pixmaps/*
     pixmaps.path = $${PREFIX}/share/pixmaps
@@ -59,7 +59,7 @@ macx {
     isEmpty(PREFIX):PREFIX = /Applications
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
-    data.files += ../share/keepassx
+    data.files = ../share/keepassx
     data.path = Contents/Resources
     LIBS += -framework CoreFoundation
     isEqual(LINK,DYNAMIC) {
@@ -90,7 +90,7 @@ isEqual(QMAKE_WIN32,1) {
     isEmpty(PREFIX):PREFIX = "C:/Program files/KeePassX"
     TARGET = ../bin/KeePassX
     target.path = $${PREFIX}
-    data.files += ../share/keepassx/*
+    data.files = ../share/keepassx/*
     data.path = $${PREFIX}/share
     !isEqual(INSTALL_QTLIB,0) {
         qt_libs.files = $${QMAKE_LIBDIR_QT}/QtCore4.dll $${QMAKE_LIBDIR_QT}/QtGui4.dll $${QMAKE_LIBDIR_QT}/QtXml4.dll

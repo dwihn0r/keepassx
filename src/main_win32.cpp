@@ -19,22 +19,13 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QApplication>
+#include <QDir>
 #include <windows.h>
 #include "main.h"
 
-void initAppPaths(int argc,char** argv){
-	QFileInfo filePath;
-	QT_WA({
-		wchar_t module_name[256];
-		GetModuleFileNameW(0, module_name, sizeof(module_name) / sizeof(wchar_t));
-		filePath = QString::fromUtf16((ushort *)module_name);
-	}, {
-		char module_name[256];
-		GetModuleFileNameA(0, module_name, sizeof(module_name));
-		filePath = QString::fromLocal8Bit(module_name);
-	});	
-	AppDir = filePath.filePath();
-	AppDir.truncate(AppDir.lastIndexOf("/"));
+void initAppPaths(){
+	AppDir = QApplication::applicationDirPath();
 	
 	HomeDir = QString::fromLocal8Bit(qgetenv("APPDATA").constData());
 	if(!HomeDir.isEmpty() && QFile::exists(HomeDir))

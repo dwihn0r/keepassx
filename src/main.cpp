@@ -58,7 +58,7 @@ QPixmap* EntryIcons;
 inline void loadImages();
 inline void parseCmdLineArgs(int argc, char** argv,QString &ArgFile,QString& ArgCfg,QString& ArgLang,bool& ArgMin,bool& ArgLock);
 bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
-void initAppPaths(int argc, char **argv);
+void initAppPaths();
 
 int main(int argc, char **argv)
 {
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 #else
 	app = new QApplication(argc,argv);
 #endif
-	initAppPaths(argc,argv);
+	initAppPaths();
 	CmdLineArgs args;
 	args.parse(QApplication::arguments());
 	qDebug(CSTR(AppDir));
@@ -288,10 +288,6 @@ void CmdLineArgs::printHelp(){
 	cout << "                              pt_BR  Portuguese(Brazil)"<<endl;
 }
 
-
-
-
-
 //TODO Plugins
 /*
 QString findPlugin(const QString& filename){
@@ -304,8 +300,3 @@ QString findPlugin(const QString& filename){
 	return QString();
 }
 */
-
-
-
-
-
