@@ -37,7 +37,9 @@ using std::string;
 #define uint8_t quint8
 #define uint16_t quint16
 #define uint32_t quint32
+#ifndef byte
 #define byte quint8
+#endif
 
 /** blowfish encryption algorithm.
   * Derived from libgcrypt-1.1.12

@@ -400,12 +400,9 @@ void initYarrow(){
 	yarrow256_init(&WeakCtx,2,WeakSrc);
 	yarrow256_init(&StrongCtx,2,StrongSrc);
 	quint8 buffer[100];
-	srand(time(0));
-	for(int i=0;i<100;i++)
-		buffer[i]=rand()%256+1;
+	getRandomBytes(buffer,100);
 	yarrow256_update(&WeakCtx,0,800,100,buffer);
-	for(int i=0;i<100;i++)
-		buffer[i]=rand()%256+1;
+	getRandomBytes(buffer,100);
 	yarrow256_update(&WeakCtx,1,800,100,buffer);
 	Q_ASSERT(yarrow256_is_seeded(&WeakCtx));
 }
@@ -429,8 +426,7 @@ void reseedStrongPool(quint8* buffer1,int l1,quint8* buffer2,int l2){
 		buffer1=buffer1+100;
 		l1=l1-100;
 	}
-	else
-	{
+	else{
 		yarrow256_update(&StrongCtx,1,100,25,buffer2);
 		buffer2=buffer2+25;
 		l2=l2-25;

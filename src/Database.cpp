@@ -20,8 +20,7 @@
 
 
 
-KpxUuid::KpxUuid(){
-	Data.fill(0,16);
+KpxUuid::KpxUuid() : Data(16,0){
 }
 
 KpxUuid::KpxUuid(const void* src){
@@ -30,7 +29,7 @@ KpxUuid::KpxUuid(const void* src){
 
 void KpxUuid::generate(){
 	char uuid[16];
-	getRandomBytes(uuid,16);
+	randomize(uuid,16);
 	quint32 Secs=QDateTime::currentDateTime().toTime_t();
 	quint16 mSecs=QTime::currentTime().msec();
 	mSecs=(mSecs & 0x3FF) | (*((quint16*)(uuid+4)) & 0xFC00); //msec has only 10 Bits, filling the rest with random data
@@ -61,7 +60,7 @@ void KpxUuid::toRaw(void* dst)const{
 }
 
 void KpxUuid::fromRaw(const void* src){
-	Data=QByteArray((char*)src,16);
+	Data.replace(0,16,(char*)src);
 }
 
 bool KpxUuid::operator==(const KpxUuid& other)const{

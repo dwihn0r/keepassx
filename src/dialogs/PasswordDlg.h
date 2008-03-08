@@ -43,9 +43,9 @@ public:
 	};
 	
 	enum DlgExit {
-		Exit_Ok,
-		Exit_Cancel,
-		Exit_Quit
+		Exit_Ok=QDialog::Accepted,
+		Exit_Cancel=QDialog::Rejected,
+		Exit_Quit=3
 	};
 	
 	typedef bool (KeyFileGenProc)(const QString& filename,QString* error);

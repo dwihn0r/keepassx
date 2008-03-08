@@ -22,7 +22,7 @@
 #define _ARCFOUR_H_
 
 #ifndef byte
-#define byte unsigned char
+#define byte quint8
 #endif
 
 class CArcFour{

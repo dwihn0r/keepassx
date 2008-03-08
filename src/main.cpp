@@ -234,7 +234,7 @@ bool CmdLineArgs::parse(const QStringList& argv){
 				return false;
 			}
 			QFileInfo file(argv[i+1]);
-			ConfigLocation=file.absolutePath();
+			ConfigLocation=file.absoluteFilePath();
 			i++;
 			continue;
 		}

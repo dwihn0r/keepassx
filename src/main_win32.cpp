@@ -22,7 +22,7 @@
 #include <windows.h>
 #include "main.h"
 
-void initAppPaths(){
+void initAppPaths(int argc,char** argv){
 	AppDir = QApplication::applicationDirPath();
 	
 	HomeDir = QString::fromLocal8Bit(qgetenv("APPDATA").constData());

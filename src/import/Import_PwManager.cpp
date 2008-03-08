@@ -31,7 +31,7 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	char* buffer=NULL;
 	int offset=0;
 	int len=0;
-	if(len=file->size()){
+	if((len=file->size())){
 		buffer=new char[len];
 	}
 	else {

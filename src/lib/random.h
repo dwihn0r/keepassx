@@ -20,7 +20,6 @@
 #ifndef RANDOM_H_
 #define RANDOM_H_
 
-extern void getRandomBytes(void* buffer,int NumBlocks,int BlockSize=1,bool Strong=false);
-
+extern void getRandomBytes(void* buffer,int NumBlocks);
 
 #endif

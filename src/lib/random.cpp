@@ -19,29 +19,44 @@
  ***************************************************************************/
 #include <iostream>
 #include <fstream>
-#include <QDateTime>
-#include <QObject>
 #include "random.h"
+
+#if defined(Q_WS_WIN)
+	#include <QSysInfo>
+#include <QMessageBox>
+	#include <windows.h>
+#endif
+
 using namespace std;
 
-void getRandomBytes(void* buffer,int NumBlocks,int BlockSize,bool Strong){
-FILE *dev_random;
-if(Strong){
-dev_random = fopen("/dev/random","r");}
-else{
-dev_random = fopen("/dev/urandom","r");}
-
-if (dev_random==NULL){
- srand(QTime(0,0,0).secsTo(QTime::currentTime()));
- for(int i=0;i<NumBlocks*BlockSize;i++){
-	quint8 rnd=rand()%256;
-	((quint8*)buffer)[i]=rnd;
+void getRandomBytes(void* buffer,int NumBlocks){
+#if defined(Q_WS_WIN)
+	// RtlGenRandom
+	if (QSysInfo::WindowsVersion>=QSysInfo::WV_XP){
+		bool success=false;
+		HMODULE hLib=LoadLibraryA("ADVAPI32.DLL");
+		if (hLib) {
+			BOOLEAN (APIENTRY *pfn)(void*, ULONG) = (BOOLEAN (APIENTRY *)(void*,ULONG))GetProcAddress(hLib,"SystemFunction036");
+			if (pfn && pfn(buffer,NumBlocks)) {
+				success=true;
+			}
+			FreeLibrary(hLib);
+		}
+		if (success)
+			return;
 	}
- return;
-}
-else{
-fread(buffer,BlockSize,NumBlocks,dev_random);
-fclose(dev_random);
-return;
-}
+#else
+	FILE* dev_random = fopen("/dev/random","r");
+	if (dev_random){
+		size_t bytesRead = fread(buffer,1,NumBlocks,dev_random);
+		fclose(dev_random);
+		if (bytesRead==NumBlocks)
+			return;
+	}
+#endif
+	
+	srand(time(NULL));
+	for(int i=0;i<NumBlocks;i++){
+		((quint8*)buffer)[i] = (quint8) (rand()%256);
+	}
 }
