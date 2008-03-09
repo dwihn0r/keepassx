@@ -78,11 +78,13 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void OnDetailViewUrlClicked(const QUrl& url);
 		void OnUnLockWorkspace();
 		void OnLockClose();
+		void OnInactivityTimer();
 
 	private:
 		void closeEvent(QCloseEvent* event);
 		void hideEvent(QHideEvent* event);
 		void showEvent(QShowEvent* event);
+		bool event(QEvent* event);
 		void setLock();
 		void resetLock();
 		SelectionState GroupSelection, EntrySelection;
@@ -124,6 +126,8 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		QList<int> lockGroup;
 		QDialog* unlockDlg;
 		QString currentFile;
+		int inactivityCounter;
+		QTimer* inactivityTimer;
 };
 
 #endif

@@ -45,6 +45,7 @@ QString DataDir;
 QString PluginLoadError;
 bool TrActive;
 QString DetailViewTemplate;
+bool EventOccurred;
 
 QPixmap* EntryIcons;
 //IIconTheme* IconLoader=NULL; //TODO plugins

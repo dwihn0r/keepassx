@@ -99,6 +99,7 @@ extern QString DataDir;
 extern bool TrActive;
 extern QString DetailViewTemplate;
 extern QPixmap *EntryIcons;
+extern bool EventOccurred;
 
 #endif //__cplusplus
 #endif //KEEPASS_X_

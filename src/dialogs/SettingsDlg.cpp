@@ -50,6 +50,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde()));
 
 	connect(Button_CustomizeEntryDetails,SIGNAL(clicked()),this,SLOT(OnCustomizeEntryDetails()));
+	connect(CheckBox_InactivityLock, SIGNAL(toggled(bool)), SLOT(OnInactivityLockChange(bool)));
 	
 #if !defined(AUTOTYPE)
 	Box_AutoType->setVisible(false);
@@ -115,6 +116,8 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	CheckBox_ShowPasswords->setChecked(config->showPasswords());
 	CheckBox_ShowPasswords_PasswordDlg->setChecked(config->showPasswordsPasswordDlg());
 	CheckBox_LockMinimize->setChecked(config->lockOnMinimize());
+	CheckBox_InactivityLock->setChecked(config->lockOnInactivity());
+	SpinBox_InacitivtyTime->setValue(config->lockAfterSec());
 	
 	//Features
 	CheckBox_FeatureBookmarks->setChecked(config->featureBookmarks());
@@ -221,6 +224,8 @@ void CSettingsDlg::apply(){
 	config->setShowPasswords(CheckBox_ShowPasswords->isChecked());
 	config->setShowPasswordsPasswordDlg(CheckBox_ShowPasswords_PasswordDlg->isChecked());
 	config->setLockOnMinimize(CheckBox_LockMinimize->isChecked());
+	config->setLockOnInactivity(CheckBox_InactivityLock->isChecked());
+	config->setLockAfterSec(SpinBox_InacitivtyTime->value());
 	
 	//Features
 	config->setFeatureBookmarks(CheckBox_FeatureBookmarks->isChecked());
@@ -319,6 +324,10 @@ void CSettingsDlg::OnIntPluginKde(){
 void CSettingsDlg::OnCustomizeEntryDetails(){
 	CustomizeDetailViewDialog dlg(this);
 	dlg.exec();
+}
+
+void CSettingsDlg::OnInactivityLockChange(bool checked){
+	SpinBox_InacitivtyTime->setEnabled(checked);
 }
 
 #ifdef GLOBAL_AUTOTYPE

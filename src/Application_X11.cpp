@@ -22,22 +22,18 @@
 #include "lib/AutoType.h"
 #include "lib/HelperX11.h"
 
+const unsigned int KeepassApplication::remove_invalid = ControlMask|ShiftMask|Mod1Mask|Mod5Mask|Mod4Mask;
+
 KeepassApplication::KeepassApplication(int& argc, char** argv) : QApplication(argc, argv){
 }
 
 bool KeepassApplication::x11EventFilter(XEvent* event){
-	if (x11KeyEvent(event))
-		return true;
-	else
-		return QApplication::x11EventFilter(event);
-}
-
-bool KeepassApplication::x11KeyEvent(XEvent* event){
-	static const unsigned int remove_invalid = ControlMask|ShiftMask|Mod1Mask|Mod5Mask|Mod4Mask;
-	if (event->type==KeyPress && AutoType::shortcut.key!=0u && event->xkey.keycode==XKeysymToKeycode(event->xkey.display,HelperX11::getKeysym(AutoType::shortcut.key)) && (event->xkey.state&remove_invalid)==HelperX11::getShortcutModifierMask(AutoType::shortcut) && QApplication::focusWidget()==NULL ){
+	if (event->type==KeyPress && AutoType::shortcut.key!=0u && event->xkey.keycode==XKeysymToKeycode(event->xkey.display,HelperX11::getKeysym(AutoType::shortcut.key)) && (event->xkey.state&remove_invalid)==HelperX11::getShortcutModifierMask(AutoType::shortcut) && focusWidget()==NULL ){
+		EventOccurred = true;
 		AutoType::performGlobal();
 		return true;
 	}
-	else
-		return false;
+	else{
+		return QApplication::x11EventFilter(event);
+	}
 }

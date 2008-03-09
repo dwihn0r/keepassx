@@ -52,6 +52,8 @@ Export_KeePassX_Xml export_KeePassX_Xml;
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent, Qt::WFlags flags) :QMainWindow(parent,flags){
 	ShutingDown=false;
 	IsLocked=false;
+	EventOccurred=true;
+	inactivityCounter=0;
 	InUnLock=false;
 	unlockDlg=NULL;
 	db=NULL;
@@ -87,6 +89,12 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	LockedCentralWidget->setVisible(false);
 
 	setupConnections();
+	
+	inactivityTimer = new QTimer(this);
+	inactivityTimer->setInterval(500);
+	connect(inactivityTimer, SIGNAL(timeout()), SLOT(OnInactivityTimer()));
+	if (config->lockOnInactivity() && config->lockAfterSec()!=0)
+		inactivityTimer->start();
 
 	bool showWindow=true;
 	FileOpen=false;
@@ -436,6 +444,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		}
 	}
 	StatusBarGeneral->setText(tr("Ready"));
+	inactivityCounter = 0;
 	return true;
 }
 
@@ -1000,18 +1009,36 @@ void KeepassMainWindow::showEvent(QShowEvent* event){
 	QMainWindow::showEvent(event);
 }
 
+bool KeepassMainWindow::event(QEvent* event){
+	if (!EventOccurred){
+		int t = event->type();
+		if ( t>=QEvent::MouseButtonPress&&t<=QEvent::KeyRelease || t>=QEvent::HoverEnter&&t<=QEvent::HoverMove )
+			EventOccurred = true;
+	}
+	return QMainWindow::event(event);
+}
+
 void KeepassMainWindow::OnExtrasSettings(){
 	CSettingsDlg dlg(this);
-	if(dlg.exec()==QDialog::Accepted){
-		EntryView->setAlternatingRowColors(config->alternatingRowColors());
-		SysTray->setVisible(config->showSysTrayIcon());
-		menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
+	dlg.exec();
+	
+	EntryView->setAlternatingRowColors(config->alternatingRowColors());
+	SysTray->setVisible(config->showSysTrayIcon());
+	menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
+	
+	EventOccurred = true;
+	if (config->lockOnInactivity() && config->lockAfterSec()!=0 && !inactivityTimer->isActive()){
+		inactivityCounter = 0;
+		inactivityTimer->start();
+	}
+	else if ((!config->lockOnInactivity() || config->lockAfterSec()==0) && inactivityTimer->isActive()){
+		inactivityTimer->stop();
 	}
 }
 
 void KeepassMainWindow::OnHelpAbout(){
-AboutDialog dlg(this);
-dlg.exec();
+	AboutDialog dlg(this);
+	dlg.exec();
 }
 
  //TODO Handbook
@@ -1212,6 +1239,29 @@ void KeepassMainWindow::resetLock(){
 	SysTray->setToolTip(QString("%1 %2").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC) + " - " + tr("Unlocked"));
 	FileUnLockWorkspaceAction->setText(tr("&Lock Workspace"));
 	IsLocked=false;
+}
+
+void KeepassMainWindow::OnInactivityTimer(){
+	if (IsLocked || !FileOpen)
+		return;
+	
+	QWidgetList widgets = QApplication::topLevelWidgets();
+	for (int i=0; i<widgets.size(); i++){
+		if (widgets[i]->windowModality()==Qt::ApplicationModal){
+			inactivityCounter = 0;
+			return;
+		}
+	}
+	
+	if (EventOccurred){
+		inactivityCounter = 0;
+		EventOccurred = false;
+	}
+	else{
+		inactivityCounter++;
+		if (inactivityCounter*(inactivityTimer->interval()) >= config->lockAfterSec()*1000)
+			OnUnLockWorkspace();
+	}
 }
 
 void KeepassMainWindow::OnBookmarkTriggered(QAction* action){

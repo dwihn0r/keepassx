@@ -44,7 +44,7 @@ class CSettingsDlg : public QDialog, public Ui_SettingsDialog
 		void OnMountDirBrowse();
 		void OnBrowserCmdBrowse();
 		void OnCustomizeEntryDetails();
-		
+		void OnInactivityLockChange(bool checked);
 	
 #ifdef GLOBAL_AUTOTYPE
 	private slots:

@@ -83,6 +83,8 @@ public:
 	bool showPasswords(){return settings.value("Options/ShowPasswords",false).toBool();}
 	bool showPasswordsPasswordDlg(){return settings.value("Options/ShowPasswordsPasswordDlg",false).toBool();}
 	bool lockOnMinimize(){return settings.value("Options/LockOnMinimize",false).toBool();}
+	bool lockOnInactivity(){return settings.value("Options/LockOnInactivity",false).toBool();}
+	int lockAfterSec(){return settings.value("Options/LockAfterSec",30).toInt();}
 	bool showStatusbar(){return settings.value("UI/ShowStatusbar",true).toBool();}
 	bool showSysTrayIcon(){return settings.value("Options/ShowSysTrayIcon",false).toBool();}
 	bool showToolbar(){return settings.value("UI/ShowToolbar",true).toBool();}
@@ -140,6 +142,8 @@ public:
 	void setShowPasswords(bool value){settings.setValue("Options/ShowPasswords",value);}
 	void setShowPasswordsPasswordDlg(bool value){settings.setValue("Options/ShowPasswordsPasswordDlg",value);}
 	void setLockOnMinimize(bool value){settings.setValue("Options/LockOnMinimize",value);}
+	void setLockOnInactivity(bool value){settings.setValue("Options/LockOnInactivity",value);}
+	void setLockAfterSec(int value){settings.setValue("Options/LockAfterSec",value);}
 	void setShowStatusbar(bool value){settings.setValue("UI/ShowStatusbar",value);}
 	void setShowSysTrayIcon(bool value){settings.setValue("Options/ShowSysTrayIcon",value);}
 	void setShowToolbar(bool value){settings.setValue("UI/ShowToolbar",value);}

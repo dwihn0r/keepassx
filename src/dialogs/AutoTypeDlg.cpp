@@ -87,6 +87,15 @@ void AutoTypeDlg::resizeEvent(QResizeEvent* event){
 	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Auto-Type"),width());
 }
 
+bool AutoTypeDlg::event(QEvent* event){
+	if (!EventOccurred){
+		int t = event->type();
+		if ( t>=QEvent::MouseButtonPress&&t<=QEvent::KeyRelease || t>=QEvent::HoverEnter&&t<=QEvent::HoverMove )
+			EventOccurred = true;
+	}
+	return QWidget::event(event);
+}
+
 void AutoTypeDlg::itemSelected(QTreeWidgetItem* item){
 	close();
 	QString err;
