@@ -27,6 +27,9 @@ CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::W
 {
 	setupUi(this);
 	database=dynamic_cast<IKdbSettings*>(db);
+	adjustSize();
+	setMaximumSize(size());
+	setMinimumSize(size());
 	createBanner(&BannerPixmap,getPixmap("appsettings"),tr("Settings"),width());
 	ComboAlgo->insertItem(0,tr("AES(Rijndael):  256 Bit   (default)"));
 	ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));

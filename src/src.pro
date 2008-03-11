@@ -76,7 +76,10 @@ macx {
     QMAKE_BUNDLE_DATA += data
     ICON = ../share/macx_bundle/icon.icns
     CONFIG += app_bundle
-    isEqual(ARCH,UNIVERSAL): CONFIG += x86 ppc
+    isEqual(ARCH,UNIVERSAL) {
+        CONFIG += x86 ppc
+        CONFIG -= precompile_header
+	}
     isEqual(ARCH,INTEL): CONFIG += x86
     isEqual(ARCH,PPC): CONFIG += ppc
     SOURCES += main_macx.cpp
@@ -170,7 +173,6 @@ HEADERS += lib/UrlLabel.h \
 #           dialogs/TrashCanDlg.h \
            lib/random.h \
            Database.h \
-#           lib/KdePlugin.h \
            lib/AutoType.h \
            lib/FileDialogs.h \
            lib/ShortcutWidget.h \
@@ -192,11 +194,10 @@ HEADERS += lib/UrlLabel.h \
            crypto/sha1.h \
            lib/WaitAnimationWidget.h \
            plugins/interfaces/IFileDialog.h \
-#           plugins/interfaces/IKdeInit.h \
-#           plugins/interfaces/IGnomeInit.h \
+           plugins/interfaces/IKdeInit.h \
+           plugins/interfaces/IGnomeInit.h \
            plugins/interfaces/IIconTheme.h \
            KpxConfig.h \
-#           KpxFirefox.h \
            dialogs/AddBookmarkDlg.h \
            lib/bookmarks.h \
            dialogs/ManageBookmarksDlg.h
@@ -235,7 +236,6 @@ SOURCES += lib/UrlLabel.cpp \
            lib/random.cpp \
            Database.cpp \
            lib/tools.cpp \
-#           lib/KdePlugin.cpp \
            lib/GroupView.cpp \
            lib/EntryView.cpp \
            lib/FileDialogs.cpp \
@@ -245,7 +245,6 @@ SOURCES += lib/UrlLabel.cpp \
            crypto/yarrow.cpp \
            lib/WaitAnimationWidget.cpp \
            KpxConfig.cpp \
-#           KpxFirefox.cpp \
            dialogs/AddBookmarkDlg.cpp \
            lib/bookmarks.cpp \
            dialogs/ManageBookmarksDlg.cpp \

@@ -5,7 +5,6 @@
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -70,40 +69,51 @@ QString KpxFileDialogs::saveFile(QWidget* Parent, const QString& Name, const QSt
 	return result;
 }
 
-QString QtStandardFileDialogs::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
-	if(SelectedFilter >= Filters.size())
-		SelectedFilter=0;
-	QFileDialog FileDlg(parent,title,dir);
-	FileDlg.setFilters(Filters);
-	FileDlg.setFileMode(QFileDialog::ExistingFile);
-	FileDlg.selectFilter(Filters[SelectedFilter]);
-	if(!FileDlg.exec())return QString();
-	if(!FileDlg.selectedFiles().size())return QString();
-	LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
-	return FileDlg.selectedFiles()[0];
+
+
+QString QtStandardFileDialogs::toSingleStringFilter(const QStringList& filterList){
+	if(!filterList.size())
+		return QString();
+	QString SingleString;
+	for(int i=0;i<filterList.size()-1;i++){
+		SingleString += filterList[i] + ";;";
+	}
+	SingleString += filterList.back();
+	return SingleString;
 }
 
-QStringList QtStandardFileDialogs::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter){
-	QFileDialog FileDlg(parent,title,dir);
-	FileDlg.setFilters(Filters);
-	FileDlg.setFileMode(QFileDialog::ExistingFiles);
-	if(!FileDlg.exec())return QStringList();
-	LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
-	return FileDlg.selectedFiles();
-}
 
-QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter, bool ShowOverwriteWarning){
-	QFileDialog FileDlg(parent,title,dir);
-	FileDlg.setFilters(Filters);
-	FileDlg.setFileMode(QFileDialog::AnyFile);
-	FileDlg.setAcceptMode(QFileDialog::AcceptSave);
-	FileDlg.setConfirmOverwrite(ShowOverwriteWarning);
-	if(!FileDlg.exec())return QString();
-	LastFilter=FileDlg.filters().indexOf(FileDlg.selectedFilter());
+
+QString QtStandardFileDialogs::openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilterIndex){
+	QString SelectedFilter;
+	if(SelectedFilterIndex < Filters.size())
+		SelectedFilter=Filters[SelectedFilterIndex];
+	QString filename = QFileDialog::getOpenFileName(parent,title,dir,toSingleStringFilter(Filters),&SelectedFilter);
+	LastFilter=Filters.indexOf(SelectedFilter);
+	return filename;
 	
+}
+
+QStringList QtStandardFileDialogs::openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilterIndex){
+	QString SelectedFilter;
+	if(SelectedFilterIndex < Filters.size())
+		SelectedFilter=Filters[SelectedFilterIndex];
+	QStringList filenames = QFileDialog::getOpenFileNames(parent,title,dir,toSingleStringFilter(Filters),&SelectedFilter);
+	LastFilter=Filters.indexOf(SelectedFilter);
+	return filenames;
+}
+
+QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilterIndex, bool ShowOverwriteWarning){
+	QString SelectedFilter;
+	if(SelectedFilterIndex < Filters.size())
+		SelectedFilter=Filters[SelectedFilterIndex];
+	QString filepath = QFileDialog::getSaveFileName(parent,title,dir,toSingleStringFilter(Filters),&SelectedFilter,
+	                                                ShowOverwriteWarning ? (QFileDialog::Option)0 : QFileDialog::DontConfirmOverwrite);
+	LastFilter=Filters.indexOf(SelectedFilter);
+		
 	//Check whether the file has an extension which fits to the selected filter
-	QString filepath=FileDlg.selectedFiles()[0];
-	QString filename=filepath.right(filepath.length()-filepath.lastIndexOf("/")-1);
+	QFileInfo file(filepath);
+	QString filename=file.fileName();
 	int a=Filters[LastFilter].indexOf('(');
 	int b=Filters[LastFilter].indexOf(')');
 	QStringList Extensions=Filters[LastFilter].mid(a+1,b-a-1).split(" ");
@@ -113,10 +123,8 @@ QString QtStandardFileDialogs::saveFileDialog(QWidget* parent,QString title,QStr
 	for(int i=0;i<Extensions.size();i++)
 		Extensions[i].remove(0,2); //remove the *. from the extensions
 
-	if(filename.contains(".")){
-		int p=filename.lastIndexOf(".");
-		QString ext=filename.right(filename.size()-p-1).toLower();
-		if(Extensions.contains(ext))
+	if(!file.suffix().isEmpty()){
+		if(Extensions.contains(file.suffix()))
 			return filepath;
 		else
 			return filepath+"."+Extensions[0];

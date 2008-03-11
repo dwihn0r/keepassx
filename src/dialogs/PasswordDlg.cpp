@@ -265,6 +265,21 @@ void PasswordDialog::OnOK(){
 		return;
 	}
 	
+	if((Mode==Mode_Ask || Mode==Mode_Set) && config->rememberLastKey()){
+		if(Check_Password->isChecked() && Check_KeyFile->isChecked()){
+			config->setLastKeyType(BOTH);
+			config->setLastKeyLocation(Combo_KeyFile->currentText());
+		}
+		else if(Check_Password->isChecked()){
+			config->setLastKeyType(PASSWORD);
+			config->setLastKeyLocation(QString());	
+		}
+		else if(Check_KeyFile->isChecked()){
+			config->setLastKeyType(PASSWORD);
+			config->setLastKeyLocation(Combo_KeyFile->currentText());
+		}		
+	}
+	
 	done(Exit_Ok);
 }
 

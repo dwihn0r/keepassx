@@ -39,8 +39,12 @@ class FileDlgHistory:public QObject{
 				Entry(){Filter=-1;}
 				QString Dir;
 				int Filter;
-				bool isNull(){if(Filter==-1)return true;
-								else return false;}
+				bool isNull(){
+					if(Filter==-1)
+						return true;
+					else
+						return false;
+				}
 		};
 		
 		QHash<QString,Entry>History;
@@ -50,42 +54,39 @@ class FileDlgHistory:public QObject{
 
 class KpxFileDialogs{
 	public:
-		static void setPlugin(IFileDialog* FileDlgPlugin);
-		static QString openExistingFile(QWidget* parent, const QString& Name,
-										const QString& Title,
-										const QStringList& Filters,
-										QString Dir=QString(),
-									    int SelectedFilter=-1);
-		static QStringList openExistingFiles(QWidget* parent, const QString& Name,
-											const QString& Title,
-											const QStringList& Filters,
-											const QString Dir=QString(),
-											int SelectedFilter=-1);
-		static QString saveFile(QWidget* parent, const QString& Name,
-									const QString& Title,
-									const QStringList& Filters,
-									bool ShowOverwriteWarning=true,
-									QString Dir=QString(),
-									int SelectedFilter=-1);		
+	static void setPlugin(IFileDialog* FileDlgPlugin);
+	static QString openExistingFile(QWidget* parent, const QString& Name,
+	                                const QString& Title,
+	                                const QStringList& Filters,
+	                                QString Dir=QString(),
+	                                int SelectedFilter=-1);
+	static QStringList openExistingFiles(QWidget* parent, const QString& Name,
+	                                     const QString& Title,
+	                                     const QStringList& Filters,
+	                                     const QString Dir=QString(),
+	                                     int SelectedFilter=-1);
+	static QString saveFile(QWidget* parent, const QString& Name,
+	                        const QString& Title,
+	                        const QStringList& Filters,
+	                        bool ShowOverwriteWarning=true,
+	                        QString Dir=QString(),
+	                        int SelectedFilter=-1);		
 	private:
-		static IFileDialog* iFileDialog;
-
-
-
+	static IFileDialog* iFileDialog;
 };
 
 
 class QtStandardFileDialogs:public QObject,public IFileDialog{
 	Q_OBJECT	
 	Q_INTERFACES(IFileDialog);
-		public:
-			QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);
-			QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);		
-			QString saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool ShowOverwriteWarning);
-			int getLastFilter();
-		private:
-			int LastFilter;
-	
+	public:
+	QString openExistingFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);
+	QStringList openExistingFilesDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter);		
+	QString saveFileDialog(QWidget* parent,QString title,QString dir,QStringList Filters,int SelectedFilter,bool ShowOverwriteWarning);
+	int getLastFilter();
+	private:
+	static QString toSingleStringFilter(const QStringList& filterList);
+	int LastFilter;
 };
 
 extern FileDlgHistory fileDlgHistory; 

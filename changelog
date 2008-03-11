@@ -2,7 +2,14 @@
     0.3.1
 ---------------
 - made key/password dialog more user friendly
+- added option for automatic database locking on inactivity
+- native file dialogs are used again under MacOS X and Windows
 - program accepts Qt command line switches like "-style" again
+- parameter "-cfg" now accepts relative paths (Bug #1825446)
+- fixed invalid entries in .desktop file (Bug #1906875)
+- fixed potential compilation problem in AES implementation (Bug #1905810)
+- fixed crash when re-arranging groups (Bug #1754998)
+- fixed size problems of some dialogs
 
 ---------------
     0.3.0a
@@ -17,7 +24,7 @@
 - global Auto-Type
 - fully customizable HTML based detail view
 - better structured settings dialog
-- secure random number generator based on ‘Yarrow‘ including an optional entropy collector
+- secure random number generator based on 'Yarrow' including an optional entropy collector
 - new dialog to view expiered entries
 - calendar widget to edit expiration dates in a more confortable way
 - restructured password generator

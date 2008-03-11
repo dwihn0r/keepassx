@@ -34,6 +34,9 @@ CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWid
 	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
 	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
+	adjustSize();
+	setMaximumSize(size());
+	setMinimumSize(size());
 }
 
 

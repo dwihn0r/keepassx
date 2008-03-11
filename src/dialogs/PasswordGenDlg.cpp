@@ -29,9 +29,6 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);
-	setMinimumSize(size());
-	setMaximumSize(size());
-	createBanner(&BannerPixmap,getPixmap("dice"),tr("Password Generator"),width());
 	connect(ButtonGenerate,SIGNAL(clicked()),this,SLOT(OnGeneratePw()));
 	connect(Radio_1,SIGNAL(toggled(bool)),this,SLOT(OnRadio1StateChanged(bool)));
 	connect(Radio_2,SIGNAL(toggled(bool)),this,SLOT(OnRadio2StateChanged(bool)));
@@ -74,6 +71,10 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	OnRadio1StateChanged(pwGenOptions.at(0));
 	OnRadio2StateChanged(!pwGenOptions.at(0));
 	Spin_Num->setValue(config->pwGenLength());
+	adjustSize();
+	setMaximumSize(size());
+	setMinimumSize(size());
+	createBanner(&BannerPixmap,getPixmap("dice"),tr("Password Generator"),width());
 }
 
 CGenPwDialog::~CGenPwDialog(){

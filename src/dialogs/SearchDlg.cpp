@@ -30,7 +30,6 @@ SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* pare
 	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnClose() ) );
 	db=database;
 	group=Group;
-	createBanner(&BannerPixmap,getPixmap("search"),tr("Search"),width());
 	QBitArray searchOptions=config->searchOptions();
 	checkBox_Cs->setChecked(searchOptions.at(0));
 	checkBox_regExp->setChecked(searchOptions.at(1));
@@ -46,6 +45,10 @@ SearchDialog::SearchDialog(IDatabase* database,IGroupHandle* Group,QWidget* pare
 		checkBox_Recursive->setChecked(false);
 		checkBox_Recursive->setEnabled(false);
 	}
+	adjustSize();
+	setMaximumSize(size());
+	setMinimumSize(size());
+	createBanner(&BannerPixmap,getPixmap("search"),tr("Search"),width());
 }
 
 SearchDialog::~SearchDialog()
