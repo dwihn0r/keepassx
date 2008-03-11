@@ -1101,6 +1101,7 @@ bool Kdb3Database::save(){
 	quint8 FinalRandomSeed[16];
 	quint8 ContentsHash[32];
 	quint8 EncryptionIV[16];
+
 	if(!(File->openMode() & QIODevice::WriteOnly)){
 		File->close();
 	}
@@ -1239,9 +1240,15 @@ bool Kdb3Database::save(){
 		return false;
 	}
 
-	File->resize(0); //truncate
+	if(!File->resize(EncryptedPartSize+DB_HEADER_SIZE)){
+		delete [] buffer;
+		error=decodeFileError(File->error());
+		return false;	
+	}
+	File->seek(0);
 	if(File->write(buffer,EncryptedPartSize+DB_HEADER_SIZE)!=EncryptedPartSize+DB_HEADER_SIZE){
 		delete [] buffer;
+		error=decodeFileError(File->error());
 		return false;
 	}
 	File->flush();

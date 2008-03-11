@@ -10,6 +10,7 @@
 - fixed potential compilation problem in AES implementation (Bug #1905810)
 - fixed crash when re-arranging groups (Bug #1754998)
 - fixed size problems of some dialogs
+- files are not longer truncated when saving fails (Bug #1648616)
 
 ---------------
     0.3.0a
