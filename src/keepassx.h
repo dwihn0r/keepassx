@@ -91,7 +91,10 @@
 #include "Database.h"
 #include "KpxConfig.h"
 
+#include "plugins/interfaces/IIconTheme.h"
+
 extern QString PluginLoadError;
+extern IIconTheme* IconLoader;
 extern KpxConfig *config;
 extern QString AppDir;
 extern QString HomeDir;

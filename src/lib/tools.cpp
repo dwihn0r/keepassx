@@ -144,8 +144,7 @@ const QIcon& getIcon(const QString& name){
 	if(CachedIcon)
 		return *CachedIcon;
 	QIcon* NewIcon=NULL;
-	//TODO plugins
-	/*if(IconLoader){
+	if(IconLoader){
 		NewIcon=new QIcon(IconLoader->getIcon(name));
 		if(NewIcon->isNull()){
 			delete NewIcon;
@@ -153,7 +152,7 @@ const QIcon& getIcon(const QString& name){
 		}
 		else
 			IconCache.insert(name,NewIcon);
-	}*/
+	}
 	if(!NewIcon)
 	{
 		NewIcon=new QIcon(getImageFile(name+".png"));

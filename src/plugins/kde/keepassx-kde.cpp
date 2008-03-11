@@ -157,13 +157,13 @@ QApplication* KdePlugin::getMainAppObject(int argc, char** argv){
 	return dynamic_cast<QApplication*>( new KpKApplication() );
 #else
 	return dynamic_cast<QApplication*>( new KApplication() );
-#emdif
+#endif
 }
 
 
 QIcon KdePlugin::getIcon(const QString& name){
 	KIconLoader loader;
-	QPixmap pxm=loader.loadIcon(IconMap.value(name),K3Icon::Desktop,0,K3Icon::DefaultState,QStringList(),NULL,true);
+	QPixmap pxm=loader.loadIcon(IconMap.value(name),KIconLoader::Desktop,0,KIconLoader::DefaultState,QStringList(),NULL,true);
 	if(pxm.isNull())return QIcon();
 	QIcon icon(pxm);
 	return icon;

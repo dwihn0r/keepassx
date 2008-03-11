@@ -20,7 +20,7 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
-//QString findPlugin(const QString& filename); //TODO Plugins
+QString findPlugin(const QString& filename);
 void loadImages();
 bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
 void initAppPaths(int argc, char **argv);
@@ -29,6 +29,7 @@ class CmdLineArgs {
 public:
 	CmdLineArgs();
 	bool parse(const QStringList& argv);
+	bool preparse(int argc,char** argv);
 	static void printHelp();
 	QString error() {return Error;}
 	QString file() {return File;}

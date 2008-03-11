@@ -19,16 +19,15 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-/*
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
 #include "plugins/interfaces/IGnomeInit.h"
 #include "plugins/interfaces/IIconTheme.h"
-#include "lib/FileDialogs.h"
-*/
+
 
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <QPluginLoader>
 #include "mainwindow.h"
 #include "main.h"
 #include "crypto/yarrow.h"
@@ -48,29 +47,26 @@ QString DetailViewTemplate;
 bool EventOccurred;
 
 QPixmap* EntryIcons;
-//IIconTheme* IconLoader=NULL; //TODO plugins
+IIconTheme* IconLoader=NULL;
 
 
 int main(int argc, char **argv)
 {
-	QApplication* app;
-#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
-	app = new KeepassApplication(argc,argv);
-#else
-	app = new QApplication(argc,argv);
-#endif
+	QApplication* app=NULL;
 	initAppPaths(argc,argv);
 	CmdLineArgs args;
-	args.parse(QApplication::arguments());
-	qDebug(CSTR(AppDir));
-	qDebug(CSTR(DataDir));
+	if(!args.preparse(argc,argv)){ // searches only for the -cfg parameter
+		qCritical(CSTR(args.error()));
+		return 1;
+	}
+
 	//Load Config
 	QString IniFilename;
 	if(args.configLocation().isEmpty()){
 		if(!QDir(HomeDir).exists()){
 			QDir conf(QDir::homePath());
 			if(!QDir().mkpath(HomeDir))
-				qDebug("Warning: Could not create directory '%s'", CSTR(HomeDir));
+				qWarning("Warning: Could not create directory '%s'", CSTR(HomeDir));
 		}
 		IniFilename=HomeDir+"/config";
 	}
@@ -79,9 +75,10 @@ int main(int argc, char **argv)
 
 	config = new KpxConfig(IniFilename);
 	fileDlgHistory.load();
+	
+	// PlugIns
 
-	// TODO Plugins
-	/*if(config->integrPlugin()!=KpxConfig::NoIntegr){
+	if(config->integrPlugin()!=KpxConfig::NoIntegr){
 		QString LibName="libkeepassx-";
 		if(config->integrPlugin()==KpxConfig::KDE)
 			LibName+="kde.so";
@@ -122,7 +119,16 @@ int main(int argc, char **argv)
 			qWarning(CSTR(QString("Could not load desktop integration plugin: File '%1' not found.").arg(LibName)));
 			PluginLoadError=QObject::tr("Could not locate library file.");
 		}
-	}*/
+	}
+	if(!app){
+		#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
+			app = new KeepassApplication(argc,argv);
+		#else
+			app = new QApplication(argc,argv);
+		#endif	
+	}
+	args.parse(QApplication::arguments());
+	
 	
 	//Internationalization
 	QLocale loc;
@@ -225,20 +231,6 @@ bool CmdLineArgs::parse(const QStringList& argv){
 			Help=true;
 			break; // break, because other arguments will be ignored anyway
 		}
-		if(argv[i]=="-cfg"){
-			if(argv.size()==i+1){
-				Error="Missing argument for '-cfg'.";
-				return false;
-			}
-			if(argv[i+1].left(1)=="-"){
-				Error=QString("Expected a path as argument for '-cfg' but got '%1.'").arg(argv[i+1]);
-				return false;
-			}
-			QFileInfo file(argv[i+1]);
-			ConfigLocation=file.absoluteFilePath();
-			i++;
-			continue;
-		}
 		if(argv[i]=="-lang"){
 			if(argv.size()==i+1){
 				Error="Missing argument for '-lang'.";
@@ -249,6 +241,11 @@ bool CmdLineArgs::parse(const QStringList& argv){
 				return false;
 			}
 			Language=argv[i+1];
+			i++;
+			continue;
+		}
+		if(argv[i]=="-cfg"){
+			//already done in preparse() -> skip
 			i++;
 			continue;
 		}
@@ -270,6 +267,26 @@ bool CmdLineArgs::parse(const QStringList& argv){
 	return true;	
 }
 
+bool CmdLineArgs::preparse(int argc,char** argv){
+	for(int i=1;i<argc;i++){
+		if(QString(argv[i])=="-cfg"){
+			if(argc==i+1){
+				Error="Missing argument for '-cfg'.";
+				return false;
+			}
+			if(QString(argv[i+1]).left(1)=="-"){
+				Error=QString("Expected a path as argument for '-cfg' but got '%1.'").arg(argv[i+1]);
+				return false;
+			}
+			QFileInfo file(argv[i+1]);
+			ConfigLocation=file.absoluteFilePath();
+			i++;
+			return true;
+		}
+	}
+	return true;
+}
+
 void CmdLineArgs::printHelp(){
 	cout << "KeePassX" << APP_VERSION << endl;
 	cout << "Usage: keepassx  [Filename] [Options]" << endl;
@@ -285,23 +302,13 @@ void CmdLineArgs::printHelp(){
 }
 
 
-
-
-
-//TODO Plugins
-/*
 QString findPlugin(const QString& filename){
-	QFileInfo info;
-
+	QFileInfo info;	
 	info.setFile(AppDir+"/../lib/"+filename);
 	if(info.exists() && info.isFile())
-		return AppDir+"/../lib/"+filename;
-
+		return AppDir+"/../lib/"+filename;	
 	return QString();
 }
-*/
-
-
 
 
 
