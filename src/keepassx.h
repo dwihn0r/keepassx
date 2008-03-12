@@ -84,7 +84,6 @@
 #include "crypto/yarrow.h"
 #include "lib/bookmarks.h"
 #include "lib/FileDialogs.h"
-#include "lib/random.h"
 #include "lib/SecString.h"
 #include "lib/tools.h"
 #include "lib/UrlLabel.h"

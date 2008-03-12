@@ -20,6 +20,42 @@
 #ifndef RANDOM_H_
 #define RANDOM_H_
 
-extern void getRandomBytes(void* buffer,int NumBlocks);
+#include <QObject>
+
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+#define HAS_DEV_RANDOM
+#include <QThread>
+#endif
+
+class RandomSource : public QObject {
+	Q_OBJECT
+	
+	public:
+		RandomSource();
+	
+	private:
+		static void getRandomWeak(quint8* buffer, int length);
+
+#ifdef HAS_DEV_RANDOM
+	private slots:
+		void seedStrong(int source, QByteArray buffer, int length);
+#endif
+};
+
+#ifdef HAS_DEV_RANDOM
+class DevRandom : public QThread {
+	Q_OBJECT
+	
+	public:
+		DevRandom(QObject* parent = 0);
+		void run();
+		
+	signals:
+		void randomAvailable(int source, QByteArray buffer, int length);
+		
+	private:
+		static bool getRandomStrong(quint8* buffer, int length);
+};
+#endif
 
 #endif

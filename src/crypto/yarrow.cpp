@@ -26,6 +26,7 @@
 #include <time.h>
 
 #include "yarrow.h"
+#include "random.h"
 
 #ifndef YARROW_DEBUG
 #define YARROW_DEBUG 0
@@ -399,12 +400,15 @@ struct yarrow_source StrongSrc[2];
 void initYarrow(){
 	yarrow256_init(&WeakCtx,2,WeakSrc);
 	yarrow256_init(&StrongCtx,2,StrongSrc);
-	quint8 buffer[100];
-	getRandomBytes(buffer,100);
-	yarrow256_update(&WeakCtx,0,800,100,buffer);
-	getRandomBytes(buffer,100);
-	yarrow256_update(&WeakCtx,1,800,100,buffer);
-	Q_ASSERT(yarrow256_is_seeded(&WeakCtx));
+	new RandomSource();
+}
+
+void yarrowUpdateWeak(unsigned source, unsigned entropy, unsigned length, const quint8 *data){
+	yarrow256_update(&WeakCtx,source,entropy,length,data);
+}
+
+void yarrowUpdateStrong(unsigned source, unsigned entropy, unsigned length, const quint8 *data){
+	yarrow256_update(&StrongCtx,source,entropy,length,data);
 }
 
 void randomize(void* buffer, unsigned int length){

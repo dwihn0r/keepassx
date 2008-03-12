@@ -23,7 +23,18 @@
 #include "main.h"
 
 void initAppPaths(int argc,char** argv){
-	AppDir = QApplication::applicationDirPath();
+	QFileInfo filePath;
+	QT_WA({
+		wchar_t module_name[256];
+		GetModuleFileNameW(0, module_name, sizeof(module_name) / sizeof(wchar_t));
+		filePath = QString::fromUtf16((ushort *)module_name);
+	}, {
+		char module_name[256];
+		GetModuleFileNameA(0, module_name, sizeof(module_name));
+		filePath = QString::fromLocal8Bit(module_name);
+	});	
+	AppDir = filePath.filePath();
+	AppDir.truncate(AppDir.lastIndexOf("/"));
 	
 	HomeDir = QString::fromLocal8Bit(qgetenv("APPDATA").constData());
 	if(!HomeDir.isEmpty() && QFile::exists(HomeDir))

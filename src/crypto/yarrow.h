@@ -182,6 +182,8 @@ do {						\
 		  (src) += (blocksize)) )
 
 void initYarrow();
+void yarrowUpdateWeak(unsigned source, unsigned entropy, unsigned length, const quint8 *data);
+void yarrowUpdateStrong(unsigned source, unsigned entropy, unsigned length, const quint8 *data);
 void randomize(void* buffer, unsigned int length);
 void reseedStrongPool(quint8* buffer1,int l1,quint8* buffer2,int l2);
 
