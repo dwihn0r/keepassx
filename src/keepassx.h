@@ -102,6 +102,7 @@ extern bool TrActive;
 extern QString DetailViewTemplate;
 extern QPixmap *EntryIcons;
 extern bool EventOccurred;
+extern bool EventOccurredBlock;
 
 #endif //__cplusplus
 #endif //KEEPASS_X_

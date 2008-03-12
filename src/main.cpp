@@ -45,6 +45,7 @@ QString PluginLoadError;
 bool TrActive;
 QString DetailViewTemplate;
 bool EventOccurred;
+bool EventOccurredBlock = false;
 
 QPixmap* EntryIcons;
 IIconTheme* IconLoader=NULL;

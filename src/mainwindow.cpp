@@ -1245,12 +1245,9 @@ void KeepassMainWindow::OnInactivityTimer(){
 	if (IsLocked || !FileOpen)
 		return;
 	
-	QWidgetList widgets = QApplication::topLevelWidgets();
-	for (int i=0; i<widgets.size(); i++){
-		if (widgets[i]->windowModality()==Qt::ApplicationModal){
-			inactivityCounter = 0;
-			return;
-		}
+	if (QApplication::activeModalWidget()!=NULL || EventOccurredBlock){
+		inactivityCounter = 0;
+		return;
 	}
 	
 	if (EventOccurred){

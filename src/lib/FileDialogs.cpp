@@ -29,6 +29,7 @@ void KpxFileDialogs::setPlugin(IFileDialog* plugin){
 
 QString KpxFileDialogs::openExistingFile(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,QString Dir,int SelectedFilter)
 {
+	EventOccurredBlock = true;
 	if(!iFileDialog)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
 	if(Dir==QString())
 		Dir=fileDlgHistory.getDir(Name);
@@ -38,11 +39,13 @@ QString KpxFileDialogs::openExistingFile(QWidget* Parent, const QString& Name, c
 	if(!result.isEmpty()){
 		fileDlgHistory.set(Name,result.left(result.lastIndexOf("/")+1),iFileDialog->getLastFilter());
 	}
+	EventOccurredBlock = false;
 	return result;
 }
 
 QStringList KpxFileDialogs::openExistingFiles(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,QString Dir,int SelectedFilter)
 {
+	EventOccurredBlock = true;
 	if(!iFileDialog)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
 	if(Dir==QString())
 		Dir=fileDlgHistory.getDir(Name);
@@ -52,11 +55,13 @@ QStringList KpxFileDialogs::openExistingFiles(QWidget* Parent, const QString& Na
 	if(!results.isEmpty()){
 		fileDlgHistory.set(Name,results[0].left(results[0].lastIndexOf("/")+1),iFileDialog->getLastFilter());
 	}
+	EventOccurredBlock = false;
 	return results;
 }
 
 QString KpxFileDialogs::saveFile(QWidget* Parent, const QString& Name, const QString& Title,const QStringList& Filters,bool OverWriteWarn,QString Dir,int SelectedFilter)
 {
+	EventOccurredBlock = true;
 	if(!iFileDialog)iFileDialog=dynamic_cast<IFileDialog*>(&DefaultQtDlgs);
 	if(Dir==QString())
 		Dir=fileDlgHistory.getDir(Name);
@@ -66,6 +71,7 @@ QString KpxFileDialogs::saveFile(QWidget* Parent, const QString& Name, const QSt
 	if(!result.isEmpty()){
 		fileDlgHistory.set(Name,result.left(result.lastIndexOf("/")+1),iFileDialog->getLastFilter());
 	}
+	EventOccurredBlock = false;
 	return result;
 }
 
