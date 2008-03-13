@@ -222,8 +222,9 @@ QRect KpxConfig::dialogGeometry(const QWidget* widget){
 		if (size.width() < minSize.width() || size.height() < minSize.height())
 			size = minSize;
 	}
-	
-	QRect rect(QPoint(), size);
+
+	QRect rect;
+	rect=QRect(QPoint(), size);
 	rect.moveCenter( widget->parentWidget()->window()->geometry().center() );
 	return rect;
 }

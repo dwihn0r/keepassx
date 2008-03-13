@@ -78,7 +78,9 @@ macx {
     CONFIG += app_bundle
     isEqual(ARCH,UNIVERSAL) {
         CONFIG += x86 ppc
+        # lipo cannot handle precompiled headers (yet)
         CONFIG -= precompile_header
+        QMAKE_CXXFLAGS += -include keepassx.h
 	}
     isEqual(ARCH,INTEL): CONFIG += x86
     isEqual(ARCH,PPC): CONFIG += ppc

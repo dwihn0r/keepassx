@@ -247,7 +247,8 @@ void CGenPwDialog::estimateQuality(){
 		num=Edit_chars->text().length();
 
 	float bits=0;
-	if(num)bits=log(num)/log(2);
+	if(num)
+		bits=log((float)num)/log(2.0f);
 	bits=bits*((float)Spin_Num->value());
 	Progress_Quali->setFormat(tr("%1 Bits").arg((int)bits));
 	Progress_Quali->update();
