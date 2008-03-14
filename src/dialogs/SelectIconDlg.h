@@ -23,31 +23,32 @@
 
 #include "ui_SelectIconDlg.h"
 
-class CSelectIconDlg:public QDialog, public Ui_SelectIconDlg{
- Q_OBJECT
-public:
- CSelectIconDlg(IDatabase* db,int ImageID,QWidget* parent = 0,  bool modal = false, Qt::WFlags fl = 0);
+class CSelectIconDlg:public QDialog, private Ui_SelectIconDlg{
+	Q_OBJECT
+	
+	public:
+		CSelectIconDlg(IDatabase* db,int ImageID,QWidget* parent = 0,  bool modal = false, Qt::WFlags fl = 0);
 
-public slots:
- void OnAddIcon();
- void OnPickIcon();
- void OnCancel();
- void OnDelete();
- void OnReplace();
- void OnSelectionChanged(QListWidgetItem*);
+	private slots:
+		void OnAddIcon();
+		void OnPickIcon();
+		void OnCancel();
+		void OnDelete();
+		void OnReplace();
+		void OnSelectionChanged(QListWidgetItem*);
 
-private:
-	int Id;
-	IDatabase* db;
-	void updateView();
-	QMenu* CtxMenu;
-	QAction* DeleteAction;
-	QAction* ReplaceAction;
-	QPushButton* Button_PickIcon;
+	private:
+		int Id;
+		IDatabase* db;
+		void updateView();
+		QMenu* CtxMenu;
+		QAction* DeleteAction;
+		QAction* ReplaceAction;
+		QPushButton* Button_PickIcon;
 
-protected:
- virtual void contextMenuEvent(QContextMenuEvent *event);
- virtual void showEvent(QShowEvent* event);
+	protected:
+		virtual void contextMenuEvent(QContextMenuEvent *event);
+		virtual void showEvent(QShowEvent* event);
 
 };
 

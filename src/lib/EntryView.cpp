@@ -563,8 +563,9 @@ void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
 	mimeData->setData("text/plain;charset=UTF-8",DragItems.first()->text(0).toUtf8());
 	mimeData->setData("application/x-keepassx-entry",QByteArray((char*)&pDragItems,sizeof(void*)));
 	drag->setMimeData(mimeData);
+	EventOccurredBlock = true;
 	drag->exec(Qt::MoveAction);
-
+	EventOccurredBlock = false;
 }
 
 void KeepassEntryView::removeDragItems(){

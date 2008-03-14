@@ -22,8 +22,6 @@
 
 #include "ui_ManageBookmarksDlg.h"
 
-#include "main.h"
-
 class ManageBookmarksDlg : public QDialog, private Ui::ManageBookmarksDlg
 {
   	Q_OBJECT

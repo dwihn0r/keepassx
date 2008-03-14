@@ -24,7 +24,7 @@
 #include "ui_ExpiredEntriesDlg.h"
 
 
-class ExpiredEntriesDialog:public QDialog, public Ui_ExpiredEntriesDialog{
+class ExpiredEntriesDialog:public QDialog, private Ui_ExpiredEntriesDialog{
 	Q_OBJECT
 	public:
 		ExpiredEntriesDialog(QWidget* parent,IDatabase* database,const QList<IEntryHandle*>& Entries);

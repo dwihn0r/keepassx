@@ -467,7 +467,9 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 	mimeData->setData("application/x-keepassx-group",QByteArray());
 	drag->setMimeData(mimeData);
 
+	EventOccurredBlock = true;
 	drag->exec(Qt::MoveAction);
+	EventOccurredBlock = false;
 }
 
 void KeepassGroupView::OnItemExpanded(QTreeWidgetItem* item){

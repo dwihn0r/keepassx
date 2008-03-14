@@ -58,7 +58,7 @@ class KeepassGroupView:public QTreeWidget{
 		GroupViewDragType DragType;
 		QList<QTreeWidgetItem*>* EntryDragItems;
 	
-	public slots:
+	private slots:
 		void OnCurrentGroupChanged(QTreeWidgetItem*);
 		void OnDeleteGroup();
 		void OnNewGroup();

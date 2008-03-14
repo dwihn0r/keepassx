@@ -48,4 +48,11 @@ private:
 	bool Help;
 };
 
+class EventListener : public QObject {
+	Q_OBJECT
+	
+	protected:
+		bool eventFilter(QObject*, QEvent* event);
+};
+
 #endif

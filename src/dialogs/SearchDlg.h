@@ -22,7 +22,7 @@
 
 #include "ui_SearchDlg.h"
 
-class SearchDialog : public QDialog, public Ui_Search_Dlg
+class SearchDialog : public QDialog, private Ui_Search_Dlg
 {
 	Q_OBJECT
 	public:
@@ -30,7 +30,7 @@ class SearchDialog : public QDialog, public Ui_Search_Dlg
 		~SearchDialog();
 		QList<IEntryHandle*> Result;
 	
-	public slots:
+	private slots:
 		virtual void OnClose();
 		virtual void OnSearch();
 	

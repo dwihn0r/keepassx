@@ -24,7 +24,7 @@
 #include "ui_EditEntryDlg.h"
 #include "Kdb3Database.h"
 
-class CEditEntryDlg : public QDialog, public Ui_EditEntryDialog
+class CEditEntryDlg : public QDialog, private Ui_EditEntryDialog
 {
 	Q_OBJECT
 	public:

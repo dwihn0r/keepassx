@@ -21,7 +21,6 @@
 
 #include "dialogs/PasswordGenDlg.h"
 #include "dialogs/CollectEntropyDlg.h"
-#include "crypto/yarrow.h"
 
 bool CGenPwDialog::EntropyCollected=false;
 

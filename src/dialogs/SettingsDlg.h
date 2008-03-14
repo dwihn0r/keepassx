@@ -24,7 +24,7 @@
 #include "ui_SettingsDlg.h"
 #include "lib/AutoType.h"
 
-class CSettingsDlg : public QDialog, public Ui_SettingsDialog
+class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 {
 	Q_OBJECT
 	public:

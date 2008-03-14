@@ -23,7 +23,7 @@
 
 #include "ui_CollectEntropyDlg.h"
 
-class CollectEntropyDlg: public QDialog, public Ui_CollectEntropyDlg{
+class CollectEntropyDlg: public QDialog, private Ui_CollectEntropyDlg{
 	Q_OBJECT
 	public:
 		CollectEntropyDlg(QWidget* parent);

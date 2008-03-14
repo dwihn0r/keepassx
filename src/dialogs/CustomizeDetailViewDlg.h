@@ -22,7 +22,7 @@
 
 #include "ui_CustomizeDetailViewDlg.h"
 
-class CustomizeDetailViewDialog : public QDialog, public Ui_CustomizeDetailViewDialog{
+class CustomizeDetailViewDialog : public QDialog, private Ui_CustomizeDetailViewDialog{
 	Q_OBJECT
 	public:
 		CustomizeDetailViewDialog(QWidget* parent);

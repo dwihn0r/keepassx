@@ -22,7 +22,6 @@
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
 #include "plugins/interfaces/IGnomeInit.h"
-#include "plugins/interfaces/IIconTheme.h"
 
 
 #include <QTranslator>
@@ -30,7 +29,6 @@
 #include <QPluginLoader>
 #include "mainwindow.h"
 #include "main.h"
-#include "crypto/yarrow.h"
 #if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
 	#include "Application_X11.h"
 #endif
@@ -46,6 +44,7 @@ bool TrActive;
 QString DetailViewTemplate;
 bool EventOccurred;
 bool EventOccurredBlock = false;
+EventListener* eventListener;
 
 QPixmap* EntryIcons;
 IIconTheme* IconLoader=NULL;
@@ -181,10 +180,14 @@ int main(int argc, char **argv)
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
 
+	eventListener = new EventListener();
+	app->installEventFilter(eventListener);
+
 	QApplication::setQuitOnLastWindowClosed(false);
 	KeepassMainWindow *mainWin = new KeepassMainWindow(args.file(), args.startMinimized(), args.startLocked());
 	int r=app->exec();
 	delete mainWin;
+	delete eventListener;
 
 	fileDlgHistory.save();
 	delete app;
@@ -312,4 +315,12 @@ QString findPlugin(const QString& filename){
 }
 
 
-
+bool EventListener::eventFilter(QObject*, QEvent* event){
+	if (!EventOccurred){
+		int t = event->type();
+		if ( t>=QEvent::MouseButtonPress&&t<=QEvent::KeyRelease || t>=QEvent::HoverEnter&&t<=QEvent::HoverMove )
+			EventOccurred = true;
+	}
+	
+	return false;
+}

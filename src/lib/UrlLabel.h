@@ -22,24 +22,25 @@
 #define _LINKLABEL_H_
 
 class LinkLabel : public QLabel{
-Q_OBJECT
-public:
-LinkLabel(QWidget *parent,const QString& text=QString::null, int x=0, int y=0,Qt::WFlags f=0);
-~LinkLabel();
-void setPos(int x,int y);
-QString url();
+	Q_OBJECT
+	
+	public:
+		LinkLabel(QWidget *parent,const QString& text=QString::null, int x=0, int y=0,Qt::WFlags f=0);
+		~LinkLabel();
+		void setPos(int x,int y);
+		QString url();
 
-public slots:
-virtual void setText(const QString&);
+	public slots:
+		virtual void setText(const QString&);
 
-signals:
- void clicked();
+	signals:
+		void clicked();
 
-protected:
-virtual void mouseReleaseEvent(QMouseEvent* event);
+	protected:
+		virtual void mouseReleaseEvent(QMouseEvent* event);
 
-private:
-QString URL;
+	private:
+		QString URL;
 
 };
 

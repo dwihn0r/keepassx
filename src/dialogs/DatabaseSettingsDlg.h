@@ -23,7 +23,7 @@
 
 #include "ui_DatabaseSettingsDlg.h"
 
-class CDbSettingsDlg : public QDialog, public Ui_DatabaseSettingsDlg
+class CDbSettingsDlg : public QDialog, private Ui_DatabaseSettingsDlg
 {
 	Q_OBJECT
 	public:
@@ -31,7 +31,7 @@ class CDbSettingsDlg : public QDialog, public Ui_DatabaseSettingsDlg
   		~CDbSettingsDlg();
 		virtual void paintEvent(QPaintEvent *);
 
-	public slots:
+	private slots:
     	virtual void OnCancel();
     	virtual void OnOK();
 

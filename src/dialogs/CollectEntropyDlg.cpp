@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 
-#include "crypto/yarrow.h"
 #include "CollectEntropyDlg.h"
 
 

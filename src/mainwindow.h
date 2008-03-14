@@ -29,7 +29,7 @@
 #include "ui_MainWindow.h"
 #include "ui_WorkspaceLockedWidget.h"
 
-class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
+class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 	Q_OBJECT
 	public:
 		KeepassMainWindow (const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent=0, Qt::WFlags flags=0);
@@ -84,7 +84,6 @@ class KeepassMainWindow : public QMainWindow, public Ui_MainWindow{
 		void closeEvent(QCloseEvent* event);
 		void hideEvent(QHideEvent* event);
 		void showEvent(QShowEvent* event);
-		bool event(QEvent* event);
 		void setLock();
 		void resetLock();
 		SelectionState GroupSelection, EntrySelection;

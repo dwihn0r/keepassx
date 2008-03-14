@@ -21,7 +21,6 @@
 #include <QStatusBar>
 #include "mainwindow.h"
 #include "lib/AutoType.h"
-#include "lib/FileDialogs.h"
 #include "import/Import_PwManager.h"
 #include "import/Import_KWalletXml.h"
 #include "import/Import_KeePassX_Xml.h"
@@ -1009,15 +1008,6 @@ void KeepassMainWindow::showEvent(QShowEvent* event){
 	QMainWindow::showEvent(event);
 }
 
-bool KeepassMainWindow::event(QEvent* event){
-	if (!EventOccurred){
-		int t = event->type();
-		if ( t>=QEvent::MouseButtonPress&&t<=QEvent::KeyRelease || t>=QEvent::HoverEnter&&t<=QEvent::HoverMove )
-			EventOccurred = true;
-	}
-	return QMainWindow::event(event);
-}
-
 void KeepassMainWindow::OnExtrasSettings(){
 	CSettingsDlg dlg(this);
 	dlg.exec();
@@ -1256,8 +1246,12 @@ void KeepassMainWindow::OnInactivityTimer(){
 	}
 	else{
 		inactivityCounter++;
-		if (inactivityCounter*(inactivityTimer->interval()) >= config->lockAfterSec()*1000)
+		if (inactivityCounter*(inactivityTimer->interval()) >= config->lockAfterSec()*1000){
+			QWidget* popUpWidget = QApplication::activePopupWidget();
+			if (popUpWidget!=NULL)
+				popUpWidget->hide();
 			OnUnLockWorkspace();
+		}
 	}
 }
 

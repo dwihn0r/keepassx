@@ -28,7 +28,7 @@ class WaitAnimationWidget:public QWidget{
 		void setRefreshRate(int fps);
 		void start();
 		void stop();
-	public slots:
+	private slots:
 		void refreshAnimation();
 	private:
 		virtual void paintEvent(QPaintEvent* event);

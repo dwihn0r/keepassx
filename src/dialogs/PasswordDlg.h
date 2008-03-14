@@ -20,65 +20,61 @@
 #ifndef PASSWORDDIALOG_H
 #define PASSWORDDIALOG_H
 
-#include <QPixmap>
 #include <QPaintEvent>
 #include "ui_PasswordDlg.h"
-#include "main.h"
-#include "lib/UrlLabel.h"
-#include "Database.h"
 
 
-class PasswordDialog : public QDialog, public Ui_PasswordDlg {
-Q_OBJECT
-public:
-	enum DlgMode {
-		Mode_Ask,     // Normal password entry when opening a database
-		Mode_Set,     // Setting password for the first time after creating a new database
-		Mode_Change   // Changing the password of a database
-	};
-	
-	enum DlgFlags {
-		Flag_None = 0x00, 
-		Flag_Auto = 0x01  // Dialog was automatically opened on start-up	
-	};
-	
-	enum DlgExit {
-		Exit_Ok=QDialog::Accepted,
-		Exit_Cancel=QDialog::Rejected,
-		Exit_Quit=3
-	};
-	
-	typedef bool (KeyFileGenProc)(const QString& filename,QString* error);
+class PasswordDialog : public QDialog, private Ui_PasswordDlg {
+	Q_OBJECT
+	public:
+		enum DlgMode {
+			Mode_Ask,     // Normal password entry when opening a database
+			Mode_Set,     // Setting password for the first time after creating a new database
+			Mode_Change   // Changing the password of a database
+		};
 		
-	PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const QString& filename=QString());
+		enum DlgFlags {
+			Flag_None = 0x00, 
+			Flag_Auto = 0x01  // Dialog was automatically opened on start-up	
+		};
+		
+		enum DlgExit {
+			Exit_Ok=QDialog::Accepted,
+			Exit_Cancel=QDialog::Rejected,
+			Exit_Quit=3
+		};
+		
+		typedef bool (KeyFileGenProc)(const QString& filename,QString* error);
+			
+		PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const QString& filename=QString());
+		
+		// result functions
+		QString selectedBookmark();
+		QString keyFile();
+		QString password();
 	
-	// result functions
-	QString selectedBookmark();
-	QString keyFile();
-	QString password();
-	
-public slots:
-	void OnOK();
-	void OnCancel();
-	void OnButtonBrowse();
-	void OnButtonQuit();
-	void OnGenKeyFile();
-	void OnButtonBack();
-	void ChangeEchoModeDatabaseKey();
-	void OnBookmarkTriggered(QAction* action);
-	void OnCheckBoxesChanged(int state);
+	private slots:
+		void OnOK();
+		void OnCancel();
+		void OnButtonBrowse();
+		void OnButtonQuit();
+		void OnGenKeyFile();
+		void OnButtonBack();
+		void ChangeEchoModeDatabaseKey();
+		void OnBookmarkTriggered(QAction* action);
+		void OnCheckBoxesChanged(int state);
 
-private:
-	DlgMode Mode;
-	QPixmap BannerPixmap;
-	QString BookmarkFilename;
-	QString Filename;
-	QString Password;
-	QString KeyFile;
-	void setStatePasswordOnly();
-	void setStateKeyFileOnly();
-	void setStateBoth();
-	virtual void paintEvent(QPaintEvent*);
+	private:
+		DlgMode Mode;
+		QPixmap BannerPixmap;
+		QString BookmarkFilename;
+		QString Filename;
+		QString Password;
+		QString KeyFile;
+		void setStatePasswordOnly();
+		void setStateKeyFileOnly();
+		void setStateBoth();
+		virtual void paintEvent(QPaintEvent*);
 };
 
 #endif
