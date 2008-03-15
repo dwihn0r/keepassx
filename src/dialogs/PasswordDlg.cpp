@@ -149,7 +149,10 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 	connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged(int)));
 	connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged(int)));
 	connect(Button_Back,SIGNAL(clicked()),this,SLOT(OnButtonBack()));
-	if(!config->showPasswordsPasswordDlg())ChangeEchoModeDatabaseKey();
+	if(!config->showPasswordsPasswordDlg())
+		ChangeEchoModeDatabaseKey();
+	else
+		ButtonChangeEchoMode->setIcon(getIcon("pwd_show"));
 	
 	adjustSize();
 	setMaximumSize(size());
@@ -294,10 +297,12 @@ void PasswordDialog::ChangeEchoModeDatabaseKey(){
 	if(Edit_Password->echoMode()==QLineEdit::Normal){
 		Edit_Password->setEchoMode(QLineEdit::Password);
 		Edit_PwRepeat->setEchoMode(QLineEdit::Password);
+		ButtonChangeEchoMode->setIcon(getIcon("pwd_hide"));
 	}
 	else{
 		Edit_Password->setEchoMode(QLineEdit::Normal);
 		Edit_PwRepeat->setEchoMode(QLineEdit::Normal);
+		ButtonChangeEchoMode->setIcon(getIcon("pwd_show"));
 	}
 }
 
