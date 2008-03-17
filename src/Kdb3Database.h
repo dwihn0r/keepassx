@@ -242,11 +242,13 @@ private:
 	QFile* File;
 	QString error;
 	bool KeyError;
+	bool PotentialEncodingIssue;
 	QList<StdEntry> UnknownMetaStreams;
 	QMap<quint32,bool> TreeStateMetaStream;
 	unsigned int KeyTransfRounds;
 	CryptAlgorithm Algorithm;
 	quint8 RawMasterKey[32];
+	quint8 RawMasterKey_Latin1[32];
 	quint8 MasterKey[32];
 };
 

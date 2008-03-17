@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2007 by Tarek Saidi                                *
+ *   Copyright (C) 2005-2008 by Tarek Saidi                                *
  *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include <QBuffer>
+#include <QTextCodec>
 #include "Kdb3Database.h"
 
 
@@ -432,6 +433,7 @@ if(!File->open(QIODevice::ReadWrite)){
 }
 total_size=File->size();
 char* buffer = new char[total_size];
+DECRYPT:
 File->read(buffer,total_size);
 
 if(total_size < DB_HEADER_SIZE){
@@ -463,6 +465,7 @@ else if(Flags & PWM_FLAG_TWOFISH) Algorithm = Twofish_Cipher;
 		else{error=tr("Unknown Encryption Algorithm.");
 			 return false;}
 
+
 if(!transformKey(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds))return false;
 quint8 FinalKey[32];
 
@@ -471,27 +474,38 @@ sha.update(FinalRandomSeed,16);
 sha.update(MasterKey,32);
 sha.finish(FinalKey);
 
-if(Algorithm == Rijndael_Cipher)
-{		AESdecrypt aes;
-		aes.key256(FinalKey);
-		aes.cbc_decrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,total_size-DB_HEADER_SIZE,(unsigned char*)EncryptionIV);
-		crypto_size=total_size-((quint8*)buffer)[total_size-1]-DB_HEADER_SIZE;
-	}
-else if(Algorithm == Twofish_Cipher)
-	{
-		CTwofish twofish;
-		if(twofish.init(FinalKey, 32, EncryptionIV) != true){return false;}
-		crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
-			total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
-	}
+if(Algorithm == Rijndael_Cipher){
+	AESdecrypt aes;
+	aes.key256(FinalKey);
+	aes.cbc_decrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,total_size-DB_HEADER_SIZE,(unsigned char*)EncryptionIV);
+	crypto_size=total_size-((quint8*)buffer)[total_size-1]-DB_HEADER_SIZE;
+}
+else if(Algorithm == Twofish_Cipher){
+	CTwofish twofish;
+	if(twofish.init(FinalKey, 32, EncryptionIV) != true){return false;}
+	crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
+	total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
+}
 
 if((crypto_size > 2147483446) || (!crypto_size && NumGroups)){error=tr("Decryption failed.\nThe key is wrong or the file is damaged."); return false;}
 SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
 
 if(memcmp(ContentsHash, FinalKey, 32) != 0){
+	delete buffer;
+	if(PotentialEncodingIssue){
+		// KeePassX used Latin-1 encoding for passwords until version 0.3.1
+		// but KeePass/Win32 uses Windows Codepage 1252.
+		// Too stay compatible with databases created with KeePassX <= 0.3.1
+		// the loading function gives both encodings a try.
+		memcpy(RawMasterKey,RawMasterKey_Latin1,32);
+		PotentialEncodingIssue=false;
+		qDebug("Decryption failed. Retrying with Latin-1.");
+		return load(filename); // second try
+	}
 	error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
 	KeyError=true;
-	return false;}
+	return false;
+}
 
 unsigned long pos = DB_HEADER_SIZE;
 quint16 FieldType;
@@ -737,10 +751,23 @@ bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
 
 bool Kdb3Database::setPasswordKey(const QString& Password){
 	assert(Password.size());
-	SHA256::hashBuffer(Password.toLatin1().data(),RawMasterKey,Password.toLatin1().size());
-	QByteArray lat,utf;
-	utf=Password.toUtf8();
-	lat=Password.toLatin1();
+	QTextCodec* codec=QTextCodec::codecForName("Windows-1252");
+	QByteArray Password_CP1252 = codec->fromUnicode(Password);
+	SHA256::hashBuffer(Password_CP1252.data(),RawMasterKey,Password_CP1252.size());
+	QByteArray Password_Latin1 = Password.toLatin1();
+	if(Password_Latin1 != Password_CP1252){
+		// KeePassX used Latin-1 encoding for passwords until version 0.3.1
+		// but KeePass/Win32 uses Windows Codepage 1252.
+		// Too stay compatible with databases created with KeePassX <= 0.3.1
+		// the loading function gives both encodings a try.
+		PotentialEncodingIssue = true;
+		SHA256::hashBuffer(Password_Latin1.data(),RawMasterKey_Latin1,Password_Latin1.size());
+	}
+	else {
+		// If the password does not contain problematic characters we don't need
+		// to try both encodings.
+		PotentialEncodingIssue = false;
+	}
 	return true;
 }
 
