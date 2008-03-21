@@ -44,7 +44,6 @@ bool TrActive;
 QString DetailViewTemplate;
 bool EventOccurred;
 bool EventOccurredBlock = false;
-EventListener* eventListener;
 
 QPixmap* EntryIcons;
 IIconTheme* IconLoader=NULL;
@@ -77,7 +76,7 @@ int main(int argc, char **argv)
 	fileDlgHistory.load();
 	
 	// PlugIns
-
+#ifdef Q_WS_X11
 	if(config->integrPlugin()!=KpxConfig::NoIntegr){
 		QString LibName="libkeepassx-";
 		if(config->integrPlugin()==KpxConfig::KDE)
@@ -103,14 +102,14 @@ int main(int argc, char **argv)
 				if(config->integrPlugin()==KpxConfig::KDE){
 					IKdeInit* kdeinit=qobject_cast<IKdeInit*>(plugin.instance());
 					app=kdeinit->getMainAppObject(argc,argv);
-					if(!app)PluginLoadError=QObject::tr("Initialization failed.");
+					if(!app) PluginLoadError = "Initialization failed.";
 				}
 				if(config->integrPlugin()==KpxConfig::Gnome){
 					IGnomeInit* ginit=qobject_cast<IGnomeInit*>(plugin.instance());
 					if(!ginit->init(argc,argv)){
 						KpxFileDialogs::setPlugin(NULL);
 						qWarning("GtkIntegrPlugin: Gtk init failed.");
-						PluginLoadError=QObject::tr("Initialization failed.");
+						PluginLoadError = "Initialization failed.";
 					}
 				}
 			}
@@ -120,6 +119,7 @@ int main(int argc, char **argv)
 			PluginLoadError=QObject::tr("Could not locate library file.");
 		}
 	}
+#endif
 	if(!app){
 		#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
 			app = new KeepassApplication(argc,argv);
@@ -137,23 +137,23 @@ int main(int argc, char **argv)
 	else
 		loc=QLocale(args.language());
 
-	QTranslator* translator = NULL;
-	QTranslator* qtTranslator=NULL;
-	translator=new QTranslator;
-	qtTranslator=new QTranslator;
+	QTranslator* translator = new QTranslator;
+	QTranslator* qtTranslator = new QTranslator;
 
 	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
 						<< DataDir+"/i18n/"
 						<< HomeDir))
 	{
-		app->installTranslator(translator);
+		QApplication::installTranslator(translator);
 		TrActive=true;
 	}
 	else{
 		if(loc.name()!="en_US")
-			qWarning(QString("Kpx: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
+			qWarning(CSTR(
+				QString("Kpx: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
 				.arg(QLocale::languageToString(loc.language()))
-				.arg(QLocale::countryToString(loc.country())).toAscii());
+				.arg(QLocale::countryToString(loc.country()))
+			));
 		delete translator;
 		TrActive=false;
 	}
@@ -163,12 +163,14 @@ int main(int argc, char **argv)
 							<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
 							<< DataDir+"/i18n/"
 							<< HomeDir))
-			app->installTranslator(qtTranslator);
+			QApplication::installTranslator(qtTranslator);
 		else{
 			if(loc.name()!="en_US")
-				qWarning(QString("Qt: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
+				qWarning(CSTR(
+					QString("Qt: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
 					.arg(QLocale::languageToString(loc.language()))
-					.arg(QLocale::countryToString(loc.country())).toAscii());
+					.arg(QLocale::countryToString(loc.country()))
+				));
 			delete qtTranslator;
 		}
 	}
@@ -180,7 +182,7 @@ int main(int argc, char **argv)
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
 
-	eventListener = new EventListener();
+	EventListener* eventListener = new EventListener();
 	app->installEventFilter(eventListener);
 
 	QApplication::setQuitOnLastWindowClosed(false);
@@ -201,8 +203,8 @@ void loadImages(){
 	QPixmap tmpImg(getImageFile("clientic.png"));
 	EntryIcons=new QPixmap[BUILTIN_ICONS];
 	for(int i=0;i<BUILTIN_ICONS;i++){
-	EntryIcons[i]=tmpImg.copy(i*16,0,16,16);}
-
+		EntryIcons[i]=tmpImg.copy(i*16,0,16,16);
+	}
 }
 
 
