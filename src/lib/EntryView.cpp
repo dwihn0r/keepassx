@@ -613,17 +613,13 @@ EntryViewItem::EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding
 bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
 	int SortCol=treeWidget()->header()->sortIndicatorSection();
 	int ListIndex=((KeepassEntryView*)treeWidget())->columnListIndex(SortCol);
-	if(ListIndex < 5 || ListIndex==9 || ListIndex==10){ //columns with string values (Title, Username, Password, URL, Comment, Group)
-		if(QString::localeAwareCompare(text(SortCol),other.text(SortCol)) < 0)
-			return true;
-		else
-			return false;
+	if(ListIndex < 5 || ListIndex > 8){ //columns with string values (Title, Username, Password, URL, Comment, Group)
+		return (QString::localeAwareCompare(text(SortCol),other.text(SortCol)) < 0);
 	}
 	KpxDateTime DateThis;
 	KpxDateTime DateOther;
 
-
-	switch(SortCol){
+	switch(ListIndex){
 		case 5: DateThis=EntryHandle->expire();
 				DateOther=((EntryViewItem&)other).EntryHandle->expire();
 				break;

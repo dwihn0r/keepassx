@@ -44,6 +44,7 @@ class AutoTypePrivate{
 		inline static void sleepKeyStrokeDelay(){ sleep(config->autoTypeKeyStrokeDelay()); };
 		static void templateToKeysyms(const QString& Template, QList<AutoTypeAction>& KeySymList,IEntryHandle* entry);
 		static void stringToKeysyms(const QString& string,QList<AutoTypeAction>& KeySymList);
+		static QString getRootGroupName(IEntryHandle* entry);
 };
 
 
@@ -193,8 +194,11 @@ void AutoType::performGlobal(){
 	QRegExp lineMatch("Auto-Type-Window(?:-(\\d+)|):([^\\n]+)", Qt::CaseInsensitive, QRegExp::RegExp2);
 	QDateTime now = QDateTime::currentDateTime();
 	for (int i=0; i<entries.size(); i++){
-		if (entries[i]->expire()!=Date_Never && entries[i]->expire()<now)
+		if ( (entries[i]->expire()!=Date_Never && entries[i]->expire()<now) ||
+			 (AutoTypePrivate::getRootGroupName(entries[i]).compare("backup",Qt::CaseInsensitive)==0)
+		){
 			continue;
+		}
 		
 		bool hasWindowEntry=false;
 		QString comment = entries[i]->comment();
@@ -563,4 +567,13 @@ void AutoTypePrivate::templateToKeysyms(const QString& tmpl, QList<AutoTypeActio
 void AutoTypePrivate::stringToKeysyms(const QString& string,QList<AutoTypeAction>& KeySymList){
 	for(int i=0; i<string.length();i++)
 		KeySymList << AutoTypeAction(TypeKey, HelperX11::getKeysym(string[i]));
+}
+
+QString AutoTypePrivate::getRootGroupName(IEntryHandle* entry){
+	IGroupHandle* group = entry->group();
+	int level = group->level();
+	for (int i=0; i<level; i++)
+		group = group->parent();
+	
+	return group->title();
 }
