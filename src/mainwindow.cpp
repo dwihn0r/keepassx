@@ -491,6 +491,7 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 	if (!lock){
 		setWindowTitle(APP_DISPLAY_NAME);
 		currentFile.clear();
+		QuickSearchEdit->setText("");
 	}
 	return true;
 }
@@ -1181,7 +1182,8 @@ void KeepassMainWindow::OnUnLockWorkspace(){
 			}
 		}
 		InUnLock = false;
-	} else {
+	}
+	else {
 		QTreeWidgetItem* item = GroupView->currentItem();
 		bool root = false;
 		while (item!=NULL){
@@ -1209,6 +1211,7 @@ void KeepassMainWindow::OnLockClose(){
 }
 
 void KeepassMainWindow::setLock(){
+	QuickSearchEdit->setEchoMode(QLineEdit::NoEcho);
 	NormalCentralWidget->setVisible(false);
 	NormalCentralWidget->setParent(NULL);
 	setCentralWidget(LockedCentralWidget);
@@ -1221,6 +1224,9 @@ void KeepassMainWindow::setLock(){
 }
 
 void KeepassMainWindow::resetLock(){
+	if (!InUnLock)
+		QuickSearchEdit->setText("");
+	QuickSearchEdit->setEchoMode(QLineEdit::Normal);
 	LockedCentralWidget->setVisible(false);
 	LockedCentralWidget->setParent(NULL);
 	setCentralWidget(NormalCentralWidget);
