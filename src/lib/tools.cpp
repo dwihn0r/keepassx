@@ -82,6 +82,9 @@ void openBrowser(IEntryHandle* entry){
 }
 
 void openBrowser(const QString& UrlString){
+	if (UrlString.trimmed().isEmpty())
+		return;
+	
 	if (UrlString.startsWith("cmd://") && UrlString.length()>6){
 		QProcess::startDetached(UrlString.right(UrlString.length()-6));
 		return;

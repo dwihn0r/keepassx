@@ -68,7 +68,27 @@
        </widget>
       </item>
       <item row="1" column="1" >
-       <widget class="QLineEdit" name="EditRounds" />
+       <layout class="QHBoxLayout" >
+        <item>
+         <widget class="QLineEdit" name="EditRounds" />
+        </item>
+        <item>
+         <widget class="QPushButton" name="ButtonBench" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip" >
+           <string>Calculate rounds for a 1-second delay on this computer</string>
+          </property>
+          <property name="text" >
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

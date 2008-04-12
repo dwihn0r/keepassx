@@ -433,12 +433,12 @@ if(!File->open(QIODevice::ReadWrite)){
 }
 total_size=File->size();
 char* buffer = new char[total_size];
-DECRYPT:
 File->read(buffer,total_size);
 
 if(total_size < DB_HEADER_SIZE){
-error=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
-return false; }
+	error=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
+	return false;
+}
 
 memcpyFromLEnd32(&Signature1,buffer);
 memcpyFromLEnd32(&Signature2,buffer+4);
@@ -453,20 +453,27 @@ memcpy(TransfRandomSeed,buffer+88,32);
 memcpyFromLEnd32(&KeyTransfRounds,buffer+120);
 
 if((Signature1!=PWM_DBSIG_1) || (Signature2!=PWM_DBSIG_2)){
-error=tr("Wrong Signature");
-return false;}
+	error=tr("Wrong Signature");
+	return false;
+}
 
 if((Version & 0xFFFFFF00) != (PWM_DBVER_DW & 0xFFFFFF00)){
 	error=tr("Unsupported File Version.");
-	return false;}
+	return false;
+}
 
-if(Flags & PWM_FLAG_RIJNDAEL) Algorithm = Rijndael_Cipher;
-else if(Flags & PWM_FLAG_TWOFISH) Algorithm = Twofish_Cipher;
-		else{error=tr("Unknown Encryption Algorithm.");
-			 return false;}
+if (Flags & PWM_FLAG_RIJNDAEL)
+	Algorithm = Rijndael_Cipher;
+else if (Flags & PWM_FLAG_TWOFISH)
+	Algorithm = Twofish_Cipher;
+else{
+	error=tr("Unknown Encryption Algorithm.");
+	return false;
+}
 
 
-if(!transformKey(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds))return false;
+KeyTransform::transform(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds);
+
 quint8 FinalKey[32];
 
 SHA256 sha;
@@ -482,12 +489,16 @@ if(Algorithm == Rijndael_Cipher){
 }
 else if(Algorithm == Twofish_Cipher){
 	CTwofish twofish;
-	if(twofish.init(FinalKey, 32, EncryptionIV) != true){return false;}
+	if (twofish.init(FinalKey, 32, EncryptionIV) != true)
+		return false;
 	crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
 	total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
 }
 
-if((crypto_size > 2147483446) || (!crypto_size && NumGroups)){error=tr("Decryption failed.\nThe key is wrong or the file is damaged."); return false;}
+if ((crypto_size > 2147483446) || (!crypto_size && NumGroups)){
+	error=tr("Decryption failed.\nThe key is wrong or the file is damaged.");
+	return false;
+}
 SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
 
 if(memcmp(ContentsHash, FinalKey, 32) != 0){
@@ -518,65 +529,73 @@ RootGroup.Title="$ROOT$";
 RootGroup.Parent=NULL;
 RootGroup.Handle=NULL;
 
-	for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
-	{
-		pField = buffer+pos;
+for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
+{
+	pField = buffer+pos;
 
-		memcpyFromLEnd16(&FieldType, pField);
-		pField += 2; pos += 2;
-		if(pos >= total_size) {
-		 error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
-		 return false; }
-
-		memcpyFromLEnd32(&FieldSize, pField);
-		pField += 4; pos += 4;
-		if(pos >= (total_size + FieldSize)){
-		 error=tr("Unexpected error: Offset is out of range.").append(" [G2]");
-		return false;}
-
-		bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
-		if((FieldType == 0xFFFF) && (bRet == true)){
-			Groups << group;
-			CurGroup++;} // Now and ONLY now the counter gets increased
-
-		pField += FieldSize;
-		pos += FieldSize;
-		if(pos >= total_size) {
-		 error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
-		 return false;}
+	memcpyFromLEnd16(&FieldType, pField);
+	pField += 2; pos += 2;
+	if (pos >= total_size){
+		error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
+		return false;
 	}
+
+	memcpyFromLEnd32(&FieldSize, pField);
+	pField += 4; pos += 4;
+	if (pos >= (total_size + FieldSize)){
+		error=tr("Unexpected error: Offset is out of range.").append(" [G2]");
+		return false;
+	}
+
+	bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
+	if ((FieldType == 0xFFFF) && (bRet == true)){
+		Groups << group;
+		CurGroup++; // Now and ONLY now the counter gets increased
+	}
+	pField += FieldSize;
+	pos += FieldSize;
+	if (pos >= total_size){
+		error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
+		return false;
+	}
+}
 
 StdEntry entry;
 
-	for(unsigned long CurEntry = 0; CurEntry < NumEntries;)
-	{
-		pField = buffer+pos;
+for (unsigned long CurEntry = 0; CurEntry < NumEntries;)
+{
+	pField = buffer+pos;
 
-		memcpyFromLEnd16(&FieldType, pField);
-		pField += 2; pos += 2;
-		if(pos >= total_size){
-		 error=tr("Unexpected error: Offset is out of range.").append(" [E1]");
-		 return false;}
-
-		memcpyFromLEnd32(&FieldSize, pField);
-		pField += 4; pos += 4;
-		if(pos >= (total_size + FieldSize)) {
-		 error=tr("Unexpected error: Offset is out of range.").append(" [E2]");
-		 return false; }
-
-		bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
-
-		if((FieldType == 0xFFFF) && (bRet == true)){
-			Entries << entry;
-			if(!entry.GroupId)qDebug("NULL: %i, '%s'",(int)CurEntry,(char*)entry.Title.toUtf8().data());
-			CurEntry++;}
-
-		pField += FieldSize;
-		pos += FieldSize;
-		if(pos >= total_size) {
-		 error=tr("Unexpected error: Offset is out of range.").append(" [E3]");
-		 return false; }
+	memcpyFromLEnd16(&FieldType, pField);
+	pField += 2; pos += 2;
+	if(pos >= total_size){
+		error=tr("Unexpected error: Offset is out of range.").append(" [E1]");
+		return false;
 	}
+
+	memcpyFromLEnd32(&FieldSize, pField);
+	pField += 4; pos += 4;
+	if (pos >= (total_size + FieldSize)){
+		error=tr("Unexpected error: Offset is out of range.").append(" [E2]");
+		return false;
+	}
+
+	bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
+
+	if((FieldType == 0xFFFF) && (bRet == true)){
+		Entries << entry;
+		if(!entry.GroupId)
+			qDebug("NULL: %i, '%s'", (int)CurEntry, (char*)entry.Title.toUtf8().data());
+		CurEntry++;
+	}
+
+	pField += FieldSize;
+	pos += FieldSize;
+	if (pos >= total_size){
+		error=tr("Unexpected error: Offset is out of range.").append(" [E3]");
+		return false;
+	}
+}
 
 if(!createGroupTree(Levels)){
 	error=tr("Invalid group tree.");
@@ -591,8 +610,8 @@ for(int i=0;i<Entries.size();i++){
 		if(!parseMetaStream(Entries[i]))
 			UnknownMetaStreams << Entries[i];
 		Entries.removeAt(i);
-		i--;}
-
+		i--;
+	}
 }
 
 int* EntryIndices=new int[Groups.size()];
@@ -614,38 +633,25 @@ return true;
 }
 
 QDateTime Kdb3Database::dateFromPackedStruct5(const unsigned char* pBytes){
-quint32 dw1, dw2, dw3, dw4, dw5;
-dw1 = (quint32)pBytes[0]; dw2 = (quint32)pBytes[1]; dw3 = (quint32)pBytes[2];
-dw4 = (quint32)pBytes[3]; dw5 = (quint32)pBytes[4];
-int y = (dw1 << 6) | (dw2 >> 2);
-int mon = ((dw2 & 0x00000003) << 2) | (dw3 >> 6);
-int d = (dw3 >> 1) & 0x0000001F;
-int h = ((dw3 & 0x00000001) << 4) | (dw4 >> 4);
-int min = ((dw4 & 0x0000000F) << 2) | (dw5 >> 6);
-int s = dw5 & 0x0000003F;
-return QDateTime(QDate(y,mon,d),QTime(h,min,s));
+	quint32 dw1, dw2, dw3, dw4, dw5;
+	dw1 = (quint32)pBytes[0]; dw2 = (quint32)pBytes[1]; dw3 = (quint32)pBytes[2];
+	dw4 = (quint32)pBytes[3]; dw5 = (quint32)pBytes[4];
+	int y = (dw1 << 6) | (dw2 >> 2);
+	int mon = ((dw2 & 0x00000003) << 2) | (dw3 >> 6);
+	int d = (dw3 >> 1) & 0x0000001F;
+	int h = ((dw3 & 0x00000001) << 4) | (dw4 >> 4);
+	int min = ((dw4 & 0x0000000F) << 2) | (dw5 >> 6);
+	int s = dw5 & 0x0000003F;
+	return QDateTime(QDate(y,mon,d),QTime(h,min,s));
 }
 
 
 void Kdb3Database::dateToPackedStruct5(const QDateTime& d,unsigned char* pBytes){
-pBytes[0] = (quint8)(((quint32)d.date().year() >> 6) & 0x0000003F);
-pBytes[1] = (quint8)((((quint32)d.date().year() & 0x0000003F) << 2) | (((quint32)d.date().month() >> 2) & 0x00000003));
-pBytes[2] = (quint8)((((quint32)d.date().month() & 0x00000003) << 6) | (((quint32)d.date().day() & 0x0000001F) << 1) | (((quint32)d.time().hour() >> 4) & 0x00000001));
-pBytes[3] = (quint8)((((quint32)d.time().hour() & 0x0000000F) << 4) | (((quint32)d.time().minute() >> 2) & 0x0000000F));
-pBytes[4] = (quint8)((((quint32)d.time().minute() & 0x00000003) << 6) | ((quint32)d.time().second() & 0x0000003F));
-}
-
-
-bool Kdb3Database::transformKey(quint8* src,quint8* dst,quint8* KeySeed,int rounds){
-	quint8 tmp[32];
-	AESencrypt aes;
-	aes.key256(KeySeed);
-	memcpy(tmp,src,32);
-	for(int i=0;i<rounds;i++){
-		aes.ecb_encrypt(tmp,tmp,32);
-	}
-	SHA256::hashBuffer(tmp,dst,32);
-	return true;
+	pBytes[0] = (quint8)(((quint32)d.date().year() >> 6) & 0x0000003F);
+	pBytes[1] = (quint8)((((quint32)d.date().year() & 0x0000003F) << 2) | (((quint32)d.date().month() >> 2) & 0x00000003));
+	pBytes[2] = (quint8)((((quint32)d.date().month() & 0x00000003) << 6) | (((quint32)d.date().day() & 0x0000001F) << 1) | (((quint32)d.time().hour() >> 4) & 0x00000001));
+	pBytes[3] = (quint8)((((quint32)d.time().hour() & 0x0000000F) << 4) | (((quint32)d.time().minute() >> 2) & 0x0000000F));
+	pBytes[4] = (quint8)((((quint32)d.time().minute() & 0x00000003) << 6) | ((quint32)d.time().second() & 0x0000003F));
 }
 
 
@@ -656,8 +662,6 @@ int Kdb3Database::numGroups(){
 int Kdb3Database::numEntries(){
 	return Entries.size();
 }
-
-
 
 void Kdb3Database::deleteGroup(StdGroup* group){
 
@@ -1097,25 +1101,23 @@ else
 }
 
 void memcpyToLEnd32(char* dst,const quint32* src){
-
-if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
-  memcpy(dst+0,((char*)src)+3,1);
-  memcpy(dst+1,((char*)src)+2,1);
-  memcpy(dst+2,((char*)src)+1,1);
-  memcpy(dst+3,((char*)src)+0,1);
-}
-else
-  memcpy(dst,src,4);
+	if (QSysInfo::ByteOrder==QSysInfo::BigEndian){
+		memcpy(dst+0,((char*)src)+3,1);
+		memcpy(dst+1,((char*)src)+2,1);
+		memcpy(dst+2,((char*)src)+1,1);
+		memcpy(dst+3,((char*)src)+0,1);
+	}
+	else
+		memcpy(dst,src,4);
 }
 
 void memcpyToLEnd16(char* dst,const quint16* src){
-
-if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
-  memcpy(dst+0,((char*)src)+1,1);
-  memcpy(dst+1,((char*)src)+0,1);
-}
-else
-  memcpy(dst,src,2);
+	if (QSysInfo::ByteOrder==QSysInfo::BigEndian){
+		memcpy(dst+0,((char*)src)+1,1);
+		memcpy(dst+1,((char*)src)+0,1);
+	}
+	else
+		memcpy(dst,src,2);
 }
 
 bool Kdb3Database::save(){
@@ -1231,7 +1233,7 @@ bool Kdb3Database::save(){
 	memcpy(buffer+56,ContentsHash,32);
 	memcpy(buffer+88,TransfRandomSeed,32);
 	memcpyToLEnd32(buffer+120,&KeyTransfRounds);
-	transformKey(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds);
+	KeyTransform::transform(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds);
 	quint8 FinalKey[32];
 
 	SHA256 sha;
@@ -1718,4 +1720,75 @@ QList<IEntryHandle*> Kdb3Database::trashEntries(){
 		if(TrashHandles[i].isValid())
 			handles << &TrashHandles[i];
 	return handles;
+}
+
+
+void KeyTransform::transform(quint8* src, quint8* dst, quint8* KeySeed, int rounds){
+	KeyTransform* ktLeft = new KeyTransform(&src[0], &dst[0], KeySeed, rounds);
+	KeyTransform* ktRight = new KeyTransform(&src[16], &dst[16], KeySeed, rounds);
+	ktLeft->start();
+	ktRight->start();
+	while (ktLeft->isRunning() || ktRight->isRunning()){
+		QThread::msleep(100);
+	}
+	SHA256::hashBuffer(dst,dst,32);
+	delete ktLeft;
+	delete ktRight;
+}
+
+KeyTransform::KeyTransform(quint8* pSrc, quint8* pDst, quint8* pKeySeed, int pRounds){
+	src = pSrc;
+	dst = pDst;
+	KeySeed = pKeySeed;
+	rounds = pRounds;
+}
+
+void KeyTransform::run(){
+	AESencrypt aes;
+	aes.key256(KeySeed);
+	memcpy(dst,src,16);
+	for (int i=0; i<rounds; i++){
+		aes.ecb_encrypt(dst,dst,16);
+	}
+}
+
+
+int KeyTransformBenchmark::benchmark(int pMSecs){
+	KeyTransformBenchmark* ktbLeft = new KeyTransformBenchmark(pMSecs);
+	KeyTransformBenchmark* ktbRight = new KeyTransformBenchmark(pMSecs);
+	ktbLeft->start();
+	ktbRight->start();
+	while (ktbLeft->isRunning() || ktbRight->isRunning()){
+		QThread::msleep(100);
+	}
+	int num = ktbLeft->rounds + ktbRight->rounds;
+	delete ktbLeft;
+	delete ktbRight;
+	
+	return num;
+}
+
+KeyTransformBenchmark::KeyTransformBenchmark(int pMSecs){
+	msecs = pMSecs;
+	rounds = 0;
+}
+
+void KeyTransformBenchmark::run(){
+	quint8 KeySeed[32];
+	memset(KeySeed, 0x4B, 32);
+	quint8 dst[16];
+	memset(dst, 0x7E, 16);
+	
+	QTime t;
+	t.start();
+	
+	AESencrypt aes;
+	aes.key256(KeySeed);
+	
+	do {
+		for (int i=0; i<64; i++){
+			aes.ecb_encrypt(dst,dst,16);
+		}
+		rounds += 64;
+	} while (t.elapsed() < msecs);
 }

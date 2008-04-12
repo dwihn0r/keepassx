@@ -20,6 +20,7 @@
  
 
 #include "DatabaseSettingsDlg.h"
+#include "Kdb3Database.h"
 
 
 CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::WFlags fl)
@@ -34,9 +35,11 @@ CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::W
 	ComboAlgo->insertItem(0,tr("AES(Rijndael):  256 Bit   (default)"));
 	ComboAlgo->insertItem(1,tr("Twofish:  256 Bit"));
 	ComboAlgo->setCurrentIndex(database->cryptAlgorithm()); //Achtung: AlgoID muss gleich dem ComboBox Index sein!
-	EditRounds->setText(QString::number(database->keyTransfRounds()));		
+	EditRounds->setText(QString::number( database->keyTransfRounds() ));
+	ButtonBench->setIcon(getIcon("alarmclock"));
 	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
 	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
+	connect( ButtonBench, SIGNAL( clicked() ), this, SLOT( OnBenchmark() ) );
 }
 
 CDbSettingsDlg::~CDbSettingsDlg()
@@ -75,4 +78,8 @@ void CDbSettingsDlg::OnOK()
 	database->setKeyTransfRounds(rounds);
 	database->setCryptAlgorithm((CryptAlgorithm)ComboAlgo->currentIndex());
 	done(1);
+}
+
+void CDbSettingsDlg::OnBenchmark(){
+	EditRounds->setText(QString::number( KeyTransformBenchmark::benchmark(1000) ));
 }

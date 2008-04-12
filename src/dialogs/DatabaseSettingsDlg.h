@@ -32,8 +32,9 @@ class CDbSettingsDlg : public QDialog, private Ui_DatabaseSettingsDlg
 		virtual void paintEvent(QPaintEvent *);
 
 	private slots:
-    	virtual void OnCancel();
-    	virtual void OnOK();
+    	void OnCancel();
+    	void OnOK();
+		void OnBenchmark();
 
 	private:
 		IKdbSettings* database;

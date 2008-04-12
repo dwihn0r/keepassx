@@ -20,6 +20,8 @@
 #ifndef _STD_DATABASE_H_
 #define _STD_DATABASE_H_
 
+#include <QThread>
+
 #define DB_HEADER_SIZE	124
 #define PWM_DBSIG_1		0x9AA2D903
 #define PWM_DBSIG_2 	0xB54BFB65
@@ -210,7 +212,6 @@ private:
 	bool readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint32 FieldSize, quint8 *pData);
 	bool createGroupTree(QList<quint32>& Levels);
 	void createHandles();
-	bool transformKey(quint8* src,quint8* dst,quint8* KeySeed,int rounds);
 	void invalidateHandle(StdEntry* entry);
 	bool convHexToBinaryKey(char* HexKey, char* dst);
 	quint32 getNewGroupId();
@@ -250,6 +251,38 @@ private:
 	quint8 RawMasterKey[32];
 	quint8 RawMasterKey_Latin1[32];
 	quint8 MasterKey[32];
+};
+
+class KeyTransform : public QThread{
+	Q_OBJECT
+	
+	public:
+		static void transform(quint8* src, quint8* dst, quint8* KeySeed, int rounds);
+	
+	private:
+		KeyTransform(quint8* pSrc, quint8* pDst, quint8* pKeySeed, int pRounds);
+		quint8* src;
+		quint8* dst;
+		quint8* KeySeed;
+		int rounds;
+	
+	protected:
+		void run();
+};
+
+class KeyTransformBenchmark : public QThread{
+	Q_OBJECT
+	
+	public:
+		static int benchmark(int pMSecs);
+	
+	private:
+		KeyTransformBenchmark(int pMSecs);
+		int msecs;
+		int rounds;
+	
+	protected:
+		void run();
 };
 
 #endif
