@@ -4,7 +4,6 @@
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -53,6 +52,7 @@ AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers){
 	qSort(itemList.begin(), itemList.end(), itemLessThan);
 	for (int i=0; i<itemList.size(); i++)
 		entryList->addTopLevelItem(itemList[i]);
+	entryList->setCurrentItem(itemList[0]);
 	
 	entryList->resizeColumnToContents(0);
 	entryList->resizeColumnToContents(1);
@@ -65,6 +65,7 @@ AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers){
 	
 	connect(ButtonBox, SIGNAL(rejected()), SLOT(close()));
 	connect(entryList, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(itemSelected(QTreeWidgetItem*)));
+	connect(entryList, SIGNAL(returnPressed(QTreeWidgetItem*)), SLOT(itemSelected(QTreeWidgetItem*)));
 }
 
 bool AutoTypeDlg::itemLessThan(QTreeWidgetItem* i1, QTreeWidgetItem* i2){
@@ -75,6 +76,7 @@ bool AutoTypeDlg::itemLessThan(QTreeWidgetItem* i1, QTreeWidgetItem* i2){
 	else
 		return i1->text(2) < i2->text(2);
 }
+
 
 void AutoTypeDlg::paintEvent(QPaintEvent* event){
 	QWidget::paintEvent(event);

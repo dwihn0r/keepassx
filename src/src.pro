@@ -76,12 +76,12 @@ macx {
     QMAKE_BUNDLE_DATA += data
     ICON = ../share/macx_bundle/icon.icns
     CONFIG += app_bundle
-    isEqual(ARCH,UNIVERSAL) {
+    isEqual(ARCH,UNIVERSAL){
         CONFIG += x86 ppc
         # lipo cannot handle precompiled headers (yet)
         CONFIG -= precompile_header
         QMAKE_CXXFLAGS += -include keepassx.h
-	}
+    }
     isEqual(ARCH,INTEL): CONFIG += x86
     isEqual(ARCH,PPC): CONFIG += ppc
     SOURCES += main_macx.cpp
@@ -202,7 +202,8 @@ HEADERS += lib/UrlLabel.h \
            KpxConfig.h \
            dialogs/AddBookmarkDlg.h \
            lib/bookmarks.h \
-           dialogs/ManageBookmarksDlg.h
+           dialogs/ManageBookmarksDlg.h \
+ lib/AutoTypeTreeWidget.h
 
 SOURCES += lib/UrlLabel.cpp \
            main.cpp \
@@ -253,7 +254,8 @@ SOURCES += lib/UrlLabel.cpp \
 	crypto/aescrypt.c \
 	crypto/aeskey.c \
 	crypto/aes_modes.c \
-	crypto/aestab.c
+	crypto/aestab.c \
+ lib/AutoTypeTreeWidget.cpp
 
 PRECOMPILED_HEADER = keepassx.h
 

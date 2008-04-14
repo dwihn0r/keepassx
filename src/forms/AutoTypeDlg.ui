@@ -37,9 +37,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeWidget" name="entryList" >
-     <property name="cursor" stdset="0" >
-      <cursorShape>PointingHandCursor</cursorShape>
+    <widget class="AutoTypeTreeWidget" name="entryList" >
+     <property name="mouseTracking" >
+      <bool>true</bool>
      </property>
      <property name="rootIsDecorated" >
       <bool>false</bool>
@@ -64,6 +64,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AutoTypeTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>lib/AutoTypeTreeWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
