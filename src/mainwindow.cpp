@@ -519,6 +519,8 @@ void KeepassMainWindow::OnFileNewKdb(){
 		setupDatabaseConnections(db);
 		setStateGroupSelected(NONE);
 		setStateEntrySelected(NONE);
+		GroupView->createGroup("Internet", 1);
+		GroupView->createGroup("eMail", 19);
 	}
 	else{
 		delete db_new;

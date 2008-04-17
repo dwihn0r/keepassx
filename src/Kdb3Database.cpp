@@ -414,6 +414,12 @@ void Kdb3Database::restoreGroupTreeState(){
 	}
 }
 
+#define LOAD_RETURN_CLEANUP \
+	delete File; \
+	File = NULL; \
+	delete[] buffer; \
+	return false;
+
 bool Kdb3Database::load(QString filename){
 unsigned long total_size,crypto_size;
 quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
@@ -422,12 +428,12 @@ quint8 FinalRandomSeed[16];
 quint8 ContentsHash[32];
 quint8 EncryptionIV[16];
 
-File=new QFile(filename);
+File = new QFile(filename);
 if(!File->open(QIODevice::ReadWrite)){
 	if(!File->open(QIODevice::ReadOnly)){
 		error=tr("Could not open file.");
 		delete File;
-		File=NULL;
+		File = NULL;
 		return false;
 	}
 }
@@ -437,7 +443,7 @@ File->read(buffer,total_size);
 
 if(total_size < DB_HEADER_SIZE){
 	error=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 
 memcpyFromLEnd32(&Signature1,buffer);
@@ -454,12 +460,12 @@ memcpyFromLEnd32(&KeyTransfRounds,buffer+120);
 
 if((Signature1!=PWM_DBSIG_1) || (Signature2!=PWM_DBSIG_2)){
 	error=tr("Wrong Signature");
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 
 if((Version & 0xFFFFFF00) != (PWM_DBVER_DW & 0xFFFFFF00)){
 	error=tr("Unsupported File Version.");
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 
 if (Flags & PWM_FLAG_RIJNDAEL)
@@ -468,7 +474,7 @@ else if (Flags & PWM_FLAG_TWOFISH)
 	Algorithm = Twofish_Cipher;
 else{
 	error=tr("Unknown Encryption Algorithm.");
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 
 
@@ -490,20 +496,22 @@ if(Algorithm == Rijndael_Cipher){
 else if(Algorithm == Twofish_Cipher){
 	CTwofish twofish;
 	if (twofish.init(FinalKey, 32, EncryptionIV) != true)
-		return false;
+		LOAD_RETURN_CLEANUP
 	crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
 	total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
 }
 
 if ((crypto_size > 2147483446) || (!crypto_size && NumGroups)){
 	error=tr("Decryption failed.\nThe key is wrong or the file is damaged.");
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
 
 if(memcmp(ContentsHash, FinalKey, 32) != 0){
-	delete buffer;
 	if(PotentialEncodingIssue){
+		delete[] buffer;
+		delete File;
+		File = NULL;
 		// KeePassX used Latin-1 encoding for passwords until version 0.3.1
 		// but KeePass/Win32 uses Windows Codepage 1252.
 		// Too stay compatible with databases created with KeePassX <= 0.3.1
@@ -515,7 +523,7 @@ if(memcmp(ContentsHash, FinalKey, 32) != 0){
 	}
 	error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
 	KeyError=true;
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 
 unsigned long pos = DB_HEADER_SIZE;
@@ -537,14 +545,14 @@ for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
 	pField += 2; pos += 2;
 	if (pos >= total_size){
 		error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
-		return false;
+		LOAD_RETURN_CLEANUP
 	}
 
 	memcpyFromLEnd32(&FieldSize, pField);
 	pField += 4; pos += 4;
 	if (pos >= (total_size + FieldSize)){
 		error=tr("Unexpected error: Offset is out of range.").append(" [G2]");
-		return false;
+		LOAD_RETURN_CLEANUP
 	}
 
 	bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
@@ -556,7 +564,7 @@ for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
 	pos += FieldSize;
 	if (pos >= total_size){
 		error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
-		return false;
+		LOAD_RETURN_CLEANUP
 	}
 }
 
@@ -570,14 +578,14 @@ for (unsigned long CurEntry = 0; CurEntry < NumEntries;)
 	pField += 2; pos += 2;
 	if(pos >= total_size){
 		error=tr("Unexpected error: Offset is out of range.").append(" [E1]");
-		return false;
+		LOAD_RETURN_CLEANUP
 	}
 
 	memcpyFromLEnd32(&FieldSize, pField);
 	pField += 4; pos += 4;
 	if (pos >= (total_size + FieldSize)){
 		error=tr("Unexpected error: Offset is out of range.").append(" [E2]");
-		return false;
+		LOAD_RETURN_CLEANUP
 	}
 
 	bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
@@ -593,13 +601,13 @@ for (unsigned long CurEntry = 0; CurEntry < NumEntries;)
 	pos += FieldSize;
 	if (pos >= total_size){
 		error=tr("Unexpected error: Offset is out of range.").append(" [E3]");
-		return false;
+		LOAD_RETURN_CLEANUP
 	}
 }
 
 if(!createGroupTree(Levels)){
 	error=tr("Invalid group tree.");
-	return false;
+	LOAD_RETURN_CLEANUP
 }
 
 delete [] buffer;
@@ -1258,7 +1266,8 @@ bool Kdb3Database::save(){
 			if(twofish.init(FinalKey, 32, EncryptionIV) == false){
 				UNEXP_ERROR
 				delete [] buffer;
-				return false;}
+				return false;
+			}
 			EncryptedPartSize = (unsigned long)twofish.padEncrypt((quint8*)buffer+DB_HEADER_SIZE,
 				pos - DB_HEADER_SIZE,(quint8*)buffer+DB_HEADER_SIZE);
 		}
@@ -1523,6 +1532,8 @@ void Kdb3Database::serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsi
  }
 
 bool Kdb3Database::close(){
+	if (File!=NULL)
+		delete File;
 	return true;
 }
 
@@ -1532,7 +1543,9 @@ void Kdb3Database::create(){
 	RootGroup.Parent=NULL;
 	RootGroup.Handle=NULL;
 	Algorithm=Rijndael_Cipher;
-	KeyTransfRounds=6000;
+	quint8 ran;
+	randomize(&ran,1);
+	KeyTransfRounds=10000 + 3*ran;
 	KeyError=false;
 }
 

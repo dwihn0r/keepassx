@@ -108,23 +108,45 @@ void KeepassGroupView::OnNewGroup(){
 		if(parent){
 			group=db->addGroup(&NewGroup,parent->GroupHandle);
 			Items.append(new GroupViewItem(parent));
-			}
+		}
 		else{
 			if(topLevelItemCount()){
 				if(topLevelItem(topLevelItemCount()-1)==SearchResultItem)
-					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-2)));			
+					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-2)));
 				else
-					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-1)));			
+					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-1)));
 			}
 			else
-				Items.append(new GroupViewItem(this));			
+				Items.append(new GroupViewItem(this));
 			group=db->addGroup(&NewGroup,NULL);
 		}
 		Items.back()->GroupHandle=group;
 		Items.back()->setText(0,group->title());
-		Items.back()->setIcon(0,db->icon(group->image()));		
+		Items.back()->setIcon(0,db->icon(group->image()));
 	}
 	emit fileModified();	
+}
+
+void KeepassGroupView::createGroup(const QString& title, quint32 image){
+	CGroup NewGroup;
+	NewGroup.Title = title;
+	NewGroup.Image = image;
+	
+	IGroupHandle* group;
+	if(topLevelItemCount()){
+		if(topLevelItem(topLevelItemCount()-1)==SearchResultItem)
+			Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-2)));
+		else
+			Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-1)));
+	}
+	else
+		Items.append(new GroupViewItem(this));
+	
+	group = db->addGroup(&NewGroup,NULL);
+	
+	Items.back()->GroupHandle = group;
+	Items.back()->setText(0, group->title());
+	Items.back()->setIcon(0, db->icon(group->image()));
 }
 
 void KeepassGroupView::OnEditGroup(){

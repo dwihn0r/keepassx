@@ -484,14 +484,12 @@
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <tabstops>
-  <tabstop>Combo_Group</tabstop>
-  <tabstop>Button_Icons</tabstop>
   <tabstop>Edit_Title</tabstop>
   <tabstop>Edit_UserName</tabstop>
   <tabstop>Edit_URL</tabstop>
   <tabstop>Edit_Password</tabstop>
-  <tabstop>ButtonEchoMode</tabstop>
   <tabstop>Edit_Password_w</tabstop>
+  <tabstop>ButtonEchoMode</tabstop>
   <tabstop>ButtonGenPw</tabstop>
   <tabstop>Edit_Comment</tabstop>
   <tabstop>DateTime_Expire</tabstop>
@@ -501,6 +499,8 @@
   <tabstop>ButtonOpenAttachment</tabstop>
   <tabstop>ButtonSaveAttachment</tabstop>
   <tabstop>ButtonDeleteAttachment</tabstop>
+  <tabstop>Combo_Group</tabstop>
+  <tabstop>Button_Icons</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
