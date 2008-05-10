@@ -173,7 +173,7 @@ HEADERS += lib/UrlLabel.h \
            dialogs/CalendarDlg.h \
            dialogs/ExpiredEntriesDlg.h \
 #           dialogs/TrashCanDlg.h \
-           lib/random.h \
+#           lib/random.h \
            Database.h \
            lib/AutoType.h \
            lib/FileDialogs.h \

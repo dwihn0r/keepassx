@@ -400,7 +400,12 @@ struct yarrow_source StrongSrc[2];
 void initYarrow(){
 	yarrow256_init(&WeakCtx,2,WeakSrc);
 	yarrow256_init(&StrongCtx,2,StrongSrc);
-	new RandomSource();
+	
+	quint8 buffer[100];
+	for (int i=0; i<2; i++){
+		Random::getEntropy(buffer,100);
+		yarrowUpdateWeak(i,100*8,100,buffer);
+	}
 }
 
 void yarrowUpdateWeak(unsigned source, unsigned entropy, unsigned length, const quint8 *data){

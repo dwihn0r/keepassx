@@ -37,9 +37,9 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <assert.h>
-#include <math.h>
-#include <time.h>
+#include <cassert>
+#include <cmath>
+#include <ctime>
 
 #include <QApplication>
 #include <QBitArray>

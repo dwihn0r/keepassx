@@ -24,82 +24,80 @@ using namespace std;
 CArcFour SecString::RC4;
 
 SecString::operator QString(){
-return string();
+	return string();
 }
 
 SecString::SecString(){
-locked=true;
+	locked=true;
 }
 
 int SecString::length(){
-return crypt.size();
+	return crypt.size();
 }
 
 SecString::~SecString(){
-lock();
+	lock();
 }
 
 void SecString::lock(){
-locked=true;
-overwrite(plain);
-plain=QString();
+	locked=true;
+	overwrite(plain);
+	plain=QString();
 }
 
 void SecString::unlock(){
-locked=false;
-plain=QString();
-if(!crypt.length()){return;}
-const unsigned char* buffer=new unsigned char[crypt.length()];
-SecString::RC4.decrypt((byte*)crypt.data(),(unsigned char*)buffer,crypt.length());
-plain=QString::fromUtf8((const char*)buffer,crypt.size());
-overwrite((unsigned char*)buffer,crypt.size());
-delete [] buffer;
+	locked = false;
+	plain = QString();
+	if(!crypt.length())
+		return;
+	const unsigned char* buffer = new unsigned char[crypt.length()];
+	SecString::RC4.decrypt( (byte*)crypt.data(), (unsigned char*)buffer, crypt.length() );
+	plain = QString::fromUtf8((const char*)buffer, crypt.size());
+	overwrite((unsigned char*)buffer, crypt.size());
+	delete [] buffer;
 }
-
 
 const QString& SecString::string(){
-if(locked){
- printf("Error in function SecString::string(): string is locked\n");
- return QString(">SEC_STRING_ERROR<");
-}
-return plain;
+	Q_ASSERT_X(!locked, "SecString::string()", "string is locked");
+	return plain;
 }
 
-
-void SecString::setString(QString& str,bool DeleteSource){
-QByteArray StrData=str.toUtf8();
-int len=StrData.size();
-unsigned char* buffer=new unsigned char[len];
-SecString::RC4.encrypt((const unsigned char*)StrData.data(),buffer,len);
-crypt=QByteArray((const char*)buffer,len);
-overwrite(buffer,len);
-overwrite((unsigned char*)StrData.data(),len);
-delete [] buffer;
-if(DeleteSource){
-  overwrite(str);
-  str=QString();}
-lock();
+void SecString::setString(QString& str, bool DeleteSource){
+	QByteArray StrData = str.toUtf8();
+	int len = StrData.size();
+	unsigned char* buffer = new unsigned char[len];
+	SecString::RC4.encrypt((const unsigned char*)StrData.data(), buffer, len);
+	crypt = QByteArray((const char*)buffer, len);
+	overwrite(buffer, len);
+	overwrite((unsigned char*)StrData.data(), len);
+	delete [] buffer;
+	if(DeleteSource){
+		overwrite(str);
+		str=QString();
+	}
+	lock();
 }
 
-void SecString::overwrite(unsigned char* str,int strlen){
-if(strlen==0 || str==NULL)return;
-for(int i=0; i<strlen; i++){
-	str[i]=0;
-}
-}
-
-void SecString::overwrite(QString &str){
-if(str.length()==0)return;
-for(int i=0; i<str.length(); i++){
-	((char*)str.data())[i]=0;
-}
+void SecString::overwrite(unsigned char* str, int strlen){
+	if(strlen==0 || str==NULL)
+		return;
+	
+	for(int i=0; i<strlen; i++)
+		str[i]=0;
 }
 
+void SecString::overwrite(QString& str){
+	if(str.length()==0)
+		return;
+	
+	for(int i=0; i<str.length(); i++)
+		((char*)str.data())[i] = 0;
+}
 
 void SecString::generateSessionKey(){
-CArcFour arc;
-unsigned char* sessionkey=new unsigned char[32];
-randomize(sessionkey,32);
-RC4.setKey(sessionkey,32);
-delete [] sessionkey;
+	CArcFour arc;
+	unsigned char sessionkey[32];
+	randomize(sessionkey,32);
+	RC4.setKey(sessionkey,32);
+	overwrite(sessionkey,32);
 }

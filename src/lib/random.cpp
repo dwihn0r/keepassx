@@ -20,35 +20,20 @@
 
 #include "random.h"
 
-#if defined(Q_WS_WIN)
+
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+	#include <QFile>
+#elif defined(Q_WS_WIN)
 	#include <windows.h>
 	#include <QSysInfo>
 #endif
 
-RandomSource::RandomSource(){
-	quint8 buffer[100];
-	for (int i=0; i<2; i++){
-		getRandomWeak(buffer,100);
-		yarrowUpdateWeak(i,100*8,100,buffer);
-	}
-	
-#ifdef HAS_DEV_RANDOM
-	if (QFile::exists("/dev/random")){
-		DevRandom* devRandom = new DevRandom(this);
-		connect(devRandom, SIGNAL(randomAvailable(int,QByteArray,int)), SLOT(seedStrong(int,QByteArray,int)));
-		connect(devRandom, SIGNAL(finished()), SLOT(deleteLater()));
-		devRandom->start();
-	}
-	else{
-		deleteLater();
-	}
-#else
-	deleteLater();
-#endif
-}
+#include <QCursor>
+#include <QDateTime>
+#include <QTime>
 
-void RandomSource::getRandomWeak(quint8* buffer, int length){
-#if defined(HAS_DEV_RANDOM)
+void Random::getEntropy(quint8* buffer, int length){
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
 	QFile dev_urandom("/dev/urandom");
 	if (dev_urandom.open(QIODevice::ReadOnly|QIODevice::Unbuffered) && dev_urandom.read((char*)buffer,length)==length)
 		return;
@@ -69,30 +54,27 @@ void RandomSource::getRandomWeak(quint8* buffer, int length){
 	}
 #endif
 	
-	srand(time(NULL));
+	initStdRand();
 	for(int i=0;i<length;i++){
-		((quint8*)buffer)[i] = (quint8) (rand()%256);
+		((quint8*)buffer)[i] = (quint8) (qrand()%256);
 	}
 }
 
-#ifdef HAS_DEV_RANDOM
-void RandomSource::seedStrong(int source, QByteArray buffer, int length){
-	yarrowUpdateStrong(source,length*8,length,(const quint8*)buffer.constData());
+void Random::initStdRand(){
+	static bool initalized = false;
+	if (initalized)
+		return;
+	
+	QByteArray buffer;
+	QDataStream stream(&buffer, QIODevice::WriteOnly);
+	
+	stream << QCursor::pos();
+	stream << QDateTime::currentDateTime().toTime_t();
+	stream << QTime::currentTime().msec();
+	
+	quint8 hash[32];
+	SHA256::hashBuffer(buffer.data(), hash, buffer.size());
+	
+	qsrand( (uint) *hash );
+	initalized = true;
 }
-
-DevRandom::DevRandom(QObject* parent) : QThread(parent){
-}
-
-void DevRandom::run(){
-	QByteArray buffer(50,0);
-	for (int i=0; i<2; i++){
-		if (getRandomStrong((quint8*)buffer.data(),50))
-			emit randomAvailable(i,buffer,50);
-	}
-}
-
-bool DevRandom::getRandomStrong(quint8* buffer, int length){
-	QFile dev_random("/dev/random");
-	return (dev_random.open(QIODevice::ReadOnly|QIODevice::Unbuffered) && dev_random.read((char*)buffer,length)==length);
-}
-#endif

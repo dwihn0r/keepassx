@@ -55,7 +55,8 @@ int main(int argc, char **argv)
 	initAppPaths(argc,argv);
 	CmdLineArgs args;
 	if(!args.preparse(argc,argv)){ // searches only for the -cfg parameter
-		qCritical(CSTR(args.error()));
+		qCritical(CSTR( args.error().append("\n") ));
+		args.printHelp();
 		return 1;
 	}
 
@@ -127,8 +128,15 @@ int main(int argc, char **argv)
 			app = new QApplication(argc,argv);
 		#endif	
 	}
-	args.parse(QApplication::arguments());
-	
+	if ( !args.parse(QApplication::arguments()) ){
+		qCritical(CSTR( args.error().append("\n") ));
+		args.printHelp();
+		return 1;
+	}
+	if (args.help()){
+		args.printHelp();
+		return 1;
+	}
 	
 	//Internationalization
 	QLocale loc;
@@ -233,7 +241,7 @@ CmdLineArgs::CmdLineArgs(){
 
 bool CmdLineArgs::parse(const QStringList& argv){
 	for(int i=1;i<argv.size();i++){
-		if(argv[i]=="-help"){
+		if(argv[i]=="-help" || argv[i]=="--help" || argv[i]=="-h"){
 			Help=true;
 			break; // break, because other arguments will be ignored anyway
 		}
@@ -263,14 +271,14 @@ bool CmdLineArgs::parse(const QStringList& argv){
 			StartLocked=true;
 			continue;
 		}
-		if(i==1){
+		if(i==1 && argv[i].left(1)!="-"){
 			File=argv[1];
 			continue;
 		}
 		Error=QString("** Unrecognized argument: '%1'").arg(argv[i]);
 		return false;
 	}
-	return true;	
+	return true;
 }
 
 bool CmdLineArgs::preparse(int argc,char** argv){
@@ -294,17 +302,17 @@ bool CmdLineArgs::preparse(int argc,char** argv){
 }
 
 void CmdLineArgs::printHelp(){
-	cout << "KeePassX" << APP_VERSION << endl;
-	cout << "Usage: keepassx  [Filename] [Options]" << endl;
-	cout << "  -help             This Help" << endl;
-	cout << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
-	cout << "  -min              Start minimized." << endl;
-	cout << "  -lock             Start locked." << endl;
-	cout << "  -lang <LOCALE>    Use specified language instead of systems default." << endl;
-	cout << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
-	cout << "                    Examples: de     German" << endl;
-	cout << "                              de_CH  German(Switzerland)"<<endl;
-	cout << "                              pt_BR  Portuguese(Brazil)"<<endl;
+	cerr << "KeePassX " << APP_VERSION << endl;
+	cerr << "Usage: keepassx  [Filename] [Options]" << endl;
+	cerr << "  -help             This Help" << endl;
+	cerr << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
+	cerr << "  -min              Start minimized." << endl;
+	cerr << "  -lock             Start locked." << endl;
+	cerr << "  -lang <LOCALE>    Use specified language instead of systems default." << endl;
+	cerr << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
+	cerr << "                    Examples: de     German" << endl;
+	cerr << "                              de_CH  German(Switzerland)" << endl;
+	cerr << "                              pt_BR  Portuguese(Brazil)" << endl;
 }
 
 
