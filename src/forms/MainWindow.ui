@@ -112,7 +112,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>29</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHilfe" >
@@ -187,7 +187,7 @@
     </property>
     <widget class="QMenu" name="menuTool_Button_Sizes" >
      <property name="title" >
-      <string>&amp;Toolbar Icon Size</string>
+      <string>Toolbar &amp;Icon Size</string>
      </property>
      <addaction name="ViewToolButtonSize16Action" />
      <addaction name="ViewToolButtonSize22Action" />
@@ -278,72 +278,72 @@
   </action>
   <action name="FileExitAction" >
    <property name="text" >
-    <string>Q&amp;uit</string>
+    <string>&amp;Quit</string>
    </property>
   </action>
   <action name="EditNewGroupAction" >
    <property name="text" >
-    <string>Add New Group...</string>
+    <string>&amp;Add New Group...</string>
    </property>
   </action>
   <action name="EditEditGroupAction" >
    <property name="text" >
-    <string>Edit Group...</string>
+    <string>&amp;Edit Group...</string>
    </property>
   </action>
   <action name="EditDeleteGroupAction" >
    <property name="text" >
-    <string>Delete Group</string>
+    <string>&amp;Delete Group</string>
    </property>
   </action>
   <action name="EditPasswordToClipboardAction" >
    <property name="text" >
-    <string>Copy Password to Clipboard</string>
+    <string>Copy Password &amp;to Clipboard</string>
    </property>
   </action>
   <action name="EditUsernameToClipboardAction" >
    <property name="text" >
-    <string>Copy Username to Clipboard</string>
+    <string>Copy &amp;Username to Clipboard</string>
    </property>
   </action>
   <action name="EditOpenUrlAction" >
    <property name="text" >
-    <string>Open URL</string>
+    <string>&amp;Open URL</string>
    </property>
   </action>
   <action name="EditSaveAttachmentAction" >
    <property name="text" >
-    <string>Save Attachment As...</string>
+    <string>&amp;Save Attachment As...</string>
    </property>
   </action>
   <action name="EditNewEntryAction" >
    <property name="text" >
-    <string>Add New Entry...</string>
+    <string>Add &amp;New Entry...</string>
    </property>
   </action>
   <action name="EditEditEntryAction" >
    <property name="text" >
-    <string>View/Edit Entry...</string>
+    <string>&amp;View/Edit Entry...</string>
    </property>
   </action>
   <action name="EditDeleteEntryAction" >
    <property name="text" >
-    <string>Delete Entry</string>
+    <string>De&amp;lete Entry</string>
    </property>
   </action>
   <action name="EditCloneEntryAction" >
    <property name="text" >
-    <string>Clone Entry</string>
+    <string>&amp;Clone Entry</string>
    </property>
   </action>
   <action name="EditSearchAction" >
    <property name="text" >
-    <string>Search in Database...</string>
+    <string>Search &amp;in Database...</string>
    </property>
   </action>
   <action name="EditGroupSearchAction" >
    <property name="text" >
-    <string>Search in this Group...</string>
+    <string>Search in this &amp;Group...</string>
    </property>
   </action>
   <action name="ViewShowEntryDetailsAction" >
@@ -483,7 +483,7 @@
   </action>
   <action name="EditAutoTypeAction" >
    <property name="text" >
-    <string>Perform AutoType</string>
+    <string>&amp;Perform AutoType</string>
    </property>
   </action>
   <action name="ViewToolButtonSize16Action" >
@@ -522,12 +522,12 @@
   </action>
   <action name="FileNewAction" >
    <property name="text" >
-    <string>New Database...</string>
+    <string>&amp;New Database...</string>
    </property>
   </action>
   <action name="ExtrasPasswordGenAction" >
    <property name="text" >
-    <string>Password Generator...</string>
+    <string>&amp;Password Generator...</string>
    </property>
   </action>
   <action name="ViewColumnsGroupAction" >

@@ -292,7 +292,7 @@ void KeepassMainWindow::setupMenus(){
 	EntryView->ContextMenu->addAction(EditCloneEntryAction);
 	EntryView->ContextMenu->addAction(EditDeleteEntryAction);
 
-	ViewShowToolbarAction->setText(tr("Show Toolbar"));
+	ViewShowToolbarAction->setText(tr("Show &Toolbar"));
 	ViewMenu->insertAction(ViewShowEntryDetailsAction,ViewShowToolbarAction);
 	ViewShowToolbarAction->setChecked(config->showToolbar());
 	ViewShowEntryDetailsAction->setChecked(config->showEntryDetails());

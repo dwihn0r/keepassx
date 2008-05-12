@@ -685,7 +685,7 @@
           </sizepolicy>
          </property>
          <property name="title" >
-          <string>Show passwords in plain text in:</string>
+          <string>Show plain text passwords in:</string>
          </property>
          <layout class="QVBoxLayout" >
           <property name="spacing" >
@@ -704,7 +704,7 @@
           <item>
            <widget class="QCheckBox" name="CheckBox_ShowPasswords_PasswordDlg" >
             <property name="text" >
-             <string>Key Dialogs</string>
+             <string>Database Key Dialog</string>
             </property>
            </widget>
           </item>
