@@ -162,7 +162,11 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 
 #ifdef GLOBAL_AUTOTYPE
 void AutoType::performGlobal(){
-	if (MainWin->db==NULL) return;
+	if (MainWin->isLocked())
+		MainWin->OnUnLockWorkspace();
+	
+	if (!MainWin->isOpened())
+		return;
 	
 	Display* d = QX11Info::display();
 	Window w;

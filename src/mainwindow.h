@@ -34,6 +34,11 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 	public:
 		KeepassMainWindow (const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent=0, Qt::WFlags flags=0);
 		IDatabase* db;
+		inline bool isLocked() { return IsLocked; };
+		inline bool isOpened() { return FileOpen; };
+	
+	public slots:
+		void OnUnLockWorkspace();
 
 	signals:
 		void entryChanged();
@@ -76,7 +81,6 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void OnImport(QAction*);
 		void OnExport(QAction*);
 		void OnDetailViewUrlClicked(const QUrl& url);
-		void OnUnLockWorkspace();
 		void OnLockClose();
 		void OnInactivityTimer();
 
