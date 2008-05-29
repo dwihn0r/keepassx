@@ -1741,9 +1741,8 @@ void KeyTransform::transform(quint8* src, quint8* dst, quint8* KeySeed, int roun
 	KeyTransform* ktRight = new KeyTransform(&src[16], &dst[16], KeySeed, rounds);
 	ktLeft->start();
 	ktRight->start();
-	while (ktLeft->isRunning() || ktRight->isRunning()){
-		QThread::msleep(100);
-	}
+	ktLeft->wait();
+	ktRight->wait();
 	SHA256::hashBuffer(dst,dst,32);
 	delete ktLeft;
 	delete ktRight;

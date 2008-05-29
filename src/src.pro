@@ -1,5 +1,5 @@
 
-CONFIG = qt uic resources thread stl warn_off precompile_header
+CONFIG = qt uic resources thread stl warn_off
 QT += xml
 
 DEPENDPATH += crypto dialogs export forms import lib translations res
@@ -15,6 +15,12 @@ isEqual(DEBUG,1){
 }
 else {
     CONFIG += release
+}
+
+# lipo and freebsd cannot handle precompiled headers (yet)
+!isEqual(PRECOMPILED,1){
+	macx : isEqual(ARCH,UNIVERSAL) : PRECOMPILED = 0
+	freebsd-* : PRECOMPILED = 0
 }
 
 win32 : QMAKE_WIN32 = 1
@@ -78,9 +84,6 @@ macx {
     CONFIG += app_bundle
     isEqual(ARCH,UNIVERSAL){
         CONFIG += x86 ppc
-        # lipo cannot handle precompiled headers (yet)
-        CONFIG -= precompile_header
-        QMAKE_CXXFLAGS += -include keepassx.h
     }
     isEqual(ARCH,INTEL): CONFIG += x86
     isEqual(ARCH,PPC): CONFIG += ppc
@@ -251,12 +254,18 @@ SOURCES += lib/UrlLabel.cpp \
            dialogs/AddBookmarkDlg.cpp \
            lib/bookmarks.cpp \
            dialogs/ManageBookmarksDlg.cpp \
-	crypto/aescrypt.c \
-	crypto/aeskey.c \
-	crypto/aes_modes.c \
-	crypto/aestab.c \
- lib/AutoTypeTreeWidget.cpp
+           crypto/aescrypt.c \
+           crypto/aeskey.c \
+           crypto/aes_modes.c \
+           crypto/aestab.c \
+           lib/AutoTypeTreeWidget.cpp
 
-PRECOMPILED_HEADER = keepassx.h
+isEqual(PRECOMPILED,0) {
+    QMAKE_CXXFLAGS += -include keepassx.h
+}
+else {
+    CONFIG += precompile_header
+    PRECOMPILED_HEADER = keepassx.h
+}
 
 RESOURCES += res/resources.qrc

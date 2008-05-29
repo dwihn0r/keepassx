@@ -18,7 +18,10 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
+#ifdef Q_WS_X11
+#include <sys/mman.h>
+#include <limits.h>
+#endif
 
 using namespace std;
 CArcFour SecString::RC4;
@@ -97,6 +100,17 @@ void SecString::overwrite(QString& str){
 void SecString::generateSessionKey(){
 	CArcFour arc;
 	unsigned char sessionkey[32];
+	
+#ifdef Q_WS_X11
+	
+#ifdef PAGESIZE
+	mlock(sessionkey - sessionkey%PAGESIZE, 32);
+#else
+	mlock(sessionkey, 32);
+#endif
+	
+#endif // Q_WS_X11
+	
 	randomize(sessionkey,32);
 	RC4.setKey(sessionkey,32);
 	overwrite(sessionkey,32);
