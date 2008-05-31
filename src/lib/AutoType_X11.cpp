@@ -130,7 +130,7 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 		if (Keys[i].type==TypeKey){
 			int keycode=XKeysymToKeycode(pDisplay,Keys[i].data);
 			if (keycode==0){
-				err = QCoreApplication::translate("AutoType","Auto-Type string contains illegal characters");
+				err = QCoreApplication::translate("AutoType","Auto-Type string contains invalid characters");
 				break;
 			}
 			int mods=HelperX11::getModifiers(pDisplay,Keys[i].data,keycode);
@@ -144,7 +144,7 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 			AutoTypePrivate::sleepKeyStrokeDelay();
 		}
 		else if (Keys[i].type==Delay){
-			QCoreApplication::processEvents();
+			QApplication::processEvents();
 			AutoTypePrivate::sleep(Keys[i].data);
 		}
 	}
@@ -154,10 +154,8 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),false,CurrentTime);
 	}
 	
-	if (hideWindow){
+	if (hideWindow && !(config->showSysTrayIcon() && config->minimizeTray()) )
 		MainWin->showMinimized();
-		XIconifyWindow(pDisplay, MainWin->winId(), MainWin->x11Info().screen()); // workaround for Gnome
-	}
 }
 
 #ifdef GLOBAL_AUTOTYPE
