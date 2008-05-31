@@ -140,13 +140,13 @@ FORMS += forms/EditGroupDlg.ui \
          forms/AddBookmarkDlg.ui \
          forms/ManageBookmarksDlg.ui
 
-TRANSLATIONS += translations/keepass-de_DE.ts \
-                translations/keepass-ru_RU.ts \
-                translations/keepass-es_ES.ts \
-                translations/keepass-fr_FR.ts \
-                translations/keepass-cs_CZ.ts \
-                translations/keepass-ja_JP.ts \
-                translations/keepass-xx_XX.ts
+TRANSLATIONS += translations/keepassx-de_DE.ts \
+                translations/keepassx-ru_RU.ts \
+                translations/keepassx-es_ES.ts \
+                translations/keepassx-fr_FR.ts \
+                translations/keepassx-cs_CZ.ts \
+                translations/keepassx-ja_JP.ts \
+                translations/keepassx-xx_XX.ts
 
 HEADERS += lib/UrlLabel.h \
            mainwindow.h \

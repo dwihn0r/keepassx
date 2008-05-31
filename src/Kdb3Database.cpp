@@ -1543,9 +1543,10 @@ void Kdb3Database::create(){
 	RootGroup.Parent=NULL;
 	RootGroup.Handle=NULL;
 	Algorithm=Rijndael_Cipher;
-	quint8 ran;
-	randomize(&ran,1);
-	KeyTransfRounds=10000 + 3*ran;
+	quint16 ran;
+	randomize(&ran,2);
+	ran &= 0x03FF; // only use 10 bits -> max 1024
+	KeyTransfRounds=10000 + ran;
 	KeyError=false;
 }
 

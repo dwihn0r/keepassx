@@ -1,4 +1,22 @@
 ---------------
+    0.3.2
+---------------
+- add default groups when creating a database
+- improved the auto-type dialog (keyboard only usage, visual selection feedback)
+- fixed password encoding problem (Bug #1687864)
+- fixed sorting of date columns (Bugs #1861726, #1922311)
+- fixed problem when restoring window after auto-type (Bug #1978861)
+- don't use entries in 'Backup' group for global auto-type (Bug #1915664)
+- hide contents of search field while database is locked (Bug #1923554)
+- added missing menu accelerators
+- automatically try to unlock db when global auto-type key has been pressed
+- master key transformations (rounds) are now computed in two threads (from KeePass 1.11)
+- added ability to measure the number of rounds that can be calculated in 1 second
+- increase and randomize the default key transformation number
+- print help if parsing the arguments fails
+- disable precompiled header on FreeBSD by default to fix compilation error (Bug #1943446)
+
+---------------
     0.3.1
 ---------------
 - made key/password dialog more user friendly

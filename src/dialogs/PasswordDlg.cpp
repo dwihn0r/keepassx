@@ -110,10 +110,13 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 		// Button Color
 		QPalette palette=Button_Bookmarks->palette();
 		palette.setColor(QPalette::Active,QPalette::Button,config->bannerColor1());
+		palette.setColor(QPalette::Inactive,QPalette::Button,config->bannerColor1());
 		palette.setColor(QPalette::Active,QPalette::Window,config->bannerColor2());
+		palette.setColor(QPalette::Inactive,QPalette::Window,config->bannerColor2());
 		Button_Bookmarks->setPalette(palette);
 		palette=Label_Bookmark->palette();
 		palette.setColor(QPalette::Active,QPalette::WindowText,config->bannerTextColor());
+		palette.setColor(QPalette::Inactive,QPalette::WindowText,config->bannerTextColor());
 		Label_Bookmark->setPalette(palette);		
 		// Create menu and add "last file" menu entry
 		QMenu* BookmarkMenu=new QMenu(this);
