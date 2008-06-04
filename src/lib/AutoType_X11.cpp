@@ -112,8 +112,8 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 	
 	bool capsEnabled = HelperX11::keyboardModifiers(pDisplay)&LockMask;
 	if (capsEnabled){
-		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),true,CurrentTime);
-		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),false,CurrentTime);
+		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),true,0);
+		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),false,0);
 		AutoTypePrivate::sleepKeyStrokeDelay();
 	}
 	
@@ -150,8 +150,8 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 	}
 	
 	if (capsEnabled){
-		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),true,CurrentTime);
-		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),false,CurrentTime);
+		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),true,0);
+		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),false,0);
 	}
 	
 	if (hideWindow && !(config->showSysTrayIcon() && config->minimizeTray()) )

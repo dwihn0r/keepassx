@@ -656,10 +656,10 @@ void KeepassMainWindow::updateDetailView(){
 	}
 	else templ.replace("%password%","****");
 	templ.replace("%url%",entry->url());
-	templ.replace("%creation%",entry->creation().toString(Qt::LocalDate));
-	templ.replace("%lastmod%",entry->lastMod().toString(Qt::LocalDate));
-	templ.replace("%lastaccess%",entry->lastAccess().toString(Qt::LocalDate));
-	templ.replace("%expire%",entry->expire().toString(Qt::LocalDate));
+	templ.replace("%creation%",entry->creation().toString(Qt::DefaultLocaleShortDate));
+	templ.replace("%lastmod%",entry->lastMod().toString(Qt::DefaultLocaleShortDate));
+	templ.replace("%lastaccess%",entry->lastAccess().toString(Qt::DefaultLocaleShortDate));
+	templ.replace("%expire%",entry->expire().toString(Qt::DefaultLocaleShortDate));
 	templ.replace("%comment%",entry->comment());
 	templ.replace("%attachment%",entry->binaryDesc());
 

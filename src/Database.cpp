@@ -50,8 +50,8 @@ QString KpxUuid::toString()const{
 	return QString("{%1-%2-%3-%4-%5}")
 			.arg(hex.mid(0,8))
 			.arg(hex.mid(8,4))
-			.arg(hex.mid(12,4))	
-			.arg(hex.mid(16,4))											
+			.arg(hex.mid(12,4))
+			.arg(hex.mid(16,4))
 			.arg(hex.mid(20,12));
 }
 
@@ -74,13 +74,35 @@ bool KpxUuid::operator!=(const KpxUuid& other)const{
 
 
 QString KpxDateTime::toString(Qt::DateFormat format) const{
-	if(*this==Date_Never)return QCoreApplication::translate("Database","Never");
-	else return QDateTime::toString(format);
+	if (*this==Date_Never)
+		return QCoreApplication::translate("Database","Never");
+	else if (format==Qt::DefaultLocaleShortDate){
+		QString strFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
+		if (!strFormat.contains("dd")) strFormat.replace("d", "dd");
+		if (!strFormat.contains("MM")) strFormat.replace("M", "MM");
+		if (!strFormat.contains("yyyy")) strFormat.replace("yy", "yyyy");
+		if (!strFormat.contains("hh")) strFormat.replace("h", "hh");
+		if (!strFormat.contains("HH")) strFormat.replace("H", "HH");
+		if (!strFormat.contains("mm")) strFormat.replace("m", "mm");
+		if (!strFormat.contains("ss")) strFormat.replace("s", "ss");
+		return date().toString(strFormat);
+	}
+	else
+		return QDateTime::toString(format);
 }
 
 QString KpxDateTime::dateToString(Qt::DateFormat format) const{
-	if(*this==Date_Never)return QCoreApplication::translate("Database","Never");
-	else return date().toString(format);
+	if (*this==Date_Never)
+		return QCoreApplication::translate("Database","Never");
+	else if (format==Qt::DefaultLocaleShortDate){
+		QString strFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
+		if (!strFormat.contains("dd")) strFormat.replace("d", "dd");
+		if (!strFormat.contains("MM")) strFormat.replace("M", "MM");
+		if (!strFormat.contains("yyyy")) strFormat.replace("yy", "yyyy");
+		return date().toString(strFormat);
+	}
+	else
+		return date().toString(format);
 }
 
 

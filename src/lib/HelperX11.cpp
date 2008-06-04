@@ -887,9 +887,8 @@ quint16 HelperX11::getKeysym(const QChar& c){
 	/*if((unicode & 0xFF000000)==0x00)
 	return (unicode & 0x00FFFFFF)|0x01FFFFFF;*/
 	
-	int MapSize=sizeof(KeysymMap);
-	
-	for(int i=0; i<MapSize;i++){
+	int MapSize = sizeof(KeysymMap) / sizeof(quint16) / 2;
+	for (int i=0; i<MapSize; i++){
 		if(unicode==KeysymMap[i][0])
 			return KeysymMap[i][1];
 	}

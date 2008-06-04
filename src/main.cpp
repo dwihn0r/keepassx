@@ -148,7 +148,7 @@ int main(int argc, char **argv)
 	QTranslator* translator = new QTranslator;
 	QTranslator* qtTranslator = new QTranslator;
 
-	if(loadTranslation(translator,"keepass-",loc.name(),QStringList()
+	if(loadTranslation(translator,"keepassx-",loc.name(),QStringList()
 						<< DataDir+"/i18n/"
 						<< HomeDir))
 	{
