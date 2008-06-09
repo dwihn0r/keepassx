@@ -28,7 +28,7 @@
 #define APP_LONG_FUNC       "Cross Platform Password Manager"
 #define APP_VERSION         "0.3.2"
 
-#define BUILTIN_ICONS 65
+#define BUILTIN_ICONS 69
 
 // often used, stable header files for pch
 

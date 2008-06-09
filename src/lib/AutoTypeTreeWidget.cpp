@@ -30,8 +30,8 @@ void AutoTypeTreeWidget::mouseMoveEvent(QMouseEvent* event){
 }
 
 void AutoTypeTreeWidget::keyPressEvent(QKeyEvent* event){
-	if(event->key()==Qt::Key_Return){
-		emit returnPressed(currentItem());	
+	if(event->key()==Qt::Key_Return || event->key()==Qt::Key_Enter){
+		emit returnPressed(currentItem());
 		event->accept();
 	}
 	else {
