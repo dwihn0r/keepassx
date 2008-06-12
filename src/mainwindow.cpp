@@ -660,7 +660,7 @@ void KeepassMainWindow::updateDetailView(){
 	templ.replace("%lastmod%",entry->lastMod().toString(Qt::DefaultLocaleShortDate));
 	templ.replace("%lastaccess%",entry->lastAccess().toString(Qt::DefaultLocaleShortDate));
 	templ.replace("%expire%",entry->expire().toString(Qt::DefaultLocaleShortDate));
-	templ.replace("%comment%",entry->comment());
+	templ.replace("%comment%",entry->comment().replace("\n","<br/>"));
 	templ.replace("%attachment%",entry->binaryDesc());
 
 	if(entry->expire()!=Date_Never){
@@ -715,100 +715,105 @@ void KeepassMainWindow::updateDetailView(){
 
 
 void KeepassMainWindow::setStateEntrySelected(SelectionState s){
-EntrySelection=s;
-if(GroupSelection == NONE || GroupSelection == SINGLE)
-switch(EntrySelection){
- case NONE:
-    EditPasswordToClipboardAction->setEnabled(false);
-    EditUsernameToClipboardAction->setEnabled(false);
-    EditOpenUrlAction->setEnabled(false);
-    EditSaveAttachmentAction->setEnabled(false);
-    EditEditEntryAction->setEnabled(false);
-    EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(tr("Clone Entry"));
-    EditDeleteEntryAction->setEnabled(false);
-    EditDeleteEntryAction->setText(tr("Delete Entry"));
+	EntrySelection = s;
+	if (GroupSelection == NONE || GroupSelection == SINGLE){
+		switch (EntrySelection){
+			case NONE:
+				EditPasswordToClipboardAction->setEnabled(false);
+				EditUsernameToClipboardAction->setEnabled(false);
+				EditOpenUrlAction->setEnabled(false);
+				EditSaveAttachmentAction->setEnabled(false);
+				EditEditEntryAction->setEnabled(false);
+				EditCloneEntryAction->setEnabled(false);
+				EditCloneEntryAction->setText(tr("Clone Entry"));
+				EditDeleteEntryAction->setEnabled(false);
+				EditDeleteEntryAction->setText(tr("Delete Entry"));
 #ifdef AUTOTYPE
-	EditAutoTypeAction->setEnabled(false);
+				EditAutoTypeAction->setEnabled(false);
 #endif
-    break;
- case SINGLE:
-    EditPasswordToClipboardAction->setEnabled(true);
-    EditUsernameToClipboardAction->setEnabled(true);
-    EditOpenUrlAction->setEnabled(true);
-    EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
-    EditEditEntryAction->setEnabled(true);
-    EditCloneEntryAction->setEnabled(true);
-    EditCloneEntryAction->setText(tr("Clone Entry"));
-    EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(tr("Delete Entry"));
+				break;
+			case SINGLE:
+				EditPasswordToClipboardAction->setEnabled(true);
+				EditUsernameToClipboardAction->setEnabled(true);
+				EditOpenUrlAction->setEnabled(true);
+				EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
+				EditEditEntryAction->setEnabled(true);
+				EditCloneEntryAction->setEnabled(true);
+				EditCloneEntryAction->setText(tr("Clone Entry"));
+				EditDeleteEntryAction->setEnabled(true);
+				EditDeleteEntryAction->setText(tr("Delete Entry"));
 #ifdef AUTOTYPE
-	EditAutoTypeAction->setEnabled(true);
+				EditAutoTypeAction->setEnabled(true);
 #endif
-    break;
- case MULTIPLE:
-    EditPasswordToClipboardAction->setEnabled(false);
-    EditUsernameToClipboardAction->setEnabled(false);
-    EditOpenUrlAction->setEnabled(false);
-    EditSaveAttachmentAction->setEnabled(false);
-    EditEditEntryAction->setEnabled(false);
-    EditCloneEntryAction->setEnabled(true);
-    EditCloneEntryAction->setText(tr("Clone Entries"));
-    EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(tr("Delete Entries"));
+				break;
+			case MULTIPLE:
+				EditPasswordToClipboardAction->setEnabled(false);
+				EditUsernameToClipboardAction->setEnabled(false);
+				EditOpenUrlAction->setEnabled(false);
+				EditSaveAttachmentAction->setEnabled(false);
+				EditEditEntryAction->setEnabled(false);
+				EditCloneEntryAction->setEnabled(true);
+				EditCloneEntryAction->setText(tr("Clone Entries"));
+				EditDeleteEntryAction->setEnabled(true);
+				EditDeleteEntryAction->setText(tr("Delete Entries"));
 #ifdef AUTOTYPE
-	EditAutoTypeAction->setEnabled(false);
+				EditAutoTypeAction->setEnabled(false);
 #endif
-    break;
- default: Q_ASSERT(false);
-}
-else if(GroupSelection == SEARCHGROUP)
-switch(EntrySelection){
- case NONE:
-    EditUsernameToClipboardAction->setEnabled(false);
-    EditPasswordToClipboardAction->setEnabled(false);
-    EditOpenUrlAction->setEnabled(false);
-    EditSaveAttachmentAction->setEnabled(false);
-    EditEditEntryAction->setEnabled(false);
-    EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(tr("Clone Entry"));
-    EditDeleteEntryAction->setEnabled(false);
-    EditDeleteEntryAction->setText(tr("Delete Entry"));
+				break;
+			default:
+				Q_ASSERT(false);
+		}
+	}
+	else if (GroupSelection == SEARCHGROUP){
+		switch(EntrySelection){
+			case NONE:
+				EditUsernameToClipboardAction->setEnabled(false);
+				EditPasswordToClipboardAction->setEnabled(false);
+				EditOpenUrlAction->setEnabled(false);
+				EditSaveAttachmentAction->setEnabled(false);
+				EditEditEntryAction->setEnabled(false);
+				EditCloneEntryAction->setEnabled(false);
+				EditCloneEntryAction->setText(tr("Clone Entry"));
+				EditDeleteEntryAction->setEnabled(false);
+				EditDeleteEntryAction->setText(tr("Delete Entry"));
 #ifdef AUTOTYPE
-	EditAutoTypeAction->setEnabled(false);
+				EditAutoTypeAction->setEnabled(false);
 #endif
-    break;
- case SINGLE:
-    EditUsernameToClipboardAction->setEnabled(true);
-    EditPasswordToClipboardAction->setEnabled(true);
-    EditOpenUrlAction->setEnabled(true);
-    EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
-    EditEditEntryAction->setEnabled(true);
-    EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(tr("Clone Entry"));
-    EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(tr("Delete Entry"));
+				break;
+			case SINGLE:
+				EditUsernameToClipboardAction->setEnabled(true);
+				EditPasswordToClipboardAction->setEnabled(true);
+				EditOpenUrlAction->setEnabled(true);
+				EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
+				EditEditEntryAction->setEnabled(true);
+				EditCloneEntryAction->setEnabled(false);
+				EditCloneEntryAction->setText(tr("Clone Entry"));
+				EditDeleteEntryAction->setEnabled(true);
+				EditDeleteEntryAction->setText(tr("Delete Entry"));
 #ifdef AUTOTYPE
-	EditAutoTypeAction->setEnabled(true);
+				EditAutoTypeAction->setEnabled(true);
 #endif
-    break;
- case MULTIPLE:
-    EditUsernameToClipboardAction->setEnabled(false);
-    EditPasswordToClipboardAction->setEnabled(false);
-    EditOpenUrlAction->setEnabled(false);
-    EditSaveAttachmentAction->setEnabled(false);
-    EditEditEntryAction->setEnabled(false);
-    EditCloneEntryAction->setEnabled(false);
-    EditCloneEntryAction->setText(tr("Clone Entries"));
-    EditDeleteEntryAction->setEnabled(true);
-    EditDeleteEntryAction->setText(tr("Delete Entries"));
+				break;
+			case MULTIPLE:
+				EditUsernameToClipboardAction->setEnabled(false);
+				EditPasswordToClipboardAction->setEnabled(false);
+				EditOpenUrlAction->setEnabled(false);
+				EditSaveAttachmentAction->setEnabled(false);
+				EditEditEntryAction->setEnabled(false);
+				EditCloneEntryAction->setEnabled(false);
+				EditCloneEntryAction->setText(tr("Clone Entries"));
+				EditDeleteEntryAction->setEnabled(true);
+				EditDeleteEntryAction->setText(tr("Delete Entries"));
 #ifdef AUTOTYPE
-	EditAutoTypeAction->setEnabled(false);
+				EditAutoTypeAction->setEnabled(false);
 #endif
-    break;
- default: Q_ASSERT(false);
-}
-else Q_ASSERT(false);
+				break;
+			default:
+				Q_ASSERT(false);
+		}
+	}
+	else
+		Q_ASSERT(false);
 }
 
 
