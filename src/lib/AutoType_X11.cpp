@@ -170,20 +170,21 @@ void AutoType::performGlobal(){
 	Window w;
 	int revert_to_return;
 	XGetInputFocus(d, &w, &revert_to_return);
-	char** list;
+	char** list = NULL;
 	int tree;
 	do {
 		XTextProperty textProp;
-		XGetWMName(d, w, &textProp);
-		int count;
-		Xutf8TextPropertyToTextList(d, &textProp, &list, &count);
-		if (list) break;
+		if (XGetWMName(d, w, &textProp) != 0) {
+			int count;
+			if (Xutf8TextPropertyToTextList(d, &textProp, &list, &count)<0) return;
+			if (list) break;
+		}
 		Window root = 0;
 		Window parent = 0;
 		Window* children = NULL;
 		unsigned int num_children;
 		tree = XQueryTree(d, w, &root, &parent, &children, &num_children);
-		w=parent;
+		w = parent;
 		if (children) XFree(children);
 	} while (tree && w);
 	if (!list) return;
