@@ -93,11 +93,13 @@ bool Kdb3Database::parseMetaStream(const StdEntry& entry){
 
 	if(entry.Comment=="KPX_GROUP_TREE_STATE"){
 		parseGroupTreeStateMetaStream(entry.Binary);
-		return true;}
+		return true;
+	}
 
 	if(entry.Comment=="KPX_CUSTOM_ICONS_3"){
 		parseCustomIconsMetaStream(entry.Binary);
-		return true;}
+		return true;
+	}
 
 	if(entry.Comment=="KPX_CUSTOM_ICONS_2")
 		return parseCustomIconsMetaStreamV2(entry.Binary);
@@ -1156,10 +1158,12 @@ bool Kdb3Database::save(){
 	-----------------------------------------------------------------------------------*/
 	for(int i=0;i<Groups.size();i++){
 		if(Groups[i].Image<builtinIcons())
-			Groups[i].OldImage=Groups[i].Image;}
+			Groups[i].OldImage=Groups[i].Image;
+	}
 	for(int i=0;i<Entries.size();i++){
 		if(Entries[i].Image<builtinIcons())
-				Entries[i].OldImage=Entries[i].Image;}
+				Entries[i].OldImage=Entries[i].Image;
+	}
 /*  ----------------------------------------------------------------------------------*/
 
 	unsigned int FileSize;
