@@ -76,7 +76,7 @@ bool KpxUuid::operator!=(const KpxUuid& other)const{
 QString KpxDateTime::toString(Qt::DateFormat format) const{
 	if (*this==Date_Never)
 		return QCoreApplication::translate("Database","Never");
-	else if (format==Qt::DefaultLocaleShortDate){
+	else if (format==Qt::SystemLocaleDate){
 		QString strFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
 		if (!strFormat.contains("dd")) strFormat.replace("d", "dd");
 		if (!strFormat.contains("MM")) strFormat.replace("M", "MM");
@@ -94,7 +94,7 @@ QString KpxDateTime::toString(Qt::DateFormat format) const{
 QString KpxDateTime::dateToString(Qt::DateFormat format) const{
 	if (*this==Date_Never)
 		return QCoreApplication::translate("Database","Never");
-	else if (format==Qt::DefaultLocaleShortDate){
+	else if (format==Qt::SystemLocaleDate){
 		QString strFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
 		if (!strFormat.contains("dd")) strFormat.replace("d", "dd");
 		if (!strFormat.contains("MM")) strFormat.replace("M", "MM");

@@ -30,7 +30,7 @@ ExpiredEntriesDialog::ExpiredEntriesDialog(QWidget* parent,IDatabase* database,c
 		item->setText(0,Entries[i]->group()->title());
 		item->setText(1,Entries[i]->title());
 		item->setText(2,Entries[i]->username());
-		item->setText(3,Entries[i]->expire().dateToString(Qt::DefaultLocaleShortDate));
+		item->setText(3,Entries[i]->expire().dateToString(Qt::SystemLocaleDate));
 		item->setIcon(0,database->icon(Entries[i]->group()->image()));
 		item->setIcon(1,database->icon(Entries[i]->image()));
 

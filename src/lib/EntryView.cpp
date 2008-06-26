@@ -183,13 +183,13 @@ void KeepassEntryView::updateEntry(EntryViewItem* item){
 	if (Columns.at(4)){
 		item->setText(j++,entry->comment().section('\n',0,0));}
 	if (Columns.at(5)){
-		item->setText(j++,entry->expire().dateToString(Qt::DefaultLocaleShortDate));}
+		item->setText(j++,entry->expire().dateToString(Qt::SystemLocaleDate));}
 	if (Columns.at(6)){
-		item->setText(j++,entry->creation().dateToString(Qt::DefaultLocaleShortDate));}
+		item->setText(j++,entry->creation().dateToString(Qt::SystemLocaleDate));}
 	if (Columns.at(7)){
-		item->setText(j++,entry->lastMod().dateToString(Qt::DefaultLocaleShortDate));}
+		item->setText(j++,entry->lastMod().dateToString(Qt::SystemLocaleDate));}
 	if (Columns.at(8)){
-		item->setText(j++,entry->lastAccess().dateToString(Qt::DefaultLocaleShortDate));}
+		item->setText(j++,entry->lastAccess().dateToString(Qt::SystemLocaleDate));}
 	if (Columns.at(9)){
 		item->setText(j++,entry->binaryDesc());}
 	if(Columns.at(10) && ViewMode==ShowSearchResults){
@@ -376,13 +376,13 @@ void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){
 		if (Columns.at(4)){
 			item->setText(j++,entries[i]->comment().section('\n',0,0));}
 		if (Columns.at(5)){
-			item->setText(j++,entries[i]->expire().dateToString(Qt::DefaultLocaleShortDate));}
+			item->setText(j++,entries[i]->expire().dateToString(Qt::SystemLocaleDate));}
 		if (Columns.at(6)){
-			item->setText(j++,entries[i]->creation().dateToString(Qt::DefaultLocaleShortDate));}
+			item->setText(j++,entries[i]->creation().dateToString(Qt::SystemLocaleDate));}
 		if (Columns.at(7)){
-			item->setText(j++,entries[i]->lastMod().dateToString(Qt::DefaultLocaleShortDate));}
+			item->setText(j++,entries[i]->lastMod().dateToString(Qt::SystemLocaleDate));}
 		if (Columns.at(8)){
-			item->setText(j++,entries[i]->lastAccess().dateToString(Qt::DefaultLocaleShortDate));}
+			item->setText(j++,entries[i]->lastAccess().dateToString(Qt::SystemLocaleDate));}
 		if (Columns.at(9)){
 			item->setText(j++,entries[i]->binaryDesc());}
 		if(Columns.at(10) && ViewMode==ShowSearchResults){

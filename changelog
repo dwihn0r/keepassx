@@ -3,13 +3,17 @@
 ---------------
 - add default groups when creating a database
 - improved the auto-type dialog (keyboard only usage, visual selection feedback)
+- automatically try to unlock db when global auto-type key has been pressed
 - fixed password encoding problem (Bug #1687864)
 - fixed sorting of date columns (Bugs #1861726, #1922311)
 - fixed problem when restoring window after auto-type (Bug #1978861)
 - don't use entries in 'Backup' group for global auto-type (Bug #1915664)
 - hide contents of search field while database is locked (Bug #1923554)
-- added missing menu accelerators
-- automatically try to unlock db when global auto-type key has been pressed
+- fixed: custom entry icons are not saved (Bug #1995561)
+- added new icons introduced in KeePass 1.11
+- improved format of date strings (Bug #1932394)
+- added missing menu accelerators (Bug #1955304)
+- fixed: line breaks are ignored in Entry Detail View (Bug #1942362)
 - master key transformations (rounds) are now computed in two threads (from KeePass 1.11)
 - added ability to measure the number of rounds that can be calculated in 1 second
 - increase and randomize the default key transformation number
