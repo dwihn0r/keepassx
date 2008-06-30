@@ -220,7 +220,6 @@ void CEditEntryDlg::OnButtonOK()
 	}
 	// MX-COMMENT: Should not this line go inside the if(Modflag) block?
 	entry->setImage(IconIndex);
-	entry->setOldImage(IconIndex);
 
 	if(ModFlag&&EntryMoved)done(2);
 	else if(ModFlag)done(1);

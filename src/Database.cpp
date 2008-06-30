@@ -60,7 +60,7 @@ void KpxUuid::toRaw(void* dst)const{
 }
 
 void KpxUuid::fromRaw(const void* src){
-	Data.replace(0,16,(char*)src);
+	Data=QByteArray((char*)src,16);
 }
 
 bool KpxUuid::operator==(const KpxUuid& other)const{
