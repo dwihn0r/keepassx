@@ -250,6 +250,7 @@ private:
 	quint8 RawMasterKey[32];
 	quint8 RawMasterKey_Latin1[32];
 	quint8 MasterKey[32];
+	bool hasV4IconMetaStream;
 };
 
 class KeyTransform : public QThread{

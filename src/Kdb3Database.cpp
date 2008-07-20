@@ -100,7 +100,8 @@ bool Kdb3Database::parseMetaStream(const StdEntry& entry){
 		return true;
 	}
 	else if(entry.Comment=="KPX_CUSTOM_ICONS_3"){
-		parseCustomIconsMetaStreamV3(entry.Binary);
+		if (!hasV4IconMetaStream)
+			parseCustomIconsMetaStreamV3(entry.Binary);
 		return true;
 	}
 	else if(entry.Comment=="KPX_CUSTOM_ICONS_2"){
@@ -674,9 +675,17 @@ if(!createGroupTree(Levels)){
 
 delete [] buffer;
 
+hasV4IconMetaStream = false;
+for(int i=0;i<Entries.size();i++){
+	if(isMetaStream(Entries[i]) && Entries[i].Comment=="KPX_CUSTOM_ICONS_4"){
+		hasV4IconMetaStream = true;
+		break;
+	}
+}
+
 //Remove the metastreams from the entry list
 for(int i=0;i<Entries.size();i++){
-	if(isMetaStream(Entries[i])==true){
+	if(isMetaStream(Entries[i])){
 		if(!parseMetaStream(Entries[i]))
 			UnknownMetaStreams << Entries[i];
 		Entries.removeAt(i);
