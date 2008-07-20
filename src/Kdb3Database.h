@@ -203,8 +203,7 @@ private:
 	bool isMetaStream(StdEntry& Entry);
 	bool parseMetaStream(const StdEntry& Entry);
 	void parseCustomIconsMetaStream(const QByteArray& data);
- 	bool parseCustomIconsMetaStreamV1(const QByteArray& data);
-	bool parseCustomIconsMetaStreamV2(const QByteArray& data);
+	void parseCustomIconsMetaStreamV3(const QByteArray& data);
 	void parseGroupTreeStateMetaStream(const QByteArray& data);
 	void createCustomIconsMetaStream(StdEntry* e);
 	void createGroupTreeStateMetaStream(StdEntry* e);

@@ -236,6 +236,8 @@ void KeepassEntryView::OnNewEntry(){
 		Items.back()->EntryHandle=NewEntry;
 		updateEntry(Items.back());
 		emit fileModified();
+		if (header()->isSortIndicatorShown())
+			sortByColumn(header()->sortIndicatorSection(), header()->sortIndicatorOrder());
 	}
 
 }

@@ -95,17 +95,22 @@ bool Kdb3Database::parseMetaStream(const StdEntry& entry){
 		parseGroupTreeStateMetaStream(entry.Binary);
 		return true;
 	}
-
-	if(entry.Comment=="KPX_CUSTOM_ICONS_3"){
+	else if(entry.Comment=="KPX_CUSTOM_ICONS_4"){
 		parseCustomIconsMetaStream(entry.Binary);
 		return true;
 	}
-
-	if(entry.Comment=="KPX_CUSTOM_ICONS_2")
-		return parseCustomIconsMetaStreamV2(entry.Binary);
-
-	if(entry.Comment=="KPX_CUSTOM_ICONS")
-		return parseCustomIconsMetaStreamV1(entry.Binary);
+	else if(entry.Comment=="KPX_CUSTOM_ICONS_3"){
+		parseCustomIconsMetaStreamV3(entry.Binary);
+		return true;
+	}
+	else if(entry.Comment=="KPX_CUSTOM_ICONS_2"){
+		qDebug("Removed old CuIcMeSt v2");
+		return true;
+	}
+	else if(entry.Comment=="KPX_CUSTOM_ICONS"){
+		qDebug("Removed old CuIcMeSt v1");
+		return true;
+	}
 
 	return false; //unknown MetaStream
 }
@@ -121,20 +126,65 @@ bool Kdb3Database::isMetaStream(StdEntry& p){
 	return true;
 }
 
-
-bool Kdb3Database::parseCustomIconsMetaStreamV1(const QByteArray& dta){
-	Q_UNUSED(dta)
-	qDebug("Removed old CuIcMeSt v1");
-	return true;
-}
-
-bool Kdb3Database::parseCustomIconsMetaStreamV2(const QByteArray& dta){
-	Q_UNUSED(dta)
-	qDebug("Removed old CuIcMeSt v2");
-	return true;
-}
-
 void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
+	//Rev 4 (KeePassX 0.3.2)
+	quint32 NumIcons,NumEntries,NumGroups,offset;
+	memcpyFromLEnd32(&NumIcons,dta.data());
+	memcpyFromLEnd32(&NumEntries,dta.data()+4);
+	memcpyFromLEnd32(&NumGroups,dta.data()+8);
+	offset=12;
+	CustomIcons.clear();
+	for(int i=0;i<NumIcons;i++){
+		CustomIcons << QPixmap();
+		quint32 Size;
+		memcpyFromLEnd32(&Size,dta.data()+offset);
+		if(offset+Size > dta.size()){
+			CustomIcons.clear();
+			qWarning("Discarded metastream KPX_CUSTOM_ICONS_4 because of a parsing error.");
+			return;
+		}
+		offset+=4;
+		if(!CustomIcons.back().loadFromData((const unsigned char*)dta.data()+offset,Size,"PNG")){
+			CustomIcons.clear();
+			qWarning("Discarded metastream KPX_CUSTOM_ICONS_4 because of a parsing error.");
+			return;
+		}
+		offset+=Size;
+		if(offset > dta.size()){
+			CustomIcons.clear();
+			qWarning("Discarded metastream KPX_CUSTOM_ICONS_4 because of a parsing error.");
+			return;
+		}
+	}
+	for(int i=0;i<NumEntries;i++){
+		quint32 Icon;
+		KpxUuid EntryUuid;
+		EntryUuid.fromRaw(dta.data()+offset);
+		offset+=16;
+		memcpyFromLEnd32(&Icon,dta.data()+offset);
+		offset+=4;
+		StdEntry* entry=getEntry(EntryUuid);
+		if(entry){
+			entry->OldImage=entry->Image;
+			entry->Image=Icon+BUILTIN_ICONS;
+		}
+	}
+	for(int i=0;i<NumGroups;i++){
+		quint32 GroupId,Icon;
+		memcpyFromLEnd32(&GroupId,dta.data()+offset);
+		offset+=4;
+		memcpyFromLEnd32(&Icon,dta.data()+offset);
+		offset+=4;
+		StdGroup* Group=getGroup(GroupId);
+		if(Group){
+			Group->OldImage=Group->Image;
+			Group->Image=Icon+BUILTIN_ICONS;
+		}
+	}
+	return;
+}
+
+void Kdb3Database::parseCustomIconsMetaStreamV3(const QByteArray& dta){
 	//Rev 3
 	quint32 NumIcons,NumEntries,NumGroups,offset;
 	memcpyFromLEnd32(&NumIcons,dta.data());
@@ -149,17 +199,20 @@ void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
 		if(offset+Size > dta.size()){
 			CustomIcons.clear();
 			qWarning("Discarded metastream KPX_CUSTOM_ICONS_3 because of a parsing error.");
-			return;}
+			return;
+		}
 		offset+=4;
 		if(!CustomIcons.back().loadFromData((const unsigned char*)dta.data()+offset,Size,"PNG")){
 			CustomIcons.clear();
 			qWarning("Discarded metastream KPX_CUSTOM_ICONS_3 because of a parsing error.");
-			return;}
+			return;
+		}
 		offset+=Size;
 		if(offset > dta.size()){
 			CustomIcons.clear();
 			qWarning("Discarded metastream KPX_CUSTOM_ICONS_3 because of a parsing error.");
-			return;}
+			return;
+		}
 	}
 	for(int i=0;i<NumEntries;i++){
 		quint32 Icon;
@@ -171,7 +224,10 @@ void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
 		StdEntry* entry=getEntry(EntryUuid);
 		if(entry){
 			entry->OldImage=entry->Image;
-			entry->Image=Icon;
+			if (Icon>=65)
+				entry->Image=Icon+4; // Since v0.3.2 the BUILTIN_ICONS number has increased by 4
+			else
+				entry->Image=Icon;
 		}
 	}
 	for(int i=0;i<NumGroups;i++){
@@ -184,6 +240,10 @@ void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
 		if(Group){
 			Group->OldImage=Group->Image;
 			Group->Image=Icon;
+			if (Group->Image>=65)
+				Group->Image=Icon+4; // Since v0.3.2 the BUILTIN_ICONS number has increased by 4
+			else
+				Group->Image=Icon;
 		}
 	}
 	return;
@@ -1305,13 +1365,21 @@ void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 	e->BinaryDesc="bin-stream";
 	e->Title="Meta-Info";
 	e->Username="SYSTEM";
-	e->Comment="KPX_CUSTOM_ICONS_3";
+	e->Comment="KPX_CUSTOM_ICONS_4";
 	e->Url="$";
 	e->OldImage=0;
 	if(Groups.size())e->GroupId=Groups[0].Id;
 	int Size=12;
-	quint32 NumEntries=Entries.size();
-	quint32 NumGroups=Groups.size();
+	quint32 NumEntries=0;
+	for(quint32 i=0;i<Entries.size();i++){
+		if (Entries[i].Image>=BUILTIN_ICONS)
+			NumEntries++;
+	}
+	quint32 NumGroups=0;
+	for(quint32 i=0;i<Groups.size();i++){
+		if (Groups[i].Image>=BUILTIN_ICONS)
+			NumGroups++;
+	}
 	Size+=8*NumGroups+20*NumEntries;
 	Size+=CustomIcons.size()*1000; // 1KB
 	e->Binary.reserve(Size);
@@ -1333,19 +1401,24 @@ void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 		e->Binary.append(QByteArray::fromRawData(ImgSizeBin,4));
 		e->Binary.append(png);
 	}
+	
 	for(quint32 i=0;i<Entries.size();i++){
-		char Bin[20];
-		Entries[i].Uuid.toRaw(Bin);
-		quint32 id=Entries[i].Image;
-		memcpyToLEnd32(Bin+16,&id);
-		e->Binary.append(QByteArray::fromRawData(Bin,20));
+		if (Entries[i].Image>=BUILTIN_ICONS){
+			char Bin[20];
+			Entries[i].Uuid.toRaw(Bin);
+			quint32 id=Entries[i].Image-BUILTIN_ICONS;
+			memcpyToLEnd32(Bin+16,&id);
+			e->Binary.append(QByteArray::fromRawData(Bin,20));
+		}
 	}
 	for(quint32 i=0;i<Groups.size();i++){
-		char Bin[8];
-		memcpyToLEnd32(Bin,&Groups[i].Id);
-		quint32 id=Groups[i].Image;
-		memcpyToLEnd32(Bin+4,&id);
-		e->Binary.append(QByteArray::fromRawData(Bin,8));
+		if (Groups[i].Image>=BUILTIN_ICONS){
+			char Bin[8];
+			memcpyToLEnd32(Bin,&Groups[i].Id);
+			quint32 id=Groups[i].Image-BUILTIN_ICONS;
+			memcpyToLEnd32(Bin+4,&id);
+			e->Binary.append(QByteArray::fromRawData(Bin,8));
+		}
 	}
 }
 
