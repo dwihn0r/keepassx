@@ -64,13 +64,13 @@ void Kdb3Database::removeIcon(int id){
 	CustomIcons.removeAt(id); // .isNull()==true
 	for(int i=0;i<Entries.size();i++){
 		if(Entries[i].Image == id+builtinIcons())
-			Entries[i].Image=Entries[i].OldImage;
+			Entries[i].Image=0;
 		if(Entries[i].Image>id+builtinIcons())
 			Entries[i].Image--;
 	}
 	for(int i=0;i<Groups.size();i++){
 		if(Groups[i].Image == id+builtinIcons())
-			Groups[i].Image=Groups[i].OldImage;
+			Groups[i].Image=0;
 		if(Groups[i].Image>id+builtinIcons())
 			Groups[i].Image--;
 	}
@@ -165,10 +165,8 @@ void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
 		memcpyFromLEnd32(&Icon,dta.data()+offset);
 		offset+=4;
 		StdEntry* entry=getEntry(EntryUuid);
-		if(entry){
-			entry->OldImage=entry->Image;
+		if(entry)
 			entry->Image=Icon+BUILTIN_ICONS;
-		}
 	}
 	for(int i=0;i<NumGroups;i++){
 		quint32 GroupId,Icon;
@@ -177,10 +175,8 @@ void Kdb3Database::parseCustomIconsMetaStream(const QByteArray& dta){
 		memcpyFromLEnd32(&Icon,dta.data()+offset);
 		offset+=4;
 		StdGroup* Group=getGroup(GroupId);
-		if(Group){
-			Group->OldImage=Group->Image;
+		if(Group)
 			Group->Image=Icon+BUILTIN_ICONS;
-		}
 	}
 	return;
 }
@@ -224,7 +220,6 @@ void Kdb3Database::parseCustomIconsMetaStreamV3(const QByteArray& dta){
 		offset+=4;
 		StdEntry* entry=getEntry(EntryUuid);
 		if(entry){
-			entry->OldImage=entry->Image;
 			if (Icon>=65)
 				entry->Image=Icon+4; // Since v0.3.2 the BUILTIN_ICONS number has increased by 4
 			else
@@ -239,8 +234,6 @@ void Kdb3Database::parseCustomIconsMetaStreamV3(const QByteArray& dta){
 		offset+=4;
 		StdGroup* Group=getGroup(GroupId);
 		if(Group){
-			Group->OldImage=Group->Image;
-			Group->Image=Icon;
 			if (Group->Image>=65)
 				Group->Image=Icon+4; // Since v0.3.2 the BUILTIN_ICONS number has increased by 4
 			else
@@ -272,7 +265,6 @@ void Kdb3Database::createGroupTreeStateMetaStream(StdEntry* e){
 	e->Username="SYSTEM";
 	e->Comment="KPX_GROUP_TREE_STATE";
 	e->Url="$";
-	e->OldImage=0;
 	e->Image=0;
 	if(Groups.size())e->GroupId=Groups[0].Id;
 	QByteArray bin;
@@ -317,7 +309,6 @@ switch(FieldType)
 		break;
 	case 0x0003:
 		memcpyFromLEnd32(&entry->Image, (char*)pData);
-		entry->OldImage=entry->Image;
 		break;
 	case 0x0004:
 		entry->Title=QString::fromUtf8((char*)pData);
@@ -388,7 +379,6 @@ bool Kdb3Database::readGroupField(StdGroup* group,QList<quint32>& Levels,quint16
 		break;
 	case 0x0007:
 		memcpyFromLEnd32(&group->Image, (char*)pData);
-		group->OldImage=group->Image;
 		break;
 	case 0x0008:
 		quint16 Level;
@@ -558,8 +548,10 @@ if(Algorithm == Rijndael_Cipher){
 }
 else if(Algorithm == Twofish_Cipher){
 	CTwofish twofish;
-	if (twofish.init(FinalKey, 32, EncryptionIV) != true)
+	if (twofish.init(FinalKey, 32, EncryptionIV) != true){
+		error=tr("Unable to initalize the twofish algorithm.");
 		LOAD_RETURN_CLEANUP
+	}
 	crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
 	total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
 }
@@ -1014,7 +1006,6 @@ IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHan
 }
 
 Kdb3Database::StdGroup::StdGroup(const CGroup& other){
-	OldImage=0;
 	Index=0;
 	Id=other.Id;
 	Image=other.Image;
@@ -1033,11 +1024,9 @@ void Kdb3Database::EntryHandle::setBinaryDesc(const QString& s){Entry->BinaryDes
 void Kdb3Database::EntryHandle::setComment(const QString& s){Entry->Comment=s;}
 void Kdb3Database::EntryHandle::setBinary(const QByteArray& s){Entry->Binary=s;}
 void Kdb3Database::EntryHandle::setImage(const quint32& s){Entry->Image=s;}
-void Kdb3Database::EntryHandle::setOldImage(const quint32& s){Entry->OldImage=s;}
 KpxUuid	Kdb3Database::EntryHandle::uuid(){return Entry->Uuid;}
 IGroupHandle* Kdb3Database::EntryHandle::group(){return Entry->Group->Handle;}
 quint32	Kdb3Database::EntryHandle::image(){return Entry->Image;}
-quint32	Kdb3Database::EntryHandle::oldImage(){return Entry->OldImage;}
 QString	Kdb3Database::EntryHandle::title(){return Entry->Title;}
 QString	Kdb3Database::EntryHandle::url(){return Entry->Url;}
 QString	Kdb3Database::EntryHandle::username(){return Entry->Username;}
@@ -1106,24 +1095,13 @@ Kdb3Database::EntryHandle::EntryHandle(Kdb3Database* db){
 
 
 bool Kdb3Database::GroupHandle::isValid(){return valid;}
-void Kdb3Database::GroupHandle::setOldImage(const quint32& s){Group->OldImage=s;}
 QString Kdb3Database::GroupHandle::title(){return Group->Title;}
-quint32	Kdb3Database::GroupHandle::oldImage(){return Group->OldImage;}
 quint32	Kdb3Database::GroupHandle::image(){return Group->Image;}
 int Kdb3Database::GroupHandle::index(){return Group->Index;}
 void Kdb3Database::GroupHandle::setTitle(const QString& Title){Group->Title=Title;}
 void Kdb3Database::GroupHandle::setExpanded(bool IsExpanded){Group->IsExpanded=IsExpanded;}
 bool Kdb3Database::GroupHandle::expanded(){return Group->IsExpanded;}
-void Kdb3Database::GroupHandle::setImage(const quint32& New)
-{
-	if(Group->Image < pDB->builtinIcons() && New >= pDB->builtinIcons())
-		Group->OldImage=Group->Image;
-
-	if(New < pDB->builtinIcons())
-		Group->OldImage=New;
-
-	Group->Image=New;
-}
+void Kdb3Database::GroupHandle::setImage(const quint32& New){Group->Image=New;}
 
 
 Kdb3Database::GroupHandle::GroupHandle(Kdb3Database* db){
@@ -1219,21 +1197,6 @@ bool Kdb3Database::save(){
 			return false;
 		}
 	}
-
-
-/*	This is only a fix for a bug in the implementation of the metastream creation
-	in KeePassX 0.2.1. to restore lost icons.
-	It should be removed after a while.
-	-----------------------------------------------------------------------------------*/
-	for(int i=0;i<Groups.size();i++){
-		if(Groups[i].Image<builtinIcons())
-			Groups[i].OldImage=Groups[i].Image;
-	}
-	for(int i=0;i<Entries.size();i++){
-		if(Entries[i].Image<builtinIcons())
-				Entries[i].OldImage=Entries[i].Image;
-	}
-/*  ----------------------------------------------------------------------------------*/
 
 	unsigned int FileSize;
 
@@ -1376,7 +1339,6 @@ void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 	e->Username="SYSTEM";
 	e->Comment="KPX_CUSTOM_ICONS_4";
 	e->Url="$";
-	e->OldImage=0;
 	if(Groups.size())e->GroupId=Groups[0].Id;
 	int Size=12;
 	quint32 NumEntries=0;
@@ -1505,7 +1467,7 @@ void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsig
 		FieldType = 0x0007; FieldSize = 4;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		memcpyToLEnd32(buffer+pos, &SortedGroups[i]->OldImage); pos += 4;
+		memcpyToLEnd32(buffer+pos, &SortedGroups[i]->Image); pos += 4;
 
 		FieldType = 0x0008; FieldSize = 2;
 		memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
@@ -1542,7 +1504,7 @@ void Kdb3Database::serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsi
 		 FieldType = 0x0003; FieldSize = 4;
 		 memcpyToLEnd16(buffer+pos, &FieldType); pos += 2;
 		 memcpyToLEnd32(buffer+pos, &FieldSize); pos += 4;
-		 memcpyToLEnd32(buffer+pos,&EntryList[i].OldImage); pos += 4;
+		 memcpyToLEnd32(buffer+pos,&EntryList[i].Image); pos += 4;
 
 
 		 FieldType = 0x0004;

@@ -20,6 +20,12 @@
 #include <QProcess>
 #include <QDesktopServices>
 
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+	#include <sys/mman.h>
+#elif defined(Q_WS_WIN)
+	#include <windows.h>
+#endif
+
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
 	createBanner(Pixmap,IconAlpha,Text,Width,config->bannerColor1(),config->bannerColor2(),config->bannerTextColor());
 }
@@ -209,4 +215,12 @@ bool createKeyFile(const QString& filename,QString* error,int length, bool Hex){
 	return true;
 }
 
-
+bool lockPage(void* addr, int len){
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+	return (mlock(addr, len)==0);
+#elif defined(Q_WS_WIN)
+	return VirtualLock(addr, len);
+#else
+	return false;
+#endif
+}

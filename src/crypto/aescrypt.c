@@ -1,22 +1,29 @@
- /**************************************************************************
- *                                                                         *
- *   Copyright (C) 2007 by Tarek Saidi <tarek.saidi@arcor.de>              *
- *   Copyright (c) 2003 Dr Brian Gladman, Worcester, UK                    *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; version 2 of the License.               *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+/*
+ ---------------------------------------------------------------------------
+ Copyright (c) 1998-2008, Brian Gladman, Worcester, UK. All rights reserved.
+
+ LICENSE TERMS
+
+ The redistribution and use of this software (with or without changes)
+ is allowed without the payment of fees or royalties provided that:
+
+  1. source code distributions include the above copyright notice, this
+     list of conditions and the following disclaimer;
+
+  2. binary distributions include the above copyright notice, this list
+     of conditions and the following disclaimer in their documentation;
+
+  3. the name of the copyright holder is not used to endorse products
+     built using this software without specific written permission.
+
+ DISCLAIMER
+
+ This software is provided 'as is' with no explicit or implied warranties
+ in respect of its properties, including, but not limited to, correctness
+ and/or fitness for purpose.
+ ---------------------------------------------------------------------------
+ Issue Date: 20/12/2007
+*/
 
 #include "aesopt.h"
 #include "aestab.h"
@@ -41,7 +48,7 @@ extern "C"
 #define state_out(y,x)  so(y,x,0); so(y,x,1); so(y,x,2); so(y,x,3)
 #define round(rm,y,x,k) rm(y,x,k,0); rm(y,x,k,1); rm(y,x,k,2); rm(y,x,k,3)
 
-#if ( FUNCS_IN_C & ENCRYPTION_IN_C)
+#if ( FUNCS_IN_C & ENCRYPTION_IN_C )
 
 /* Visual C++ .Net v7.1 provides the fastest encryption code when using
    Pentium optimiation with small code but this is poor for decryption
@@ -87,17 +94,15 @@ extern "C"
 #define fwd_lrnd(y,x,k,c)   (s(y,c) = (k)[c] ^ no_table(x,t_use(s,box),fwd_var,rf1,c))
 #endif
 
-aes_rval aes_encrypt(const unsigned char *in, unsigned char *out, const aes_encrypt_ctx cx[1])
+AES_RETURN aes_encrypt(const unsigned char *in, unsigned char *out, const aes_encrypt_ctx cx[1])
 {   uint_32t         locals(b0, b1);
     const uint_32t   *kp;
 #if defined( dec_fmvars )
     dec_fmvars; /* declare variables for fwd_mcol() if needed */
 #endif
 
-#if defined( AES_ERR_CHK )
     if( cx->inf.b[0] != 10 * 16 && cx->inf.b[0] != 12 * 16 && cx->inf.b[0] != 14 * 16 )
         return EXIT_FAILURE;
-#endif
 
     kp = cx->ks;
     state_in(b0, in, kp);
@@ -155,10 +160,7 @@ aes_rval aes_encrypt(const unsigned char *in, unsigned char *out, const aes_encr
 #endif
 
     state_out(out, b0);
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
@@ -224,17 +226,15 @@ aes_rval aes_encrypt(const unsigned char *in, unsigned char *out, const aes_encr
 #define rnd_key(n)  (kp - n * N_COLS)
 #endif
 
-aes_rval aes_decrypt(const unsigned char *in, unsigned char *out, const aes_decrypt_ctx cx[1])
+AES_RETURN aes_decrypt(const unsigned char *in, unsigned char *out, const aes_decrypt_ctx cx[1])
 {   uint_32t        locals(b0, b1);
 #if defined( dec_imvars )
     dec_imvars; /* declare variables for inv_mcol() if needed */
 #endif
     const uint_32t *kp;
 
-#if defined( AES_ERR_CHK )
     if( cx->inf.b[0] != 10 * 16 && cx->inf.b[0] != 12 * 16 && cx->inf.b[0] != 14 * 16 )
         return EXIT_FAILURE;
-#endif
 
     kp = cx->ks + (key_ofs ? (cx->inf.b[0] >> 2) : 0);
     state_in(b0, in, kp);
@@ -291,10 +291,7 @@ aes_rval aes_decrypt(const unsigned char *in, unsigned char *out, const aes_decr
 #endif
 
     state_out(out, b0);
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif

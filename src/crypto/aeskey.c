@@ -1,28 +1,35 @@
- /**************************************************************************
- *                                                                         *
- *   Copyright (C) 2007 by Tarek Saidi <tarek.saidi@arcor.de>              *
- *   Copyright (c) 2003 Dr Brian Gladman, Worcester, UK                    *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; version 2 of the License.               *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+/*
+ ---------------------------------------------------------------------------
+ Copyright (c) 1998-2008, Brian Gladman, Worcester, UK. All rights reserved.
+
+ LICENSE TERMS
+
+ The redistribution and use of this software (with or without changes)
+ is allowed without the payment of fees or royalties provided that:
+
+  1. source code distributions include the above copyright notice, this
+     list of conditions and the following disclaimer;
+
+  2. binary distributions include the above copyright notice, this list
+     of conditions and the following disclaimer in their documentation;
+
+  3. the name of the copyright holder is not used to endorse products
+     built using this software without specific written permission.
+
+ DISCLAIMER
+
+ This software is provided 'as is' with no explicit or implied warranties
+ in respect of its properties, including, but not limited to, correctness
+ and/or fitness for purpose.
+ ---------------------------------------------------------------------------
+ Issue Date: 20/12/2007
+*/
 
 #include "aesopt.h"
 #include "aestab.h"
 
 #ifdef USE_VIA_ACE_IF_PRESENT
-#include "via_ace.h"
+#  include "aes_via_ace.h"
 #endif
 
 #if defined(__cplusplus)
@@ -48,9 +55,22 @@ extern "C"
     cx->n_col = 8   29 23 19 17 14
 */
 
+#if defined( REDUCE_CODE_SIZE )
+#  define ls_box ls_sub
+   uint_32t ls_sub(const uint_32t t, const uint_32t n);
+#  define inv_mcol im_sub
+   uint_32t im_sub(const uint_32t x);
+#  ifdef ENC_KS_UNROLL
+#    undef ENC_KS_UNROLL
+#  endif
+#  ifdef DEC_KS_UNROLL
+#    undef DEC_KS_UNROLL
+#  endif
+#endif
+
 #if (FUNCS_IN_C & ENC_KEYING_IN_C)
 
-#if defined(AES_128) || defined(AES_VAR)
+#if defined(AES_128) || defined( AES_VAR )
 
 #define ke4(k,i) \
 {   k[4*(i)+4] = ss[0] ^= ls_box(ss[3],3) ^ t_use(r,c)[i]; \
@@ -59,7 +79,7 @@ extern "C"
     k[4*(i)+7] = ss[3] ^= ss[2]; \
 }
 
-aes_rval aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1])
+AES_RETURN aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1])
 {   uint_32t    ss[4];
 
     cx->ks[0] = ss[0] = word_in(key, 0);
@@ -67,17 +87,17 @@ aes_rval aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1])
     cx->ks[2] = ss[2] = word_in(key, 2);
     cx->ks[3] = ss[3] = word_in(key, 3);
 
-#if ENC_UNROLL == NONE
-    {   uint_32t i;
-        for(i = 0; i < 9; ++i)
-            ke4(cx->ks, i);
-    }
-#else
+#ifdef ENC_KS_UNROLL
     ke4(cx->ks, 0);  ke4(cx->ks, 1);
     ke4(cx->ks, 2);  ke4(cx->ks, 3);
     ke4(cx->ks, 4);  ke4(cx->ks, 5);
     ke4(cx->ks, 6);  ke4(cx->ks, 7);
     ke4(cx->ks, 8);
+#else
+    {   uint_32t i;
+        for(i = 0; i < 9; ++i)
+            ke4(cx->ks, i);
+    }
 #endif
     ke4(cx->ks, 9);
     cx->inf.l = 0;
@@ -87,15 +107,12 @@ aes_rval aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1])
     if(VIA_ACE_AVAILABLE)
         cx->inf.b[1] = 0xff;
 #endif
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
 
-#if defined(AES_192) || defined(AES_VAR)
+#if defined(AES_192) || defined( AES_VAR )
 
 #define kef6(k,i) \
 {   k[6*(i)+ 6] = ss[0] ^= ls_box(ss[5],3) ^ t_use(r,c)[i]; \
@@ -110,7 +127,7 @@ aes_rval aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1])
     k[6*(i)+11] = ss[5] ^= ss[4]; \
 }
 
-aes_rval aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1])
+AES_RETURN aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1])
 {   uint_32t    ss[6];
 
     cx->ks[0] = ss[0] = word_in(key, 0);
@@ -120,16 +137,16 @@ aes_rval aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1])
     cx->ks[4] = ss[4] = word_in(key, 4);
     cx->ks[5] = ss[5] = word_in(key, 5);
 
-#if ENC_UNROLL == NONE
-    {   uint_32t i;
-        for(i = 0; i < 7; ++i)
-            ke6(cx->ks, i);
-    }
-#else
+#ifdef ENC_KS_UNROLL
     ke6(cx->ks, 0);  ke6(cx->ks, 1);
     ke6(cx->ks, 2);  ke6(cx->ks, 3);
     ke6(cx->ks, 4);  ke6(cx->ks, 5);
     ke6(cx->ks, 6);
+#else
+    {   uint_32t i;
+        for(i = 0; i < 7; ++i)
+            ke6(cx->ks, i);
+    }
 #endif
     kef6(cx->ks, 7);
     cx->inf.l = 0;
@@ -139,15 +156,12 @@ aes_rval aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1])
     if(VIA_ACE_AVAILABLE)
         cx->inf.b[1] = 0xff;
 #endif
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
 
-#if defined(AES_256) || defined(AES_VAR)
+#if defined(AES_256) || defined( AES_VAR )
 
 #define kef8(k,i) \
 {   k[8*(i)+ 8] = ss[0] ^= ls_box(ss[7],3) ^ t_use(r,c)[i]; \
@@ -164,7 +178,7 @@ aes_rval aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1])
     k[8*(i)+15] = ss[7] ^= ss[6]; \
 }
 
-aes_rval aes_encrypt_key256(const unsigned char *key, aes_encrypt_ctx cx[1])
+AES_RETURN aes_encrypt_key256(const unsigned char *key, aes_encrypt_ctx cx[1])
 {   uint_32t    ss[8];
 
     cx->ks[0] = ss[0] = word_in(key, 0);
@@ -176,15 +190,15 @@ aes_rval aes_encrypt_key256(const unsigned char *key, aes_encrypt_ctx cx[1])
     cx->ks[6] = ss[6] = word_in(key, 6);
     cx->ks[7] = ss[7] = word_in(key, 7);
 
-#if ENC_UNROLL == NONE
+#ifdef ENC_KS_UNROLL
+    ke8(cx->ks, 0); ke8(cx->ks, 1);
+    ke8(cx->ks, 2); ke8(cx->ks, 3);
+    ke8(cx->ks, 4); ke8(cx->ks, 5);
+#else
     {   uint_32t i;
         for(i = 0; i < 6; ++i)
             ke8(cx->ks,  i);
     }
-#else
-    ke8(cx->ks, 0); ke8(cx->ks, 1);
-    ke8(cx->ks, 2); ke8(cx->ks, 3);
-    ke8(cx->ks, 4); ke8(cx->ks, 5);
 #endif
     kef8(cx->ks, 6);
     cx->inf.l = 0;
@@ -194,30 +208,21 @@ aes_rval aes_encrypt_key256(const unsigned char *key, aes_encrypt_ctx cx[1])
     if(VIA_ACE_AVAILABLE)
         cx->inf.b[1] = 0xff;
 #endif
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
 
-#if defined(AES_VAR)
+#if defined( AES_VAR )
 
-aes_rval aes_encrypt_key(const unsigned char *key, int key_len, aes_encrypt_ctx cx[1])
-{
+AES_RETURN aes_encrypt_key(const unsigned char *key, int key_len, aes_encrypt_ctx cx[1])
+{   
     switch(key_len)
     {
-#if defined( AES_ERR_CHK )
     case 16: case 128: return aes_encrypt_key128(key, cx);
     case 24: case 192: return aes_encrypt_key192(key, cx);
     case 32: case 256: return aes_encrypt_key256(key, cx);
     default: return EXIT_FAILURE;
-#else
-    case 16: case 128: aes_encrypt_key128(key, cx); return;
-    case 24: case 192: aes_encrypt_key192(key, cx); return;
-    case 32: case 256: aes_encrypt_key256(key, cx); return;
-#endif
     }
 }
 
@@ -245,7 +250,7 @@ aes_rval aes_encrypt_key(const unsigned char *key, int key_len, aes_encrypt_ctx 
 #endif
 #endif
 
-#if defined(AES_128) || defined(AES_VAR)
+#if defined(AES_128) || defined( AES_VAR )
 
 #define k4e(k,i) \
 {   k[v(40,(4*(i))+4)] = ss[0] ^= ls_box(ss[3],3) ^ t_use(r,c)[i]; \
@@ -311,7 +316,7 @@ aes_rval aes_encrypt_key(const unsigned char *key, int key_len, aes_encrypt_ctx 
 
 #endif
 
-aes_rval aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1])
+AES_RETURN aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1])
 {   uint_32t    ss[5];
 #if defined( d_vars )
         d_vars;
@@ -321,7 +326,13 @@ aes_rval aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1])
     cx->ks[v(40,(2))] = ss[2] = word_in(key, 2);
     cx->ks[v(40,(3))] = ss[3] = word_in(key, 3);
 
-#if DEC_UNROLL == NONE
+#ifdef DEC_KS_UNROLL
+     kdf4(cx->ks, 0); kd4(cx->ks, 1);
+     kd4(cx->ks, 2);  kd4(cx->ks, 3);
+     kd4(cx->ks, 4);  kd4(cx->ks, 5);
+     kd4(cx->ks, 6);  kd4(cx->ks, 7);
+     kd4(cx->ks, 8);  kdl4(cx->ks, 9);
+#else
     {   uint_32t i;
         for(i = 0; i < 10; ++i)
             k4e(cx->ks, i);
@@ -330,12 +341,6 @@ aes_rval aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1])
             cx->ks[i] = inv_mcol(cx->ks[i]);
 #endif
     }
-#else
-    kdf4(cx->ks, 0);  kd4(cx->ks, 1);
-     kd4(cx->ks, 2);  kd4(cx->ks, 3);
-     kd4(cx->ks, 4);  kd4(cx->ks, 5);
-     kd4(cx->ks, 6);  kd4(cx->ks, 7);
-     kd4(cx->ks, 8); kdl4(cx->ks, 9);
 #endif
     cx->inf.l = 0;
     cx->inf.b[0] = 10 * 16;
@@ -344,15 +349,12 @@ aes_rval aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1])
     if(VIA_ACE_AVAILABLE)
         cx->inf.b[1] = 0xff;
 #endif
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
 
-#if defined(AES_192) || defined(AES_VAR)
+#if defined(AES_192) || defined( AES_VAR )
 
 #define k6ef(k,i) \
 {   k[v(48,(6*(i))+ 6)] = ss[0] ^= ls_box(ss[5],3) ^ t_use(r,c)[i]; \
@@ -393,7 +395,7 @@ aes_rval aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1])
     ss[3] ^= ss[2]; k[v(48,(6*(i))+ 9)] = ss[3]; \
 }
 
-aes_rval aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1])
+AES_RETURN aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1])
 {   uint_32t    ss[7];
 #if defined( d_vars )
         d_vars;
@@ -403,7 +405,14 @@ aes_rval aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1])
     cx->ks[v(48,(2))] = ss[2] = word_in(key, 2);
     cx->ks[v(48,(3))] = ss[3] = word_in(key, 3);
 
-#if DEC_UNROLL == NONE
+#ifdef DEC_KS_UNROLL
+    cx->ks[v(48,(4))] = ff(ss[4] = word_in(key, 4));
+    cx->ks[v(48,(5))] = ff(ss[5] = word_in(key, 5));
+    kdf6(cx->ks, 0); kd6(cx->ks, 1);
+    kd6(cx->ks, 2);  kd6(cx->ks, 3);
+    kd6(cx->ks, 4);  kd6(cx->ks, 5);
+    kd6(cx->ks, 6);  kdl6(cx->ks, 7);
+#else
     cx->ks[v(48,(4))] = ss[4] = word_in(key, 4);
     cx->ks[v(48,(5))] = ss[5] = word_in(key, 5);
     {   uint_32t i;
@@ -416,13 +425,6 @@ aes_rval aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1])
             cx->ks[i] = inv_mcol(cx->ks[i]);
 #endif
     }
-#else
-    cx->ks[v(48,(4))] = ff(ss[4] = word_in(key, 4));
-    cx->ks[v(48,(5))] = ff(ss[5] = word_in(key, 5));
-    kdf6(cx->ks, 0); kd6(cx->ks, 1);
-    kd6(cx->ks, 2);  kd6(cx->ks, 3);
-    kd6(cx->ks, 4);  kd6(cx->ks, 5);
-    kd6(cx->ks, 6); kdl6(cx->ks, 7);
 #endif
     cx->inf.l = 0;
     cx->inf.b[0] = 12 * 16;
@@ -431,15 +433,12 @@ aes_rval aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1])
     if(VIA_ACE_AVAILABLE)
         cx->inf.b[1] = 0xff;
 #endif
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
 
-#if defined(AES_256) || defined(AES_VAR)
+#if defined(AES_256) || defined( AES_VAR )
 
 #define k8ef(k,i) \
 {   k[v(56,(8*(i))+ 8)] = ss[0] ^= ls_box(ss[7],3) ^ t_use(r,c)[i]; \
@@ -487,7 +486,7 @@ aes_rval aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1])
     ss[3] ^= ss[2]; k[v(56,(8*(i))+11)] = ss[3]; \
 }
 
-aes_rval aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1])
+AES_RETURN aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1])
 {   uint_32t    ss[9];
 #if defined( d_vars )
         d_vars;
@@ -497,7 +496,16 @@ aes_rval aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1])
     cx->ks[v(56,(2))] = ss[2] = word_in(key, 2);
     cx->ks[v(56,(3))] = ss[3] = word_in(key, 3);
 
-#if DEC_UNROLL == NONE
+#ifdef DEC_KS_UNROLL
+    cx->ks[v(56,(4))] = ff(ss[4] = word_in(key, 4));
+    cx->ks[v(56,(5))] = ff(ss[5] = word_in(key, 5));
+    cx->ks[v(56,(6))] = ff(ss[6] = word_in(key, 6));
+    cx->ks[v(56,(7))] = ff(ss[7] = word_in(key, 7));
+    kdf8(cx->ks, 0); kd8(cx->ks, 1);
+    kd8(cx->ks, 2);  kd8(cx->ks, 3);
+    kd8(cx->ks, 4);  kd8(cx->ks, 5);
+    kdl8(cx->ks, 6);
+#else
     cx->ks[v(56,(4))] = ss[4] = word_in(key, 4);
     cx->ks[v(56,(5))] = ss[5] = word_in(key, 5);
     cx->ks[v(56,(6))] = ss[6] = word_in(key, 6);
@@ -510,18 +518,8 @@ aes_rval aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1])
 #if !(DEC_ROUND == NO_TABLES)
         for(i = N_COLS; i < 14 * N_COLS; ++i)
             cx->ks[i] = inv_mcol(cx->ks[i]);
-
 #endif
     }
-#else
-    cx->ks[v(56,(4))] = ff(ss[4] = word_in(key, 4));
-    cx->ks[v(56,(5))] = ff(ss[5] = word_in(key, 5));
-    cx->ks[v(56,(6))] = ff(ss[6] = word_in(key, 6));
-    cx->ks[v(56,(7))] = ff(ss[7] = word_in(key, 7));
-    kdf8(cx->ks, 0); kd8(cx->ks, 1);
-    kd8(cx->ks, 2);  kd8(cx->ks, 3);
-    kd8(cx->ks, 4);  kd8(cx->ks, 5);
-    kdl8(cx->ks, 6);
 #endif
     cx->inf.l = 0;
     cx->inf.b[0] = 14 * 16;
@@ -530,30 +528,21 @@ aes_rval aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1])
     if(VIA_ACE_AVAILABLE)
         cx->inf.b[1] = 0xff;
 #endif
-
-#if defined( AES_ERR_CHK )
     return EXIT_SUCCESS;
-#endif
 }
 
 #endif
 
-#if defined(AES_VAR)
+#if defined( AES_VAR )
 
-aes_rval aes_decrypt_key(const unsigned char *key, int key_len, aes_decrypt_ctx cx[1])
+AES_RETURN aes_decrypt_key(const unsigned char *key, int key_len, aes_decrypt_ctx cx[1])
 {
     switch(key_len)
     {
-#if defined( AES_ERR_CHK )
     case 16: case 128: return aes_decrypt_key128(key, cx);
     case 24: case 192: return aes_decrypt_key192(key, cx);
     case 32: case 256: return aes_decrypt_key256(key, cx);
     default: return EXIT_FAILURE;
-#else
-    case 16: case 128: aes_decrypt_key128(key, cx); return;
-    case 24: case 192: aes_decrypt_key192(key, cx); return;
-    case 32: case 256: aes_decrypt_key256(key, cx); return;
-#endif
     }
 }
 

@@ -20,6 +20,8 @@
 #ifndef _SECSTRING_H_
 #define _SECSTRING_H_
 
+#include "crypto/arcfour.h"
+
 //! QString based class with in-memory encryption of its content.
 /*!
 This class can hold a QString object in an encrypted buffer. To get access to the string it is neccassary to unlock the SecString object.
@@ -47,8 +49,8 @@ public:
 	static void generateSessionKey();
 	
 private:
-	bool locked;
 	static CArcFour RC4;
+	bool locked;
 	QByteArray crypt;
 	QString plain;
 

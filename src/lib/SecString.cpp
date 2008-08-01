@@ -18,11 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifdef Q_WS_X11
-#include <sys/mman.h>
-#include <limits.h>
-#endif
-
 using namespace std;
 CArcFour SecString::RC4;
 
@@ -54,7 +49,7 @@ void SecString::unlock(){
 	if(!crypt.length())
 		return;
 	const unsigned char* buffer = new unsigned char[crypt.length()];
-	SecString::RC4.decrypt( (byte*)crypt.data(), (unsigned char*)buffer, crypt.length() );
+	RC4.decrypt( (byte*)crypt.data(), (unsigned char*)buffer, crypt.length() );
 	plain = QString::fromUtf8((const char*)buffer, crypt.size());
 	overwrite((unsigned char*)buffer, crypt.size());
 	delete [] buffer;
@@ -69,7 +64,7 @@ void SecString::setString(QString& str, bool DeleteSource){
 	QByteArray StrData = str.toUtf8();
 	int len = StrData.size();
 	unsigned char* buffer = new unsigned char[len];
-	SecString::RC4.encrypt((const unsigned char*)StrData.data(), buffer, len);
+	RC4.encrypt((const unsigned char*)StrData.data(), buffer, len);
 	crypt = QByteArray((const char*)buffer, len);
 	overwrite(buffer, len);
 	overwrite((unsigned char*)StrData.data(), len);
@@ -98,20 +93,8 @@ void SecString::overwrite(QString& str){
 }
 
 void SecString::generateSessionKey(){
-	CArcFour arc;
-	unsigned char sessionkey[32];
-	
-#ifdef Q_WS_X11
-	
-#ifdef PAGESIZE
-	mlock(sessionkey - sessionkey%PAGESIZE, 32);
-#else
-	mlock(sessionkey, 32);
-#endif
-	
-#endif // Q_WS_X11
-	
-	randomize(sessionkey,32);
-	RC4.setKey(sessionkey,32);
-	overwrite(sessionkey,32);
+	quint8* sessionkey = new quint8[32];
+	lockPage(sessionkey, 32);
+	randomize(sessionkey, 32);
+	RC4.setKey(sessionkey, 32);
 }

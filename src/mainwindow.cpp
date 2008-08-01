@@ -415,7 +415,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	QString err;
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	db->setKey(dlg.password(),dlg.keyFile());
-	if(db->load(filename)==true){
+	if(db->load(filename)){
 		if (IsLocked)
 			resetLock();
 		saveLastFilename(filename);

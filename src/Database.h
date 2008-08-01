@@ -110,7 +110,6 @@ The IEntryHandle interface provides access to Entry data structures without usin
 class IEntryHandle{
 public:
 	virtual void setImage(const quint32& ImageID)=0;
-	virtual void setOldImage(const quint32& OldImgID)=0;
 	virtual void setTitle(const QString& Title)=0;
 	virtual void setUrl(const QString& URL)=0;
     virtual void setUsername(const QString& Username)=0;
@@ -126,7 +125,6 @@ public:
 	virtual KpxUuid uuid()=0;
 	virtual IGroupHandle* group()=0;
 	virtual quint32 image()=0;
-	virtual quint32 oldImage()=0;
 	virtual QString title()=0;
 	virtual QString url()=0;
     virtual QString username()=0;

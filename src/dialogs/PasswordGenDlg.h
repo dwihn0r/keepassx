@@ -28,27 +28,30 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 {
 	Q_OBJECT
 	public:
-		CGenPwDialog(QWidget* parent, bool StandAloneMode, Qt::WFlags fl = 0 );
+		CGenPwDialog(QWidget* parent, bool StandAloneMode, Qt::WFlags fl = 0);
 		~CGenPwDialog();
-				
+	
 	private:
 		int AddToAssoctable(char* table,int start,int end,int pos);
 		bool trim(unsigned char &value,int range);
-		virtual void paintEvent(QPaintEvent* event);
-		QPixmap BannerPixmap;	
+		void paintEvent(QPaintEvent* event);
+		void generatePasswordInternal(char* buffer, int length);
+		QPixmap BannerPixmap;
 		static bool EntropyCollected;
 		QPushButton* AcceptButton;
 	
 	private slots:
-		virtual void OnGeneratePw();
-		virtual void OnRadio2StateChanged(bool);
-		virtual void OnRadio1StateChanged(bool);
-		virtual void OnCancel();
-		virtual void OnAccept();
+		void OnGeneratePw();
+		void OnRadio2StateChanged(bool);
+		void OnRadio1StateChanged(bool);
+		void OnCancel();
+		void OnAccept();
 		void estimateQuality();
 		void OnCollectEntropyChanged(int);
 		void OnCharsChanged(const QString& str);
-		
+		void SwapEchoMode();
+		void setGenerateEnabled();
+		void setAcceptEnabled(const QString& str);
 };
 
 #endif

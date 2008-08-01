@@ -21,6 +21,7 @@
 
 #include "Import_PwManager.h"
 
+#include <QCryptographicHash>
 
 bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){	
 	database=db;
@@ -80,32 +81,27 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	byte* xml=new byte[len-offset+1];
 	xml[len-offset]=0;
 	memcpy(Key,password.toAscii(),pwlen);
-	char* key_hash=new char[20];
-	CSHA1 sha;
-	sha.Update(Key,pwlen);
-	sha.Final();
-	sha.GetHash((unsigned char*)key_hash);
-	if(memcmp(key_hash,KeyHash,20)){
-		delete[] Key; delete [] key_hash; delete [] buffer;
+	QCryptographicHash sha(QCryptographicHash::Sha1);
+	sha.addData((const char*)Key,pwlen);
+	QByteArray key_hash = sha.result();
+	if(memcmp(key_hash.constData(),KeyHash,20)){
+		delete[] Key;
+		delete [] buffer;
 		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Wrong password."));
 		return false;
 	}
-	delete [] key_hash;
 	blowfish.bf_setkey(Key,password.length());
 	blowfish.bf_decrypt(xml,(byte*)buffer+offset,len-offset);
 	delete [] Key;
 	delete [] buffer;
-	char* content_hash=new char[20];
-	sha.Reset();
-	sha.Update(xml,strlen((char*)xml)-1);
-	sha.Final();
-	sha.GetHash((unsigned char*)content_hash);
-	if(memcmp(content_hash,DataHash,20)){
-		delete [] content_hash; delete [] xml;
+	sha.reset();
+	sha.addData((const char*)xml,strlen((char*)xml)-1);
+	QByteArray content_hash = sha.result();
+	if(memcmp(content_hash.constData(),DataHash,20)){
+		delete [] xml;
 		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("File is damaged (hash test failed)."));
 		return false;
 	}
-	delete[] content_hash;
 	
 	if(!parseXmlContent((char*)xml)){
 		delete [] xml;

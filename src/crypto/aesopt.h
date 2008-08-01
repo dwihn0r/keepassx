@@ -1,24 +1,29 @@
- /**************************************************************************
- *                                                                         *
- *   Copyright (C) 2007 by Tarek Saidi <tarek.saidi@arcor.de>              *
- *   Copyright (c) 2003 Dr Brian Gladman, Worcester, UK                    *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; version 2 of the License.               *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
- 
 /*
+ ---------------------------------------------------------------------------
+ Copyright (c) 1998-2008, Brian Gladman, Worcester, UK. All rights reserved.
+
+ LICENSE TERMS
+
+ The redistribution and use of this software (with or without changes)
+ is allowed without the payment of fees or royalties provided that:
+
+  1. source code distributions include the above copyright notice, this
+     list of conditions and the following disclaimer;
+
+  2. binary distributions include the above copyright notice, this list
+     of conditions and the following disclaimer in their documentation;
+
+  3. the name of the copyright holder is not used to endorse products
+     built using this software without specific written permission.
+
+ DISCLAIMER
+
+ This software is provided 'as is' with no explicit or implied warranties
+ in respect of its properties, including, but not limited to, correctness
+ and/or fitness for purpose.
+ ---------------------------------------------------------------------------
+ Issue Date: 20/12/2007
+
  This file contains the compilation options for AES (Rijndael) and code
  that is common across encryption, key scheduling and table generation.
 
@@ -43,24 +48,24 @@
   uint_32t                (an unsigned 32-bit type)
   struct aes_encrypt_ctx  (structure for the cipher encryption context)
   struct aes_decrypt_ctx  (structure for the cipher decryption context)
-  aes_rval                the function return type
+  AES_RETURN                the function return type
 
   C subroutine calls:
 
-  aes_rval aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1]);
-  aes_rval aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1]);
-  aes_rval aes_encrypt_key256(const unsigned char *key, aes_encrypt_ctx cx[1]);
-  aes_rval aes_encrypt(const unsigned char *in, unsigned char *out,
+  AES_RETURN aes_encrypt_key128(const unsigned char *key, aes_encrypt_ctx cx[1]);
+  AES_RETURN aes_encrypt_key192(const unsigned char *key, aes_encrypt_ctx cx[1]);
+  AES_RETURN aes_encrypt_key256(const unsigned char *key, aes_encrypt_ctx cx[1]);
+  AES_RETURN aes_encrypt(const unsigned char *in, unsigned char *out,
                                                   const aes_encrypt_ctx cx[1]);
 
-  aes_rval aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1]);
-  aes_rval aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1]);
-  aes_rval aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1]);
-  aes_rval aes_decrypt(const unsigned char *in, unsigned char *out,
+  AES_RETURN aes_decrypt_key128(const unsigned char *key, aes_decrypt_ctx cx[1]);
+  AES_RETURN aes_decrypt_key192(const unsigned char *key, aes_decrypt_ctx cx[1]);
+  AES_RETURN aes_decrypt_key256(const unsigned char *key, aes_decrypt_ctx cx[1]);
+  AES_RETURN aes_decrypt(const unsigned char *in, unsigned char *out,
                                                   const aes_decrypt_ctx cx[1]);
 
  IMPORTANT NOTE: If you are using this C interface with dynamic tables make sure that
- you call gen_tabs() before AES is used so that the tables are initialised.
+ you call aes_init() before AES is used so that the tables are initialised.
 
  C++ aes class subroutines:
 
@@ -70,20 +75,20 @@
           AESencrypt(void)
           AESencrypt(const unsigned char *key) - 128 bit key
       Members:
-          aes_rval key128(const unsigned char *key)
-          aes_rval key192(const unsigned char *key)
-          aes_rval key256(const unsigned char *key)
-          aes_rval encrypt(const unsigned char *in, unsigned char *out) const
+          AES_RETURN key128(const unsigned char *key)
+          AES_RETURN key192(const unsigned char *key)
+          AES_RETURN key256(const unsigned char *key)
+          AES_RETURN encrypt(const unsigned char *in, unsigned char *out) const
 
       Class AESdecrypt  for encryption
       Construtors:
           AESdecrypt(void)
           AESdecrypt(const unsigned char *key) - 128 bit key
       Members:
-          aes_rval key128(const unsigned char *key)
-          aes_rval key192(const unsigned char *key)
-          aes_rval key256(const unsigned char *key)
-          aes_rval decrypt(const unsigned char *in, unsigned char *out) const
+          AES_RETURN key128(const unsigned char *key)
+          AES_RETURN key192(const unsigned char *key)
+          AES_RETURN key256(const unsigned char *key)
+          AES_RETURN decrypt(const unsigned char *in, unsigned char *out) const
 */
 
 #if !defined( _AESOPT_H )
@@ -97,7 +102,7 @@
 
 /*  PLATFORM SPECIFIC INCLUDES */
 
-#include "aes_edefs.h"
+#include "aes_endian.h"
 
 /*  CONFIGURATION - THE USE OF DEFINES
 
@@ -153,40 +158,47 @@
     This define will hence be redefined later (in section 4) if necessary
 */
 
-#if 1 
-#define ALGORITHM_BYTE_ORDER PLATFORM_BYTE_ORDER
+#if 1
+#  define ALGORITHM_BYTE_ORDER PLATFORM_BYTE_ORDER
 #elif 0
-#define ALGORITHM_BYTE_ORDER IS_LITTLE_ENDIAN
+#  define ALGORITHM_BYTE_ORDER IS_LITTLE_ENDIAN
 #elif 0
-#define ALGORITHM_BYTE_ORDER IS_BIG_ENDIAN
+#  define ALGORITHM_BYTE_ORDER IS_BIG_ENDIAN
 #else
-#error The algorithm byte order is not defined
+#  error The algorithm byte order is not defined
 #endif
 
-/*  2. VIA ACE SUPPORT
+/*  2. VIA ACE SUPPORT */
 
-    Define this option if support for the VIA ACE is required. This uses 
-    inline assembler instructions and is only implemented for the Microsoft, 
+// DISABLE VIA ACE
+/*#if defined( __GNUC__ ) && defined( __i386__ ) \
+ || defined( _WIN32   ) && defined( _M_IX86  ) \
+ && !(defined( _WIN64 ) || defined( _WIN32_WCE ) || defined( _MSC_VER ) && ( _MSC_VER <= 800 ))
+#  define VIA_ACE_POSSIBLE
+#endif*/
+
+/*  Define this option if support for the VIA ACE is required. This uses
+    inline assembler instructions and is only implemented for the Microsoft,
     Intel and GCC compilers.  If VIA ACE is known to be present, then defining
-    ASSUME_VIA_ACE_PRESENT will remove the ordinary encryption/decryption 
+    ASSUME_VIA_ACE_PRESENT will remove the ordinary encryption/decryption
     code.  If USE_VIA_ACE_IF_PRESENT is defined then VIA ACE will be used if
-    it is detected (both present and enabled) but the normal AES code will 
-    also be present. 
-    
-    When VIA ACE is to be used, all AES encryption contexts MUST be 16 byte 
-    aligned; other input/output buffers do not need to be 16 byte aligned 
-    but there are very large performance gains if this can be arranged.  
-    VIA ACE also requires the decryption key schedule to be in reverse 
-    order (which the following defines ensure).
+    it is detected (both present and enabled) but the normal AES code will
+    also be present.
+
+    When VIA ACE is to be used, all AES encryption contexts MUST be 16 byte
+    aligned; other input/output buffers do not need to be 16 byte aligned
+    but there are very large performance gains if this can be arranged.
+    VIA ACE also requires the decryption key schedule to be in reverse
+    order (which later checks below ensure).
 */
 
-#if 0 && !defined( _WIN64 ) && !defined( USE_VIA_ACE_IF_PRESENT )
-#define USE_VIA_ACE_IF_PRESENT
+#if 1 && defined( VIA_ACE_POSSIBLE ) && !defined( USE_VIA_ACE_IF_PRESENT )
+#  define USE_VIA_ACE_IF_PRESENT
 #endif
 
-#if 0 && !defined( _WIN64 ) && !defined( ASSUME_VIA_ACE_PRESENT )
-#define ASSUME_VIA_ACE_PRESENT
-#endif
+#if 0 && defined( VIA_ACE_POSSIBLE ) && !defined( ASSUME_VIA_ACE_PRESENT )
+#  define ASSUME_VIA_ACE_PRESENT
+#  endif
 
 /*  3. ASSEMBLER SUPPORT
 
@@ -194,39 +206,32 @@
     assembler code routines for encryption, decryption and key scheduling
     as follows:
 
-    ASM_X86_V1C uses the assembler (aes_x86_v1.asm) with large tables for 
+    ASM_X86_V1C uses the assembler (aes_x86_v1.asm) with large tables for
                 encryption and decryption and but with key scheduling in C
     ASM_X86_V2  uses assembler (aes_x86_v2.asm) with compressed tables for
                 encryption, decryption and key scheduling
-    ASM_X86_V2C	uses assembler (aes_x86_v2.asm) with compressed tables for
+    ASM_X86_V2C uses assembler (aes_x86_v2.asm) with compressed tables for
                 encryption and decryption and but with key scheduling in C
-    ASM_AMD64_C	uses assembler (aes_amd64.asm) with compressed tables for
+    ASM_AMD64_C uses assembler (aes_amd64.asm) with compressed tables for
                 encryption and decryption and but with key scheduling in C
 
-    Change one 'if 0' below to 'if 1' to select the version or define 
+    Change one 'if 0' below to 'if 1' to select the version or define
     as a compilation option.
 */
 
-#if defined ( ASM_X86_V1C ) || defined( ASM_X86_V2 ) || defined( ASM_X86_V2C )
-#  if defined( _M_IX86 )
-#    if 0 && !defined( ASM_X86_V1C )
-#      define ASM_X86_V1C
-#    elif 0 && !defined( ASM_X86_V2  )
-#      define ASM_X86_V2
-#    elif 0 && !defined( ASM_X86_V2C )
-#      define ASM_X86_V2C
-#    endif
-#  else
-#    error Assembler code is only available for x86 and AMD64 systems
-#  endif
-#elif defined( ASM_AMD64_C )
-#  if defined( _M_X64 )
-#    if 0 && !defined( ASM_AMD64_C )
-#      define ASM_AMD64_C
-#    endif
-#  else
-#    error Assembler code is only available for x86 and AMD64 systems
-#  endif
+#if 0 && !defined( ASM_X86_V1C )
+#  define ASM_X86_V1C
+#elif 0 && !defined( ASM_X86_V2  )
+#  define ASM_X86_V2
+#elif 0 && !defined( ASM_X86_V2C )
+#  define ASM_X86_V2C
+#elif 0 && !defined( ASM_AMD64_C )
+#  define ASM_AMD64_C
+#endif
+
+#if (defined ( ASM_X86_V1C ) || defined( ASM_X86_V2 ) || defined( ASM_X86_V2C )) \
+      && !defined( _M_IX86 ) || defined( ASM_AMD64_C ) && !defined( _M_X64 )
+#  error Assembler code is only available for x86 and AMD64 systems
 #endif
 
 /*  4. FAST INPUT/OUTPUT OPERATIONS.
@@ -246,7 +251,7 @@
     words will not cause problems when such accesses are misaligned.
 */
 #if 1 && !defined( _MSC_VER )
-#define SAFE_IO
+#  define SAFE_IO
 #endif
 
 /*  5. LOOP UNROLLING
@@ -261,19 +266,27 @@
     to be set independently for encryption and decryption
 */
 #if 1
-#define ENC_UNROLL  FULL
+#  define ENC_UNROLL  FULL
 #elif 0
-#define ENC_UNROLL  PARTIAL
+#  define ENC_UNROLL  PARTIAL
 #else
-#define ENC_UNROLL  NONE
+#  define ENC_UNROLL  NONE
 #endif
 
 #if 1
-#define DEC_UNROLL  FULL
+#  define DEC_UNROLL  FULL
 #elif 0
-#define DEC_UNROLL  PARTIAL
+#  define DEC_UNROLL  PARTIAL
 #else
-#define DEC_UNROLL  NONE
+#  define DEC_UNROLL  NONE
+#endif
+
+#if 1
+#  define ENC_KS_UNROLL
+#endif
+
+#if 1
+#  define DEC_KS_UNROLL
 #endif
 
 /*  6. FAST FINITE FIELD OPERATIONS
@@ -282,7 +295,7 @@
     field arithmetic (this has no effect if FIXED_TABLES is defined).
 */
 #if 1
-#define FF_TABLES
+#  define FF_TABLES
 #endif
 
 /*  7. INTERNAL STATE VARIABLE FORMAT
@@ -293,20 +306,31 @@
     varaibles in arrays. Otherwise individual local variables will be used.
 */
 #if 1
-#define ARRAYS
+#  define ARRAYS
 #endif
 
 /*  8. FIXED OR DYNAMIC TABLES
 
     When this section is included the tables used by the code are compiled
-    statically into the binary file.  Otherwise the subroutine gen_tabs()
+    statically into the binary file.  Otherwise the subroutine aes_init()
     must be called to compute them before the code is first used.
 */
-#if 1 && !(defined( _MSC_VER ) && ( _MSC_VER <= 800 )) 
-#define FIXED_TABLES
+#if 1 && !(defined( _MSC_VER ) && ( _MSC_VER <= 800 ))
+#  define FIXED_TABLES
 #endif
 
-/*  9. TABLE ALIGNMENT
+/*  9. MASKING OR CASTING FROM LONGER VALUES TO BYTES
+
+    In some systems it is better to mask longer values to extract bytes 
+    rather than using a cast. This option allows this choice.
+*/
+#if 0
+#  define to_byte(x)  ((uint_8t)(x))
+#else
+#  define to_byte(x)  ((x) & 0xff)
+#endif
+
+/*  10. TABLE ALIGNMENT
 
     On some sytsems speed will be improved by aligning the AES large lookup
     tables on particular boundaries. This define should be set to a power of
@@ -316,11 +340,21 @@
 */
 
 #if 1 && defined( _MSC_VER ) && ( _MSC_VER >= 1300 )
-#define TABLE_ALIGN 32
+#  define TABLE_ALIGN 32
 #endif
 
-/*  10. TABLE OPTIONS
-    
+/*  11.  REDUCE CODE AND TABLE SIZE
+
+    This replaces some expanded macros with function calls if AES_ASM_V2 or
+    AES_ASM_V2C are defined
+*/
+
+#if 1 && (defined( ASM_X86_V2 ) || defined( ASM_X86_V2C ))
+#  define REDUCE_CODE_SIZE
+#endif
+
+/*  12. TABLE OPTIONS
+
     This cipher proceeds by repeating in a number of cycles known as 'rounds'
     which are implemented by a round function which can optionally be speeded
     up using tables.  The basic tables are each 256 32-bit words, with either
@@ -340,35 +374,35 @@
 */
 
 #if 1   /* set tables for the normal encryption round */
-#define ENC_ROUND   FOUR_TABLES
+#  define ENC_ROUND   FOUR_TABLES
 #elif 0
-#define ENC_ROUND   ONE_TABLE
+#  define ENC_ROUND   ONE_TABLE
 #else
-#define ENC_ROUND   NO_TABLES
+#  define ENC_ROUND   NO_TABLES
 #endif
 
 #if 1   /* set tables for the last encryption round */
-#define LAST_ENC_ROUND  FOUR_TABLES
+#  define LAST_ENC_ROUND  FOUR_TABLES
 #elif 0
-#define LAST_ENC_ROUND  ONE_TABLE
+#  define LAST_ENC_ROUND  ONE_TABLE
 #else
-#define LAST_ENC_ROUND  NO_TABLES
+#  define LAST_ENC_ROUND  NO_TABLES
 #endif
 
 #if 1   /* set tables for the normal decryption round */
-#define DEC_ROUND   FOUR_TABLES
+#  define DEC_ROUND   FOUR_TABLES
 #elif 0
-#define DEC_ROUND   ONE_TABLE
+#  define DEC_ROUND   ONE_TABLE
 #else
-#define DEC_ROUND   NO_TABLES
+#  define DEC_ROUND   NO_TABLES
 #endif
 
 #if 1   /* set tables for the last decryption round */
-#define LAST_DEC_ROUND  FOUR_TABLES
+#  define LAST_DEC_ROUND  FOUR_TABLES
 #elif 0
-#define LAST_DEC_ROUND  ONE_TABLE
+#  define LAST_DEC_ROUND  ONE_TABLE
 #else
-#define LAST_DEC_ROUND  NO_TABLES
+#  define LAST_DEC_ROUND  NO_TABLES
 #endif
 
 /*  The decryption key schedule can be speeded up with tables in the same
@@ -376,11 +410,11 @@
     defines to set this requirement.
 */
 #if 1
-#define KEY_SCHED   FOUR_TABLES
+#  define KEY_SCHED   FOUR_TABLES
 #elif 0
-#define KEY_SCHED   ONE_TABLE
+#  define KEY_SCHED   ONE_TABLE
 #else
-#define KEY_SCHED   NO_TABLES
+#  define KEY_SCHED   NO_TABLES
 #endif
 
 /*  ---- END OF USER CONFIGURED OPTIONS ---- */
@@ -397,18 +431,19 @@
 #endif
 
 #if defined( ASSUME_VIA_ACE_PRESENT ) && !defined( USE_VIA_ACE_IF_PRESENT )
-#define USE_VIA_ACE_IF_PRESENT
+#  define USE_VIA_ACE_IF_PRESENT
 #endif
 
 #if defined( USE_VIA_ACE_IF_PRESENT ) && !defined ( AES_REV_DKS )
-#define AES_REV_DKS
+#  define AES_REV_DKS
 #endif
 
 /* Assembler support requires the use of platform byte order */
 
-#if ( defined( ASM_X86_V1C ) || defined( ASM_X86_V2C ) || defined( ASM_AMD64_C ) ) && (ALGORITHM_BYTE_ORDER != PLATFORM_BYTE_ORDER)
-#undef  ALGORITHM_BYTE_ORDER
-#define ALGORITHM_BYTE_ORDER PLATFORM_BYTE_ORDER
+#if ( defined( ASM_X86_V1C ) || defined( ASM_X86_V2C ) || defined( ASM_AMD64_C ) ) \
+    && (ALGORITHM_BYTE_ORDER != PLATFORM_BYTE_ORDER)
+#  undef  ALGORITHM_BYTE_ORDER
+#  define ALGORITHM_BYTE_ORDER PLATFORM_BYTE_ORDER
 #endif
 
 /* In this implementation the columns of the state array are each held in
@@ -423,20 +458,20 @@
 */
 
 #if defined( ARRAYS )
-#define s(x,c) x[c]
+#  define s(x,c) x[c]
 #else
-#define s(x,c) x##c
+#  define s(x,c) x##c
 #endif
 
 /*  This implementation provides subroutines for encryption, decryption
     and for setting the three key lengths (separately) for encryption
-    and decryption. Since not all functions are needed, masks are set 
+    and decryption. Since not all functions are needed, masks are set
     up here to determine which will be implemented in C
 */
 
 #if !defined( AES_ENCRYPT )
 #  define EFUNCS_IN_C   0
-#elif defined( ASSUME_VIA_ACE_PRESENT ) || defined( ASM_X86_V1C )
+#elif defined( ASSUME_VIA_ACE_PRESENT ) || defined( ASM_X86_V1C ) \
     || defined( ASM_X86_V2C ) || defined( ASM_AMD64_C )
 #  define EFUNCS_IN_C   ENC_KEYING_IN_C
 #elif !defined( ASM_X86_V2 )
@@ -447,8 +482,8 @@
 
 #if !defined( AES_DECRYPT )
 #  define DFUNCS_IN_C   0
-#elif defined( ASSUME_VIA_ACE_PRESENT ) || defined( ASM_X86_V1C )
-    || defined( ASM_X86_V2C ) || defined( ASM_AMD64_C )	
+#elif defined( ASSUME_VIA_ACE_PRESENT ) || defined( ASM_X86_V1C ) \
+    || defined( ASM_X86_V2C ) || defined( ASM_AMD64_C )
 #  define DFUNCS_IN_C   DEC_KEYING_IN_C
 #elif !defined( ASM_X86_V2 )
 #  define DFUNCS_IN_C   ( DECRYPTION_IN_C | DEC_KEYING_IN_C )
@@ -465,38 +500,38 @@
 /* Disable or report errors on some combinations of options */
 
 #if ENC_ROUND == NO_TABLES && LAST_ENC_ROUND != NO_TABLES
-#undef  LAST_ENC_ROUND
-#define LAST_ENC_ROUND  NO_TABLES
+#  undef  LAST_ENC_ROUND
+#  define LAST_ENC_ROUND  NO_TABLES
 #elif ENC_ROUND == ONE_TABLE && LAST_ENC_ROUND == FOUR_TABLES
-#undef  LAST_ENC_ROUND
-#define LAST_ENC_ROUND  ONE_TABLE
+#  undef  LAST_ENC_ROUND
+#  define LAST_ENC_ROUND  ONE_TABLE
 #endif
 
 #if ENC_ROUND == NO_TABLES && ENC_UNROLL != NONE
-#undef  ENC_UNROLL
-#define ENC_UNROLL  NONE
+#  undef  ENC_UNROLL
+#  define ENC_UNROLL  NONE
 #endif
 
 #if DEC_ROUND == NO_TABLES && LAST_DEC_ROUND != NO_TABLES
-#undef  LAST_DEC_ROUND
-#define LAST_DEC_ROUND  NO_TABLES
+#  undef  LAST_DEC_ROUND
+#  define LAST_DEC_ROUND  NO_TABLES
 #elif DEC_ROUND == ONE_TABLE && LAST_DEC_ROUND == FOUR_TABLES
-#undef  LAST_DEC_ROUND
-#define LAST_DEC_ROUND  ONE_TABLE
+#  undef  LAST_DEC_ROUND
+#  define LAST_DEC_ROUND  ONE_TABLE
 #endif
 
 #if DEC_ROUND == NO_TABLES && DEC_UNROLL != NONE
-#undef  DEC_UNROLL
-#define DEC_UNROLL  NONE
+#  undef  DEC_UNROLL
+#  define DEC_UNROLL  NONE
 #endif
 
 #if defined( bswap32 )
-#define aes_sw32    bswap32
+#  define aes_sw32    bswap32
 #elif defined( bswap_32 )
-#define aes_sw32    bswap_32
+#  define aes_sw32    bswap_32
 #else
-#define brot(x,n)   (((uint_32t)(x) <<  n) | ((uint_32t)(x) >> (32 - n)))
-#define aes_sw32(x) ((brot((x),8) & 0x00ff00ff) | (brot((x),24) & 0xff00ff00))
+#  define brot(x,n)   (((uint_32t)(x) <<  n) | ((uint_32t)(x) >> (32 - n)))
+#  define aes_sw32(x) ((brot((x),8) & 0x00ff00ff) | (brot((x),24) & 0xff00ff00))
 #endif
 
 /*  upr(x,n):  rotates bytes within words by n positions, moving bytes to
@@ -511,38 +546,32 @@
 */
 
 #if ( ALGORITHM_BYTE_ORDER == IS_LITTLE_ENDIAN )
-#define upr(x,n)        (((uint_32t)(x) << (8 * (n))) | ((uint_32t)(x) >> (32 - 8 * (n))))
-#define ups(x,n)        ((uint_32t) (x) << (8 * (n)))
-#define bval(x,n)       ((uint_8t)((x) >> (8 * (n))))
-#define bytes2word(b0, b1, b2, b3)  \
+#  define upr(x,n)      (((uint_32t)(x) << (8 * (n))) | ((uint_32t)(x) >> (32 - 8 * (n))))
+#  define ups(x,n)      ((uint_32t) (x) << (8 * (n)))
+#  define bval(x,n)     to_byte((x) >> (8 * (n)))
+#  define bytes2word(b0, b1, b2, b3)  \
         (((uint_32t)(b3) << 24) | ((uint_32t)(b2) << 16) | ((uint_32t)(b1) << 8) | (b0))
 #endif
 
 #if ( ALGORITHM_BYTE_ORDER == IS_BIG_ENDIAN )
-#define upr(x,n)        (((uint_32t)(x) >> (8 * (n))) | ((uint_32t)(x) << (32 - 8 * (n))))
-#define ups(x,n)        ((uint_32t) (x) >> (8 * (n)))
-#define bval(x,n)       ((uint_8t)((x) >> (24 - 8 * (n))))
-#define bytes2word(b0, b1, b2, b3)  \
+#  define upr(x,n)      (((uint_32t)(x) >> (8 * (n))) | ((uint_32t)(x) << (32 - 8 * (n))))
+#  define ups(x,n)      ((uint_32t) (x) >> (8 * (n)))
+#  define bval(x,n)     to_byte((x) >> (24 - 8 * (n)))
+#  define bytes2word(b0, b1, b2, b3)  \
         (((uint_32t)(b0) << 24) | ((uint_32t)(b1) << 16) | ((uint_32t)(b2) << 8) | (b3))
 #endif
 
 #if defined( SAFE_IO )
-
-#define word_in(x,c)    bytes2word(((const uint_8t*)(x)+4*c)[0], ((const uint_8t*)(x)+4*c)[1], \
+#  define word_in(x,c)    bytes2word(((const uint_8t*)(x)+4*c)[0], ((const uint_8t*)(x)+4*c)[1], \
                                    ((const uint_8t*)(x)+4*c)[2], ((const uint_8t*)(x)+4*c)[3])
-#define word_out(x,c,v) { ((uint_8t*)(x)+4*c)[0] = bval(v,0); ((uint_8t*)(x)+4*c)[1] = bval(v,1); \
+#  define word_out(x,c,v) { ((uint_8t*)(x)+4*c)[0] = bval(v,0); ((uint_8t*)(x)+4*c)[1] = bval(v,1); \
                           ((uint_8t*)(x)+4*c)[2] = bval(v,2); ((uint_8t*)(x)+4*c)[3] = bval(v,3); }
-
 #elif ( ALGORITHM_BYTE_ORDER == PLATFORM_BYTE_ORDER )
-
-#define word_in(x,c)    (*((uint_32t*)(x)+(c)))
-#define word_out(x,c,v) (*((uint_32t*)(x)+(c)) = (v))
-
+#  define word_in(x,c)    (*((uint_32t*)(x)+(c)))
+#  define word_out(x,c,v) (*((uint_32t*)(x)+(c)) = (v))
 #else
-
-#define word_in(x,c)    aes_sw32(*((uint_32t*)(x)+(c)))
-#define word_out(x,c,v) (*((uint_32t*)(x)+(c)) = aes_sw32(v))
-
+#  define word_in(x,c)    aes_sw32(*((uint_32t*)(x)+(c)))
+#  define word_out(x,c,v) (*((uint_32t*)(x)+(c)) = aes_sw32(v))
 #endif
 
 /* the finite field modular polynomial and elements */
@@ -568,80 +597,85 @@
 /* Work out which tables are needed for the different options   */
 
 #if defined( ASM_X86_V1C )
-#if defined( ENC_ROUND )
-#undef  ENC_ROUND
-#endif
-#define ENC_ROUND   FOUR_TABLES
-#if defined( LAST_ENC_ROUND )
-#undef  LAST_ENC_ROUND
-#endif
-#define LAST_ENC_ROUND  FOUR_TABLES
-#if defined( DEC_ROUND )
-#undef  DEC_ROUND
-#endif
-#define DEC_ROUND   FOUR_TABLES
-#if defined( LAST_DEC_ROUND )
-#undef  LAST_DEC_ROUND
-#endif
-#define LAST_DEC_ROUND  FOUR_TABLES
-#if defined( KEY_SCHED )
-#undef  KEY_SCHED
-#define KEY_SCHED   FOUR_TABLES
-#endif
+#  if defined( ENC_ROUND )
+#    undef  ENC_ROUND
+#  endif
+#  define ENC_ROUND   FOUR_TABLES
+#  if defined( LAST_ENC_ROUND )
+#    undef  LAST_ENC_ROUND
+#  endif
+#  define LAST_ENC_ROUND  FOUR_TABLES
+#  if defined( DEC_ROUND )
+#    undef  DEC_ROUND
+#  endif
+#  define DEC_ROUND   FOUR_TABLES
+#  if defined( LAST_DEC_ROUND )
+#    undef  LAST_DEC_ROUND
+#  endif
+#  define LAST_DEC_ROUND  FOUR_TABLES
+#  if defined( KEY_SCHED )
+#    undef  KEY_SCHED
+#    define KEY_SCHED   FOUR_TABLES
+#  endif
 #endif
 
 #if ( FUNCS_IN_C & ENCRYPTION_IN_C ) || defined( ASM_X86_V1C )
-#if ENC_ROUND == ONE_TABLE
-#define FT1_SET
-#elif ENC_ROUND == FOUR_TABLES
-#define FT4_SET
-#else
-#define SBX_SET
-#endif
-#if LAST_ENC_ROUND == ONE_TABLE
-#define FL1_SET
-#elif LAST_ENC_ROUND == FOUR_TABLES
-#define FL4_SET
-#elif !defined( SBX_SET )
-#define SBX_SET
-#endif
+#  if ENC_ROUND == ONE_TABLE
+#    define FT1_SET
+#  elif ENC_ROUND == FOUR_TABLES
+#    define FT4_SET
+#  else
+#    define SBX_SET
+#  endif
+#  if LAST_ENC_ROUND == ONE_TABLE
+#    define FL1_SET
+#  elif LAST_ENC_ROUND == FOUR_TABLES
+#    define FL4_SET
+#  elif !defined( SBX_SET )
+#    define SBX_SET
+#  endif
 #endif
 
 #if ( FUNCS_IN_C & DECRYPTION_IN_C ) || defined( ASM_X86_V1C )
-#if DEC_ROUND == ONE_TABLE
-#define IT1_SET
-#elif DEC_ROUND == FOUR_TABLES
-#define IT4_SET
-#else
-#define ISB_SET
-#endif
-#if LAST_DEC_ROUND == ONE_TABLE
-#define IL1_SET
-#elif LAST_DEC_ROUND == FOUR_TABLES
-#define IL4_SET
-#elif !defined(ISB_SET)
-#define ISB_SET
-#endif
-#endif
-
-#if (FUNCS_IN_C & ENC_KEYING_IN_C) || (FUNCS_IN_C & DEC_KEYING_IN_C)
-#if KEY_SCHED == ONE_TABLE
-#define LS1_SET
-#elif KEY_SCHED == FOUR_TABLES
-#define LS4_SET
-#elif !defined( SBX_SET )
-#define SBX_SET
-#endif
+#  if DEC_ROUND == ONE_TABLE
+#    define IT1_SET
+#  elif DEC_ROUND == FOUR_TABLES
+#    define IT4_SET
+#  else
+#    define ISB_SET
+#  endif
+#  if LAST_DEC_ROUND == ONE_TABLE
+#    define IL1_SET
+#  elif LAST_DEC_ROUND == FOUR_TABLES
+#    define IL4_SET
+#  elif !defined(ISB_SET)
+#    define ISB_SET
+#  endif
 #endif
 
-#if (FUNCS_IN_C & DEC_KEYING_IN_C)
-#if KEY_SCHED == ONE_TABLE
-#define IM1_SET
-#elif KEY_SCHED == FOUR_TABLES
-#define IM4_SET
-#elif !defined( SBX_SET )
-#define SBX_SET
-#endif
+#if !(defined( REDUCE_CODE_SIZE ) && (defined( ASM_X86_V2 ) || defined( ASM_X86_V2C )))
+#  if ((FUNCS_IN_C & ENC_KEYING_IN_C) || (FUNCS_IN_C & DEC_KEYING_IN_C))
+#    if KEY_SCHED == ONE_TABLE
+#      if !defined( FL1_SET )  && !defined( FL4_SET ) 
+#        define LS1_SET
+#      endif
+#    elif KEY_SCHED == FOUR_TABLES
+#      if !defined( FL4_SET )
+#        define LS4_SET
+#      endif
+#    elif !defined( SBX_SET )
+#      define SBX_SET
+#    endif
+#  endif
+#  if (FUNCS_IN_C & DEC_KEYING_IN_C)
+#    if KEY_SCHED == ONE_TABLE
+#      define IM1_SET
+#    elif KEY_SCHED == FOUR_TABLES
+#      define IM4_SET
+#    elif !defined( SBX_SET )
+#      define SBX_SET
+#    endif
+#  endif
 #endif
 
 /* generic definitions of Rijndael macros that use tables    */
@@ -671,39 +705,43 @@
 /* perform forward and inverse column mix operation on four bytes in long word x in */
 /* parallel. NOTE: x must be a simple variable, NOT an expression in these macros.  */
 
-#if defined( FM4_SET )    /* not currently used */
-#define fwd_mcol(x)       four_tables(x,t_use(f,m),vf1,rf1,0)
-#elif defined( FM1_SET )  /* not currently used */
-#define fwd_mcol(x)       one_table(x,upr,t_use(f,m),vf1,rf1,0)
+#if !(defined( REDUCE_CODE_SIZE ) && (defined( ASM_X86_V2 ) || defined( ASM_X86_V2C ))) 
+
+#if defined( FM4_SET )      /* not currently used */
+#  define fwd_mcol(x)       four_tables(x,t_use(f,m),vf1,rf1,0)
+#elif defined( FM1_SET )    /* not currently used */
+#  define fwd_mcol(x)       one_table(x,upr,t_use(f,m),vf1,rf1,0)
 #else
-#define dec_fmvars        uint_32t g2
-#define fwd_mcol(x)       (g2 = gf_mulx(x), g2 ^ upr((x) ^ g2, 3) ^ upr((x), 2) ^ upr((x), 1))
+#  define dec_fmvars        uint_32t g2
+#  define fwd_mcol(x)       (g2 = gf_mulx(x), g2 ^ upr((x) ^ g2, 3) ^ upr((x), 2) ^ upr((x), 1))
 #endif
 
 #if defined( IM4_SET )
-#define inv_mcol(x)       four_tables(x,t_use(i,m),vf1,rf1,0)
+#  define inv_mcol(x)       four_tables(x,t_use(i,m),vf1,rf1,0)
 #elif defined( IM1_SET )
-#define inv_mcol(x)       one_table(x,upr,t_use(i,m),vf1,rf1,0)
+#  define inv_mcol(x)       one_table(x,upr,t_use(i,m),vf1,rf1,0)
 #else
-#define dec_imvars        uint_32t g2, g4, g9
-#define inv_mcol(x)       (g2 = gf_mulx(x), g4 = gf_mulx(g2), g9 = (x) ^ gf_mulx(g4), g4 ^= g9, \
-                          (x) ^ g2 ^ g4 ^ upr(g2 ^ g9, 3) ^ upr(g4, 2) ^ upr(g9, 1))
+#  define dec_imvars        uint_32t g2, g4, g9
+#  define inv_mcol(x)       (g2 = gf_mulx(x), g4 = gf_mulx(g2), g9 = (x) ^ gf_mulx(g4), g4 ^= g9, \
+                            (x) ^ g2 ^ g4 ^ upr(g2 ^ g9, 3) ^ upr(g4, 2) ^ upr(g9, 1))
 #endif
 
 #if defined( FL4_SET )
-#define ls_box(x,c)       four_tables(x,t_use(f,l),vf1,rf2,c)
-#elif   defined( LS4_SET )
-#define ls_box(x,c)       four_tables(x,t_use(l,s),vf1,rf2,c)
+#  define ls_box(x,c)       four_tables(x,t_use(f,l),vf1,rf2,c)
+#elif defined( LS4_SET )
+#  define ls_box(x,c)       four_tables(x,t_use(l,s),vf1,rf2,c)
 #elif defined( FL1_SET )
-#define ls_box(x,c)       one_table(x,upr,t_use(f,l),vf1,rf2,c)
+#  define ls_box(x,c)       one_table(x,upr,t_use(f,l),vf1,rf2,c)
 #elif defined( LS1_SET )
-#define ls_box(x,c)       one_table(x,upr,t_use(l,s),vf1,rf2,c)
+#  define ls_box(x,c)       one_table(x,upr,t_use(l,s),vf1,rf2,c)
 #else
-#define ls_box(x,c)     no_table(x,t_use(s,box),vf1,rf2,c)
+#  define ls_box(x,c)       no_table(x,t_use(s,box),vf1,rf2,c)
+#endif
+
 #endif
 
 #if defined( ASM_X86_V1C ) && defined( AES_DECRYPT ) && !defined( ISB_SET )
-#define ISB_SET
+#  define ISB_SET
 #endif
 
 #endif

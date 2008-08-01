@@ -33,5 +33,6 @@ QString decodeFileError(QFile::FileError Code);
 QString makePathRelative(const QString& Abs,const QString& Cur);
 QString getImageFile(const QString& name);
 bool createKeyFile(const QString& filename,QString* err, int length=32, bool Hex=true);
+bool lockPage(void* addr, int len);
 
 #endif //TOOLS_H

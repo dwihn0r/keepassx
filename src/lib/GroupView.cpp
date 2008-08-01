@@ -21,6 +21,9 @@
 #include "EntryView.h"
 #include "GroupView.h"
 #include "dialogs/EditGroupDlg.h"
+
+#include <QBrush>
+
 #define INSERT_AREA_WIDTH 4
 
 KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){

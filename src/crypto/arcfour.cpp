@@ -1,84 +1,58 @@
-/***************************************************************************
- *   Copyright (C) 2005-2006 by Tarek Saidi                                *
- *   tarek.saidi@arcor.de                                                  *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; version 2 of the License.               *
+/*
+  Copyright (C) 2003-2008 Dominik Reichl <dominik.reichl@t-online.de>
 
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
 
-#include <QByteArray>
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
 #include "arcfour.h"
 
-
-static inline void swap_byte(unsigned char *a, unsigned char *b)
-    {
-        unsigned char swapByte;
-
-        swapByte = *a;
-        *a = *b;      
-        *b = swapByte;
-    } 
-
-void CArcFour::setKey(byte* key_data_ptr, int key_data_len){
-RawKey=QByteArray((const char*)key_data_ptr,key_data_len);
+void CArcFour::setKey(quint8* key, int length){
+	RawKey = key;
+	RawKeyLength = length;
 }
 
-void CArcFour::prepareKey(){
- unsigned char index1;
- unsigned char index2;
- unsigned char* state;
- short counter;    
+void CArcFour::encrypt(const quint8* src, quint8* dst, int length){
+	quint8 S[256];
+	quint32 w;
+	
+	for(w = 0; w < 256; ++w)
+		S[w] = static_cast<quint8>(w); // Fill linearly
 
- state = &key.state[0];        
- for(counter = 0; counter < 256; counter++)              
- state[counter] = counter;              
- key.x = 0;    
- key.y = 0;    
- index1 = 0;    
- index2 = 0;            
- for(counter = 0; counter < 256; counter++)      
- {              
-   index2 = (RawKey.at(index1) + state[counter] + index2) % 256;                
-   swap_byte(&state[counter], &state[index2]);            
-   index1 = (index1 + 1) % RawKey.size();  
-  }      
+	const quint8 btBufDep = static_cast<quint8>((length & 0xFF) << 1);
+
+	quint8 i = 0, j = 0, t;
+	quint32 k = 0;
+	for(w = 0; w < 256; ++w) // Key setup
+	{
+		j += S[w] + RawKey[k] + btBufDep;
+
+		t = S[i]; S[i] = S[j]; S[j] = t; // Swap entries
+
+		++k;
+		if(k == RawKeyLength) k = 0;
+	}
+
+	i = 0; j = 0;
+	for(w = 0; w < length; ++w) // Encrypt PT
+	{
+		++i;
+		j += S[i];
+
+		t = S[i]; S[i] = S[j]; S[j] = t; // Swap entries
+
+		t = S[i] + S[j]; // Generate random byte
+		dst[w] = src[w] ^ S[t]; // XOR with PT
+	}
 }
-
-void CArcFour::encrypt(const byte* src, byte* dst,int length){
-		prepareKey();
-        unsigned char x;
-        unsigned char y;
-        unsigned char* state;
-        unsigned char xorIndex;
-        short counter;              
-
-        x = key.x;    
-        y = key.y;    
-
-        state = &key.state[0];        
-        for(counter = 0; counter < length; counter ++)      
-        {              
-             x = (x + 1) % 256;                      
-             y = (state[x] + y) % 256;              
-             swap_byte(&state[x], &state[y]);                        
-
-             xorIndex = (state[x] + state[y]) % 256;                
-
-			 dst[counter]=src[counter]^state[xorIndex];        
-         }              
-         key.x = x;    
-         key.y = y;
-}
-

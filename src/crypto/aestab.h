@@ -1,24 +1,28 @@
- /**************************************************************************
- *                                                                         *
- *   Copyright (C) 2007 by Tarek Saidi <tarek.saidi@arcor.de>              *
- *   Copyright (c) 2003 Dr Brian Gladman, Worcester, UK                    *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; version 2 of the License.               *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
- 
- /*
+/*
+ ---------------------------------------------------------------------------
+ Copyright (c) 1998-2008, Brian Gladman, Worcester, UK. All rights reserved.
+
+ LICENSE TERMS
+
+ The redistribution and use of this software (with or without changes)
+ is allowed without the payment of fees or royalties provided that:
+
+  1. source code distributions include the above copyright notice, this
+     list of conditions and the following disclaimer;
+
+  2. binary distributions include the above copyright notice, this list
+     of conditions and the following disclaimer in their documentation;
+
+  3. the name of the copyright holder is not used to endorse products
+     built using this software without specific written permission.
+
+ DISCLAIMER
+
+ This software is provided 'as is' with no explicit or implied warranties
+ in respect of its properties, including, but not limited to, correctness
+ and/or fitness for purpose.
+ ---------------------------------------------------------------------------
+ Issue Date: 20/12/2007
 
  This file contains the code for declaring the tables needed to implement
  AES. The file aesopt.h is assumed to be included before this header file.
@@ -29,7 +33,7 @@
  managed appropriately.  In particular, the value of the t_dec(in,it) item
  in the table structure must be set to zero in order to ensure that the
  tables are initialised. In practice the three code sequences in aeskey.c
- that control the calls to gen_tabs() and the gen_tabs() routine itself will
+ that control the calls to aes_init() and the aes_init() routine itself will
  have to be changed for a specific implementation. If global variables are
  available it will generally be preferable to use them with the precomputed
  FIXED_TABLES option that uses static global tables.
@@ -69,20 +73,22 @@
 #define t_use(m,n) t_##m##n
 
 #if defined(FIXED_TABLES)
-#  if defined( __MSDOS__ ) || defined( __WIN16__ )
+#  if !defined( __GNUC__ ) && (defined( __MSDOS__ ) || defined( __WIN16__ ))
 /*   make tables far data to avoid using too much DGROUP space (PG) */
 #    define CONST const far
-#  else    
+#  else
 #    define CONST const
 #  endif
 #else
 #  define CONST
 #endif
 
-#if defined(DO_TABLES)
-#define EXTERN
+#if defined(__cplusplus)
+#  define EXTERN extern "C"
+#elif defined(DO_TABLES)
+#  define EXTERN
 #else
-#define EXTERN extern
+#  define EXTERN extern
 #endif
 
 #if defined(_MSC_VER) && defined(TABLE_ALIGN)
@@ -91,20 +97,15 @@
 #define ALIGN
 #endif
 
-#if defined(__cplusplus)
-extern "C"
-{
-#endif
-
-#if defined( __WATCOMC__)
+#if defined( __WATCOMC__ ) && ( __WATCOMC__ >= 1100 )
 #  define XP_DIR __cdecl
 #else
 #  define XP_DIR
 #endif
 
 #if defined(DO_TABLES) && defined(FIXED_TABLES)
-#define d_1(t,n,b,e)       ALIGN CONST XP_DIR t n[256]    =   b(e)
-#define d_4(t,n,b,e,f,g,h) ALIGN CONST XP_DIR t n[4][256] = { b(e), b(f), b(g), b(h) }
+#define d_1(t,n,b,e)       EXTERN ALIGN CONST XP_DIR t n[256]    =   b(e)
+#define d_4(t,n,b,e,f,g,h) EXTERN ALIGN CONST XP_DIR t n[4][256] = { b(e), b(f), b(g), b(h) }
 EXTERN ALIGN CONST uint_32t t_dec(r,c)[RC_LENGTH] = rc_data(w0);
 #else
 #define d_1(t,n,b,e)       EXTERN ALIGN CONST XP_DIR t n[256]
@@ -168,10 +169,6 @@ EXTERN ALIGN CONST uint_32t t_dec(r,c)[RC_LENGTH];
 #endif
 #if defined( IM4_SET )
     d_4(uint_32t, t_dec(i,m), mm_data, v0, v1, v2, v3);
-#endif
-
-#if defined(__cplusplus)
-}
 #endif
 
 #endif

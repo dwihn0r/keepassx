@@ -403,7 +403,7 @@ void initYarrow(){
 	
 	quint8 buffer[100];
 	for (int i=0; i<2; i++){
-		Random::getEntropy(buffer,100);
+		getEntropy(buffer,100);
 		yarrowUpdateWeak(i,100*8,100,buffer);
 	}
 }

@@ -49,7 +49,6 @@ public:
 		public:
 			EntryHandle(Kdb3Database* db);
 			virtual void setImage(const quint32& ImageID);
-			void setOldImage(const quint32& OldImgID);
 			virtual void setTitle(const QString& Title);
 			virtual void setUrl(const QString& URL);
 			virtual void setUsername(const QString& Username);
@@ -67,7 +66,6 @@ public:
 			virtual int visualIndex() const;
 			virtual void setVisualIndex(int i);
 			virtual void setVisualIndexDirectly(int i);
-			quint32 oldImage();
 			virtual QString title();
 			virtual QString url();
 			virtual QString username();
@@ -96,10 +94,8 @@ public:
 		public:
 			virtual void setTitle(const QString& Title);
 			virtual void setImage(const quint32& ImageId);
-			void setOldImage(const quint32& ImageId);
 			virtual QString title();
 			virtual quint32 image();
-			quint32 oldImage();
 			virtual bool isValid();
 			virtual IGroupHandle* parent();
 			virtual QList<IGroupHandle*> childs();
@@ -120,7 +116,6 @@ public:
 
 	class StdEntry:public CEntry{
 		public:
-				quint32 OldImage;
 				quint16 Index;
 				EntryHandle* Handle;
 				StdGroup* Group;
@@ -130,7 +125,6 @@ public:
 		public:
 			StdGroup():CGroup(){};
 			StdGroup(const CGroup&);
-			quint32 OldImage;
 			quint16 Index;
 			StdGroup* Parent;
 			GroupHandle* Handle;

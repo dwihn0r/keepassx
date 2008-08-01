@@ -349,7 +349,7 @@ void PasswordDialog::OnGenKeyFile(){
 
 QString PasswordDialog::password(){
 	if(Check_Password->isChecked())
-		return Edit_Password->text();
+		return Password;
 	else
 		return QString();
 }
@@ -368,6 +368,16 @@ QString PasswordDialog::selectedBookmark(){
 
 void PasswordDialog::OnButtonBack(){
 	stackedWidget->setCurrentIndex(0);
-	Edit_PwRepeat->clear();	
+	Edit_PwRepeat->clear();
 }
 
+void PasswordDialog::done(int r){
+	// workaround for a Qt crash bug
+	Password = Edit_Password->text();
+	Edit_Password->clear();
+	Edit_Password->setEchoMode(QLineEdit::Normal);
+	Edit_PwRepeat->clear();
+	Edit_PwRepeat->setEchoMode(QLineEdit::Normal);
+	
+	QDialog::done(r);
+}
