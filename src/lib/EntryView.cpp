@@ -493,6 +493,7 @@ void KeepassEntryView::OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisInde
 	for(int i=0;i<header()->count();i++){
 		ColumnOrder[columnListIndex(header()->logicalIndex(i))]=i;
 	}
+	sortByColumn(header()->sortIndicatorSection(), header()->sortIndicatorOrder());
 }
 
 int KeepassEntryView::logicalColIndex(int LstIndex){
@@ -645,33 +646,66 @@ EntryViewItem::EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding
 }
 
 
-bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
-	int SortCol=treeWidget()->header()->sortIndicatorSection();
-	int ListIndex=((KeepassEntryView*)treeWidget())->columnListIndex(SortCol);
-	if(ListIndex < 5 || ListIndex > 8){ //columns with string values (Title, Username, Password, URL, Comment, Group)
-		return (QString::localeAwareCompare(text(SortCol),other.text(SortCol)) < 0);
+bool EntryViewItem::operator<(const QTreeWidgetItem& other) const{
+	int SortCol = treeWidget()->header()->sortIndicatorSection();
+	int ListIndex = ((KeepassEntryView*)treeWidget())->columnListIndex(SortCol);
+	
+	int comp = compare(other, SortCol, ListIndex);
+	if (comp!=0)
+		return (comp<0);
+	else {
+		int visibleCols = treeWidget()->header()->count() - treeWidget()->header()->hiddenSectionCount();
+		int ListIndexOrg = ListIndex;
+		for (int i=0; i<visibleCols; i++){
+			SortCol = treeWidget()->header()->logicalIndex(i);
+			ListIndex = ((KeepassEntryView*)treeWidget())->columnListIndex(SortCol);
+			if (ListIndex==ListIndexOrg || ListIndex==3) // sort or password column
+				continue;
+			
+			comp = compare(other, SortCol, ListIndex);
+			if (comp!=0)
+				return (comp<0);
+		}
+		return true; // entries are equal
 	}
+}
+
+int EntryViewItem::compare(const QTreeWidgetItem& other, int col, int index) const{
+	if (index < 5 || index > 8){ //columns with string values (Title, Username, Password, URL, Comment, Group)
+		return QString::localeAwareCompare(text(col),other.text(col));
+	}
+	
 	KpxDateTime DateThis;
 	KpxDateTime DateOther;
 
-	switch (ListIndex){
-		case 5: DateThis=EntryHandle->expire();
-				DateOther=((EntryViewItem&)other).EntryHandle->expire();
-				break;
-		case 6: DateThis=EntryHandle->creation();
-				DateOther=((EntryViewItem&)other).EntryHandle->creation();
-				break;
-		case 7: DateThis=EntryHandle->lastMod();
-				DateOther=((EntryViewItem&)other).EntryHandle->lastMod();
-				break;
-		case 8: DateThis=EntryHandle->lastAccess();
-				DateOther=((EntryViewItem&)other).EntryHandle->lastAccess();
-				break;
-		default:Q_ASSERT(false);
+	switch (index){
+		case 5:
+			DateThis=EntryHandle->expire();
+			DateOther=((EntryViewItem&)other).EntryHandle->expire();
+			break;
+		case 6:
+			DateThis=EntryHandle->creation();
+			DateOther=((EntryViewItem&)other).EntryHandle->creation();
+			break;
+		case 7:
+			DateThis=EntryHandle->lastMod();
+			DateOther=((EntryViewItem&)other).EntryHandle->lastMod();
+			break;
+		case 8:
+			DateThis=EntryHandle->lastAccess();
+			DateOther=((EntryViewItem&)other).EntryHandle->lastAccess();
+			break;
+		default:
+			Q_ASSERT(false);
 	}
-	return DateThis < DateOther;
+	
+	if (DateThis==DateOther)
+		return 0;
+	else if (DateThis < DateOther)
+		return -1;
+	else
+		return 1;
 }
-
 
 void KeepassEntryView::setCurrentEntry(IEntryHandle* entry){
 	bool found=false;

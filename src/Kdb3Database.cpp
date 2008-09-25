@@ -406,7 +406,8 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 			Groups[i].Parent=&RootGroup;
 			Groups[i].Index=RootGroup.Childs.size();
 			RootGroup.Childs.append(&Groups[i]);
-			continue;}
+			continue;
+		}
 		int j;
 		//the first item with a lower level is the parent
 		for(j=i-1;j>=0;j--){

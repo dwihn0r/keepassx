@@ -64,11 +64,11 @@ class KeepassEntryView:public QTreeWidget{
 		QList<int> ColumnOrder;
 		float GroupColumnSize;
 
-		virtual void contextMenuEvent(QContextMenuEvent *event);
-		virtual void paintEvent(QPaintEvent* event);
-		virtual void resizeEvent(QResizeEvent* event);
-		virtual void mousePressEvent(QMouseEvent *event);
-		virtual void mouseMoveEvent(QMouseEvent *event);
+		void contextMenuEvent(QContextMenuEvent *event);
+		void paintEvent(QPaintEvent* event);
+		void resizeEvent(QResizeEvent* event);
+		void mousePressEvent(QMouseEvent *event);
+		void mouseMoveEvent(QMouseEvent *event);
 	
 	private slots:
 		void OnColumnResized(int index,int OldSize, int NewSize);
@@ -107,7 +107,9 @@ class EntryViewItem:public QTreeWidgetItem{
 		EntryViewItem(QTreeWidgetItem *parent);
 		EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
 		IEntryHandle* EntryHandle;
-		virtual bool operator<(const QTreeWidgetItem& other)const;
+		bool operator<(const QTreeWidgetItem& other) const;
+	private:
+		int compare(const QTreeWidgetItem& other, int col, int index) const;
 };
 
 

@@ -53,7 +53,7 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	connect(CheckBox_ExpiresNever,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxExpiresNeverChanged(int)));
 	connect(Button_Icons,SIGNAL(clicked()),this,SLOT(OnButtonIcons()));
 	connect(ExpirePresetsMenu,SIGNAL(triggered(QAction*)),this,SLOT(OnExpirePreset(QAction*)));
-	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar()));
+	connect(ButtonExpirePresets,SIGNAL(triggered(QAction*)),this,SLOT(OnCalendar(QAction*)));
 	connect(this, SIGNAL(finished(int)), this, SLOT(OnClose()));
 
 	// QAction::data() contains the time until expiration in days.
@@ -69,7 +69,9 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	ExpirePresetsMenu->addSeparator();
 	ExpirePresetsMenu->addAction(tr("1 Year"))->setData(365);
 	ButtonExpirePresets->setMenu(ExpirePresetsMenu);
-	ButtonExpirePresets->setDefaultAction(new QAction(tr("Calendar..."),ButtonExpirePresets));
+	QAction* actionCalendar = new QAction(tr("Calendar..."),ButtonExpirePresets);
+	actionCalendar->setData(-1);
+	ButtonExpirePresets->setDefaultAction(actionCalendar);
 
 	IconIndex = entry->image();
 	Button_Icons->setIcon(db->icon(IconIndex));
@@ -400,11 +402,26 @@ void CEditEntryDlg::OnButtonIcons(){
 
 void CEditEntryDlg::OnExpirePreset(QAction* action){
 	CheckBox_ExpiresNever->setChecked(false);
-	DateTime_Expire->setDate(QDate::fromJulianDay(QDate::currentDate().toJulianDay()+action->data().toInt()));
+	int days = action->data().toInt();
+	switch (days){
+		case 30:
+		case 90:
+		case 180:
+			DateTime_Expire->setDate(QDate::currentDate().addMonths(days/30));
+			break;
+		case 365:
+			DateTime_Expire->setDate(QDate::currentDate().addYears(1));
+			break;
+		default:
+			DateTime_Expire->setDate(QDate::currentDate().addDays(days));
+	}
 	DateTime_Expire->setTime(QTime(0,0,0));
 }
 
-void CEditEntryDlg::OnCalendar(){
+void CEditEntryDlg::OnCalendar(QAction* action){
+	if (action->data().toInt()!=-1)
+		return;
+	
 	CalendarDialog dlg(this);
 	if(dlg.exec()==QDialog::Accepted){
 		CheckBox_ExpiresNever->setChecked(false);

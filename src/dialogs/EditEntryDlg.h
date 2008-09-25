@@ -57,13 +57,13 @@ class CEditEntryDlg : public QDialog, private Ui_EditEntryDialog
 		void OnCheckBoxExpiresNeverChanged(int state);
 		void OnButtonIcons();
 		void OnButtonOK();
-		void OnExpirePreset(QAction*);
-		void OnCalendar();
+		void OnExpirePreset(QAction* action);
+		void OnCalendar(QAction* action);
 		void OnClose();
 		
 	private:		
 		virtual void paintEvent(QPaintEvent*);
-		virtual void resizeEvent(QResizeEvent *);	
+		virtual void resizeEvent(QResizeEvent *);
 
 		int IconIndex;
 		bool pNewEntry;
