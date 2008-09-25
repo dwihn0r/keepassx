@@ -17,6 +17,14 @@
    <string>KeePassX</string>
   </property>
   <widget class="QWidget" name="centralWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>724</width>
+     <height>439</height>
+    </rect>
+   </property>
    <layout class="QVBoxLayout" >
     <item>
      <widget class="QSplitter" name="VSplitter" >
@@ -112,7 +120,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>30</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHilfe" >
@@ -170,6 +178,7 @@
     <addaction name="EditUsernameToClipboardAction" />
     <addaction name="EditPasswordToClipboardAction" />
     <addaction name="EditOpenUrlAction" />
+    <addaction name="EditCopyUrlAction" />
     <addaction name="EditSaveAttachmentAction" />
     <addaction name="separator" />
     <addaction name="EditNewEntryAction" />
@@ -562,6 +571,11 @@
   <action name="AddThisAsBookmarkAction" >
    <property name="text" >
     <string>Bookmark &amp;this Database...</string>
+   </property>
+  </action>
+  <action name="EditCopyUrlAction" >
+   <property name="text" >
+    <string>Copy URL to Clipboard</string>
    </property>
   </action>
  </widget>

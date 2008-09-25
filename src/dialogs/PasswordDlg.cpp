@@ -210,7 +210,7 @@ void PasswordDialog::OnOK(){
 		return;
 	}
 
-	if(Check_KeyFile->isChecked()){		
+	if(Check_KeyFile->isChecked()){
 		/* Check wether key path exists and is readable */
 		QFileInfo fileinfo(KeyFile);
 		if(!fileinfo.exists()){
@@ -278,7 +278,7 @@ void PasswordDialog::OnOK(){
 		}
 		else if(Check_Password->isChecked()){
 			config->setLastKeyType(PASSWORD);
-			config->setLastKeyLocation(QString());	
+			config->setLastKeyLocation(QString());
 		}
 		else if(Check_KeyFile->isChecked()){
 			config->setLastKeyType(PASSWORD);

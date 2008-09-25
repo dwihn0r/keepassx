@@ -821,7 +821,7 @@ bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
 		return setPasswordKey(password);
 	if(!keyfile.isEmpty())
 		return setFileKey(keyfile);
-	assert(false);	
+	assert(false);
 }
 
 bool Kdb3Database::setPasswordKey(const QString& Password){
@@ -860,15 +860,18 @@ bool Kdb3Database::setFileKey(const QString& filename){
 	if(FileSize == 32){
 		if(file.read((char*)RawMasterKey,32) != 32){
 			error=decodeFileError(file.error());
-			return false;}
+			return false;
+		}
 		return true;
 	}
 	if(FileSize == 64){
 		char hex[64];
 		if(file.read(hex,64) != 64){
 			error=decodeFileError(file.error());
-			return false;}
-		if(convHexToBinaryKey(hex,(char*)RawMasterKey))return true;
+			return false;
+		}
+		if (convHexToBinaryKey(hex,(char*)RawMasterKey))
+			return true;
 	}
 	SHA256 sha;
 	unsigned char* buffer = new unsigned char[2048];

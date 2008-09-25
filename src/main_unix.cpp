@@ -70,5 +70,7 @@ void initAppPaths(int argc,char** argv) {
 	}
 	AppDir.truncate(AppDir.lastIndexOf("/"));
 	DataDir=AppDir+"/../share/keepassx";
+	if (!QFile::exists(DataDir) && QFile::exists(AppDir+"/share"))
+		DataDir=AppDir+"/share";
 	HomeDir = QDir::homePath()+"/.keepassx";
 }

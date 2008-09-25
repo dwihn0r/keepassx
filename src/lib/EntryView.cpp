@@ -21,6 +21,7 @@
 #include <QHeaderView>
 #include <QClipboard>
 #include <QFileDialog>
+#include <QProcess>
 #include "lib/AutoType.h"
 #include "lib/EntryView.h"
 #include "dialogs/EditEntryDlg.h"
@@ -243,15 +244,19 @@ void KeepassEntryView::OnNewEntry(){
 }
 
 void KeepassEntryView::OnEntryActivated(QTreeWidgetItem* item,int Column){
-	switch(columnListIndex(Column)){
-		case 0:	editEntry((EntryViewItem*)item);
-		break;
-		case 1: OnUsernameToClipboard();
-		break;
-		case 2: OnEditOpenUrl();
-		break;
-		case 3:	OnPasswordToClipboard();
-		break;
+	switch (columnListIndex(Column)){
+		case 0:
+			editEntry((EntryViewItem*)item);
+			break;
+		case 1:
+			OnUsernameToClipboard();
+			break;
+		case 2:
+			OnEditOpenUrl();
+			break;
+		case 3:
+			OnPasswordToClipboard();
+			break;
 	}
 
 }
@@ -266,14 +271,31 @@ void KeepassEntryView::OnEditOpenUrl(){
 	openBrowser( ((EntryViewItem*)selectedItems().first())->EntryHandle );
 }
 
+void KeepassEntryView::OnEditCopyUrl(){
+	if (selectedItems().size() == 0) return;
+	QString url = ((EntryViewItem*)selectedItems().first())->EntryHandle->url();
+	if (url.startsWith("cmd://") && url.length()>6)
+		url = url.right(url.length()-6);
+	
+	Clipboard->setText(url,  QClipboard::Clipboard);
+	if(Clipboard->supportsSelection()){
+		Clipboard->setText(url, QClipboard::Selection);
+	}
+}
+
 void KeepassEntryView::OnUsernameToClipboard(){
 	if (selectedItems().size() == 0) return;
-	Clipboard->setText(((EntryViewItem*)selectedItems().first())->EntryHandle->username(),  QClipboard::Clipboard);
+	QString username = ((EntryViewItem*)selectedItems().first())->EntryHandle->username();
+	if (username.trimmed().isEmpty()) return;
+	Clipboard->setText(username,  QClipboard::Clipboard);
 	if(Clipboard->supportsSelection()){
-		Clipboard->setText(((EntryViewItem*)selectedItems().first())->EntryHandle->username(),QClipboard::Selection);
+		Clipboard->setText(username, QClipboard::Selection);
 	}
-	ClipboardTimer.setSingleShot(true);
-	ClipboardTimer.start(config->clipboardTimeOut()*1000);
+	
+	if (config->clipboardTimeOut()!=0) {
+		ClipboardTimer.setSingleShot(true);
+		ClipboardTimer.start(config->clipboardTimeOut()*1000);
+	}
 }
 
 void KeepassEntryView::OnPasswordToClipboard(){
@@ -281,12 +303,16 @@ void KeepassEntryView::OnPasswordToClipboard(){
 	SecString password;
 	password=((EntryViewItem*)selectedItems().first())->EntryHandle->password();
 	password.unlock();
-	Clipboard->setText(password.string(),QClipboard::Clipboard);
+	if (password.string().isEmpty()) return;
+	Clipboard->setText(password.string(), QClipboard::Clipboard);
 	if(Clipboard->supportsSelection()){
-		Clipboard->setText(password.string(),QClipboard::Selection);
+		Clipboard->setText(password.string(), QClipboard::Selection);
 	}
-	ClipboardTimer.setSingleShot(true);
-	ClipboardTimer.start(config->clipboardTimeOut()*1000);
+	
+	if (config->clipboardTimeOut()!=0) {
+		ClipboardTimer.setSingleShot(true);
+		ClipboardTimer.start(config->clipboardTimeOut()*1000);
+	}
 }
 
 void KeepassEntryView::OnClipboardTimeOut(){
@@ -294,6 +320,13 @@ void KeepassEntryView::OnClipboardTimeOut(){
 	if(Clipboard->supportsSelection()){
 		Clipboard->clear(QClipboard::Selection);
 	}
+#ifdef Q_WS_X11
+	static bool clearKlipper = true;
+	if (clearKlipper){
+		if (QProcess::execute("dcop klipper klipper clearClipboardHistory")!=0)
+			clearKlipper = false;
+	}
+#endif
 }
 
 
@@ -312,9 +345,9 @@ void KeepassEntryView::contextMenuEvent(QContextMenuEvent* e){
 				}
 			}
 	}
-	else
-	{while(selectedItems().size()){
-		setItemSelected(selectedItems().first(),false);}
+	else{
+		while (selectedItems().size())
+			setItemSelected(selectedItems().first(),false);
 	}
 	e->accept();
 	ContextMenu->popup(e->globalPos());
@@ -621,7 +654,7 @@ bool EntryViewItem::operator<(const QTreeWidgetItem& other)const{
 	KpxDateTime DateThis;
 	KpxDateTime DateOther;
 
-	switch(ListIndex){
+	switch (ListIndex){
 		case 5: DateThis=EntryHandle->expire();
 				DateOther=((EntryViewItem&)other).EntryHandle->expire();
 				break;

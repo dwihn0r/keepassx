@@ -45,11 +45,11 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	str+="<div style='margin-left:10px;'>";
 	str+="<u>Tarek Saidi</u><br>"+tr("Developer, Project Admin")+"<br>tarek_saidi@users.sf.net<br>";
 	str+="<br>";
+	str+="<u>Felix Geyer</u><br>"+tr("Developer, Project Admin")+"<br>sniperbeamer@users.sf.net<br>";
+	str+="<br>";
 	str+="<u>Eugen Gorschenin</u><br>"+tr("Web Designer")+"<br>geugen@users.sf.de<br>";
 	str+="<br>";
 	str+="<u>Juan J Gonz&aacute;lez C&aacute;rdenas [Jota Jota]</u><br>"+tr("Developer")+"<br>myxelf@users.sf.net<br>";
-	str+="<br>";
-	str+="<u>Felix Geyer</u><br>"+tr("Developer")+"<br>sniperbeamer@users.sf.net<br>";
 	str+="</div><br><div style='margin-left:0px;'>";
     str+="<b>"+tr("Thanks To")+"</b><br>";
 	str+="</div><div style='margin-left:10px;'>";

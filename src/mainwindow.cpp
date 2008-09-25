@@ -157,6 +157,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditUsernameToClipboardAction, SIGNAL(triggered()), EntryView, SLOT(OnUsernameToClipboard()));
 	connect(EditPasswordToClipboardAction, SIGNAL(triggered()), EntryView, SLOT(OnPasswordToClipboard()));
 	connect(EditOpenUrlAction, SIGNAL(triggered()), EntryView, SLOT(OnEditOpenUrl()));
+	connect(EditCopyUrlAction, SIGNAL(triggered()), EntryView, SLOT(OnEditCopyUrl()));
 	connect(EditSaveAttachmentAction, SIGNAL(triggered()),EntryView, SLOT(OnSaveAttachment()));
 	connect(EditSearchAction, SIGNAL(triggered()), this, SLOT(OnSearch()));
 	connect(EditGroupSearchAction, SIGNAL(triggered()), this, SLOT(OnGroupSearch()));
@@ -282,6 +283,7 @@ void KeepassMainWindow::setupMenus(){
 	EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
     EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
     EntryView->ContextMenu->addAction(EditOpenUrlAction);
+	EntryView->ContextMenu->addAction(EditCopyUrlAction);
 	EntryView->ContextMenu->addAction(EditSaveAttachmentAction);
 #ifdef AUTOTYPE
 	EntryView->ContextMenu->addAction(EditAutoTypeAction);
@@ -578,6 +580,7 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 		EditPasswordToClipboardAction->setEnabled(false);
 		EditUsernameToClipboardAction->setEnabled(false);
 		EditOpenUrlAction->setEnabled(false);
+		EditCopyUrlAction->setEnabled(false);
 		EditSaveAttachmentAction->setEnabled(false);
 		EditNewEntryAction->setEnabled(false);
 		EditEditEntryAction->setEnabled(false);
@@ -722,6 +725,7 @@ void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 				EditPasswordToClipboardAction->setEnabled(false);
 				EditUsernameToClipboardAction->setEnabled(false);
 				EditOpenUrlAction->setEnabled(false);
+				EditCopyUrlAction->setEnabled(false);
 				EditSaveAttachmentAction->setEnabled(false);
 				EditEditEntryAction->setEnabled(false);
 				EditCloneEntryAction->setEnabled(false);
@@ -736,6 +740,7 @@ void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 				EditPasswordToClipboardAction->setEnabled(true);
 				EditUsernameToClipboardAction->setEnabled(true);
 				EditOpenUrlAction->setEnabled(true);
+				EditCopyUrlAction->setEnabled(true);
 				EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
 				EditEditEntryAction->setEnabled(true);
 				EditCloneEntryAction->setEnabled(true);
@@ -750,6 +755,7 @@ void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 				EditPasswordToClipboardAction->setEnabled(false);
 				EditUsernameToClipboardAction->setEnabled(false);
 				EditOpenUrlAction->setEnabled(false);
+				EditCopyUrlAction->setEnabled(false);
 				EditSaveAttachmentAction->setEnabled(false);
 				EditEditEntryAction->setEnabled(false);
 				EditCloneEntryAction->setEnabled(true);
@@ -770,6 +776,7 @@ void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 				EditUsernameToClipboardAction->setEnabled(false);
 				EditPasswordToClipboardAction->setEnabled(false);
 				EditOpenUrlAction->setEnabled(false);
+				EditCopyUrlAction->setEnabled(false);
 				EditSaveAttachmentAction->setEnabled(false);
 				EditEditEntryAction->setEnabled(false);
 				EditCloneEntryAction->setEnabled(false);
@@ -784,6 +791,7 @@ void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 				EditUsernameToClipboardAction->setEnabled(true);
 				EditPasswordToClipboardAction->setEnabled(true);
 				EditOpenUrlAction->setEnabled(true);
+				EditCopyUrlAction->setEnabled(true);
 				EditSaveAttachmentAction->setEnabled(((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle->binarySize() > 0);
 				EditEditEntryAction->setEnabled(true);
 				EditCloneEntryAction->setEnabled(false);
@@ -798,6 +806,7 @@ void KeepassMainWindow::setStateEntrySelected(SelectionState s){
 				EditUsernameToClipboardAction->setEnabled(false);
 				EditPasswordToClipboardAction->setEnabled(false);
 				EditOpenUrlAction->setEnabled(false);
+				EditCopyUrlAction->setEnabled(false);
 				EditSaveAttachmentAction->setEnabled(false);
 				EditEditEntryAction->setEnabled(false);
 				EditCloneEntryAction->setEnabled(false);
@@ -833,7 +842,8 @@ bool KeepassMainWindow::OnFileSave(){
 bool KeepassMainWindow::OnFileSaveAs(){
 	QString filename=KpxFileDialogs::saveFile(this,"MainWindow_FileSave",
 			tr("Save Database..."),QStringList()<<tr("KeePass Databases (*.kdb)")<< tr("All Files (*)"));
-	if(filename.isEmpty())return false;
+	if (filename.isEmpty() || filename.compare(".kdb", Qt::CaseInsensitive)==0)
+		return false;
 	if(!db->changeFile(filename)){
 		showErrMsg(QString("%1\n%2").arg(tr("File could not be saved.")).arg(db->getError()));
 		db->changeFile(QString());

@@ -148,7 +148,7 @@ QString getImageFile(const QString& name){
 
 
 const QIcon& getIcon(const QString& name){
-	static QHash<QString,QIcon*>IconCache;		
+	static QHash<QString,QIcon*>IconCache;
 	QIcon* CachedIcon=IconCache.value(name);
 	if(CachedIcon)
 		return *CachedIcon;

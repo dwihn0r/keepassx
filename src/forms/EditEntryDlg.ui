@@ -243,6 +243,9 @@
      <property name="tabChangesFocus" >
       <bool>true</bool>
      </property>
+     <property name="acceptRichText" >
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
    <item row="12" column="0" colspan="2" >

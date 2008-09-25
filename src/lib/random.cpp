@@ -88,9 +88,18 @@ extern void initStdRand(){
 	stream << QCursor::pos();
 	stream << QDateTime::currentDateTime().toTime_t();
 	stream << QTime::currentTime().msec();
+#ifdef Q_WS_WIN
+	stream << GetCurrentProcessId();
+#else
+	stream << getpid();
+#endif
+	/* On a modern OS code, stack and heap base are randomized */
+	quint64 code_value = (quint64)initStdRand;
+	stream << code_value;
+	stream << (quint64)&code_value;
 	
-	QByteArray hash = QCryptographicHash::hash(buffer, QCryptographicHash::Md4);
+	QByteArray hash = QCryptographicHash::hash(buffer, QCryptographicHash::Sha1);
 	
-	qsrand( (uint) hash.constData() );
+	qsrand( *((uint*) hash.data()) );
 	initalized = true;
 }
