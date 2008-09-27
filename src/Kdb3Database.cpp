@@ -1695,24 +1695,41 @@ QList<IEntryHandle*> Kdb3Database::search(IGroupHandle* Group,const QString& sea
 	}
 	else
 		SearchEntries=entries();
-
-	for(int i=0;i<SearchEntries.size();i++){
+	
+	IGroupHandle* backupGroup = NULL;
+	if (!Group){
+		QList<IGroupHandle*> allGroups = groups();
+		for (int i=0; i<allGroups.size(); i++){
+			if (allGroups[i]->parent()==NULL && allGroups[i]->title()=="Backup"){
+				backupGroup = allGroups[i];
+				break;
+			}
+		}
+	}
+	
+	QList<IEntryHandle*> ResultEntries;
+	for(int i=0; i<SearchEntries.size(); i++){
+		IGroupHandle* entryGroup = SearchEntries[i]->group();
+		while (entryGroup->parent())
+			entryGroup = entryGroup->parent();
+		if (entryGroup == backupGroup)
+			continue;
+		
 		bool match=false;
 		if(Fields[0])match=match||searchStringContains(search,SearchEntries[i]->title(),CaseSensitive,RegExp);
 		if(Fields[1])match=match||searchStringContains(search,SearchEntries[i]->username(),CaseSensitive,RegExp);
 		if(Fields[2])match=match||searchStringContains(search,SearchEntries[i]->url(),CaseSensitive,RegExp);
-		SecString Password=SearchEntries[i]->password(); Password.unlock();
+		SecString Password=SearchEntries[i]->password();
+		Password.unlock();
 		if(Fields[3])match=match||searchStringContains(search,Password.string(),CaseSensitive,RegExp);
 		Password.lock();
 		if(Fields[4])match=match||searchStringContains(search,SearchEntries[i]->comment(),CaseSensitive,RegExp);
 		if(Fields[5])match=match||searchStringContains(search,SearchEntries[i]->binaryDesc(),CaseSensitive,RegExp);
-		if(!match){
-			SearchEntries.removeAt(i);
-			i--;
-		}
+		if(match)
+			ResultEntries << SearchEntries[i];
 	}
 
-	return SearchEntries;
+	return ResultEntries;
 }
 
 void Kdb3Database::rebuildIndices(QList<StdGroup*>& list){

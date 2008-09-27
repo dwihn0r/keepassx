@@ -451,9 +451,6 @@
                 <height>23</height>
                </size>
               </property>
-              <property name="pixmap" >
-               <pixmap/>
-              </property>
               <property name="scaledContents" >
                <bool>true</bool>
               </property>
@@ -506,9 +503,6 @@
                 <width>23</width>
                 <height>23</height>
                </size>
-              </property>
-              <property name="pixmap" >
-               <pixmap/>
               </property>
               <property name="scaledContents" >
                <bool>true</bool>

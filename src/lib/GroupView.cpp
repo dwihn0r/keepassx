@@ -66,9 +66,9 @@ void KeepassGroupView::updateIcons(){
 void KeepassGroupView::showSearchResults(){
 	if(topLevelItem(topLevelItemCount()-1)!=SearchResultItem){
 		addTopLevelItem(SearchResultItem);
-		setCurrentItem(SearchResultItem);
 	}
-	emit searchResultsSelected();	
+	setCurrentItem(SearchResultItem);
+	emit searchResultsSelected();
 }
 
 void KeepassGroupView::addChilds(GroupViewItem* item){
