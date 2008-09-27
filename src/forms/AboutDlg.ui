@@ -42,7 +42,7 @@
      <property name="sizeType" >
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>50</height>
@@ -56,6 +56,14 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>397</width>
+        <height>171</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>About</string>
       </attribute>
@@ -121,7 +129,7 @@
            <property name="sizeType" >
             <enum>QSizePolicy::Fixed</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>10</width>
              <height>20</height>
@@ -161,6 +169,14 @@ General Public License (GPL) version 2.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>397</width>
+        <height>171</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Credits</string>
       </attribute>
@@ -178,6 +194,14 @@ General Public License (GPL) version 2.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_4" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>397</width>
+        <height>171</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Translation</string>
       </attribute>
@@ -195,6 +219,14 @@ General Public License (GPL) version 2.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>397</width>
+        <height>171</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>License</string>
       </attribute>
@@ -230,6 +262,13 @@ General Public License (GPL) version 2.</string>
    <header>../../src/lib/UrlLabel.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>Edit_Thanks</tabstop>
+  <tabstop>Edit_Translation</tabstop>
+  <tabstop>Edit_License</tabstop>
+  <tabstop>ButtonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

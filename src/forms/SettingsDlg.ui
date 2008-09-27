@@ -27,7 +27,7 @@
      <property name="sizeType" >
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>50</height>
@@ -47,6 +47,14 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="TabGeneral" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>341</height>
+       </rect>
+      </property>
       <property name="whatsThis" >
        <string>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</string>
       </property>
@@ -71,7 +79,7 @@
            <property name="sizeType" >
             <enum>QSizePolicy::Fixed</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>25</width>
              <height>10</height>
@@ -101,7 +109,7 @@
            <property name="sizeType" >
             <enum>QSizePolicy::Fixed</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>25</width>
              <height>10</height>
@@ -143,7 +151,7 @@
              <property name="sizeType" >
               <enum>QSizePolicy::Fixed</enum>
              </property>
-             <property name="sizeHint" >
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>25</width>
                <height>10</height>
@@ -173,7 +181,7 @@
              <property name="sizeType" >
               <enum>QSizePolicy::Fixed</enum>
              </property>
-             <property name="sizeHint" >
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>25</width>
                <height>10</height>
@@ -203,7 +211,7 @@
              <property name="sizeType" >
               <enum>QSizePolicy::Fixed</enum>
              </property>
-             <property name="sizeHint" >
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>25</width>
                <height>10</height>
@@ -245,7 +253,7 @@
            <property name="sizeType" >
             <enum>QSizePolicy::Fixed</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>10</width>
              <height>20</height>
@@ -265,7 +273,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -294,7 +302,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>0</height>
@@ -305,6 +313,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="TabPage" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>341</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Appea&amp;rance</string>
       </attribute>
@@ -323,10 +339,7 @@
           </property>
           <item>
            <layout class="QGridLayout" >
-            <property name="horizontalSpacing" >
-             <number>6</number>
-            </property>
-            <property name="verticalSpacing" >
+            <property name="spacing" >
              <number>6</number>
             </property>
             <item row="1" column="0" >
@@ -344,7 +357,7 @@
               <property name="sizeType" >
                <enum>QSizePolicy::Fixed</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -551,7 +564,7 @@
               <property name="sizeType" >
                <enum>QSizePolicy::Minimum</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -588,7 +601,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -602,10 +615,7 @@
         <layout class="QHBoxLayout" >
          <item>
           <layout class="QGridLayout" >
-           <property name="horizontalSpacing" >
-            <number>6</number>
-           </property>
-           <property name="verticalSpacing" >
+           <property name="spacing" >
             <number>6</number>
            </property>
            <item row="0" column="0" >
@@ -643,7 +653,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -658,7 +668,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>0</height>
@@ -669,6 +679,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabSecurity" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>341</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Security</string>
       </attribute>
@@ -812,7 +830,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>0</height>
@@ -823,6 +841,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabFeatures" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>341</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Features</string>
       </attribute>
@@ -849,7 +875,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>0</height>
@@ -860,6 +886,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabIntegration" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>341</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Desktop Integration</string>
       </attribute>
@@ -939,7 +973,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -961,7 +995,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>0</height>
@@ -972,6 +1006,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="TabAdvanced" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>341</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Advanced</string>
       </attribute>
@@ -1045,10 +1087,7 @@
           <string>Auto-Type Fine Tuning</string>
          </property>
          <layout class="QGridLayout" >
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
+          <property name="spacing" >
            <number>6</number>
           </property>
           <item row="0" column="1" >
@@ -1079,7 +1118,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -1134,7 +1173,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -1156,7 +1195,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>0</height>
@@ -1174,7 +1213,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -1213,6 +1252,8 @@
   <tabstop>CheckBox_ShowPasswords_PasswordDlg</tabstop>
   <tabstop>SpinBox_ClipboardTime</tabstop>
   <tabstop>CheckBox_LockMinimize</tabstop>
+  <tabstop>CheckBox_InactivityLock</tabstop>
+  <tabstop>SpinBox_InacitivtyTime</tabstop>
   <tabstop>CheckBox_FeatureBookmarks</tabstop>
   <tabstop>Radio_IntPlugin_None</tabstop>
   <tabstop>Radio_IntPlugin_Gnome</tabstop>

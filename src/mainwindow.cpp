@@ -385,10 +385,25 @@ void KeepassMainWindow::setupDatabaseConnections(IDatabase* DB){
 
 bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	if (!QFile::exists(filename)){
-		QMessageBox::critical(this,tr("Error")
-				,tr("The database file does not exist."));
+		QMessageBox::critical(this, tr("Error"), tr("The database file does not exist."));
 		return false;
 	}
+	
+	if (QFile::exists(filename+".lock")){
+		QMessageBox::StandardButton buttonPressed = QMessageBox::question(
+			this,
+			tr("Database locked"),
+			tr("The database you are trying to open is locked.\n"
+				"This means that either someone else has opened the file or KeePassX crashed last time it opened the database.\n\n"
+				"Do you want to open it anyway?"
+			),
+			QMessageBox::Yes|QMessageBox::No,
+			QMessageBox::No
+		);
+		if (buttonPressed != QMessageBox::Yes)
+			return false;
+	}
+	
 	if(!IsAuto){
 		config->setLastKeyLocation(QString());
 		config->setLastKeyType(PASSWORD);
@@ -418,6 +433,14 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	db->setKey(dlg.password(),dlg.keyFile());
 	if(db->load(filename)){
+		if (!QFile::exists(filename+".lock")){
+			QFile lock(filename+".lock");
+			if (!lock.open(QIODevice::WriteOnly)){
+				QMessageBox::critical(this, tr("Error"), tr("Couldn't create database lock file."));
+				return false;
+			}
+		}
+		
 		if (IsLocked)
 			resetLock();
 		saveLastFilename(filename);
@@ -446,13 +469,13 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	}
 	StatusBarGeneral->setText(tr("Ready"));
 	inactivityCounter = 0;
+	
 	return true;
 }
 
 void KeepassMainWindow::fakeOpenDatabase(const QString& filename){
 	if (!QFile::exists(filename)){
-		QMessageBox::critical(this,tr("Error")
-				,tr("The database file does not exist."));
+		QMessageBox::critical(this, tr("Error"), tr("The database file does not exist."));
 		return;
 	}
 	
@@ -473,13 +496,18 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 							tr("The current file was modified. Do you want\nto save the changes?"),
 							QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel, QMessageBox::Yes);
 			if(r==QMessageBox::Cancel) return false; //Cancel
-			if(r==QMessageBox::Yes) //Yes (Save file)
+			if(r==QMessageBox::Yes){ //Yes (Save file)
 				if(!OnFileSave()) return false;
+			}
 		}
 	}
 	db->close();
 	delete db;
 	db=NULL;
+	if (QFile::exists(currentFile+".lock")){
+		if (!QFile::remove(currentFile+".lock"))
+			QMessageBox::critical(this, tr("Error"), tr("Couldn't remove database lock file."));
+	}
 	EntryView->db=NULL;
 	EntryView->clear();
 	EntryView->Items.clear();

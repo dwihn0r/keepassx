@@ -61,30 +61,36 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 			Check_Password->setChecked(true);
 			Check_KeyFile->setChecked(false);
 			Combo_KeyFile->setEditText("");
+			Edit_Password->setFocus(Qt::OtherFocusReason);
 			break;
 			
 		case KEYFILE:
 			Check_Password->setChecked(false);
 			Check_KeyFile->setChecked(true);
 			Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+			Combo_KeyFile->setFocus(Qt::OtherFocusReason);
 			break;
 
 		case BOTH:
 			Check_Password->setChecked(true);
 			Check_KeyFile->setChecked(true);
 			Combo_KeyFile->setEditText(QDir::cleanPath(QDir::current().absoluteFilePath(config->lastKeyLocation())));
+			Edit_Password->setFocus(Qt::OtherFocusReason);
 			break;
 		}
+	}
+	else{
+		Edit_Password->setFocus(Qt::OtherFocusReason);
 	}
 
 	if(Mode!=Mode_Set && Mode!=Mode_Change){
 		Button_GenKeyFile->hide();
 	}
-	if(flags & Flag_Auto){
-		/*
+	/*if(flags & Flag_Auto){
+		/ *
 		QPushButton* Button_Quit = buttonBox->addButton(tr("Quit"),QDialogButtonBox::DestructiveRole);
 		connect(Button_Quit,SIGNAL(clicked()),this,SLOT(OnButtonQuit()));
-		*/
+		* /
 		if(config->rememberLastKey()){
 			switch(config->lastKeyType()){
 			case PASSWORD:
@@ -100,10 +106,10 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 				Check_Password->setChecked(true);
 				Check_KeyFile->setChecked(true);
 				Combo_KeyFile->setEditText(config->lastKeyLocation());
-				break;				
+				break;
 			}
 		}
-	}
+	}*/
 	
 	// Setting up the bookmark button
 	if(Mode==Mode_Ask && config->featureBookmarks()){

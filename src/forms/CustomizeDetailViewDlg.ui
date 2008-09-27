@@ -22,6 +22,14 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>509</width>
+        <height>324</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Rich Text Editor</string>
       </attribute>
@@ -262,7 +270,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -278,6 +286,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>509</width>
+        <height>324</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>HTML</string>
       </attribute>
@@ -299,12 +315,28 @@
    <item>
     <widget class="QDialogButtonBox" name="ButtonBox" >
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>TabWidget</tabstop>
+  <tabstop>BtnBold</tabstop>
+  <tabstop>BtnItalic</tabstop>
+  <tabstop>BtnUnderline</tabstop>
+  <tabstop>BtnAlignLeft</tabstop>
+  <tabstop>BtnAlignCenter</tabstop>
+  <tabstop>BtnAlignRight</tabstop>
+  <tabstop>BtnAlignBlock</tabstop>
+  <tabstop>BtnColor</tabstop>
+  <tabstop>FontSize</tabstop>
+  <tabstop>BtnTemplates</tabstop>
+  <tabstop>RichEdit</tabstop>
+  <tabstop>HtmlEdit</tabstop>
+  <tabstop>ButtonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
