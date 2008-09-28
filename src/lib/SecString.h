@@ -22,11 +22,16 @@
 
 #include "crypto/arcfour.h"
 
+class SecData;
+
 //! QString based class with in-memory encryption of its content.
 /*!
 This class can hold a QString object in an encrypted buffer. To get access to the string it is neccassary to unlock the SecString object.
  */
 class SecString{
+
+friend class SecData;
+
 public:
 	SecString();
 	~SecString();
@@ -54,6 +59,22 @@ private:
 	QByteArray crypt;
 	QString plain;
 
+};
+
+class SecData{
+	public:
+		SecData(int len);
+		~SecData();
+		void lock();
+		void unlock();
+		void copyData(quint8* src);
+		void copyData(SecData& secData);
+		quint8* operator*();
+	
+	private:
+		quint8* data;
+		int length;
+		bool locked;
 };
 
 

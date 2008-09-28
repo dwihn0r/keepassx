@@ -224,3 +224,13 @@ bool lockPage(void* addr, int len){
 	return false;
 #endif
 }
+
+bool unlockPage(void* addr, int len){
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+	return (munlock(addr, len)==0);
+#elif defined(Q_WS_WIN)
+	return VirtualUnlock(addr, len);
+#else
+	return false;
+#endif
+}

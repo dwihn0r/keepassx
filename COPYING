@@ -1,11 +1,5 @@
 Copyright (C) 2005-2007 Tarek Saidi <tarek.saidi@arcor.de>
-Copyright (C) 2003-2007 Dominik Reichl <dominik.reichl@t-online.de>
-Copyright (C) 2001 Niels Müler
-Copyright (C) 1998, 2001, 2002 Free Software Foundation, Inc.
-Copyright (C) 2003, 2004 Michael Buesch <mbuesch@freenet.de>
-Copyright (c) 2003 Dr Brian Gladman, Worcester, UK
-Copyright (C) 2001-2003  Christophe Devine
-Copyright (C) 1992-2007 Trolltech ASA
+Copyright (C) 2007-2008 Felix Geyer
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,6 +9,42 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 text of the GNU General Public License below for more details.
+
+
+Other licenses:
+
+apg/*:
+	Copyright (c) 1999, 2000, 2001, 2002, 2003 Adel I. Mirzazhanov
+	3-clause BSD license
+
+crypto/aes*:
+	Copyright (c) 1998-2008, Brian Gladman, Worcester
+	3-clause BSD license
+
+crypto/arcfour*:
+	Copyright (C) 2003-2008 Dominik Reichl <dominik.reichl@t-online.de>
+	GPLv2 or later
+
+crypto/blowfish*:
+	Copyright (C) 1998, 2001, 2002 Free Software Foundation, Inc.
+	Copyright (C) 2003 by Michael Buesch
+	Copyright (C) 2007 by Tarek Saidi <tarek.saidi@arcor.de>
+	GPLv2
+
+crypto/sha256*:
+	Copyright (C) 2001-2003 by Christophe Devine
+	Copyright (C) 2005-2006 by Tarek Saidi
+	GPLv2
+
+crypto/two*:
+	Copyright (C) 2005-2007 Tarek Saidi <tarek.saidi@arcor.de>
+	Copyright (c) 2003,2004 Dominik Reichl <dominik.reichl@t-online.de>
+	GPLv2
+
+crypto/yarrow*:
+	Copyright (C) 2007 Tarek Saidi <tarek.saidi@arcor.de>
+	Copyright (C) 2001 Niels MÃ¼ler
+	GPLv2
 
 ---------------------------------------------------------------------------
 			

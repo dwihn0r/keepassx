@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>606</width>
-    <height>475</height>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -52,7 +52,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>341</height>
+        <height>345</height>
        </rect>
       </property>
       <property name="whatsThis" >
@@ -291,6 +291,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="CheckBox_AutoSaveChange" >
+         <property name="text" >
+          <string>Automatically save database after every change</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="checkBox_AskBeforeDelete" >
          <property name="text" >
           <string>Always ask before deleting entries or groups</string>
@@ -318,7 +325,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>341</height>
+        <height>345</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -678,7 +685,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>341</height>
+        <height>345</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -840,7 +847,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>341</height>
+        <height>345</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -885,7 +892,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>341</height>
+        <height>345</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -1005,7 +1012,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>341</height>
+        <height>345</height>
        </rect>
       </property>
       <attribute name="title" >

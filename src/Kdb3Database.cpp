@@ -40,6 +40,9 @@ bool StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb3Database::Std
 }
 
 
+Kdb3Database::Kdb3Database() : RawMasterKey(32), RawMasterKey_Latin1(32), MasterKey(32){
+}
+
 QString Kdb3Database::getError(){
 	return error;
 }
@@ -477,7 +480,6 @@ void Kdb3Database::restoreGroupTreeState(){
 bool Kdb3Database::load(QString filename){
 unsigned long total_size,crypto_size;
 quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
-quint8 TransfRandomSeed[32];
 quint8 FinalRandomSeed[16];
 quint8 ContentsHash[32];
 quint8 EncryptionIV[16];
@@ -531,15 +533,19 @@ else{
 	LOAD_RETURN_CLEANUP
 }
 
-
-KeyTransform::transform(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds);
+RawMasterKey.unlock();
+MasterKey.unlock();
+KeyTransform::transform(*RawMasterKey,*MasterKey,TransfRandomSeed,KeyTransfRounds);
 
 quint8 FinalKey[32];
 
 SHA256 sha;
 sha.update(FinalRandomSeed,16);
-sha.update(MasterKey,32);
+sha.update(*MasterKey,32);
 sha.finish(FinalKey);
+
+RawMasterKey.lock();
+MasterKey.lock();
 
 if(Algorithm == Rijndael_Cipher){
 	AESdecrypt aes;
@@ -572,7 +578,8 @@ if(memcmp(ContentsHash, FinalKey, 32) != 0){
 		// but KeePass/Win32 uses Windows Codepage 1252.
 		// Too stay compatible with databases created with KeePassX <= 0.3.1
 		// the loading function gives both encodings a try.
-		memcpy(RawMasterKey,RawMasterKey_Latin1,32);
+		
+		RawMasterKey.copyData(RawMasterKey_Latin1);
 		PotentialEncodingIssue=false;
 		qDebug("Decryption failed. Retrying with Latin-1.");
 		return load(filename); // second try
@@ -829,7 +836,9 @@ bool Kdb3Database::setPasswordKey(const QString& Password){
 	assert(Password.size());
 	QTextCodec* codec=QTextCodec::codecForName("Windows-1252");
 	QByteArray Password_CP1252 = codec->fromUnicode(Password);
-	SHA256::hashBuffer(Password_CP1252.data(),RawMasterKey,Password_CP1252.size());
+	RawMasterKey.unlock();
+	SHA256::hashBuffer(Password_CP1252.data(),*RawMasterKey,Password_CP1252.size());
+	RawMasterKey.lock();
 	QByteArray Password_Latin1 = Password.toLatin1();
 	if(Password_Latin1 != Password_CP1252){
 		// KeePassX used Latin-1 encoding for passwords until version 0.3.1
@@ -837,7 +846,9 @@ bool Kdb3Database::setPasswordKey(const QString& Password){
 		// Too stay compatible with databases created with KeePassX <= 0.3.1
 		// the loading function gives both encodings a try.
 		PotentialEncodingIssue = true;
-		SHA256::hashBuffer(Password_Latin1.data(),RawMasterKey_Latin1,Password_Latin1.size());
+		RawMasterKey_Latin1.unlock();
+		SHA256::hashBuffer(Password_Latin1.data(),*RawMasterKey_Latin1,Password_Latin1.size());
+		RawMasterKey_Latin1.lock();
 	}
 	else {
 		// If the password does not contain problematic characters we don't need
@@ -858,21 +869,27 @@ bool Kdb3Database::setFileKey(const QString& filename){
 		error=tr("Key file is empty.");
 		return false;
 	}
+	RawMasterKey.unlock();
 	if(FileSize == 32){
-		if(file.read((char*)RawMasterKey,32) != 32){
+		if(file.read((char*)(*RawMasterKey),32) != 32){
 			error=decodeFileError(file.error());
+			RawMasterKey.lock();
 			return false;
 		}
+		RawMasterKey.lock();
 		return true;
 	}
 	if(FileSize == 64){
 		char hex[64];
 		if(file.read(hex,64) != 64){
 			error=decodeFileError(file.error());
+			RawMasterKey.lock();
 			return false;
 		}
-		if (convHexToBinaryKey(hex,(char*)RawMasterKey))
+		if (convHexToBinaryKey(hex,(char*)(*RawMasterKey))){
+			RawMasterKey.lock();
 			return true;
+		}
 	}
 	SHA256 sha;
 	unsigned char* buffer = new unsigned char[2048];
@@ -883,22 +900,25 @@ bool Kdb3Database::setFileKey(const QString& filename){
 		sha.update(buffer,read);
 		if(read != 2048) break;
 	}
-	sha.finish(RawMasterKey);
+	sha.finish(*RawMasterKey);
+	RawMasterKey.lock();
 	delete [] buffer;
 	return true;
 }
 
 bool Kdb3Database::setCompositeKey(const QString& Password,const QString& filename){
-	unsigned char PasswordKey[32];
-	unsigned char FileKey[32];
-	if(!setFileKey(filename))return false;
-	memcpy(FileKey,RawMasterKey,32);
-	setPasswordKey(Password);
-	memcpy(PasswordKey,RawMasterKey,32);
 	SHA256 sha;
-	sha.update(PasswordKey,32);
-	sha.update(FileKey,32);
-	sha.finish(RawMasterKey);
+	
+	if(!setFileKey(filename))return false;
+	RawMasterKey.unlock();
+	sha.update(*RawMasterKey,32);
+	RawMasterKey.lock();
+	
+	setPasswordKey(Password);
+	RawMasterKey.unlock();
+	sha.update(*RawMasterKey,32);
+	sha.finish(*RawMasterKey);
+	RawMasterKey.lock();
 	return true;
 }
 
@@ -1187,7 +1207,6 @@ bool Kdb3Database::save(){
 		return false;
 	}
 	quint32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
-	quint8 TransfRandomSeed[32];
 	quint8 FinalRandomSeed[16];
 	quint8 ContentsHash[32];
 	quint8 EncryptionIV[16];
@@ -1260,7 +1279,6 @@ bool Kdb3Database::save(){
 	qSort(saveEntries.begin(),saveEntries.end(),StdEntryLessThan);
 
 	randomize(FinalRandomSeed,16);
-	randomize(TransfRandomSeed,32);
 	randomize(EncryptionIV,16);
 
 	unsigned int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
@@ -1281,12 +1299,13 @@ bool Kdb3Database::save(){
 	memcpy(buffer+56,ContentsHash,32);
 	memcpy(buffer+88,TransfRandomSeed,32);
 	memcpyToLEnd32(buffer+120,&KeyTransfRounds);
-	KeyTransform::transform(RawMasterKey,MasterKey,TransfRandomSeed,KeyTransfRounds);
 	quint8 FinalKey[32];
 
 	SHA256 sha;
 	sha.update(FinalRandomSeed,16);
-	sha.update(MasterKey,32);
+	MasterKey.unlock();
+	sha.update(*MasterKey,32);
+	MasterKey.lock();
 	sha.finish(FinalKey);
 
 	unsigned long EncryptedPartSize;
@@ -1803,6 +1822,15 @@ QList<IEntryHandle*> Kdb3Database::trashEntries(){
 		if(TrashHandles[i].isValid())
 			handles << &TrashHandles[i];
 	return handles;
+}
+
+void Kdb3Database::generateMasterKey(){
+	randomize(TransfRandomSeed,32);
+	RawMasterKey.unlock();
+	MasterKey.unlock();
+	KeyTransform::transform(*RawMasterKey,*MasterKey,TransfRandomSeed,KeyTransfRounds);
+	RawMasterKey.lock();
+	MasterKey.lock();
 }
 
 

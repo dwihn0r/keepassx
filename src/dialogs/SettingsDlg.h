@@ -45,6 +45,8 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 		void OnBrowserCmdBrowse();
 		void OnCustomizeEntryDetails();
 		void OnInactivityLockChange(bool checked);
+		void OnAutoSaveToggle(bool checked);
+		void OnAutoSaveChangeToggle(bool checked);
 	
 #ifdef GLOBAL_AUTOTYPE
 	private slots:

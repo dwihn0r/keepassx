@@ -239,6 +239,7 @@ public:
 	
 	virtual bool setKey(const QString& password,const QString& keyfile)=0;
 	virtual bool isKeyError()=0;
+	virtual void generateMasterKey()=0;
 
 	//! Loads a database.
    	/*! It is not allowed to call this function if a database is already loaded.

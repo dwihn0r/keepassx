@@ -51,6 +51,8 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 
 	connect(Button_CustomizeEntryDetails,SIGNAL(clicked()),this,SLOT(OnCustomizeEntryDetails()));
 	connect(CheckBox_InactivityLock, SIGNAL(toggled(bool)), SLOT(OnInactivityLockChange(bool)));
+	connect(CheckBox_AutoSave, SIGNAL(toggled(bool)), SLOT(OnAutoSaveToggle(bool)));
+	connect(CheckBox_AutoSaveChange, SIGNAL(toggled(bool)), SLOT(OnAutoSaveChangeToggle(bool)));
 	
 #if !defined(AUTOTYPE)
 	Box_AutoType->setVisible(false);
@@ -76,6 +78,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	CheckBox_StartLocked->setChecked(config->startLocked());
 	checkBox_SaveFileDlgHistory->setChecked(config->saveFileDlgHistory());
 	CheckBox_AutoSave->setChecked(config->autoSave());
+	CheckBox_AutoSaveChange->setChecked(config->autoSaveChange());
 	checkBox_AskBeforeDelete->setChecked(config->askBeforeDelete());
 
 	switch(config->groupTreeState()){
@@ -211,6 +214,7 @@ void CSettingsDlg::apply(){
 	config->setOpenLastFile(CheckBox_OpenLast->isChecked());
 	config->setRememberLastKey(CheckBox_RememberLastKey->isChecked());
 	config->setAutoSave(CheckBox_AutoSave->isChecked());
+	config->setAutoSaveChange(CheckBox_AutoSaveChange->isChecked());
 	config->setAskBeforeDelete(checkBox_AskBeforeDelete->isChecked());
 
 	//Appearence
@@ -328,6 +332,14 @@ void CSettingsDlg::OnCustomizeEntryDetails(){
 
 void CSettingsDlg::OnInactivityLockChange(bool checked){
 	SpinBox_InacitivtyTime->setEnabled(checked);
+}
+
+void CSettingsDlg::OnAutoSaveToggle(bool checked){
+	CheckBox_AutoSaveChange->setEnabled(!checked);
+}
+
+void CSettingsDlg::OnAutoSaveChangeToggle(bool checked){
+	CheckBox_AutoSave->setEnabled(!checked);
 }
 
 #ifdef GLOBAL_AUTOTYPE

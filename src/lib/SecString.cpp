@@ -98,3 +98,46 @@ void SecString::generateSessionKey(){
 	randomize(sessionkey, 32);
 	RC4.setKey(sessionkey, 32);
 }
+
+
+SecData::SecData(int len) : locked(true){
+	length = len;
+	data = new quint8[len];
+}
+
+SecData::~SecData(){
+	if (!locked){
+		for (int i=0; i<length; i++)
+			data[i] = 0;
+	}
+	delete data;
+}
+
+void SecData::lock(){
+	Q_ASSERT(!locked);
+	SecString::RC4.encrypt(data, data, length);
+	locked = true;
+}
+
+void SecData::unlock(){
+	Q_ASSERT(locked);
+	SecString::RC4.decrypt(data, data, length);
+	locked = false;
+}
+
+void SecData::copyData(quint8* src){
+	unlock();
+	memcpy(data, src, length);
+	lock();
+}
+
+void SecData::copyData(SecData& secData){
+	secData.unlock();
+	copyData(*secData);
+	secData.lock();
+}
+
+quint8* SecData::operator*(){
+	Q_ASSERT(!locked);
+	return data;
+}

@@ -488,12 +488,12 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 	Q_ASSERT(FileOpen);
 	Q_ASSERT(db!=NULL);
 	if(ModFlag){
-		if(config->autoSave()){
+		if(config->autoSave() && db->file()){
 			if(!OnFileSave()) return false;
 		}
 		else{
 			QMessageBox::StandardButton r=QMessageBox::question(this,tr("Save modified file?"),
-							tr("The current file was modified. Do you want\nto save the changes?"),
+							tr("The current file was modified.\nDo you want to save the changes?"),
 							QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel, QMessageBox::Yes);
 			if(r==QMessageBox::Cancel) return false; //Cancel
 			if(r==QMessageBox::Yes){ //Yes (Save file)
@@ -536,8 +536,9 @@ void KeepassMainWindow::OnFileNewKdb(){
 			if(!closeDatabase())return;
 		if (IsLocked)
 			resetLock();
-		db=db_new;		
-		db->setKey(dlg.password(),dlg.keyFile());		
+		db=db_new;
+		db->setKey(dlg.password(),dlg.keyFile());
+		db->generateMasterKey();
 		setWindowTitle(QString("[%1][*] - KeePassX").arg(tr("new")));
 		GroupView->db=db;
 		EntryView->db=db;
@@ -545,7 +546,6 @@ void KeepassMainWindow::OnFileNewKdb(){
 		EntryView->showGroup(NULL);
 		setStateFileOpen(true);
 		setStateFileModified(true);
-		FileOpen=true;
 		setupDatabaseConnections(db);
 		setStateGroupSelected(NONE);
 		setStateEntrySelected(NONE);
@@ -592,6 +592,7 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 	FileCloseAction->setEnabled(IsOpen||IsLocked);
 	FileSettingsAction->setEnabled(IsOpen);
 	FileChangeKeyAction->setEnabled(IsOpen);
+	menuExport->setEnabled(IsOpen);
 	EditSearchAction->setEnabled(IsOpen);
 	GroupView->setEnabled(IsOpen);
 	EntryView->setEnabled(IsOpen);
@@ -627,10 +628,11 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 
 
 void KeepassMainWindow::setStateFileModified(bool mod){
-	if(!FileOpen){
-		FileSaveAction->setIcon(getIcon("filesave"));
-		return;
+	if (config->autoSaveChange() && mod && db->file()){
+		OnFileSave();
+		mod = false;
 	}
+	
 	ModFlag=mod;
 	if(mod)
 		FileSaveAction->setIcon(getIcon("filesave"));
@@ -884,7 +886,10 @@ bool KeepassMainWindow::OnFileSaveAs(){
 
 void KeepassMainWindow::OnFileSettings(){
 	CDbSettingsDlg dlg(this,db);
-	if(dlg.exec()) setStateFileModified(true);
+	if(dlg.exec()){
+		db->generateMasterKey();
+		setStateFileModified(true);
+	}
 }
 
 void KeepassMainWindow::OnFileChangeKey(){
@@ -892,8 +897,9 @@ void KeepassMainWindow::OnFileChangeKey(){
 	QString filename = file ? file->fileName() : QString();
 	PasswordDialog dlg(this,PasswordDialog::Mode_Change,PasswordDialog::Flag_None,filename);
 	if(dlg.exec()==PasswordDialog::Exit_Ok){
-		setStateFileModified(true);
 		db->setKey(dlg.password(),dlg.keyFile());
+		db->generateMasterKey();
+		setStateFileModified(true);
 	}
 }
 
@@ -920,6 +926,7 @@ void KeepassMainWindow::OnImport(QAction* action){
 		}
 		db=tmpdb;
 		db->setKey(dlg.password(),dlg.keyFile());
+		db->generateMasterKey();
 		GroupView->db=db;
 		EntryView->db=db;
 		setupDatabaseConnections(db);
@@ -989,7 +996,7 @@ void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
 }
 
 void KeepassMainWindow::OnFileModified(){
-setStateFileModified(true);
+	setStateFileModified(true);
 }
 
 void KeepassMainWindow::closeEvent(QCloseEvent* e){
@@ -1017,7 +1024,8 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 		if(!closeDatabase()){
 			ShutingDown=false;
 			e->ignore();
-			return;}
+			return;
+		}
 		else
 			e->accept();
 	}

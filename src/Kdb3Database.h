@@ -137,6 +137,7 @@ public:
 			QStringList GroupPath;
 	};
 
+	Kdb3Database();
 	virtual ~Kdb3Database(){};
 	virtual bool load(QString identifier);
 	virtual bool save();
@@ -187,7 +188,8 @@ public:
 	virtual void moveGroup(IGroupHandle* Group,IGroupHandle* NewParent,int Position);
 	virtual IGroupHandle* addGroup(const CGroup* Group,IGroupHandle* Parent);
 	virtual bool isParent(IGroupHandle* parent, IGroupHandle* child);
-
+	
+	virtual void generateMasterKey();
 
 
 
@@ -241,9 +243,10 @@ private:
 	QMap<quint32,bool> TreeStateMetaStream;
 	unsigned int KeyTransfRounds;
 	CryptAlgorithm Algorithm;
-	quint8 RawMasterKey[32];
-	quint8 RawMasterKey_Latin1[32];
-	quint8 MasterKey[32];
+	SecData RawMasterKey;
+	SecData RawMasterKey_Latin1;
+	SecData MasterKey;
+	quint8 TransfRandomSeed[32];
 	bool hasV4IconMetaStream;
 };
 

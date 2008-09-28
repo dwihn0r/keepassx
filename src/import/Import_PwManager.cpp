@@ -105,8 +105,8 @@ bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){
 	
 	if(!parseXmlContent((char*)xml)){
 		delete [] xml;
-		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Invalid XML data (see stdout for details).")); return false;}
-	database->setKey(password,QString());
+		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Invalid XML data (see stdout for details).")); return false;
+	}
 	return true;
 }
 
