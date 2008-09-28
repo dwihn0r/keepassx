@@ -138,12 +138,13 @@ FORMS += forms/AboutDlg.ui \
 #         forms/TrashCanDlg.ui \
          forms/WorkspaceLockedWidget.ui
 
-TRANSLATIONS += translations/keepassx-de_DE.ts \
-                translations/keepassx-ru_RU.ts \
+TRANSLATIONS += translations/keepassx-cs_CZ.ts \
+                translations/keepassx-de_DE.ts \
                 translations/keepassx-es_ES.ts \
                 translations/keepassx-fr_FR.ts \
-                translations/keepassx-cs_CZ.ts \
+                translations/keepassx-gl_ES.ts \
                 translations/keepassx-ja_JP.ts \
+                translations/keepassx-ru_RU.ts \
                 translations/keepassx-xx_XX.ts
 
 HEADERS += main.h \
