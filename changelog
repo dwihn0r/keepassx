@@ -1,6 +1,11 @@
----------------
-    0.3.2
----------------
+----------------------------
+    0.3.3 (2008-08-11)
+----------------------------
+- fix an error when opening twofish encrypted databases
+
+----------------------------
+    0.3.2 (2008-07-20)
+----------------------------
 - add default groups when creating a database
 - improved the auto-type dialog (keyboard only usage, visual selection feedback)
 - automatically try to unlock db when global auto-type key has been pressed

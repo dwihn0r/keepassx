@@ -40,11 +40,9 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
 	target.path = $${PREFIX}/bin
 	data.files += ../share/keepassx
 	data.path = $${PREFIX}/share
-	pixmaps.files = ../share/pixmaps/*
-	pixmaps.path = $${PREFIX}/share/pixmaps
-	desktop.files = ../share/applications/*
-	desktop.path = $${PREFIX}/share/applications
-	INSTALLS += pixmaps desktop
+	share.files = ../share/applications ../share/mime ../share/mimelnk ../share/pixmaps
+	share.path = $${PREFIX}/share
+	INSTALLS += share
 	contains(DEFINES,AUTOTYPE){
 		LIBS += -lXtst
 		SOURCES += lib/HelperX11.cpp lib/AutoType_X11.cpp

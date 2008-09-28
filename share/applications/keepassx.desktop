@@ -1,13 +1,14 @@
 [Desktop Entry]
 Name=KeePassX
 GenericName=Cross Platform Password Manager
-GenericName[fr]=Gestionnaire de mot de passe
 GenericName[de]=Passwortverwaltung
+GenericName[fr]=Gestionnaire de mot de passe
 Exec=keepassx
 Icon=keepassx
 Comment=Cross Platform Password Manager
-Comment[fr]=Gestionnaire de mot de passe
 Comment[de]=Passwortverwaltung
+Comment[fr]=Gestionnaire de mot de passe
 Terminal=false
 Type=Application
 Categories=Qt;Utility;
+MimeType=application/x-keepass
