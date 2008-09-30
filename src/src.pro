@@ -112,9 +112,9 @@ isEqual(QMAKE_WIN32,1){
 INSTALLS += target data
 
 contains(DEFINES,GLOBAL_AUTOTYPE){
-	FORMS += forms/AutoTypeDlg.ui
-	HEADERS += dialogs/AutoTypeDlg.h lib/AutoTypeTreeWidget.h
-	SOURCES += dialogs/AutoTypeDlg.cpp lib/AutoTypeTreeWidget.cpp
+	FORMS += forms/AutoTypeDlg.ui forms/TargetWindowDlg.ui
+	HEADERS += dialogs/AutoTypeDlg.h lib/AutoTypeTreeWidget.h dialogs/TargetWindowDlg.h
+	SOURCES += dialogs/AutoTypeDlg.cpp lib/AutoTypeTreeWidget.cpp dialogs/TargetWindowDlg.cpp
 }
 
 

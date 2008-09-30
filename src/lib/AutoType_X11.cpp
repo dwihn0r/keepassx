@@ -159,6 +159,64 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 }
 
 #ifdef GLOBAL_AUTOTYPE
+
+Window windowRoot;
+QStringList windowBlacklist;
+Atom wm_state;
+
+void windowTitles(Window window, QStringList& titleList){
+	Display* d = QX11Info::display();
+	
+	Atom type = None;
+	int format;
+	unsigned long nitems, after;
+	unsigned char* data;
+	XGetWindowProperty(d, window, wm_state, 0, 0, false, AnyPropertyType, &type, &format, &nitems, &after, &data);
+	if (type){
+		XTextProperty textProp;
+		if (XGetWMName(d, window, &textProp) != 0) {
+			char** list = NULL;
+			int count;
+			if (Xutf8TextPropertyToTextList(d, &textProp, &list, &count)>=0 && list){
+				QString title = QString::fromUtf8(list[0]);
+				if (window!=windowRoot && window!=AutoType::MainWin->winId() &&
+				    (QApplication::activeWindow()==NULL || window!=QApplication::activeWindow()->winId()) &&
+				    !windowBlacklist.contains(title)
+				){
+					titleList.append(title);
+				}
+				XFreeStringList(list);
+			}
+		}
+	}
+	
+	Window root;
+	Window parent;
+	Window* children = NULL;
+	unsigned int num_children;
+	int tree = XQueryTree(d, window, &root, &parent, &children, &num_children);
+	if (tree && children){
+		for (int i=0; i<num_children; i++)
+			windowTitles(children[i], titleList);
+	}
+	else
+		XFree(children);
+}
+
+void AutoType::init(){
+	Display* d = QX11Info::display();
+	wm_state = XInternAtom(d, "WM_STATE", true);
+	windowRoot = XRootWindow(d, MainWin->x11Info().screen());
+	windowBlacklist << "kicker" << "KDE Desktop";
+}
+
+QStringList AutoType::getAllWindowTitles(){
+	QStringList titleList;
+	if (wm_state) // don't do anything if WM_STATE doesn't exist
+		windowTitles(windowRoot, titleList);
+	return titleList;
+}
+
 void AutoType::performGlobal(){
 	if (MainWin->isLocked())
 		MainWin->OnUnLockWorkspace();
@@ -277,7 +335,7 @@ bool AutoType::registerGlobalShortcut(const Shortcut& s){
 		return true;
 	
 	Display* display = QX11Info::display();
-	Window root = XDefaultRootWindow(display);
+	Window root = XRootWindow(display, MainWin->x11Info().screen());
 	int code=XKeysymToKeycode(display, HelperX11::getKeysym(s.key));
 	int mod=HelperX11::getShortcutModifierMask(s);
 	

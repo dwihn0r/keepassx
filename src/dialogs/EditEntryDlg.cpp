@@ -23,7 +23,7 @@
 #include "PasswordGenDlg.h"
 #include "EditEntryDlg.h"
 #include "CalendarDlg.h"
-
+#include "TargetWindowDlg.h"
 
 CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent,  bool modal, bool newEntry)
 : QDialog(parent)
@@ -107,10 +107,6 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	Edit_Comment->setPlainText(entry->comment());
 	InitGroupComboBox();
 
-/* MX-TO-DO: After approval, remove this invokation
-	InitIconComboBox();
-*/
-
 	if(!entry->binarySize()){
 		ButtonSaveAttachment->setDisabled(true);
 		ButtonDeleteAttachment->setDisabled(true);
@@ -126,12 +122,22 @@ CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* paren
 	else{
 		DateTime_Expire->setDateTime(entry->expire());
 	}
+	
+#ifdef AUTOTYPE
+	QToolButton* buttonTools = new QToolButton(buttonBox);
+	buttonTools->setText("Tools");
+	buttonTools->setPopupMode(QToolButton::InstantPopup);
+	QMenu* menuTools = new QMenu(buttonTools);
+	connect(menuTools->addAction("Auto-Type: Customize Sequence"), SIGNAL(triggered(bool)), SLOT(OnCustomizeSequence()));
+#ifdef GLOBAL_AUTOTYPE
+	connect(menuTools->addAction("Auto-Type: Select target window"), SIGNAL(triggered(bool)), SLOT(OnSelectTarget()));
+#endif
+	buttonTools->setMenu(menuTools);
+	buttonBox->addButton(buttonTools, QDialogButtonBox::ResetRole); // ResetRole: workaround to display button on the left
+#endif
 }
 
-CEditEntryDlg::~CEditEntryDlg()
-{
-
-
+CEditEntryDlg::~CEditEntryDlg(){
 }
 
 void CEditEntryDlg::resizeEvent(QResizeEvent *event){
@@ -147,16 +153,6 @@ void CEditEntryDlg::paintEvent(QPaintEvent *event){
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
-
-/* MX-TO-DO: After approval, remove this implementation
-
-void CEditEntryDlg::InitIconComboBox(){
-	for(int i=0;i<db->numIcons();i++){
-		Combo_IconPicker->insertItem(i,db->icon(i),"");
-	}
-	Combo_IconPicker->setCurrentIndex(entry->image());
-}
-*/
 
 void CEditEntryDlg::InitGroupComboBox(){
 	QString Space;
@@ -432,4 +428,26 @@ void CEditEntryDlg::OnCalendar(QAction* action){
 
 void CEditEntryDlg::OnClose(){
 	config->setDialogGeometry(this);
+}
+
+
+void CEditEntryDlg::OnCustomizeSequence(){
+#ifdef AUTOTYPE
+	QString text = Edit_Comment->toPlainText();
+	if (!text.isEmpty())
+		text.append("\n");
+	Edit_Comment->setPlainText(text.append("Auto-Type: {USERNAME}{TAB}{PASSWORD}{ENTER}"));
+#endif
+}
+
+void CEditEntryDlg::OnSelectTarget(){
+#ifdef GLOBAL_AUTOTYPE
+	TargetWindowDlg dlg(this);
+	if (dlg.exec() && !dlg.windowTitle().isEmpty()){
+		QString text = Edit_Comment->toPlainText();
+		if (!text.isEmpty())
+			text.append("\n");
+		Edit_Comment->setPlainText(text.append(dlg.windowTitle()));
+	}
+#endif
 }

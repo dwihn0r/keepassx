@@ -195,6 +195,9 @@ int main(int argc, char **argv)
 
 	QApplication::setQuitOnLastWindowClosed(false);
 	KeepassMainWindow *mainWin = new KeepassMainWindow(args.file(), args.startMinimized(), args.startLocked());
+#ifdef GLOBAL_AUTOTYPE
+	AutoType::init();
+#endif
 	int r=app->exec();
 	delete mainWin;
 	delete eventListener;

@@ -31,9 +31,6 @@ class CEditEntryDlg : public QDialog, private Ui_EditEntryDialog
 		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0,  bool modal = FALSE, bool newEntry = FALSE);
 		~CEditEntryDlg();
 		void InitGroupComboBox();
-/* MX-TO-DO: Remove this declaration
-		void InitIconComboBox();
-*/
 		static void saveAttachment(IEntryHandle* pEntry, QWidget* ParentWidget=NULL);
 		
 		IEntryHandle* entry;
@@ -60,14 +57,15 @@ class CEditEntryDlg : public QDialog, private Ui_EditEntryDialog
 		void OnExpirePreset(QAction* action);
 		void OnCalendar(QAction* action);
 		void OnClose();
+		void OnCustomizeSequence();
+		void OnSelectTarget();
 		
-	private:		
+	private:
 		virtual void paintEvent(QPaintEvent*);
 		virtual void resizeEvent(QResizeEvent *);
-
+		
 		int IconIndex;
 		bool pNewEntry;
 };
 
 #endif
-

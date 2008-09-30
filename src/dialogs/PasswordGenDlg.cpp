@@ -448,7 +448,6 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 		}
 	}
 	else{
-		qDebug("ja");
 		for (int i=0; i<length; i++)
 			buffer[i] = assoctable[randint(num)];
 	}
