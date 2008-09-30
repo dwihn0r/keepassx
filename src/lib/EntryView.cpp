@@ -274,6 +274,7 @@ void KeepassEntryView::OnEditOpenUrl(){
 void KeepassEntryView::OnEditCopyUrl(){
 	if (selectedItems().size() == 0) return;
 	QString url = ((EntryViewItem*)selectedItems().first())->EntryHandle->url();
+	if (url.trimmed().isEmpty()) return;
 	if (url.startsWith("cmd://") && url.length()>6)
 		url = url.right(url.length()-6);
 	

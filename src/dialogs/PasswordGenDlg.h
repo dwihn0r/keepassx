@@ -32,8 +32,12 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 		~CGenPwDialog();
 	
 	private:
-		int AddToAssoctable(char* table,int start,int end,int pos);
-		bool trim(unsigned char &value,int range);
+		struct PwGroup {
+			int start;
+			int end;
+		};
+		void AddToAssoctable(char* table,int start,int end,int& pos);
+		PwGroup AddToAssoctableGroup(char* table,int start,int end,int& pos);
 		void paintEvent(QPaintEvent* event);
 		void generatePasswordInternal(char* buffer, int length);
 		QPixmap BannerPixmap;

@@ -33,10 +33,12 @@ extern "C" {
 #endif
 
 void getEntropy(quint8* buffer, int length);
-quint32 randint(quint32 n);
+quint32 randint(quint32 limit); // generate random number: 0 <= n < limit
 
 #ifdef __cplusplus
 }
 #endif
+
+quint32 randintRange(quint32 min, quint32 max); // generate random number: min <= n <= max
 
 #endif

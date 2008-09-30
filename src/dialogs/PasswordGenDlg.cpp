@@ -22,6 +22,7 @@
 #include "dialogs/PasswordGenDlg.h"
 #include "dialogs/CollectEntropyDlg.h"
 
+#include "random.h"
 #include "apg/randpass.h"
 #include "apg/pronpass.h"
 
@@ -109,6 +110,8 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 		checkBoxPN->setChecked(true);
 		checkBoxPS->setChecked(false);
 	}
+	Check_ExcludeLookAlike->setChecked(config->pwGenExcludeLookAlike());
+	Check_EveryGroup->setChecked(config->pwGenEveryGroup());
 	Spin_Num->setValue(config->pwGenLength());
 	adjustSize();
 	setMaximumSize(size());
@@ -139,6 +142,8 @@ CGenPwDialog::~CGenPwDialog(){
 	pwGenOptions.setBit(12,checkBoxPN->isChecked());
 	pwGenOptions.setBit(13,checkBoxPS->isChecked());
 	config->setPwGenOptions(pwGenOptions);
+	config->setPwGenExcludeLookAlike(Check_ExcludeLookAlike->isChecked());
+	config->setPwGenEveryGroup(Check_EveryGroup->isChecked());
 	config->setPwGenLength(Spin_Num->value());
 }
 
@@ -198,45 +203,12 @@ void CGenPwDialog::OnGeneratePw()
 		gen_pron_pass(buffer, hyphenated_word, length, length, mode);
 		delete[] hyphenated_word;
 	}
-	else if (Radio_1->isChecked() && !checkBox5->isChecked() &&
-	         !checkBox6->isChecked() && !checkBox7->isChecked())
-	{
-		unsigned int mode = 0;
-		if (checkBox1->isChecked())
-			mode |= S_CL;
-		if (checkBox2->isChecked())
-			mode |= S_SL;
-		if (checkBox3->isChecked())
-			mode |= S_NB;
-		if (checkBox4->isChecked())
-			mode |= S_SS;
-		
-		gen_rand_pass(buffer, length, length, mode);
-	}
 	else{
 		generatePasswordInternal(buffer, length);
 	}
 
 	Edit_dest->setText(buffer);
 	delete[] buffer;
-}
-
-int CGenPwDialog::AddToAssoctable(char* table,int start,int end,int pos){
-	for(int i=start;i<=end;i++){
-		table[pos]=i;
-		pos++;
-	}
-	return (end-start)+1;
-}
-
-
-bool CGenPwDialog::trim(unsigned char &x, int r){
-	if(x<r)
-		return true;
-	if(256%r!=0)
-		return false;
-	x=x-(x/r)*r;
-	return true;
 }
 
 void CGenPwDialog::estimateQuality(){
@@ -340,6 +312,32 @@ void CGenPwDialog::SwapEchoMode(){
 	}
 }
 
+void CGenPwDialog::AddToAssoctable(char* table,int start,int end,int& pos){
+	for (int i=start;i<=end;i++){
+		if (Check_ExcludeLookAlike->isChecked()){
+			switch (i){
+				case 48:  // 0
+				case 79:  // O
+				case 49:  // 1
+				case 73:  // I
+				case 108: // l
+				case 124: // |
+					continue;
+			}
+		}
+		table[pos]=i;
+		pos++;
+	}
+}
+
+CGenPwDialog::PwGroup CGenPwDialog::AddToAssoctableGroup(char* table,int start,int end,int& pos){
+	PwGroup group;
+	group.start = pos;
+	AddToAssoctable(table,start,end,pos);
+	group.end = pos-1;
+	return group;
+}
+
 void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 	/*-------------------------------------------------------
 	     ASCII
@@ -355,26 +353,62 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 
 	int num=0;
 	char assoctable[255];
+	int groups=0;
+	bool ensureEveryGroup = false;
+	QList<PwGroup> groupTable;
 	
 	if(Radio_1->isChecked()){
-		if(checkBox1->isChecked())
-			num+=AddToAssoctable(assoctable,65,90,num);
-		if(checkBox2->isChecked())
-			num+=AddToAssoctable(assoctable,97,122,num);
-		if(checkBox3->isChecked())
-			num+=AddToAssoctable(assoctable,48,57,num);
-		if(checkBox4->isChecked()){
-			num+=AddToAssoctable(assoctable,33,47,num);
-			num+=AddToAssoctable(assoctable,58,64,num);
-			num+=AddToAssoctable(assoctable,91,96,num);
-			num+=AddToAssoctable(assoctable,123,126,num);
+		if (Check_EveryGroup->isChecked()){
+			if (checkBox1->isChecked()) groups++;
+			if (checkBox2->isChecked()) groups++;
+			if (checkBox3->isChecked()) groups++;
+			if (checkBox4->isChecked()) groups++;
+			if (checkBox5->isChecked()) groups++;
+			if (checkBox6->isChecked()) groups++;
+			if (checkBox7->isChecked()) groups++;
+			if (groups<=length)
+				ensureEveryGroup = true;
 		}
-		if(checkBox5->isChecked())
-			num+=AddToAssoctable(assoctable,32,32,num);
-		if(checkBox6->isChecked() && !checkBox4->isChecked())
-			num+=AddToAssoctable(assoctable,45,45,num);
-		if(checkBox7->isChecked() && !checkBox4->isChecked())
-			num+=AddToAssoctable(assoctable,95,95,num);
+		
+		if(checkBox1->isChecked()){
+			if (ensureEveryGroup) groupTable.append(AddToAssoctableGroup(assoctable,65,90,num));
+			else AddToAssoctable(assoctable,65,90,num);
+		}
+		if(checkBox2->isChecked()){
+			if (ensureEveryGroup) groupTable.append(AddToAssoctableGroup(assoctable,97,122,num));
+			else AddToAssoctable(assoctable,97,122,num);
+		}
+		if(checkBox3->isChecked()){
+			if (ensureEveryGroup) groupTable.append(AddToAssoctableGroup(assoctable,48,57,num));
+			else AddToAssoctable(assoctable,48,57,num);
+		}
+		if(checkBox4->isChecked()){
+			PwGroup group;
+			group.start = num;
+			AddToAssoctable(assoctable,33,44,num);
+			AddToAssoctable(assoctable,46,47,num);
+			AddToAssoctable(assoctable,58,64,num);
+			AddToAssoctable(assoctable,91,94,num);
+			AddToAssoctable(assoctable,96,96,num);
+			AddToAssoctable(assoctable,123,126,num);
+			if (ensureEveryGroup){
+				group.end = num-1;
+				groupTable.append(group);
+			}
+			
+		}
+		if(checkBox5->isChecked()){
+			if (ensureEveryGroup) groupTable.append(AddToAssoctableGroup(assoctable,32,32,num));
+			else AddToAssoctable(assoctable,32,32,num);
+		}
+		if(checkBox6->isChecked()){
+			if (ensureEveryGroup) groupTable.append(AddToAssoctableGroup(assoctable,45,45,num));
+			else AddToAssoctable(assoctable,45,45,num);
+		}
+		if(checkBox7->isChecked()){
+			if (ensureEveryGroup) groupTable.append(AddToAssoctableGroup(assoctable,95,95,num));
+			else AddToAssoctable(assoctable,95,95,num);
+		}
 	}
 	else{
 		QString str=Edit_chars->text();
@@ -393,14 +427,30 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 			EntropyCollected=true;
 		}
 	}
-
-	unsigned char tmp;
-	for(int i=0;i<length;i++){
-
-		do randomize(&tmp,1);
-		while(!trim(tmp,num));
-
-		buffer[i]=assoctable[tmp];
+	
+	if (ensureEveryGroup){
+		QList<int> charPos;
+		for (int i=0; i<length; i++)
+			charPos.append(i);
+		
+		for (int i=0; i<groups; i++){
+			int posIndex = randintRange(0, charPos.count()-1);
+			int pos = charPos[posIndex];
+			charPos.removeAt(posIndex);
+			buffer[pos] = assoctable[randintRange(groupTable[i].start, groupTable[i].end)];
+		}
+		
+		for (int i=groups; i<length; i++){
+			int posIndex = randintRange(0, charPos.count()-1);
+			int pos = charPos[posIndex];
+			charPos.removeAt(posIndex);
+			buffer[pos] = assoctable[randint(num)];
+		}
+	}
+	else{
+		qDebug("ja");
+		for (int i=0; i<length; i++)
+			buffer[i] = assoctable[randint(num)];
 	}
 }
 

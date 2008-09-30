@@ -126,7 +126,7 @@ void SecData::unlock(){
 }
 
 void SecData::copyData(quint8* src){
-	unlock();
+	locked = false;
 	memcpy(data, src, length);
 	lock();
 }

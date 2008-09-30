@@ -47,10 +47,14 @@ void getEntropy(quint8* buffer, int length){
 	}
 }
 
-quint32 randint(quint32 n){
+quint32 randint(quint32 limit){
 	quint32 rand;
 	randomize(&rand, 4);
-	return (rand % n);
+	return (rand % limit);
+}
+
+quint32 randintRange(quint32 min, quint32 max){
+	return min + randint(max-min+1);
 }
 
 #if defined(Q_WS_X11) || defined(Q_WS_MAC)

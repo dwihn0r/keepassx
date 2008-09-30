@@ -354,6 +354,7 @@ void KeepassMainWindow::setupMenus(){
 	EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
 	EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
 	EditOpenUrlAction->setShortcut(tr("Ctrl+U"));
+	EditCopyUrlAction->setShortcut(tr("Ctrl+I"));
 	EditNewEntryAction->setShortcut(tr("Ctrl+Y"));
 	EditEditEntryAction->setShortcut(tr("Ctrl+E"));
 	EditDeleteEntryAction->setShortcut(tr("Ctrl+D"));
@@ -630,7 +631,6 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 void KeepassMainWindow::setStateFileModified(bool mod){
 	if (config->autoSaveChange() && mod && db->file()){
 		OnFileSave();
-		mod = false;
 	}
 	
 	ModFlag=mod;

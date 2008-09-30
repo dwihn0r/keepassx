@@ -478,237 +478,237 @@ void Kdb3Database::restoreGroupTreeState(){
 	return false;
 
 bool Kdb3Database::load(QString filename){
-unsigned long total_size,crypto_size;
-quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
-quint8 FinalRandomSeed[16];
-quint8 ContentsHash[32];
-quint8 EncryptionIV[16];
-
-File = new QFile(filename);
-if(!File->open(QIODevice::ReadWrite)){
-	if(!File->open(QIODevice::ReadOnly)){
-		error=tr("Could not open file.");
-		delete File;
-		File = NULL;
-		return false;
-	}
-}
-total_size=File->size();
-char* buffer = new char[total_size];
-File->read(buffer,total_size);
-
-if(total_size < DB_HEADER_SIZE){
-	error=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
-	LOAD_RETURN_CLEANUP
-}
-
-memcpyFromLEnd32(&Signature1,buffer);
-memcpyFromLEnd32(&Signature2,buffer+4);
-memcpyFromLEnd32(&Flags,buffer+8);
-memcpyFromLEnd32(&Version,buffer+12);
-memcpy(FinalRandomSeed,buffer+16,16);
-memcpy(EncryptionIV,buffer+32,16);
-memcpyFromLEnd32(&NumGroups,buffer+48);
-memcpyFromLEnd32(&NumEntries,buffer+52);
-memcpy(ContentsHash,buffer+56,32);
-memcpy(TransfRandomSeed,buffer+88,32);
-memcpyFromLEnd32(&KeyTransfRounds,buffer+120);
-
-if((Signature1!=PWM_DBSIG_1) || (Signature2!=PWM_DBSIG_2)){
-	error=tr("Wrong Signature");
-	LOAD_RETURN_CLEANUP
-}
-
-if((Version & 0xFFFFFF00) != (PWM_DBVER_DW & 0xFFFFFF00)){
-	error=tr("Unsupported File Version.");
-	LOAD_RETURN_CLEANUP
-}
-
-if (Flags & PWM_FLAG_RIJNDAEL)
-	Algorithm = Rijndael_Cipher;
-else if (Flags & PWM_FLAG_TWOFISH)
-	Algorithm = Twofish_Cipher;
-else{
-	error=tr("Unknown Encryption Algorithm.");
-	LOAD_RETURN_CLEANUP
-}
-
-RawMasterKey.unlock();
-MasterKey.unlock();
-KeyTransform::transform(*RawMasterKey,*MasterKey,TransfRandomSeed,KeyTransfRounds);
-
-quint8 FinalKey[32];
-
-SHA256 sha;
-sha.update(FinalRandomSeed,16);
-sha.update(*MasterKey,32);
-sha.finish(FinalKey);
-
-RawMasterKey.lock();
-MasterKey.lock();
-
-if(Algorithm == Rijndael_Cipher){
-	AESdecrypt aes;
-	aes.key256(FinalKey);
-	aes.cbc_decrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,total_size-DB_HEADER_SIZE,(unsigned char*)EncryptionIV);
-	crypto_size=total_size-((quint8*)buffer)[total_size-1]-DB_HEADER_SIZE;
-}
-else if(Algorithm == Twofish_Cipher){
-	CTwofish twofish;
-	if (twofish.init(FinalKey, 32, EncryptionIV) != true){
-		error=tr("Unable to initalize the twofish algorithm.");
-		LOAD_RETURN_CLEANUP
-	}
-	crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
-	total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
-}
-
-if ((crypto_size > 2147483446) || (!crypto_size && NumGroups)){
-	error=tr("Decryption failed.\nThe key is wrong or the file is damaged.");
-	LOAD_RETURN_CLEANUP
-}
-SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
-
-if(memcmp(ContentsHash, FinalKey, 32) != 0){
-	if(PotentialEncodingIssue){
-		delete[] buffer;
-		delete File;
-		File = NULL;
-		// KeePassX used Latin-1 encoding for passwords until version 0.3.1
-		// but KeePass/Win32 uses Windows Codepage 1252.
-		// Too stay compatible with databases created with KeePassX <= 0.3.1
-		// the loading function gives both encodings a try.
-		
-		RawMasterKey.copyData(RawMasterKey_Latin1);
-		PotentialEncodingIssue=false;
-		qDebug("Decryption failed. Retrying with Latin-1.");
-		return load(filename); // second try
-	}
-	error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
-	KeyError=true;
-	LOAD_RETURN_CLEANUP
-}
-
-unsigned long pos = DB_HEADER_SIZE;
-quint16 FieldType;
-quint32 FieldSize;
-char* pField;
-bool bRet;
-StdGroup group;
-QList<quint32> Levels;
-RootGroup.Title="$ROOT$";
-RootGroup.Parent=NULL;
-RootGroup.Handle=NULL;
-
-for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
-{
-	pField = buffer+pos;
-
-	memcpyFromLEnd16(&FieldType, pField);
-	pField += 2; pos += 2;
-	if (pos >= total_size){
-		error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
-		LOAD_RETURN_CLEANUP
-	}
-
-	memcpyFromLEnd32(&FieldSize, pField);
-	pField += 4; pos += 4;
-	if (pos >= (total_size + FieldSize)){
-		error=tr("Unexpected error: Offset is out of range.").append(" [G2]");
-		LOAD_RETURN_CLEANUP
-	}
-
-	bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
-	if ((FieldType == 0xFFFF) && (bRet == true)){
-		Groups << group;
-		CurGroup++; // Now and ONLY now the counter gets increased
-	}
-	pField += FieldSize;
-	pos += FieldSize;
-	if (pos >= total_size){
-		error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
-		LOAD_RETURN_CLEANUP
-	}
-}
-
-StdEntry entry;
-
-for (unsigned long CurEntry = 0; CurEntry < NumEntries;)
-{
-	pField = buffer+pos;
-
-	memcpyFromLEnd16(&FieldType, pField);
-	pField += 2; pos += 2;
-	if(pos >= total_size){
-		error=tr("Unexpected error: Offset is out of range.").append(" [E1]");
-		LOAD_RETURN_CLEANUP
-	}
-
-	memcpyFromLEnd32(&FieldSize, pField);
-	pField += 4; pos += 4;
-	if (pos >= (total_size + FieldSize)){
-		error=tr("Unexpected error: Offset is out of range.").append(" [E2]");
-		LOAD_RETURN_CLEANUP
-	}
-
-	bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
-
-	if((FieldType == 0xFFFF) && (bRet == true)){
-		Entries << entry;
-		if(!entry.GroupId)
-			qDebug("NULL: %i, '%s'", (int)CurEntry, (char*)entry.Title.toUtf8().data());
-		CurEntry++;
-	}
-
-	pField += FieldSize;
-	pos += FieldSize;
-	if (pos >= total_size){
-		error=tr("Unexpected error: Offset is out of range.").append(" [E3]");
-		LOAD_RETURN_CLEANUP
-	}
-}
-
-if(!createGroupTree(Levels)){
-	error=tr("Invalid group tree.");
-	LOAD_RETURN_CLEANUP
-}
-
-delete [] buffer;
-
-hasV4IconMetaStream = false;
-for(int i=0;i<Entries.size();i++){
-	if(isMetaStream(Entries[i]) && Entries[i].Comment=="KPX_CUSTOM_ICONS_4"){
-		hasV4IconMetaStream = true;
-		break;
-	}
-}
-
-//Remove the metastreams from the entry list
-for(int i=0;i<Entries.size();i++){
-	if(isMetaStream(Entries[i])){
-		if(!parseMetaStream(Entries[i]))
-			UnknownMetaStreams << Entries[i];
-		Entries.removeAt(i);
-		i--;
-	}
-}
-
-int* EntryIndices=new int[Groups.size()];
-for(int i=0;i<Groups.size();i++)EntryIndices[i]=0;
-
-for(int g=0;g<Groups.size();g++){
-	for(int e=0;e<Entries.size();e++){
-		if(Entries[e].GroupId==Groups[g].Id){
-			Entries[e].Index=EntryIndices[g];
-			EntryIndices[g]++;
+	unsigned long total_size,crypto_size;
+	quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
+	quint8 FinalRandomSeed[16];
+	quint8 ContentsHash[32];
+	quint8 EncryptionIV[16];
+	
+	File = new QFile(filename);
+	if(!File->open(QIODevice::ReadWrite)){
+		if(!File->open(QIODevice::ReadOnly)){
+			error=tr("Could not open file.");
+			delete File;
+			File = NULL;
+			return false;
 		}
 	}
-}
-delete [] EntryIndices;
-createHandles();
-restoreGroupTreeState();
-
-return true;
+	total_size=File->size();
+	char* buffer = new char[total_size];
+	File->read(buffer,total_size);
+	
+	if(total_size < DB_HEADER_SIZE){
+		error=tr("Unexpected file size (DB_TOTAL_SIZE < DB_HEADER_SIZE)");
+		LOAD_RETURN_CLEANUP
+	}
+	
+	memcpyFromLEnd32(&Signature1,buffer);
+	memcpyFromLEnd32(&Signature2,buffer+4);
+	memcpyFromLEnd32(&Flags,buffer+8);
+	memcpyFromLEnd32(&Version,buffer+12);
+	memcpy(FinalRandomSeed,buffer+16,16);
+	memcpy(EncryptionIV,buffer+32,16);
+	memcpyFromLEnd32(&NumGroups,buffer+48);
+	memcpyFromLEnd32(&NumEntries,buffer+52);
+	memcpy(ContentsHash,buffer+56,32);
+	memcpy(TransfRandomSeed,buffer+88,32);
+	memcpyFromLEnd32(&KeyTransfRounds,buffer+120);
+	
+	if((Signature1!=PWM_DBSIG_1) || (Signature2!=PWM_DBSIG_2)){
+		error=tr("Wrong Signature");
+		LOAD_RETURN_CLEANUP
+	}
+	
+	if((Version & 0xFFFFFF00) != (PWM_DBVER_DW & 0xFFFFFF00)){
+		error=tr("Unsupported File Version.");
+		LOAD_RETURN_CLEANUP
+	}
+	
+	if (Flags & PWM_FLAG_RIJNDAEL)
+		Algorithm = Rijndael_Cipher;
+	else if (Flags & PWM_FLAG_TWOFISH)
+		Algorithm = Twofish_Cipher;
+	else{
+		error=tr("Unknown Encryption Algorithm.");
+		LOAD_RETURN_CLEANUP
+	}
+	
+	RawMasterKey.unlock();
+	MasterKey.unlock();
+	KeyTransform::transform(*RawMasterKey,*MasterKey,TransfRandomSeed,KeyTransfRounds);
+	
+	quint8 FinalKey[32];
+	
+	SHA256 sha;
+	sha.update(FinalRandomSeed,16);
+	sha.update(*MasterKey,32);
+	sha.finish(FinalKey);
+	
+	RawMasterKey.lock();
+	MasterKey.lock();
+	
+	if(Algorithm == Rijndael_Cipher){
+		AESdecrypt aes;
+		aes.key256(FinalKey);
+		aes.cbc_decrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,total_size-DB_HEADER_SIZE,(unsigned char*)EncryptionIV);
+		crypto_size=total_size-((quint8*)buffer)[total_size-1]-DB_HEADER_SIZE;
+	}
+	else if(Algorithm == Twofish_Cipher){
+		CTwofish twofish;
+		if (twofish.init(FinalKey, 32, EncryptionIV) != true){
+			error=tr("Unable to initalize the twofish algorithm.");
+			LOAD_RETURN_CLEANUP
+		}
+		crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
+		total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
+	}
+	
+	if ((crypto_size > 2147483446) || (!crypto_size && NumGroups)){
+		error=tr("Decryption failed.\nThe key is wrong or the file is damaged.");
+		LOAD_RETURN_CLEANUP
+	}
+	SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
+	
+	if(memcmp(ContentsHash, FinalKey, 32) != 0){
+		if(PotentialEncodingIssue){
+			delete[] buffer;
+			delete File;
+			File = NULL;
+			// KeePassX used Latin-1 encoding for passwords until version 0.3.1
+			// but KeePass/Win32 uses Windows Codepage 1252.
+			// Too stay compatible with databases created with KeePassX <= 0.3.1
+			// the loading function gives both encodings a try.
+			
+			RawMasterKey.copyData(RawMasterKey_Latin1);
+			PotentialEncodingIssue=false;
+			qDebug("Decryption failed. Retrying with Latin-1.");
+			return load(filename); // second try
+		}
+		error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
+		KeyError=true;
+		LOAD_RETURN_CLEANUP
+	}
+	
+	unsigned long pos = DB_HEADER_SIZE;
+	quint16 FieldType;
+	quint32 FieldSize;
+	char* pField;
+	bool bRet;
+	StdGroup group;
+	QList<quint32> Levels;
+	RootGroup.Title="$ROOT$";
+	RootGroup.Parent=NULL;
+	RootGroup.Handle=NULL;
+	
+	for(unsigned long CurGroup = 0; CurGroup < NumGroups; )
+	{
+		pField = buffer+pos;
+	
+		memcpyFromLEnd16(&FieldType, pField);
+		pField += 2; pos += 2;
+		if (pos >= total_size){
+			error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
+			LOAD_RETURN_CLEANUP
+		}
+	
+		memcpyFromLEnd32(&FieldSize, pField);
+		pField += 4; pos += 4;
+		if (pos >= (total_size + FieldSize)){
+			error=tr("Unexpected error: Offset is out of range.").append(" [G2]");
+			LOAD_RETURN_CLEANUP
+		}
+	
+		bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
+		if ((FieldType == 0xFFFF) && (bRet == true)){
+			Groups << group;
+			CurGroup++; // Now and ONLY now the counter gets increased
+		}
+		pField += FieldSize;
+		pos += FieldSize;
+		if (pos >= total_size){
+			error=tr("Unexpected error: Offset is out of range.").append(" [G1]");
+			LOAD_RETURN_CLEANUP
+		}
+	}
+	
+	StdEntry entry;
+	
+	for (unsigned long CurEntry = 0; CurEntry < NumEntries;)
+	{
+		pField = buffer+pos;
+	
+		memcpyFromLEnd16(&FieldType, pField);
+		pField += 2; pos += 2;
+		if(pos >= total_size){
+			error=tr("Unexpected error: Offset is out of range.").append(" [E1]");
+			LOAD_RETURN_CLEANUP
+		}
+	
+		memcpyFromLEnd32(&FieldSize, pField);
+		pField += 4; pos += 4;
+		if (pos >= (total_size + FieldSize)){
+			error=tr("Unexpected error: Offset is out of range.").append(" [E2]");
+			LOAD_RETURN_CLEANUP
+		}
+	
+		bRet = readEntryField(&entry,FieldType,FieldSize,(quint8*)pField);
+	
+		if((FieldType == 0xFFFF) && (bRet == true)){
+			Entries << entry;
+			if(!entry.GroupId)
+				qDebug("NULL: %i, '%s'", (int)CurEntry, (char*)entry.Title.toUtf8().data());
+			CurEntry++;
+		}
+	
+		pField += FieldSize;
+		pos += FieldSize;
+		if (pos >= total_size){
+			error=tr("Unexpected error: Offset is out of range.").append(" [E3]");
+			LOAD_RETURN_CLEANUP
+		}
+	}
+	
+	if(!createGroupTree(Levels)){
+		error=tr("Invalid group tree.");
+		LOAD_RETURN_CLEANUP
+	}
+	
+	delete [] buffer;
+	
+	hasV4IconMetaStream = false;
+	for(int i=0;i<Entries.size();i++){
+		if(isMetaStream(Entries[i]) && Entries[i].Comment=="KPX_CUSTOM_ICONS_4"){
+			hasV4IconMetaStream = true;
+			break;
+		}
+	}
+	
+	//Remove the metastreams from the entry list
+	for(int i=0;i<Entries.size();i++){
+		if(isMetaStream(Entries[i])){
+			if(!parseMetaStream(Entries[i]))
+				UnknownMetaStreams << Entries[i];
+			Entries.removeAt(i);
+			i--;
+		}
+	}
+	
+	int* EntryIndices=new int[Groups.size()];
+	for(int i=0;i<Groups.size();i++)EntryIndices[i]=0;
+	
+	for(int g=0;g<Groups.size();g++){
+		for(int e=0;e<Entries.size();e++){
+			if(Entries[e].GroupId==Groups[g].Id){
+				Entries[e].Index=EntryIndices[g];
+				EntryIndices[g]++;
+			}
+		}
+	}
+	delete [] EntryIndices;
+	createHandles();
+	restoreGroupTreeState();
+	
+	return true;
 }
 
 QDateTime Kdb3Database::dateFromPackedStruct5(const unsigned char* pBytes){
@@ -1614,10 +1614,7 @@ void Kdb3Database::create(){
 	RootGroup.Parent=NULL;
 	RootGroup.Handle=NULL;
 	Algorithm=Rijndael_Cipher;
-	quint16 ran;
-	randomize(&ran,2);
-	ran &= 0x03FF; // only use 10 bits -> max 1024
-	KeyTransfRounds=10000 + ran;
+	KeyTransfRounds=50000;
 	KeyError=false;
 }
 

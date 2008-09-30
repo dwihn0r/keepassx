@@ -75,6 +75,8 @@ public:
 	bool autoSaveChange(){return settings.value("Options/AutoSaveChange",false).toBool();}
 	int pwGenCategory(){return settings.value("Options/PwGenCategory",0).toInt();}
 	QString pwGenCharList(){return settings.value("Options/PwGenCharList").toString();}
+	bool pwGenExcludeLookAlike(){return settings.value("Options/PwGenExcludeLookAlike").toBool();}
+	bool pwGenEveryGroup(){return settings.value("Options/PwGenEveryGroup").toBool();}
 	int pwGenLength(){return settings.value("Options/PwGenLength",25).toInt();}
 	QBitArray pwGenOptions(){return stringToBitArray(settings.value("Options/PwGenOptions","11111000011110").toString(),14);}
 	bool rememberLastKey(){return settings.value("Options/RememberLastKey",true).toBool();}
@@ -136,6 +138,8 @@ public:
 	void setAutoSaveChange(bool value){settings.setValue("Options/AutoSaveChange",value);}
 	void setPwGenCategory(int value){settings.setValue("Options/PwGenCategory",value);}
 	void setPwGenCharList(const QString& value){settings.setValue("Options/PwGenCharList",value);}
+	void setPwGenExcludeLookAlike(bool value){settings.setValue("Options/PwGenExcludeLookAlike",value);}
+	void setPwGenEveryGroup(bool value){settings.setValue("Options/PwGenEveryGroup",value);}
 	void setPwGenLength(int value){settings.setValue("Options/PwGenLength",value);}
 	void setPwGenOptions(const QBitArray& value){settings.setValue("Options/PwGenOptions",bitArrayToString(value));}
 	void setRememberLastKey(bool value){settings.setValue("Options/RememberLastKey",value);}

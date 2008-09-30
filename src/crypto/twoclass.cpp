@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 
-#include <qstring.h>
+#include <QString>
 #include "twoclass.h"
 
 static bool g_bInitialized = false;

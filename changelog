@@ -1,7 +1,7 @@
 ----------------------------
     0.3.3 (2008-08-11)
 ----------------------------
-- fix an error when opening twofish encrypted databases
+- fixed error when opening twofish encrypted databases (Bug #2025075)
 
 ----------------------------
     0.3.2 (2008-07-20)
