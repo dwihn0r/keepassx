@@ -161,7 +161,8 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 #ifdef GLOBAL_AUTOTYPE
 
 Window windowRoot;
-QStringList windowBlacklist;
+//QSet<QString> windowBlacklist;
+QSet<QString> classBlacklist;
 Atom wm_state;
 
 void windowTitles(Window window, QStringList& titleList){
@@ -179,9 +180,17 @@ void windowTitles(Window window, QStringList& titleList){
 			int count;
 			if (Xutf8TextPropertyToTextList(d, &textProp, &list, &count)>=0 && list){
 				QString title = QString::fromUtf8(list[0]);
+				
+				QString className;
+				XClassHint* wmClass = XAllocClassHint();
+				if (XGetClassHint(d, window, wmClass)!=0 && wmClass->res_name!=NULL)
+					className = QString::fromLocal8Bit(wmClass->res_name);
+				XFree(wmClass);
+				
 				if (window!=windowRoot && window!=AutoType::MainWin->winId() &&
 				    (QApplication::activeWindow()==NULL || window!=QApplication::activeWindow()->winId()) &&
-				    !windowBlacklist.contains(title)
+				    // !windowBlacklist.contains(title) &&
+				    (className.isNull() || !classBlacklist.contains(className))
 				){
 					titleList.append(title);
 				}
@@ -207,7 +216,10 @@ void AutoType::init(){
 	Display* d = QX11Info::display();
 	wm_state = XInternAtom(d, "WM_STATE", true);
 	windowRoot = XRootWindow(d, MainWin->x11Info().screen());
-	windowBlacklist << "kicker" << "KDE Desktop";
+	//windowBlacklist << "kicker" << "KDE Desktop";
+	classBlacklist << "desktop_window" << "gnome-panel"; // Gnome
+	classBlacklist << "kdesktop" << "kicker"; // KDE 3
+	classBlacklist << "xfdesktop" << "xfce4-panel"; // Xfce 4
 }
 
 QStringList AutoType::getAllWindowTitles(){
