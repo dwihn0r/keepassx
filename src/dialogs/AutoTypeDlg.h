@@ -24,7 +24,7 @@ class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 	Q_OBJECT
 	
 	public:
-		AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers);
+		AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers, bool wasLocked);
 	
 	protected:
 		void paintEvent(QPaintEvent* event);
@@ -42,4 +42,5 @@ class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 		static bool itemLessThan(QTreeWidgetItem* i1, QTreeWidgetItem* i2);
 		QHash<QTreeWidgetItem*,AutoTypeEntry> itemToEntry;
 		QPixmap BannerPixmap;
+		bool pWasLocked;
 };

@@ -34,7 +34,7 @@ class KeepassMainWindow;
 class AutoType{
 	public:
 		static KeepassMainWindow* MainWin;
-		static void perform(IEntryHandle* entry, QString& err,bool hideWindow=true,int nr=0);
+		static void perform(IEntryHandle* entry, QString& err,bool hideWindow=true,int nr=0,bool wasLocked=false);
 #ifdef GLOBAL_AUTOTYPE
 		static Shortcut shortcut;
 		static void performGlobal();

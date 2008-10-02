@@ -55,7 +55,7 @@ KeepassMainWindow* AutoType::MainWin=NULL;
 Shortcut AutoType::shortcut;
 #endif
 
-void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr){
+void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr,bool wasLocked){
 	QString indexStr;
 	if (nr==0)
 		indexStr = "Auto-Type:";
@@ -154,8 +154,20 @@ void AutoType::perform(IEntryHandle* entry, QString& err,bool hideWindow,int nr)
 		XTestFakeKeyEvent(pDisplay,XKeysymToKeycode(pDisplay,XK_Caps_Lock),false,0);
 	}
 	
-	if (hideWindow && !(config->showSysTrayIcon() && config->minimizeTray()) )
-		MainWin->showMinimized();
+	if (config->lockOnMinimize()){
+		if (hideWindow || wasLocked){
+			if ( !(config->showSysTrayIcon() && config->minimizeTray()) )
+				MainWin->showMinimized();
+			else
+				MainWin->OnUnLockWorkspace();
+		}
+	}
+	else{
+		if (hideWindow && !(config->showSysTrayIcon() && config->minimizeTray()) )
+			MainWin->showMinimized();
+		if (wasLocked)
+			MainWin->OnUnLockWorkspace();
+	}
 }
 
 #ifdef GLOBAL_AUTOTYPE
@@ -230,7 +242,8 @@ QStringList AutoType::getAllWindowTitles(){
 }
 
 void AutoType::performGlobal(){
-	if (MainWin->isLocked())
+	bool wasLocked = MainWin->isLocked();
+	if (wasLocked)
 		MainWin->OnUnLockWorkspace();
 	
 	if (!MainWin->isOpened())
@@ -334,10 +347,10 @@ void AutoType::performGlobal(){
 	
 	if (validEntries.size()==1){
 		QString err;
-		perform(validEntries[0],err,false,entryNumbers[0]);
+		perform(validEntries[0],err,wasLocked,entryNumbers[0],wasLocked);
 	}
 	else if (validEntries.size()>1){
-		AutoTypeDlg* dlg = new AutoTypeDlg(validEntries, entryNumbers);
+		AutoTypeDlg* dlg = new AutoTypeDlg(validEntries, entryNumbers, wasLocked);
 		dlg->show();
 	}
 }

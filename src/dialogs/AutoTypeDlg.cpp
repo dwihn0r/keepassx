@@ -19,7 +19,7 @@
 #include <QDesktopWidget>
 #include "AutoTypeDlg.h"
 
-AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers){
+AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers, bool wasLocked) : pWasLocked(wasLocked){
 	setupUi(this);
 	
 	setAttribute(Qt::WA_DeleteOnClose);
@@ -101,5 +101,5 @@ bool AutoTypeDlg::event(QEvent* event){
 void AutoTypeDlg::itemSelected(QTreeWidgetItem* item){
 	close();
 	QString err;
-	AutoType::perform(itemToEntry[item].dbHandle,err,false,itemToEntry[item].nr);
+	AutoType::perform(itemToEntry[item].dbHandle, err, pWasLocked, itemToEntry[item].nr, pWasLocked);
 }

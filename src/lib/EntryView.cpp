@@ -322,10 +322,17 @@ void KeepassEntryView::OnClipboardTimeOut(){
 		Clipboard->clear(QClipboard::Selection);
 	}
 #ifdef Q_WS_X11
-	static bool clearKlipper = true;
-	if (clearKlipper){
+	static bool clearKlipper3 = true;
+	static bool clearKlipper4 = true;
+	
+	if (clearKlipper3){
 		if (QProcess::execute("dcop klipper klipper clearClipboardHistory")!=0)
-			clearKlipper = false;
+			clearKlipper3 = false;
+	}
+	
+	if (clearKlipper4){
+		if (QProcess::execute("dbus-send --type=method_call --print-reply --dest=org.kde.klipper /klipper org.kde.klipper.klipper.clearClipboardHistory")!=0)
+			clearKlipper4 = false;
 	}
 #endif
 }
