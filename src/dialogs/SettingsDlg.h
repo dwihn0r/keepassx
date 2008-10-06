@@ -47,6 +47,7 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 		void OnInactivityLockChange(bool checked);
 		void OnAutoSaveToggle(bool checked);
 		void OnAutoSaveChangeToggle(bool checked);
+		void OnBackupDeleteChange();
 	
 #ifdef GLOBAL_AUTOTYPE
 	private slots:

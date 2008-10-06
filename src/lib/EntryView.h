@@ -26,6 +26,7 @@
 #define NUM_COLUMNS 11
 
 class EntryViewItem;
+class GroupViewItem;
 enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
 
 class KeepassEntryView:public QTreeWidget{
@@ -44,6 +45,7 @@ class KeepassEntryView:public QTreeWidget{
 		QMenu *ContextMenu;
 		QBitArray Columns;
 		void setCurrentEntry(IEntryHandle* entry);
+		inline IGroupHandle* getCurrentGroup() { return CurrentGroup; };
 	private:
 		void setEntry(IEntryHandle* entry);
 		void updateEntry(EntryViewItem*);
@@ -97,6 +99,7 @@ class KeepassEntryView:public QTreeWidget{
 	signals:
 		void fileModified();
 		void selectionChanged(SelectionState);
+		void requestCreateGroup(QString title, quint32 image, GroupViewItem* parent);
 };
 
 

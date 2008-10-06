@@ -73,6 +73,9 @@ public:
 	bool openLastFile(){return settings.value("Options/OpenLastFile",true).toBool();}
 	bool autoSave(){return settings.value("Options/AutoSave",false).toBool();}
 	bool autoSaveChange(){return settings.value("Options/AutoSaveChange",false).toBool();}
+	bool backup(){return settings.value("Options/Backup",true).toBool();}
+	bool backupDelete(){return settings.value("Options/BackupDelete",false).toBool();}
+	int backupDeleteAfter(){return settings.value("Options/BackupDeleteAfter",14).toInt();}
 	int pwGenCategory(){return settings.value("Options/PwGenCategory",0).toInt();}
 	QString pwGenCharList(){return settings.value("Options/PwGenCharList").toString();}
 	bool pwGenExcludeLookAlike(){return settings.value("Options/PwGenExcludeLookAlike").toBool();}
@@ -105,7 +108,8 @@ public:
 	Shortcut globalShortcut();
 	bool entryTitlesMatch(){return settings.value("Options/EntryTitlesMatch",true).toBool();}
 #endif
-	bool featureBookmarks(){return settings.value("Features/Bookmarks",true).toBool();}
+	//bool featureBookmarks(){return settings.value("Features/Bookmarks",true).toBool();}
+	bool featureBookmarks(){return true;}
 	
 	void setAlternatingRowColors(bool value){settings.setValue("Options/AlternatingRowColors",value);}
 	void setBannerColor1(const QColor& value){settings.setValue("Options/BannerColor1",colorToString(value));}
@@ -136,6 +140,9 @@ public:
 	void setOpenLastFile(bool value){settings.setValue("Options/OpenLastFile",value);}
 	void setAutoSave(bool value){settings.setValue("Options/AutoSave",value);}
 	void setAutoSaveChange(bool value){settings.setValue("Options/AutoSaveChange",value);}
+	void setBackup(bool value){settings.setValue("Options/Backup",value);}
+	void setBackupDelete(bool value){settings.setValue("Options/BackupDelete",value);}
+	void setBackupDeleteAfter(int value){settings.setValue("Options/BackupDeleteAfter",value);}
 	void setPwGenCategory(int value){settings.setValue("Options/PwGenCategory",value);}
 	void setPwGenCharList(const QString& value){settings.setValue("Options/PwGenCharList",value);}
 	void setPwGenExcludeLookAlike(bool value){settings.setValue("Options/PwGenExcludeLookAlike",value);}
@@ -168,7 +175,7 @@ public:
 	void setGlobalShortcut(const Shortcut& s);
 	void setEntryTitlesMatch(bool value){settings.setValue("Options/EntryTitlesMatch",value);}
 #endif
-	void setFeatureBookmarks(bool value){settings.setValue("Features/Bookmarks",value);}
+	//void setFeatureBookmarks(bool value){settings.setValue("Features/Bookmarks",value);}
 
 	unsigned fileDlgHistorySize();
 	void clearFileDlgHistory(){settings.remove("FileDlgHistory");};

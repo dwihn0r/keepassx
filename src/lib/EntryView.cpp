@@ -170,17 +170,18 @@ void KeepassEntryView::updateEntry(EntryViewItem* item){
 		if(config->hideUsernames())
 			item->setText(j++,"******");
 		else
-			item->setText(j++,entry->username());}
-		if (Columns.at(2)){item->setText(j++,entry->url());}
-		if (Columns.at(3)){
-			if(config->hidePasswords())
-				item->setText(j++,"******");
-			else{
-				SecString password=entry->password();
-				password.unlock();
-				item->setText(j++,password.string());
-			}
+			item->setText(j++,entry->username());
+	}
+	if (Columns.at(2)){item->setText(j++,entry->url());}
+	if (Columns.at(3)){
+		if(config->hidePasswords())
+			item->setText(j++,"******");
+		else{
+			SecString password=entry->password();
+			password.unlock();
+			item->setText(j++,password.string());
 		}
+	}
 	if (Columns.at(4)){
 		item->setText(j++,entry->comment().section('\n',0,0));}
 	if (Columns.at(5)){
@@ -195,25 +196,40 @@ void KeepassEntryView::updateEntry(EntryViewItem* item){
 		item->setText(j++,entry->binaryDesc());}
 	if(Columns.at(10) && ViewMode==ShowSearchResults){
 		item->setText(j,entry->group()->title());
-		item->setIcon(j++,db->icon(entry->group()->image()));}
+		item->setIcon(j++,db->icon(entry->group()->image()));
+	}
 }
 
 void KeepassEntryView::editEntry(EntryViewItem* item){
+	CEntry old = item->EntryHandle->data();
+	
 	CEditEntryDlg dlg(db,item->EntryHandle,this,true);
-	switch(dlg.exec()){
+	int result = dlg.exec();
+	switch(result){
 		case 0: //canceled or no changes
 			break;
 		case 1: //modifications but same group
 			updateEntry(item);
 			emit fileModified();
 			break;
-		case 2: //entry moved to another group
+		//entry moved to another group
+		case 2: //modified
+		case 3: //not modified
 			delete item;
 			Items.removeAt(Items.indexOf(item));
 			emit fileModified();
 			break;
 	}
-
+	
+	if ((result==1 || result==2) && config->backup()){
+		old.LastAccess = QDateTime::currentDateTime();
+		old.LastMod = QDateTime::currentDateTime();
+		IGroupHandle* bGroup = db->backupGroup();
+		if (bGroup==NULL)
+			emit requestCreateGroup("Backup", 4, NULL);
+		if ((bGroup = db->backupGroup())!=NULL)
+			db->addEntry(&old, bGroup);
+	}
 }
 
 

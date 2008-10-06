@@ -48,9 +48,9 @@ void Export_KeePassX_Xml::addGroup(IGroupHandle* group,QDomElement& parent,QDomD
 	Icon.appendChild(doc.createTextNode(QString::number(group->image())));
 	GroupElement.appendChild(Title);
 	GroupElement.appendChild(Icon);
-	QList<IGroupHandle*> childs=group->childs();
-	for(int i=0;i<childs.size();i++){
-		addGroup(childs[i],GroupElement,doc);
+	QList<IGroupHandle*> children=group->children();
+	for(int i=0;i<children.size();i++){
+		addGroup(children[i],GroupElement,doc);
 	}
 	QList<IEntryHandle*> entries=db->entries(group);
 	for(int i=0;i<entries.size();i++){

@@ -407,8 +407,8 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 	for(int i=0;i<Groups.size();i++){
 		if(Levels[i]==0){
 			Groups[i].Parent=&RootGroup;
-			Groups[i].Index=RootGroup.Childs.size();
-			RootGroup.Childs.append(&Groups[i]);
+			Groups[i].Index=RootGroup.Children.size();
+			RootGroup.Children.append(&Groups[i]);
 			continue;
 		}
 		int j;
@@ -421,8 +421,8 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 			if(j==0)return false; //No parent found
 		}
 		Groups[i].Parent=&Groups[j];
-		Groups[i].Index=Groups[j].Childs.size();
-		Groups[i].Parent->Childs.append(&Groups[i]);
+		Groups[i].Index=Groups[j].Children.size();
+		Groups[i].Parent->Children.append(&Groups[i]);
 	}
 
 	QList<int> EntryIndexCounter;
@@ -467,6 +467,9 @@ void Kdb3Database::restoreGroupTreeState(){
 		case KpxConfig::ExpandAll:
 			for(int i=0;i<Groups.size();i++)
 				Groups[i].IsExpanded=true;
+			break;
+		
+		case KpxConfig::DoNothing:
 			break;
 	}
 }
@@ -744,17 +747,17 @@ int Kdb3Database::numEntries(){
 
 void Kdb3Database::deleteGroup(StdGroup* group){
 
-	while(group->Childs.size())
-		deleteGroup(group->Childs.front());
+	while(group->Children.size())
+		deleteGroup(group->Children.front());
 
 	QList<IEntryHandle*> GroupEntries;
 	GroupEntries=entries(group->Handle);
 	deleteEntries(GroupEntries);
 
-	Q_ASSERT(group==group->Parent->Childs[group->Index]);
-	group->Parent->Childs.removeAt(group->Index);
-	for(int i=group->Index;i<group->Parent->Childs.size();i++){
-		group->Parent->Childs[i]->Index--;
+	Q_ASSERT(group==group->Parent->Children[group->Index]);
+	group->Parent->Children.removeAt(group->Index);
+	for(int i=group->Index;i<group->Parent->Children.size();i++){
+		group->Parent->Children[i]->Index--;
 	}
 	group->Handle->invalidate();
 
@@ -791,7 +794,7 @@ void Kdb3Database::GroupHandle::setIndex(int index){
 			if(pDB->Groups[NewPos].ParentId==ParentId && pDB->Groups[NewPos].Index+1==index)
 				break;
 		}
-		//skip the childs of the found sibling
+		//skip the children of the found sibling
 		for(NewPos;NewPos<Groups.size();NewPos++){
 			if(Groups[NewPos]
 			pDB->Groups.move(Pos,NewPos);
@@ -978,13 +981,13 @@ void Kdb3Database::deleteEntries(QList<IEntryHandle*> entries){
 			if(&Entries[j]==((EntryHandle*)entries[i])->Entry)
 				break;
 		}
-		Group->Childs.removeAt(Entries[j].Index);
+		Group->Children.removeAt(Entries[j].Index);
 		Entries[j].Handle->invalidate();
 		Entries.removeAt(j);
 	}
 
-	for(int i=0;i<Group->Childs.size();i++){
-		Group->Childs[i]->Index=i;
+	for(int i=0;i<Group->Children.size();i++){
+		Group->Children[i]->Index=i;
 	}
 };
 
@@ -1018,15 +1021,35 @@ IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHan
 	GroupHandles.back().Group=&Groups.back();
 	if(ParentHandle){
 		Groups.back().Parent=((GroupHandle*)ParentHandle)->Group;
-		Groups.back().Index=Groups.back().Parent->Childs.size();
-		Groups.back().Parent->Childs.append(&Groups.back());
+		Groups.back().Index=Groups.back().Parent->Children.size();
+		Groups.back().Parent->Children.append(&Groups.back());
 	}
 	else{
 		Groups.back().Parent=&RootGroup;
-		Groups.back().Index=RootGroup.Childs.size();
-		Groups.back().Parent->Childs.append(&Groups.back());
+		Groups.back().Index=RootGroup.Children.size();
+		Groups.back().Parent->Children.append(&Groups.back());
 	}
 	return &GroupHandles.back();
+}
+
+IGroupHandle* Kdb3Database::backupGroup(bool create){
+	IGroupHandle* group = NULL;
+	QList<IGroupHandle*> allGroups = groups();
+	for (int i=0; i<allGroups.size(); i++){
+		if (allGroups[i]->parent()==NULL && allGroups[i]->title()=="Backup"){
+			group = allGroups[i];
+			break;
+		}
+	}
+	
+	if (group==NULL && create){
+		CGroup newGroup;
+		newGroup.Title = "Backup";
+		newGroup.Image = 4;
+		group = addGroup(&newGroup, NULL);
+	}
+	
+	return group;
 }
 
 Kdb3Database::StdGroup::StdGroup(const CGroup& other){
@@ -1104,6 +1127,10 @@ int Kdb3Database::EntryHandle::visualIndex()const{return Entry->Index;}
 void Kdb3Database::EntryHandle::setVisualIndexDirectly(int i){Entry->Index=i;}
 bool Kdb3Database::EntryHandle::isValid()const{return valid;}
 
+CEntry Kdb3Database::EntryHandle::data()const{
+	return *this->Entry;
+}
+
 void Kdb3Database::EntryHandle::setVisualIndex(int index){
 	QList<IEntryHandle*>Entries=pDB->entries(Entry->Group->Handle);
 	Entries.move(visualIndex(),index);
@@ -1150,35 +1177,35 @@ int Kdb3Database::GroupHandle::level(){
 }
 
 
-QList<IGroupHandle*> Kdb3Database::GroupHandle::childs(){
-	QList<IGroupHandle*> childs;
-	for(int i=0;i<Group->Childs.size();i++){
-		childs.append(Group->Childs[i]->Handle);
+QList<IGroupHandle*> Kdb3Database::GroupHandle::children(){
+	QList<IGroupHandle*> children;
+	for(int i=0; i < Group->Children.size(); i++){
+		children.append(Group->Children[i]->Handle);
 	}
-	return childs;
+	return children;
 }
 
 
 void memcpyFromLEnd32(quint32* dst,const char* src){
-
-if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
-  memcpy(((char*)dst)+3,src+0,1);
-  memcpy(((char*)dst)+2,src+1,1);
-  memcpy(((char*)dst)+1,src+2,1);
-  memcpy(((char*)dst)+0,src+3,1);
-}
-else
-  memcpy(dst,src,4);
+	if (QSysInfo::ByteOrder==QSysInfo::BigEndian){
+		memcpy(((char*)dst)+3,src+0,1);
+		memcpy(((char*)dst)+2,src+1,1);
+		memcpy(((char*)dst)+1,src+2,1);
+		memcpy(((char*)dst)+0,src+3,1);
+	}
+	else{
+		memcpy(dst,src,4);
+	}
 }
 
 void memcpyFromLEnd16(quint16* dst,const char* src){
-
-if(QSysInfo::ByteOrder==QSysInfo::BigEndian){
-  memcpy(((char*)dst)+1,src+0,1);
-  memcpy(((char*)dst)+0,src+1,1);
-}
-else
-  memcpy(dst,src,2);
+	if (QSysInfo::ByteOrder==QSysInfo::BigEndian){
+		memcpy(((char*)dst)+1,src+0,1);
+		memcpy(((char*)dst)+0,src+1,1);
+	}
+	else{
+		memcpy(dst,src,2);
+	}
 }
 
 void memcpyToLEnd32(char* dst,const quint32* src){
@@ -1188,8 +1215,9 @@ void memcpyToLEnd32(char* dst,const quint32* src){
 		memcpy(dst+2,((char*)src)+1,1);
 		memcpy(dst+3,((char*)src)+0,1);
 	}
-	else
+	else{
 		memcpy(dst,src,4);
+	}
 }
 
 void memcpyToLEnd16(char* dst,const quint16* src){
@@ -1197,8 +1225,9 @@ void memcpyToLEnd16(char* dst,const quint16* src){
 		memcpy(dst+0,((char*)src)+1,1);
 		memcpy(dst+1,((char*)src)+0,1);
 	}
-	else
+	else{
 		memcpy(dst,src,2);
+	}
 }
 
 bool Kdb3Database::save(){
@@ -1206,6 +1235,17 @@ bool Kdb3Database::save(){
 		error=tr("The database must contain at least one group.");
 		return false;
 	}
+	
+	//Delete old backup entries
+	if (config->backup() && config->backupDelete() && config->backupDeleteAfter()>0 && backupGroup()){
+		QDateTime time = QDateTime::currentDateTime().addDays(-config->backupDeleteAfter());
+		QList<IEntryHandle*> backupEntries = entries(backupGroup());
+		for (int i=0; i<backupEntries.size(); i++){
+			if (backupEntries[i]->lastMod()<time)
+				deleteEntry(backupEntries[i]);
+		}
+	}
+	
 	quint32 NumGroups,NumEntries,Signature1,Signature2,Flags,Version;
 	quint8 FinalRandomSeed[16];
 	quint8 ContentsHash[32];
@@ -1418,23 +1458,23 @@ void Kdb3Database::createCustomIconsMetaStream(StdEntry* e){
 
 QList<IGroupHandle*> Kdb3Database::sortedGroups(){
 	QList<IGroupHandle*> SortedGroups;
-	appendChildsToGroupList(SortedGroups,RootGroup);
+	appendChildrenToGroupList(SortedGroups,RootGroup);
 	return SortedGroups;
 }
 
 
-void Kdb3Database::appendChildsToGroupList(QList<IGroupHandle*>& list,StdGroup& group){
-	for(int i=0;i<group.Childs.size();i++){
-		list << group.Childs[i]->Handle;
-		appendChildsToGroupList(list,*group.Childs[i]);
+void Kdb3Database::appendChildrenToGroupList(QList<IGroupHandle*>& list,StdGroup& group){
+	for(int i=0;i<group.Children.size();i++){
+		list << group.Children[i]->Handle;
+		appendChildrenToGroupList(list,*group.Children[i]);
 	}
 }
 
 
-void Kdb3Database::appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& group){
-	for(int i=0;i<group.Childs.size();i++){
-		list << group.Childs[i];
-		appendChildsToGroupList(list,*group.Childs[i]);
+void Kdb3Database::appendChildrenToGroupList(QList<StdGroup*>& list,StdGroup& group){
+	for(int i=0;i<group.Children.size();i++){
+		list << group.Children[i];
+		appendChildrenToGroupList(list,*group.Children[i]);
 	}
 }
 
@@ -1444,7 +1484,7 @@ void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsig
 	quint32 FieldSize;
 	quint32 Flags=0; //unused
 	QList<StdGroup*>SortedGroups;
-	appendChildsToGroupList(SortedGroups,RootGroup);
+	appendChildrenToGroupList(SortedGroups,RootGroup);
 
 	for(int i=0; i < SortedGroups.size(); i++){
 		unsigned char Date[5];
@@ -1692,8 +1732,8 @@ bool Kdb3Database::searchStringContains(const QString& search, const QString& st
 
 void Kdb3Database::getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList){
 	EntryList<<entries(Group);
-	for(int i=0;i<((GroupHandle*)Group)->Group->Childs.size();	i++){
-		getEntriesRecursive(((GroupHandle*)Group)->Group->Childs[i]->Handle,EntryList);
+	for(int i=0;i<((GroupHandle*)Group)->Group->Children.size();	i++){
+		getEntriesRecursive(((GroupHandle*)Group)->Group->Children[i]->Handle,EntryList);
 	}
 }
 
@@ -1712,23 +1752,14 @@ QList<IEntryHandle*> Kdb3Database::search(IGroupHandle* Group,const QString& sea
 	else
 		SearchEntries=entries();
 	
-	IGroupHandle* backupGroup = NULL;
-	if (!Group){
-		QList<IGroupHandle*> allGroups = groups();
-		for (int i=0; i<allGroups.size(); i++){
-			if (allGroups[i]->parent()==NULL && allGroups[i]->title()=="Backup"){
-				backupGroup = allGroups[i];
-				break;
-			}
-		}
-	}
+	IGroupHandle* bGroup = backupGroup();
 	
 	QList<IEntryHandle*> ResultEntries;
 	for(int i=0; i<SearchEntries.size(); i++){
 		IGroupHandle* entryGroup = SearchEntries[i]->group();
 		while (entryGroup->parent())
 			entryGroup = entryGroup->parent();
-		if (entryGroup == backupGroup)
+		if (entryGroup == bGroup)
 			continue;
 		
 		bool match=false;
@@ -1762,18 +1793,18 @@ void Kdb3Database::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,i
 		Parent=((GroupHandle*)NewParent)->Group;
 	else
 		Parent=&RootGroup;
-	Group->Parent->Childs.removeAt(Group->Index);
-	rebuildIndices(Group->Parent->Childs);
+	Group->Parent->Children.removeAt(Group->Index);
+	rebuildIndices(Group->Parent->Children);
 	Group->Parent=Parent;
 	if(Pos==-1){
-		Parent->Childs.append(Group);
+		Parent->Children.append(Group);
 	}
 	else
 	{
-		Q_ASSERT(Parent->Childs.size()>=Pos);
-		Parent->Childs.insert(Pos,Group);
+		Q_ASSERT(Parent->Children.size()>=Pos);
+		Parent->Children.insert(Pos,Group);
 	}
-	rebuildIndices(Parent->Childs);
+	rebuildIndices(Parent->Children);
 }
 
 bool Kdb3Database::changeFile(const QString& filename){

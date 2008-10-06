@@ -157,7 +157,7 @@ public:
 		\return TRUE if the handle is valid and FALSE if the handle is invalid e.g. because the associated entry was deleted.*/
 	virtual bool isValid()const=0;
 
-
+	virtual CEntry data()const=0;
 };
 
 //! Custom Icon Interface
@@ -206,13 +206,13 @@ public:
 	//! \return a pointer to the handle of the parent group or NULL if the group has no parent.
 	virtual IGroupHandle* parent()=0;
 
-	//! \return a List of pointers to the handles of all childs of the group and an empty list if the group has no childs. The list is sorted and starts with the first child.
-	virtual QList<IGroupHandle*> childs()=0;
+	//! \return a List of pointers to the handles of all children of the group and an empty list if the group has no children. The list is sorted.
+	virtual QList<IGroupHandle*> children()=0;
 
-	//! \return the index of the group amongst the childs of its parent. The index of the first child is 0.
+	//! \return the index of the group amongst the children of its parent. The index of the first child is 0.
 	virtual int index()=0;
 
-	/*! Sets the index of a group amongst the childs of its parent.
+	/*! Sets the index of a group amongst the children of its parent.
 		This function can be used to sort the groups of the database in a specific order.
 		\param index The new index of the group. The indices of the other groups which are affected by this operation will be automatically adjusted.*/
 	virtual void setIndex(int index)=0;
@@ -291,6 +291,10 @@ public:
 		\return a list with the pointers to the handles of all entries of the database. The list ist sorted and contains only valid handles.*/
 	virtual QList<IGroupHandle*> sortedGroups()=0;
 
+	/*! \return handle of the backup group or NULL if it doesn't exist
+		\param create Create the backup group if it doesn't exist
+	 */
+	virtual IGroupHandle* backupGroup(bool create=false)=0;
 
 	/*! \return the last error message or an empty QString() object if no error occured.*/
 	virtual QString getError()=0;

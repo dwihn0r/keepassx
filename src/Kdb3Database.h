@@ -80,6 +80,7 @@ public:
 			virtual quint32 binarySize();
             virtual QString friendlySize();
 			virtual bool isValid() const;
+			virtual CEntry data()const;
 		private:
 			void invalidate(){valid=false;}
 			bool valid;
@@ -98,7 +99,7 @@ public:
 			virtual quint32 image();
 			virtual bool isValid();
 			virtual IGroupHandle* parent();
-			virtual QList<IGroupHandle*> childs();
+			virtual QList<IGroupHandle*> children();
 			virtual int index();
 			virtual void setIndex(int index);
 			virtual int level();
@@ -128,7 +129,7 @@ public:
 			quint16 Index;
 			StdGroup* Parent;
 			GroupHandle* Handle;
-			QList<StdGroup*> Childs;
+			QList<StdGroup*> Children;
 			QList<StdEntry*> Entries;
 	};
 
@@ -187,6 +188,7 @@ public:
 	virtual void deleteGroup(IGroupHandle* group);
 	virtual void moveGroup(IGroupHandle* Group,IGroupHandle* NewParent,int Position);
 	virtual IGroupHandle* addGroup(const CGroup* Group,IGroupHandle* Parent);
+	virtual IGroupHandle* backupGroup(bool create=false);
 	virtual bool isParent(IGroupHandle* parent, IGroupHandle* child);
 	
 	virtual void generateMasterKey();
@@ -212,8 +214,8 @@ private:
 	quint32 getNewGroupId();
 	void serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsigned int& pos);
 	void serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos);
-	void appendChildsToGroupList(QList<StdGroup*>& list,StdGroup& group);
-	void appendChildsToGroupList(QList<IGroupHandle*>& list,StdGroup& group);
+	void appendChildrenToGroupList(QList<StdGroup*>& list,StdGroup& group);
+	void appendChildrenToGroupList(QList<IGroupHandle*>& list,StdGroup& group);
 	bool searchStringContains(const QString& search, const QString& string,bool Cs, bool RegExp);
 	void getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList);
 	void rebuildIndices(QList<StdGroup*>& list);

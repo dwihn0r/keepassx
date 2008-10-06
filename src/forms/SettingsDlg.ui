@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>606</width>
-    <height>479</height>
+    <height>455</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -46,20 +46,17 @@
      <property name="currentIndex" >
       <number>0</number>
      </property>
-     <widget class="QWidget" name="TabGeneral" >
+     <widget class="QWidget" name="TabGeneral1" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>345</height>
+        <height>321</height>
        </rect>
       </property>
-      <property name="whatsThis" >
-       <string>The integration plugins provide features like usage of the native file dialogs and message boxes of the particular desktop environments.</string>
-      </property>
       <attribute name="title" >
-       <string>General</string>
+       <string>General (1)</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <item>
@@ -284,20 +281,6 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="CheckBox_AutoSave" >
-         <property name="text" >
-          <string>Automatically save database on exit and workspace locking</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_AutoSaveChange" >
-         <property name="text" >
-          <string>Automatically save database after every change</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="checkBox_AskBeforeDelete" >
          <property name="text" >
           <string>Always ask before deleting entries or groups</string>
@@ -319,13 +302,118 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="TabGeneral2" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>584</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <attribute name="title" >
+       <string>General (2)</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout" >
+       <item>
+        <widget class="QCheckBox" name="CheckBox_Backup" >
+         <property name="text" >
+          <string>Save backups of modified entries into the 'Backup' group</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout" >
+         <item>
+          <spacer name="spacer" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>25</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_BackupDelete" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>Delete backup entries older than:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="SpinBox_BackupDeleteAfter" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimum" >
+            <number>1</number>
+           </property>
+           <property name="maximum" >
+            <number>999</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label" >
+           <property name="text" >
+            <string>days</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="CheckBox_AutoSave" >
+         <property name="text" >
+          <string>Automatically save database on exit and workspace locking</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="CheckBox_AutoSaveChange" >
+         <property name="text" >
+          <string>Automatically save database after every change</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="TabPage" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>345</height>
+        <height>321</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -685,7 +773,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>345</height>
+        <height>321</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -847,7 +935,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>345</height>
+        <height>321</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -892,7 +980,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>345</height>
+        <height>321</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -1012,7 +1100,7 @@
         <x>0</x>
         <y>0</y>
         <width>584</width>
-        <height>345</height>
+        <height>321</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -1239,8 +1327,12 @@
   <tabstop>CheckBox_StartLocked</tabstop>
   <tabstop>checkBox_SaveFileDlgHistory</tabstop>
   <tabstop>Button_ClearFileDlgHistory</tabstop>
-  <tabstop>CheckBox_AutoSave</tabstop>
   <tabstop>checkBox_AskBeforeDelete</tabstop>
+  <tabstop>CheckBox_Backup</tabstop>
+  <tabstop>CheckBox_BackupDelete</tabstop>
+  <tabstop>SpinBox_BackupDeleteAfter</tabstop>
+  <tabstop>CheckBox_AutoSave</tabstop>
+  <tabstop>CheckBox_AutoSaveChange</tabstop>
   <tabstop>ButtonColor1</tabstop>
   <tabstop>ButtonColor2</tabstop>
   <tabstop>ButtonTextColor</tabstop>

@@ -51,6 +51,10 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 
 	connect(Button_CustomizeEntryDetails,SIGNAL(clicked()),this,SLOT(OnCustomizeEntryDetails()));
 	connect(CheckBox_InactivityLock, SIGNAL(toggled(bool)), SLOT(OnInactivityLockChange(bool)));
+	
+	connect(CheckBox_Backup, SIGNAL( toggled(bool) ), CheckBox_BackupDelete, SLOT( setEnabled(bool) ) );
+	connect(CheckBox_Backup, SIGNAL( toggled(bool) ), SLOT( OnBackupDeleteChange() ) );
+	connect(CheckBox_BackupDelete, SIGNAL( toggled(bool) ), SLOT( OnBackupDeleteChange() ) );
 	connect(CheckBox_AutoSave, SIGNAL(toggled(bool)), SLOT(OnAutoSaveToggle(bool)));
 	connect(CheckBox_AutoSaveChange, SIGNAL(toggled(bool)), SLOT(OnAutoSaveChangeToggle(bool)));
 	
@@ -68,7 +72,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(this,SIGNAL(rejected()),SLOT(resetGlobalShortcut()));
 #endif
 
-	//General
+	//General (1)
 	CheckBox_OpenLast->setChecked(config->openLastFile());
 	CheckBox_RememberLastKey->setChecked(config->rememberLastKey());
 	CheckBox_ShowSysTrayIcon->setChecked(config->showSysTrayIcon());
@@ -77,9 +81,14 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	CheckBox_StartMinimized->setChecked(config->startMinimized());
 	CheckBox_StartLocked->setChecked(config->startLocked());
 	checkBox_SaveFileDlgHistory->setChecked(config->saveFileDlgHistory());
+	checkBox_AskBeforeDelete->setChecked(config->askBeforeDelete());
+	
+	//General (2)
+	CheckBox_Backup->setChecked(config->backup());
+	CheckBox_BackupDelete->setChecked(config->backupDelete());
+	SpinBox_BackupDeleteAfter->setValue(config->backupDeleteAfter());
 	CheckBox_AutoSave->setChecked(config->autoSave());
 	CheckBox_AutoSaveChange->setChecked(config->autoSaveChange());
-	checkBox_AskBeforeDelete->setChecked(config->askBeforeDelete());
 
 	switch(config->groupTreeState()){
 		case KpxConfig::RestoreLast:
@@ -123,7 +132,8 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	SpinBox_InacitivtyTime->setValue(config->lockAfterSec());
 	
 	//Features
-	CheckBox_FeatureBookmarks->setChecked(config->featureBookmarks());
+	tabWidgetSettings->removeTab(tabWidgetSettings->indexOf(tabFeatures));
+	//CheckBox_FeatureBookmarks->setChecked(config->featureBookmarks());
 
 
 	// TODO Desktop Integration
@@ -201,7 +211,7 @@ void CSettingsDlg::OnOtherButton(QAbstractButton* button){
 
 void CSettingsDlg::apply(){
 	
-	//General
+	//General (1)
 	config->setShowSysTrayIcon(CheckBox_ShowSysTrayIcon->isChecked());
 	config->setMinimizeToTray(CheckBox_CloseToTray->isChecked());
 	config->setMinimizeTray(CheckBox_MinimizeTray->isChecked());
@@ -213,9 +223,14 @@ void CSettingsDlg::apply(){
 	else config->setGroupTreeState(KpxConfig::DoNothing);
 	config->setOpenLastFile(CheckBox_OpenLast->isChecked());
 	config->setRememberLastKey(CheckBox_RememberLastKey->isChecked());
+	config->setAskBeforeDelete(checkBox_AskBeforeDelete->isChecked());
+	
+	//General (2)
+	config->setBackup(CheckBox_Backup->isChecked());
+	config->setBackupDelete(CheckBox_BackupDelete->isChecked());
+	config->setBackupDeleteAfter(SpinBox_BackupDeleteAfter->value());
 	config->setAutoSave(CheckBox_AutoSave->isChecked());
 	config->setAutoSaveChange(CheckBox_AutoSaveChange->isChecked());
-	config->setAskBeforeDelete(checkBox_AskBeforeDelete->isChecked());
 
 	//Appearence
 	config->setBannerColor1(color1);
@@ -232,7 +247,7 @@ void CSettingsDlg::apply(){
 	config->setLockAfterSec(SpinBox_InacitivtyTime->value());
 	
 	//Features
-	config->setFeatureBookmarks(CheckBox_FeatureBookmarks->isChecked());
+	//config->setFeatureBookmarks(CheckBox_FeatureBookmarks->isChecked());
 
 	//TODO Desktop Integration
 	/*PluginsModified=Label_IntPlugin_Info->isVisible();
@@ -340,6 +355,10 @@ void CSettingsDlg::OnAutoSaveToggle(bool checked){
 
 void CSettingsDlg::OnAutoSaveChangeToggle(bool checked){
 	CheckBox_AutoSave->setEnabled(!checked);
+}
+
+void CSettingsDlg::OnBackupDeleteChange(){
+	SpinBox_BackupDeleteAfter->setEnabled(CheckBox_Backup->isChecked() && CheckBox_BackupDelete->isChecked());
 }
 
 #ifdef GLOBAL_AUTOTYPE

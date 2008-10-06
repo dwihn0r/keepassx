@@ -211,18 +211,20 @@ void CEditEntryDlg::OnButtonOK()
 		pw.setString(password,true);
 		entry->setPassword(pw);
 		entry->setComment(Edit_Comment->toPlainText());
+		entry->setImage(IconIndex);
 	}
 	if(Combo_Group->currentIndex()!=GroupIndex){
 		db->moveEntry(entry,groups[Combo_Group->currentIndex()]);
-		EntryMoved=true; ModFlag=true;
+		EntryMoved=true;
+		ModFlag=true;
 	}
-	// MX-COMMENT: Should not this line go inside the if(Modflag) block?
-	entry->setImage(IconIndex);
 
-	if(ModFlag&&EntryMoved)done(2);
-	else if(ModFlag)done(1);
-	else done(0);
-
+	if(EntryMoved)
+		done(ModFlag?2:3);
+	else if (ModFlag)
+		done(1);
+	else
+		done(0);
 }
 
 void CEditEntryDlg::OnButtonCancel()

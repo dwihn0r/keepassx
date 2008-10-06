@@ -152,6 +152,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditDeleteGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnDeleteGroup()));
 	connect(EditNewEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnNewEntry()));
 	connect(EditEditEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnEditEntry()));
+	connect(EntryView, SIGNAL(requestCreateGroup(QString,quint32,GroupViewItem*)), GroupView, SLOT(createGroup(QString,quint32,GroupViewItem*)));
 	connect(EditCloneEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnCloneEntry()));
 	connect(EditDeleteEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnDeleteEntry()));
 	connect(EditUsernameToClipboardAction, SIGNAL(triggered()), EntryView, SLOT(OnUsernameToClipboard()));
@@ -860,13 +861,19 @@ bool KeepassMainWindow::OnFileSave(){
 	if(!db->file())
 		return OnFileSaveAs();
 	saveLastFilename(db->file()->fileName());
-	if(db->save())
+	if(db->save()){
 		setStateFileModified(false);
+		if (config->backup() && config->backupDelete() && config->backupDeleteAfter()>0){
+			IGroupHandle* backupGroup = db->backupGroup();
+			if (backupGroup && backupGroup==EntryView->getCurrentGroup())
+				EntryView->showGroup(backupGroup);
+		}
+		return true;
+	}
 	else{
 		showErrMsg(QString("%1\n%2").arg(tr("File could not be saved.")).arg(db->getError()));
 		return false;
 	}
-	return true;
 }
 
 bool KeepassMainWindow::OnFileSaveAs(){

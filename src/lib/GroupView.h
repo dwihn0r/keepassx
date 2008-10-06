@@ -36,7 +36,9 @@ class KeepassGroupView:public QTreeWidget{
 		void createItems();
 		void showSearchResults();
 		void setCurrentGroup(IGroupHandle* group);
-		void createGroup(const QString& title, quint32 image);
+	
+	public slots:
+		void createGroup(const QString& title, quint32 image, GroupViewItem* group=NULL);
 		
 	private:
 		virtual void dragEnterEvent(QDragEnterEvent* event);
@@ -49,7 +51,7 @@ class KeepassGroupView:public QTreeWidget{
 		virtual void mouseMoveEvent(QMouseEvent *event);
 		virtual void paintEvent ( QPaintEvent * event );
 		virtual void contextMenuEvent(QContextMenuEvent *event);
-		void addChilds(GroupViewItem* item);
+		void addChildren(GroupViewItem* item);
 		QPoint DragStartPos;
 		GroupViewItem* DragItem;
 		GroupViewItem* LastHoverItem;

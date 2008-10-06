@@ -77,6 +77,7 @@ int main(int argc, char **argv)
 	fileDlgHistory.load();
 	
 	// PlugIns
+	/*
 #ifdef Q_WS_X11
 	if(config->integrPlugin()!=KpxConfig::NoIntegr){
 		QString LibName="libkeepassx-";
@@ -121,6 +122,7 @@ int main(int argc, char **argv)
 		}
 	}
 #endif
+	*/
 	if(!app){
 		#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
 			app = new KeepassApplication(argc,argv);
@@ -158,7 +160,7 @@ int main(int argc, char **argv)
 	else{
 		if(loc.name()!="en_US")
 			qWarning(CSTR(
-				QString("Kpx: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
+				QString("Kpx: No Translation found for '%1 (%2)' using 'English (United States)'")
 				.arg(QLocale::languageToString(loc.language()))
 				.arg(QLocale::countryToString(loc.country()))
 			));
@@ -175,7 +177,7 @@ int main(int argc, char **argv)
 		else{
 			if(loc.name()!="en_US")
 				qWarning(CSTR(
-					QString("Qt: No Translation found for '%1 (%2)' using 'English (UnitedStates)'")
+					QString("Qt: No Translation found for '%1 (%2)' using 'English (United States)'")
 					.arg(QLocale::languageToString(loc.language()))
 					.arg(QLocale::countryToString(loc.country()))
 				));

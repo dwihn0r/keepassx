@@ -46,7 +46,7 @@ void KeepassGroupView::createItems(){
 			Items.append(new GroupViewItem(this));
 			Items.back()->setText(0,groups[i]->title());
 			Items.back()->GroupHandle=groups[i];
-			addChilds(Items.back());	
+			addChildren(Items.back());
 		}
 	}
 	for(int i=0;i<Items.size();i++){
@@ -71,15 +71,15 @@ void KeepassGroupView::showSearchResults(){
 	emit searchResultsSelected();
 }
 
-void KeepassGroupView::addChilds(GroupViewItem* item){
-	QList<IGroupHandle*>childs=item->GroupHandle->childs();
-	if(!childs.size())
+void KeepassGroupView::addChildren(GroupViewItem* item){
+	QList<IGroupHandle*>children=item->GroupHandle->children();
+	if(!children.size())
 		return;
-	for(int i=0; i<childs.size(); i++){
+	for(int i=0; i<children.size(); i++){
 		Items.push_back(new GroupViewItem(item));
-		Items.back()->setText(0,childs[i]->title());
-		Items.back()->GroupHandle=childs[i]; 
-		addChilds(Items.back());		
+		Items.back()->setText(0,children[i]->title());
+		Items.back()->GroupHandle=children[i];
+		addChildren(Items.back());
 	}	
 }
 
@@ -106,50 +106,39 @@ void KeepassGroupView::OnNewGroup(){
 	GroupViewItem* parent=(GroupViewItem*)currentItem();
 	CGroup NewGroup;
 	CEditGroupDialog dlg(db,&NewGroup,parentWidget(),true);
-	if(dlg.exec()){
-		IGroupHandle* group;
-		if(parent){
-			group=db->addGroup(&NewGroup,parent->GroupHandle);
-			Items.append(new GroupViewItem(parent));
-		}
-		else{
-			if(topLevelItemCount()){
-				if(topLevelItem(topLevelItemCount()-1)==SearchResultItem)
-					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-2)));
-				else
-					Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-1)));
-			}
-			else
-				Items.append(new GroupViewItem(this));
-			group=db->addGroup(&NewGroup,NULL);
-		}
-		Items.back()->GroupHandle=group;
-		Items.back()->setText(0,group->title());
-		Items.back()->setIcon(0,db->icon(group->image()));
-	}
-	emit fileModified();	
+	if(dlg.exec())
+		createGroup(NewGroup.Title, NewGroup.Image, parent);
 }
 
-void KeepassGroupView::createGroup(const QString& title, quint32 image){
+void KeepassGroupView::createGroup(const QString& title, quint32 image, GroupViewItem* parent){
 	CGroup NewGroup;
 	NewGroup.Title = title;
 	NewGroup.Image = image;
 	
 	IGroupHandle* group;
-	if(topLevelItemCount()){
-		if(topLevelItem(topLevelItemCount()-1)==SearchResultItem)
-			Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-2)));
-		else
-			Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-1)));
+	if(parent){
+		group=db->addGroup(&NewGroup,parent->GroupHandle);
+		Items.append(new GroupViewItem(parent));
 	}
-	else
-		Items.append(new GroupViewItem(this));
-	
-	group = db->addGroup(&NewGroup,NULL);
+	else{
+		if(topLevelItemCount()){
+			int i=1;
+			if(topLevelItem(topLevelItemCount()-i)==SearchResultItem)
+				i++;
+			if(title!="Backup" && topLevelItem(topLevelItemCount()-i)->text(0)=="Backup")
+				i++;
+			Items.append(new GroupViewItem(this,topLevelItem(topLevelItemCount()-i)));
+		}
+		else
+			Items.append(new GroupViewItem(this));
+		
+		group = db->addGroup(&NewGroup,NULL);
+	}
 	
 	Items.back()->GroupHandle = group;
 	Items.back()->setText(0, group->title());
 	Items.back()->setIcon(0, db->icon(group->image()));
+	emit fileModified();
 }
 
 void KeepassGroupView::OnEditGroup(){
