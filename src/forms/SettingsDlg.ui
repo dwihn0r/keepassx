@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>606</width>
-    <height>455</height>
+    <width>667</width>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -36,1265 +36,1382 @@
     </spacer>
    </item>
    <item>
-    <widget class="QTabWidget" name="tabWidgetSettings" >
-     <property name="tabPosition" >
-      <enum>QTabWidget::North</enum>
-     </property>
-     <property name="tabShape" >
-      <enum>QTabWidget::Rounded</enum>
-     </property>
-     <property name="currentIndex" >
-      <number>0</number>
-     </property>
-     <widget class="QWidget" name="TabGeneral1" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>General (1)</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <item>
-        <widget class="QCheckBox" name="CheckBox_ShowSysTrayIcon" >
-         <property name="text" >
-          <string>Show system tray icon</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>25</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="CheckBox_MinimizeTray" >
-           <property name="enabled" >
-            <bool>false</bool>
-           </property>
-           <property name="text" >
-            <string>Minimize to tray instead of taskbar</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>25</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="CheckBox_CloseToTray" >
-           <property name="enabled" >
-            <bool>false</bool>
-           </property>
-           <property name="text" >
-            <string>Minimize to tray when clicking the main window's close button</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" >
-         <item>
-          <widget class="QCheckBox" name="CheckBox_OpenLast" >
-           <property name="text" >
-            <string>Remember last opened file</string>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+Ö</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>25</width>
-               <height>10</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
-             <property name="enabled" >
-              <bool>false</bool>
-             </property>
-             <property name="text" >
-              <string>Remember last key type and location</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>25</width>
-               <height>10</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="CheckBox_StartMinimized" >
-             <property name="enabled" >
-              <bool>false</bool>
-             </property>
-             <property name="text" >
-              <string>Start minimized</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>25</width>
-               <height>10</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="CheckBox_StartLocked" >
-             <property name="enabled" >
-              <bool>false</bool>
-             </property>
-             <property name="text" >
-              <string>Start locked</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="checkBox_SaveFileDlgHistory" >
-           <property name="text" >
-            <string>Save recent directories of file dialogs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>10</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Button_ClearFileDlgHistory" >
-           <property name="text" >
-            <string>Clear History Now</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_AskBeforeDelete" >
-         <property name="text" >
-          <string>Always ask before deleting entries or groups</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="TabGeneral2" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>General (2)</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout" >
-       <item>
-        <widget class="QCheckBox" name="CheckBox_Backup" >
-         <property name="text" >
-          <string>Save backups of modified entries into the 'Backup' group</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" >
-         <item>
-          <spacer name="spacer" >
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>25</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="CheckBox_BackupDelete" >
-           <property name="enabled" >
-            <bool>false</bool>
-           </property>
-           <property name="text" >
-            <string>Delete backup entries older than:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="SpinBox_BackupDeleteAfter" >
-           <property name="enabled" >
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimum" >
-            <number>1</number>
-           </property>
-           <property name="maximum" >
-            <number>999</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>days</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_AutoSave" >
-         <property name="text" >
-          <string>Automatically save database on exit and workspace locking</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_AutoSaveChange" >
-         <property name="text" >
-          <string>Automatically save database after every change</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="TabPage" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>Appea&amp;rance</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <widget class="QListWidget" name="listWidget" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Fixed" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>120</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font" >
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet" >
+        <string notr="true" >QListView {
+	show-decoration-selected: 1;
+}
+
+QListView::item {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}</string>
+       </property>
+       <property name="selectionBehavior" >
+        <enum>QAbstractItemView::SelectRows</enum>
        </property>
        <item>
-        <widget class="QGroupBox" name="groupBox1" >
-         <property name="title" >
-          <string>Banner Color</string>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <layout class="QGridLayout" >
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="textLabel2_2" >
-              <property name="text" >
-               <string>Text Color:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3" >
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType" >
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="2" >
-             <widget class="QPushButton" name="ButtonTextColor" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>0</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>16777215</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>Change...</string>
-              </property>
-              <property name="shortcut" >
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4" >
-             <widget class="QLabel" name="textLabel3" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>Color 2:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1" >
-             <widget class="QLabel" name="pixmColor1" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>23</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>23</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1" >
-             <widget class="QLabel" name="pixmTextColor" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>23</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>23</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="scaledContents" >
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6" >
-             <widget class="QPushButton" name="ButtonColor2" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>0</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>16777215</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>Change...</string>
-              </property>
-              <property name="shortcut" >
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="5" >
-             <widget class="QLabel" name="pixmColor2" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>23</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>23</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="scaledContents" >
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2" >
-             <widget class="QPushButton" name="ButtonColor1" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize" >
-               <size>
-                <width>0</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>16777215</width>
-                <height>23</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>C&amp;hange...</string>
-              </property>
-              <property name="shortcut" >
-               <string>Alt+H</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="textLabel1_3" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>Color 1:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="7" >
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType" >
-               <enum>QSizePolicy::Minimum</enum>
-              </property>
-              <property name="sizeHint" stdset="0" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
+        <property name="text" >
+         <string>General (1)</string>
+        </property>
        </item>
        <item>
-        <widget class="QCheckBox" name="CheckBox_AlternatingRowColors" >
-         <property name="text" >
-          <string>Alternating Row Colors</string>
-         </property>
-        </widget>
+        <property name="text" >
+         <string>General (2)</string>
+        </property>
        </item>
        <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
+        <property name="text" >
+         <string>Appearance</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Language</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Security</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Advanced</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QStackedWidget" name="stackedWidget" >
+       <property name="currentIndex" >
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="pageGeneral1" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout" >
          <item>
-          <widget class="QPushButton" name="Button_CustomizeEntryDetails" >
+          <widget class="QCheckBox" name="CheckBox_ShowSysTrayIcon" >
            <property name="text" >
-            <string>Customize Entry Detail View...</string>
+            <string>Show system tray icon</string>
            </property>
           </widget>
          </item>
          <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          <layout class="QHBoxLayout" name="_16" >
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>25</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBox_MinimizeTray" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Minimize to tray instead of taskbar</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
          <item>
-          <layout class="QGridLayout" >
+          <layout class="QHBoxLayout" name="_17" >
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>25</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBox_CloseToTray" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Minimize to tray when clicking the main window's close button</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="_18" >
+           <item>
+            <widget class="QCheckBox" name="CheckBox_OpenLast" >
+             <property name="text" >
+              <string>Remember last opened file</string>
+             </property>
+             <property name="shortcut" >
+              <string>Alt+Ö</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="_19" >
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>25</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CheckBox_RememberLastKey" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
+               <property name="text" >
+                <string>Remember last key type and location</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="_20" >
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>25</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CheckBox_StartMinimized" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
+               <property name="text" >
+                <string>Start minimized</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="_21" >
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>25</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CheckBox_StartLocked" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
+               <property name="text" >
+                <string>Start locked</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_22" >
            <property name="spacing" >
             <number>6</number>
            </property>
-           <item row="0" column="0" >
-            <widget class="QLabel" name="label_3" >
+           <item>
+            <widget class="QCheckBox" name="checkBox_SaveFileDlgHistory" >
              <property name="text" >
-              <string>Group tree at start-up:</string>
+              <string>Save recent directories of file dialogs</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Button_ClearFileDlgHistory" >
+             <property name="text" >
+              <string>Clear History Now</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_AskBeforeDelete" >
+           <property name="text" >
+            <string>Always ask before deleting entries or groups</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>1</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="pageGeneral2" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2" >
+         <item>
+          <widget class="QCheckBox" name="CheckBox_Backup" >
+           <property name="text" >
+            <string>Save backups of modified entries into the 'Backup' group</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2" >
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>25</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBox_BackupDelete" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="text" >
+              <string>Delete backup entries older than:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="SpinBox_BackupDeleteAfter" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimum" >
+              <number>1</number>
+             </property>
+             <property name="maximum" >
+              <number>999</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label" >
+             <property name="text" >
+              <string>days</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_AutoSave" >
+           <property name="text" >
+            <string>Automatically save database on exit and workspace locking</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_AutoSaveChange" >
+           <property name="text" >
+            <string>Automatically save database after every change</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>1</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="pageAppearance" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3" >
+         <item>
+          <widget class="QGroupBox" name="groupBox1" >
+           <property name="title" >
+            <string>Banner Color</string>
+           </property>
+           <layout class="QVBoxLayout" name="_23" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <layout class="QGridLayout" name="_24" >
+              <property name="spacing" >
+               <number>6</number>
+              </property>
+              <item row="1" column="0" >
+               <widget class="QLabel" name="textLabel2_2" >
+                <property name="text" >
+                 <string>Text Color:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3" >
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType" >
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="2" >
+               <widget class="QPushButton" name="ButtonTextColor" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize" >
+                 <size>
+                  <width>0</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>16777215</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="text" >
+                 <string>Change...</string>
+                </property>
+                <property name="shortcut" >
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4" >
+               <widget class="QLabel" name="textLabel3" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text" >
+                 <string>Color 2:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" >
+               <widget class="QLabel" name="pixmColor1" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize" >
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="text" >
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1" >
+               <widget class="QLabel" name="pixmTextColor" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize" >
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="scaledContents" >
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="6" >
+               <widget class="QPushButton" name="ButtonColor2" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize" >
+                 <size>
+                  <width>0</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>16777215</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="text" >
+                 <string>Change...</string>
+                </property>
+                <property name="shortcut" >
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5" >
+               <widget class="QLabel" name="pixmColor2" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize" >
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="scaledContents" >
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2" >
+               <widget class="QPushButton" name="ButtonColor1" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize" >
+                 <size>
+                  <width>0</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize" >
+                 <size>
+                  <width>16777215</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="text" >
+                 <string>C&amp;hange...</string>
+                </property>
+                <property name="shortcut" >
+                 <string>Alt+H</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" >
+               <widget class="QLabel" name="textLabel1_2" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text" >
+                 <string>Color 1:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="7" >
+               <spacer>
+                <property name="orientation" >
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType" >
+                 <enum>QSizePolicy::Minimum</enum>
+                </property>
+                <property name="sizeHint" stdset="0" >
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_AlternatingRowColors" >
+           <property name="text" >
+            <string>Alternating Row Colors</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_25" >
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="Button_CustomizeEntryDetails" >
+             <property name="text" >
+              <string>Customize Entry Detail View...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_26" >
+           <item>
+            <layout class="QGridLayout" name="_27" >
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label_3" >
+               <property name="text" >
+                <string>Group tree at start-up:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QRadioButton" name="Radio_GroupTreeRestore" >
+               <property name="text" >
+                <string>Restore last state</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QRadioButton" name="Radio_GroupTreeExpand" >
+               <property name="text" >
+                <string>Expand all items</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <widget class="QRadioButton" name="Radio_GroupTreeDoNothing" >
+               <property name="text" >
+                <string>Do not expand any item</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="spacer_2" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>1</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="pageLanguage" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_8" >
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3" >
+           <item>
+            <widget class="QListWidget" name="listSelectLanguage" >
+             <property name="selectionBehavior" >
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <item>
+              <property name="text" >
+               <string>System Language</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>English</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer" >
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="gridLayout" >
+           <item row="0" column="0" >
+            <widget class="QLabel" name="label_7" >
+             <property name="text" >
+              <string>Language:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" >
+            <widget class="QLabel" name="label_8" >
+             <property name="text" >
+              <string>Author:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1" >
-            <widget class="QRadioButton" name="Radio_GroupTreeRestore" >
+            <widget class="QLabel" name="labelLang" >
              <property name="text" >
-              <string>Restore last state</string>
+              <string/>
              </property>
             </widget>
            </item>
            <item row="1" column="1" >
-            <widget class="QRadioButton" name="Radio_GroupTreeExpand" >
+            <widget class="QLabel" name="labelAuthor" >
              <property name="text" >
-              <string>Expand all items</string>
+              <string/>
              </property>
             </widget>
            </item>
-           <item row="2" column="1" >
-            <widget class="QRadioButton" name="Radio_GroupTreeDoNothing" >
+           <item row="0" column="2" >
+            <spacer name="horizontalSpacer_2" >
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>1</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="pageSecurity" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4" >
+         <item>
+          <widget class="QGroupBox" name="groupBox_2" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title" >
+            <string>Show plain text passwords in:</string>
+           </property>
+           <layout class="QVBoxLayout" name="_28" >
+            <property name="spacing" >
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
+              <property name="text" >
+               <string>Edit Entry Dialog</string>
+              </property>
+              <property name="shortcut" >
+               <string>Alt+O</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="CheckBox_ShowPasswords_PasswordDlg" >
+              <property name="text" >
+               <string>Database Key Dialog</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_29" >
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="textLabel1" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text" >
-              <string>Do not expand any item</string>
+              <string>Clear clipboard after:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="SpinBox_ClipboardTime" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>80</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum" >
+              <number>50000</number>
+             </property>
+             <property name="value" >
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="textLabel2" >
+             <property name="text" >
+              <string>seconds</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <spacer>
+          <widget class="QCheckBox" name="CheckBox_LockMinimize" >
+           <property name="text" >
+            <string>Lock workspace when minimizing the main window</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_30" >
+           <item>
+            <widget class="QCheckBox" name="CheckBox_InactivityLock" >
+             <property name="text" >
+              <string>Lock database after inactivity of</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="SpinBox_InacitivtyTime" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>80</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum" >
+              <number>50000</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_Inactivity" >
+             <property name="text" >
+              <string>seconds</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="spacer_3" >
            <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0" >
             <size>
-             <width>40</width>
-             <height>20</height>
+             <width>1</width>
+             <height>1</height>
             </size>
            </property>
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tabSecurity" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>Security</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="groupBox_2" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title" >
-          <string>Show plain text passwords in:</string>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
-            <property name="text" >
-             <string>Edit Entry Dialog</string>
-            </property>
-            <property name="shortcut" >
-             <string>Alt+O</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="CheckBox_ShowPasswords_PasswordDlg" >
-            <property name="text" >
-             <string>Database Key Dialog</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
+       </widget>
+       <widget class="QWidget" name="pageAdvanced" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5" >
          <item>
-          <widget class="QLabel" name="textLabel1" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <widget class="QGroupBox" name="Box_BrowserCmd" >
+           <property name="title" >
+            <string>Custom Browser Command</string>
            </property>
-           <property name="text" >
-            <string>Clear clipboard after:</string>
+           <property name="checkable" >
+            <bool>true</bool>
            </property>
+           <layout class="QHBoxLayout" name="_31" >
+            <item>
+             <widget class="QLineEdit" name="Edit_BrowserCmd" />
+            </item>
+            <item>
+             <widget class="QPushButton" name="Button_BrowserCmdBrowse" >
+              <property name="text" >
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="SpinBox_ClipboardTime" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize" >
-            <size>
-             <width>80</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="maximum" >
-            <number>50000</number>
-           </property>
-           <property name="value" >
-            <number>2</number>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="_32" >
+           <item>
+            <widget class="QLabel" name="label_2" >
+             <property name="text" >
+              <string>Media Root:</string>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="Edit_MountDir" >
+             <property name="whatsThis" >
+              <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Button_MountDirBrowse" >
+             <property name="text" >
+              <string>Browse...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QLabel" name="textLabel2" >
-           <property name="text" >
-            <string>seconds</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_LockMinimize" >
-         <property name="text" >
-          <string>Lock workspace when minimizing the main window</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QCheckBox" name="CheckBox_InactivityLock" >
-           <property name="text" >
-            <string>Lock database after inactivity of</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="SpinBox_InacitivtyTime" >
-           <property name="enabled" >
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize" >
-            <size>
-             <width>80</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="maximum" >
-            <number>50000</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_Inactivity" >
-           <property name="text" >
-            <string>seconds</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tabFeatures" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>Features</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <item>
-        <widget class="QLabel" name="label_6" >
-         <property name="text" >
-          <string>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</string>
-         </property>
-         <property name="wordWrap" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_FeatureBookmarks" >
-         <property name="text" >
-          <string>Bookmarks</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tabIntegration" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>Desktop Integration</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="Label_IntPlugin_Error" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text" >
-          <string/>
-         </property>
-         <property name="wordWrap" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title" >
-          <string>Plug-Ins</string>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="Radio_IntPlugin_None" >
-            <property name="text" >
-             <string>None</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="Radio_IntPlugin_Gnome" >
-            <property name="text" >
-             <string>Gnome Desktop Integration (Gtk 2.x)</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="Radio_IntPlugin_Kde" >
-            <property name="text" >
-             <string>KDE 4 Desktop Integration</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="Label_IntPlugin_Info" >
-           <property name="text" >
-            <string>You need to restart the program before the changes take effect.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0" >
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="IntPlugin_Button_Config" >
-           <property name="text" >
-            <string>Configure...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="TabAdvanced" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>584</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <attribute name="title" >
-       <string>Advanced</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="Box_BrowserCmd" >
-         <property name="title" >
-          <string>Custom Browser Command</string>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-         <layout class="QHBoxLayout" >
-          <item>
-           <widget class="QLineEdit" name="Edit_BrowserCmd" />
-          </item>
-          <item>
-           <widget class="QPushButton" name="Button_BrowserCmdBrowse" >
-            <property name="text" >
-             <string>Browse</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Media Root:</string>
-           </property>
-           <property name="alignment" >
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="Edit_MountDir" >
+          <widget class="QCheckBox" name="CheckBox_SaveRelativePaths" >
            <property name="whatsThis" >
-            <string>The directory where storage devices like CDs and memory sticks are normally mounted.</string>
+            <string>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</string>
+           </property>
+           <property name="text" >
+            <string>Save relative paths (bookmarks and last file)</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="Button_MountDirBrowse" >
+          <widget class="QGroupBox" name="Box_AutoType" >
+           <property name="title" >
+            <string>Auto-Type Fine Tuning</string>
+           </property>
+           <layout class="QGridLayout" name="_33" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item row="0" column="1" >
+             <widget class="QSpinBox" name="SpinBox_AutoTypePreGap" >
+              <property name="whatsThis" >
+               <string>Time between the activation of an auto-type action by the user and the first simulated key stroke.</string>
+              </property>
+              <property name="suffix" >
+               <string>ms</string>
+              </property>
+              <property name="maximum" >
+               <number>10000</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" >
+             <widget class="QLabel" name="label_4" >
+              <property name="text" >
+               <string>Pre-Gap:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2" >
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="label_5" >
+              <property name="text" >
+               <string>Key Stroke Delay:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QSpinBox" name="SpinBox_AutoTypeKeyStrokeDelay" >
+              <property name="whatsThis" >
+               <string>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</string>
+              </property>
+              <property name="suffix" >
+               <string>ms</string>
+              </property>
+              <property name="maximum" >
+               <number>10000</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_34" >
+           <item>
+            <widget class="QLabel" name="Label_GlobalShortcut" >
+             <property name="text" >
+              <string>Global Auto-Type Shortcut:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="ShortcutWidget" name="Edit_GlobalShortcut" >
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CheckBox_EntryTitlesMatch" >
            <property name="text" >
-            <string>Browse...</string>
+            <string>Use entries' title to match the window for Global Auto-Type</string>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="spacer_4" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>1</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_SaveRelativePaths" >
-         <property name="whatsThis" >
-          <string>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</string>
-         </property>
-         <property name="text" >
-          <string>Save relative paths (bookmarks and last file)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="Box_AutoType" >
-         <property name="title" >
-          <string>Auto-Type Fine Tuning</string>
-         </property>
-         <layout class="QGridLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item row="0" column="1" >
-           <widget class="QSpinBox" name="SpinBox_AutoTypePreGap" >
-            <property name="whatsThis" >
-             <string>Time between the activation of an auto-type action by the user and the first simulated key stroke.</string>
-            </property>
-            <property name="suffix" >
-             <string>ms</string>
-            </property>
-            <property name="maximum" >
-             <number>10000</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label_4" >
-            <property name="text" >
-             <string>Pre-Gap:</string>
-            </property>
-            <property name="alignment" >
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" >
-           <spacer>
-            <property name="orientation" >
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0" >
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_5" >
-            <property name="text" >
-             <string>Key Stroke Delay:</string>
-            </property>
-            <property name="alignment" >
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" >
-           <widget class="QSpinBox" name="SpinBox_AutoTypeKeyStrokeDelay" >
-            <property name="whatsThis" >
-             <string>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</string>
-            </property>
-            <property name="suffix" >
-             <string>ms</string>
-            </property>
-            <property name="maximum" >
-             <number>10000</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
+       </widget>
+       <widget class="QWidget" name="pageFeatures" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6" >
          <item>
-          <widget class="QLabel" name="Label_GlobalShortcut" >
+          <widget class="QLabel" name="label_6" >
            <property name="text" >
-            <string>Global Auto-Type Shortcut:</string>
+            <string>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="ShortcutWidget" name="Edit_GlobalShortcut" >
-           <property name="readOnly" >
+           <property name="wordWrap" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <spacer>
+          <widget class="QCheckBox" name="CheckBox_FeatureBookmarks" >
+           <property name="text" >
+            <string>Bookmarks</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="spacer_5" >
            <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0" >
             <size>
-             <width>40</width>
-             <height>20</height>
+             <width>1</width>
+             <height>1</height>
             </size>
            </property>
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBox_EntryTitlesMatch" >
-         <property name="text" >
-          <string>Use entries' title to match the window for Global Auto-Type</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-    </widget>
+       </widget>
+       <widget class="QWidget" name="pageDesktop" >
+        <property name="geometry" >
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>521</width>
+          <height>331</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_7" >
+         <item>
+          <widget class="QGroupBox" name="groupBox" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Minimum" hsizetype="Preferred" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title" >
+            <string>Plug-Ins</string>
+           </property>
+           <layout class="QVBoxLayout" name="_35" >
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QRadioButton" name="Radio_IntPlugin_None" >
+              <property name="text" >
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="Radio_IntPlugin_Gnome" >
+              <property name="text" >
+               <string>Gnome Desktop Integration (Gtk 2.x)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="Radio_IntPlugin_Kde" >
+              <property name="text" >
+               <string>KDE 4 Desktop Integration</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="_36" >
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="Label_IntPlugin_Info" >
+             <property name="text" >
+              <string>You need to restart the program before the changes take effect.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="IntPlugin_Button_Config" >
+             <property name="text" >
+              <string>Configure...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="spacer_6" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>1</width>
+             <height>1</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="DialogButtons" >
@@ -1317,7 +1434,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>tabWidgetSettings</tabstop>
+  <tabstop>listWidget</tabstop>
   <tabstop>CheckBox_ShowSysTrayIcon</tabstop>
   <tabstop>CheckBox_MinimizeTray</tabstop>
   <tabstop>CheckBox_CloseToTray</tabstop>
@@ -1341,17 +1458,13 @@
   <tabstop>Radio_GroupTreeRestore</tabstop>
   <tabstop>Radio_GroupTreeExpand</tabstop>
   <tabstop>Radio_GroupTreeDoNothing</tabstop>
+  <tabstop>listSelectLanguage</tabstop>
   <tabstop>CheckBox_ShowPasswords</tabstop>
   <tabstop>CheckBox_ShowPasswords_PasswordDlg</tabstop>
   <tabstop>SpinBox_ClipboardTime</tabstop>
   <tabstop>CheckBox_LockMinimize</tabstop>
   <tabstop>CheckBox_InactivityLock</tabstop>
   <tabstop>SpinBox_InacitivtyTime</tabstop>
-  <tabstop>CheckBox_FeatureBookmarks</tabstop>
-  <tabstop>Radio_IntPlugin_None</tabstop>
-  <tabstop>Radio_IntPlugin_Gnome</tabstop>
-  <tabstop>Radio_IntPlugin_Kde</tabstop>
-  <tabstop>IntPlugin_Button_Config</tabstop>
   <tabstop>Box_BrowserCmd</tabstop>
   <tabstop>Edit_BrowserCmd</tabstop>
   <tabstop>Button_BrowserCmdBrowse</tabstop>
@@ -1362,6 +1475,11 @@
   <tabstop>SpinBox_AutoTypeKeyStrokeDelay</tabstop>
   <tabstop>Edit_GlobalShortcut</tabstop>
   <tabstop>CheckBox_EntryTitlesMatch</tabstop>
+  <tabstop>CheckBox_FeatureBookmarks</tabstop>
+  <tabstop>Radio_IntPlugin_None</tabstop>
+  <tabstop>Radio_IntPlugin_Gnome</tabstop>
+  <tabstop>Radio_IntPlugin_Kde</tabstop>
+  <tabstop>IntPlugin_Button_Config</tabstop>
   <tabstop>DialogButtons</tabstop>
  </tabstops>
  <resources/>

@@ -17,8 +17,10 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/ 
 
-#include <QProcess>
 #include <QDesktopServices>
+#include <QLibraryInfo>
+#include <QProcess>
+#include <QTranslator>
 
 #if defined(Q_WS_X11) || defined(Q_WS_MAC)
 	#include <sys/mman.h>
@@ -233,4 +235,132 @@ bool unlockPage(void* addr, int len){
 #else
 	return false;
 #endif
+}
+
+QTranslator* translator = new QTranslator();
+QTranslator* qtTranslator = new QTranslator();
+bool translatorActive = false;
+bool qtTranslatorActive = false;
+
+bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& loc,const QStringList& paths){
+	for (int i=0;i<paths.size();i++){
+		if(tr->load(prefix+loc+".qm",paths[i]))
+			return true;
+	}
+	
+	for (int i=0;i<paths.size();i++){
+		QDir dir(paths[i]);
+		QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
+		for (int j=0;j<TrFiles.size();j++){
+			if (TrFiles[j].left(prefix.length()+2)==prefix+loc.left(2)){
+				if (tr->load(TrFiles[j],paths[i]))
+					return true;
+			}
+		}
+	}
+	return false;
+}
+
+void deactivateTranslators(bool qtOnly=false){
+	if (translatorActive && !qtOnly){
+		QApplication::removeTranslator(translator);
+		translatorActive = false;
+	}
+	
+	if (qtTranslatorActive){
+		QApplication::removeTranslator(qtTranslator);
+		qtTranslatorActive = false;
+	}
+}
+
+void installTranslator(){
+	QString language = config->language();
+	if (language=="auto")
+		language = QLocale::system().name();
+	
+	if (language.isEmpty() || language=="en_US"){
+		deactivateTranslators();
+		return;
+	}
+	
+	if (loadTranslation(translator,"keepassx-",language,QStringList()
+		<< DataDir+"/i18n/" << HomeDir))
+	{
+		if (!translatorActive){
+			QApplication::installTranslator(translator);
+			translatorActive = true;
+		}
+	}
+	else{
+		deactivateTranslators();
+		return;
+	}
+	
+	if (loadTranslation(qtTranslator,"qt_",language,QStringList()
+		<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
+		<< DataDir+"/i18n/" << HomeDir))
+	{
+		if (!qtTranslatorActive){
+			QApplication::installTranslator(qtTranslator);
+			qtTranslatorActive = true;
+		}
+	}
+	else{
+		deactivateTranslators(true);
+	}
+}
+
+bool isTranslationActive(){
+	return translatorActive;
+}
+
+bool operator<(const Translation& t1, const Translation& t2){
+	return t1.nameLong < t2.nameLong;
+}
+
+QList<Translation> getAllTranslations(){
+	QTranslator tmpTranslator;
+	QList<Translation> translations;
+	QSet<QString> names;
+	
+	QStringList paths = QStringList() << DataDir+"/i18n/" << HomeDir;
+	QRegExp filename("keepassx-([^_]{2}_[^\\.]{2}|[^\\.]{2})\\.qm");
+	for (int i=0;i<paths.size();i++){
+		QDir dir(paths[i]);
+		QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
+		for (int j=0;j<TrFiles.size();j++){
+			if (filename.exactMatch(TrFiles[j]) && tmpTranslator.load(TrFiles[j],paths[i]) &&
+				!names.contains(filename.cap(1)))
+			{
+				Translation t;
+				t.nameCode = filename.cap(1);
+				t.nameLong = tmpTranslator.translate("Translation", "$LANGUAGE_NAME", "Insert your language name in the format: English (United States)");
+				t.author = tmpTranslator.translate("Translation", "$TRANSLATION_AUTHOR");
+				
+				QLocale l(t.nameCode);
+				t.nameEnglish = QLocale::languageToString(l.language());
+				if (t.nameCode.size()==5){
+					QString country = QLocale::countryToString(l.country());
+					int size = country.size();
+					for (int k=1; k<size; k++){
+						if (country[k].isUpper()){
+							country.insert(k, " ");
+							k += 2;
+							size++;
+						}
+					}
+					t.nameEnglish.append(" (").append(country).append(")");
+				}
+				
+				if (t.nameLong.isEmpty())
+					t.nameLong = t.nameEnglish;
+				
+				translations << t;
+				names << t.nameCode;
+			}
+		}
+	}
+	
+	qSort(translations.begin(), translations.end());
+	return translations;
 }

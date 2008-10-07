@@ -30,7 +30,7 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 	public:
 		CSettingsDlg(QWidget* parent);
 		~CSettingsDlg();
-
+	
 	private slots:
     	virtual void OnCancel();
     	virtual void OnOK();
@@ -38,9 +38,9 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
     	virtual void OnColor2();
     	virtual void OnColor1();
 		void OnOtherButton(QAbstractButton*);
-		void OnIntPluginNone();
+		/*void OnIntPluginNone();
 		void OnIntPluginGnome();
-		void OnIntPluginKde();
+		void OnIntPluginKde();*/
 		void OnMountDirBrowse();
 		void OnBrowserCmdBrowse();
 		void OnCustomizeEntryDetails();
@@ -48,6 +48,7 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 		void OnAutoSaveToggle(bool checked);
 		void OnAutoSaveChangeToggle(bool checked);
 		void OnBackupDeleteChange();
+		void OnSelectLanguage(int index);
 	
 #ifdef GLOBAL_AUTOTYPE
 	private slots:
@@ -60,10 +61,11 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 		void apply();
  		QColor color1,color2,textcolor;
  		QPixmap BannerPixmap;
+		QList<Translation> translations;
 #ifdef GLOBAL_AUTOTYPE
 		Shortcut pShortcut;
 #endif
-		static bool PluginsModified;
+		//static bool PluginsModified;
 
 };
 

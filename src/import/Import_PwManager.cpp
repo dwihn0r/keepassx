@@ -132,7 +132,8 @@ bool Import_PwManager::parseXmlContent(char* content){
 	if(!groups.elementsByTagName("c"+QString::number(i)).item(0).isElement())return false;
 	CurrGroup=groups.elementsByTagName("c"+QString::number(i)).item(0).toElement();
 	if(!CurrGroup.hasAttribute("n"))return false;
-	IGroupHandle* NewGroup=database->addGroup(&CGroup(),NULL);
+	CGroup tmpGroup;
+	IGroupHandle* NewGroup=database->addGroup(&tmpGroup,NULL);
 	NewGroup->setTitle(CurrGroup.attribute("n"));
 	int j=0;
 		while(1){

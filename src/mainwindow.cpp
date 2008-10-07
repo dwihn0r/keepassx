@@ -1070,8 +1070,14 @@ void KeepassMainWindow::showEvent(QShowEvent* event){
 }
 
 void KeepassMainWindow::OnExtrasSettings(){
+	QString oldLang = config->language();
 	CSettingsDlg dlg(this);
 	dlg.exec();
+	if (config->language() != oldLang){
+		retranslateUi(this);
+		EntryView->updateColumns();
+		
+	}
 	
 	EntryView->setAlternatingRowColors(config->alternatingRowColors());
 	SysTray->setVisible(config->showSysTrayIcon());

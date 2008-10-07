@@ -60,7 +60,6 @@ public:
 	bool hideUsernames(){return settings.value("UI/HideUsernames",true).toBool();}
 	QByteArray hSplitterPos(){return settings.value("UI/HSplitterPos").toByteArray();}
 	IntegrPluginType integrPlugin(){return stringToIntegrPluginType(settings.value("Options/IntegrPlugin").toString());}
-	QString langFile(){return settings.value("Options/LangFile").toString();}
 	QString lastFile(){return settings.value("Options/LastFile").toString();}
 	QString lastKeyLocation(){return settings.value("Options/LastKeyLocation").toString();}
 	tKeyType lastKeyType(){return stringToKeyType(settings.value("Options/LastKeyType").toString());}
@@ -110,6 +109,7 @@ public:
 #endif
 	//bool featureBookmarks(){return settings.value("Features/Bookmarks",true).toBool();}
 	bool featureBookmarks(){return true;}
+	QString language(){return settings.value("Options/Language","auto").toString();}
 	
 	void setAlternatingRowColors(bool value){settings.setValue("Options/AlternatingRowColors",value);}
 	void setBannerColor1(const QColor& value){settings.setValue("Options/BannerColor1",colorToString(value));}
@@ -127,7 +127,6 @@ public:
 	void setHideUsernames(bool value){settings.setValue("UI/HideUsernames",value);}
 	void setHSplitterPos(const QByteArray& value){settings.setValue("UI/HSplitterPos",value);}
 	void setIntegrPlugin(IntegrPluginType value){settings.setValue("Options/IntegrPlugin",integrPluginTypeToString(value));}
-	void setLangFile(const QString& value){settings.setValue("Options/LangFile",value);}
 	void setLastFile(const QString& value){settings.setValue("Options/LastFile",value);}
 	void setLastKeyLocation(const QString& value){settings.setValue("Options/LastKeyLocation",value);}
 	void setLastKeyType(tKeyType value){settings.setValue("Options/LastKeyType",keyTypeToString(value));}
@@ -176,6 +175,7 @@ public:
 	void setEntryTitlesMatch(bool value){settings.setValue("Options/EntryTitlesMatch",value);}
 #endif
 	//void setFeatureBookmarks(bool value){settings.setValue("Features/Bookmarks",value);}
+	void setLanguage(const QString& value){settings.setValue("Options/Language",value);}
 
 	unsigned fileDlgHistorySize();
 	void clearFileDlgHistory(){settings.remove("FileDlgHistory");};

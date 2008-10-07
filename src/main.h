@@ -22,7 +22,6 @@
 
 QString findPlugin(const QString& filename);
 void loadImages();
-bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& LocaleCode,const QStringList& SearchPaths);
 void initAppPaths(int argc, char **argv);
 
 class CmdLineArgs {

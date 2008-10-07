@@ -22,12 +22,14 @@
 #include "dialogs/SettingsDlg.h"
 #include "dialogs/CustomizeDetailViewDlg.h"
 
-bool CSettingsDlg::PluginsModified=false;
+//bool CSettingsDlg::PluginsModified=false;
 
 
 CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 {
 	setupUi(this);
+	connect(listWidget, SIGNAL( currentRowChanged(int) ), stackedWidget, SLOT( setCurrentIndex(int) ) );
+	
 	connect(DialogButtons, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
 	connect(DialogButtons, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect(DialogButtons, SIGNAL( clicked(QAbstractButton*)), this, SLOT(OnOtherButton(QAbstractButton*)));
@@ -38,6 +40,8 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(CheckBox_OpenLast, SIGNAL( toggled(bool) ), CheckBox_StartMinimized, SLOT( setEnabled(bool) ) );
 	connect(CheckBox_OpenLast, SIGNAL( toggled(bool) ), CheckBox_StartLocked, SLOT( setEnabled(bool) ) );
 	
+	connect(listSelectLanguage, SIGNAL( currentRowChanged(int) ), SLOT( OnSelectLanguage(int) ) );
+	
 	connect(Button_ClearFileDlgHistory, SIGNAL(clicked()), &fileDlgHistory, SLOT(clear()));
 	connect(ButtonColor1, SIGNAL( clicked() ), this, SLOT( OnColor1() ) );
 	connect(ButtonColor2, SIGNAL( clicked() ), this, SLOT( OnColor2() ) );
@@ -45,9 +49,9 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	connect(Button_MountDirBrowse,SIGNAL(clicked()),this,SLOT(OnMountDirBrowse()));
 	connect(Button_BrowserCmdBrowse,SIGNAL(clicked()),this,SLOT(OnBrowserCmdBrowse()));
 
-	connect(Radio_IntPlugin_None,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginNone()));
-	connect(Radio_IntPlugin_Gnome,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginGnome()));
-	connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde()));
+	//connect(Radio_IntPlugin_None,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginNone()));
+	//connect(Radio_IntPlugin_Gnome,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginGnome()));
+	//connect(Radio_IntPlugin_Kde,SIGNAL(toggled(bool)),this,SLOT(OnIntPluginKde()));
 
 	connect(Button_CustomizeEntryDetails,SIGNAL(clicked()),this,SLOT(OnCustomizeEntryDetails()));
 	connect(CheckBox_InactivityLock, SIGNAL(toggled(bool)), SLOT(OnInactivityLockChange(bool)));
@@ -71,6 +75,8 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	pShortcut = AutoType::shortcut;
 	connect(this,SIGNAL(rejected()),SLOT(resetGlobalShortcut()));
 #endif
+	
+	listWidget->setCurrentRow(0);
 
 	//General (1)
 	CheckBox_OpenLast->setChecked(config->openLastFile());
@@ -121,8 +127,25 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	color2=config->bannerColor2();
 	textcolor=config->bannerTextColor();
 	CheckBox_AlternatingRowColors->setChecked(config->alternatingRowColors());
-
-
+	
+	//Language
+	translations = getAllTranslations();
+	QString currentLang = config->language();
+	bool foundCurrent = false;
+	for (int i=0; i<translations.size(); i++){
+		listSelectLanguage->addItem(translations[i].nameLong);
+		if (translations[i].nameCode==currentLang){
+			listSelectLanguage->setCurrentRow(i+2);
+			foundCurrent = true;
+		}
+	}
+	if (!foundCurrent){
+		if (currentLang=="en_US")
+			listSelectLanguage->setCurrentRow(1);
+		else
+			listSelectLanguage->setCurrentRow(0);
+	}
+	
 	//Security
 	SpinBox_ClipboardTime->setValue(config->clipboardTimeOut());
 	CheckBox_ShowPasswords->setChecked(config->showPasswords());
@@ -132,12 +155,12 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	SpinBox_InacitivtyTime->setValue(config->lockAfterSec());
 	
 	//Features
-	tabWidgetSettings->removeTab(tabWidgetSettings->indexOf(tabFeatures));
+	stackedWidget->removeWidget(pageFeatures);
 	//CheckBox_FeatureBookmarks->setChecked(config->featureBookmarks());
 
 
 	// TODO Desktop Integration
-	tabWidgetSettings->removeTab(tabWidgetSettings->indexOf(tabIntegration));
+	stackedWidget->removeWidget(pageDesktop);
 	/*if(PluginLoadError==QString())
 		Label_IntPlugin_Error->hide();
 	else
@@ -174,11 +197,10 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 #endif
 	
 	adjustSize();
-	resize( size() + QSize(50,20) );
+	resize( size() + QSize(20,20) );
 }
 
-CSettingsDlg::~CSettingsDlg()
-{
+CSettingsDlg::~CSettingsDlg(){
 }
 
 void CSettingsDlg::paintEvent(QPaintEvent *event){
@@ -237,6 +259,21 @@ void CSettingsDlg::apply(){
 	config->setBannerColor2(color2);
 	config->setBannerTextColor(textcolor);
 	config->setAlternatingRowColors(CheckBox_AlternatingRowColors->isChecked());
+
+	//Language
+	int langIndex = listSelectLanguage->currentRow();
+	QString oldLang = config->language();
+	if (langIndex==0)
+		config->setLanguage("auto");
+	else if (langIndex==1)
+		config->setLanguage("en_US");
+	else
+		config->setLanguage(translations[langIndex-2].nameCode);
+	if (config->language() != oldLang){
+		installTranslator();
+		retranslateUi(this);
+		OnSelectLanguage(langIndex);
+	}
 
 	//Security
 	config->setClipboardTimeOut(SpinBox_ClipboardTime->value());
@@ -327,7 +364,7 @@ void CSettingsDlg::OnBrowserCmdBrowse(){
 	}
 }
 
-void CSettingsDlg::OnIntPluginNone(){
+/*void CSettingsDlg::OnIntPluginNone(){
 	Label_IntPlugin_Info->show();
 }
 
@@ -337,8 +374,7 @@ void CSettingsDlg::OnIntPluginGnome(){
 
 void CSettingsDlg::OnIntPluginKde(){
 	Label_IntPlugin_Info->show();
-}
-
+}*/
 
 void CSettingsDlg::OnCustomizeEntryDetails(){
 	CustomizeDetailViewDialog dlg(this);
@@ -359,6 +395,24 @@ void CSettingsDlg::OnAutoSaveChangeToggle(bool checked){
 
 void CSettingsDlg::OnBackupDeleteChange(){
 	SpinBox_BackupDeleteAfter->setEnabled(CheckBox_Backup->isChecked() && CheckBox_BackupDelete->isChecked());
+}
+
+void CSettingsDlg::OnSelectLanguage(int index){
+	if (index==0){
+		labelLang->clear();
+		labelAuthor->clear();
+	}
+	else if (index==1){
+		labelLang->setText("English (United States)");
+		labelAuthor->setText("KeePassX Development Team");
+	}
+	else{
+		if (translations[index-2].nameLong != translations[index-2].nameEnglish)
+			labelLang->setText(QString("%1 / %2").arg(translations[index-2].nameLong).arg(translations[index-2].nameEnglish));
+		else
+			labelLang->setText(translations[index-2].nameEnglish);
+		labelAuthor->setText(translations[index-2].author);
+	}
 }
 
 #ifdef GLOBAL_AUTOTYPE

@@ -20,8 +20,18 @@
 #define TOOLS_H
 
 #define CSTR(x)(x.toLocal8Bit().constData())
+
 class IEntryHandle;
+
 typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
+struct Translation {
+	QString nameCode;
+	QString nameLong;
+	QString nameEnglish;
+	QString author;
+};
+bool operator<(const Translation& t1, const Translation& t2);
+
 const QIcon& getIcon(const QString& name);
 const QPixmap* getPixmap(const QString& name);
 void createBanner(QPixmap* Pixmap, const QPixmap* IconAlpha,const QString& Text,int Width);
@@ -35,5 +45,8 @@ QString getImageFile(const QString& name);
 bool createKeyFile(const QString& filename,QString* err, int length=32, bool Hex=true);
 bool lockPage(void* addr, int len);
 bool unlockPage(void* addr, int len);
+void installTranslator();
+bool isTranslationActive();
+QList<Translation> getAllTranslations();
 
 #endif //TOOLS_H

@@ -24,9 +24,7 @@
 #include "plugins/interfaces/IGnomeInit.h"
 
 
-#include <QTranslator>
-#include <QLibraryInfo>
-#include <QPluginLoader>
+//#include <QPluginLoader>
 #include "mainwindow.h"
 #include "main.h"
 #if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
@@ -40,7 +38,6 @@ QString  AppDir;
 QString HomeDir;
 QString DataDir;
 QString PluginLoadError;
-bool TrActive;
 QString DetailViewTemplate;
 bool EventOccurred;
 bool EventOccurredBlock = false;
@@ -118,7 +115,7 @@ int main(int argc, char **argv)
 		}
 		else{
 			qWarning(CSTR(QString("Could not load desktop integration plugin: File '%1' not found.").arg(LibName)));
-			PluginLoadError=QObject::tr("Could not locate library file.");
+			PluginLoadError=QApplication::translate("Main", "Could not locate library file.");
 		}
 	}
 #endif
@@ -140,57 +137,14 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	
-	//Internationalization
-	QLocale loc;
-	if(!args.language().size())
-		loc=QLocale::system();
-	else
-		loc=QLocale(args.language());
-
-	QTranslator* translator = new QTranslator;
-	QTranslator* qtTranslator = new QTranslator;
-
-	if(loadTranslation(translator,"keepassx-",loc.name(),QStringList()
-						<< DataDir+"/i18n/"
-						<< HomeDir))
-	{
-		QApplication::installTranslator(translator);
-		TrActive=true;
-	}
-	else{
-		if(loc.name()!="en_US")
-			qWarning(CSTR(
-				QString("Kpx: No Translation found for '%1 (%2)' using 'English (United States)'")
-				.arg(QLocale::languageToString(loc.language()))
-				.arg(QLocale::countryToString(loc.country()))
-			));
-		delete translator;
-		TrActive=false;
-	}
-	
-	if(TrActive){
-		if(loadTranslation(qtTranslator,"qt_",loc.name(),QStringList()
-							<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-							<< DataDir+"/i18n/"
-							<< HomeDir))
-			QApplication::installTranslator(qtTranslator);
-		else{
-			if(loc.name()!="en_US")
-				qWarning(CSTR(
-					QString("Qt: No Translation found for '%1 (%2)' using 'English (United States)'")
-					.arg(QLocale::languageToString(loc.language()))
-					.arg(QLocale::countryToString(loc.country()))
-				));
-			delete qtTranslator;
-		}
-	}
-
 	DetailViewTemplate=config->detailViewTemplate();
 
 	loadImages();
 	KpxBookmarks::load();
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
+	
+	installTranslator();
 
 	EventListener* eventListener = new EventListener();
 	app->installEventFilter(eventListener);
@@ -221,21 +175,7 @@ void loadImages(){
 }
 
 
-bool loadTranslation(QTranslator* tr,const QString& prefix,const QString& loc,const QStringList& paths){
-	for(int i=0;i<paths.size();i++)
-		if(tr->load(prefix+loc+".qm",paths[i])) return true;
-	
-	for(int i=0;i<paths.size();i++){
-		QDir dir(paths[i]);
-		QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
-		for(int j=0;j<TrFiles.size();j++){
-			if(TrFiles[j].left(prefix.length()+2)==prefix+loc.left(2)){
-				if(tr->load(TrFiles[j],paths[i]))return true;
-			}
-		}
-	}
-	return false;
-}
+
 
 
 CmdLineArgs::CmdLineArgs(){
@@ -249,19 +189,6 @@ bool CmdLineArgs::parse(const QStringList& argv){
 		if(argv[i]=="-help" || argv[i]=="--help" || argv[i]=="-h"){
 			Help=true;
 			break; // break, because other arguments will be ignored anyway
-		}
-		if(argv[i]=="-lang"){
-			if(argv.size()==i+1){
-				Error="Missing argument for '-lang'.";
-				return false;
-			}
-			if(argv[i+1].size() != 2 && argv[i+1].size() != 5 ){
-				Error=QString("'%1' is not a valid language code.").arg(argv[i+1]);
-				return false;
-			}
-			Language=argv[i+1];
-			i++;
-			continue;
 		}
 		if(argv[i]=="-cfg"){
 			//already done in preparse() -> skip
@@ -308,16 +235,11 @@ bool CmdLineArgs::preparse(int argc,char** argv){
 
 void CmdLineArgs::printHelp(){
 	cerr << "KeePassX " << APP_VERSION << endl;
-	cerr << "Usage: keepassx  [Filename] [Options]" << endl;
+	cerr << "Usage: keepassx [filename] [options]" << endl;
 	cerr << "  -help             This Help" << endl;
 	cerr << "  -cfg <CONFIG>     Use specified file for loading/saving the configuration." << endl;
 	cerr << "  -min              Start minimized." << endl;
 	cerr << "  -lock             Start locked." << endl;
-	cerr << "  -lang <LOCALE>    Use specified language instead of systems default." << endl;
-	cerr << "                    <LOCALE> is the ISO-639 language code with or without ISO-3166 country code" << endl;
-	cerr << "                    Examples: de     German" << endl;
-	cerr << "                              de_CH  German(Switzerland)" << endl;
-	cerr << "                              pt_BR  Portuguese(Brazil)" << endl;
 }
 
 
