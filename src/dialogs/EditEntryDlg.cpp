@@ -23,7 +23,10 @@
 #include "PasswordGenDlg.h"
 #include "EditEntryDlg.h"
 #include "CalendarDlg.h"
+
+#ifdef GLOBAL_AUTOTYPE
 #include "TargetWindowDlg.h"
+#endif
 
 CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent,  bool modal, bool newEntry)
 : QDialog(parent)
@@ -200,9 +203,10 @@ void CEditEntryDlg::OnButtonOK()
 		ModFlag=true;
 
 	if(ModFlag){
+		QDateTime now = QDateTime::currentDateTime();
 		entry->setExpire(DateTime_Expire->dateTime());
-		entry->setLastAccess(QDateTime::currentDateTime());
-		entry->setLastMod(QDateTime::currentDateTime());
+		entry->setLastAccess(now);
+		entry->setLastMod(now);
 		entry->setTitle(Edit_Title->text());
 		entry->setUsername(Edit_UserName->text());
 		entry->setUrl(Edit_URL->text());
@@ -449,7 +453,7 @@ void CEditEntryDlg::OnSelectTarget(){
 		QString text = Edit_Comment->toPlainText();
 		if (!text.isEmpty())
 			text.append("\n");
-		Edit_Comment->setPlainText(text.append(dlg.windowTitle()));
+		Edit_Comment->setPlainText(text.append("Auto-Type-Window: "+dlg.windowTitle()));
 	}
 #endif
 }

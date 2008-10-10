@@ -25,6 +25,7 @@
 	#include <QFile>
 #elif defined(Q_WS_WIN)
 	#include <windows.h>
+	#include <wincrypt.h>
 	#include <QSysInfo>
 #endif
 
@@ -93,7 +94,7 @@ extern void initStdRand(){
 	stream << QDateTime::currentDateTime().toTime_t();
 	stream << QTime::currentTime().msec();
 #ifdef Q_WS_WIN
-	stream << GetCurrentProcessId();
+	stream << (quint32) GetCurrentProcessId();
 #else
 	stream << getpid();
 #endif

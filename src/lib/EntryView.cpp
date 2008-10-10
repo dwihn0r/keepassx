@@ -146,11 +146,24 @@ void KeepassEntryView::OnDeleteEntry(){
 		else
 			text=tr("Are you sure you want to delete these %1 entries?").arg(entries.size());
 		if(QMessageBox::question(this,tr("Delete?"),text,QMessageBox::Yes | QMessageBox::No,QMessageBox::No)==QMessageBox::No)
-			return;			
+			return;
 	}
 	
+	bool backup = false;
+	IGroupHandle* bGroup;
+	if (config->backup() && ((EntryViewItem*)entries[0])->EntryHandle->group() != (bGroup=db->backupGroup()))
+		backup = true;
 	for(int i=0; i<entries.size();i++){
-		db->deleteEntry(((EntryViewItem*)entries[i])->EntryHandle);
+		IEntryHandle* entryHandle = ((EntryViewItem*)entries[i])->EntryHandle;
+		if (backup){
+			db->moveEntry(entryHandle, bGroup);
+			QDateTime now = QDateTime::currentDateTime();
+			entryHandle->setLastAccess(now);
+			entryHandle->setLastMod(now);
+		}
+		else{
+			db->deleteEntry(entryHandle);
+		}
 		Items.removeAt(Items.indexOf((EntryViewItem*)entries[i]));
 		delete entries[i];
 	}
@@ -221,10 +234,10 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 			break;
 	}
 	
-	if ((result==1 || result==2) && config->backup()){
+	IGroupHandle* bGroup;
+	if ((result==1 || result==2) && config->backup() && item->EntryHandle->group() != (bGroup=db->backupGroup())){
 		old.LastAccess = QDateTime::currentDateTime();
-		old.LastMod = QDateTime::currentDateTime();
-		IGroupHandle* bGroup = db->backupGroup();
+		old.LastMod = old.LastAccess;
 		if (bGroup==NULL)
 			emit requestCreateGroup("Backup", 4, NULL);
 		if ((bGroup = db->backupGroup())!=NULL)
