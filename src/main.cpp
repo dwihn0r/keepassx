@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	initAppPaths(argc,argv);
 	CmdLineArgs args;
 	if(!args.preparse(argc,argv)){ // searches only for the -cfg parameter
-		qCritical(CSTR( args.error().append("\n") ));
+		qCritical("%s", CSTR( args.error().append("\n") ));
 		args.printHelp();
 		return 1;
 	}
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 			if(!plugin.load()){
 				PluginLoadError=plugin.errorString();
 				qWarning("Could not load desktop integration plugin:");
-				qWarning(CSTR(PluginLoadError));
+				qWarning("%s", CSTR(PluginLoadError));
 			}
 			else{
 				QObject *plugininstance=plugin.instance();
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 		#endif	
 	}
 	if ( !args.parse(QApplication::arguments()) ){
-		qCritical(CSTR( args.error().append("\n") ));
+		qCritical("%s", CSTR( args.error().append("\n") ));
 		args.printHelp();
 		return 1;
 	}
@@ -151,9 +151,7 @@ int main(int argc, char **argv)
 
 	QApplication::setQuitOnLastWindowClosed(false);
 	KeepassMainWindow *mainWin = new KeepassMainWindow(args.file(), args.startMinimized(), args.startLocked());
-#ifdef GLOBAL_AUTOTYPE
-	AutoType::init();
-#endif
+
 	int r=app->exec();
 	delete mainWin;
 	delete eventListener;
@@ -255,7 +253,7 @@ QString findPlugin(const QString& filename){
 bool EventListener::eventFilter(QObject*, QEvent* event){
 	if (!EventOccurred){
 		int t = event->type();
-		if ( t>=QEvent::MouseButtonPress&&t<=QEvent::KeyRelease || t>=QEvent::HoverEnter&&t<=QEvent::HoverMove )
+		if ( (t>=QEvent::MouseButtonPress && t<=QEvent::KeyRelease) || (t>=QEvent::HoverEnter && t<=QEvent::HoverMove) )
 			EventOccurred = true;
 	}
 	

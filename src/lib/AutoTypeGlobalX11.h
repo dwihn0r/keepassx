@@ -1,5 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2005-2008 by Felix Geyer                                *
+ *   Copyright (C) 2005-2008 by Tarek Saidi, Felix Geyer                   *
+ *   tarek.saidi@arcor.de                                                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,26 +18,29 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#ifndef _AUTOTYPEGLOBALX11_H_
+#define _AUTOTYPEGLOBALX11_H_
 
-#include "Application_X11.h"
-#include "lib/AutoType.h"
-#include "lib/HelperX11.h"
+#include "AutoTypeX11.h"
 
-const unsigned int KeepassApplication::remove_invalid = ControlMask|ShiftMask|Mod1Mask|Mod5Mask|Mod4Mask;
+class AutoTypeGlobalX11 : public AutoTypeX11, public AutoTypeGlobal {
+	public:
+		AutoTypeGlobalX11(KeepassMainWindow* mainWin);
+		void perform(IEntryHandle* entry, bool hideWindow=true, int nr=0, bool wasLocked=false);
+		void performGlobal();
+		bool registerGlobalShortcut(const Shortcut& s);
+		void unregisterGlobalShortcut();
+		QStringList getAllWindowTitles();
+	
+	private:
+		void windowTitles(Window window, QStringList& titleList);
+		QString getRootGroupName(IEntryHandle* entry);
+		
+		Window windowRoot;
+		//QSet<QString> windowBlacklist;
+		QSet<QString> classBlacklist;
+		Atom wm_state;
+		Window focusedWindow;
+};
 
-KeepassApplication::KeepassApplication(int& argc, char** argv) : QApplication(argc, argv){
-}
-
-bool KeepassApplication::x11EventFilter(XEvent* event){
-	if (event->type==KeyPress && autoType->getShortcut().key!=0u &&
-			event->xkey.keycode==XKeysymToKeycode(event->xkey.display,HelperX11::getKeysym(autoType->getShortcut().key)) &&
-			(event->xkey.state&remove_invalid)==HelperX11::getShortcutModifierMask(autoType->getShortcut()) && focusWidget()==NULL )
-	{
-		EventOccurred = true;
-		autoType->performGlobal();
-		return true;
-	}
-	else{
-		return QApplication::x11EventFilter(event);
-	}
-}
+#endif // _AUTOTYPEGLOBALX11_H_

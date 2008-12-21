@@ -61,10 +61,10 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	setUnifiedTitleAndToolBarOnMac(true);
 #endif
 #ifdef AUTOTYPE
-	AutoType::MainWin=this;
+	initAutoType(this);
 #endif
 #ifdef GLOBAL_AUTOTYPE
-	AutoType::registerGlobalShortcut(config->globalShortcut());
+	autoType->registerGlobalShortcut(config->globalShortcut());
 #endif
 	setWindowModified(false);
 	setGeometry(config->mainWindowGeometry(geometry()));
@@ -1016,7 +1016,7 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 	}
 	
 #ifdef GLOBAL_AUTOTYPE
-	AutoType::unregisterGlobalShortcut();
+	autoType->unregisterGlobalShortcut();
 #endif
 
 	config->setMainWindowGeometry(geometry());

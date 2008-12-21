@@ -33,9 +33,6 @@
 
 class HelperX11{
 	public:
-		static int getModifiers(Display *d,KeySym keysym, int keycode);
-		static void pressModifiers(Display*,int mods,bool Press=true);
-		static void releaseModifiers(Display*,int mods);
 		static quint16 getKeysym(const QChar& c);
 #ifdef GLOBAL_AUTOTYPE
 		static int getShortcutModifierMask(const Shortcut& s);

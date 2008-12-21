@@ -60,7 +60,7 @@ void KeepassGroupView::createItems(){
 void KeepassGroupView::updateIcons(){
 	for(int i=0;i<Items.size();i++){
 		Items[i]->setIcon(0,db->icon(Items[i]->GroupHandle->image()));
-	}	
+	}
 }
 
 void KeepassGroupView::showSearchResults(){
@@ -86,7 +86,7 @@ void KeepassGroupView::addChildren(GroupViewItem* item){
 void KeepassGroupView::OnDeleteGroup(){
 	if(config->askBeforeDelete()){
 		if(QMessageBox::question(this,tr("Delete?"),
-		   tr("Are you sure you want to delete this group, all it's child groups and all their entries?"),
+		   tr("Are you sure you want to delete this group, all its child groups and all their entries?"),
 			  QMessageBox::Yes | QMessageBox::No,QMessageBox::No) == QMessageBox::No)
 			return;			
 	}

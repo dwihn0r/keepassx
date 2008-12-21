@@ -23,7 +23,7 @@
 #include "dialogs/SimplePasswordDlg.h"
 
 QFile* ExporterBase::openFile(QWidget* parent, QString id, QStringList Filters){
-	QString filename=KpxFileDialogs::saveFile(parent,id,tr("Import File..."),Filters);
+	QString filename=KpxFileDialogs::saveFile(parent,id,tr("Export File..."),Filters);
 	if(filename.isEmpty())return NULL;
 	QFile* file=new QFile(filename);
 	if(!file->open(QIODevice::ReadWrite|QIODevice::Truncate)){

@@ -34,7 +34,7 @@ bool Import_KWalletXml::importDatabase(QWidget* GuiParent, IDatabase* db){
 	int col,line;
 	if(!doc.setContent(QString::fromUtf8((char*)buffer,len),false,&xmlerr,&line,&col)){
 		qWarning("Import_PwManager::parseXmlContent():\n");
-		qWarning(((xmlerr+" (Line:%1 Column:%2)").arg(line).arg(col)+QString('\n')).toAscii());
+		qWarning("%s (Line:%d Column:%d)\n",CSTR(xmlerr), line, col);
 		QMessageBox::critical(GuiParent,tr("Import Failed"),tr("Invalid XML data (see stdout for details)."));
 		delete [] buffer;
 		return false;}

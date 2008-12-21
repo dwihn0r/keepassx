@@ -365,7 +365,7 @@
  * This default definition of SWAP works, but on many platforms there is a 
  * more efficient implementation. 
  */
-#define BSWAP(x) (ROL32((x),8)&0x00ff00ff | ROR32((x),8) & 0xff00ff00)
+#define BSWAP(x) ( (ROL32((x),8) & 0x00ff00ff) | (ROR32((x),8) & 0xff00ff00) )
 
 
 /*

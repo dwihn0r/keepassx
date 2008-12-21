@@ -21,40 +21,6 @@
 #include "HelperX11.h"
 #include <QX11Info>
 
-int HelperX11::getModifiers(Display *d,KeySym keysym, int keycode){
-	int SymsPerKey;
-	KeySym* Syms=XGetKeyboardMapping(d,keycode,1,&SymsPerKey);
-	int c=-1;
-	for(int i=0;i<4;i++)
-		if(Syms[i]==keysym){
-			c=i; break;
-		}
-	Q_ASSERT(c!=-1);
-	XFree(Syms);
-	return c;
-}
-
-void HelperX11::pressModifiers(Display* d,int mods,bool press){
-	switch(mods){
-		case 0: //no modifier
-				break;
-		case 1: //Shift
-				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
-				break;
-		case 2: //AltGr
-				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
-				break;
-		case 3: //Shift+AltGr
-				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_Shift_L),press,2);
-				XTestFakeKeyEvent(d,XKeysymToKeycode(d,XK_ISO_Level3_Shift),press,2);
-				break;
-	}
-}
-
-void HelperX11::releaseModifiers(Display* d,int mods){
-	pressModifiers(d,mods,False);
-}
-
 #ifdef GLOBAL_AUTOTYPE
 int HelperX11::getShortcutModifierMask(const Shortcut& s){
 	int mod=0;
@@ -889,8 +855,8 @@ quint16 HelperX11::getKeysym(const QChar& c){
 	
 	int MapSize = sizeof(KeysymMap) / sizeof(quint16) / 2;
 	for (int i=0; i<MapSize; i++){
-		if(unicode==KeysymMap[i][0])
-			return KeysymMap[i][1];
+		if (unicode==KeysymMap[i][1])
+			return KeysymMap[i][0];
 	}
 	
 	return 0;

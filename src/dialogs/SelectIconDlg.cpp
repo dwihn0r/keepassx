@@ -60,8 +60,9 @@ void CSelectIconDlg::OnAddIcon(){
 		QPixmap icon;
 		if(!icon.load(filenames[i])){
 			errors+=tr("%1: File could not be loaded.").arg(filenames[i].section("/",-1)).append("\n");
-			continue;}
-			dynamic_cast<ICustomIcons*>(db)->addIcon(icon.scaled(16,16,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+			continue;
+		}
+		dynamic_cast<ICustomIcons*>(db)->addIcon(icon.scaled(16,16,Qt::KeepAspectRatio,Qt::SmoothTransformation));
 	}
 	if(errors.size())
 		QMessageBox::warning(this,tr("Error"),tr("An error occured while loading the icon(s):").append("\n").append(errors));

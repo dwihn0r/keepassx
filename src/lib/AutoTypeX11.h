@@ -18,40 +18,54 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef _AUTOTYPE_H_
-#define _AUTOTYPE_H_
+#ifndef _AUTOTYPEX11_H_
+#define _AUTOTYPEX11_H_
 
-class KeepassMainWindow;
-void initAutoType(KeepassMainWindow* mainWin);
+#include "AutoType.h"
 
-class AutoType{
-	public:
-		virtual void perform(IEntryHandle* entry, bool hideWindow=true, int nr=0, bool wasLocked=false) = 0;
+#include <X11/Xutil.h>
+
+enum AutoTypeActionType{
+	TypeKey, Delay
 };
 
-#ifdef GLOBAL_AUTOTYPE
-struct Shortcut{
-	bool ctrl, shift, alt, altgr, win;
-	quint32 key;
+struct AutoTypeAction{
+	AutoTypeAction(AutoTypeActionType t, quint16 d);
+	AutoTypeActionType type;
+	quint16 data;
 };
 
-class AutoTypeGlobal : public AutoType{
+class AutoTypeX11 : public AutoType {
 	public:
-		virtual void performGlobal() = 0;
-		inline const Shortcut& getShortcut() { return shortcut; };
-		virtual bool registerGlobalShortcut(const Shortcut& s) = 0;
-		virtual void unregisterGlobalShortcut() = 0;
-		virtual QStringList getAllWindowTitles() = 0;
+		AutoTypeX11(KeepassMainWindow* mainWin);
+		void perform(IEntryHandle* entry, bool hideWindow=true, int nr=0, bool wasLocked=false);
 	
 	protected:
-		Shortcut shortcut;
+		void sleepTime(int msec);
+		inline void sleepKeyStrokeDelay(){ sleep(config->autoTypeKeyStrokeDelay()); };
+		void templateToKeysyms(const QString& Template, QList<AutoTypeAction>& KeySymList,IEntryHandle* entry);
+		void stringToKeysyms(const QString& string,QList<AutoTypeAction>& KeySymList);
+		
+		int AddKeysym(KeySym keysym, bool top);
+		void AddModifier(KeySym keysym);
+		void ReadKeymap();
+		void SendKeyPressedEvent(KeySym keysym, unsigned int shift);
+		void SendEvent(XKeyEvent *event);
+		static int MyErrorHandler(Display *my_dpy, XErrorEvent *event);
+		
+		KeepassMainWindow* mainWin;
+		Display* dpy;
+		
+		KeySym *keysym_table;
+		int min_keycode, max_keycode;
+		int keysym_per_keycode;
+		static bool error_detected;
+		int alt_mask;
+		int meta_mask;
+		int altgr_mask;
+		KeySym altgr_keysym;
+		Window focused_window;
+		Window focused_subwindow;
 };
-#endif
 
-#ifdef GLOBAL_AUTOTYPE
-extern AutoTypeGlobal* autoType;
-#else
-extern AutoType* autoType;
-#endif
-
-#endif
+#endif // _AUTOTYPEX11_H_

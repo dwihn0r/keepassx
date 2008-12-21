@@ -23,7 +23,7 @@
 
 class IEntryHandle;
 
-typedef enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
+enum tKeyType {PASSWORD=0,KEYFILE=1,BOTH=2};
 struct Translation {
 	QString nameCode;
 	QString nameLong;

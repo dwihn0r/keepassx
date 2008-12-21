@@ -23,7 +23,7 @@
 
 extern const QDateTime Date_Never;
 
-typedef enum CryptAlgorithm{
+enum CryptAlgorithm{
 	Rijndael_Cipher=0,
 	Twofish_Cipher=1
 };
@@ -371,7 +371,7 @@ public:
 	*/
 	virtual QPixmap& icon(int index)=0;
 	//! \return the number of icons provided by the database. This number can vary at runtime if the database supports custom icons.
- 	virtual int	numIcons()=0;
+ 	virtual int numIcons()=0;
 
 	/*! Deletes all old invalid handles of the database.
 		Make sure that there are no pointers to those handles which are still in use before calling this function.*/
@@ -395,16 +395,8 @@ public:
 		\param Fields A pointer to a six element bool array. It defines which fields are included into the search. The order is: title, username, url, password, comment, attachment description. The pointer can also be NULL, than the default pattern is used instead.
 		\return the search results as a list of pointers to the entry handles.*/
 	virtual QList<IEntryHandle*> search(IGroupHandle* Group,const QString& SearchString, bool CaseSensitve, bool RegExp,bool Recursive,bool* Fields)=0;
-
-	//! Moves an entry to the recycle bin.
-	virtual void moveToTrash(IEntryHandle* entry)=0;
-
-	//! \returns all entries of the recycle bin.
-	virtual QList<IEntryHandle*> trashEntries()=0;
-
-	//! Empty the recycle bin.
-	virtual void emptyTrash()=0;
-
+	
+	//virtual IDatabase* groupToNewDb(IGroupHandle* group)=0;
 };
 
 class IKdbSettings{

@@ -90,7 +90,7 @@ void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool 
 			pShortcut.alt = alt;
 			pShortcut.altgr = altgr;
 			pShortcut.win = win;
-			failed = AutoType::registerGlobalShortcut(pShortcut);
+			failed = autoType->registerGlobalShortcut(pShortcut);
 			if (!failed)
 				setBackgroundColor(QColor(255, 150, 150));
 			else

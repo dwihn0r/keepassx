@@ -72,7 +72,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 #endif
 	
 #ifdef GLOBAL_AUTOTYPE
-	pShortcut = AutoType::shortcut;
+	pShortcut = autoType->getShortcut();
 	connect(this,SIGNAL(rejected()),SLOT(resetGlobalShortcut()));
 #endif
 	
@@ -417,7 +417,7 @@ void CSettingsDlg::OnSelectLanguage(int index){
 
 #ifdef GLOBAL_AUTOTYPE
 void CSettingsDlg::resetGlobalShortcut(){
-	AutoType::unregisterGlobalShortcut();
-	AutoType::registerGlobalShortcut(pShortcut);
+	autoType->unregisterGlobalShortcut();
+	autoType->registerGlobalShortcut(pShortcut);
 }
 #endif

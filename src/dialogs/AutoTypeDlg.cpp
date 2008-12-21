@@ -92,7 +92,7 @@ void AutoTypeDlg::resizeEvent(QResizeEvent* event){
 bool AutoTypeDlg::event(QEvent* event){
 	if (!EventOccurred){
 		int t = event->type();
-		if ( t>=QEvent::MouseButtonPress&&t<=QEvent::KeyRelease || t>=QEvent::HoverEnter&&t<=QEvent::HoverMove )
+		if ( (t>=QEvent::MouseButtonPress && t<=QEvent::KeyRelease) || (t>=QEvent::HoverEnter && t<=QEvent::HoverMove) )
 			EventOccurred = true;
 	}
 	return QWidget::event(event);
@@ -100,6 +100,5 @@ bool AutoTypeDlg::event(QEvent* event){
 
 void AutoTypeDlg::itemSelected(QTreeWidgetItem* item){
 	close();
-	QString err;
-	AutoType::perform(itemToEntry[item].dbHandle, err, pWasLocked, itemToEntry[item].nr, pWasLocked);
+	autoType->perform(itemToEntry[item].dbHandle, pWasLocked, itemToEntry[item].nr, pWasLocked);
 }

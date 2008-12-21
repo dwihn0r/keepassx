@@ -536,9 +536,12 @@ void KeepassEntryView::OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisInde
 int KeepassEntryView::logicalColIndex(int LstIndex){
 	int c=-1;
 	for(int i=0;i<NUM_COLUMNS;i++){
-		if(Columns.at(i))c++;
-		if(i==10 && Columns.at(10) && ViewMode!=ShowSearchResults)c--;
-		if(i==LstIndex)return c;
+		if(Columns.at(i))
+			c++;
+		if(i==10 && Columns.at(10) && ViewMode!=ShowSearchResults)
+			c--;
+		if(i==LstIndex)
+			return c;
 	}
 	Q_ASSERT(false);
 	return -1;
@@ -578,15 +581,18 @@ void KeepassEntryView::resizeColumns(){
 int KeepassEntryView::columnListIndex(int LogicalIndex){
 	int c=-1; int i;
 	for(i=0;i<NUM_COLUMNS;i++){
-		if(Columns.at(i))c++;
-		if(i==10 && Columns.at(10) && ViewMode!=ShowSearchResults)c--;
-		if(c==LogicalIndex)break;
+		if(Columns.at(i))
+			c++;
+		if(i==10 && Columns.at(10) && ViewMode!=ShowSearchResults)
+			c--;
+		if(c==LogicalIndex)
+			break;
 	}
 	return i;
 }
 
 
-void KeepassEntryView::OnColumnResized(int lindex,int Old, int New){
+void KeepassEntryView::OnColumnResized(int lindex, int Old, int New){
 	if(!AutoResizeColumns)return;
 	for(int i=0;i<header()->count();i++){
 		ColumnSizes[columnListIndex(i)]=header()->sectionSize(i);
@@ -611,15 +617,20 @@ void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
 	EntryViewItem* DragStartItem=(EntryViewItem*)itemAt(DragStartPos);
 	if(!DragStartItem){
 		while(selectedItems().size()){
-			setItemSelected(selectedItems().first(),false);}
+			setItemSelected(selectedItems().first(),false);
+		}
 		return;
 	}
 	if(selectedItems().isEmpty()){
-			setItemSelected(DragStartItem,true);}
+			setItemSelected(DragStartItem,true);
+	}
 	else{
 		bool AlreadySelected=false;
 		for(int i=0;i<selectedItems().size();i++){
-			if(selectedItems()[i]==DragStartItem){AlreadySelected=true; break;}
+			if(selectedItems()[i]==DragStartItem){
+				AlreadySelected=true;
+				break;
+			}
 		}
 		if(!AlreadySelected){
 			while(selectedItems().size()){
@@ -656,8 +667,7 @@ void KeepassEntryView::removeDragItems(){
 #ifdef AUTOTYPE
 void KeepassEntryView::OnAutoType(){
 	if (selectedItems().size() == 0) return;
-	QString error;
-	AutoType::perform(((EntryViewItem*)selectedItems().first())->EntryHandle,error);
+	autoType->perform(((EntryViewItem*)selectedItems().first())->EntryHandle);
 }
 #endif
 

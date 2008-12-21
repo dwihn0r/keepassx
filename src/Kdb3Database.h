@@ -133,11 +133,6 @@ public:
 			QList<StdEntry*> Entries;
 	};
 
-	class TrashEntry: public StdEntry{
-		public:
-			QStringList GroupPath;
-	};
-
 	Kdb3Database();
 	virtual ~Kdb3Database(){};
 	virtual bool load(QString identifier);
@@ -150,7 +145,7 @@ public:
 	virtual bool isKeyError();
 	virtual void cleanUpHandles();
 	virtual QPixmap& icon(int index);
- 	virtual int	numIcons();
+ 	virtual int numIcons();
 	virtual void addIcon(const QPixmap& icon);
 	virtual void removeIcon(int index);
 	virtual void replaceIcon(int index,const QPixmap& icon);
@@ -178,9 +173,6 @@ public:
 	virtual IEntryHandle* addEntry(const CEntry* NewEntry, IGroupHandle* group);
 	virtual void moveEntry(IEntryHandle* entry, IGroupHandle* group);
 	virtual void deleteLastEntry();
-	virtual void moveToTrash(IEntryHandle* entry);
-	virtual QList<IEntryHandle*> trashEntries();
-	virtual void emptyTrash();
 
 
 	virtual QList<IGroupHandle*> groups();
@@ -192,8 +184,7 @@ public:
 	virtual bool isParent(IGroupHandle* parent, IGroupHandle* child);
 	
 	virtual void generateMasterKey();
-
-
+	//virtual IDatabase* groupToNewDb(IGroupHandle* group);
 
 private:
 	QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
@@ -220,6 +211,7 @@ private:
 	void getEntriesRecursive(IGroupHandle* Group, QList<IEntryHandle*>& EntryList);
 	void rebuildIndices(QList<StdGroup*>& list);
 	void restoreGroupTreeState();
+	//void copyTree(Kdb3Database* db, GroupHandle* orgGroup, IGroupHandle* parent);
 
 	StdEntry* getEntry(const KpxUuid& uuid);
 	StdEntry* getEntry(EntryHandle* handle);
@@ -231,10 +223,8 @@ private:
 
 	QList<EntryHandle> EntryHandles;
 	QList<GroupHandle> GroupHandles;
-	QList<EntryHandle> TrashHandles;
 	QList<StdEntry> Entries;
 	QList<StdGroup> Groups;
-	QList<TrashEntry> TrashEntries;
 	StdGroup RootGroup;
 	QList<QPixmap>CustomIcons;
 	QFile* File;

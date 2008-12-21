@@ -45,12 +45,12 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
 	INSTALLS += share
 	contains(DEFINES,AUTOTYPE){
 		LIBS += -lXtst
-		SOURCES += lib/HelperX11.cpp lib/AutoType_X11.cpp
-		HEADERS += lib/HelperX11.h
+		SOURCES += lib/HelperX11.cpp lib/AutoTypeX11.cpp
+		HEADERS += lib/HelperX11.h lib/AutoTypeX11.h
 	}
 	contains(DEFINES,GLOBAL_AUTOTYPE){
-		SOURCES += Application_X11.cpp
-		HEADERS += Application_X11.h
+		SOURCES += Application_X11.cpp lib/AutoTypeGlobalX11.cpp
+		HEADERS += Application_X11.h lib/AutoTypeGlobalX11.h
 	}
 	SOURCES += main_unix.cpp
 }
@@ -93,7 +93,7 @@ macx {
 #-------------------------------------------------------------------------------
 isEqual(QMAKE_WIN32,1){
 	CONFIG += windows
-	isEmpty(PREFIX): PREFIX = "C:/Program files/KeePassX"
+	isEmpty(PREFIX): PREFIX = "C:/Program\ files/KeePassX"
 	TARGET = ../bin/KeePassX
 	target.path = $${PREFIX}
 	data.files += ../share/keepassx/*

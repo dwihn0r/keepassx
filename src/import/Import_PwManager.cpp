@@ -116,8 +116,9 @@ bool Import_PwManager::parseXmlContent(char* content){
 	int col,line;
 	if(!db.setContent(QString::fromUtf8(content,strlen(content)-1),false,&err,&line,&col)){
 		qWarning("Import_PwManager::parseXmlContent():\n");
-		qWarning(((err+" (Line:%1 Column:%2)").arg(line).arg(col)+QString('\n')).toAscii());
-		return false;}
+		qWarning("%s (Line:%d Column:%d)\n", CSTR(err), line, col);
+		return false;
+	}
 	QDomElement root=db.documentElement();
 	if(root.tagName()!="P")return false;
 	//Achtung! Kommentare und Kategorien haben das selbe Tag "c"

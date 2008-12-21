@@ -22,7 +22,7 @@
 
 TargetWindowDlg::TargetWindowDlg(QWidget* parent) : QDialog(parent){
 	setupUi(this);
-	QStringList windowTitles = AutoType::getAllWindowTitles();
+	QStringList windowTitles = autoType->getAllWindowTitles();
 	windowTitles.sort();
 	for (QStringList::const_iterator i = windowTitles.constBegin(); i != windowTitles.constEnd(); ++i)
 		comboWindow->addItem(*i);

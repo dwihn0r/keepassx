@@ -247,10 +247,16 @@ void Kdb3Database::parseCustomIconsMetaStreamV3(const QByteArray& dta){
 }
 
 void Kdb3Database::parseGroupTreeStateMetaStream(const QByteArray& dta){
-	if(dta.size()<4){qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error."); return;}
+	if(dta.size()<4){
+		qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error.");
+		return;
+	}
 	quint32 Num;
 	memcpyFromLEnd32(&Num,dta.data());
-	if(Num*5!=dta.size()-4){qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error."); return;}
+	if(Num*5!=dta.size()-4){
+		qWarning("Discarded metastream KPX_GROUP_TREE_STATE because of a parsing error.");
+		return;
+	}
 	TreeStateMetaStream.clear();
 	for(int i=0;i<Num;i++){
 		quint32 GroupID;
@@ -1002,14 +1008,17 @@ QList<IGroupHandle*> Kdb3Database::groups(){
 quint32 Kdb3Database::getNewGroupId(){
 	quint32 id;
 	bool used;
-	while(1){
+	do{
 		used=false;
 		randomize(&id,4);
 		if(!id)continue; //group IDs must not be 0
 		for(int j=0;j<Groups.size();j++){
-			if(Groups[j].Id==id)used=true;}
-		if(used==false)break;
-	}
+			if(Groups[j].Id==id){
+				used=true;
+				break;
+			}
+		}
+	} while(used);
 	return id;
 }
 
@@ -1027,6 +1036,10 @@ IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHan
 	else{
 		Groups.back().Parent=&RootGroup;
 		Groups.back().Index=RootGroup.Children.size();
+		if (group->Title!="Backup" && RootGroup.Children.size() && RootGroup.Children.last()->Title=="Backup"){
+			RootGroup.Children.last()->Index = Groups.back().Index;
+			Groups.back().Index--;
+		}
 		Groups.back().Parent->Children.append(&Groups.back());
 	}
 	return &GroupHandles.back();
@@ -1256,7 +1269,7 @@ bool Kdb3Database::save(){
 	}
 	if(!File->isOpen()){
 		if(!File->open(QIODevice::ReadWrite)){
-			error= tr("Could not open file for writing.");
+			error = tr("Could not open file for writing.");
 			return false;
 		}
 	}
@@ -1376,14 +1389,16 @@ bool Kdb3Database::save(){
 		delete [] buffer;
 		return false;
 	}
-
-	if(!File->resize(EncryptedPartSize+DB_HEADER_SIZE)){
+	
+	int size = EncryptedPartSize+DB_HEADER_SIZE;
+	
+	if(!File->resize(size)){
 		delete [] buffer;
 		error=decodeFileError(File->error());
 		return false;	
 	}
 	File->seek(0);
-	if(File->write(buffer,EncryptedPartSize+DB_HEADER_SIZE)!=EncryptedPartSize+DB_HEADER_SIZE){
+	if(File->write(buffer,size)!=size){
 		delete [] buffer;
 		error=decodeFileError(File->error());
 		return false;
@@ -1824,34 +1839,6 @@ bool Kdb3Database::changeFile(const QString& filename){
 	return true;
 }
 
-void Kdb3Database::moveToTrash(IEntryHandle* entry){
-	TrashEntry trash=*((TrashEntry*)dynamic_cast<EntryHandle*>(entry)->Entry);
-	IGroupHandle* CurGroup=entry->group();
-	while(CurGroup){
-		trash.GroupPath << CurGroup->title();
-		CurGroup=CurGroup->parent();
-	}
-	deleteEntry(entry);
-	trash.Group=NULL;
-	TrashEntries.append(trash);
-	TrashHandles.append(EntryHandle(this));
-	TrashHandles.back().Entry=&TrashEntries.back();
-	TrashEntries.back().Handle=&TrashHandles.back();
-}
-
-void Kdb3Database::emptyTrash(){
-	TrashEntries.clear();
-	TrashHandles.clear();
-}
-
-QList<IEntryHandle*> Kdb3Database::trashEntries(){
-	QList<IEntryHandle*> handles;
-	for(int i=0; i<TrashHandles.size();i++)
-		if(TrashHandles[i].isValid())
-			handles << &TrashHandles[i];
-	return handles;
-}
-
 void Kdb3Database::generateMasterKey(){
 	randomize(TransfRandomSeed,32);
 	RawMasterKey.unlock();
@@ -1860,6 +1847,34 @@ void Kdb3Database::generateMasterKey(){
 	RawMasterKey.lock();
 	MasterKey.lock();
 }
+
+/*void Kdb3Database::copyTree(Kdb3Database* db, GroupHandle* orgGroup, IGroupHandle* parent) {
+	IGroupHandle* newParent = db->addGroup(orgGroup->Group, parent);
+	
+	QList<IEntryHandle*> entryList = entries(orgGroup);
+	for (int i=0; i<entryList.size(); i++) {
+		EntryHandle* entry = static_cast<EntryHandle*>(entryList[i]);
+		db->addEntry(entry->Entry, newParent);
+	}
+	
+	QList<IGroupHandle*> children = orgGroup->children();
+	for (int i=0; i<children.size(); i++) {
+		GroupHandle* child = static_cast<GroupHandle*>(children[i]);
+		copyTree(db, child, newParent);
+	}
+}
+
+IDatabase* Kdb3Database::groupToNewDb(IGroupHandle* group){
+	Kdb3Database* db = new Kdb3Database();
+	db->create();
+	copyTree(db, static_cast<GroupHandle*>(group), NULL);
+	
+	db->changeFile("/ramtmp/test.kdb");
+	if (!db->save())
+		qWarning("%s", CSTR(db->error));
+	
+	return db;
+}*/
 
 
 void KeyTransform::transform(quint8* src, quint8* dst, quint8* KeySeed, int rounds){
@@ -1896,9 +1911,8 @@ int KeyTransformBenchmark::benchmark(int pMSecs){
 	KeyTransformBenchmark* ktbRight = new KeyTransformBenchmark(pMSecs);
 	ktbLeft->start();
 	ktbRight->start();
-	while (ktbLeft->isRunning() || ktbRight->isRunning()){
-		QThread::msleep(100);
-	}
+	ktbLeft->wait();
+	ktbRight->wait();
 	int num = ktbLeft->rounds + ktbRight->rounds;
 	delete ktbLeft;
 	delete ktbRight;
