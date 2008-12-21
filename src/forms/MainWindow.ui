@@ -172,6 +172,7 @@
      <string>&amp;Edit</string>
     </property>
     <addaction name="EditNewGroupAction" />
+    <addaction name="EditNewSubgroupAction" />
     <addaction name="EditEditGroupAction" />
     <addaction name="EditDeleteGroupAction" />
     <addaction name="separator" />
@@ -290,9 +291,9 @@
     <string>&amp;Quit</string>
    </property>
   </action>
-  <action name="EditNewGroupAction" >
+  <action name="EditNewSubgroupAction" >
    <property name="text" >
-    <string>&amp;Add New Group...</string>
+    <string>&amp;Add New Subgroup...</string>
    </property>
   </action>
   <action name="EditEditGroupAction" >
@@ -576,6 +577,11 @@
   <action name="EditCopyUrlAction" >
    <property name="text" >
     <string>Copy URL to Clipboard</string>
+   </property>
+  </action>
+  <action name="EditNewGroupAction" >
+   <property name="text" >
+    <string>Add New Group...</string>
    </property>
   </action>
  </widget>

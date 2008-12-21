@@ -103,6 +103,13 @@ void KeepassGroupView::OnHideSearchResults(){
 }
 
 void KeepassGroupView::OnNewGroup(){
+	CGroup NewGroup;
+	CEditGroupDialog dlg(db,&NewGroup,parentWidget(),true);
+	if(dlg.exec())
+		createGroup(NewGroup.Title, NewGroup.Image, NULL);
+}
+
+void KeepassGroupView::OnNewSubgroup(){
 	GroupViewItem* parent=(GroupViewItem*)currentItem();
 	CGroup NewGroup;
 	CEditGroupDialog dlg(db,&NewGroup,parentWidget(),true);

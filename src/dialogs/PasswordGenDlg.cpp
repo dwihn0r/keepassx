@@ -114,8 +114,7 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	Check_EveryGroup->setChecked(config->pwGenEveryGroup());
 	Spin_Num->setValue(config->pwGenLength());
 	adjustSize();
-	setMaximumSize(size());
-	setMinimumSize(size());
+	resize(size() + QSize(10, 20));
 	createBanner(&BannerPixmap,getPixmap("dice"),tr("Password Generator"),width());
 	
 	if(!config->showPasswords())

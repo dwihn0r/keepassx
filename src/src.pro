@@ -143,6 +143,7 @@ TRANSLATIONS += translations/keepassx-cs_CZ.ts \
                 translations/keepassx-es_ES.ts \
                 translations/keepassx-fr_FR.ts \
                 translations/keepassx-gl_ES.ts \
+                translations/keepassx-it_IT.ts \
                 translations/keepassx-ja_JP.ts \
                 translations/keepassx-ru_RU.ts \
                 translations/keepassx-xx_XX.ts

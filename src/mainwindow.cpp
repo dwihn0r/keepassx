@@ -148,6 +148,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(menuBookmarks,SIGNAL(triggered(QAction*)),this,SLOT(OnBookmarkTriggered(QAction*)));
 
 	connect(EditNewGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnNewGroup()));
+	connect(EditNewSubgroupAction, SIGNAL(triggered()), GroupView, SLOT(OnNewSubgroup()));
 	connect(EditEditGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnEditGroup()));
 	connect(EditDeleteGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnDeleteGroup()));
 	connect(EditNewEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnNewEntry()));
@@ -223,7 +224,7 @@ void KeepassMainWindow::setupToolbar(){
     toolBar->addAction(FileUnLockWorkspaceAction);
     toolBar->addSeparator();
     QuickSearchEdit=new QLineEdit(toolBar);
-	QuickSearchEdit->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+	QuickSearchEdit->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
 	toolBar->addWidget(QuickSearchEdit);
 	toolBar->setVisible(config->showToolbar());
 }
@@ -247,6 +248,7 @@ void KeepassMainWindow::setupIcons(){
 	EditOpenUrlAction->setIcon(getIcon("openurl"));
 	EditSaveAttachmentAction->setIcon(getIcon("filesave"));
 	EditNewGroupAction->setIcon(getIcon("newgroup"));
+	EditNewSubgroupAction->setIcon(getIcon("newgroup"));
 	EditEditGroupAction->setIcon(getIcon("editgroup"));
 	EditDeleteGroupAction->setIcon(getIcon("deletegroup"));
 	EditSearchAction->setIcon(getIcon("dbsearch"));
@@ -272,7 +274,7 @@ void KeepassMainWindow::setupIcons(){
 }
 
 void KeepassMainWindow::setupMenus(){
-	GroupView->ContextMenu->addAction(EditNewGroupAction);
+	GroupView->ContextMenu->addAction(EditNewSubgroupAction);
 	GroupView->ContextMenu->addAction(EditEditGroupAction);
 	GroupView->ContextMenu->addAction(EditDeleteGroupAction);
 	GroupView->ContextMenu->addSeparator();
@@ -349,9 +351,9 @@ void KeepassMainWindow::setupMenus(){
 	FileOpenAction->setShortcut(tr("Ctrl+O"));
 	FileCloseAction->setShortcut(tr("Ctrl+W"));
 	FileSaveAction->setShortcut(tr("Ctrl+S"));
-    FileUnLockWorkspaceAction->setShortcut(tr("Ctrl+L"));
-    FileExitAction->setShortcut(tr("Ctrl+Q"));
-    EditNewGroupAction->setShortcut(tr("Ctrl+G"));
+	FileUnLockWorkspaceAction->setShortcut(tr("Ctrl+L"));
+	FileExitAction->setShortcut(tr("Ctrl+Q"));
+	EditNewGroupAction->setShortcut(tr("Ctrl+G"));
 	EditPasswordToClipboardAction->setShortcut(tr("Ctrl+C"));
 	EditUsernameToClipboardAction->setShortcut(tr("Ctrl+B"));
 	EditOpenUrlAction->setShortcut(tr("Ctrl+U"));
@@ -595,6 +597,7 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 	FileSettingsAction->setEnabled(IsOpen);
 	FileChangeKeyAction->setEnabled(IsOpen);
 	menuExport->setEnabled(IsOpen);
+	EditNewGroupAction->setEnabled(IsOpen);
 	EditSearchAction->setEnabled(IsOpen);
 	GroupView->setEnabled(IsOpen);
 	EntryView->setEnabled(IsOpen);
@@ -605,7 +608,7 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 	FileUnLockWorkspaceAction->setEnabled(IsOpen||IsLocked);
 	
 	if(!IsOpen){
-		EditNewGroupAction->setEnabled(false);
+		EditNewSubgroupAction->setEnabled(false);
 		EditEditGroupAction->setEnabled(false);
 		EditDeleteGroupAction->setEnabled(false);
 		EditPasswordToClipboardAction->setEnabled(false);
@@ -646,21 +649,21 @@ void KeepassMainWindow::setStateGroupSelected(SelectionState s){
 	GroupSelection=s;
 	switch(GroupSelection){
 		case NONE:
-			EditNewGroupAction->setEnabled(true);
+			EditNewSubgroupAction->setEnabled(false);
 			EditEditGroupAction->setEnabled(false);
 			EditDeleteGroupAction->setEnabled(false);
 			EditGroupSearchAction->setEnabled(false);
 			EditNewEntryAction->setEnabled(false);
 			break;
 		case SINGLE:
-			EditNewGroupAction->setEnabled(true);
+			EditNewSubgroupAction->setEnabled(true);
 			EditEditGroupAction->setEnabled(true);
 			EditDeleteGroupAction->setEnabled(true);
 			EditGroupSearchAction->setEnabled(true);
 			EditNewEntryAction->setEnabled(true);
 			break;
 		case SEARCHGROUP:
-			EditNewGroupAction->setEnabled(false);
+			EditNewSubgroupAction->setEnabled(false);
 			EditEditGroupAction->setEnabled(false);
 			EditDeleteGroupAction->setEnabled(false);
 			EditGroupSearchAction->setEnabled(false);

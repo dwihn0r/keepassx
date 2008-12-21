@@ -65,6 +65,7 @@ class KeepassGroupView:public QTreeWidget{
 		void OnCurrentGroupChanged(QTreeWidgetItem*);
 		void OnDeleteGroup();
 		void OnNewGroup();
+		void OnNewSubgroup();
 		void OnEditGroup();
 		void updateIcons();
 		void OnHideSearchResults();
