@@ -47,6 +47,8 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	str+="<br>";
 	str+="<u>Felix Geyer</u><br>"+tr("Developer, Project Admin")+"<br>sniperbeamer@users.sf.net<br>";
 	str+="<br>";
+	str+="<u>Brandon Mayes</u><br>"+tr("Developer")+"<br>bdmayes@users.sourceforge.net<br>";
+	str+="<br>";
 	str+="<u>Eugen Gorschenin</u><br>"+tr("Web Designer")+"<br>geugen@users.sf.de<br>";
 	str+="<br>";
 	str+="<u>Juan J Gonz&aacute;lez C&aacute;rdenas [Jota Jota]</u><br>"+tr("Developer")+"<br>myxelf@users.sf.net<br>";

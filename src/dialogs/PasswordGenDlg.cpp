@@ -112,6 +112,7 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 		checkBoxPN->setChecked(true);
 		checkBoxPS->setChecked(false);
 	}
+	Edit_chars->setText(config->pwGenCharList());
 	Check_ExcludeLookAlike->setChecked(config->pwGenExcludeLookAlike());
 	Check_EveryGroup->setChecked(config->pwGenEveryGroup());
 	Spin_Num->setValue(config->pwGenLength());
@@ -143,6 +144,7 @@ CGenPwDialog::~CGenPwDialog(){
 	pwGenOptions.setBit(12,checkBoxPN->isChecked());
 	pwGenOptions.setBit(13,checkBoxPS->isChecked());
 	config->setPwGenOptions(pwGenOptions);
+	config->setPwGenCharList(Edit_chars->text());
 	config->setPwGenExcludeLookAlike(Check_ExcludeLookAlike->isChecked());
 	config->setPwGenEveryGroup(Check_EveryGroup->isChecked());
 	config->setPwGenLength(Spin_Num->value());

@@ -67,7 +67,9 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	autoType->registerGlobalShortcut(config->globalShortcut());
 #endif
 	setWindowModified(false);
-	setGeometry(config->mainWindowGeometry(geometry()));
+	QByteArray windowGeo = config->mainWindowGeometry();
+	if (!windowGeo.isEmpty())
+		restoreGeometry(windowGeo);
 	VSplitter->restoreState(config->vSplitterPos());
 	HSplitter->restoreState(config->hSplitterPos());
 	SysTray=new QSystemTrayIcon(this);
@@ -1022,7 +1024,7 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 	autoType->unregisterGlobalShortcut();
 #endif
 
-	config->setMainWindowGeometry(geometry());
+	config->setMainWindowGeometry(saveGeometry());
 	// workaround if window has never been visible
 	if (isVisible() || VSplitter->sizes()[0]!=VSplitter->sizes()[1])
 		config->setVSplitterPos(VSplitter->saveState());

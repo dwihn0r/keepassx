@@ -78,6 +78,7 @@ macx {
 		LIBS += -framework Carbon -framework AppKit -lz
 	}
 	QMAKE_BUNDLE_DATA += data
+	QMAKE_INFO_PLIST= ../share/macx_bundle/Info.plist
 	ICON = ../share/macx_bundle/icon.icns
 	CONFIG += app_bundle
 	isEqual(ARCH,UNIVERSAL){

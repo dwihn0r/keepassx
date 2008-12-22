@@ -63,7 +63,7 @@ public:
 	QString lastFile(){return settings.value("Options/LastFile").toString();}
 	QString lastKeyLocation(){return settings.value("Options/LastKeyLocation").toString();}
 	tKeyType lastKeyType(){return stringToKeyType(settings.value("Options/LastKeyType").toString());}
-	QRect mainWindowGeometry(const QRect& defaultValue){return settings.value("UI/MainWindowGeometry",defaultValue).toRect();}
+	QByteArray mainWindowGeometry();
 	bool minimizeToTray(){return settings.value("Options/MinimizeToTray",false).toBool();}
 	bool minimizeTray(){return settings.value("Options/MinimizeTray",false).toBool();}
 	bool startMinimized(){return settings.value("Options/StartMinimized",false).toBool();}
@@ -130,7 +130,7 @@ public:
 	void setLastFile(const QString& value){settings.setValue("Options/LastFile",value);}
 	void setLastKeyLocation(const QString& value){settings.setValue("Options/LastKeyLocation",value);}
 	void setLastKeyType(tKeyType value){settings.setValue("Options/LastKeyType",keyTypeToString(value));}
-	void setMainWindowGeometry(const QRect& value){settings.setValue("UI/MainWindowGeometry",value);}
+	void setMainWindowGeometry(const QByteArray& value){settings.setValue("UI/MainWindowGeometry",value);}
 	void setMinimizeToTray(bool value){settings.setValue("Options/MinimizeToTray",value);}
 	void setMinimizeTray(bool value){settings.setValue("Options/MinimizeTray",value);}
 	void setStartMinimized(bool value){settings.setValue("Options/StartMinimized",value);}

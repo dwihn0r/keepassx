@@ -211,6 +211,14 @@ QString KpxConfig::keyTypeToString(tKeyType keyType){
 	return res;
 }
 
+QByteArray KpxConfig::mainWindowGeometry() {
+	QVariant var = settings.value("UI/MainWindowGeometry");
+	if (var.type() == QVariant::ByteArray)
+		return var.toByteArray();
+	else
+		return QByteArray();
+}
+
 QRect KpxConfig::dialogGeometry(const QWidget* widget){
 	Q_ASSERT(widget->parentWidget()!=NULL && widget->parentWidget()->window()!=NULL);
 	QSize size = settings.value(QString("UI/%1Size").arg(widget->objectName()),widget->size()).toSize();
