@@ -53,8 +53,8 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	connect(checkBoxPN, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
 	connect(checkBoxPS, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
 	connect(Spin_Num, SIGNAL(valueChanged(int)), SLOT(estimateQuality()));
+	connect(Check_ExcludeLookAlike, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
 	connect(Check_CollectEntropy, SIGNAL(stateChanged(int)), SLOT(OnCollectEntropyChanged(int)));
-	connect(Edit_chars, SIGNAL(textEdited(const QString&)), SLOT(OnCharsChanged(const QString&)));
 	connect(ButtonChangeEchoMode, SIGNAL(clicked()), SLOT(SwapEchoMode()));
 	connect(tabCategory, SIGNAL(currentChanged(int)), SLOT(setGenerateEnabled()));
 	connect(Radio_1, SIGNAL(toggled(bool)), SLOT(setGenerateEnabled()));
@@ -82,7 +82,9 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 		DialogButtons->addButton(QDialogButtonBox::Close);
 		AcceptButton=NULL;
 	}
-
+	
+	Edit_chars->setValidator(new PassCharValidator(this));
+	
 	tabCategory->setCurrentIndex(config->pwGenCategory());
 	QBitArray pwGenOptions=config->pwGenOptions();
 	Radio_1->setChecked(pwGenOptions.at(0));
@@ -184,7 +186,7 @@ void CGenPwDialog::OnRadio2StateChanged(bool state){
 void CGenPwDialog::OnGeneratePw()
 {
 	int length = Spin_Num->value();
-	char* buffer = new char[length+1];
+	QString password;
 	
 	if (tabCategory->currentIndex()==1)
 	{
@@ -198,35 +200,49 @@ void CGenPwDialog::OnGeneratePw()
 		if (checkBoxPS->isChecked())
 			mode |= S_SS;
 		
+		char* buffer = new char[length+1];
 		char* hyphenated_word = new char[length*18+1];
 		gen_pron_pass(buffer, hyphenated_word, length, length, mode);
+		password = buffer;
 		delete[] hyphenated_word;
+		delete[] buffer;
 	}
 	else{
-		generatePasswordInternal(buffer, length);
+		password = generatePasswordInternal(length);
 	}
 
-	Edit_dest->setText(buffer);
-	delete[] buffer;
+	Edit_dest->setText(password);
 }
 
 void CGenPwDialog::estimateQuality(){
 	int num=0;
 	if (tabCategory->currentIndex()==0){
 		if(Radio_1->isChecked()){
-			if(checkBox1->isChecked())
+			if(checkBox1->isChecked()) {
 				num+=26;
-			if(checkBox2->isChecked())
+				if (Check_ExcludeLookAlike->isChecked())
+					num -= 2;
+			}
+			if(checkBox2->isChecked()) {
 				num+=26;
-			if(checkBox3->isChecked())
+				if (Check_ExcludeLookAlike->isChecked())
+					num -= 1;
+			}
+			if(checkBox3->isChecked()) {
 				num+=10;
-			if(checkBox4->isChecked())
+				if (Check_ExcludeLookAlike->isChecked())
+					num -= 2;
+			}
+			if(checkBox4->isChecked()) {
 				num+=32;
+				if (Check_ExcludeLookAlike->isChecked())
+					num -= 1;
+			}
 			if(checkBox5->isChecked())
 				num++;
-			if(checkBox6->isChecked() && !checkBox4->isChecked())
+			if(checkBox6->isChecked())
 				num++;
-			if(checkBox7->isChecked() && !checkBox4->isChecked())
+			if(checkBox7->isChecked())
 				num++;
 		}
 		else
@@ -243,43 +259,15 @@ void CGenPwDialog::estimateQuality(){
 			num+=32;
 	}
 
-	float bits=0;
-	if(num)
-		bits=log((float)num)/log(2.0f);
-	bits=bits*((float)Spin_Num->value());
-	Progress_Quali->setFormat(tr("%1 Bits").arg((int)bits));
+	float bits = 0;
+	if (num)
+		bits = log((float)num) / log(2.0f);
+	bits = bits * ((float)Spin_Num->value());
+	int bitsNum = (int) (bits+0.5);
+	
+	Progress_Quali->setFormat(tr("%1 Bits").arg(bitsNum));
 	Progress_Quali->update();
-	if(bits>128)bits=128;
-	Progress_Quali->setValue((int)bits);
-}
-
-void CGenPwDialog::OnCharsChanged(const QString& str){
-	bool multiple=false;
-	for(int i=0;i<str.size();i++){
-		int count=0;
-		for(int j=0;j<str.size();j++){
-			if(str[i]==str[j]){
-				if(count){
-					multiple=true;
-					break;
-				}
-				else {
-					count++;
-				}
-			}
-		}
-		if(multiple)break;
-	}
-	if(!multiple)return;
-
-	QString newstr;
-	for(int i=0;i<str.size();i++){
-		if(!newstr.count(str[i])){
-			newstr+=str[i];
-		}
-	}
-	Edit_chars->setText(newstr);
-
+	Progress_Quali->setValue((bitsNum > 128) ? 128 : bitsNum);
 }
 
 void CGenPwDialog::OnAccept()
@@ -311,7 +299,7 @@ void CGenPwDialog::SwapEchoMode(){
 	}
 }
 
-void CGenPwDialog::AddToAssoctable(char* table,int start,int end,int& pos){
+void CGenPwDialog::AddToAssoctable(QList<QChar>& table,int start,int end,int& pos){
 	for (int i=start;i<=end;i++){
 		if (Check_ExcludeLookAlike->isChecked()){
 			switch (i){
@@ -324,12 +312,12 @@ void CGenPwDialog::AddToAssoctable(char* table,int start,int end,int& pos){
 					continue;
 			}
 		}
-		table[pos]=i;
+		table.append(QChar(i));
 		pos++;
 	}
 }
 
-CGenPwDialog::PwGroup CGenPwDialog::AddToAssoctableGroup(char* table,int start,int end,int& pos){
+CGenPwDialog::PwGroup CGenPwDialog::AddToAssoctableGroup(QList<QChar>& table,int start,int end,int& pos){
 	PwGroup group;
 	group.start = pos;
 	AddToAssoctable(table,start,end,pos);
@@ -337,7 +325,7 @@ CGenPwDialog::PwGroup CGenPwDialog::AddToAssoctableGroup(char* table,int start,i
 	return group;
 }
 
-void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
+QString CGenPwDialog::generatePasswordInternal(int length){
 	/*-------------------------------------------------------
 	     ASCII
 	  -------------------------------------------------------
@@ -351,7 +339,7 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 	*/
 
 	int num=0;
-	char assoctable[255];
+	QList<QChar> assoctable;
 	int groups=0;
 	bool ensureEveryGroup = false;
 	QList<PwGroup> groupTable;
@@ -412,13 +400,11 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 	else{
 		QString str=Edit_chars->text();
 		for(int i=0;i<str.length();i++){
-			assoctable[i]=str[i].toAscii();
+			assoctable.append(str[i]);
 			num++;
 		}
 	}
 	
-	buffer[length]=0;
-
 	if(Check_CollectEntropy->isChecked()){
 		if((Check_CollectOncePerSession->isChecked() && !EntropyCollected) || !Check_CollectOncePerSession->isChecked()){
 			CollectEntropyDlg dlg(this);
@@ -426,6 +412,8 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 			EntropyCollected=true;
 		}
 	}
+	
+	QString password(length, '\0');
 	
 	if (ensureEveryGroup){
 		QList<int> charPos;
@@ -436,20 +424,22 @@ void CGenPwDialog::generatePasswordInternal(char* buffer, int length){
 			int posIndex = randintRange(0, charPos.count()-1);
 			int pos = charPos[posIndex];
 			charPos.removeAt(posIndex);
-			buffer[pos] = assoctable[randintRange(groupTable[i].start, groupTable[i].end)];
+			password[pos] = assoctable[randintRange(groupTable[i].start, groupTable[i].end)];
 		}
 		
 		for (int i=groups; i<length; i++){
 			int posIndex = randintRange(0, charPos.count()-1);
 			int pos = charPos[posIndex];
 			charPos.removeAt(posIndex);
-			buffer[pos] = assoctable[randint(num)];
+			password[pos] = assoctable[randint(num)];
 		}
 	}
 	else{
 		for (int i=0; i<length; i++)
-			buffer[i] = assoctable[randint(num)];
+			password[i] = assoctable[randint(num)];
 	}
+	
+	return password;
 }
 
 void CGenPwDialog::setGenerateEnabled(){
@@ -475,4 +465,20 @@ void CGenPwDialog::setGenerateEnabled(){
 
 void CGenPwDialog::setAcceptEnabled(const QString& str){
 	AcceptButton->setEnabled(!str.isEmpty());
+}
+
+PassCharValidator::PassCharValidator(QObject* parent) : QValidator(parent) {
+}
+
+QValidator::State PassCharValidator::validate(QString& input, int& pos) const {
+	QSet<QChar> chars;
+	
+	for (int i=0; i<input.size(); i++) {
+		if (chars.contains(input[i]))
+			return QValidator::Invalid;
+		else
+			chars.insert(input[i]);
+	}
+	
+	return QValidator::Acceptable;
 }

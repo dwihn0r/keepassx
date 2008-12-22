@@ -36,10 +36,10 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 			int start;
 			int end;
 		};
-		void AddToAssoctable(char* table,int start,int end,int& pos);
-		PwGroup AddToAssoctableGroup(char* table,int start,int end,int& pos);
+		void AddToAssoctable(QList<QChar>& table,int start,int end,int& pos);
+		PwGroup AddToAssoctableGroup(QList<QChar>& table,int start,int end,int& pos);
 		void paintEvent(QPaintEvent* event);
-		void generatePasswordInternal(char* buffer, int length);
+		QString generatePasswordInternal(int length);
 		QPixmap BannerPixmap;
 		static bool EntropyCollected;
 		QPushButton* AcceptButton;
@@ -52,10 +52,18 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 		void OnAccept();
 		void estimateQuality();
 		void OnCollectEntropyChanged(int);
-		void OnCharsChanged(const QString& str);
 		void SwapEchoMode();
 		void setGenerateEnabled();
 		void setAcceptEnabled(const QString& str);
+};
+
+class PassCharValidator : public QValidator
+{
+	Q_OBJECT
+	
+	public:
+		PassCharValidator(QObject* parent);
+		State validate(QString& input, int& pos) const;
 };
 
 #endif
