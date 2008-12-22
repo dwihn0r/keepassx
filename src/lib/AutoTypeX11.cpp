@@ -32,7 +32,7 @@ void initAutoType(KeepassMainWindow* mainWin) {
 }
 #endif
 
-AutoTypeAction::AutoTypeAction(AutoTypeActionType t, quint16 d) : type(t), data(d){
+AutoTypeAction::AutoTypeAction(AutoTypeActionType t, KeySym d) : type(t), data(d){
 }
 
 bool AutoTypeX11::error_detected = false;

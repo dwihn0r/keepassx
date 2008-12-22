@@ -30,9 +30,9 @@ enum AutoTypeActionType{
 };
 
 struct AutoTypeAction{
-	AutoTypeAction(AutoTypeActionType t, quint16 d);
+	AutoTypeAction(AutoTypeActionType t, KeySym d);
 	AutoTypeActionType type;
-	quint16 data;
+	KeySym data;
 };
 
 class AutoTypeX11 : public AutoType {

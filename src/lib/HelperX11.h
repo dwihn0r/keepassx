@@ -27,13 +27,12 @@
 #define XK_XKB_KEYS
 #define XK_3270
 #define XK_CURRENCY
-#include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
 #include <X11/keysymdef.h>
 
 class HelperX11{
 	public:
-		static quint16 getKeysym(const QChar& c);
+		static KeySym getKeysym(const QChar& c);
 #ifdef GLOBAL_AUTOTYPE
 		static int getShortcutModifierMask(const Shortcut& s);
 #endif
@@ -48,7 +47,6 @@ class HelperX11{
 		static int (*oldHandler) (Display*, XErrorEvent*);
 		static bool catchErrors;
 		static bool pErrorOccurred;
-		static const quint16 KeysymMap[][2];
 };
 
 #endif // HELPERX11_H
