@@ -49,7 +49,7 @@ void SecString::unlock(){
 	if(!crypt.length())
 		return;
 	const unsigned char* buffer = new unsigned char[crypt.length()];
-	RC4.decrypt( (byte*)crypt.data(), (unsigned char*)buffer, crypt.length() );
+	RC4.decrypt( (quint8*)crypt.data(), (unsigned char*)buffer, crypt.length() );
 	plain = QString::fromUtf8((const char*)buffer, crypt.size());
 	overwrite((unsigned char*)buffer, crypt.size());
 	delete [] buffer;

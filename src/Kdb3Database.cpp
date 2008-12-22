@@ -17,10 +17,11 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QBuffer>
-#include <QTextCodec>
 #include "Kdb3Database.h"
 
+#include "crypto/twoclass.h"
+#include <QBuffer>
+#include <QTextCodec>
 
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 

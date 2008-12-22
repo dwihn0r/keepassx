@@ -72,9 +72,6 @@
 #include <QUrl>
 
 #include "crypto/aescpp.h"
-#include "crypto/blowfish.h"
-#include "crypto/sha256.h"
-#include "crypto/twoclass.h"
 #include "crypto/yarrow.h"
 #include "lib/bookmarks.h"
 #include "lib/FileDialogs.h"

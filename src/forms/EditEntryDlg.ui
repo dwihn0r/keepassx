@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>526</height>
+    <width>494</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -151,13 +151,6 @@
      </property>
      <property name="text" >
       <string>Comment:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="1" >
-    <widget class="QLabel" name="Label_AttachmentSize" >
-     <property name="text" >
-      <string>%1</string>
      </property>
     </widget>
    </item>
@@ -333,6 +326,19 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QLabel" name="Label_AttachmentSize" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text" >
+        <string>%1</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="9" column="1" >
@@ -386,9 +392,6 @@
          <width>16777215</width>
          <height>14</height>
         </size>
-       </property>
-       <property name="value" >
-        <number>24</number>
        </property>
        <property name="textVisible" >
         <bool>false</bool>

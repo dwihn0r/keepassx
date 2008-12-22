@@ -21,6 +21,7 @@
 
 #include "Import_PwManager.h"
 
+#include "crypto/blowfish.h"
 #include <QCryptographicHash>
 
 bool Import_PwManager::importDatabase(QWidget* GuiParent, IDatabase* db){	
