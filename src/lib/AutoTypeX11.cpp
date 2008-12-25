@@ -39,7 +39,7 @@ bool AutoTypeX11::error_detected = false;
 
 AutoTypeX11::AutoTypeX11(KeepassMainWindow* mainWin) {
 	this->mainWin = mainWin;
-	dpy = mainWin->x11Info().display();
+	dpy = QX11Info::display();
 	
 	keysym_table = NULL;
 	alt_mask = 0;

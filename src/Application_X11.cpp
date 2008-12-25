@@ -19,18 +19,26 @@
 
 
 #include "Application_X11.h"
-#include "lib/AutoType.h"
+#include "lib/AutoTypeGlobalX11.h"
 #include "lib/HelperX11.h"
 
-const unsigned int KeepassApplication::remove_invalid = ControlMask|ShiftMask|Mod1Mask|Mod5Mask|Mod4Mask;
-
-KeepassApplication::KeepassApplication(int& argc, char** argv) : QApplication(argc, argv){
+KeepassApplication::KeepassApplication(int& argc, char** argv) : QApplication(argc, argv), remove_invalid(0){
 }
 
 bool KeepassApplication::x11EventFilter(XEvent* event){
+	if (autoType == NULL)
+		return QApplication::x11EventFilter(event);
+	
+	if (remove_invalid == 0) {
+		AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
+		remove_invalid = ControlMask | ShiftMask | autoTypeGlobal->maskAlt() |
+				autoTypeGlobal->maskAltGr() | autoTypeGlobal->maskMeta();
+	}
+	
 	if (event->type==KeyPress && autoType->getShortcut().key!=0u &&
-			event->xkey.keycode==XKeysymToKeycode(event->xkey.display,HelperX11::getKeysym(autoType->getShortcut().key)) &&
-			(event->xkey.state&remove_invalid)==HelperX11::getShortcutModifierMask(autoType->getShortcut()) && focusWidget()==NULL )
+			event->xkey.keycode == XKeysymToKeycode(event->xkey.display,HelperX11::getKeysym(autoType->getShortcut().key)) &&
+			(event->xkey.state&remove_invalid) == HelperX11::getShortcutModifierMask(autoType->getShortcut()) &&
+			focusWidget()==NULL)
 	{
 		EventOccurred = true;
 		autoType->performGlobal();

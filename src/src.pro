@@ -17,6 +17,10 @@ else {
 	CONFIG += release
 }
 
+isEqual(NOSTRIP,1) {
+	CONFIG += nostrip
+}
+
 # lipo and freebsd cannot handle precompiled headers (yet)
 !isEqual(PRECOMPILED,1){
 	macx : isEqual(ARCH,UNIVERSAL) : PRECOMPILED = 0

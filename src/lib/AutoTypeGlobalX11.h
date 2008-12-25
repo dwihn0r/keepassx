@@ -31,6 +31,9 @@ class AutoTypeGlobalX11 : public AutoTypeX11, public AutoTypeGlobal {
 		bool registerGlobalShortcut(const Shortcut& s);
 		void unregisterGlobalShortcut();
 		QStringList getAllWindowTitles();
+		inline int maskAlt() { return alt_mask; };
+		inline int maskAltGr() { return altgr_mask; };
+		inline int maskMeta() { return meta_mask; };
 	
 	private:
 		void windowTitles(Window window, QStringList& titleList);

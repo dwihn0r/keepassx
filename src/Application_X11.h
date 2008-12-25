@@ -20,7 +20,6 @@
 #ifndef APPLICATION_X11_H
 #define APPLICATION_X11_H
 
-
 class KeepassApplication : public QApplication
 {
 	Q_OBJECT
@@ -30,7 +29,7 @@ class KeepassApplication : public QApplication
 		bool x11EventFilter(XEvent* event);
 		
 	private:
-		static const unsigned int remove_invalid;
+		unsigned int remove_invalid;
 };
 
 #endif // APPLICATION_X11_H

@@ -20,13 +20,13 @@
 #ifndef HELPERX11_H
 #define HELPERX11_H
 
-#include "AutoType.h"
-#include <QChar>
-
 #define XK_MISCELLANY
 #define XK_XKB_KEYS
 #define XK_3270
 #define XK_CURRENCY
+
+#include "AutoType.h"
+#include <QChar>
 #include <X11/extensions/XTest.h>
 #include <X11/keysymdef.h>
 

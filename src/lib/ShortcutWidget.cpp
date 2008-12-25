@@ -25,6 +25,7 @@
 #include <QX11Info>
 #include <QPalette>
 #include "HelperX11.h"
+#include "AutoTypeGlobalX11.h"
 
 ShortcutWidget::ShortcutWidget(QWidget* parent) : QLineEdit(parent), lock(false), failed(false){
 }
@@ -55,8 +56,12 @@ void ShortcutWidget::keyEvent(QKeyEvent* event, bool release){
 	if (release && lock)
 		return;
 	
+	AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
+	
 	unsigned int mods = HelperX11::keyboardModifiers(QX11Info::display());
-	displayShortcut(event->nativeVirtualKey(), release, mods&ControlMask, mods&ShiftMask, mods&Mod1Mask, mods&Mod5Mask, mods&Mod4Mask);
+	displayShortcut(event->nativeVirtualKey(), release, mods & ControlMask,
+			mods & ShiftMask, mods & autoTypeGlobal->maskAlt(),
+			mods & autoTypeGlobal->maskAltGr(), mods & autoTypeGlobal->maskMeta());
 }
 
 void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool shift, bool alt, bool altgr, bool win){
@@ -74,6 +79,7 @@ void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool 
 		text.append(tr("Win")).append(" + ");
 	
 	if ( !release && (key<XK_Shift_L || key>XK_Hyper_R) && (key<XK_ISO_Lock || key>XK_ISO_Last_Group_Lock) ){
+		// converts key into orignal key on the keyboard
 		KeySym keysym = XKeycodeToKeysym(QX11Info::display(), XKeysymToKeycode(QX11Info::display(),key), 0);
 		if (keysym>=0xfd00 && keysym<=0xffff){
 			text.append(XKeysymToString(keysym));

@@ -22,13 +22,18 @@
 #include <QX11Info>
 
 #ifdef GLOBAL_AUTOTYPE
+#include "AutoTypeGlobalX11.h"
+
 int HelperX11::getShortcutModifierMask(const Shortcut& s){
-	int mod=0;
+	AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
+	
+	int mod = 0;
 	if (s.ctrl) mod |= ControlMask;
 	if (s.shift) mod |= ShiftMask;
-	if (s.alt) mod |= Mod1Mask;
-	if (s.altgr) mod |= Mod5Mask;
-	if (s.win) mod |= Mod4Mask;
+	if (s.alt) mod |= autoTypeGlobal->maskAlt();
+	if (s.altgr) mod |= autoTypeGlobal->maskAltGr();
+	if (s.win) mod |= autoTypeGlobal->maskMeta();
+	
 	return mod;
 }
 #endif
@@ -67,8 +72,8 @@ int (*HelperX11::oldHandler) (Display*, XErrorEvent*) = NULL;
 bool HelperX11::catchErrors = false;
 bool HelperX11::pErrorOccurred = false;
 
-XID HelperX11::getKeysym(const QChar& c){
-	KeySym unicode = c.unicode();
+KeySym HelperX11::getKeysym(const QChar& c){
+	ushort unicode = c.unicode();
 	
 	/* first check for Latin-1 characters (1:1 mapping) */
 	if ((unicode >= 0x0020 && unicode <= 0x007e) ||
