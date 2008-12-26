@@ -16,7 +16,7 @@
     <string>APPL</string>
 
     <key>CFBundleGetInfoString</key>
-    <string>KeePassX 0.3.4</string>
+    <string>KeePassX 0.4.0b</string>
 
     <key>CFBundleSignature</key>
     <string>kpsx</string>
@@ -25,10 +25,10 @@
     <string>KeePassX</string>
 
     <key>CFBundleVersion</key>
-    <string>0.3.4</string>
+    <string>0.4.0b</string>
 
     <key>CFBundleShortVersionString</key>
-    <string>0.3.4</string>
+    <string>0.4.0b</string>
 
     <key>CFBundleName</key>
     <string>KeePassX</string>
