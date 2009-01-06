@@ -18,8 +18,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-using namespace std;
 CArcFour SecString::RC4;
+quint8* SecString::sessionkey;
 
 SecString::operator QString(){
 	return string();
@@ -88,15 +88,19 @@ void SecString::overwrite(QString& str){
 	if(str.length()==0)
 		return;
 	
-	for(int i=0; i<str.length(); i++)
-		((char*)str.data())[i] = 0;
+	overwrite((unsigned char*)str.data(), str.capacity());
 }
 
 void SecString::generateSessionKey(){
-	quint8* sessionkey = new quint8[32];
+	sessionkey = new quint8[32];
 	lockPage(sessionkey, 32);
 	randomize(sessionkey, 32);
 	RC4.setKey(sessionkey, 32);
+}
+
+void SecString::deleteSessionKey() {
+	overwrite(sessionkey, 32);
+	delete[] sessionkey;
 }
 
 
@@ -110,7 +114,7 @@ SecData::~SecData(){
 		for (int i=0; i<length; i++)
 			data[i] = 0;
 	}
-	delete data;
+	delete[] data;
 }
 
 void SecData::lock(){

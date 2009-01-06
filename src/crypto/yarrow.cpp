@@ -425,7 +425,7 @@ void randomize(void* buffer, unsigned int length){
 
 void strongRandomize(void* buffer, unsigned int length){
 	Q_ASSERT(yarrow256_is_seeded(&StrongCtx));
-	for(int i=0; i<length;i++)
+	for(uint i=0; i<length;i++)
 		yarrow256_random(&StrongCtx,1,(quint8*)buffer+i);	
 }
 

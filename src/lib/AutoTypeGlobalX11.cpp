@@ -87,7 +87,7 @@ void AutoTypeGlobalX11::windowTitles(Window window, QStringList& titleList){
 	unsigned int num_children;
 	int tree = XQueryTree(dpy, window, &root, &parent, &children, &num_children);
 	if (tree && children){
-		for (int i=0; i<num_children; i++)
+		for (uint i=0; i<num_children; i++)
 			windowTitles(children[i], titleList);
 	}
 	else
@@ -220,7 +220,7 @@ bool AutoTypeGlobalX11::registerGlobalShortcut(const Shortcut& s){
 		return true;
 	
 	int code=XKeysymToKeycode(dpy, HelperX11::getKeysym(s.key));
-	int mod=HelperX11::getShortcutModifierMask(s);
+	uint mod=HelperX11::getShortcutModifierMask(s);
 	
 	HelperX11::startCatchErrors();
 	XGrabKey(dpy, code, mod, windowRoot, true, GrabModeAsync, GrabModeAsync);
@@ -247,7 +247,7 @@ void AutoTypeGlobalX11::unregisterGlobalShortcut(){
 	if (shortcut.key==0) return;
 	
 	int code=XKeysymToKeycode(dpy, HelperX11::getKeysym(shortcut.key));
-	int mod=HelperX11::getShortcutModifierMask(shortcut);
+	uint mod=HelperX11::getShortcutModifierMask(shortcut);
 	
 	XUngrabKey(dpy, code, mod, windowRoot);
 	XUngrabKey(dpy, code, mod | Mod2Mask, windowRoot);

@@ -24,10 +24,10 @@
 #ifdef GLOBAL_AUTOTYPE
 #include "AutoTypeGlobalX11.h"
 
-int HelperX11::getShortcutModifierMask(const Shortcut& s){
+uint HelperX11::getShortcutModifierMask(const Shortcut& s){
 	AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
 	
-	int mod = 0;
+	uint mod = 0;
 	if (s.ctrl) mod |= ControlMask;
 	if (s.shift) mod |= ShiftMask;
 	if (s.alt) mod |= autoTypeGlobal->maskAlt();

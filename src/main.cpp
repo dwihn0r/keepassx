@@ -157,6 +157,7 @@ int main(int argc, char **argv)
 	delete eventListener;
 
 	fileDlgHistory.save();
+	SecString::deleteSessionKey();
 	delete app;
 	delete config;
 	return r;

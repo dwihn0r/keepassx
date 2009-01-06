@@ -35,7 +35,7 @@ bool KeepassApplication::x11EventFilter(XEvent* event){
 				autoTypeGlobal->maskAltGr() | autoTypeGlobal->maskMeta();
 	}
 	
-	if (event->type==KeyPress && autoType->getShortcut().key!=0u &&
+	if (event->type==KeyPress && autoType->getShortcut().key!=0 &&
 			event->xkey.keycode == XKeysymToKeycode(event->xkey.display,HelperX11::getKeysym(autoType->getShortcut().key)) &&
 			(event->xkey.state&remove_invalid) == HelperX11::getShortcutModifierMask(autoType->getShortcut()) &&
 			focusWidget()==NULL)

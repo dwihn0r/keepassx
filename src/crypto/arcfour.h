@@ -21,13 +21,13 @@
 
 class CArcFour{
 	public:
-		void encrypt(const quint8* src, quint8* dst, int length);
-		inline void decrypt(const quint8* src, quint8* dst, int length){encrypt(src,dst,length);} //just for readability
-		void setKey(quint8* key, int length);
+		void encrypt(const quint8* src, quint8* dst, uint length);
+		inline void decrypt(const quint8* src, quint8* dst, uint length){encrypt(src,dst,length);} //just for readability
+		void setKey(quint8* key, uint length);
 		
 	private:
 		quint8* RawKey;
-		int RawKeyLength;
+		uint RawKeyLength;
 };
 
 #endif

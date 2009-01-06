@@ -18,12 +18,12 @@
 
 #include "arcfour.h"
 
-void CArcFour::setKey(quint8* key, int length){
+void CArcFour::setKey(quint8* key, uint length){
 	RawKey = key;
 	RawKeyLength = length;
 }
 
-void CArcFour::encrypt(const quint8* src, quint8* dst, int length){
+void CArcFour::encrypt(const quint8* src, quint8* dst, uint length){
 	quint8 S[256];
 	quint32 w;
 	

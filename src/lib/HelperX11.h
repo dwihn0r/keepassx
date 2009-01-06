@@ -34,7 +34,7 @@ class HelperX11{
 	public:
 		static KeySym getKeysym(const QChar& c);
 #ifdef GLOBAL_AUTOTYPE
-		static int getShortcutModifierMask(const Shortcut& s);
+		static uint getShortcutModifierMask(const Shortcut& s);
 #endif
 		static unsigned int keyboardModifiers(Display* d);
 		

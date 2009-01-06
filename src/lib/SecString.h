@@ -52,9 +52,11 @@ public:
 	static void overwrite(unsigned char* str,int len);
 	static void overwrite(QString& str);
 	static void generateSessionKey();
+	static void deleteSessionKey();
 	
 private:
 	static CArcFour RC4;
+	static quint8* sessionkey;
 	bool locked;
 	QByteArray crypt;
 	QString plain;
