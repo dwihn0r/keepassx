@@ -28,15 +28,26 @@
 const QDateTime Date_Never(QDate(2999,12,28),QTime(23,59,59));
 
 
-bool EntryHandleLessThan(const IEntryHandle* This,const IEntryHandle* Other){
+bool Kdb3Database::EntryHandleLessThan(const IEntryHandle* This,const IEntryHandle* Other){
 	if(!This->isValid() && Other->isValid())return true;
 	if(This->isValid() && !Other->isValid())return false;
 	if(!This->isValid() && !Other->isValid())return false;
 	return This->visualIndex()<Other->visualIndex();
-
 }
 
-bool StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb3Database::StdEntry& Other){
+bool Kdb3Database::EntryHandleLessThanStd(const IEntryHandle* This,const IEntryHandle* Other){
+	int comp = This->title().compare(Other->title());
+	if (comp < 0) return true;
+	else if (comp > 0) return false;
+	
+	comp = This->username().compare(Other->username());
+	if (comp < 0) return true;
+	else if (comp > 0) return false;
+	
+	return true;
+}
+
+bool Kdb3Database::StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb3Database::StdEntry& Other){
 	return This.Index<Other.Index;
 }
 
@@ -951,13 +962,24 @@ QList<IEntryHandle*> Kdb3Database::expiredEntries(){
 	return handles;
 }
 
-QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* group){
+QList<IEntryHandle*> Kdb3Database::entries(IGroupHandle* Group){
 	QList<IEntryHandle*> handles;
 	for(int i=0; i<EntryHandles.size(); i++){
-		if(EntryHandles[i].isValid() && (EntryHandles[i].group()==group))
+		if(EntryHandles[i].isValid() && (EntryHandles[i].group()==Group))
 			handles.append(&EntryHandles[i]);
 	}
 	qSort(handles.begin(),handles.end(),EntryHandleLessThan);
+
+	return handles;
+}
+
+QList<IEntryHandle*> Kdb3Database::entriesSortedStd(IGroupHandle* Group){
+	QList<IEntryHandle*> handles;
+	for(int i=0; i<EntryHandles.size(); i++){
+		if(EntryHandles[i].isValid() && (EntryHandles[i].group()==Group))
+			handles.append(&EntryHandles[i]);
+	}
+	qSort(handles.begin(),handles.end(),EntryHandleLessThanStd);
 
 	return handles;
 }
@@ -1085,23 +1107,23 @@ void Kdb3Database::EntryHandle::setBinaryDesc(const QString& s){Entry->BinaryDes
 void Kdb3Database::EntryHandle::setComment(const QString& s){Entry->Comment=s;}
 void Kdb3Database::EntryHandle::setBinary(const QByteArray& s){Entry->Binary=s;}
 void Kdb3Database::EntryHandle::setImage(const quint32& s){Entry->Image=s;}
-KpxUuid	Kdb3Database::EntryHandle::uuid(){return Entry->Uuid;}
-IGroupHandle* Kdb3Database::EntryHandle::group(){return Entry->Group->Handle;}
-quint32	Kdb3Database::EntryHandle::image(){return Entry->Image;}
-QString	Kdb3Database::EntryHandle::title(){return Entry->Title;}
-QString	Kdb3Database::EntryHandle::url(){return Entry->Url;}
-QString	Kdb3Database::EntryHandle::username(){return Entry->Username;}
-SecString Kdb3Database::EntryHandle::password(){return Entry->Password;}
-QString	Kdb3Database::EntryHandle::comment(){return Entry->Comment;}
-QString	Kdb3Database::EntryHandle::binaryDesc(){return Entry->BinaryDesc;}
-KpxDateTime	Kdb3Database::EntryHandle::creation(){return Entry->Creation;}
-KpxDateTime	Kdb3Database::EntryHandle::lastMod(){return Entry->LastMod;}
-KpxDateTime	Kdb3Database::EntryHandle::lastAccess(){return Entry->LastAccess;}
-KpxDateTime	Kdb3Database::EntryHandle::expire(){return Entry->Expire;}
-QByteArray Kdb3Database::EntryHandle::binary(){return Entry->Binary;}
-quint32 Kdb3Database::EntryHandle::binarySize(){return Entry->Binary.size();}
+KpxUuid	Kdb3Database::EntryHandle::uuid()const{return Entry->Uuid;}
+IGroupHandle* Kdb3Database::EntryHandle::group()const{return Entry->Group->Handle;}
+quint32	Kdb3Database::EntryHandle::image()const{return Entry->Image;}
+QString	Kdb3Database::EntryHandle::title()const{return Entry->Title;}
+QString	Kdb3Database::EntryHandle::url()const{return Entry->Url;}
+QString	Kdb3Database::EntryHandle::username()const{return Entry->Username;}
+SecString Kdb3Database::EntryHandle::password()const{return Entry->Password;}
+QString	Kdb3Database::EntryHandle::comment()const{return Entry->Comment;}
+QString	Kdb3Database::EntryHandle::binaryDesc()const{return Entry->BinaryDesc;}
+KpxDateTime	Kdb3Database::EntryHandle::creation()const{return Entry->Creation;}
+KpxDateTime	Kdb3Database::EntryHandle::lastMod()const{return Entry->LastMod;}
+KpxDateTime	Kdb3Database::EntryHandle::lastAccess()const{return Entry->LastAccess;}
+KpxDateTime	Kdb3Database::EntryHandle::expire()const{return Entry->Expire;}
+QByteArray Kdb3Database::EntryHandle::binary()const{return Entry->Binary;}
+quint32 Kdb3Database::EntryHandle::binarySize()const{return Entry->Binary.size();}
 
-QString Kdb3Database::EntryHandle::friendlySize()
+QString Kdb3Database::EntryHandle::friendlySize()const
 {
     quint32 binsize = binarySize();
     QString unit;

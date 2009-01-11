@@ -27,11 +27,11 @@ bool Export_KeePassX_Xml::exportDatabase(QWidget* GuiParent,IDatabase* database)
 	QDomDocument doc("KEEPASSX_DATABASE");
 	QDomElement root=doc.createElement("database");
 	doc.appendChild(root);
-	QList<IGroupHandle*> Groups=db->groups();
+	QList<IGroupHandle*> Groups=db->sortedGroups();
 	for(int i=0;i<Groups.size();i++){
 		if(Groups[i]->parent()==NULL){
-			addGroup(Groups[i],root,doc);			
-		}		
+			addGroup(Groups[i],root,doc);
+		}
 	}
 	file->write(doc.toByteArray());
 	file->close();
@@ -52,7 +52,7 @@ void Export_KeePassX_Xml::addGroup(IGroupHandle* group,QDomElement& parent,QDomD
 	for(int i=0;i<children.size();i++){
 		addGroup(children[i],GroupElement,doc);
 	}
-	QList<IEntryHandle*> entries=db->entries(group);
+	QList<IEntryHandle*> entries=db->entriesSortedStd(group);
 	for(int i=0;i<entries.size();i++){
 		addEntry(entries[i],GroupElement,doc);
 	}

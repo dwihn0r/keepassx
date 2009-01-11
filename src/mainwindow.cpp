@@ -1067,7 +1067,9 @@ void KeepassMainWindow::hideEvent(QHideEvent* event){
 
 void KeepassMainWindow::showEvent(QShowEvent* event){
 	if (IsLocked && !InUnLock && event->spontaneous()){
+#ifndef Q_WS_MAC
 		showNormal(); // workaround for some graphic glitches
+#endif
 		OnUnLockWorkspace();
 	}
 	
@@ -1081,7 +1083,15 @@ void KeepassMainWindow::OnExtrasSettings(){
 	if (config->language() != oldLang){
 		retranslateUi(this);
 		EntryView->updateColumns();
-		
+		if (FileOpen) {
+			if (db->file())
+				setWindowTitle(QString("%1[*] - KeePassX").arg(db->file()->fileName()));
+			else
+				setWindowTitle(QString("[%1][*] - KeePassX").arg(tr("new")));
+		}
+		else {
+			setWindowTitle(APP_DISPLAY_NAME);
+		}
 	}
 	
 	EntryView->setAlternatingRowColors(config->alternatingRowColors());

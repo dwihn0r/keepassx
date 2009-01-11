@@ -1,4 +1,43 @@
 ----------------------------
+    0.4.0beta1 ()
+----------------------------
+- Added pronounceable password generator
+- Added action "Copy URL to Clipboard"
+- Added "Tools" button to EditEntryDlg: Window List and Auto-Type sequence
+- Improved Auto-Typing: ability to type all unicode characters
+- Added option to save database after every change
+- Associate KeePassX with *.kdb files on Linux and Mac OS
+- Display warning when opening a database that is already opened
+- Distinguish between adding groups and subgroups (Bug #2194057)
+- Store list of preferred characters in password generator (Bug #2432748)
+- Implemented backup feature
+- Don't include entries from "Backup" group in search results
+- Clear Klipper history when clearing clipboard
+- Redesigned the Settings dialog and added ability to select language
+- Added gl_ES and it_IT translations
+- Cache and protect MasterKey - speeds up saving database
+- Added 2 new password generator options
+- Fixed: Unnamed Database saved as ".kdb" (Bugs #2109972, #2118340)
+- Fixed: Date of Modification isn't updated (Bugs #2108658, #2121768)
+- Fixed: Predefined expire times don't work (Bug #2109987)
+- Fixed: Sorting isn't consistent (Bug #2108655)
+- Fixed: KeepassX fails to lock itself after Ctrl-V (Bug #2106604)
+- Fixed: Position of main window not properly restored (Bugs #2090649, #2371738, #2336064)
+- Fixed: No password generated using list of very special characters (Bug #2230887)
+- Fixed: Crash if minimize to systray with locked workbench on Mac OS (Bug #2482531)
+- Fixed: Exports aren't sorted consistently (Bug #2108661)
+- Improved the initialization of the Windows RNG and fallback random number source (Bug #2091784)
+- Improved Mac OS bundle information (Bugs #2096992, #1921260)
+- Improve tab order in many dialogs (Bug #2130397)
+- Added nostrip qmake option
+
+----------------------------
+    0.3.4 (2008-11-09)
+----------------------------
+- fixed crash when auto-typing special characters (Bug #2111588)
+- only allow plain text in comment field
+
+----------------------------
     0.3.3 (2008-08-11)
 ----------------------------
 - fixed error when opening twofish encrypted databases (Bug #2025075)

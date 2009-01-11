@@ -122,22 +122,22 @@ public:
 	virtual void setExpire(const KpxDateTime& Expire)=0;
 	virtual void setBinary(const QByteArray& BinaryData)=0;
 
-	virtual KpxUuid uuid()=0;
-	virtual IGroupHandle* group()=0;
-	virtual quint32 image()=0;
-	virtual QString title()=0;
-	virtual QString url()=0;
-    virtual QString username()=0;
-	virtual SecString password()=0;
-	virtual QString comment()=0;
-	virtual QString binaryDesc()=0;
-	virtual KpxDateTime creation()=0;
-	virtual KpxDateTime lastMod()=0;
-	virtual KpxDateTime lastAccess()=0;
-	virtual KpxDateTime expire()=0;
-	virtual QByteArray binary()=0;
-	virtual quint32 binarySize()=0;
-    virtual QString friendlySize()=0;
+	virtual KpxUuid uuid()const=0;
+	virtual IGroupHandle* group()const=0;
+	virtual quint32 image()const=0;
+	virtual QString title()const=0;
+	virtual QString url()const=0;
+	virtual QString username()const=0;
+	virtual SecString password()const=0;
+	virtual QString comment()const=0;
+	virtual QString binaryDesc()const=0;
+	virtual KpxDateTime creation()const=0;
+	virtual KpxDateTime lastMod()const=0;
+	virtual KpxDateTime lastAccess()const=0;
+	virtual KpxDateTime expire()const=0;
+	virtual QByteArray binary()const=0;
+	virtual quint32 binarySize()const=0;
+	virtual QString friendlySize()const=0;
 
 	//! \return the index of the entry amongst the entries of its group. The index of the first entry is 0.
 	virtual int visualIndex()const=0;
@@ -279,6 +279,10 @@ public:
 	//! \param Group The group which contains the wanted entries.
 	//! \return a list of pointers to the handles of all entries which belong to the given group. The list contains only valid handles and is sorted in an ascending order regarding to the entry indices.
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group)=0;
+
+	//! \param Group The group which contains the wanted entries.
+	//! \return a list of pointers to the handles of all entries which belong to the given group. The list contains only valid handles and is sorted in an ascending order (title, username).
+	virtual QList<IEntryHandle*> entriesSortedStd(IGroupHandle* Group)=0;
 
 	//! \return a list with the pointers to the handles of all expired entries of the database. The list contains only valid handles. The list is not sorted.
 	virtual QList<IEntryHandle*> expiredEntries()=0;

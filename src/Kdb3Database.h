@@ -60,25 +60,25 @@ public:
 			virtual void setLastAccess(const KpxDateTime& LastAccess);
 			virtual void setExpire(const KpxDateTime& Expire);
 			virtual void setBinary(const QByteArray& BinaryData);
-			virtual KpxUuid uuid();
-			virtual IGroupHandle* group();
-			virtual quint32 image();
+			virtual KpxUuid uuid()const;
+			virtual IGroupHandle* group()const;
+			virtual quint32 image()const;
 			virtual int visualIndex() const;
 			virtual void setVisualIndex(int i);
 			virtual void setVisualIndexDirectly(int i);
-			virtual QString title();
-			virtual QString url();
-			virtual QString username();
-			virtual SecString password();
-			virtual QString comment();
-			virtual QString binaryDesc();
-			virtual KpxDateTime creation();
-			virtual KpxDateTime lastMod();
-			virtual KpxDateTime lastAccess();
-			virtual KpxDateTime expire();
-			virtual QByteArray binary();
-			virtual quint32 binarySize();
-            virtual QString friendlySize();
+			virtual QString title()const;
+			virtual QString url()const;
+			virtual QString username()const;
+			virtual SecString password()const;
+			virtual QString comment()const;
+			virtual QString binaryDesc()const;
+			virtual KpxDateTime creation()const;
+			virtual KpxDateTime lastMod()const;
+			virtual KpxDateTime lastAccess()const;
+			virtual KpxDateTime expire()const;
+			virtual QByteArray binary()const;
+			virtual quint32 binarySize()const;
+			virtual QString friendlySize()const;
 			virtual bool isValid() const;
 			virtual CEntry data()const;
 		private:
@@ -164,6 +164,7 @@ public:
 
 	virtual QList<IEntryHandle*> entries();
 	virtual QList<IEntryHandle*> entries(IGroupHandle* Group);
+	virtual QList<IEntryHandle*> entriesSortedStd(IGroupHandle* Group);
 	virtual QList<IEntryHandle*> expiredEntries();
 
 	virtual IEntryHandle* cloneEntry(const IEntryHandle* entry);
@@ -212,6 +213,9 @@ private:
 	void rebuildIndices(QList<StdGroup*>& list);
 	void restoreGroupTreeState();
 	//void copyTree(Kdb3Database* db, GroupHandle* orgGroup, IGroupHandle* parent);
+	static bool EntryHandleLessThan(const IEntryHandle* This,const IEntryHandle* Other);
+	static bool EntryHandleLessThanStd(const IEntryHandle* This,const IEntryHandle* Other);
+	static bool StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb3Database::StdEntry& Other);
 
 	StdEntry* getEntry(const KpxUuid& uuid);
 	StdEntry* getEntry(EntryHandle* handle);

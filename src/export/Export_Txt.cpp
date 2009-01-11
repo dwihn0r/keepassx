@@ -40,7 +40,7 @@ bool Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db){
 	QList<IGroupHandle*> groups=db->sortedGroups();
 	for(int g=0;g<groups.size();g++){
 		file->write(GroupTemplate.arg(groups[g]->title()).toUtf8());
-		QList<IEntryHandle*> entries=db->entries(groups[g]);
+		QList<IEntryHandle*> entries=db->entriesSortedStd(groups[g]);
 		for(int e=0;e<entries.size();e++){
 			SecString password=entries[e]->password();
 			password.unlock();
