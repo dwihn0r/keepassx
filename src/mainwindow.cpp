@@ -78,10 +78,11 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	setStateFileOpen(false);
 	setupMenus();
 	DetailView->setVisible(config->showEntryDetails());
+	statusbarState = 0;
 	StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
-	StatusBarSelection=new QLabel(statusBar());
+	//StatusBarSelection=new QLabel(statusBar());
 	statusBar()->addWidget(StatusBarGeneral,15);
-	statusBar()->addWidget(StatusBarSelection,85);
+	//statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config->showStatusbar());
 
 	NormalCentralWidget=QMainWindow::centralWidget();
@@ -436,6 +437,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	EntryView->db=db;
 	setupDatabaseConnections(db);
 	QString err;
+	statusbarState = 1;
 	StatusBarGeneral->setText(tr("Loading Database..."));
 	db->setKey(dlg.password(),dlg.keyFile());
 	if(db->load(filename)){
@@ -458,6 +460,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		currentFile = filename;
 	}
 	else{
+		statusbarState = 2;
 		StatusBarGeneral->setText(tr("Loading Failed"));
 		QString error=db->getError();
 		if(error.isEmpty())error=tr("Unknown error while loading database.");
@@ -473,6 +476,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 			return false;
 		}
 	}
+	statusbarState = 0;
 	StatusBarGeneral->setText(tr("Ready"));
 	inactivityCounter = 0;
 	
@@ -1091,6 +1095,17 @@ void KeepassMainWindow::OnExtrasSettings(){
 		}
 		else {
 			setWindowTitle(APP_DISPLAY_NAME);
+		}
+		switch (statusbarState) {
+			case 0:
+				StatusBarGeneral->setText(tr("Ready"));
+				break;
+			case 1:
+				StatusBarGeneral->setText(tr("Loading Database..."));
+				break;
+			case 2:
+				StatusBarGeneral->setText(tr("Loading Failed"));
+				break;
 		}
 	}
 	

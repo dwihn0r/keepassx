@@ -138,8 +138,8 @@
            <item>
             <widget class="QLabel" name="label_4" >
              <property name="text" >
-              <string>Copyright (C) 2005 - 2009 KeePassX Team 
-KeePassX is distributed under the terms of the 
+              <string>Copyright (C) 2005 - 2009 KeePassX Team
+KeePassX is distributed under the terms of the
 General Public License (GPL) version 2.</string>
              </property>
             </widget>

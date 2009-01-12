@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="en_US">
+<defaultcodec></defaultcodec>
 <context>
     <name>@default</name>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file (FileError=%1)</source>
         <translation type="obsolete">No se pudo abrir el archivo (FileError=%1)</translation>
     </message>
@@ -11,18 +11,15 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX %1</source>
         <translation type="obsolete">KeePassX %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
         <translation type="obsolete">&lt;b&gt;Traducción actual: Español&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
         <translation type="obsolete">&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
@@ -93,12 +90,10 @@
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file &apos;%1&apos;</source>
         <translation type="obsolete">No se pudo abrir fichero &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The following error occured:
 %1</source>
         <translation type="obsolete">Ha ocurrido el siguiente error:
@@ -139,7 +134,6 @@
         <translation>Acerca de</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Thanks To</source>
         <translation type="obsolete">Agradecimientos</translation>
     </message>
@@ -190,7 +184,16 @@ General Public License (GPL) version 2.</source>
         <source>Copyright (C) 2005 - 2009 KeePassX Team 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
-        <translation type="unfinished">Copyright (C) 2005 - 2008 KeePassX Team KeePassX se distribuye bajo los términos de la  General Public License (GPL) versión 2. {2005 ?} {2009 ?} {2.?}</translation>
+        <translation type="obsolete">Copyright (C) 2005 - 2008 KeePassX Team KeePassX se distribuye bajo los términos de la  General Public License (GPL) versión 2. {2005 ?} {2009 ?} {2.?}</translation>
+    </message>
+    <message>
+        <location filename="../forms/AboutDlg.ui" line="141"/>
+        <source>Copyright (C) 2005 - 2009 KeePassX Team
+KeePassX is distributed under the terms of the
+General Public License (GPL) version 2.</source>
+        <translation>Copyright (C) 2005 - 2009 KeePassX Team
+KeePassX se distribuye bajo los términos de la
+General Public License (GPL) versión 2.</translation>
     </message>
 </context>
 <context>
@@ -240,7 +243,6 @@ Allowed is only one per entry.</source>
         <translation type="obsolete">Se ha encontrado más de una secuencia de teclas para &apos;auto-escritura:&apos;.Sólo se permite una por entrada.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Error</translation>
     </message>
@@ -285,7 +287,6 @@ Allowed is only one per entry.</source>
         <translation>Nombre de usuario</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Cancelar</translation>
     </message>
@@ -298,78 +299,64 @@ Allowed is only one per entry.</source>
 <context>
     <name>CAboutDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX %1</source>
         <translation type="obsolete">KeePassX %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Error</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation type="obsolete">Archivo &apos;%1&apos; no encontrado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Make sure that the program is installed correctly.</source>
         <translation type="obsolete">Asegúrese de que el programa está instalado correctamente.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file &apos;%1&apos;</source>
         <translation type="obsolete">No se pudo abrir fichero &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The following error occured:
 %1</source>
         <translation type="obsolete">Ha ocurrido el siguiente error:
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>http://keepass.berlios.de/index.php</source>
         <translation type="obsolete">http://keepass.berlios.de/index.php</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
         <translation type="obsolete">&lt;b&gt;Traducción actual: Español&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
         <translation type="obsolete">&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>$TRANSALTION_AUTHOR</source>
         <translation type="obsolete">Jaroslaw Filiochowski</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
         <translation type="obsolete">jarfil@jarfil.net</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Information on how to translate KeePassX can be found under:
 http://keepass.berlios.de/translation-howto.html</source>
         <translation type="obsolete">Puede encontrar información sobre cómo traducir KeePassX en esta dirección:
 http://keepass.berlios.de/translation-howto.html</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Thanks To</source>
         <translation type="obsolete">Agradecimientos</translation>
     </message>
@@ -447,12 +434,10 @@ Compruebe que las ha introducido correctamente.</translation>
         <translation>Guardar Adjunto...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Overwrite?</source>
         <translation type="obsolete">Sobreescribir?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>A file with this name already exists.
 Do you want to replace it?</source>
         <translation type="obsolete">Ya existe un archivo con este nombre.
@@ -464,7 +449,6 @@ Do you want to replace it?</source>
         <translation>Sí</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">No</translation>
     </message>
@@ -474,12 +458,10 @@ Do you want to replace it?</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not remove old file.</source>
         <translation type="obsolete">No se pudo eliminar el archivo anterior.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not create new file.</source>
         <translation type="obsolete">No se pudo crear el nuevo archivo.</translation>
     </message>
@@ -604,12 +586,10 @@ Are you sure?</source>
         <translation type="obsolete">Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Error</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
         <translation type="obsolete">No se pudo abrir &apos;/dev/random&apos; o &apos;/dev/urandom&apos;.</translation>
     </message>
@@ -627,134 +607,110 @@ Are you sure?</source>
 <context>
     <name>CPasswordDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Error</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a Password.</source>
         <translation type="obsolete">Introduzca una Contraseña.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please choose a key file.</source>
         <translation type="obsolete">Seleccione un archivo de clave.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a Password or select a key file.</source>
         <translation type="obsolete">Introduzca una Contraseña o seleccione un archivo de clave.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Database Key</source>
         <translation type="obsolete">Contraseña de la Base de Datos</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Select a Key File</source>
         <translation type="obsolete">Seleccione un Archivo de Clave</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>*.key</source>
         <translation type="obsolete">*.key</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected Error: File does not exist.</source>
         <translation type="obsolete">Error Inesperado: Archivo no existe.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The selected key file or directory does not exist.</source>
         <translation type="obsolete">El archivo de clave seleccionado o el directorio no existen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The given directory does not contain any key files.</source>
         <translation type="obsolete">El directorio no contiene ningún archivo de clave.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The given directory contains more then one key file.
 Please specify the key file directly.</source>
         <translation type="obsolete">El directorio contiene más de un archivo de clave.
 Especifique un archivo de clave concreto.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The key file found in the given directory is not readable.
 Please check your permissions.</source>
         <translation type="obsolete">El archivo de clave encontrado en el directorio no se puede leer.
 Compruebe sus permisos de acceso.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file could not be found.</source>
         <translation type="obsolete">Archivo de clave no encontrado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file is not readable.
 Please check your permissions.</source>
         <translation type="obsolete">Archivo de clave no se puede leer.
 Compruebe sus permisos de acceso.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Warning</source>
         <translation type="obsolete">Advertencia</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Password an password repetition are not equal.
 Please check your input.</source>
         <translation type="obsolete">Las contraseñas no coinciden.
 Compruebe que las ha introducido correctamente.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a password or select a key file.</source>
         <translation type="obsolete">Introduzca una contraseña o seleccione un archivo de clave.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>A file with the name &apos;pwsafe.key&apos; already exisits in the given directory.
 Do you want to replace it?</source>
         <translation type="obsolete">El archivo &apos;pwsafe.key&apos; ya existe en el directorio.
 ¿Desea reemplazarlo?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Sí</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">No</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The exisiting file is not writable.</source>
         <translation type="obsolete">El archivo existente no se puede escribir.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>A file with the this name already exisits.
 Do you want to replace it?</source>
         <translation type="obsolete">Existe un archivo con ese nombre.
 ¿Desea reemplazarlo?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Cancelar</translation>
     </message>
@@ -762,22 +718,18 @@ Do you want to replace it?</source>
 <context>
     <name>CSearchDlg</name>
     <message>
-        <location filename="" line="0"/>
         <source>Notice</source>
         <translation type="obsolete">Aviso</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a search string.</source>
         <translation type="obsolete">Introduzca una cadena de búsqueda.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search</source>
         <translation type="obsolete">Buscar</translation>
     </message>
@@ -1141,7 +1093,6 @@ p, li { white-space: pre-wrap; }
         <translation>HTML</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Cancelar</translation>
     </message>
@@ -1288,12 +1239,10 @@ p, li { white-space: pre-wrap; }
         <translation>Grupo:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Cancelar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
@@ -1308,7 +1257,6 @@ p, li { white-space: pre-wrap; }
         <translation>Icono:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>% Bit</source>
         <translation type="obsolete">% Bits</translation>
     </message>
@@ -1318,17 +1266,14 @@ p, li { white-space: pre-wrap; }
         <translation>Ge&amp;n.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>...</source>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">&amp;Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+A</translation>
     </message>
@@ -1366,22 +1311,18 @@ p, li { white-space: pre-wrap; }
         <translation>Icono:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Cancelar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">&amp;Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+A</translation>
     </message>
@@ -1450,7 +1391,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Export_Txt</name>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file (FileError=%1)</source>
         <translation type="obsolete">No se pudo abrir el archivo (FileError=%1)</translation>
     </message>
@@ -1594,12 +1534,10 @@ p, li { white-space: pre-wrap; }
         <translation>Generador de Contraseña</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Accep&amp;t</source>
         <translation type="obsolete">&amp;Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Cancelar</translation>
     </message>
@@ -1654,7 +1592,6 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">S&amp;ubrayado</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+H</source>
         <translation type="obsolete">Alt+M</translation>
     </message>
@@ -1674,7 +1611,6 @@ p, li { white-space: pre-wrap; }
         <translation>Longitud:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Use &quot;/dev/rando&amp;m&quot;</source>
         <translation type="obsolete">Usar &quot;/dev/rando&amp;m&quot;</translation>
     </message>
@@ -1905,70 +1841,70 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Kdb3Database</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="500"/>
+        <location filename="../Kdb3Database.cpp" line="511"/>
         <source>Could not open file.</source>
         <translation>No se pudo abrir el archivo.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="511"/>
+        <location filename="../Kdb3Database.cpp" line="522"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation>Tamaño de fichero no esperado (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="528"/>
+        <location filename="../Kdb3Database.cpp" line="539"/>
         <source>Wrong Signature</source>
         <translation>Firma Incorrecta</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="533"/>
+        <location filename="../Kdb3Database.cpp" line="544"/>
         <source>Unsupported File Version.</source>
         <translation>Versión de archivo no compatible.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="542"/>
+        <location filename="../Kdb3Database.cpp" line="553"/>
         <source>Unknown Encryption Algorithm.</source>
         <translation>Algoritmo de cifrado desconocido.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="577"/>
+        <location filename="../Kdb3Database.cpp" line="588"/>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
         <translation>Falló el descifrado.La contraseña es incorrecta o el archivo está dañado.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="597"/>
+        <location filename="../Kdb3Database.cpp" line="608"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation>Comprobación hash fallida.
 La clave es incorecta o el fichero está dañado.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="682"/>
+        <location filename="../Kdb3Database.cpp" line="693"/>
         <source>Invalid group tree.</source>
         <translation>Árbol de grupos no válido.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="879"/>
+        <location filename="../Kdb3Database.cpp" line="890"/>
         <source>Key file is empty.</source>
         <translation>El archivo de claves está vacio.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1249"/>
+        <location filename="../Kdb3Database.cpp" line="1271"/>
         <source>The database must contain at least one group.</source>
         <translation>La base de datos tiene que contener al menos un grupo.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1273"/>
+        <location filename="../Kdb3Database.cpp" line="1295"/>
         <source>Could not open file for writing.</source>
         <translation>No se puede abrir el archivo para escritura.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="676"/>
+        <location filename="../Kdb3Database.cpp" line="687"/>
         <source>Unexpected error: Offset is out of range.</source>
         <translation>Error inesperado: El desplazamiento está fuera del rango.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="569"/>
+        <location filename="../Kdb3Database.cpp" line="580"/>
         <source>Unable to initalize the twofish algorithm.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1976,22 +1912,22 @@ La clave es incorecta o el fichero está dañado.</translation>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1113"/>
+        <location filename="../Kdb3Database.cpp" line="1135"/>
         <source>Bytes</source>
         <translation>Bytes</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1121"/>
+        <location filename="../Kdb3Database.cpp" line="1143"/>
         <source>KiB</source>
         <translation>KiB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1127"/>
+        <location filename="../Kdb3Database.cpp" line="1149"/>
         <source>MiB</source>
         <translation>MiB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1132"/>
+        <location filename="../Kdb3Database.cpp" line="1154"/>
         <source>GiB</source>
         <translation>GiB</translation>
     </message>
@@ -2049,7 +1985,6 @@ La clave es incorecta o el fichero está dañado.</translation>
         <translation>Adjunto</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>%1 items</source>
         <translation type="obsolete">%1 elementos</translation>
     </message>
@@ -2097,7 +2032,6 @@ La clave es incorecta o el fichero está dañado.</translation>
         <translation>Resultados de Búsqueda</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Groups</source>
         <translation type="obsolete">Grupos</translation>
     </message>
@@ -2195,14 +2129,12 @@ La clave es incorecta o el fichero está dañado.</translation>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The following error occured while opening the database:
 %1</source>
         <translation type="obsolete">Ocurrió el siguiente error al intentar abrir la base de datos:
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">Aceptar</translation>
     </message>
@@ -2219,22 +2151,18 @@ to save the changes?</source>
 ¿Desea guardar los cambios?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Sí</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">No</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Cancelar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;B&gt;Group: &lt;/B&gt;%1  &lt;B&gt;Title: &lt;/B&gt;%2  &lt;B&gt;Username: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Password: &lt;/B&gt;%5  &lt;B&gt;Creation: &lt;/B&gt;%6  &lt;B&gt;Last Change: &lt;/B&gt;%7  &lt;B&gt;LastAccess: &lt;/B&gt;%8  &lt;B&gt;Expires: &lt;/B&gt;%9</source>
         <translation type="obsolete">&lt;b&gt;Grupo: &lt;/b&gt;%1  &lt;b&gt;Título: &lt;/b&gt;%2  &lt;b&gt;Usuario: &lt;/b&gt;%3  &lt;b&gt;URL: &lt;/b&gt;&lt;a href=&quot;%4&quot;&gt;%4&lt;/a&gt;  &lt;b&gt;Contraseña: &lt;/b&gt;%5  &lt;b&gt;Creación: &lt;/b&gt;%6  &lt;b&gt;Último Cambio: &lt;/b&gt;%7  &lt;b&gt;Último Acceso: &lt;/b&gt;%8  &lt;b&gt;Expira: &lt;/b&gt;%9</translation>
     </message>
@@ -2259,14 +2187,12 @@ to save the changes?</source>
         <translation>Eliminar Entradas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File could not be saved.
 %1</source>
         <translation type="obsolete">Archivo no ha podido ser guardado.
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save Database As...</source>
         <translation type="obsolete">Guardar Base de Datos Como...</translation>
     </message>
@@ -2276,7 +2202,6 @@ to save the changes?</source>
         <translation>Listo</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>[new]</source>
         <translation type="obsolete">[nuevo]</translation>
     </message>
@@ -2296,29 +2221,24 @@ to save the changes?</source>
         <translation>Carga Fallida</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not create key file. The following error occured:
 %1</source>
         <translation type="obsolete">No se ha podido crear archivo de clave. Ha ocurrido el siguiente error:
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Export To...</source>
         <translation type="obsolete">Exportar A...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX [new]</source>
         <translation type="obsolete">KeePassX [nuevo]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown error in Import_PwManager::importFile()()</source>
         <translation type="obsolete">Error desconocido en Import_PwManager::importFile()()</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown error in Import_KWalletXml::importFile()</source>
         <translation type="obsolete">Error desconocido en Import_KWalletXml::importFile()</translation>
     </message>
@@ -2328,12 +2248,10 @@ to save the changes?</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Toolbar</source>
         <translation type="obsolete">Mostrar Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX</source>
         <translation type="obsolete">KeePassX</translation>
     </message>
@@ -2528,257 +2446,208 @@ Do you want to save the changes?</source>
         <translation>KeePassX</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File</source>
         <translation type="obsolete">Archivo</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Import from...</source>
         <translation type="obsolete">Importar desde...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>View</source>
         <translation type="obsolete">Ver</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Columns</source>
         <translation type="obsolete">Columnas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Extras</source>
         <translation type="obsolete">Preferencias</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Help</source>
         <translation type="obsolete">Ayuda</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>New Database...</source>
         <translation type="obsolete">Nueva Base de Datos...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Open Database...</source>
         <translation type="obsolete">Abrir Base de Datos...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Close Database</source>
         <translation type="obsolete">Cerrar Base de Datos</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save Database</source>
         <translation type="obsolete">Guardar Base de Datos</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save Database As...</source>
         <translation type="obsolete">Guardar Base de Datos Como...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Database Settings...</source>
         <translation type="obsolete">Preferencias de Base de Datos...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Change Master Key...</source>
         <translation type="obsolete">Cambiar Clave Maestra...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Exit</source>
         <translation type="obsolete">Salir</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>PwManager File (*.pwm)</source>
         <translation type="obsolete">PwManager (*.pwm)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KWallet XML-File (*.xml)</source>
         <translation type="obsolete">KWallet, archivo XML (*.xml)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="584"/>
+        <location filename="../forms/MainWindow.ui" line="593"/>
         <source>Add New Group...</source>
         <translation type="unfinished">Añadir Nuevo Grupo...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Edit Group...</source>
         <translation type="obsolete">Editar Grupo...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Delete Group</source>
         <translation type="obsolete">Eliminar Grupo</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Copy Password to Clipboard</source>
         <translation type="obsolete">Copiar Contraseña al Portapapeles</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Copy Username to Clipboard</source>
         <translation type="obsolete">Copiar Usuario al Portapapeles</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Open URL</source>
         <translation type="obsolete">Abrir URL</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save Attachment As...</source>
         <translation type="obsolete">Guardar Adjunto Como...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Add New Entry...</source>
         <translation type="obsolete">Añadir Nueva Entrada...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>View/Edit Entry...</source>
         <translation type="obsolete">Ver/Editar Entrada...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Delete Entry</source>
         <translation type="obsolete">Eliminar Entrada</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Clone Entry</source>
         <translation type="obsolete">Duplicar Entrada</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search In Database...</source>
         <translation type="obsolete">Buscar en Base de Datos...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search in this group...</source>
         <translation type="obsolete">Buscar en este grupo...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Toolbar</source>
         <translation type="obsolete">Mostrar Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Entry Details</source>
         <translation type="obsolete">Mostrar Detalles de Entradas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hide Usernames</source>
         <translation type="obsolete">Ocultar Usuarios</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hide Passwords</source>
         <translation type="obsolete">Ocultar Contraseñas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Title</source>
         <translation type="obsolete">Título</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Username</source>
         <translation type="obsolete">Usuario</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>URL</source>
         <translation type="obsolete">URL</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Password</source>
         <translation type="obsolete">Contraseña</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Comment</source>
         <translation type="obsolete">Comentario</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Expires</source>
         <translation type="obsolete">Expira</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Creation</source>
         <translation type="obsolete">Creación</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Last Change</source>
         <translation type="obsolete">Último Cambio</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Last Access</source>
         <translation type="obsolete">Último Acceso</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Attachment</source>
         <translation type="obsolete">Adjunto</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Settings...</source>
         <translation type="obsolete">Preferencias...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>About...</source>
         <translation type="obsolete">Acerca de...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Edit</source>
         <translation type="obsolete">Editar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Statusbar</source>
         <translation type="obsolete">Mostrar Barra de estado</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Export to...</source>
         <translation type="obsolete">Exportar a...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX Handbook...</source>
         <translation type="obsolete">Manual de KeePassX...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Plain Text (*.txt)</source>
         <translation type="obsolete">Texto Plano (*.txt)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="491"/>
+        <location filename="../forms/MainWindow.ui" line="500"/>
         <source>Hide</source>
         <translation>Ocultar</translation>
     </message>
@@ -2848,32 +2717,32 @@ Do you want to save the changes?</source>
         <translation>Cambiar contraseña &amp;maestra...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="465"/>
+        <location filename="../forms/MainWindow.ui" line="468"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Preferencias...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="470"/>
+        <location filename="../forms/MainWindow.ui" line="476"/>
         <source>&amp;About...</source>
         <translation>&amp;Acerca de...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="483"/>
+        <location filename="../forms/MainWindow.ui" line="492"/>
         <source>&amp;KeePassX Handbook...</source>
         <translation>Manual de &amp;KeePassX...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="525"/>
+        <location filename="../forms/MainWindow.ui" line="534"/>
         <source>Standard KeePass Single User Database (*.kdb)</source>
         <translation>Base de datos estándar de KeePass para un único usuario (*.kdb)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="530"/>
+        <location filename="../forms/MainWindow.ui" line="539"/>
         <source>Advanced KeePassX Database (*.kxdb)</source>
         <translation>Base de datos avanzada de KeePass (*.kxdb)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="561"/>
+        <location filename="../forms/MainWindow.ui" line="570"/>
         <source>Recycle Bin...</source>
         <translation>Papelera de reciclaje...</translation>
     </message>
@@ -2918,192 +2787,192 @@ Do you want to save the changes?</source>
         <translation type="obsolete">&amp;Añadir nuevo grupo...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="301"/>
+        <location filename="../forms/MainWindow.ui" line="304"/>
         <source>&amp;Edit Group...</source>
         <translation>&amp;Editar Grupo...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="306"/>
+        <location filename="../forms/MainWindow.ui" line="309"/>
         <source>&amp;Delete Group</source>
         <translation>&amp;Borrar grupo</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="311"/>
+        <location filename="../forms/MainWindow.ui" line="314"/>
         <source>Copy Password &amp;to Clipboard</source>
         <translation>Copiar la con&amp;traseña al portapapeles</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="316"/>
+        <location filename="../forms/MainWindow.ui" line="319"/>
         <source>Copy &amp;Username to Clipboard</source>
         <translation>Copiar la nombre de &amp;usuario al portapapeles</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="321"/>
+        <location filename="../forms/MainWindow.ui" line="324"/>
         <source>&amp;Open URL</source>
         <translation>Abrir URL</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="326"/>
+        <location filename="../forms/MainWindow.ui" line="329"/>
         <source>&amp;Save Attachment As...</source>
         <translation>&amp;Guardar archivo adjunto como...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="331"/>
+        <location filename="../forms/MainWindow.ui" line="334"/>
         <source>Add &amp;New Entry...</source>
         <translation>Añadir &amp;nueva entrada...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="336"/>
+        <location filename="../forms/MainWindow.ui" line="339"/>
         <source>&amp;View/Edit Entry...</source>
         <translation>&amp;Ver/Editar entrada...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="341"/>
+        <location filename="../forms/MainWindow.ui" line="344"/>
         <source>De&amp;lete Entry</source>
         <translation>Bo&amp;rrar entrada</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="346"/>
+        <location filename="../forms/MainWindow.ui" line="349"/>
         <source>&amp;Clone Entry</source>
         <translation>&amp;Clonar entrada</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="351"/>
+        <location filename="../forms/MainWindow.ui" line="354"/>
         <source>Search &amp;in Database...</source>
         <translation>Buscar e&amp;n la base de datos</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="356"/>
+        <location filename="../forms/MainWindow.ui" line="359"/>
         <source>Search in this &amp;Group...</source>
         <translation>Buscar en este &amp;grupo...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="364"/>
+        <location filename="../forms/MainWindow.ui" line="367"/>
         <source>Show &amp;Entry Details</source>
         <translation>Mostrar detalles de la &amp;entrada</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="372"/>
+        <location filename="../forms/MainWindow.ui" line="375"/>
         <source>Hide &amp;Usernames</source>
         <translation>Ocultar nombres de &amp;usuario</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="380"/>
+        <location filename="../forms/MainWindow.ui" line="383"/>
         <source>Hide &amp;Passwords</source>
         <translation>Ocultar &amp;contraseñas</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="388"/>
+        <location filename="../forms/MainWindow.ui" line="391"/>
         <source>&amp;Title</source>
         <translation>&amp;Título</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="396"/>
+        <location filename="../forms/MainWindow.ui" line="399"/>
         <source>User&amp;name</source>
         <translation>&amp;Nombre de usuario</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="404"/>
+        <location filename="../forms/MainWindow.ui" line="407"/>
         <source>&amp;URL</source>
         <translation>&amp;URL</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="412"/>
+        <location filename="../forms/MainWindow.ui" line="415"/>
         <source>&amp;Password</source>
         <translation>&amp;Contraseña</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="420"/>
+        <location filename="../forms/MainWindow.ui" line="423"/>
         <source>&amp;Comment</source>
         <translation>&amp;Comentario</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="428"/>
+        <location filename="../forms/MainWindow.ui" line="431"/>
         <source>E&amp;xpires</source>
         <translation>E&amp;xpira</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="436"/>
+        <location filename="../forms/MainWindow.ui" line="439"/>
         <source>C&amp;reation</source>
         <translation>C&amp;reación</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="444"/>
+        <location filename="../forms/MainWindow.ui" line="447"/>
         <source>&amp;Last Change</source>
         <translation>Ú&amp;ltimo cambio</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="452"/>
+        <location filename="../forms/MainWindow.ui" line="455"/>
         <source>Last &amp;Access</source>
         <translation>Último &amp;acceso</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="460"/>
+        <location filename="../forms/MainWindow.ui" line="463"/>
         <source>A&amp;ttachment</source>
         <translation>Adjun&amp;to</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="478"/>
+        <location filename="../forms/MainWindow.ui" line="487"/>
         <source>Show &amp;Statusbar</source>
         <translation>Mostrar barra de e&amp;stado</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="496"/>
+        <location filename="../forms/MainWindow.ui" line="505"/>
         <source>&amp;Perform AutoType</source>
         <translation>%Utilizar Auto-escritura</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="504"/>
+        <location filename="../forms/MainWindow.ui" line="513"/>
         <source>&amp;16x16</source>
         <translation>&amp;16x16</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="512"/>
+        <location filename="../forms/MainWindow.ui" line="521"/>
         <source>&amp;22x22</source>
         <translation>&amp;22x22</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="520"/>
+        <location filename="../forms/MainWindow.ui" line="529"/>
         <source>2&amp;8x28</source>
         <translation>2&amp;8x28</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="535"/>
+        <location filename="../forms/MainWindow.ui" line="544"/>
         <source>&amp;New Database...</source>
         <translation>&amp;Nueva base de datos...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="540"/>
+        <location filename="../forms/MainWindow.ui" line="549"/>
         <source>&amp;Password Generator...</source>
         <translation>Generador de &amp;contraseñas...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="551"/>
+        <location filename="../forms/MainWindow.ui" line="560"/>
         <source>&amp;Group (search results only)</source>
         <translation>&amp;Grupo (sólo resultados de búsqueda)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="556"/>
+        <location filename="../forms/MainWindow.ui" line="565"/>
         <source>Show &amp;Expired Entries...</source>
         <translation>Mostar &amp;entidades expiradas</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="569"/>
+        <location filename="../forms/MainWindow.ui" line="578"/>
         <source>&amp;Add Bookmark...</source>
         <translation>&amp;Añadir marcador...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="574"/>
+        <location filename="../forms/MainWindow.ui" line="583"/>
         <source>Bookmark &amp;this Database...</source>
         <translation>Añadir marcador a es&amp;ta base de datos...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="296"/>
+        <location filename="../forms/MainWindow.ui" line="299"/>
         <source>&amp;Add New Subgroup...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="579"/>
+        <location filename="../forms/MainWindow.ui" line="588"/>
         <source>Copy URL to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3210,17 +3079,14 @@ File is not readable.</source>
 <context>
     <name>PasswordDlg</name>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>...</source>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Cancelar</translation>
     </message>
@@ -3240,7 +3106,6 @@ File is not readable.</source>
         <translation>Contraseña:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file or directory:</source>
         <translation type="obsolete">Archivo o directorio de clave:</translation>
     </message>
@@ -3255,17 +3120,14 @@ File is not readable.</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Use Password AND Key File</source>
         <translation type="obsolete">Usar Contraseña Y Archivo de Clave</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Exit</source>
         <translation type="obsolete">Salir</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Password Repet.:</source>
         <translation type="obsolete">Contraseña (repetida):</translation>
     </message>
@@ -3303,44 +3165,36 @@ File is not readable.</source>
 <context>
     <name>PwDatabase</name>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown Error</source>
         <translation type="obsolete">Error Desconocido</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation type="obsolete">Tamaño de fichero inesperado (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Wrong Signature</source>
         <translation type="obsolete">Firma Incorrecta</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>AES-Init Failed</source>
         <translation type="obsolete">Falló inicialización de AES</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Comprobación hash fallida.
 La clave es incorecta o el fichero está dañado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open key file.</source>
         <translation type="obsolete">No se pudo abrir archivo de clave.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file could not be written.</source>
         <translation type="obsolete">No se pudo escribir archivo de clave.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file.</source>
         <translation type="obsolete">No se pudo abrir el archivo.</translation>
     </message>
@@ -3348,104 +3202,84 @@ La clave es incorecta o el fichero está dañado.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="" line="0"/>
         <source>Warning</source>
         <translation type="obsolete">Advertencia</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not save configuration file.
 Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="obsolete">No se pudo guardar el archivo de configuración.
 Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation type="obsolete">Archivo &apos;%1&apos; no encontrado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File not found.</source>
         <translation type="obsolete">Archivo no encontrado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file.</source>
         <translation type="obsolete">No se pudo abrir el archivo.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File is no valid PwManager file.</source>
         <translation type="obsolete">El archivo no es un archivo PwManager válido.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported file version.</source>
         <translation type="obsolete">Version de archivo no soportada.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported hash algorithm.</source>
         <translation type="obsolete">Algoritmo hash no soportado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported encryption algorithm.</source>
         <translation type="obsolete">Algoritmo de cifrado no soportado.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Compressed files are not supported yet.</source>
         <translation type="obsolete">Los archivos comprimidos todavía no están soportados.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Wrong password.</source>
         <translation type="obsolete">Contraseña incorrecta.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File is damaged (hash test failed).</source>
         <translation type="obsolete">El archivo está dañado (comprobación hash fallida).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid XML data (see stdout for details).</source>
         <translation type="obsolete">Datos XML no válidos (ver stdout para más detalles).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File is empty.</source>
         <translation type="obsolete">Archivo vacío.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid XML file (see stdout for details).</source>
         <translation type="obsolete">Archivo XML no válido (ver stdout para más detalles).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid XML file.</source>
         <translation type="obsolete">Archivo XML no válido.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Document does not contain data.</source>
         <translation type="obsolete">El documento no contiene datos.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Error</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Never</source>
         <translation type="obsolete">Nunca</translation>
     </message>
@@ -3561,17 +3395,14 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>&amp;Contraseñas</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search</source>
         <translation type="obsolete">Buscar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Clo&amp;se</source>
         <translation type="obsolete">C&amp;errar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+S</source>
         <translation type="obsolete">Alt+E</translation>
     </message>
@@ -3589,7 +3420,6 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>Selección de icono</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Cancelar</translation>
     </message>
@@ -3602,12 +3432,10 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>Alt+Ö</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">&amp;Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+A</translation>
     </message>
@@ -3617,7 +3445,6 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>Preferencias</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Cancelar</translation>
     </message>
@@ -3627,12 +3454,10 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>Borrar portapapeles después de:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Seconds</source>
         <translation type="obsolete">Segundos</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Sh&amp;ow passwords in plain text by default</source>
         <translation type="obsolete">M&amp;ostrar contraseñas en texto plano por defecto</translation>
     </message>
@@ -3682,27 +3507,22 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>Color 1:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Expand group tree when opening a database</source>
         <translation type="obsolete">Expandir árbol de grupo al abrir la base de datos</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Other</source>
         <translation type="obsolete">&amp;Otros</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Remember last opend file</source>
         <translation type="obsolete">Recordar último archivo abierto</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Browser Command:</source>
         <translation type="obsolete">Comando del Navegador:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Securi&amp;ty</source>
         <translation type="obsolete">Seguri&amp;dad</translation>
     </message>
@@ -4058,22 +3878,18 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
 <context>
     <name>SimplePasswordDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">&amp;Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>...</source>
         <translation type="obsolete">...</translation>
     </message>
@@ -4088,7 +3904,6 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
         <translation>Contraseña:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Cancelar</translation>
     </message>
@@ -4096,22 +3911,18 @@ Asegúrese de tener acceso para escritura en &apos;~/.keepass&apos;.</translatio
 <context>
     <name>StandardDatabase</name>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file.</source>
         <translation type="obsolete">No se pudo abrir el archivo.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation type="obsolete">Tamaño de fichero inesperado (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Wrong Signature</source>
         <translation type="obsolete">Firma Incorrecta</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Comprobación hash fallida.
@@ -4155,12 +3966,10 @@ from the drop-down list, or enter the window title manually:</source>
 <context>
     <name>TrashCanDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>Title</source>
         <translation type="obsolete">Título</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Username</source>
         <translation type="obsolete">Usuario</translation>
     </message>
@@ -4194,47 +4003,38 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>dbsettingdlg_base</name>
     <message>
-        <location filename="" line="0"/>
         <source>Database Settings</source>
         <translation type="obsolete">Preferencias de Base de Datos</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Encryption</source>
         <translation type="obsolete">Cifrado</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Algorithm:</source>
         <translation type="obsolete">Algoritmo:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>?</source>
         <translation type="obsolete">?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Encryption Rounds:</source>
         <translation type="obsolete">Iteraciones de Cifrado:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">&amp;Aceptar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Ctrl+K</source>
         <translation type="obsolete">Ctrl+A</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Cancelar</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Ctrl+C</source>
         <translation type="obsolete">Ctrl+C</translation>
     </message>

@@ -131,6 +131,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		QString currentFile;
 		int inactivityCounter;
 		QTimer* inactivityTimer;
+		int statusbarState;
 };
 
 #endif

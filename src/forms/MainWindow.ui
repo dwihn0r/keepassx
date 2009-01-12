@@ -290,6 +290,9 @@
    <property name="text" >
     <string>&amp;Quit</string>
    </property>
+   <property name="menuRole" >
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="EditNewSubgroupAction" >
    <property name="text" >
@@ -464,10 +467,16 @@
    <property name="text" >
     <string>&amp;Settings...</string>
    </property>
+   <property name="menuRole" >
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="HelpAboutAction" >
    <property name="text" >
     <string>&amp;About...</string>
+   </property>
+   <property name="menuRole" >
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="ViewShowStatusbarAction" >
