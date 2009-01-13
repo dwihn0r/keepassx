@@ -1086,6 +1086,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 	dlg.exec();
 	if (config->language() != oldLang){
 		retranslateUi(this);
+		WorkspaceLockedWidget.retranslateUi(LockedCentralWidget);
 		EntryView->updateColumns();
 		if (FileOpen) {
 			if (db->file())
