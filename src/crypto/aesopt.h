@@ -170,12 +170,11 @@
 
 /*  2. VIA ACE SUPPORT */
 
-// DISABLE VIA ACE
-/*#if defined( __GNUC__ ) && defined( __i386__ ) \
+#if defined( __GNUC__ ) && defined( __i386__ ) \
  || defined( _WIN32   ) && defined( _M_IX86  ) \
  && !(defined( _WIN64 ) || defined( _WIN32_WCE ) || defined( _MSC_VER ) && ( _MSC_VER <= 800 ))
 #  define VIA_ACE_POSSIBLE
-#endif*/
+#endif
 
 /*  Define this option if support for the VIA ACE is required. This uses
     inline assembler instructions and is only implemented for the Microsoft,

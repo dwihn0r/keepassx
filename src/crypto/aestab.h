@@ -68,6 +68,10 @@
 #if !defined( _AESTAB_H )
 #define _AESTAB_H
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 #define t_dec(m,n) t_##m##n
 #define t_set(m,n) t_##m##n
 #define t_use(m,n) t_##m##n
@@ -83,9 +87,7 @@
 #  define CONST
 #endif
 
-#if defined(__cplusplus)
-#  define EXTERN extern "C"
-#elif defined(DO_TABLES)
+#if defined(DO_TABLES)
 #  define EXTERN
 #else
 #  define EXTERN extern
@@ -169,6 +171,10 @@ EXTERN ALIGN CONST uint_32t t_dec(r,c)[RC_LENGTH];
 #endif
 #if defined( IM4_SET )
     d_4(uint_32t, t_dec(i,m), mm_data, v0, v1, v2, v3);
+#endif
+
+#if defined(__cplusplus)
+}
 #endif
 
 #endif

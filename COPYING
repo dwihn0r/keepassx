@@ -1,5 +1,5 @@
-Copyright (C) 2005-2007 Tarek Saidi <tarek.saidi@arcor.de>
-Copyright (C) 2007-2008 Felix Geyer
+Copyright (C) 2005-2008 Tarek Saidi <tarek.saidi@arcor.de>
+Copyright (C) 2007-2009 Felix Geyer <debfx-keepassx {at} fobos.de>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,11 +14,11 @@ text of the GNU General Public License below for more details.
 Other licenses:
 
 apg/*:
-	Copyright (c) 1999, 2000, 2001, 2002, 2003 Adel I. Mirzazhanov
+	Copyright (c) 1999, 2000, 2001, 2002, 2003 Adel I. Mirzazhanov <a-del@iname.com>
 	3-clause BSD license
 
 crypto/aes*:
-	Copyright (c) 1998-2008, Brian Gladman, Worcester
+	Copyright (c) 1998-2008, Brian Gladman
 	3-clause BSD license
 
 crypto/arcfour*:

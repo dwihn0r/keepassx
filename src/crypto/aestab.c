@@ -224,38 +224,52 @@ static uint_8t hibit(const uint_32t x)
 
 /* return the inverse of the finite field element x */
 
-static uint_8t fi(const uint_8t x)
+static uint_8t gf_inv(const uint_8t x)
 {   uint_8t p1 = x, p2 = BPOLY, n1 = hibit(x), n2 = 0x80, v1 = 1, v2 = 0;
 
-    if(x < 2) return x;
+    if(x < 2) 
+        return x;
 
-    for(;;)
+    for( ; ; )
     {
-        if(!n1) return v1;
+        if(n1)
+            while(n2 >= n1)             /* divide polynomial p2 by p1    */
+            {
+                n2 /= n1;               /* shift smaller polynomial left */ 
+                p2 ^= (p1 * n2) & 0xff; /* and remove from larger one    */
+                v2 ^= v1 * n2;          /* shift accumulated value and   */ 
+                n2 = hibit(p2);         /* add into result               */
+            }
+        else
+            return v1;
 
-        while(n2 >= n1)
-        {
-            n2 /= n1; p2 ^= p1 * n2; v2 ^= v1 * n2; n2 = hibit(p2);
-        }
-
-        if(!n2) return v2;
-
-        while(n1 >= n2)
-        {
-            n1 /= n2; p1 ^= p2 * n1; v1 ^= v2 * n1; n1 = hibit(p1);
-        }
+        if(n2)                          /* repeat with values swapped    */ 
+            while(n1 >= n2)
+            {
+                n1 /= n2; 
+                p1 ^= p2 * n1; 
+                v1 ^= v2 * n1; 
+                n1 = hibit(p1);
+            }
+        else
+            return v2;
     }
 }
 
 #endif
 
 /* The forward and inverse affine transformations used in the S-box */
+uint_8t fwd_affine(const uint_8t x)
+{   uint_32t w = x;
+    w ^= (w << 1) ^ (w << 2) ^ (w << 3) ^ (w << 4);
+    return 0x63 ^ ((w ^ (w >> 8)) & 0xff);
+}
 
-#define fwd_affine(x) \
-    (w = (uint_32t)x, w ^= (w<<1)^(w<<2)^(w<<3)^(w<<4), 0x63^(uint_8t)(w^(w>>8)))
-
-#define inv_affine(x) \
-    (w = (uint_32t)x, w = (w<<1)^(w<<3)^(w<<6), 0x05^(uint_8t)(w^(w>>8)))
+uint_8t inv_affine(const uint_8t x)
+{   uint_32t w = x;
+    w = (w << 1) ^ (w << 3) ^ (w << 6);
+    return 0x05 ^ ((w ^ (w >> 8)) & 0xff);
+}
 
 static int init = 0;
 
@@ -297,7 +311,7 @@ AES_RETURN aes_init(void)
     for(i = 0; i < 256; ++i)
     {   uint_8t    b;
 
-        b = fwd_affine(fi((uint_8t)i));
+        b = fwd_affine(gf_inv((uint_8t)i));
         w = bytes2word(f2(b), b, b, f3(b));
 
 #if defined( SBX_SET )
@@ -335,7 +349,7 @@ AES_RETURN aes_init(void)
         t_set(l,s)[3][i] = upr(w,3);
 #endif
 
-        b = fi(inv_affine((uint_8t)i));
+        b = gf_inv(inv_affine((uint_8t)i));
         w = bytes2word(fe(b), f9(b), fd(b), fb(b));
 
 #if defined( IM1_SET )			/* tables for the inverse mix column operation  */

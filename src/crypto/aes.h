@@ -41,10 +41,10 @@ extern "C"
 {
 #endif
 
-#define AES_128     /* if a fast 128 bit key scheduler is needed    */
-#define AES_192     /* if a fast 192 bit key scheduler is needed    */
+//#define AES_128     /* if a fast 128 bit key scheduler is needed    */
+//#define AES_192     /* if a fast 192 bit key scheduler is needed    */
 #define AES_256     /* if a fast 256 bit key scheduler is needed    */
-#define AES_VAR     /* if variable key size scheduler is needed     */
+//#define AES_VAR     /* if variable key size scheduler is needed     */
 #define AES_MODES   /* if support is needed for modes               */
 
 /* The following must also be set in assembler files if being used  */

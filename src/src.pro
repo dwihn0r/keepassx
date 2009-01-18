@@ -176,6 +176,7 @@ HEADERS += main.h \
            crypto/aes_types.h \
            crypto/aesopt.h \
            crypto/aestab.h \
+           crypto/aes_via_ace.h \
            crypto/arcfour.h \
            crypto/blowfish.h \
            crypto/sha256.h \
