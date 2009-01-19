@@ -885,7 +885,7 @@ bool Kdb3Database::setFileKey(const QString& filename){
 		error=decodeFileError(file.error());
 		return false;
 	}
-	unsigned long FileSize=file.size();
+	qint64 FileSize=file.size();
 	if(FileSize == 0){
 		error=tr("Key file is empty.");
 		return false;
@@ -913,33 +913,32 @@ bool Kdb3Database::setFileKey(const QString& filename){
 		}
 	}
 	SHA256 sha;
-	unsigned char* buffer = new unsigned char[2048];
-	while(1)
-	{
-		unsigned long read=file.read((char*)buffer,2048);
-		if(read == 0) break;
-		sha.update(buffer,read);
-		if(read != 2048) break;
-	}
+	unsigned char* buffer[2048];
+	unsigned long read;
+	do {
+		read = file.read((char*)buffer,2048);
+		if (read != 0)
+			sha.update(buffer,read);
+	} while (read == 2048);
 	sha.finish(*RawMasterKey);
 	RawMasterKey.lock();
-	delete [] buffer;
 	return true;
 }
 
 bool Kdb3Database::setCompositeKey(const QString& Password,const QString& filename){
 	SHA256 sha;
 	
-	if(!setFileKey(filename))return false;
+	setPasswordKey(Password);
 	RawMasterKey.unlock();
 	sha.update(*RawMasterKey,32);
 	RawMasterKey.lock();
 	
-	setPasswordKey(Password);
+	if(!setFileKey(filename))return false;
 	RawMasterKey.unlock();
 	sha.update(*RawMasterKey,32);
 	sha.finish(*RawMasterKey);
 	RawMasterKey.lock();
+	
 	return true;
 }
 

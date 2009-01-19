@@ -287,7 +287,7 @@ void PasswordDialog::OnOK(){
 			config->setLastKeyLocation(QString());
 		}
 		else if(Check_KeyFile->isChecked()){
-			config->setLastKeyType(PASSWORD);
+			config->setLastKeyType(KEYFILE);
 			config->setLastKeyLocation(Combo_KeyFile->currentText());
 		}		
 	}
