@@ -451,13 +451,13 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		
 		if (IsLocked)
 			resetLock();
+		currentFile = filename;
 		saveLastFilename(filename);
 		setWindowTitle(QString("%1[*] - KeePassX").arg(filename));
 		GroupView->createItems();
 		EntryView->showGroup(NULL);
 		setStateFileOpen(true);
 		setStateFileModified(false);
-		currentFile = filename;
 	}
 	else{
 		statusbarState = 2;
@@ -549,6 +549,7 @@ void KeepassMainWindow::OnFileNewKdb(){
 		db=db_new;
 		db->setKey(dlg.password(),dlg.keyFile());
 		db->generateMasterKey();
+		currentFile.clear();
 		setWindowTitle(QString("[%1][*] - KeePassX").arg(tr("new")));
 		GroupView->db=db;
 		EntryView->db=db;
@@ -610,7 +611,7 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 	DetailView->setEnabled(IsOpen);
 	QuickSearchEdit->setEnabled(IsOpen);
 	ExtrasShowExpiredEntriesAction->setEnabled(IsOpen);
-	AddThisAsBookmarkAction->setEnabled(IsOpen);
+	AddThisAsBookmarkAction->setEnabled(IsOpen && db->file());
 	FileUnLockWorkspaceAction->setEnabled(IsOpen||IsLocked);
 	
 	if(!IsOpen){
@@ -871,6 +872,7 @@ bool KeepassMainWindow::OnFileSave(){
 		return OnFileSaveAs();
 	saveLastFilename(db->file()->fileName());
 	if(db->save()){
+		setStateFileOpen(true); // necessary for AddThisAsBookmarkAction
 		setStateFileModified(false);
 		if (config->backup() && config->backupDelete() && config->backupDeleteAfter()>0){
 			IGroupHandle* backupGroup = db->backupGroup();
@@ -1369,18 +1371,14 @@ void KeepassMainWindow::OnBookmarkTriggered(QAction* action){
 			action->setIcon(getIcon("document"));
 			menuBookmarks->addAction(action);
 		}
-		return;
 	}
-
-	if(action==ManageBookmarksAction){
+	else if(action==ManageBookmarksAction){
 		ManageBookmarksDlg dlg(this);
 		dlg.exec();
 		menuBookmarks->clear();
 		createBookmarkActions();
-		return;
 	}
-
-	if(action==AddThisAsBookmarkAction){
+	else if(action==AddThisAsBookmarkAction){
 		AddBookmarkDlg dlg(this,db->file()->fileName());
 		if(dlg.exec()){
 			int id=dlg.ItemID;
@@ -1390,10 +1388,10 @@ void KeepassMainWindow::OnBookmarkTriggered(QAction* action){
 			action->setIcon(getIcon("document"));
 			menuBookmarks->addAction(action);
 		}
-		return;
 	}
-	openDatabase(KpxBookmarks::path(action->data().toInt()));
-
+	else {
+		openDatabase(KpxBookmarks::path(action->data().toInt()));
+	}
 }
 
 void KeepassMainWindow::createBookmarkActions(){

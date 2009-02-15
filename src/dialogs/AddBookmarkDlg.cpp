@@ -29,17 +29,17 @@ AddBookmarkDlg::AddBookmarkDlg(QWidget* parent, QString DefaultFilename, int _It
 	connect(buttonBox->button(QDialogButtonBox::Ok),SIGNAL(clicked()),this,SLOT(OnButtonOk()));
 	connect(buttonBox->button(QDialogButtonBox::Cancel),SIGNAL(clicked()),this,SLOT(reject()));
 	if(ItemID==-1){
-        createBanner(&BannerPixmap,getPixmap("bookmark_add"),tr("Add Bookmark"),width());
+		createBanner(&BannerPixmap,getPixmap("bookmark_add"),tr("Add Bookmark"),width());
 
 		if(DefaultFilename.isEmpty())
-			OnButtonBrowse();
+			QMetaObject::invokeMethod(this, "OnButtonBrowse", Qt::QueuedConnection);
 		else
 			Edit_Filename->setText(DefaultFilename);
 	}
 	else {
-        createBanner(&BannerPixmap,getPixmap("bookmark_edit"),tr("Edit Bookmark"),width());
+		createBanner(&BannerPixmap,getPixmap("bookmark_edit"),tr("Edit Bookmark"),width());
 
-        Edit_Title->setText(KpxBookmarks::title(ItemID));
+		Edit_Title->setText(KpxBookmarks::title(ItemID));
 		Edit_Filename->setText(KpxBookmarks::path(ItemID));
 		setWindowTitle(tr("Edit Bookmark"));
 	}

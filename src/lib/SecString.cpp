@@ -85,10 +85,9 @@ void SecString::overwrite(unsigned char* str, int strlen){
 }
 
 void SecString::overwrite(QString& str){
-	if(str.length()==0)
-		return;
-	
-	overwrite((unsigned char*)str.data(), str.capacity());
+	for (int i=0; i<str.length(); i++) {
+		str[i] = '\0';
+	}
 }
 
 void SecString::generateSessionKey(){
