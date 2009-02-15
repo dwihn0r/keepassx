@@ -16,6 +16,6 @@ fi
 cd `dirname $0`
 rm share/keepassx/i18n/*.qm
 cd src
-lrelease-qt4 src.pro
+$LRELEASE src.pro
 mv translations/*.qm ../share/keepassx/i18n
 rm ../share/keepassx/i18n/keepassx-xx_XX.qm
