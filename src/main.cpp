@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	initAppPaths(argc,argv);
 	CmdLineArgs args;
 	if(!args.preparse(argc,argv)){ // searches only for the -cfg parameter
-		qCritical("%s", CSTR( args.error().append("\n") ));
+		qCritical("%s\n", CSTR( args.error() ));
 		args.printHelp();
 		return 1;
 	}
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 		#endif	
 	}
 	if ( !args.parse(QApplication::arguments()) ){
-		qCritical("%s", CSTR( args.error().append("\n") ));
+		qCritical("%s\n", CSTR( args.error() ));
 		args.printHelp();
 		return 1;
 	}

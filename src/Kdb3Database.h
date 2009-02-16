@@ -234,13 +234,15 @@ private:
 	QFile* File;
 	QString error;
 	bool KeyError;
-	bool PotentialEncodingIssue;
+	bool PotentialEncodingIssueLatin1;
+	bool PotentialEncodingIssueUTF8;
 	QList<StdEntry> UnknownMetaStreams;
 	QMap<quint32,bool> TreeStateMetaStream;
 	unsigned int KeyTransfRounds;
 	CryptAlgorithm Algorithm;
 	SecData RawMasterKey;
 	SecData RawMasterKey_Latin1;
+	SecData RawMasterKey_UTF8;
 	SecData MasterKey;
 	quint8 TransfRandomSeed[32];
 	bool hasV4IconMetaStream;

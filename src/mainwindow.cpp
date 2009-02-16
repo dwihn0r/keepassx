@@ -98,11 +98,10 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	if (config->lockOnInactivity() && config->lockAfterSec()!=0)
 		inactivityTimer->start();
 
-	bool showWindow=true;
+	bool showWindow = !ArgMin;
 	FileOpen=false;
 	if(!ArgFile.isEmpty()){
 		QString f = QDir::cleanPath(QDir::current().absoluteFilePath(ArgFile));
-		showWindow = !ArgMin;
 		if (ArgLock)
 			fakeOpenDatabase(f);
 		else
@@ -112,8 +111,9 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 		QFileInfo file(config->lastFile());
 		if(file.exists()){
 			QString f = QDir::cleanPath(QDir::current().absoluteFilePath(config->lastFile()));
-			showWindow = !config->startMinimized();
-			if (config->startLocked())
+			if (!ArgMin)
+				showWindow = !config->startMinimized();
+			if (ArgLock || config->startLocked())
 				fakeOpenDatabase(f);
 			else
 				openDatabase(f,true);
@@ -121,9 +121,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 		else
 			config->setLastFile(QString());
 	}
-	else if (ArgLock){
-		showWindow = false;
-	}
+	
 	// TODO HelpBrowser
 	/*HelpBrowser = new QAssistantClient(QString(),this);
 	HelpBrowser->setArguments(QStringList()<< "-profile" << "share/keepass/doc/keepassx.adp");*/

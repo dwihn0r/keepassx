@@ -52,7 +52,7 @@ bool Kdb3Database::StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb
 }
 
 
-Kdb3Database::Kdb3Database() : RawMasterKey(32), RawMasterKey_Latin1(32), MasterKey(32){
+Kdb3Database::Kdb3Database() : RawMasterKey(32), RawMasterKey_Latin1(32), RawMasterKey_UTF8(32), MasterKey(32){
 }
 
 QString Kdb3Database::getError(){
@@ -591,19 +591,25 @@ bool Kdb3Database::load(QString filename){
 	SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
 	
 	if(memcmp(ContentsHash, FinalKey, 32) != 0){
-		if(PotentialEncodingIssue){
+		if(PotentialEncodingIssueLatin1){
 			delete[] buffer;
 			delete File;
 			File = NULL;
-			// KeePassX used Latin-1 encoding for passwords until version 0.3.1
-			// but KeePass/Win32 uses Windows Codepage 1252.
-			// Too stay compatible with databases created with KeePassX <= 0.3.1
-			// the loading function gives both encodings a try.
 			
 			RawMasterKey.copyData(RawMasterKey_Latin1);
-			PotentialEncodingIssue=false;
+			PotentialEncodingIssueLatin1 = false;
 			qDebug("Decryption failed. Retrying with Latin-1.");
 			return load(filename); // second try
+		}
+		if(PotentialEncodingIssueUTF8){
+			delete[] buffer;
+			delete File;
+			File = NULL;
+			
+			RawMasterKey.copyData(RawMasterKey_UTF8);
+			PotentialEncodingIssueUTF8 = false;
+			qDebug("Decryption failed. Retrying with UTF-8.");
+			return load(filename); // second/third try
 		}
 		error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
 		KeyError=true;
@@ -854,28 +860,40 @@ bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
 }
 
 bool Kdb3Database::setPasswordKey(const QString& Password){
-	assert(Password.size());
+	Q_ASSERT(Password.size());
 	QTextCodec* codec=QTextCodec::codecForName("Windows-1252");
 	QByteArray Password_CP1252 = codec->fromUnicode(Password);
 	RawMasterKey.unlock();
 	SHA256::hashBuffer(Password_CP1252.data(),*RawMasterKey,Password_CP1252.size());
 	RawMasterKey.lock();
+	
 	QByteArray Password_Latin1 = Password.toLatin1();
-	if(Password_Latin1 != Password_CP1252){
+	QByteArray Password_UTF8 = Password.toUtf8();
+	PotentialEncodingIssueLatin1 = false;
+	PotentialEncodingIssueUTF8 = false;
+	
+	if (Password_Latin1 != Password_CP1252){
 		// KeePassX used Latin-1 encoding for passwords until version 0.3.1
 		// but KeePass/Win32 uses Windows Codepage 1252.
-		// Too stay compatible with databases created with KeePassX <= 0.3.1
+		// To stay compatible with databases created with KeePassX <= 0.3.1
 		// the loading function gives both encodings a try.
-		PotentialEncodingIssue = true;
+		PotentialEncodingIssueLatin1 = true;
 		RawMasterKey_Latin1.unlock();
 		SHA256::hashBuffer(Password_Latin1.data(),*RawMasterKey_Latin1,Password_Latin1.size());
 		RawMasterKey_Latin1.lock();
 	}
-	else {
-		// If the password does not contain problematic characters we don't need
-		// to try both encodings.
-		PotentialEncodingIssue = false;
+	
+	if (Password_UTF8 != Password_CP1252){
+		// KeePassX used UTF-8 encoding for passwords until version 0.2.2
+		// but KeePass/Win32 uses Windows Codepage 1252.
+		// To stay compatible with databases created with KeePassX <= 0.2.2
+		// the loading function gives both encodings a try.
+		PotentialEncodingIssueUTF8 = true;
+		RawMasterKey_UTF8.unlock();
+		SHA256::hashBuffer(Password_UTF8.data(),*RawMasterKey_UTF8,Password_UTF8.size());
+		RawMasterKey_UTF8.lock();
 	}
+	
 	return true;
 }
 
