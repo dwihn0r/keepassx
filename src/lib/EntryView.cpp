@@ -133,6 +133,8 @@ void KeepassEntryView::OnCloneEntry(){
 			db->cloneEntry(((EntryViewItem*)entries[i])->EntryHandle);
 		updateEntry(Items.back());
 	}
+	if (header()->isSortIndicatorShown())
+		sortByColumn(header()->sortIndicatorSection(), header()->sortIndicatorOrder());
 	emit fileModified();
 }
 
