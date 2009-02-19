@@ -52,7 +52,8 @@ bool Kdb3Database::StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb
 }
 
 
-Kdb3Database::Kdb3Database() : RawMasterKey(32), RawMasterKey_Latin1(32), RawMasterKey_UTF8(32), MasterKey(32){
+Kdb3Database::Kdb3Database() : RawMasterKey(32), RawMasterKey_CP1252(32),
+	RawMasterKey_Latin1(32), RawMasterKey_UTF8(32), MasterKey(32){
 }
 
 QString Kdb3Database::getError(){
@@ -104,7 +105,7 @@ int Kdb3Database::numIcons(){
 
 bool Kdb3Database::parseMetaStream(const StdEntry& entry){
 
-	qDebug("Found Metastream: %s",entry.Comment.toUtf8().data());
+	qDebug("Found Metastream: %s", CSTR(entry.Comment));
 
 	if(entry.Comment=="KPX_GROUP_TREE_STATE"){
 		parseGroupTreeStateMetaStream(entry.Binary);
@@ -492,13 +493,17 @@ void Kdb3Database::restoreGroupTreeState(){
 	}
 }
 
+bool Kdb3Database::load(QString identifier){
+	return loadReal(identifier, false);
+}
+
 #define LOAD_RETURN_CLEANUP \
 	delete File; \
 	File = NULL; \
 	delete[] buffer; \
 	return false;
 
-bool Kdb3Database::load(QString filename){
+bool Kdb3Database::loadReal(QString filename, bool differentEncoding) {
 	unsigned long total_size,crypto_size;
 	quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
 	quint8 FinalRandomSeed[16];
@@ -599,7 +604,7 @@ bool Kdb3Database::load(QString filename){
 			RawMasterKey.copyData(RawMasterKey_Latin1);
 			PotentialEncodingIssueLatin1 = false;
 			qDebug("Decryption failed. Retrying with Latin-1.");
-			return load(filename); // second try
+			return loadReal(filename, true); // second try
 		}
 		if(PotentialEncodingIssueUTF8){
 			delete[] buffer;
@@ -609,7 +614,7 @@ bool Kdb3Database::load(QString filename){
 			RawMasterKey.copyData(RawMasterKey_UTF8);
 			PotentialEncodingIssueUTF8 = false;
 			qDebug("Decryption failed. Retrying with UTF-8.");
-			return load(filename); // second/third try
+			return loadReal(filename, true); // second/third try
 		}
 		error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
 		KeyError=true;
@@ -735,6 +740,12 @@ bool Kdb3Database::load(QString filename){
 	createHandles();
 	restoreGroupTreeState();
 	
+	passwordEncodingChanged = differentEncoding;
+	if (differentEncoding) {
+		RawMasterKey.copyData(RawMasterKey_CP1252);
+		generateMasterKey();
+	}
+	
 	return true;
 }
 
@@ -856,16 +867,17 @@ bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
 		return setPasswordKey(password);
 	if(!keyfile.isEmpty())
 		return setFileKey(keyfile);
-	assert(false);
+	Q_ASSERT(false);
 }
 
 bool Kdb3Database::setPasswordKey(const QString& Password){
 	Q_ASSERT(Password.size());
 	QTextCodec* codec=QTextCodec::codecForName("Windows-1252");
 	QByteArray Password_CP1252 = codec->fromUnicode(Password);
-	RawMasterKey.unlock();
-	SHA256::hashBuffer(Password_CP1252.data(),*RawMasterKey,Password_CP1252.size());
-	RawMasterKey.lock();
+	RawMasterKey_CP1252.unlock();
+	SHA256::hashBuffer(Password_CP1252.data(),*RawMasterKey_CP1252,Password_CP1252.size());
+	RawMasterKey_CP1252.lock();
+	RawMasterKey.copyData(RawMasterKey_CP1252);
 	
 	QByteArray Password_Latin1 = Password.toLatin1();
 	QByteArray Password_UTF8 = Password.toUtf8();

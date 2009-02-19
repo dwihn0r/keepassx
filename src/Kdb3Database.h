@@ -186,8 +186,11 @@ public:
 	
 	virtual void generateMasterKey();
 	//virtual IDatabase* groupToNewDb(IGroupHandle* group);
+	
+	inline bool hasPasswordEncodingChanged() { return passwordEncodingChanged; };
 
 private:
+	bool loadReal(QString filename, bool differentEncoding);
 	QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
 	void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
 	bool isMetaStream(StdEntry& Entry);
@@ -241,11 +244,13 @@ private:
 	unsigned int KeyTransfRounds;
 	CryptAlgorithm Algorithm;
 	SecData RawMasterKey;
+	SecData RawMasterKey_CP1252;
 	SecData RawMasterKey_Latin1;
 	SecData RawMasterKey_UTF8;
 	SecData MasterKey;
 	quint8 TransfRandomSeed[32];
 	bool hasV4IconMetaStream;
+	bool passwordEncodingChanged;
 };
 
 class KeyTransform : public QThread{

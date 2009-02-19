@@ -413,7 +413,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		config->setLastKeyLocation(QString());
 		config->setLastKeyType(PASSWORD);
 	}
-	db=dynamic_cast<IDatabase*>(new Kdb3Database());
+	db = new Kdb3Database();
 	PasswordDialog::DlgFlags flags=PasswordDialog::Flag_None;
 	if(IsAuto)
 		flags = PasswordDialog::Flag_Auto;
@@ -455,7 +455,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		GroupView->createItems();
 		EntryView->showGroup(NULL);
 		setStateFileOpen(true);
-		setStateFileModified(false);
+		setStateFileModified(static_cast<Kdb3Database*>(db)->hasPasswordEncodingChanged());
 	}
 	else{
 		statusbarState = 2;
