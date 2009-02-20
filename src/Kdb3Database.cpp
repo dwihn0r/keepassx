@@ -868,6 +868,7 @@ bool Kdb3Database::setKey(const QString& password,const QString& keyfile){
 	if(!keyfile.isEmpty())
 		return setFileKey(keyfile);
 	Q_ASSERT(false);
+	return false;
 }
 
 bool Kdb3Database::setPasswordKey(const QString& Password){

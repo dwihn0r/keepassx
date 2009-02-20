@@ -535,16 +535,6 @@
     <string>2&amp;8x28</string>
    </property>
   </action>
-  <action name="FileNewKdbAction" >
-   <property name="text" >
-    <string>Standard KeePass Single User Database (*.kdb)</string>
-   </property>
-  </action>
-  <action name="FileNewKxdbAction" >
-   <property name="text" >
-    <string>Advanced KeePassX Database (*.kxdb)</string>
-   </property>
-  </action>
   <action name="FileNewAction" >
    <property name="text" >
     <string>&amp;New Database...</string>
@@ -602,11 +592,6 @@
   <action name="EditGroupSortAction" >
    <property name="text" >
     <string>Sort groups</string>
-   </property>
-  </action>
-  <action name="EditGroupSortDesc" >
-   <property name="text" >
-    <string>Sort in descending oder</string>
    </property>
   </action>
  </widget>
