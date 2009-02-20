@@ -152,6 +152,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditNewSubgroupAction, SIGNAL(triggered()), GroupView, SLOT(OnNewSubgroup()));
 	connect(EditEditGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnEditGroup()));
 	connect(EditDeleteGroupAction, SIGNAL(triggered()), GroupView, SLOT(OnDeleteGroup()));
+	connect(EditGroupSortAction, SIGNAL(triggered()), GroupView, SLOT(OnSort()));
 	connect(EditNewEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnNewEntry()));
 	connect(EditEditEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnEditEntry()));
 	connect(EntryView, SIGNAL(requestCreateGroup(QString,quint32,GroupViewItem*)), GroupView, SLOT(createGroup(QString,quint32,GroupViewItem*)));
@@ -243,6 +244,7 @@ void KeepassMainWindow::setupIcons(){
 	EditNewEntryAction->setIcon(getIcon("newentry"));
 	EditEditEntryAction->setIcon(getIcon("editentry"));
 	EditDeleteEntryAction->setIcon(getIcon("deleteentry"));
+	EditGroupSortAction->setIcon(getIcon("swap"));
 	EditUsernameToClipboardAction->setIcon(getIcon("copyusername"));
     EditPasswordToClipboardAction->setIcon(getIcon("copypwd"));
     EditCloneEntryAction->setIcon(getIcon("cloneentry"));
@@ -278,6 +280,7 @@ void KeepassMainWindow::setupMenus(){
 	GroupView->ContextMenu->addAction(EditNewSubgroupAction);
 	GroupView->ContextMenu->addAction(EditEditGroupAction);
 	GroupView->ContextMenu->addAction(EditDeleteGroupAction);
+	GroupView->ContextMenu->addAction(EditGroupSortAction);
 	GroupView->ContextMenu->addSeparator();
 	GroupView->ContextMenu->addAction(EditNewEntryAction);
 	GroupView->ContextMenu->addSeparator();

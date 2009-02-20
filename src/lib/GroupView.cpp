@@ -23,6 +23,7 @@
 #include "dialogs/EditGroupDlg.h"
 
 #include <QBrush>
+#include <QHeaderView>
 
 #define INSERT_AREA_WIDTH 4
 
@@ -36,7 +37,7 @@ KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
 }
 
 
-void KeepassGroupView::createItems(){	
+void KeepassGroupView::createItems(){
 	clear();
 	Items.clear();
 	InsLinePos=-1;
@@ -177,7 +178,7 @@ void KeepassGroupView::OnCurrentGroupChanged(QTreeWidgetItem* cur){
 			emit groupChanged(((GroupViewItem*)cur)->GroupHandle);
 	}
 	else
-		emit groupChanged(NULL);	
+		emit groupChanged(NULL);
 }
 
 
@@ -187,11 +188,11 @@ void KeepassGroupView::setCurrentGroup(IGroupHandle* group){
 	for(i=0;i<Items.size();i++)
 		if(Items[i]->GroupHandle==group){found=true; break;}
 	if(!found)return;
-	setCurrentItem(Items[i]);	
+	setCurrentItem(Items[i]);
 }
 
 void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
-	LastHoverItem=NULL;	
+	LastHoverItem=NULL;
 	InsLinePos=-1;
 	
 	if(event->mimeData()->hasFormat("application/x-keepassx-group")){
@@ -299,15 +300,15 @@ void KeepassGroupView::dropEvent( QDropEvent * event ){
 			if(event->pos().y()>ItemRect.y()+2){
 				qDebug("Insert behind sibling '%s'",((char*)Item->text(0).toUtf8().data()));
 				if(DragItem->parent()){
-					DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));			
+					DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));
 				}
 				else{
-					takeTopLevelItem(indexOfTopLevelItem(DragItem));			
+					takeTopLevelItem(indexOfTopLevelItem(DragItem));
 				}				
 				if(Item->parent()){
 					int index=Item->parent()->indexOfChild(Item)+1;
 					db->moveGroup(DragItem->GroupHandle,((GroupViewItem*)Item->parent())->GroupHandle,index);
-					Item->parent()->insertChild(index,DragItem);					
+					Item->parent()->insertChild(index,DragItem);
 				}
 				else{
 					int index=indexOfTopLevelItem(Item)+1;
@@ -319,15 +320,15 @@ void KeepassGroupView::dropEvent( QDropEvent * event ){
 			else{	
 				qDebug("Insert before sibling '%s'",((char*)Item->text(0).toUtf8().data()));
 				if(DragItem->parent()){
-					DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));			
+					DragItem->parent()->takeChild(DragItem->parent()->indexOfChild(DragItem));
 				}
 				else{
-					takeTopLevelItem(indexOfTopLevelItem(DragItem));			
+					takeTopLevelItem(indexOfTopLevelItem(DragItem));
 				}				
 				if(Item->parent()){
 					int index=Item->parent()->indexOfChild(Item);
 					db->moveGroup(DragItem->GroupHandle,((GroupViewItem*)Item->parent())->GroupHandle,index);
-					Item->parent()->insertChild(index,DragItem);					
+					Item->parent()->insertChild(index,DragItem);
 				}
 				else{
 					int index=indexOfTopLevelItem(Item);
@@ -343,7 +344,7 @@ void KeepassGroupView::dropEvent( QDropEvent * event ){
 	
 }
 
-void KeepassGroupView::entryDragMoveEvent( QDragMoveEvent * event ){
+void KeepassGroupView::entryDragMoveEvent(QDragMoveEvent* event){
 
 	GroupViewItem* Item=(GroupViewItem*)itemAt(event->pos());
 	if(!Item){
@@ -378,7 +379,7 @@ void KeepassGroupView::entryDragMoveEvent( QDragMoveEvent * event ){
 	
 }
 
-void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
+void KeepassGroupView::dragMoveEvent(QDragMoveEvent* event){
 	if(DragType==EntryDrag){
 		entryDragMoveEvent(event);
 		return;
@@ -435,7 +436,7 @@ void KeepassGroupView::dragMoveEvent( QDragMoveEvent * event ){
 					InsLinePos=ItemRect.y();
 				}
 				InsLineStart=ItemRect.x();
-				viewport()->update(QRegion(0,InsLinePos-2,viewport()->width(),4));			
+				viewport()->update(QRegion(0,InsLinePos-2,viewport()->width(),4));
 			}
 			event->acceptProposedAction();
 			return;
@@ -451,7 +452,7 @@ void KeepassGroupView::paintEvent(QPaintEvent* event){
 	if(InsLinePos != -1){
 		QPainter painter(viewport());
 		painter.setBrush(QBrush(QColor(0,0,0),Qt::Dense4Pattern));
-		painter.setPen(Qt::NoPen);		
+		painter.setPen(Qt::NoPen);
 		painter.drawRect(InsLineStart,InsLinePos-2,viewport()->width(),4);
 	}
 }
@@ -494,11 +495,47 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 }
 
 void KeepassGroupView::OnItemExpanded(QTreeWidgetItem* item){
-	dynamic_cast<GroupViewItem*>(item)->GroupHandle->setExpanded(true);
+	static_cast<GroupViewItem*>(item)->GroupHandle->setExpanded(true);
 }
 
 void KeepassGroupView::OnItemCollapsed(QTreeWidgetItem* item){
-	dynamic_cast<GroupViewItem*>(item)->GroupHandle->setExpanded(false);
+	static_cast<GroupViewItem*>(item)->GroupHandle->setExpanded(false);
+}
+
+void KeepassGroupView::OnSort() {
+	QHash<QTreeWidgetItem*,int> oldIndex;
+	for (int i=0; i<Items.size(); i++) {
+		if (Items[i]->parent())
+			oldIndex.insert(Items[i], Items[i]->parent()->indexOfChild(Items[i]));
+		else
+			oldIndex.insert(Items[i], invisibleRootItem()->indexOfChild(Items[i]));
+	}
+	
+	sortItems(0, Qt::AscendingOrder);
+	
+	bool modified = false;
+	QMutableHashIterator<QTreeWidgetItem*, int> i(oldIndex);
+	while (i.hasNext()) {
+		i.next();
+		int newIndex;
+		IGroupHandle* parent;
+		if (i.key()->parent()) {
+			newIndex = i.key()->parent()->indexOfChild(i.key());
+			parent = static_cast<GroupViewItem*>(i.key()->parent())->GroupHandle;
+		}
+		else {
+			newIndex = invisibleRootItem()->indexOfChild(i.key());
+			parent = NULL;
+		}
+		
+		if (newIndex != i.value()) {
+			db->moveGroup(static_cast<GroupViewItem*>(i.key())->GroupHandle, parent, newIndex);
+			modified = true;
+		}
+	}
+	
+	if (modified)
+		emit fileModified();
 }
 
 
@@ -518,3 +555,21 @@ GroupViewItem::GroupViewItem(QTreeWidgetItem *parent):QTreeWidgetItem(parent){
 GroupViewItem::GroupViewItem(QTreeWidgetItem *parent, QTreeWidgetItem *preceding):QTreeWidgetItem(parent,preceding){
 }
 
+bool GroupViewItem::operator<(const QTreeWidgetItem& other) const {
+	const GroupViewItem* otherItem = static_cast<const GroupViewItem*>(&other);
+	KeepassGroupView* groupView = static_cast<KeepassGroupView*>(treeWidget());
+	
+	// Search result is always at the bottom
+	if (this == groupView->SearchResultItem)
+		return false;
+	if (otherItem == groupView->SearchResultItem)
+		return true;
+	
+	// Backup group is always at the bottom but above search results
+	if (!parent() && text(0).compare("Backup", Qt::CaseInsensitive) == 0)
+		return false;
+	if (!otherItem->parent() && otherItem->text(0).compare("Backup", Qt::CaseInsensitive) == 0)
+		return true;
+	
+	return QTreeWidgetItem::operator<(other);
+}

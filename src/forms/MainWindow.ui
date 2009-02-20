@@ -167,26 +167,21 @@
     <addaction name="FileUnLockWorkspaceAction" />
     <addaction name="FileExitAction" />
    </widget>
-   <widget class="QMenu" name="menuBearbeiten" >
+   <widget class="QMenu" name="menuEntries" >
     <property name="title" >
-     <string>&amp;Edit</string>
+     <string>&amp;Entries</string>
     </property>
-    <addaction name="EditNewGroupAction" />
-    <addaction name="EditNewSubgroupAction" />
-    <addaction name="EditEditGroupAction" />
-    <addaction name="EditDeleteGroupAction" />
+    <addaction name="EditNewEntryAction" />
+    <addaction name="EditCloneEntryAction" />
+    <addaction name="EditEditEntryAction" />
+    <addaction name="EditDeleteEntryAction" />
+    <addaction name="EditAutoTypeAction" />
     <addaction name="separator" />
     <addaction name="EditUsernameToClipboardAction" />
     <addaction name="EditPasswordToClipboardAction" />
     <addaction name="EditOpenUrlAction" />
     <addaction name="EditCopyUrlAction" />
     <addaction name="EditSaveAttachmentAction" />
-    <addaction name="separator" />
-    <addaction name="EditNewEntryAction" />
-    <addaction name="EditEditEntryAction" />
-    <addaction name="EditCloneEntryAction" />
-    <addaction name="EditDeleteEntryAction" />
-    <addaction name="EditAutoTypeAction" />
     <addaction name="separator" />
     <addaction name="EditSearchAction" />
     <addaction name="EditGroupSearchAction" />
@@ -240,8 +235,19 @@
     <addaction name="separator" />
     <addaction name="ExtrasSettingsAction" />
    </widget>
+   <widget class="QMenu" name="menuGroups" >
+    <property name="title" >
+     <string>&amp;Groups</string>
+    </property>
+    <addaction name="EditNewGroupAction" />
+    <addaction name="EditNewSubgroupAction" />
+    <addaction name="EditEditGroupAction" />
+    <addaction name="EditDeleteGroupAction" />
+    <addaction name="EditGroupSortAction" />
+   </widget>
    <addaction name="menuDatei" />
-   <addaction name="menuBearbeiten" />
+   <addaction name="menuEntries" />
+   <addaction name="menuGroups" />
    <addaction name="ViewMenu" />
    <addaction name="menuExtras" />
    <addaction name="menuHilfe" />
@@ -591,6 +597,16 @@
   <action name="EditNewGroupAction" >
    <property name="text" >
     <string>Add New Group...</string>
+   </property>
+  </action>
+  <action name="EditGroupSortAction" >
+   <property name="text" >
+    <string>Sort groups</string>
+   </property>
+  </action>
+  <action name="EditGroupSortDesc" >
+   <property name="text" >
+    <string>Sort in descending oder</string>
    </property>
   </action>
  </widget>
