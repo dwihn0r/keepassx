@@ -242,13 +242,13 @@ void CmdLineArgs::printHelp(){
 }
 
 
-QString findPlugin(const QString& filename){
+/*QString findPlugin(const QString& filename){
 	QFileInfo info;	
 	info.setFile(AppDir+"/../lib/"+filename);
 	if(info.exists() && info.isFile())
 		return AppDir+"/../lib/"+filename;	
 	return QString();
-}
+}*/
 
 
 bool EventListener::eventFilter(QObject*, QEvent* event){

@@ -151,6 +151,7 @@ TRANSLATIONS += translations/keepassx-cs_CZ.ts \
                 translations/keepassx-it_IT.ts \
                 translations/keepassx-ja_JP.ts \
                 translations/keepassx-ru_RU.ts \
+                translations/keepassx-tr_TR.ts \
                 translations/keepassx-xx_XX.ts
 
 HEADERS += main.h \
