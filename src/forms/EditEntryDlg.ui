@@ -54,7 +54,13 @@
       </widget>
      </item>
      <item row="1" column="0" >
-      <widget class="QLineEdit" name="Edit_Password_w" />
+      <widget class="QLineEdit" name="Edit_Password_w" >
+       <property name="font" >
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+      </widget>
      </item>
      <item row="0" column="1" >
       <widget class="QToolButton" name="ButtonEchoMode" >
@@ -85,7 +91,13 @@
       </widget>
      </item>
      <item row="0" column="0" >
-      <widget class="QLineEdit" name="Edit_Password" />
+      <widget class="QLineEdit" name="Edit_Password" >
+       <property name="font" >
+        <font>
+         <family>Serif</family>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
