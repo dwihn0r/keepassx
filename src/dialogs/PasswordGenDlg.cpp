@@ -187,6 +187,14 @@ void CGenPwDialog::OnRadio2StateChanged(bool state){
 
 void CGenPwDialog::OnGeneratePw()
 {
+	if(Check_CollectEntropy->isChecked()){
+		if((Check_CollectOncePerSession->isChecked() && !EntropyCollected) || !Check_CollectOncePerSession->isChecked()){
+			CollectEntropyDlg dlg(this);
+			dlg.exec();
+			EntropyCollected=true;
+		}
+	}
+	
 	int length = Spin_Num->value();
 	QString password;
 	
@@ -404,14 +412,6 @@ QString CGenPwDialog::generatePasswordInternal(int length){
 		for(int i=0;i<str.length();i++){
 			assoctable.append(str[i]);
 			num++;
-		}
-	}
-	
-	if(Check_CollectEntropy->isChecked()){
-		if((Check_CollectOncePerSession->isChecked() && !EntropyCollected) || !Check_CollectOncePerSession->isChecked()){
-			CollectEntropyDlg dlg(this);
-			dlg.exec();
-			EntropyCollected=true;
 		}
 	}
 	
