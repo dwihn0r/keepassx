@@ -568,8 +568,8 @@ bool GroupViewItem::operator<(const QTreeWidgetItem& other) const {
 	// Backup group is always at the bottom but above search results
 	if (!parent() && text(0).compare("Backup", Qt::CaseInsensitive) == 0)
 		return false;
-	if (!otherItem->parent() && otherItem->text(0).compare("Backup", Qt::CaseInsensitive) == 0)
+	if (!other.parent() && other.text(0).compare("Backup", Qt::CaseInsensitive) == 0)
 		return true;
 	
-	return QTreeWidgetItem::operator<(other);
+	return QString::localeAwareCompare(text(0), other.text(0)) < 0;
 }

@@ -146,6 +146,7 @@ FORMS += forms/AboutDlg.ui \
 TRANSLATIONS += translations/keepassx-cs_CZ.ts \
                 translations/keepassx-de_DE.ts \
                 translations/keepassx-es_ES.ts \
+                translations/keepassx-fi_FI.ts \
                 translations/keepassx-fr_FR.ts \
                 translations/keepassx-gl_ES.ts \
                 translations/keepassx-it_IT.ts \

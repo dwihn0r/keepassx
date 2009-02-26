@@ -155,7 +155,8 @@ void KeepassMainWindow::setupConnections(){
 	connect(EditGroupSortAction, SIGNAL(triggered()), GroupView, SLOT(OnSort()));
 	connect(EditNewEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnNewEntry()));
 	connect(EditEditEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnEditEntry()));
-	connect(EntryView, SIGNAL(requestCreateGroup(QString,quint32,GroupViewItem*)), GroupView, SLOT(createGroup(QString,quint32,GroupViewItem*)));
+	connect(EntryView, SIGNAL(requestCreateGroup(QString,quint32,GroupViewItem*)),
+			GroupView, SLOT(createGroup(QString,quint32,GroupViewItem*)));
 	connect(EditCloneEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnCloneEntry()));
 	connect(EditDeleteEntryAction, SIGNAL(triggered()), EntryView, SLOT(OnDeleteEntry()));
 	connect(EditUsernameToClipboardAction, SIGNAL(triggered()), EntryView, SLOT(OnUsernameToClipboard()));
