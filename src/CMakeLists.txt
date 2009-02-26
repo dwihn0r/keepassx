@@ -131,13 +131,13 @@ set(keepassx_TRANSLATIONS
 	translations/keepassx-tr_TR.ts
 )
 
-IF( MINGW )
-	SET(keepassx_SOURCES ${keepassx_SOURCES} main_win32.cpp)
-ELSEIF( APPLE )
-	SET(keepassx_SOURCES ${keepassx_SOURCES} main_macx.cpp)
-ELSE( MINGW )
-	SET(keepassx_SOURCES ${keepassx_SOURCES} main_unix.cpp)
-ENDIF( MINGW )
+#IF( MINGW )
+#	SET(keepassx_SOURCES ${keepassx_SOURCES} main_win32.cpp)
+#ELSEIF( APPLE )
+#	SET(keepassx_SOURCES ${keepassx_SOURCES} main_macx.cpp)
+#ELSE( MINGW )
+#	SET(keepassx_SOURCES ${keepassx_SOURCES} main_unix.cpp)
+#ENDIF( MINGW )
 
 IF( AUTOTYPE )
 	SET(keepassx_HEADERS ${keepassx_HEADERS}

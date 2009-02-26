@@ -56,7 +56,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
 		SOURCES += Application_X11.cpp lib/AutoTypeGlobalX11.cpp
 		HEADERS += Application_X11.h lib/AutoTypeGlobalX11.h
 	}
-	SOURCES += main_unix.cpp
+#	SOURCES += main_unix.cpp
 }
 
 
@@ -90,7 +90,7 @@ macx {
 	}
 	isEqual(ARCH,INTEL): CONFIG += x86
 	isEqual(ARCH,PPC): CONFIG += ppc
-	SOURCES += main_macx.cpp
+#	SOURCES += main_macx.cpp
 }
 
 #-------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ isEqual(QMAKE_WIN32,1){
 	}
 	RC_FILE = ../share/win_ico/keepassx.rc
 	QMAKE_LINK_OBJECT_SCRIPT = $${OBJECTS_DIR}/$${QMAKE_LINK_OBJECT_SCRIPT}
-	SOURCES += main_win32.cpp
+#	SOURCES += main_win32.cpp
 }
 
 

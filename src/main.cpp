@@ -48,11 +48,39 @@ IIconTheme* IconLoader=NULL;
 
 int main(int argc, char **argv)
 {
-	QApplication* app=NULL;
-	initAppPaths(argc,argv);
+#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
+	QApplication* app = new KeepassApplication(argc,argv);
+#else
+	QApplication* app = new QApplication(argc,argv);
+#endif
+	
+	AppDir = QApplication::applicationFilePath();
+	AppDir.truncate(AppDir.lastIndexOf("/"));
+#if defined(Q_WS_X11)
+	DataDir=AppDir+"/../share/keepassx";
+	if (!QFile::exists(DataDir) && QFile::exists(AppDir+"/share"))
+		DataDir=AppDir+"/share";
+	HomeDir = QDir::homePath()+"/.keepassx";
+#elif defined(Q_WS_MAC)
+	HomeDir = QDir::homePath()+"/.keepassx";
+	DataDir=AppDir+"/../Resources/keepassx";	
+#else //Q_WS_WIN
+	HomeDir = QString::fromLocal8Bit(qgetenv("APPDATA").constData());
+	if(!HomeDir.isEmpty() && QFile::exists(HomeDir))
+		HomeDir = QDir::fromNativeSeparators(HomeDir)+"/KeePassX";
+	else
+		HomeDir = QDir::homePath()+"/KeePassX";
+	
+	DataDir=AppDir+"/share";
+#endif
+	
 	CmdLineArgs args;
-	if(!args.preparse(argc,argv)){ // searches only for the -cfg parameter
+	if ( !args.parse(QApplication::arguments()) ){
 		qCritical("%s\n", CSTR( args.error() ));
+		args.printHelp();
+		return 1;
+	}
+	if (args.help()){
 		args.printHelp();
 		return 1;
 	}
@@ -120,22 +148,6 @@ int main(int argc, char **argv)
 	}
 #endif
 	*/
-	if(!app){
-		#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
-			app = new KeepassApplication(argc,argv);
-		#else
-			app = new QApplication(argc,argv);
-		#endif	
-	}
-	if ( !args.parse(QApplication::arguments()) ){
-		qCritical("%s\n", CSTR( args.error() ));
-		args.printHelp();
-		return 1;
-	}
-	if (args.help()){
-		args.printHelp();
-		return 1;
-	}
 	
 	DetailViewTemplate=config->detailViewTemplate();
 
@@ -190,7 +202,16 @@ bool CmdLineArgs::parse(const QStringList& argv){
 			break; // break, because other arguments will be ignored anyway
 		}
 		if(argv[i]=="-cfg"){
-			//already done in preparse() -> skip
+			if(argv.size() == i+1){
+				Error="Missing argument for '-cfg'.";
+				return false;
+			}
+			if(argv[i+1].left(1)=="-"){
+				Error=QString("Expected a path as argument for '-cfg' but got '%1.'").arg(argv[i+1]);
+				return false;
+			}
+			QFileInfo file(argv[i+1]);
+			ConfigLocation=file.absoluteFilePath();
 			i++;
 			continue;
 		}
@@ -208,26 +229,6 @@ bool CmdLineArgs::parse(const QStringList& argv){
 		}
 		Error=QString("** Unrecognized argument: '%1'").arg(argv[i]);
 		return false;
-	}
-	return true;
-}
-
-bool CmdLineArgs::preparse(int argc,char** argv){
-	for(int i=1;i<argc;i++){
-		if(QString(argv[i])=="-cfg"){
-			if(argc==i+1){
-				Error="Missing argument for '-cfg'.";
-				return false;
-			}
-			if(QString(argv[i+1]).left(1)=="-"){
-				Error=QString("Expected a path as argument for '-cfg' but got '%1.'").arg(argv[i+1]);
-				return false;
-			}
-			QFileInfo file(argv[i+1]);
-			ConfigLocation=file.absoluteFilePath();
-			i++;
-			return true;
-		}
 	}
 	return true;
 }
