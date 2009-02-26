@@ -56,7 +56,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	InUnLock=false;
 	unlockDlg=NULL;
 	db=NULL;
-    setupUi(this);
+	setupUi(this);
 #ifdef Q_WS_MAC
 	setUnifiedTitleAndToolBarOnMac(true);
 #endif
@@ -222,11 +222,11 @@ void KeepassMainWindow::setupToolbar(){
 	toolBar->addAction(EditDeleteEntryAction);
 	toolBar->addSeparator();
 	toolBar->addAction(EditUsernameToClipboardAction);
-    toolBar->addAction(EditPasswordToClipboardAction);
-    toolBar->addSeparator();
-    toolBar->addAction(FileUnLockWorkspaceAction);
-    toolBar->addSeparator();
-    QuickSearchEdit=new QLineEdit(toolBar);
+	toolBar->addAction(EditPasswordToClipboardAction);
+	toolBar->addSeparator();
+	toolBar->addAction(FileUnLockWorkspaceAction);
+	toolBar->addSeparator();
+	QuickSearchEdit=new QLineEdit(toolBar);
 	QuickSearchEdit->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
 	toolBar->addWidget(QuickSearchEdit);
 	toolBar->setVisible(config->showToolbar());
@@ -240,15 +240,15 @@ void KeepassMainWindow::setupIcons(){
 	FileSaveAsAction->setIcon(getIcon("filesaveas"));
 	FileCloseAction->setIcon(getIcon("fileclose"));
 	FileSettingsAction->setIcon(getIcon("dbsettings"));
-    FileUnLockWorkspaceAction->setIcon(getIcon("lock"));
+	FileUnLockWorkspaceAction->setIcon(getIcon("lock"));
 	FileExitAction->setIcon(getIcon("exit"));
 	EditNewEntryAction->setIcon(getIcon("newentry"));
 	EditEditEntryAction->setIcon(getIcon("editentry"));
 	EditDeleteEntryAction->setIcon(getIcon("deleteentry"));
 	EditGroupSortAction->setIcon(getIcon("swap"));
 	EditUsernameToClipboardAction->setIcon(getIcon("copyusername"));
-    EditPasswordToClipboardAction->setIcon(getIcon("copypwd"));
-    EditCloneEntryAction->setIcon(getIcon("cloneentry"));
+	EditPasswordToClipboardAction->setIcon(getIcon("copypwd"));
+	EditCloneEntryAction->setIcon(getIcon("cloneentry"));
 	EditOpenUrlAction->setIcon(getIcon("openurl"));
 	EditSaveAttachmentAction->setIcon(getIcon("filesave"));
 	EditNewGroupAction->setIcon(getIcon("newgroup"));
@@ -260,9 +260,9 @@ void KeepassMainWindow::setupIcons(){
 	ExtrasShowExpiredEntriesAction->setIcon(getIcon("expired"));
 	ExtrasPasswordGenAction->setIcon(getIcon("generator"));
 	//ExtrasTrashCanAction->setIcon(getIcon("trashcan")); //TODO ExtrasTrashCan
-    ExtrasSettingsAction->setIcon(getIcon("appsettings"));
+	ExtrasSettingsAction->setIcon(getIcon("appsettings"));
 #ifdef AUTOTYPE
-    EditAutoTypeAction->setIcon(getIcon("autotype"));
+	EditAutoTypeAction->setIcon(getIcon("autotype"));
 #else
 	EditAutoTypeAction->setVisible(false);
 #endif
@@ -289,8 +289,8 @@ void KeepassMainWindow::setupMenus(){
 	GroupView->ContextMenuSearchGroup->addAction(HideSearchResultsAction);
 
 	EntryView->ContextMenu->addAction(EditUsernameToClipboardAction);
-    EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
-    EntryView->ContextMenu->addAction(EditOpenUrlAction);
+	EntryView->ContextMenu->addAction(EditPasswordToClipboardAction);
+	EntryView->ContextMenu->addAction(EditOpenUrlAction);
 	EntryView->ContextMenu->addAction(EditCopyUrlAction);
 	EntryView->ContextMenu->addAction(EditSaveAttachmentAction);
 #ifdef AUTOTYPE
@@ -328,11 +328,11 @@ void KeepassMainWindow::setupMenus(){
 	}
 
 	SysTrayMenu = new QMenu(APP_DISPLAY_NAME,this);
-    SysTrayMenu->addAction(FileUnLockWorkspaceAction);
-    SysTrayMenu->addSeparator();
+	SysTrayMenu->addAction(FileUnLockWorkspaceAction);
+	SysTrayMenu->addSeparator();
 	SysTrayMenu->addAction(FileExitAction);
 	SysTray->setContextMenu(SysTrayMenu);
-    SysTray->setToolTip(QString("%1 %2 - %3").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC, (IsLocked) ? tr("Locked") : tr("Unlocked")));
+	SysTray->setToolTip(QString("%1 %2 - %3").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC, (IsLocked) ? tr("Locked") : tr("Unlocked")));
 
 	#define _add_import(name){\
 	QAction* import=new QAction(this);\
@@ -635,8 +635,8 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 #endif
 	}
 	/*else{
-    	OnGroupSelectionChanged();
-    	OnEntrySelectionChanged();
+		OnGroupSelectionChanged();
+		OnEntrySelectionChanged();
 	}*/
 }
 
