@@ -216,9 +216,10 @@ void KeepassEntryView::updateEntry(EntryViewItem* item){
 }
 
 void KeepassEntryView::editEntry(EntryViewItem* item){
-	CEntry old = item->EntryHandle->data();
+	IEntryHandle* handle = item->EntryHandle;
+	CEntry old = handle->data();
 	
-	CEditEntryDlg dlg(db,item->EntryHandle,this,true);
+	CEditEntryDlg dlg(db,handle,this,true);
 	int result = dlg.exec();
 	switch(result){
 		case 0: //canceled or no changes
@@ -230,14 +231,14 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 		//entry moved to another group
 		case 2: //modified
 		case 3: //not modified
+			Items.removeOne(item);
 			delete item;
-			Items.removeAt(Items.indexOf(item));
 			emit fileModified();
 			break;
 	}
 	
 	IGroupHandle* bGroup;
-	if ((result==1 || result==2) && config->backup() && item->EntryHandle->group() != (bGroup=db->backupGroup())){
+	if ((result==1 || result==2) && config->backup() && handle->group() != (bGroup=db->backupGroup())){
 		old.LastAccess = QDateTime::currentDateTime();
 		old.LastMod = old.LastAccess;
 		if (bGroup==NULL)

@@ -220,7 +220,6 @@ void CEditEntryDlg::OnButtonOK()
 	if(Combo_Group->currentIndex()!=GroupIndex){
 		db->moveEntry(entry,groups[Combo_Group->currentIndex()]);
 		EntryMoved=true;
-		ModFlag=true;
 	}
 
 	if(EntryMoved)
