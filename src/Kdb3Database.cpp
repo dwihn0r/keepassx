@@ -493,8 +493,8 @@ void Kdb3Database::restoreGroupTreeState(){
 	}
 }
 
-bool Kdb3Database::load(QString identifier){
-	return loadReal(identifier, false);
+bool Kdb3Database::load(QString identifier, bool readOnly){
+	return loadReal(identifier, readOnly, false);
 }
 
 #define LOAD_RETURN_CLEANUP \
@@ -503,7 +503,7 @@ bool Kdb3Database::load(QString identifier){
 	delete[] buffer; \
 	return false;
 
-bool Kdb3Database::loadReal(QString filename, bool differentEncoding) {
+bool Kdb3Database::loadReal(QString filename, bool readOnly, bool differentEncoding) {
 	unsigned long total_size,crypto_size;
 	quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
 	quint8 FinalRandomSeed[16];
@@ -511,7 +511,7 @@ bool Kdb3Database::loadReal(QString filename, bool differentEncoding) {
 	quint8 EncryptionIV[16];
 	
 	File = new QFile(filename);
-	if(!File->open(QIODevice::ReadWrite)){
+	if (readOnly) {
 		if(!File->open(QIODevice::ReadOnly)){
 			error=tr("Could not open file.");
 			delete File;
@@ -519,6 +519,20 @@ bool Kdb3Database::loadReal(QString filename, bool differentEncoding) {
 			return false;
 		}
 	}
+	else {
+		if(!File->open(QIODevice::ReadWrite)){
+			if(!File->open(QIODevice::ReadOnly)){
+				error=tr("Could not open file.");
+				delete File;
+				File = NULL;
+				return false;
+			}
+			else{
+				readOnly = true;
+			}
+		}
+	}
+	
 	total_size=File->size();
 	char* buffer = new char[total_size];
 	File->read(buffer,total_size);
@@ -604,7 +618,7 @@ bool Kdb3Database::loadReal(QString filename, bool differentEncoding) {
 			RawMasterKey.copyData(RawMasterKey_Latin1);
 			PotentialEncodingIssueLatin1 = false;
 			qDebug("Decryption failed. Retrying with Latin-1.");
-			return loadReal(filename, true); // second try
+			return loadReal(filename, readOnly, true); // second try
 		}
 		if(PotentialEncodingIssueUTF8){
 			delete[] buffer;
@@ -614,7 +628,7 @@ bool Kdb3Database::loadReal(QString filename, bool differentEncoding) {
 			RawMasterKey.copyData(RawMasterKey_UTF8);
 			PotentialEncodingIssueUTF8 = false;
 			qDebug("Decryption failed. Retrying with UTF-8.");
-			return loadReal(filename, true); // second/third try
+			return loadReal(filename, readOnly, true); // second/third try
 		}
 		error=tr("Hash test failed.\nThe key is wrong or the file is damaged.");
 		KeyError=true;
@@ -1318,13 +1332,8 @@ bool Kdb3Database::save(){
 	quint8 EncryptionIV[16];
 
 	if(!(File->openMode() & QIODevice::WriteOnly)){
-		File->close();
-	}
-	if(!File->isOpen()){
-		if(!File->open(QIODevice::ReadWrite)){
-			error = tr("Could not open file for writing.");
-			return false;
-		}
+		error = tr("The database has been opened read-only.");
+		return false;
 	}
 
 	unsigned int FileSize;

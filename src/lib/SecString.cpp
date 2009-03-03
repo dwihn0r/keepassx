@@ -92,13 +92,15 @@ void SecString::overwrite(QString& str){
 
 void SecString::generateSessionKey(){
 	sessionkey = new quint8[32];
-	lockPage(sessionkey, 32);
+	if (!lockPage(sessionkey, 32))
+		qDebug("Failed to lock session key page");
 	randomize(sessionkey, 32);
 	RC4.setKey(sessionkey, 32);
 }
 
 void SecString::deleteSessionKey() {
 	overwrite(sessionkey, 32);
+	unlockPage(sessionkey, 32);
 	delete[] sessionkey;
 }
 

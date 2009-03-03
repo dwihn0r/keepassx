@@ -90,6 +90,11 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void showEvent(QShowEvent* event);
 		void setLock();
 		void resetLock();
+		enum StatusBarMsg {
+			StatusBarReady, StatusBarLoading, StatusBarLoadingFailed,
+			StatusBarReadOnlyLock
+		};
+		void setStatusBarMsg(StatusBarMsg statusBarMsg);
 		SelectionState GroupSelection, EntrySelection;
 		bool FileOpen;
 		bool ModFlag;
@@ -115,7 +120,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void createBookmarkActions();
 		QLineEdit* QuickSearchEdit;
 		QLabel* StatusBarGeneral;
-		QLabel* StatusBarSelection;
+		//QLabel* StatusBarSelection;
 		QToolBar* toolBar;
 		QSystemTrayIcon* SysTray;
 		QAction* ViewShowToolbarAction;
@@ -131,7 +136,8 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		QString currentFile;
 		int inactivityCounter;
 		QTimer* inactivityTimer;
-		int statusbarState;
+		StatusBarMsg statusbarState;
+		bool dbReadOnly;
 };
 
 #endif

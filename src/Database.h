@@ -246,7 +246,7 @@ public:
 		\param  identifier Normally this is the filename of the database but it can also be an IP address or something else if the database is not file based.
 		\return TRUE if loading was successfull, otherwise FALSE.
 	*/
-	virtual bool load(QString identifier)=0;
+	virtual bool load(QString identifier, bool readOnly)=0;
 
 	//! Saves the current database.
    	/*! It is not allowed to call this function if no database is loaded.

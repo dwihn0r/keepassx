@@ -56,21 +56,21 @@ void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,i
 
 QString decodeFileError(QFile::FileError Code){
 	switch(Code){
-	case QFile::NoError: return QApplication::translate("FileErrors","No error occurred.");
-	case QFile::ReadError: return QApplication::translate("FileErrors","An error occurred while reading from the file.");
-	case QFile::WriteError: return QApplication::translate("FileErrors","An error occurred while writing to the file.");
-	case QFile::FatalError: return QApplication::translate("FileErrors","A fatal error occurred.");
-	case QFile::ResourceError: return QApplication::translate("FileErrors","An resource error occurred.");
-	case QFile::OpenError: return QApplication::translate("FileErrors","The file could not be opened.");
-	case QFile::AbortError: return QApplication::translate("FileErrors","The operation was aborted.");
-	case QFile::TimeOutError: return QApplication::translate("FileErrors","A timeout occurred.");
-	case QFile::UnspecifiedError: return QApplication::translate("FileErrors","An unspecified error occurred.");
-	case QFile::RemoveError: return QApplication::translate("FileErrors","The file could not be removed.");
-	case QFile::RenameError: return QApplication::translate("FileErrors","The file could not be renamed.");
-	case QFile::PositionError: return QApplication::translate("FileErrors","The position in the file could not be changed.");
-	case QFile::ResizeError: return QApplication::translate("FileErrors","The file could not be resized.");
-	case QFile::PermissionsError: return QApplication::translate("FileErrors","The file could not be accessed.");
-	case QFile::CopyError: return QApplication::translate("FileErrors","The file could not be copied.");
+		case QFile::NoError: return QApplication::translate("FileErrors","No error occurred.");
+		case QFile::ReadError: return QApplication::translate("FileErrors","An error occurred while reading from the file.");
+		case QFile::WriteError: return QApplication::translate("FileErrors","An error occurred while writing to the file.");
+		case QFile::FatalError: return QApplication::translate("FileErrors","A fatal error occurred.");
+		case QFile::ResourceError: return QApplication::translate("FileErrors","An resource error occurred.");
+		case QFile::OpenError: return QApplication::translate("FileErrors","The file could not be opened.");
+		case QFile::AbortError: return QApplication::translate("FileErrors","The operation was aborted.");
+		case QFile::TimeOutError: return QApplication::translate("FileErrors","A timeout occurred.");
+		case QFile::UnspecifiedError: return QApplication::translate("FileErrors","An unspecified error occurred.");
+		case QFile::RemoveError: return QApplication::translate("FileErrors","The file could not be removed.");
+		case QFile::RenameError: return QApplication::translate("FileErrors","The file could not be renamed.");
+		case QFile::PositionError: return QApplication::translate("FileErrors","The position in the file could not be changed.");
+		case QFile::ResizeError: return QApplication::translate("FileErrors","The file could not be resized.");
+		case QFile::PermissionsError: return QApplication::translate("FileErrors","The file could not be accessed.");
+		case QFile::CopyError: return QApplication::translate("FileErrors","The file could not be copied.");
 	}
 	return QString();
 }
@@ -134,20 +134,19 @@ QString makePathRelative(const QString& AbsDir,const QString& CurDir){
 }
 
 void showErrMsg(const QString& msg,QWidget* parent){
-	QMessageBox::critical(parent,QApplication::translate("Main","Error"),msg,QApplication::translate("Main","OK"));
+	QMessageBox::critical(parent, QApplication::translate("Main","Error"), msg);
 }
 
 QString getImageFile(const QString& name){
 	if (QFile::exists(DataDir+"/icons/"+name))
 		return DataDir+"/icons/"+name;
 	else{
-		QMessageBox::critical(0,QApplication::translate("Main","Error"),
-		                      QApplication::translate("Main","File '%1' could not be found.")
-		                      .arg(name),QApplication::translate("Main","OK"),0,0,2,1);
-		exit(1);
+		QString errMsg = QApplication::translate("Main","File '%1' could not be found.").arg(name);
+		showErrMsg(errMsg);
+		qFatal("File '%s' could not be found.", CSTR(errMsg));
+		return QString();
 	}
 }
-
 
 const QIcon& getIcon(const QString& name){
 	static QHash<QString,QIcon*>IconCache;
@@ -284,7 +283,7 @@ void installTranslator(){
 	}
 	
 	if (loadTranslation(translator,"keepassx-",language,QStringList()
-		<< DataDir+"/i18n/" << HomeDir))
+		<< HomeDir << DataDir+"/i18n/"))
 	{
 		if (!translatorActive){
 			QApplication::installTranslator(translator);
@@ -297,8 +296,8 @@ void installTranslator(){
 	}
 	
 	if (loadTranslation(qtTranslator,"qt_",language,QStringList()
-		<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-		<< DataDir+"/i18n/" << HomeDir))
+		<< HomeDir << DataDir+"/i18n/"
+		<< QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
 	{
 		if (!qtTranslatorActive){
 			QApplication::installTranslator(qtTranslator);

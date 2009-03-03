@@ -78,12 +78,12 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	setStateFileOpen(false);
 	setupMenus();
 	DetailView->setVisible(config->showEntryDetails());
-	statusbarState = 0;
-	StatusBarGeneral=new QLabel(tr("Ready"),statusBar());
+	StatusBarGeneral=new QLabel(statusBar());
 	//StatusBarSelection=new QLabel(statusBar());
 	statusBar()->addWidget(StatusBarGeneral,15);
 	//statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config->showStatusbar());
+	setStatusBarMsg(StatusBarReady);
 
 	NormalCentralWidget=QMainWindow::centralWidget();
 	LockedCentralWidget=new QWidget(this);
@@ -398,19 +398,27 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		return false;
 	}
 	
+	dbReadOnly = false;
+	
 	if (QFile::exists(filename+".lock")){
-		QMessageBox::StandardButton buttonPressed = QMessageBox::question(
-			this,
-			tr("Database locked"),
-			tr("The database you are trying to open is locked.\n"
+		QMessageBox msgBox(this);
+		msgBox.setIcon(QMessageBox::Question);
+		msgBox.setWindowTitle(tr("Database locked"));
+		msgBox.setText(tr("The database you are trying to open is locked.\n"
 				"This means that either someone else has opened the file or KeePassX crashed last time it opened the database.\n\n"
 				"Do you want to open it anyway?"
-			),
-			QMessageBox::Yes|QMessageBox::No,
-			QMessageBox::No
-		);
-		if (buttonPressed != QMessageBox::Yes)
+		));
+		msgBox.addButton(QMessageBox::Yes);
+		msgBox.addButton(QMessageBox::No);
+		QPushButton* readOnlyButton = new QPushButton(tr("Open read-only"), &msgBox);
+		msgBox.addButton(readOnlyButton, QMessageBox::AcceptRole);
+		msgBox.setDefaultButton(readOnlyButton);
+		msgBox.exec();
+		
+		if (!msgBox.clickedButton() || msgBox.clickedButton() == msgBox.button(QMessageBox::No))
 			return false;
+		else if (msgBox.clickedButton() == readOnlyButton)
+			dbReadOnly = true;
 	}
 	
 	if(!IsAuto){
@@ -439,18 +447,18 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 	EntryView->db=db;
 	setupDatabaseConnections(db);
 	QString err;
-	statusbarState = 1;
-	StatusBarGeneral->setText(tr("Loading Database..."));
+	setStatusBarMsg(StatusBarLoading);
 	db->setKey(dlg.password(),dlg.keyFile());
-	if(db->load(filename)){
-		if (!QFile::exists(filename+".lock")){
-			QFile lock(filename+".lock");
-			if (!lock.open(QIODevice::WriteOnly)){
-				QMessageBox::critical(this, tr("Error"), tr("Couldn't create database lock file."));
-				return false;
-			}
+	
+	if (!dbReadOnly && !QFile::exists(filename+".lock")){
+		QFile lock(filename+".lock");
+		if (!lock.open(QIODevice::WriteOnly)){
+			setStatusBarMsg(StatusBarReadOnlyLock);
+			dbReadOnly = true;
 		}
-		
+	}
+	
+	if(db->load(filename, dbReadOnly)){
 		if (IsLocked)
 			resetLock();
 		currentFile = filename;
@@ -462,8 +470,7 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		setStateFileModified(static_cast<Kdb3Database*>(db)->hasPasswordEncodingChanged());
 	}
 	else{
-		statusbarState = 2;
-		StatusBarGeneral->setText(tr("Loading Failed"));
+		setStatusBarMsg(StatusBarLoadingFailed);
 		QString error=db->getError();
 		if(error.isEmpty())error=tr("Unknown error while loading database.");
 		QMessageBox::critical(this,tr("Error"),
@@ -478,8 +485,8 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 			return false;
 		}
 	}
-	statusbarState = 0;
-	StatusBarGeneral->setText(tr("Ready"));
+	if (statusbarState != StatusBarReadOnlyLock)
+		setStatusBarMsg(StatusBarReady);
 	inactivityCounter = 0;
 	
 	return true;
@@ -509,7 +516,12 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 							QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel, QMessageBox::Yes);
 			if(r==QMessageBox::Cancel) return false; //Cancel
 			if(r==QMessageBox::Yes){ //Yes (Save file)
-				if(!OnFileSave()) return false;
+				if (dbReadOnly) {
+					if(!OnFileSaveAs()) return false;
+				}
+				else {
+					if(!OnFileSave()) return false;
+				}
 			}
 		}
 	}
@@ -1028,6 +1040,14 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 		return;
 	}
 	
+	if(FileOpen && !closeDatabase()){
+		ShutingDown=false;
+		e->ignore();
+		return;
+	}
+	
+	e->accept();
+	
 #ifdef GLOBAL_AUTOTYPE
 	autoType->unregisterGlobalShortcut();
 #endif
@@ -1039,20 +1059,9 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 	if (config->showEntryDetails())
 		config->setHSplitterPos(HSplitter->saveState());
 	config->setShowStatusbar(statusBar()->isVisible());
-
-	if(FileOpen){
-		if(!closeDatabase()){
-			ShutingDown=false;
-			e->ignore();
-			return;
-		}
-		else
-			e->accept();
-	}
-	else
-		e->accept();
+	
 	delete SysTray;
-	QCoreApplication::quit();
+	QApplication::quit();
 }
 
 void KeepassMainWindow::hideEvent(QHideEvent* event){
@@ -1101,17 +1110,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 		else {
 			setWindowTitle(APP_DISPLAY_NAME);
 		}
-		switch (statusbarState) {
-			case 0:
-				StatusBarGeneral->setText(tr("Ready"));
-				break;
-			case 1:
-				StatusBarGeneral->setText(tr("Loading Database..."));
-				break;
-			case 2:
-				StatusBarGeneral->setText(tr("Loading Failed"));
-				break;
-		}
+		setStatusBarMsg(statusbarState);
 	}
 	
 	EntryView->setAlternatingRowColors(config->alternatingRowColors());
@@ -1408,4 +1407,26 @@ void KeepassMainWindow::createBookmarkActions(){
 		action->setIcon(getIcon("document"));
 		menuBookmarks->addAction(action);
 	}
+}
+
+void KeepassMainWindow::setStatusBarMsg(StatusBarMsg statusBarMsg) {
+	QString text;
+	
+	switch (statusBarMsg) {
+		case StatusBarReady:
+			text = tr("Ready");
+			break;
+		case StatusBarLoading:
+			text = tr("Loading Database...");
+			break;
+		case StatusBarLoadingFailed:
+			text = tr("Loading Failed");
+			break;
+		case StatusBarReadOnlyLock:
+			text = tr("Couldn't create lock file. Opening the database read-only.");
+			break;
+	}
+	
+	statusbarState = statusBarMsg;
+	StatusBarGeneral->setText(text);
 }

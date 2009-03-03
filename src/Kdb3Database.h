@@ -135,7 +135,7 @@ public:
 
 	Kdb3Database();
 	virtual ~Kdb3Database(){};
-	virtual bool load(QString identifier);
+	virtual bool load(QString identifier, bool readOnly);
 	virtual bool save();
 	virtual bool close();
 	virtual void create();
@@ -190,7 +190,7 @@ public:
 	inline bool hasPasswordEncodingChanged() { return passwordEncodingChanged; };
 
 private:
-	bool loadReal(QString filename, bool differentEncoding);
+	bool loadReal(QString filename, bool readOnly, bool differentEncoding);
 	QDateTime dateFromPackedStruct5(const unsigned char* pBytes);
 	void dateToPackedStruct5(const QDateTime& datetime, unsigned char* dst);
 	bool isMetaStream(StdEntry& Entry);

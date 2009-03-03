@@ -477,8 +477,7 @@
 
 
 void Twofish_fatal(const char* msg){
-	qCritical("Twofish: Fatal Error: %s",msg);
-	exit(1);
+	qFatal("Twofish: Fatal Error: %s", msg);
 }
 
 
