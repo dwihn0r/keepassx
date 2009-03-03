@@ -46,10 +46,10 @@ AddBookmarkDlg::AddBookmarkDlg(QWidget* parent, QString DefaultFilename, int _It
 }
 
 void AddBookmarkDlg::paintEvent(QPaintEvent *event){
-    QDialog::paintEvent(event);
-    QPainter painter(this);
-    painter.setClipRegion(event->region());
-    painter.drawPixmap(QPoint(0,0),BannerPixmap);
+	QDialog::paintEvent(event);
+	QPainter painter(this);
+	painter.setClipRegion(event->region());
+	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
 void AddBookmarkDlg::OnButtonBrowse(){

@@ -90,6 +90,3 @@ void SearchDialog::paintEvent(QPaintEvent *event){
 	painter.setClipRegion(event->region());
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
-
-
-

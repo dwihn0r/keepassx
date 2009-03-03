@@ -251,7 +251,7 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 
 void KeepassEntryView::OnNewEntry(){
 	IEntryHandle* NewEntry = NULL;
-	if (!CurrentGroup){// We must be viewing search results. Add the new entry to the first group.		
+	if (!CurrentGroup){ // We must be viewing search results. Add the new entry to the first group.
 		if (db->groups().size() > 0)
 			NewEntry=db->newEntry(db->sortedGroups()[0]);
 		else{

@@ -77,7 +77,7 @@ void CustomizeDetailViewDialog::OnTabChanged(int index){
 		RichEdit->setHtml(HtmlEdit->toPlainText());
 	}	
 	if(index==1){
-		HtmlEdit->setPlainText(RichEdit->toHtml());		
+		HtmlEdit->setPlainText(RichEdit->toHtml());
 	}	
 }
 
@@ -85,8 +85,8 @@ void CustomizeDetailViewDialog::OnFontSizeChanged(const QString& text){
 	bool ok=false;
 	int size=text.toInt(&ok);
 	if(ok && size > 0){
-		RichEdit->setFontPointSize(size);		
-	}	
+		RichEdit->setFontPointSize(size);
+	}
 }
 
 

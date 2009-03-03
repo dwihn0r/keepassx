@@ -52,8 +52,7 @@ CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* pa
 	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
 }
 
-CEditGroupDialog::~CEditGroupDialog()
-{
+CEditGroupDialog::~CEditGroupDialog(){
 }
 
 void CEditGroupDialog::showEvent(QShowEvent *event){
@@ -76,7 +75,7 @@ void CEditGroupDialog::OnOK()
 	if(ComboIconPicker->currentIndex()!=group->Image){
 		group->Image=ComboIconPicker->currentIndex();
 		r=2;
-	}	
+	}
 	if(handle){
 		handle->setTitle(group->Title);
 		handle->setImage(group->Image);

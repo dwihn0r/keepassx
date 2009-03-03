@@ -42,8 +42,7 @@ CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::W
 	connect( ButtonBench, SIGNAL( clicked() ), this, SLOT( OnBenchmark() ) );
 }
 
-CDbSettingsDlg::~CDbSettingsDlg()
-{
+CDbSettingsDlg::~CDbSettingsDlg(){
 }
 
 void CDbSettingsDlg::paintEvent(QPaintEvent *event){

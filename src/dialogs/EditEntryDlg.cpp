@@ -238,64 +238,55 @@ void CEditEntryDlg::OnButtonCancel()
 
 void CEditEntryDlg::ChangeEchoMode()
 {
-if(Edit_Password->echoMode()==QLineEdit::Normal){
-Edit_Password->setEchoMode(QLineEdit::Password);
-Edit_Password_w->setEchoMode(QLineEdit::Password);
-ButtonEchoMode->setIcon(getIcon("pwd_hide"));
-}
-else
-{
-Edit_Password->setEchoMode(QLineEdit::Normal);
-Edit_Password_w->setEchoMode(QLineEdit::Normal);
-ButtonEchoMode->setIcon(getIcon("pwd_show"));
-}
-
-
+	if(Edit_Password->echoMode()==QLineEdit::Normal){
+		Edit_Password->setEchoMode(QLineEdit::Password);
+		Edit_Password_w->setEchoMode(QLineEdit::Password);
+		ButtonEchoMode->setIcon(getIcon("pwd_hide"));
+	}
+	else
+	{
+		Edit_Password->setEchoMode(QLineEdit::Normal);
+		Edit_Password_w->setEchoMode(QLineEdit::Normal);
+		ButtonEchoMode->setIcon(getIcon("pwd_show"));
+	}
 }
 
 void CEditEntryDlg::OnTitleTextChanged(const QString& txt)
 {
-    setWindowTitle((txt=="") ? tr("[Untitled Entry]") : txt);
+	setWindowTitle((txt=="") ? tr("[Untitled Entry]") : txt);
 }
 
 void CEditEntryDlg::OnPasswordTextChanged()
 {
-Edit_Password_w->setText(QString());
-int bits=(Edit_Password->text().length()*8);
-Label_Bits->setText(QString::number(bits)+" Bit");
-if(bits>128)bits=128;
-Progress_Quali->setValue(100*bits/128);
+	Edit_Password_w->setText(QString());
+	int bits=(Edit_Password->text().length()*8);
+	Label_Bits->setText(QString::number(bits)+" Bit");
+	if(bits>128)bits=128;
+	Progress_Quali->setValue(100*bits/128);
 }
 
 void CEditEntryDlg::OnPasswordwTextChanged()
 {
-
-if(QString::compare(Edit_Password_w->text(),Edit_Password->text().mid(0,(Edit_Password_w->text().length())))!=0){
-    QPalette palette;
-    palette.setColor(Edit_Password_w->backgroundRole(),QColor(255,125,125));
-	Edit_Password_w->setPalette(palette);
-}else
-{
-	Edit_Password_w->setPalette(QApplication::palette());
-}
-
-
-
+	if(QString::compare(Edit_Password_w->text(),Edit_Password->text().mid(0,(Edit_Password_w->text().length())))!=0){
+		QPalette palette;
+		palette.setColor(Edit_Password_w->backgroundRole(),QColor(255,125,125));
+		Edit_Password_w->setPalette(palette);
+	}
+	else {
+		Edit_Password_w->setPalette(QApplication::palette());
+	}
 }
 
 void CEditEntryDlg::OnPasswordwLostFocus()
 {
-if(QString::compare(Edit_Password_w->text(),Edit_Password->text())!=0){
-	QPalette palette;
-    palette.setColor(Edit_Password_w->backgroundRole(),QColor(255,125,125));
-	Edit_Password_w->setPalette(palette);
-}
-else
-{
-	Edit_Password_w->setPalette(QApplication::palette ());
-}
-
-
+	if (QString::compare(Edit_Password_w->text(),Edit_Password->text())!=0){
+		QPalette palette;
+		palette.setColor(Edit_Password_w->backgroundRole(),QColor(255,125,125));
+		Edit_Password_w->setPalette(palette);
+	}
+	else {
+		Edit_Password_w->setPalette(QApplication::palette ());
+	}
 }
 
 void CEditEntryDlg::OnNewAttachment()
@@ -303,7 +294,7 @@ void CEditEntryDlg::OnNewAttachment()
 	QString filename=QFileDialog::getOpenFileName(this,tr("Add Attachment..."),QDir::homePath());
 	if(filename=="")return;
 	QFile file(filename);
-	if(file.open(QIODevice::ReadOnly)==false){
+	if(!file.open(QIODevice::ReadOnly)){
 		file.close();
 		QMessageBox::warning(NULL,tr("Error"),tr("Could not open file."),tr("OK"));
 		return;
@@ -353,12 +344,13 @@ void CEditEntryDlg::saveAttachment(IEntryHandle* pEntry, QWidget* ParentWidget)
 		return;
 	}
 	file.close();
-
 }
 
 void CEditEntryDlg::OnDeleteAttachment()
 {
-	int r=QMessageBox::warning(this,tr("Delete Attachment?"),tr("You are about to delete the attachment of this entry.\nAre you sure?"),tr("Yes"),tr("No, Cancel"),NULL,1,1);
+	int r=QMessageBox::warning(this,tr("Delete Attachment?"),
+			tr("You are about to delete the attachment of this entry.\nAre you sure?"),
+			tr("Yes"),tr("No, Cancel"),NULL,1,1);
 	if(r==0){
 		ModFlag=true;
 		entry->setBinary(QByteArray());
