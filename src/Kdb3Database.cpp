@@ -1364,14 +1364,14 @@ bool Kdb3Database::save(){
 
 	for(int i=0; i < UnknownMetaStreams.size(); i++){
 		FileSize
-			+=164
+			+=165
 			+UnknownMetaStreams[i].Comment.toUtf8().length()+1
 			+UnknownMetaStreams[i].Binary.length();
 	}
 
 	for(int i=0; i < MetaStreams.size(); i++){
 		FileSize
-				+=164
+				+=165
 				+MetaStreams[i].Comment.toUtf8().length()+1
 				+MetaStreams[i].Binary.length();
 	}
