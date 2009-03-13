@@ -21,7 +21,6 @@
 
 #include "crypto/twoclass.h"
 #include <QBuffer>
-#include <QTextCodec>
 
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 

@@ -20,7 +20,7 @@
 #ifndef KEEPASSX_H_
 #define KEEPASSX_H_
 
-// global defines 
+// global defines
 
 #define APP_DISPLAY_NAME    "KeePassX"
 #define APP_CODE_NAME       "keepassx"
@@ -35,11 +35,8 @@
 #ifdef __cplusplus
 
 #include <cstdlib>
-#include <iostream>
 
-#include <cassert>
 #include <cmath>
-#include <ctime>
 
 #include <QApplication>
 #include <QBitArray>
@@ -67,6 +64,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QTextCodec>
 #include <QTimer>
 #include <QTreeWidget>
 #include <QUrl>

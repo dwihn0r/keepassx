@@ -18,9 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
 #include "WaitAnimationWidget.h"
-
 
 WaitAnimationWidget::WaitAnimationWidget(QWidget* parent):QWidget(parent){
 	speed=60;
@@ -94,4 +92,3 @@ void WaitAnimationWidget::resizeEvent(QResizeEvent* event){
 		CircPositions[i].setY((r-10)*sin(-2.0*3.14159265*(0.16666667*i))+r);
 	}
 }
-

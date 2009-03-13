@@ -363,3 +363,32 @@ QList<Translation> getAllTranslations(){
 	qSort(translations.begin(), translations.end());
 	return translations;
 }
+
+// from src/corelib/qsettings.cpp:
+#ifdef Q_OS_WIN
+QString qtWindowsConfigPath(int type)
+{
+	QString result;
+
+	QLibrary library(QLatin1String("shell32"));
+	QT_WA( {
+		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, LPTSTR, int, BOOL);
+		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathW");
+		if (SHGetSpecialFolderPath) {
+			TCHAR path[MAX_PATH];
+			SHGetSpecialFolderPath(0, path, type, FALSE);
+			result = QString::fromUtf16((ushort*)path);
+		}
+	} , {
+		typedef BOOL (WINAPI*GetSpecialFolderPath)(HWND, char*, int, BOOL);
+		GetSpecialFolderPath SHGetSpecialFolderPath = (GetSpecialFolderPath)library.resolve("SHGetSpecialFolderPathA");
+		if (SHGetSpecialFolderPath) {
+			char path[MAX_PATH];
+			SHGetSpecialFolderPath(0, path, type, FALSE);
+			result = QString::fromLocal8Bit(path);
+		}
+	} );
+
+	return result;
+}
+#endif // Q_OS_WIN

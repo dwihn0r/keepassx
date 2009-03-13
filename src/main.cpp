@@ -19,17 +19,18 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include "main.h"
+#include "mainwindow.h"
+#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
+	#include "Application_X11.h"
+#endif
+
 #include "plugins/interfaces/IFileDialog.h"
 #include "plugins/interfaces/IKdeInit.h"
 #include "plugins/interfaces/IGnomeInit.h"
 
-
 //#include <QPluginLoader>
-#include "mainwindow.h"
-#include "main.h"
-#if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
-	#include "Application_X11.h"
-#endif
+#include <iostream>
 
 using namespace std;
 
@@ -48,6 +49,8 @@ IIconTheme* IconLoader=NULL;
 
 int main(int argc, char **argv)
 {
+	setlocale(LC_CTYPE, "");
+	
 	QT_REQUIRE_VERSION(argc, argv, "4.3.0");
 	
 #if defined(Q_WS_X11) && defined(GLOBAL_AUTOTYPE)
@@ -59,22 +62,34 @@ int main(int argc, char **argv)
 	AppDir = QApplication::applicationFilePath();
 	AppDir.truncate(AppDir.lastIndexOf("/"));
 #if defined(Q_WS_X11)
-	DataDir=AppDir+"/../share/keepassx";
+	DataDir = AppDir+"/../share/keepassx";
 	if (!QFile::exists(DataDir) && QFile::exists(AppDir+"/share"))
-		DataDir=AppDir+"/share";
-	HomeDir = QDir::homePath()+"/.keepassx";
+		DataDir = AppDir+"/share";
+	const char* env = getenv("XDG_CONFIG_HOME");
+	if (!env) {
+		HomeDir = QDir::homePath() + "/.config";
+	}
+	else {
+		QString qenv = QTextCodec::codecForLocale()->toUnicode(env);
+		if (qenv[0] == '/')
+			HomeDir = qenv;
+		else
+			HomeDir = QDir::homePath() + '/' + qenv;
+	}
+	HomeDir += "/keepassx";
 #elif defined(Q_WS_MAC)
 	HomeDir = QDir::homePath()+"/.keepassx";
-	DataDir=AppDir+"/../Resources/keepassx";	
+	DataDir = AppDir+"/../Resources/keepassx";
 #else //Q_WS_WIN
-	HomeDir = QString::fromLocal8Bit(qgetenv("APPDATA").constData());
+	HomeDir = qtWindowsConfigPath(CSIDL_APPDATA);
 	if(!HomeDir.isEmpty() && QFile::exists(HomeDir))
 		HomeDir = QDir::fromNativeSeparators(HomeDir)+"/KeePassX";
 	else
 		HomeDir = QDir::homePath()+"/KeePassX";
 	
-	DataDir=AppDir+"/share";
+	DataDir = AppDir+"/share";
 #endif
+	DataDir = QDir::cleanPath(DataDir);
 	
 	CmdLineArgs args;
 	if ( !args.parse(QApplication::arguments()) ){
@@ -95,11 +110,21 @@ int main(int argc, char **argv)
 			if(!QDir().mkpath(HomeDir))
 				qWarning("Warning: Could not create directory '%s'", CSTR(HomeDir));
 		}
-		IniFilename=HomeDir+"/config";
+		IniFilename=HomeDir+"/config.ini";
 	}
 	else
 		IniFilename=args.configLocation();
 
+#ifdef Q_WS_X11
+	{
+		QString OldHomeDir = QDir::homePath()+"/.keepassx";
+		if (args.configLocation().isEmpty() && QFile::exists(OldHomeDir+"/config") && !QFile::exists(HomeDir+"/config"))
+			QFile::rename(OldHomeDir+"/config", HomeDir+"/config.ini");
+	}
+#else
+	if (args.configLocation().isEmpty() && QFile::exists(HomeDir+"/config") && !QFile::exists(HomeDir+"/config.ini"))
+		QFile::rename(HomeDir+"/config", HomeDir+"/config.ini");
+#endif
 	config = new KpxConfig(IniFilename);
 	fileDlgHistory.load();
 	
