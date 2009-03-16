@@ -30,9 +30,7 @@ struct Translation {
 };
 bool operator<(const Translation& t1, const Translation& t2);
 
-inline const char* CSTR(const QString& str) {
-	return QTextCodec::codecForLocale()->fromUnicode(str).constData();
-}
+#define CSTR(x)(QTextCodec::codecForLocale()->fromUnicode(x).constData())
 
 const QIcon& getIcon(const QString& name);
 const QPixmap* getPixmap(const QString& name);
@@ -48,6 +46,7 @@ QString getImageFile(const QString& name);
 bool createKeyFile(const QString& filename,QString* err, int length=32, bool Hex=true);
 bool lockPage(void* addr, int len);
 bool unlockPage(void* addr, int len);
+bool syncFile(QFile* file);
 void installTranslator();
 bool isTranslationActive();
 QList<Translation> getAllTranslations();

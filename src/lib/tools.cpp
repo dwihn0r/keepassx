@@ -24,8 +24,10 @@
 
 #if defined(Q_WS_X11) || defined(Q_WS_MAC)
 	#include <sys/mman.h>
+	#include <unistd.h>
 #elif defined(Q_WS_WIN)
 	#include <windows.h>
+	#include <io.h>
 #endif
 
 void createBanner(QPixmap* Pixmap,const QPixmap* IconAlpha,const QString& Text,int Width){
@@ -231,6 +233,18 @@ bool unlockPage(void* addr, int len){
 	return (munlock(addr, len)==0);
 #elif defined(Q_WS_WIN)
 	return VirtualUnlock(addr, len);
+#else
+	return false;
+#endif
+}
+
+bool syncFile(QFile* file) {
+	if (!file->flush())
+		return false;
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
+	return (fsync(file->handle())==0);
+#elif defined(Q_WS_WIN)
+	return (_commit(file->handle())==0);
 #else
 	return false;
 #endif

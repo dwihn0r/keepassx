@@ -1456,7 +1456,7 @@ bool Kdb3Database::save(){
 	if(!File->resize(size)){
 		delete [] buffer;
 		error=decodeFileError(File->error());
-		return false;	
+		return false;
 	}
 	File->seek(0);
 	if(File->write(buffer,size)!=size){
@@ -1464,7 +1464,8 @@ bool Kdb3Database::save(){
 		error=decodeFileError(File->error());
 		return false;
 	}
-	File->flush();
+	if (!syncFile(File))
+		qWarning("Unable to flush file to disk");
 
 	delete [] buffer;
 	//if(SearchGroupID!=-1)Groups.push_back(SearchGroup);
