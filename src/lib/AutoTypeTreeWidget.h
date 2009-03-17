@@ -18,12 +18,15 @@
 
 
 class AutoTypeTreeWidget : public QTreeWidget {
-Q_OBJECT
-public:
-	AutoTypeTreeWidget(QWidget* parent):QTreeWidget(parent){}
-signals:
-	void returnPressed(QTreeWidgetItem*);
-private:
-	void mouseMoveEvent(QMouseEvent*);
-	void keyPressEvent(QKeyEvent*);
+	Q_OBJECT
+	
+	public:
+		AutoTypeTreeWidget(QWidget* parent):QTreeWidget(parent){};
+	
+	signals:
+		void returnPressed(QTreeWidgetItem*);
+	
+	private:
+		void mouseMoveEvent(QMouseEvent*);
+		void keyPressEvent(QKeyEvent*);
 };
