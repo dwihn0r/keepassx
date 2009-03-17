@@ -128,7 +128,7 @@
         <location filename="../dialogs/AboutDlg.cpp" line="32"/>
         <source>None</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation type="unfinished">nichts</translation>
+        <translation>nichts</translation>
     </message>
     <message>
         <location filename="../dialogs/AboutDlg.cpp" line="34"/>
@@ -474,32 +474,32 @@ http://keepass.berlios.de</translation>
         <translation>Twofish:  256 Bit</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="65"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="64"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="65"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="64"/>
         <source>Please determine the number of encryption rounds.</source>
         <translation>Bitte geben Sie die Zahl der Verschlüsselungsrunden an.</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="75"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="75"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="71"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="70"/>
         <source>&apos;%1&apos; is not valid integer value.</source>
         <translation>&apos;%1&apos; ist kein gültiger Ganzzahlwert.</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="75"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>The number of encryption rounds have to be greater than 0.</source>
         <translation>Die Anzahl an Verschlüsselungsrunden muss mindestens Eins betragen.</translation>
     </message>
@@ -524,12 +524,12 @@ Please check your input.</source>
 Bitte prüfen Sie Ihre Eingabe.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="334"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="324"/>
         <source>Save Attachment...</source>
         <translation>Anhang speichern...</translation>
     </message>
@@ -546,7 +546,7 @@ Do you want to replace it?</source>
 Möchten Sie diese ersetzen.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -556,7 +556,7 @@ Möchten Sie diese ersetzen.</translation>
         <translation type="obsolete">Nein</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -571,24 +571,24 @@ Möchten Sie diese ersetzen.</translation>
         <translation type="obsolete">Neue Datei konnte nicht angelegt werden.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>Error while writing the file.</source>
         <translation>Beim Schreiben der Datei ist ein Fehler aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="351"/>
         <source>Delete Attachment?</source>
         <translation>Anhang löschen?</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="352"/>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
         <translation>Sie sind dabei den Dateianhang dieses Eintrages zu löschen.
 Sind Sie sicher?</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
         <source>No, Cancel</source>
         <translation>Nein, Abbrechen</translation>
     </message>
@@ -598,7 +598,7 @@ Sind Sie sicher?</translation>
         <translation>Eintrag bearbeiten</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="341"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
         <source>Could not open file.</source>
         <translation>Datei konnte nicht geöffnet werden.</translation>
     </message>
@@ -608,12 +608,12 @@ Sind Sie sicher?</translation>
         <translation>%1 Bit</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="304"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="294"/>
         <source>Add Attachment...</source>
         <translation>Anhang hinzufügen...</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="321"/>
         <source>The chosen entry has no attachment or it is empty.</source>
         <translation>Der ausgewählte Eintrag hat keinen Anhang oder ist leer.</translation>
     </message>
@@ -663,7 +663,7 @@ Sind Sie sicher?</translation>
         <translation>Kalender...</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="259"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="256"/>
         <source>[Untitled Entry]</source>
         <translation>[unbeschrifteter Eintrag]</translation>
     </message>
@@ -706,7 +706,7 @@ Sind Sie sicher?</translation>
         <translation>Passwortgenerator</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordGenDlg.cpp" line="270"/>
+        <location filename="../dialogs/PasswordGenDlg.cpp" line="278"/>
         <source>%1 Bits</source>
         <translation>%1 Bits</translation>
     </message>
@@ -986,7 +986,7 @@ Bitter prüfen Sie Ihre Zugriffsrechte.</translation>
         <location filename="../forms/CollectEntropyDlg.ui" line="56"/>
         <source>Collecting entropy...
 Please move the mouse and/or press some keys until enought entropy for a reseed of the random number generator is collected.</source>
-        <translation type="unfinished">sammle Entropie...
+        <translation>sammle Entropie...
 Bitte bewegen Sie die Maus und/oder drücken Sie einige Tasten bis genügend Entropie gesammelt wurde, damit der Zufallszahlengenerator gefüllt werden kann.</translation>
     </message>
     <message>
@@ -995,7 +995,7 @@ Bitte bewegen Sie die Maus und/oder drücken Sie einige Tasten bis genügend Ent
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#006400;&quot;&gt;Random pool successfully reseeded!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;(new line)p, li { white-space: pre-wrap; }(new line)&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;(new line)&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#006400;&quot;&gt;Zufallsdatenfeld erfolgreich gefüllt!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;(new line)p, li { white-space: pre-wrap; }(new line)&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;(new line)&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#006400;&quot;&gt;Zufallsdatenfeld erfolgreich gefüllt!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1148,92 +1148,92 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="162"/>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="167"/>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="172"/>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="177"/>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="182"/>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation>10</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="187"/>
         <source>11</source>
-        <translation type="unfinished"></translation>
+        <translation>11</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="192"/>
         <source>12</source>
-        <translation type="unfinished"></translation>
+        <translation>12</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="197"/>
         <source>14</source>
-        <translation type="unfinished"></translation>
+        <translation>14</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="202"/>
         <source>16</source>
-        <translation type="unfinished"></translation>
+        <translation>16</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="207"/>
         <source>18</source>
-        <translation type="unfinished"></translation>
+        <translation>18</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="212"/>
         <source>20</source>
-        <translation type="unfinished"></translation>
+        <translation>20</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="217"/>
         <source>22</source>
-        <translation type="unfinished"></translation>
+        <translation>22</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="222"/>
         <source>24</source>
-        <translation type="unfinished"></translation>
+        <translation>24</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="227"/>
         <source>26</source>
-        <translation type="unfinished"></translation>
+        <translation>26</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="232"/>
         <source>28</source>
-        <translation type="unfinished"></translation>
+        <translation>28</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="237"/>
         <source>36</source>
-        <translation type="unfinished"></translation>
+        <translation>36</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="242"/>
         <source>42</source>
-        <translation type="unfinished"></translation>
+        <translation>42</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="247"/>
         <source>78</source>
-        <translation type="unfinished"></translation>
+        <translation>78</translation>
     </message>
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="255"/>
@@ -1248,7 +1248,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="298"/>
         <source>HTML</source>
-        <translation type="unfinished"></translation>
+        <translation>HTML</translation>
     </message>
     <message>
         <location filename="" line="0"/>
@@ -1353,47 +1353,47 @@ p, li { white-space: pre-wrap; }
         <translation>Eintrag bearbeiten</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="140"/>
+        <location filename="../forms/EditEntryDlg.ui" line="152"/>
         <source>Username:</source>
         <translation>Benutzername:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="198"/>
+        <location filename="../forms/EditEntryDlg.ui" line="210"/>
         <source>Password Repet.:</source>
         <translation>Passwort Wdhlg.:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="127"/>
+        <location filename="../forms/EditEntryDlg.ui" line="139"/>
         <source>Title:</source>
         <translation>Titel:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="166"/>
+        <location filename="../forms/EditEntryDlg.ui" line="178"/>
         <source>URL:</source>
         <translation>URL:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="211"/>
+        <location filename="../forms/EditEntryDlg.ui" line="223"/>
         <source>Password:</source>
         <translation>Passwort:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="101"/>
+        <location filename="../forms/EditEntryDlg.ui" line="113"/>
         <source>Quality:</source>
         <translation>Qualität:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="153"/>
+        <location filename="../forms/EditEntryDlg.ui" line="165"/>
         <source>Comment:</source>
         <translation>Kommentar:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="224"/>
+        <location filename="../forms/EditEntryDlg.ui" line="236"/>
         <source>Expires:</source>
         <translation>Läuft ab:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="179"/>
+        <location filename="../forms/EditEntryDlg.ui" line="191"/>
         <source>Group:</source>
         <translation>Gruppe:</translation>
     </message>
@@ -1408,12 +1408,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="338"/>
+        <location filename="../forms/EditEntryDlg.ui" line="350"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="450"/>
+        <location filename="../forms/EditEntryDlg.ui" line="462"/>
         <source>Icon:</source>
         <translation>Symbol:</translation>
     </message>
@@ -1443,17 +1443,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Alt+K</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="371"/>
+        <location filename="../forms/EditEntryDlg.ui" line="383"/>
         <source>Never</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="114"/>
+        <location filename="../forms/EditEntryDlg.ui" line="126"/>
         <source>Attachment:</source>
         <translation>Anhang:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="407"/>
+        <location filename="../forms/EditEntryDlg.ui" line="419"/>
         <source>%1 Bit</source>
         <translation>%1 Bit</translation>
     </message>
@@ -1590,83 +1590,83 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../export/Export.cpp" line="26"/>
         <source>Export File...</source>
-        <translation type="unfinished"></translation>
+        <translation>exportiere Datei...</translation>
     </message>
 </context>
 <context>
     <name>FileErrors</name>
     <message>
-        <location filename="../lib/tools.cpp" line="59"/>
+        <location filename="../lib/tools.cpp" line="61"/>
         <source>No error occurred.</source>
         <translation>Kein Fehler aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="60"/>
+        <location filename="../lib/tools.cpp" line="62"/>
         <source>An error occurred while reading from the file.</source>
         <translation>Es ist ein Fehler beim lesen der Datei aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="61"/>
+        <location filename="../lib/tools.cpp" line="63"/>
         <source>An error occurred while writing to the file.</source>
         <translation>Es ist ein Fehler beim schreiben der Datei aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="62"/>
+        <location filename="../lib/tools.cpp" line="64"/>
         <source>A fatal error occurred.</source>
         <translation>Ein fataler Fehler hat sich ereignet.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="63"/>
+        <location filename="../lib/tools.cpp" line="65"/>
         <source>An resource error occurred.</source>
         <translation>Ein Resourcenfehler hat siche ereignet.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="64"/>
+        <location filename="../lib/tools.cpp" line="66"/>
         <source>The file could not be opened.</source>
         <translation>Die Datei konnte nicht geöffnet werden.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="65"/>
+        <location filename="../lib/tools.cpp" line="67"/>
         <source>The operation was aborted.</source>
         <translation>Die Operation wurde abgebrochen.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="66"/>
+        <location filename="../lib/tools.cpp" line="68"/>
         <source>A timeout occurred.</source>
         <translation>Ein Zeitlauffehler hat sich ereignet.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="67"/>
+        <location filename="../lib/tools.cpp" line="69"/>
         <source>An unspecified error occurred.</source>
         <translation>Ein unspezifizierter Fehler hat sich ereignet.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="68"/>
+        <location filename="../lib/tools.cpp" line="70"/>
         <source>The file could not be removed.</source>
         <translation>Die Datei konnte nicht gelöscht werden.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="69"/>
+        <location filename="../lib/tools.cpp" line="71"/>
         <source>The file could not be renamed.</source>
         <translation>Die Datei konnte nicht umbenannt werden.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="70"/>
+        <location filename="../lib/tools.cpp" line="72"/>
         <source>The position in the file could not be changed.</source>
         <translation>Die Position in der Datei konnte nicht geändert werden.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="71"/>
+        <location filename="../lib/tools.cpp" line="73"/>
         <source>The file could not be resized.</source>
         <translation>Die Größe der Datei konnte nicht geändert werden.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="72"/>
+        <location filename="../lib/tools.cpp" line="74"/>
         <source>The file could not be accessed.</source>
         <translation>Auf die Datei konnte nicht zugegriffen werden.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="73"/>
+        <location filename="../lib/tools.cpp" line="75"/>
         <source>The file could not be copied.</source>
         <translation>Die Datei konnte nicht kopiert werden.</translation>
     </message>
@@ -1676,22 +1676,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="141"/>
         <source>Alt+U</source>
-        <translation></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="118"/>
         <source>Alt+N</source>
-        <translation></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="399"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="404"/>
         <source>Alt+M</source>
-        <translation></translation>
+        <translation>Alt+M</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="95"/>
         <source>Alt+L</source>
-        <translation></translation>
+        <translation>Alt+L</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="13"/>
@@ -1709,44 +1709,44 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Abbre&amp;chen</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="472"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="483"/>
         <source>Generate</source>
         <translation>Generieren</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="455"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="460"/>
         <source>New Password:</source>
         <translation>Neues Passwort:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="369"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="374"/>
         <source>Quality:</source>
         <translation>Qualität:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="319"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="324"/>
         <source>Options</source>
         <translation>Optionen</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="138"/>
         <source>&amp;Upper Letters</source>
-        <translation>Großbuchstaben:</translation>
+        <translation type="unfinished">&amp;Großbuchstaben:</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="92"/>
         <source>&amp;Lower Letters</source>
-        <translation>Kleinbuchstaben:</translation>
+        <translation type="unfinished">&amp;Kleinbuchstaben:</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="115"/>
         <source>&amp;Numbers</source>
-        <translation>Zahlen</translation>
+        <translation type="unfinished">&amp;Zahlen</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="158"/>
         <source>&amp;Special Characters</source>
-        <translation>Sonderzeichen</translation>
+        <translation type="unfinished">&amp;Sonderzeichen</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="145"/>
@@ -1766,15 +1766,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="169"/>
         <source>Use &amp;only following characters:</source>
-        <translation>Nur folgende Zeichen benutzen:</translation>
+        <translation type="unfinished">Nur folgende &amp;Zeichen benutzen:</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="172"/>
         <source>Alt+O</source>
-        <translation></translation>
+        <translation type="unfinished">Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="333"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="338"/>
         <source>Length:</source>
         <translation>Länge:</translation>
     </message>
@@ -1786,12 +1786,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="56"/>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Folgende Zeichengruppen nutzen:</translation>
+        <translation type="unfinished">Folgende Zei&amp;chengruppen nutzen:</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="59"/>
         <source>Alt+W</source>
-        <translation></translation>
+        <translation type="unfinished">Alt+W</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="122"/>
@@ -1801,72 +1801,72 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="131"/>
         <source>Alt+S</source>
-        <translation></translation>
+        <translation type="unfinished">Alt+S</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="396"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="401"/>
         <source>Enable entropy collection</source>
         <translation>aktiviere Entropie Sammlung</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="425"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="430"/>
         <source>Collect only once per session</source>
         <translation>Sammle nur einmal pro Sitzung</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="50"/>
         <source>Random</source>
-        <translation type="unfinished"></translation>
+        <translation>Zufall</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="105"/>
         <source>&amp;Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstrich</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="128"/>
         <source>&amp;White Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Leerzeichen</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="151"/>
         <source>&amp;Minus</source>
-        <translation type="unfinished"></translation>
+        <translation>Minus</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="209"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="214"/>
         <source>Exclude look-alike characters</source>
-        <translation type="unfinished"></translation>
+        <translation>ähnlich aussehende Zeichen ausschliessen</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="216"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="221"/>
         <source>Ensure that password contains characters from every group</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherstellen, dass das Passwort Zeichen ein jeder Gruppe enthält</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="232"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="237"/>
         <source>Pronounceable</source>
-        <translation type="unfinished"></translation>
+        <translation>ausprechbar</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="256"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="261"/>
         <source>Lower Letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinbuchstaben</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="263"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="268"/>
         <source>Upper Letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Großbuchstaben</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="270"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="275"/>
         <source>Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummern</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="277"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="282"/>
         <source>Special Characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonderzeichen</translation>
     </message>
 </context>
 <context>
@@ -2011,147 +2011,152 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Kdb3Database</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="516"/>
+        <location filename="../Kdb3Database.cpp" line="524"/>
         <source>Could not open file.</source>
         <translation>Datei konnte nicht geöffnet werden.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="527"/>
+        <location filename="../Kdb3Database.cpp" line="540"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation>unerwartete Dateigrößen (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="544"/>
+        <location filename="../Kdb3Database.cpp" line="557"/>
         <source>Wrong Signature</source>
         <translation>falsche Signatur</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="549"/>
+        <location filename="../Kdb3Database.cpp" line="562"/>
         <source>Unsupported File Version.</source>
         <translation>Nicht unterstützte Dateiversion.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="558"/>
+        <location filename="../Kdb3Database.cpp" line="571"/>
         <source>Unknown Encryption Algorithm.</source>
         <translation>Unbekannter bzw. nicht unterstüzter Verschlüsselungsalgorithmus.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="593"/>
+        <location filename="../Kdb3Database.cpp" line="606"/>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
         <translation>Entschlüsselung fehlgeschlagen.
 Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="619"/>
+        <location filename="../Kdb3Database.cpp" line="632"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation>Hash-Test fehlgeschlagen.
 Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="704"/>
+        <location filename="../Kdb3Database.cpp" line="717"/>
         <source>Invalid group tree.</source>
         <translation>Gruppenbaum ungültig.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="921"/>
+        <location filename="../Kdb3Database.cpp" line="934"/>
         <source>Key file is empty.</source>
         <translation>Schlüsseldatei ist leer.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1301"/>
+        <location filename="../Kdb3Database.cpp" line="1314"/>
         <source>The database must contain at least one group.</source>
         <translation>Die Datenbank muss mindestens eine Gruppe enthalten.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1325"/>
+        <location filename="../Kdb3Database.cpp" line="1295"/>
         <source>Could not open file for writing.</source>
-        <translation>Datei konnte nicht zum Schreiben geöffnent werden.</translation>
+        <translation type="obsolete">Datei konnte nicht zum Schreiben geöffnent werden.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="698"/>
+        <location filename="../Kdb3Database.cpp" line="711"/>
         <source>Unexpected error: Offset is out of range.</source>
         <translation>unerwarteter Fehler: Offset ist auserhalb der Reichweite.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="585"/>
+        <location filename="../Kdb3Database.cpp" line="598"/>
         <source>Unable to initalize the twofish algorithm.</source>
+        <translation type="unfinished">Der Twofish-Algorithmus ist nicht initialisierbar.</translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="1334"/>
+        <source>The database has been opened read-only.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1165"/>
+        <location filename="../Kdb3Database.cpp" line="1178"/>
         <source>Bytes</source>
-        <translation></translation>
+        <translation type="unfinished">Bytes</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1173"/>
+        <location filename="../Kdb3Database.cpp" line="1186"/>
         <source>KiB</source>
-        <translation></translation>
+        <translation type="unfinished">KiB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1179"/>
+        <location filename="../Kdb3Database.cpp" line="1192"/>
         <source>MiB</source>
-        <translation></translation>
+        <translation type="unfinished">MiB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1184"/>
+        <location filename="../Kdb3Database.cpp" line="1197"/>
         <source>GiB</source>
-        <translation></translation>
+        <translation type="unfinished">GiB</translation>
     </message>
 </context>
 <context>
     <name>KeepassEntryView</name>
     <message>
-        <location filename="../lib/EntryView.cpp" line="483"/>
+        <location filename="../lib/EntryView.cpp" line="484"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="485"/>
+        <location filename="../lib/EntryView.cpp" line="486"/>
         <source>Username</source>
         <translation>Benutzername</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="487"/>
+        <location filename="../lib/EntryView.cpp" line="488"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="489"/>
+        <location filename="../lib/EntryView.cpp" line="490"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="491"/>
+        <location filename="../lib/EntryView.cpp" line="492"/>
         <source>Comments</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="493"/>
+        <location filename="../lib/EntryView.cpp" line="494"/>
         <source>Expires</source>
         <translation>Läuft ab</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="495"/>
+        <location filename="../lib/EntryView.cpp" line="496"/>
         <source>Creation</source>
         <translation>Erstellung</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="497"/>
+        <location filename="../lib/EntryView.cpp" line="498"/>
         <source>Last Change</source>
         <translation>Letzte Änderung</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="499"/>
+        <location filename="../lib/EntryView.cpp" line="500"/>
         <source>Last Access</source>
         <translation>Letzter Zugriff</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="501"/>
+        <location filename="../lib/EntryView.cpp" line="502"/>
         <source>Attachment</source>
         <translation>Anhang</translation>
     </message>
@@ -2166,22 +2171,22 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
         <translation>löschen?</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="503"/>
+        <location filename="../lib/EntryView.cpp" line="504"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="257"/>
+        <location filename="../lib/EntryView.cpp" line="258"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="257"/>
+        <location filename="../lib/EntryView.cpp" line="258"/>
         <source>At least one group must exist before adding an entry.</source>
         <translation>mindestens eine Gruppe muss existieren, bevor ein Eintrag hinzugefügt werden kann.</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="257"/>
+        <location filename="../lib/EntryView.cpp" line="258"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -2221,83 +2226,83 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
     <message>
         <location filename="../lib/GroupView.cpp" line="90"/>
         <source>Are you sure you want to delete this group, all its child groups and all their entries?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sind Sie sicher, dass Sie diese Gruppe, die enthaltenden Untergruppen und all deren Einträge löschen wollen?</translation>
     </message>
 </context>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Ctrl+O</source>
-        <translation></translation>
+        <translation>Strg+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+S</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="360"/>
-        <source>Ctrl+G</source>
-        <translation></translation>
+        <translation>Strg+S</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="361"/>
-        <source>Ctrl+C</source>
-        <translation></translation>
+        <source>Ctrl+G</source>
+        <translation>Strg+G</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
-        <source>Ctrl+B</source>
-        <translation></translation>
+        <source>Ctrl+C</source>
+        <translation>Strg+C</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="363"/>
-        <source>Ctrl+U</source>
-        <translation></translation>
+        <source>Ctrl+B</source>
+        <translation>Strg+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
-        <source>Ctrl+Y</source>
-        <translation></translation>
+        <location filename="../mainwindow.cpp" line="364"/>
+        <source>Ctrl+U</source>
+        <translation>Strg+U</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="366"/>
-        <source>Ctrl+E</source>
-        <translation></translation>
+        <source>Ctrl+Y</source>
+        <translation>Strg+Y</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="367"/>
-        <source>Ctrl+D</source>
-        <translation></translation>
+        <source>Ctrl+E</source>
+        <translation>Strg+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="368"/>
-        <source>Ctrl+K</source>
-        <translation></translation>
+        <source>Ctrl+D</source>
+        <translation>Strg+D</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="369"/>
+        <source>Ctrl+K</source>
+        <translation>Strg+K</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+F</source>
-        <translation></translation>
+        <translation>Strg+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ctrl+W</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="376"/>
-        <source>Shift+Ctrl+S</source>
-        <translation></translation>
+        <translation>Strg+W</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="377"/>
-        <source>Shift+Ctrl+F</source>
-        <translation></translation>
+        <source>Shift+Ctrl+S</source>
+        <translation>Umschalt+Strg+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="378"/>
+        <source>Shift+Ctrl+F</source>
+        <translation>Umschalt+Strg+F</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -2314,7 +2319,7 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="506"/>
+        <location filename="../mainwindow.cpp" line="515"/>
         <source>Save modified file?</source>
         <translation>Geändete Datei speichern?</translation>
     </message>
@@ -2346,22 +2351,22 @@ die Änderungen speichern?</translation>
         <translation type="obsolete">&lt;B&gt;Gruppe: &lt;/B&gt;%1  &lt;B&gt;Titel: &lt;/B&gt;%2  &lt;B&gt;Benutzername: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Passwort: &lt;/B&gt;%5  &lt;B&gt;Erstellung: &lt;/B&gt;%6  &lt;B&gt;Letzte Änderung: &lt;/B&gt;%7  &lt;B&gt;Letzter Zugriff: &lt;/B&gt;%8  &lt;B&gt;Läuft ab: &lt;/B&gt;%9</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="840"/>
+        <location filename="../mainwindow.cpp" line="854"/>
         <source>Clone Entry</source>
         <translation>Eintrag duplizieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="856"/>
         <source>Delete Entry</source>
         <translation>Eintrag löschen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="855"/>
+        <location filename="../mainwindow.cpp" line="869"/>
         <source>Clone Entries</source>
         <translation>Einträge duplizieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="857"/>
+        <location filename="../mainwindow.cpp" line="871"/>
         <source>Delete Entries</source>
         <translation>Einträge löschen</translation>
     </message>
@@ -2378,7 +2383,7 @@ die Änderungen speichern?</translation>
         <translation type="obsolete">Datenbank speichern unter...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1105"/>
+        <location filename="../mainwindow.cpp" line="1418"/>
         <source>Ready</source>
         <translation>Bereit</translation>
     </message>
@@ -2388,17 +2393,17 @@ die Änderungen speichern?</translation>
         <translation type="obsolete">[neu]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="600"/>
         <source>Open Database...</source>
         <translation>Datenbank öffnen...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1108"/>
+        <location filename="../mainwindow.cpp" line="1421"/>
         <source>Loading Database...</source>
         <translation>Lade Datenbank...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1111"/>
+        <location filename="../mainwindow.cpp" line="1424"/>
         <source>Loading Failed</source>
         <translation>Laden fehlgeschlagen</translation>
     </message>
@@ -2435,7 +2440,7 @@ die Änderungen speichern?</translation>
         <translation type="obsolete">Unbekannter Fehler in PwDatabase::openDatabase()</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
@@ -2450,174 +2455,186 @@ die Änderungen speichern?</translation>
         <translation type="obsolete">KeePassX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="467"/>
+        <location filename="../mainwindow.cpp" line="476"/>
         <source>Unknown error while loading database.</source>
         <translation>Unbekannter Fehler während des öffnens der Datenbank.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="893"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation>KeePass Datenbank (*.kdb)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="893"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>All Files (*)</source>
         <translation>alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="893"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>Save Database...</source>
         <translation>speichere Datenbank...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="728"/>
+        <location filename="../mainwindow.cpp" line="742"/>
         <source>1 Month</source>
         <translation>1 Monat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="744"/>
         <source>%1 Months</source>
         <translation>%1 Monate</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="736"/>
+        <location filename="../mainwindow.cpp" line="750"/>
         <source>1 Year</source>
         <translation>1 Jahr</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="738"/>
+        <location filename="../mainwindow.cpp" line="752"/>
         <source>%1 Years</source>
         <translation>%1 Jahre</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="744"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>1 Day</source>
         <translation>1 Tag</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="746"/>
+        <location filename="../mainwindow.cpp" line="760"/>
         <source>%1 Days</source>
         <translation>%1 Tage</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="750"/>
+        <location filename="../mainwindow.cpp" line="764"/>
         <source>less than 1 day</source>
         <translation>weniger als einen Tag</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1320"/>
+        <location filename="../mainwindow.cpp" line="1321"/>
         <source>Locked</source>
         <translation>gesperrt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1335"/>
+        <location filename="../mainwindow.cpp" line="1336"/>
         <source>Unlocked</source>
         <translation>entsperrt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
-        <source>Ctrl+L</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="359"/>
-        <source>Ctrl+Q</source>
-        <translation></translation>
+        <source>Ctrl+L</source>
+        <translation>Strg+L</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="489"/>
+        <location filename="../mainwindow.cpp" line="360"/>
+        <source>Ctrl+Q</source>
+        <translation>Strg+Q</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="498"/>
         <source>The database file does not exist.</source>
         <translation>Die Datenbankdatei existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1098"/>
+        <location filename="../mainwindow.cpp" line="1109"/>
         <source>new</source>
         <translation>neu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="714"/>
+        <location filename="../mainwindow.cpp" line="728"/>
         <source>Expired</source>
         <translation>abgelaufen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1321"/>
+        <location filename="../mainwindow.cpp" line="1322"/>
         <source>Un&amp;lock Workspace</source>
         <translation>entsperre Arbeitsbereich</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1336"/>
+        <location filename="../mainwindow.cpp" line="1337"/>
         <source>&amp;Lock Workspace</source>
         <translation>sperre Arbeitsbereich</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="478"/>
         <source>The following error occured while opening the database:</source>
         <translation>Der folgende Fehler hat sich beim öffnen der Datenbank ereignet:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="897"/>
+        <location filename="../mainwindow.cpp" line="911"/>
         <source>File could not be saved.</source>
         <translation>Datei konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>Show &amp;Toolbar</source>
-        <translation type="unfinished">Werkzeugleiste anzeigen</translation>
+        <translation>Werkzeugleiste anzeigen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Ctrl+N</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="370"/>
-        <source>Ctrl+P</source>
-        <translation></translation>
+        <translation>Strg+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="371"/>
+        <source>Ctrl+P</source>
+        <translation>Strg+P</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+X</source>
-        <translation></translation>
+        <translation>Strg+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="406"/>
         <source>Database locked</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenbank gesperrt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="407"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
 Do you want to open it anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datenbank, die Sie versuchen zu öffnen ist gesperrt.
+Dies bedeutet, das jemand anders die Datei geöffnet hat oder KeePassX das letzte mal abgestürtzt ist, als es die Datenbank geöffnet war.
+Soll die Datenbank auf jeden Fall geöffnet werden?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="445"/>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Konnte Datenbaksperrdatei nicht erstellen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="507"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
+        <translation>Die aktuelle Datei wurde geändert. Möchten Sie die Änderungen speichern?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="534"/>
+        <source>Couldn&apos;t remove database lock file.</source>
+        <translation>Konnte Datenbaksperrdatei nicht entfernen.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="413"/>
+        <source>Open read-only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <source>Couldn&apos;t remove database lock file.</source>
+        <location filename="../mainwindow.cpp" line="1427"/>
+        <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../lib/tools.cpp" line="144"/>
+        <location filename="../lib/tools.cpp" line="139"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -2629,7 +2646,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../lib/tools.cpp" line="146"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
 </context>
 <context>
@@ -2722,7 +2739,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../forms/MainWindow.ui" line="589"/>
         <source>Add New Group...</source>
-        <translation type="unfinished">Neu Gruppe hinzufügen...</translation>
+        <translation>neue Gruppe hinzufügen...</translation>
     </message>
     <message>
         <location filename="" line="0"/>
@@ -2912,7 +2929,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../forms/MainWindow.ui" line="191"/>
         <source>&amp;View</source>
-        <translation>Ansicht</translation>
+        <translation type="unfinished">&amp;Ansicht</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="136"/>
@@ -3000,6 +3017,11 @@ Do you want to save the changes?</source>
         <translation>&amp;KeePassX Handbuch...</translation>
     </message>
     <message>
+        <location filename="../forms/MainWindow.ui" line="534"/>
+        <source>Standard KeePass Single User Database (*.kdb)</source>
+        <translation type="obsolete">Standart KeePass Einzelbenutzer Datenbank (*.kdb)</translation>
+    </message>
+    <message>
         <location filename="../forms/MainWindow.ui" line="539"/>
         <source>Advanced KeePassX Database (*.kxdb)</source>
         <translation type="obsolete">fortgeschrittene KeePassX Datenbank (*.kxdb)</translation>
@@ -3017,32 +3039,32 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../forms/MainWindow.ui" line="292"/>
         <source>&amp;Lock Workspace</source>
-        <translation type="unfinished">sperre Arbeitsbereich</translation>
+        <translation>sperre Arbeitsbereich</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="150"/>
         <source>&amp;Bookmarks</source>
-        <translation type="unfinished">Lesezeichen</translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="195"/>
         <source>Toolbar &amp;Icon Size</source>
-        <translation type="unfinished">Werkezugleisten Symbol Größe</translation>
+        <translation>Werkezugleisten Symbol Größe</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="203"/>
         <source>&amp;Columns</source>
-        <translation type="unfinished">Spalten</translation>
+        <translation>Spalten</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="257"/>
         <source>&amp;Manage Bookmarks...</source>
-        <translation type="unfinished">Lesezeichen bearbeiten...</translation>
+        <translation>Lesezeichen bearbeiten...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="297"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">schliessen</translation>
+        <translation>schliessen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="286"/>
@@ -3052,187 +3074,187 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../forms/MainWindow.ui" line="310"/>
         <source>&amp;Edit Group...</source>
-        <translation type="unfinished">Gruppe bearbeiten...</translation>
+        <translation type="unfinished">Gruppe b&amp;earbeiten...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="315"/>
         <source>&amp;Delete Group</source>
-        <translation type="unfinished">Gruppe löschen</translation>
+        <translation type="unfinished">Gruppe &amp;löschen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="320"/>
         <source>Copy Password &amp;to Clipboard</source>
-        <translation type="unfinished">Passwort in die Zwischenablage kopieren</translation>
+        <translation type="unfinished">Pass&amp;wort in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="325"/>
         <source>Copy &amp;Username to Clipboard</source>
-        <translation type="unfinished">Benutzername in die Zwischenablage kopieren</translation>
+        <translation type="unfinished">Be&amp;nutzername in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="330"/>
         <source>&amp;Open URL</source>
-        <translation type="unfinished">Url öffnen</translation>
+        <translation>Url öffnen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="335"/>
         <source>&amp;Save Attachment As...</source>
-        <translation type="unfinished">Anhang speichern als...</translation>
+        <translation>Anhang speichern als...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="340"/>
         <source>Add &amp;New Entry...</source>
-        <translation type="unfinished">Eintrag neu hinzufügen...</translation>
+        <translation>Eintrag &amp;neu hinzufügen...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="345"/>
         <source>&amp;View/Edit Entry...</source>
-        <translation type="unfinished">Eintrag zeigen/bearbeiten...</translation>
+        <translation>Eintrag zeigen/&amp;bearbeiten...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="350"/>
         <source>De&amp;lete Entry</source>
-        <translation type="unfinished">Eintrag löschen</translation>
+        <translation>Eintrag &amp;löschen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="355"/>
         <source>&amp;Clone Entry</source>
-        <translation type="unfinished">Eintrag schliessen</translation>
+        <translation>Eintrag duplizieren</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="360"/>
         <source>Search &amp;in Database...</source>
-        <translation type="unfinished">Suche in Datenbank...</translation>
+        <translation>Suche &amp;in Datenbank...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="365"/>
         <source>Search in this &amp;Group...</source>
-        <translation type="unfinished">Suche in dieser Gruppe...</translation>
+        <translation>Suche in dieser &amp;Gruppe...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="373"/>
         <source>Show &amp;Entry Details</source>
-        <translation type="unfinished">Eintragsdetails zeigen</translation>
+        <translation>&amp;Eintragsdetails zeigen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="381"/>
         <source>Hide &amp;Usernames</source>
-        <translation type="unfinished">Benutzername verstecken</translation>
+        <translation>Ben&amp;utzername verstecken</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="389"/>
         <source>Hide &amp;Passwords</source>
-        <translation type="unfinished">Passwort verstecken</translation>
+        <translation>&amp;Passwort verstecken</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="397"/>
         <source>&amp;Title</source>
-        <translation type="unfinished">Titel</translation>
+        <translation>&amp;Titel</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="405"/>
         <source>User&amp;name</source>
-        <translation type="unfinished">Benutzername</translation>
+        <translation type="unfinished">Benutzer&amp;name</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="413"/>
         <source>&amp;URL</source>
-        <translation type="unfinished">URL</translation>
+        <translation type="unfinished">&amp;URL</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="421"/>
         <source>&amp;Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation type="unfinished">&amp;Passwort</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="429"/>
         <source>&amp;Comment</source>
-        <translation type="unfinished">Kommentar</translation>
+        <translation>Kommentar</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="437"/>
         <source>E&amp;xpires</source>
-        <translation type="unfinished">Ablauf</translation>
+        <translation>Ablauf</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="445"/>
         <source>C&amp;reation</source>
-        <translation type="unfinished">Erstellung</translation>
+        <translation>Erstellung</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="453"/>
         <source>&amp;Last Change</source>
-        <translation type="unfinished">letzte Änderung</translation>
+        <translation>letzte Änderung</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="461"/>
         <source>Last &amp;Access</source>
-        <translation type="unfinished">letzter Zugriff</translation>
+        <translation>letzter Zugriff</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="469"/>
         <source>A&amp;ttachment</source>
-        <translation type="unfinished">Anhang</translation>
+        <translation>Anhang</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="493"/>
         <source>Show &amp;Statusbar</source>
-        <translation type="unfinished">Statuszeile zeigen</translation>
+        <translation>&amp;Statuszeile zeigen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="511"/>
         <source>&amp;Perform AutoType</source>
-        <translation type="unfinished">Auto-Type ausführen</translation>
+        <translation>Auto-Type ausführen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="519"/>
         <source>&amp;16x16</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;16x16</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="527"/>
         <source>&amp;22x22</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;22x22</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="535"/>
         <source>2&amp;8x28</source>
-        <translation type="unfinished"></translation>
+        <translation>2&amp;8x28</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="545"/>
         <source>&amp;Password Generator...</source>
-        <translation type="unfinished">Passwortgenerator...</translation>
+        <translation>&amp;Passwortgenerator...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="556"/>
         <source>&amp;Group (search results only)</source>
-        <translation type="unfinished">Gruppe (nur Suchergebnisse)</translation>
+        <translation>&amp;Gruppe (nur Suchergebnisse)</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="561"/>
         <source>Show &amp;Expired Entries...</source>
-        <translation type="unfinished">Zeige abgelaufene Einträge...</translation>
+        <translation>Zeige abgelaufene &amp;Einträge...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="574"/>
         <source>&amp;Add Bookmark...</source>
-        <translation type="unfinished">Lesezeichen hinzufügen...</translation>
+        <translation>Lesezeichen hinzufügen...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="579"/>
         <source>Bookmark &amp;this Database...</source>
-        <translation type="unfinished">speichere diese Datenbank als Lesezeichen...</translation>
+        <translation>speichere diese Da&amp;tenbank als Lesezeichen...</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="305"/>
         <source>&amp;Add New Subgroup...</source>
-        <translation type="unfinished"></translation>
+        <translation>neue Untergruppe hinzufügen</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="584"/>
         <source>Copy URL to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>kopiere URL in die Zwischenablage</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="172"/>
@@ -3391,14 +3413,14 @@ Datei ist nicht lesbar.</translation>
         <translation type="obsolete">Schlüsseldatei oder Datenträger:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="185"/>
+        <location filename="../forms/PasswordDlg.ui" line="191"/>
         <source>&amp;Browse...</source>
         <translation>durchsuchen...</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="188"/>
+        <location filename="../forms/PasswordDlg.ui" line="194"/>
         <source>Alt+B</source>
-        <translation></translation>
+        <translation type="unfinished">Alt+B</translation>
     </message>
     <message>
         <location filename="" line="0"/>
@@ -3421,27 +3443,27 @@ Datei ist nicht lesbar.</translation>
         <translation>letzte Datei</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="157"/>
+        <location filename="../forms/PasswordDlg.ui" line="163"/>
         <source>Key File:</source>
         <translation>Schlüsseldatei:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="197"/>
+        <location filename="../forms/PasswordDlg.ui" line="203"/>
         <source>Generate Key File...</source>
         <translation>generiere Schlüsseldatei...</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="229"/>
+        <location filename="../forms/PasswordDlg.ui" line="235"/>
         <source>Please repeat your password:</source>
         <translation>bitte geben Sie Ihr Passwort nochmal ein:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="241"/>
+        <location filename="../forms/PasswordDlg.ui" line="253"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="268"/>
+        <location filename="../forms/PasswordDlg.ui" line="280"/>
         <source>Passwords are not equal.</source>
         <translation>Passwörter sind nicht gleich.</translation>
     </message>
@@ -3918,37 +3940,37 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="122"/>
         <source>Show system tray icon</source>
-        <translation type="unfinished">zeige System-Tray Symbol</translation>
+        <translation>zeige System-Tray Symbol</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="180"/>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="unfinished">minimiere zum tray, wenn das Hauptfenser geschlossen wird</translation>
+        <translation>minimiere zum tray, wenn das Hauptfenser geschlossen wird</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="298"/>
         <source>Save recent directories of file dialogs</source>
-        <translation type="unfinished">speichere Verzeichnisse der letzten geöffneten Dateien</translation>
+        <translation>speichere Verzeichnisse der letzten geöffneten Dateien</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="761"/>
         <source>Group tree at start-up:</source>
-        <translation type="unfinished">gruppiere Baum beim Start:</translation>
+        <translation>gruppiere Baum beim Start:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="768"/>
         <source>Restore last state</source>
-        <translation type="unfinished">letzte Einstellungen wiederherstellen</translation>
+        <translation>letzte Einstellungen wiederherstellen</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="775"/>
         <source>Expand all items</source>
-        <translation type="unfinished">alle Gegenstände expandieren</translation>
+        <translation>alle Unter-/Gruppen expandieren</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="782"/>
         <source>Do not expand any item</source>
-        <translation type="unfinished">Gegenstände nicht expandieren</translation>
+        <translation>Unter-/Gruppen nicht expandieren</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="94"/>
@@ -3958,7 +3980,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="950"/>
         <source>Edit Entry Dialog</source>
-        <translation type="unfinished">Eintragbearbeitungs Dialog</translation>
+        <translation>Eintragbearbeitungs Dialog</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="864"/>
@@ -4023,7 +4045,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1285"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
-        <translation type="unfinished">Sie können einige Einstellung von KeePassX nach Ihren Wünschen abschalten, um das Erscheinungsbild gering zu halten.</translation>
+        <translation>Sie können einige Einstellung von KeePassX nach Ihren Wünschen abschalten, um das Erscheinungsbild gering zu halten.</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1295"/>
@@ -4033,32 +4055,32 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1151"/>
         <source>Auto-Type Fine Tuning</source>
-        <translation type="unfinished">Auto-Type Feineinstellungen</translation>
+        <translation>Auto-Type Feineinstellungen</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1160"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit zwischen der Aktivierung einer auto-type Aktion durch den Benutzer bis zum ersten simulierten Tastenanschlag.</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1209"/>
         <source>ms</source>
-        <translation type="unfinished">ms</translation>
+        <translation>ms</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1173"/>
         <source>Pre-Gap:</source>
-        <translation type="unfinished">vor Lücke:</translation>
+        <translation type="unfinished">Pause vor erstem Tastenanschlag:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1196"/>
         <source>Key Stroke Delay:</source>
-        <translation type="unfinished">Tasteneingabeverzögerung:</translation>
+        <translation>Tasteneingabeverzögerung:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1206"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
-        <translation type="unfinished">Verzögerung zwischen zwei simulierten Tasteneingaben. Erhöhen Sie dies, wenn Auto-Type unregelmäßig Zeichen auslässt.</translation>
+        <translation>Verzögerung zwischen zwei simulierten Tasteneingaben. Erhöhen Sie dies, wenn Auto-Type unregelmäßig Zeichen auslässt.</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1125"/>
@@ -4073,7 +4095,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1141"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren Sie dies, wenn Sie Ihre Lesezeichen und die zu letzt geöffnete Datei unabhänig von deren absoluten Pfaden verwenden wollen. Dies ist natürlich am sinnvollsten, wenn Sie KeePassX flexibel einsetzten und sich dadurch die Einhängepunkte im Dauteisystem ändern.</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1144"/>
@@ -4083,7 +4105,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="150"/>
         <source>Minimize to tray instead of taskbar</source>
-        <translation type="unfinished">minimiere nach tray anstatt zur Arbeitsleiste</translation>
+        <translation>minimiere nach tray anstatt zur Arbeitsleiste</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="252"/>
@@ -4108,22 +4130,22 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1091"/>
         <source>Custom Browser Command</source>
-        <translation type="unfinished">anwenderspezifischer Browserbefehl</translation>
+        <translation>anwenderspezifischer Browserbefehl</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1103"/>
         <source>Browse</source>
-        <translation type="unfinished">durchsuchen...</translation>
+        <translation>durchsuchen...</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="438"/>
         <source>Automatically save database on exit and workspace locking</source>
-        <translation type="unfinished">automaitsches speichern der Datenbank beim Beenden und beim Sperren des Arbeitsbereiches</translation>
+        <translation>automaitsches speichern der Datenbank beim Beenden und beim Sperren des Arbeitsbereiches</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="941"/>
         <source>Show plain text passwords in:</source>
-        <translation type="unfinished">zeige Klartextpasswörter in:</translation>
+        <translation>zeige Klartextpasswörter in:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="960"/>
@@ -4138,7 +4160,7 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1028"/>
         <source>Lock database after inactivity of</source>
-        <translation type="unfinished">sperre Datenbank bei Inaktivität nach:</translation>
+        <translation>sperre Datenbank bei Inaktivität nach:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="1253"/>
@@ -4148,62 +4170,62 @@ Stellen Sie sicher, dass Sie Schreibzugriff auf &apos;~/.keepass&apos; haben.</t
     <message>
         <location filename="../forms/SettingsDlg.ui" line="74"/>
         <source>General (1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemein (1)</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="79"/>
         <source>General (2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemein (2)</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="84"/>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussehen</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="89"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="375"/>
         <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
-        <translation type="unfinished"></translation>
+        <translation>speichere Sicherheitskopieen der bearbeiteten Einträge in der Gruppe &quot;Backup&quot;</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="403"/>
         <source>Delete backup entries older than:</source>
-        <translation type="unfinished"></translation>
+        <translation>lösche Sicherheiskopieen der Einträge, die älter sind als:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="429"/>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>Tage</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="445"/>
         <source>Automatically save database after every change</source>
-        <translation type="unfinished"></translation>
+        <translation>speichere Datenbank automatisch nach jeder Änderung</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="837"/>
         <source>System Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemsprache</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="842"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Englisch</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="867"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache:</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="874"/>
         <source>Author:</source>
-        <translation type="unfinished"></translation>
+        <translation>Author:</translation>
     </message>
 </context>
 <context>
@@ -4314,19 +4336,20 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
     <message>
         <location filename="../forms/TargetWindowDlg.ui" line="13"/>
         <source>Auto-Type: Select Target Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-Type: Zielfenster auswählen</translation>
     </message>
     <message>
         <location filename="../forms/TargetWindowDlg.ui" line="19"/>
         <source>To specify the target window, either select an existing currently-opened window
 from the drop-down list, or enter the window title manually:</source>
-        <translation type="unfinished"></translation>
+        <translation>Um das Zielfenster auszuwählen, entweder ein bereits geöffnetes Fenster
+aus der Auswähllistes auswählen, oder den Fenstertitel manuell eingeben:</translation>
     </message>
 </context>
 <context>
     <name>Translation</name>
     <message>
-        <location filename="../lib/tools.cpp" line="338"/>
+        <location filename="../lib/tools.cpp" line="351"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation type="unfinished">Tarek Saidi</translation>
     </message>
@@ -4337,10 +4360,10 @@ from the drop-down list, or enter the window title manually:</source>
         <translation type="unfinished">tarek.saidi@arcor.de</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="337"/>
+        <location filename="../lib/tools.cpp" line="350"/>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Deutsch (Deutschland)</translation>
     </message>
 </context>
 <context>

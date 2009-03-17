@@ -225,32 +225,32 @@ ile dağıtılmaktadır.</translation>
         <translation> Twofish:  256 Bit</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="65"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="64"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="65"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="64"/>
         <source>Please determine the number of encryption rounds.</source>
         <translation>Lütfen şifrelemenin kaç basamak ile yapılacağını belirtin.</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="75"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>OK</source>
         <translation>TAMAM</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="75"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="71"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="70"/>
         <source>&apos;%1&apos; is not valid integer value.</source>
         <translation>&apos;%1&apos; geçerli bir tam sayı değeri değil.</translation>
     </message>
     <message>
-        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="75"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>The number of encryption rounds have to be greater than 0.</source>
         <translation>Sıfırdan büyük olması gereken ve şifrelemenin kaç basamaklı olacağını belirten sayı.</translation>
     </message>
@@ -325,64 +325,64 @@ Please check your input.</source>
 Lütfen girdilerinizi kontrol edin.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>OK</source>
         <translation>TAMAM</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="259"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="256"/>
         <source>[Untitled Entry]</source>
         <translation>[Başlıksız Girdi]</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="304"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="294"/>
         <source>Add Attachment...</source>
         <translation>Eklenti Ekle...</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="341"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
         <source>Could not open file.</source>
         <translation>Dosya açılamadı.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="321"/>
         <source>The chosen entry has no attachment or it is empty.</source>
         <translation>Seçilen girdinin eklentisi yok ya da boş.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="334"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="324"/>
         <source>Save Attachment...</source>
         <translation>Eklentiyi kaydet...</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>Error while writing the file.</source>
         <translation>Dosya yazılırken hata.</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="351"/>
         <source>Delete Attachment?</source>
         <translation>Eklenti silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="352"/>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
         <translation>Bu girdinin eklentisini silmek üzeresiniz.
 Emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../dialogs/EditEntryDlg.cpp" line="362"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="353"/>
         <source>No, Cancel</source>
         <translation>Hayır, İptal Et</translation>
     </message>
@@ -400,7 +400,7 @@ Emin misiniz?</translation>
         <translation>Parola Oluşturucu</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordGenDlg.cpp" line="270"/>
+        <location filename="../dialogs/PasswordGenDlg.cpp" line="278"/>
         <source>%1 Bits</source>
         <translation>%1 Bit</translation>
     </message>
@@ -870,72 +870,72 @@ p, li { white-space: pre-wrap; }
         <translation>Olu&amp;ştur.</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="101"/>
+        <location filename="../forms/EditEntryDlg.ui" line="113"/>
         <source>Quality:</source>
         <translation>Kalite:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="114"/>
+        <location filename="../forms/EditEntryDlg.ui" line="126"/>
         <source>Attachment:</source>
         <translation>Eklenti:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="127"/>
+        <location filename="../forms/EditEntryDlg.ui" line="139"/>
         <source>Title:</source>
         <translation>Başlık:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="140"/>
+        <location filename="../forms/EditEntryDlg.ui" line="152"/>
         <source>Username:</source>
         <translation>Kullanıcı adı:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="153"/>
+        <location filename="../forms/EditEntryDlg.ui" line="165"/>
         <source>Comment:</source>
         <translation>Açıklama:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="338"/>
+        <location filename="../forms/EditEntryDlg.ui" line="350"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="166"/>
+        <location filename="../forms/EditEntryDlg.ui" line="178"/>
         <source>URL:</source>
         <translation>Adres:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="179"/>
+        <location filename="../forms/EditEntryDlg.ui" line="191"/>
         <source>Group:</source>
         <translation>Grup:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="198"/>
+        <location filename="../forms/EditEntryDlg.ui" line="210"/>
         <source>Password Repet.:</source>
         <translation>Parola (Yeniden):</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="211"/>
+        <location filename="../forms/EditEntryDlg.ui" line="223"/>
         <source>Password:</source>
         <translation>Parola:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="224"/>
+        <location filename="../forms/EditEntryDlg.ui" line="236"/>
         <source>Expires:</source>
         <translation>Süre Dolumu:</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="371"/>
+        <location filename="../forms/EditEntryDlg.ui" line="383"/>
         <source>Never</source>
         <translation>Asla</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="407"/>
+        <location filename="../forms/EditEntryDlg.ui" line="419"/>
         <source>%1 Bit</source>
         <translation>%1 Bit</translation>
     </message>
     <message>
-        <location filename="../forms/EditEntryDlg.ui" line="450"/>
+        <location filename="../forms/EditEntryDlg.ui" line="462"/>
         <source>Icon:</source>
         <translation>Simge:</translation>
     </message>
@@ -1053,77 +1053,77 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileErrors</name>
     <message>
-        <location filename="../lib/tools.cpp" line="59"/>
+        <location filename="../lib/tools.cpp" line="61"/>
         <source>No error occurred.</source>
         <translation>Hiç hata oluşmadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="60"/>
+        <location filename="../lib/tools.cpp" line="62"/>
         <source>An error occurred while reading from the file.</source>
         <translation>Dosyadan okunurken bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="61"/>
+        <location filename="../lib/tools.cpp" line="63"/>
         <source>An error occurred while writing to the file.</source>
         <translation>Dosyaya yazılırken bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="62"/>
+        <location filename="../lib/tools.cpp" line="64"/>
         <source>A fatal error occurred.</source>
         <translation>Sonlandırıcı bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="63"/>
+        <location filename="../lib/tools.cpp" line="65"/>
         <source>An resource error occurred.</source>
         <translation>Bir kaynak hatası oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="64"/>
+        <location filename="../lib/tools.cpp" line="66"/>
         <source>The file could not be opened.</source>
         <translation>Dosya açılamadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="65"/>
+        <location filename="../lib/tools.cpp" line="67"/>
         <source>The operation was aborted.</source>
         <translation>İşlem sonlandırıldı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="66"/>
+        <location filename="../lib/tools.cpp" line="68"/>
         <source>A timeout occurred.</source>
         <translation>Bir zaman aşımı oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="67"/>
+        <location filename="../lib/tools.cpp" line="69"/>
         <source>An unspecified error occurred.</source>
         <translation>Belirtilmemiş hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="68"/>
+        <location filename="../lib/tools.cpp" line="70"/>
         <source>The file could not be removed.</source>
         <translation>Dosya silinemedi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="69"/>
+        <location filename="../lib/tools.cpp" line="71"/>
         <source>The file could not be renamed.</source>
         <translation>Dosya yeniden adlandırılamadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="70"/>
+        <location filename="../lib/tools.cpp" line="72"/>
         <source>The position in the file could not be changed.</source>
         <translation>Dosyanın içerisindeki konum değiştirilemedi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="71"/>
+        <location filename="../lib/tools.cpp" line="73"/>
         <source>The file could not be resized.</source>
         <translation>Dosya yeniden boyutlandırılamadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="72"/>
+        <location filename="../lib/tools.cpp" line="74"/>
         <source>The file could not be accessed.</source>
         <translation>Dosyaya erişilemedi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="73"/>
+        <location filename="../lib/tools.cpp" line="75"/>
         <source>The file could not be copied.</source>
         <translation>Dosya kopyalanamadı.</translation>
     </message>
@@ -1136,7 +1136,7 @@ p, li { white-space: pre-wrap; }
         <translation>Parola Oluşturucu</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="319"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="324"/>
         <source>Options</source>
         <translation>Seçenekler</translation>
     </message>
@@ -1201,37 +1201,37 @@ p, li { white-space: pre-wrap; }
         <translation>Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="333"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="338"/>
         <source>Length:</source>
         <translation>Uzunluk:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="369"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="374"/>
         <source>Quality:</source>
         <translation>Kalite:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="396"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="401"/>
         <source>Enable entropy collection</source>
         <translation>Enerji toplamayı etkinleştir</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="399"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="404"/>
         <source>Alt+M</source>
         <translation>Alt+M</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="425"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="430"/>
         <source>Collect only once per session</source>
         <translation>Her oturum için bir kere topla</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="455"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="460"/>
         <source>New Password:</source>
         <translation>Yeni Parola:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="472"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="483"/>
         <source>Generate</source>
         <translation>Oluştur</translation>
     </message>
@@ -1256,37 +1256,37 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Eksi</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="209"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="214"/>
         <source>Exclude look-alike characters</source>
         <translation>Buna benzer karakterleri hariç tut</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="216"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="221"/>
         <source>Ensure that password contains characters from every group</source>
         <translation>Parolanın her gruptan karakter içerdiğinden emin olun</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="232"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="237"/>
         <source>Pronounceable</source>
         <translation>Okunabilir</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="256"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="261"/>
         <source>Lower Letters</source>
         <translation>Küçük Harfler</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="263"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="268"/>
         <source>Upper Letters</source>
         <translation>Büyük Harfler</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="270"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="275"/>
         <source>Numbers</source>
         <translation>Rakamlar</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="277"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="282"/>
         <source>Special Characters</source>
         <translation>Özel Karakterler</translation>
     </message>
@@ -1433,94 +1433,99 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Kdb3Database</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="516"/>
+        <location filename="../Kdb3Database.cpp" line="524"/>
         <source>Could not open file.</source>
         <translation>Dosya açılamadı.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="527"/>
+        <location filename="../Kdb3Database.cpp" line="540"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation>Beklenmeyen dosya boyutu (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="544"/>
+        <location filename="../Kdb3Database.cpp" line="557"/>
         <source>Wrong Signature</source>
         <translation>Yanlış İmza</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="549"/>
+        <location filename="../Kdb3Database.cpp" line="562"/>
         <source>Unsupported File Version.</source>
         <translation>Desteklenmeyen Dosya Sürümü.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="558"/>
+        <location filename="../Kdb3Database.cpp" line="571"/>
         <source>Unknown Encryption Algorithm.</source>
         <translation>Bilinmeyen Şifreleme Algoritması.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="593"/>
+        <location filename="../Kdb3Database.cpp" line="606"/>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
         <translation>Şifre çözme işlemi başarısız.
 Anahtar yanlış ya da dosya bozuk.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="619"/>
+        <location filename="../Kdb3Database.cpp" line="632"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation>Özet kontrolü başarısız.
 Anahtar yanlış ya da dosya bozulmuş.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="698"/>
+        <location filename="../Kdb3Database.cpp" line="711"/>
         <source>Unexpected error: Offset is out of range.</source>
         <translation>Beklenmeyen hata: Konum dışı.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="704"/>
+        <location filename="../Kdb3Database.cpp" line="717"/>
         <source>Invalid group tree.</source>
         <translation>Geçersiz grup ağacı.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="921"/>
+        <location filename="../Kdb3Database.cpp" line="934"/>
         <source>Key file is empty.</source>
         <translation>Anahtar dosyası boş.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1301"/>
+        <location filename="../Kdb3Database.cpp" line="1314"/>
         <source>The database must contain at least one group.</source>
         <translation>Veritabanı en az bir grup içermelidir.</translation>
     </message>
     <message>
         <location filename="../Kdb3Database.cpp" line="1325"/>
         <source>Could not open file for writing.</source>
-        <translation>Yazmak için açılamadı.</translation>
+        <translation type="obsolete">Yazmak için açılamadı.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="585"/>
+        <location filename="../Kdb3Database.cpp" line="598"/>
         <source>Unable to initalize the twofish algorithm.</source>
         <translation>Twofish algoritması başlatılamadı.</translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="1334"/>
+        <source>The database has been opened read-only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1165"/>
+        <location filename="../Kdb3Database.cpp" line="1178"/>
         <source>Bytes</source>
         <translation>Bayt</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1173"/>
+        <location filename="../Kdb3Database.cpp" line="1186"/>
         <source>KiB</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1179"/>
+        <location filename="../Kdb3Database.cpp" line="1192"/>
         <source>MiB</source>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1184"/>
+        <location filename="../Kdb3Database.cpp" line="1197"/>
         <source>GiB</source>
         <translation>GB</translation>
     </message>
@@ -1533,72 +1538,72 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
         <translation>Silinsin mi?</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="257"/>
+        <location filename="../lib/EntryView.cpp" line="258"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="257"/>
+        <location filename="../lib/EntryView.cpp" line="258"/>
         <source>At least one group must exist before adding an entry.</source>
         <translation>Bir girdi eklenmeden önce en az bir grup olmalıdır.</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="257"/>
+        <location filename="../lib/EntryView.cpp" line="258"/>
         <source>OK</source>
         <translation>TAMAM</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="483"/>
+        <location filename="../lib/EntryView.cpp" line="484"/>
         <source>Title</source>
         <translation>Başlık</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="485"/>
+        <location filename="../lib/EntryView.cpp" line="486"/>
         <source>Username</source>
         <translation>Kullanıcı Adı</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="487"/>
+        <location filename="../lib/EntryView.cpp" line="488"/>
         <source>URL</source>
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="489"/>
+        <location filename="../lib/EntryView.cpp" line="490"/>
         <source>Password</source>
         <translation>Parola</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="491"/>
+        <location filename="../lib/EntryView.cpp" line="492"/>
         <source>Comments</source>
         <translation>Yorumlar</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="493"/>
+        <location filename="../lib/EntryView.cpp" line="494"/>
         <source>Expires</source>
         <translation>Süre Dolumu</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="495"/>
+        <location filename="../lib/EntryView.cpp" line="496"/>
         <source>Creation</source>
         <translation>Oluşturulma</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="497"/>
+        <location filename="../lib/EntryView.cpp" line="498"/>
         <source>Last Change</source>
         <translation>Son Değişiklik</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="499"/>
+        <location filename="../lib/EntryView.cpp" line="500"/>
         <source>Last Access</source>
         <translation>Son Erişim</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="501"/>
+        <location filename="../lib/EntryView.cpp" line="502"/>
         <source>Attachment</source>
         <translation>Eklenti</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="503"/>
+        <location filename="../lib/EntryView.cpp" line="504"/>
         <source>Group</source>
         <translation>Grup</translation>
     </message>
@@ -1634,272 +1639,272 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="1105"/>
+        <location filename="../mainwindow.cpp" line="1418"/>
         <source>Ready</source>
         <translation>Hazır</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1320"/>
+        <location filename="../mainwindow.cpp" line="1321"/>
         <source>Locked</source>
         <translation>Kilitli</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1335"/>
+        <location filename="../mainwindow.cpp" line="1336"/>
         <source>Unlocked</source>
         <translation>Kilidi Açılmış</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Shift+Ctrl+S</source>
         <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="377"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Shift+Ctrl+F</source>
         <translation>Shift+Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="489"/>
+        <location filename="../mainwindow.cpp" line="498"/>
         <source>The database file does not exist.</source>
         <translation>Veritabanı dosyası yok.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1108"/>
+        <location filename="../mainwindow.cpp" line="1421"/>
         <source>Loading Database...</source>
         <translation>Veritabanı Yükleniyor...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1111"/>
+        <location filename="../mainwindow.cpp" line="1424"/>
         <source>Loading Failed</source>
         <translation>Yükleme Başarısız Oldu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="467"/>
+        <location filename="../mainwindow.cpp" line="476"/>
         <source>Unknown error while loading database.</source>
         <translation>Veritabanı yüklenirken bilinmeyen bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="478"/>
         <source>The following error occured while opening the database:</source>
         <translation>Veritabanı açılırken şu hata oluştu:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="506"/>
+        <location filename="../mainwindow.cpp" line="515"/>
         <source>Save modified file?</source>
         <translation>Değiştirilmiş dosya kaydeilsin mi?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1098"/>
+        <location filename="../mainwindow.cpp" line="1109"/>
         <source>new</source>
         <translation>yeni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="600"/>
         <source>Open Database...</source>
         <translation>Veritabanı Aç...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="893"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation>KeePassX Veritabanları (*.kdb)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="893"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>All Files (*)</source>
         <translation>Tüm Dosyalar (*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="714"/>
+        <location filename="../mainwindow.cpp" line="728"/>
         <source>Expired</source>
         <translation>Süresi Dolmuş</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="728"/>
+        <location filename="../mainwindow.cpp" line="742"/>
         <source>1 Month</source>
         <translation>1 Ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="744"/>
         <source>%1 Months</source>
         <translation>%1 Ay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="736"/>
+        <location filename="../mainwindow.cpp" line="750"/>
         <source>1 Year</source>
         <translation>1 Yıl</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="738"/>
+        <location filename="../mainwindow.cpp" line="752"/>
         <source>%1 Years</source>
         <translation>%1 Yıl</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="744"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>1 Day</source>
         <translation>1 Gün</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="746"/>
+        <location filename="../mainwindow.cpp" line="760"/>
         <source>%1 Days</source>
         <translation>%1 Gün</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="750"/>
+        <location filename="../mainwindow.cpp" line="764"/>
         <source>less than 1 day</source>
         <translation>1 günden az</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="840"/>
+        <location filename="../mainwindow.cpp" line="854"/>
         <source>Clone Entry</source>
         <translation>Girdiyi İkile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="856"/>
         <source>Delete Entry</source>
         <translation>Girdiyi Sil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="855"/>
+        <location filename="../mainwindow.cpp" line="869"/>
         <source>Clone Entries</source>
         <translation>Girdileri İkile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="857"/>
+        <location filename="../mainwindow.cpp" line="871"/>
         <source>Delete Entries</source>
         <translation>Girdileri Sil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="897"/>
+        <location filename="../mainwindow.cpp" line="911"/>
         <source>File could not be saved.</source>
         <translation>Dosya kaydedilemedi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="893"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>Save Database...</source>
         <translation>Veritabanını Kaydet...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1321"/>
+        <location filename="../mainwindow.cpp" line="1322"/>
         <source>Un&amp;lock Workspace</source>
         <translation>Çalışma A&amp;lanının Kilidini Aç</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1336"/>
+        <location filename="../mainwindow.cpp" line="1337"/>
         <source>&amp;Lock Workspace</source>
         <translation>Çalışma A&amp;lanını Kilitle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>Show &amp;Toolbar</source>
         <translation>&amp;Araç Çubuğunu Göster</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="406"/>
         <source>Database locked</source>
         <translation>Veritabanı kilitli</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="407"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -1909,25 +1914,35 @@ Do you want to open it anyway?</source>
     <message>
         <location filename="../mainwindow.cpp" line="448"/>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation>Veritabanı kilit dosyası oluşturulamadı.</translation>
+        <translation type="obsolete">Veritabanı kilit dosyası oluşturulamadı.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="507"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation>Geçerli dosya üzerinde değişiklikler yapıldı.
 Değişiklikleri kaydetmek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation>Veritabanı kilit dosyası silinemedi.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="413"/>
+        <source>Open read-only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1427"/>
+        <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../lib/tools.cpp" line="144"/>
+        <location filename="../lib/tools.cpp" line="139"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
@@ -1939,7 +1954,7 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
     <message>
         <location filename="../lib/tools.cpp" line="146"/>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation type="obsolete">TAMAM</translation>
     </message>
 </context>
 <context>
@@ -2420,37 +2435,37 @@ Dosya okunabilir değil.</translation>
         <translation>Parola:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="185"/>
+        <location filename="../forms/PasswordDlg.ui" line="191"/>
         <source>&amp;Browse...</source>
         <translation>&amp;Gözat...</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="188"/>
+        <location filename="../forms/PasswordDlg.ui" line="194"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="157"/>
+        <location filename="../forms/PasswordDlg.ui" line="163"/>
         <source>Key File:</source>
         <translation>Anahtar Dosyası:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="197"/>
+        <location filename="../forms/PasswordDlg.ui" line="203"/>
         <source>Generate Key File...</source>
         <translation>Anahtar Dosyası Oluştur...</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="229"/>
+        <location filename="../forms/PasswordDlg.ui" line="235"/>
         <source>Please repeat your password:</source>
         <translation>Lütfen parolanızı tekrar girin:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="241"/>
+        <location filename="../forms/PasswordDlg.ui" line="253"/>
         <source>Back</source>
         <translation>Geri</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="268"/>
+        <location filename="../forms/PasswordDlg.ui" line="280"/>
         <source>Passwords are not equal.</source>
         <translation>Parolalar aynı değil.</translation>
     </message>
@@ -2990,7 +3005,7 @@ from the drop-down list, or enter the window title manually:</source>
 <context>
     <name>Translation</name>
     <message>
-        <location filename="../lib/tools.cpp" line="338"/>
+        <location filename="../lib/tools.cpp" line="351"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation>Serdar Soytetir</translation>
     </message>
@@ -3001,7 +3016,7 @@ from the drop-down list, or enter the window title manually:</source>
         <translation>tulliana@gmail.com</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="337"/>
+        <location filename="../lib/tools.cpp" line="350"/>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
         <translation>Türkçe</translation>
