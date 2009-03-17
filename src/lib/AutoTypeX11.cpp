@@ -35,8 +35,6 @@ void initAutoType(KeepassMainWindow* mainWin) {
 AutoTypeAction::AutoTypeAction(AutoTypeActionType t, KeySym d) : type(t), data(d){
 }
 
-bool AutoTypeX11::error_detected = false;
-
 AutoTypeX11::AutoTypeX11(KeepassMainWindow* mainWin) {
 	this->mainWin = mainWin;
 	dpy = QX11Info::display();
@@ -46,8 +44,6 @@ AutoTypeX11::AutoTypeX11(KeepassMainWindow* mainWin) {
 	meta_mask = 0;
 	altgr_mask = 0;
 	altgr_keysym = NoSymbol;
-	focused_window = None;
-	focused_subwindow = None;
 	
 	ReadKeymap();
 	if (!altgr_mask)
@@ -618,54 +614,11 @@ void AutoTypeX11::ReadKeymap()
  */
 void AutoTypeX11::SendEvent(XKeyEvent *event)
 {
-	static bool first = TRUE;
-
 	XSync(event->display, FALSE);
 	int (*oldHandler) (Display*, XErrorEvent*) = XSetErrorHandler(MyErrorHandler);
 
-	error_detected = FALSE;
-	if (focused_window != None) {
-		/* set input focus if input focus is set explicitly */
-		XSetInputFocus(event->display, focused_window, RevertToParent, CurrentTime);
-		XSync(event->display, FALSE);
-	}
-	if (!error_detected) {
-		Window root, child, w;
-		int root_x, root_y, x, y;
-		unsigned int mask;
-		int revert_to;
-
-		w = None;
-		first = FALSE;
-
-		w = focused_subwindow;
-		if (w == None)
-			XGetInputFocus(event->display, &w, &revert_to);
-
-		if (w != None) {
-			XQueryPointer(event->display, w,
-						  &root, &child, &root_x, &root_y, &x, &y, &mask);
-			XWarpPointer(event->display, None, w, 0, 0, 0, 0, 1, 1);
-			XFlush(event->display);
-		}
-
-		XTestFakeKeyEvent(event->display, event->keycode, event->type == KeyPress, 0);
-		XFlush(event->display);
-
-		if (w != None) {
-			XWarpPointer(event->display, None, root, 0, 0, 0, 0, root_x, root_y);
-			XFlush(event->display);
-		}
-	} else {
-		XTestFakeKeyEvent(event->display, event->keycode, event->type == KeyPress, 0);
-		XFlush(event->display);
-	}
-
-	if (error_detected) {
-		/* reset focus because focused window is (probably) no longer exist */
-		focused_window = None;
-		focused_subwindow = None;
-	}
+	XTestFakeKeyEvent(event->display, event->keycode, event->type == KeyPress, 0);
+	XFlush(event->display);
 
 	XSetErrorHandler(oldHandler);
 }
@@ -684,10 +637,7 @@ void AutoTypeX11::SendKeyPressedEvent(KeySym keysym, unsigned int shift)
 	int phase, inx;
 	bool found;
 
-	if (focused_subwindow != None)
-		cur_focus = focused_subwindow;
-	else
-		XGetInputFocus(dpy, &cur_focus, &revert_to);
+	XGetInputFocus(dpy, &cur_focus, &revert_to);
 
 	found = FALSE;
 	keycode = 0;
@@ -856,7 +806,6 @@ int AutoTypeX11::MyErrorHandler(Display *my_dpy, XErrorEvent *event)
 {
 	char msg[200];
 
-	error_detected = TRUE;
 	if (event->error_code == BadWindow) {
 		return 0;
 	}

@@ -59,13 +59,10 @@ class AutoTypeX11 : public AutoType {
 		KeySym *keysym_table;
 		int min_keycode, max_keycode;
 		int keysym_per_keycode;
-		static bool error_detected;
 		int alt_mask;
 		int meta_mask;
 		int altgr_mask;
 		KeySym altgr_keysym;
-		Window focused_window;
-		Window focused_subwindow;
 };
 
 #endif // _AUTOTYPEX11_H_
