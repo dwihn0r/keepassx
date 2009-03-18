@@ -44,11 +44,11 @@ KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 	updateColumns();
 	header()->setSortIndicator(config->columnSort(), config->columnSortOrder());
 
-	connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized(int,int,int)));
+	connect(header(),SIGNAL(sectionResized(int,int,int)),this,SLOT(OnColumnResized()));
 	connect(this,SIGNAL(itemSelectionChanged()),this,SLOT(OnItemsChanged()));
 	connect(&ClipboardTimer, SIGNAL(timeout()), this, SLOT(OnClipboardTimeOut()));
 	connect(header(),SIGNAL(sectionClicked(int)),this,SLOT(OnHeaderSectionClicked(int)));
-	connect(header(),SIGNAL(sectionMoved(int,int,int)),this,SLOT(OnColumnMoved(int,int,int)));
+	connect(header(),SIGNAL(sectionMoved(int,int,int)),this,SLOT(OnColumnMoved()));
 	Clipboard=QApplication::clipboard();
 	ContextMenu=new QMenu(this);
 	setAlternatingRowColors(config->alternatingRowColors());
@@ -260,7 +260,7 @@ void KeepassEntryView::OnNewEntry(){
 	}
 	else
 		NewEntry=db->newEntry(CurrentGroup);
-	CEditEntryDlg dlg(db,NewEntry,this,true,true);
+	CEditEntryDlg dlg(db,NewEntry,this,true);
 	if(!dlg.exec()){
 		db->deleteLastEntry();
 	}
@@ -473,9 +473,9 @@ void KeepassEntryView::updateIcons(){
 }
 
 
-void KeepassEntryView::setEntry(IEntryHandle* entry){
+/*void KeepassEntryView::setEntry(IEntryHandle* entry){
 
-}
+}*/
 
 void KeepassEntryView::updateColumns(){
 	setColumnCount(0);
@@ -529,7 +529,7 @@ void KeepassEntryView::refreshItems(){
 		updateEntry(Items.at(i));
 }
 
-void KeepassEntryView::OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisIndex){
+void KeepassEntryView::OnColumnMoved(){
 	for(int i=0;i<header()->count();i++){
 		ColumnOrder[columnListIndex(header()->logicalIndex(i))]=i;
 	}
@@ -595,7 +595,7 @@ int KeepassEntryView::columnListIndex(int LogicalIndex){
 }
 
 
-void KeepassEntryView::OnColumnResized(int lindex, int Old, int New){
+void KeepassEntryView::OnColumnResized(){
 	if(!AutoResizeColumns)return;
 	for(int i=0;i<header()->count();i++){
 		ColumnSizes[columnListIndex(i)]=header()->sectionSize(i);

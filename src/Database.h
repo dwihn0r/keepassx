@@ -215,7 +215,7 @@ public:
 	/*! Sets the index of a group amongst the children of its parent.
 		This function can be used to sort the groups of the database in a specific order.
 		\param index The new index of the group. The indices of the other groups which are affected by this operation will be automatically adjusted.*/
-	virtual void setIndex(int index)=0;
+	//virtual void setIndex(int index)=0;
 
 	/*! Tests the validity of the handle.
 		\return TRUE if the handle is valid and FALSE if the handle is invalid e.g. because the associated group was deleted.*/

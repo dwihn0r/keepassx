@@ -28,7 +28,7 @@
 #include "TargetWindowDlg.h"
 #endif
 
-CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent,  bool modal, bool newEntry)
+CEditEntryDlg::CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent, bool newEntry)
 : QDialog(parent)
 {
 	Q_ASSERT(_db);

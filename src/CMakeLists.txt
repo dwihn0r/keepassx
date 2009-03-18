@@ -119,16 +119,19 @@ SET(keepassx_FORMS
 SET(keepassx_RESOURCES res/resources.qrc)
 
 set(keepassx_TRANSLATIONS
-	translations/keepassx-cs_CZ.ts
+#	translations/keepassx-cs_CZ.ts
 	translations/keepassx-de_DE.ts
 	translations/keepassx-es_ES.ts
 	translations/keepassx-fi_FI.ts
 	translations/keepassx-fr_FR.ts
 	translations/keepassx-gl_ES.ts
 	translations/keepassx-it_IT.ts
-	translations/keepassx-ja_JP.ts
-	translations/keepassx-ru_RU.ts
+#	translations/keepassx-ja_JP.ts
+#	translations/keepassx-ru_RU.ts
 	translations/keepassx-tr_TR.ts
+	translations/qt_fi.ts
+	translations/qt_it.ts
+	translations/qt_tr.ts
 )
 
 #IF( MINGW )

@@ -105,7 +105,7 @@ void KeepassGroupView::OnHideSearchResults(){
 
 void KeepassGroupView::OnNewGroup(){
 	CGroup NewGroup;
-	CEditGroupDialog dlg(db,&NewGroup,parentWidget(),true);
+	CEditGroupDialog dlg(db,&NewGroup,parentWidget());
 	if(dlg.exec())
 		createGroup(NewGroup.Title, NewGroup.Image, NULL);
 }
@@ -113,7 +113,7 @@ void KeepassGroupView::OnNewGroup(){
 void KeepassGroupView::OnNewSubgroup(){
 	GroupViewItem* parent=(GroupViewItem*)currentItem();
 	CGroup NewGroup;
-	CEditGroupDialog dlg(db,&NewGroup,parentWidget(),true);
+	CEditGroupDialog dlg(db,&NewGroup,parentWidget());
 	if(dlg.exec())
 		createGroup(NewGroup.Title, NewGroup.Image, parent);
 }
@@ -151,7 +151,7 @@ void KeepassGroupView::createGroup(const QString& title, quint32 image, GroupVie
 
 void KeepassGroupView::OnEditGroup(){
 	GroupViewItem* item=(GroupViewItem*)currentItem();
-	CEditGroupDialog dlg(db,item->GroupHandle,parentWidget(),true);
+	CEditGroupDialog dlg(db,item->GroupHandle,parentWidget());
 	int r=dlg.exec();
 	if(r){
 		item->setIcon(0,db->icon(item->GroupHandle->image()));
@@ -212,6 +212,7 @@ void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
 
 
 void KeepassGroupView::dragLeaveEvent ( QDragLeaveEvent * event ){
+	Q_UNUSED(event);
 	if(LastHoverItem){
 		LastHoverItem->setBackgroundColor(0,QApplication::palette().color(QPalette::Base));
 		LastHoverItem->setForeground(0,QBrush(QApplication::palette().color(QPalette::Text)));

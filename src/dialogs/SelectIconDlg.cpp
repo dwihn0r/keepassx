@@ -21,7 +21,7 @@
 #include "dialogs/SelectIconDlg.h"
 
 
-CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent, bool modal, Qt::WFlags fl):QDialog(parent,fl){
+CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent, Qt::WFlags fl):QDialog(parent,fl){
 	setupUi(this);
 	db=database;
 	Id=CurrentId;

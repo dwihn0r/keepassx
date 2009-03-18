@@ -86,6 +86,7 @@ void AutoTypeDlg::paintEvent(QPaintEvent* event){
 }
 
 void AutoTypeDlg::resizeEvent(QResizeEvent* event){
+	Q_UNUSED(event);
 	createBanner(&BannerPixmap,getPixmap("keepassx_large"),tr("Auto-Type"),width());
 }
 

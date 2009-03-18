@@ -23,6 +23,7 @@
 PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const QString& filename)
 : QDialog(parent)
 {
+	Q_UNUSED(flags);
 	setupUi(this);
 	Mode=mode;
 	Filename=filename;
@@ -155,8 +156,8 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 	connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL( clicked() ), this, SLOT( OnOK() ) );
 	connect(Button_Browse, SIGNAL( clicked() ), this, SLOT( OnButtonBrowse() ) );
 	connect(Button_GenKeyFile,SIGNAL(clicked()),this,SLOT(OnGenKeyFile()));
-	connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged(int)));
-	connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged(int)));
+	connect(Check_Password,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
+	connect(Check_KeyFile,SIGNAL(stateChanged(int)),this,SLOT(OnCheckBoxesChanged()));
 	connect(Button_Back,SIGNAL(clicked()),this,SLOT(OnButtonBack()));
 	if(!config->showPasswordsPasswordDlg())
 		ChangeEchoModeDatabaseKey();
@@ -168,7 +169,7 @@ PasswordDialog::PasswordDialog(QWidget* parent,DlgMode mode,DlgFlags flags,const
 	setMinimumSize(size());
 	createBanner(&BannerPixmap,getPixmap("key"),BannerTitle,width());
 	Button_Bookmarks->setIcon(getIcon("bookmark"));
-	OnCheckBoxesChanged(0);
+	OnCheckBoxesChanged();
 }
 
 
@@ -295,7 +296,7 @@ void PasswordDialog::OnOK(){
 	done(Exit_Ok);
 }
 
-void PasswordDialog::OnCheckBoxesChanged(int state){
+void PasswordDialog::OnCheckBoxesChanged(){
 	Edit_Password->setEnabled(Check_Password->isChecked());
 	Combo_KeyFile->setEnabled(Check_KeyFile->isChecked());
 	Button_Browse->setEnabled(Check_KeyFile->isChecked());

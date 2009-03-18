@@ -101,7 +101,7 @@ public:
 			virtual IGroupHandle* parent();
 			virtual QList<IGroupHandle*> children();
 			virtual int index();
-			virtual void setIndex(int index);
+			//virtual void setIndex(int index);
 			virtual int level();
 			virtual bool expanded();
 			virtual void setExpanded(bool IsExpanded);
@@ -201,14 +201,14 @@ private:
 	void createCustomIconsMetaStream(StdEntry* e);
 	void createGroupTreeStateMetaStream(StdEntry* e);
 	bool readEntryField(StdEntry* entry, quint16 FieldType, quint32 FieldSize, quint8 *pData);
-	bool readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint32 FieldSize, quint8 *pData);
+	bool readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint8 *pData);
 	bool createGroupTree(QList<quint32>& Levels);
 	void createHandles();
 	void invalidateHandle(StdEntry* entry);
 	bool convHexToBinaryKey(char* HexKey, char* dst);
 	quint32 getNewGroupId();
 	void serializeEntries(QList<StdEntry>& EntryList,char* buffer,unsigned int& pos);
-	void serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos);
+	void serializeGroups(char* buffer,unsigned int& pos);
 	void appendChildrenToGroupList(QList<StdGroup*>& list,StdGroup& group);
 	void appendChildrenToGroupList(QList<IGroupHandle*>& list,StdGroup& group);
 	bool searchStringContains(const QString& search, const QString& string,bool Cs, bool RegExp);

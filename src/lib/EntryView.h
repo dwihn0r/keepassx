@@ -47,7 +47,7 @@ class KeepassEntryView:public QTreeWidget{
 		void setCurrentEntry(IEntryHandle* entry);
 		inline IGroupHandle* getCurrentGroup() { return CurrentGroup; };
 	private:
-		void setEntry(IEntryHandle* entry);
+		//void setEntry(IEntryHandle* entry);
 		void updateEntry(EntryViewItem*);
 		void editEntry(EntryViewItem*);
 		void createItems(QList<IEntryHandle*>& entries);
@@ -73,7 +73,7 @@ class KeepassEntryView:public QTreeWidget{
 		void mouseMoveEvent(QMouseEvent *event);
 	
 	private slots:
-		void OnColumnResized(int index,int OldSize, int NewSize);
+		void OnColumnResized();
 		void OnHeaderSectionClicked(int index);
 		void OnGroupChanged(IGroupHandle* group);
 		void OnShowSearchResults();
@@ -92,7 +92,7 @@ class KeepassEntryView:public QTreeWidget{
 		void OnAutoType();
 #endif
 		void removeDragItems();
-		void OnColumnMoved(int LogIndex,int OldVisIndex,int NewVisIndex);
+		void OnColumnMoved();
 		void OnEditOpenUrl();
 		void OnEditCopyUrl();
 	

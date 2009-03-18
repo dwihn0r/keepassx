@@ -23,7 +23,7 @@
 #include "Kdb3Database.h"
 
 
-CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db,  bool modal, Qt::WFlags fl)
+CDbSettingsDlg::CDbSettingsDlg(QWidget* parent,IDatabase* db, Qt::WFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);

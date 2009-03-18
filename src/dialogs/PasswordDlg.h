@@ -62,7 +62,7 @@ class PasswordDialog : public QDialog, private Ui_PasswordDlg {
 		void OnButtonBack();
 		void ChangeEchoModeDatabaseKey();
 		void OnBookmarkTriggered(QAction* action);
-		void OnCheckBoxesChanged(int state);
+		void OnCheckBoxesChanged();
 		void done(int r);
 
 	private:

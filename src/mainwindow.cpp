@@ -172,10 +172,10 @@ void KeepassMainWindow::setupConnections(){
 
 	connect(ViewShowToolbarAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowToolbar(bool)));
 	connect(ViewShowEntryDetailsAction,SIGNAL(toggled(bool)),this,SLOT(OnViewShowEntryDetails(bool)));
-	connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
-	connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged(bool)));
+	connect(ViewHidePasswordsAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged()));
+	connect(ViewHideUsernamesAction,SIGNAL(toggled(bool)), this, SLOT(OnUsernPasswVisibilityChanged()));
 
-	connect(menuColumns,SIGNAL(triggered(QAction*)),this,SLOT(OnColumnVisibilityChanged(QAction*)));
+	connect(menuColumns,SIGNAL(triggered(QAction*)),this,SLOT(OnColumnVisibilityChanged()));
 	connect(ViewToolButtonSize16Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize16(bool)));
 	connect(ViewToolButtonSize22Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize22(bool)));
 	connect(ViewToolButtonSize28Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize28(bool)));
@@ -1006,7 +1006,7 @@ void KeepassMainWindow::OnQuickSearch(){
 	GroupView->showSearchResults();
 }
 
-void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
+void KeepassMainWindow::OnColumnVisibilityChanged(){
 	EntryView->Columns[0]=ViewColumnsTitleAction->isChecked();
 	EntryView->Columns[1]=ViewColumnsUsernameAction->isChecked();
 	EntryView->Columns[2]=ViewColumnsUrlAction->isChecked();
@@ -1022,7 +1022,7 @@ void KeepassMainWindow::OnColumnVisibilityChanged(QAction* action){
 	if(FileOpen) EntryView->refreshItems();
 }
 
-void KeepassMainWindow::OnUsernPasswVisibilityChanged(bool value){
+void KeepassMainWindow::OnUsernPasswVisibilityChanged(){
  	config->setHidePasswords(ViewHidePasswordsAction->isChecked());
  	config->setHideUsernames(ViewHideUsernamesAction->isChecked());
 	EntryView->refreshItems();
@@ -1150,13 +1150,13 @@ config->setShowEntryDetails(show);
 DetailView->setVisible(show);
 }
 
-void KeepassMainWindow::OnItemExpanded(QTreeWidgetItem* item){
+/*void KeepassMainWindow::OnItemExpanded(QTreeWidgetItem* item){
 //((GroupViewItem*)item)->pGroup->UI_ItemIsExpanded=true;
 }
 
 void KeepassMainWindow::OnItemCollaped(QTreeWidgetItem* item){
 //((GroupViewItem*)item)->pGroup->UI_ItemIsExpanded=false;
-}
+}*/
 
 void KeepassMainWindow::OnGroupSelectionChanged(IGroupHandle* group){
 	if(group)

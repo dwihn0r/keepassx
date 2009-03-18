@@ -28,7 +28,7 @@ class CEditEntryDlg : public QDialog, private Ui_EditEntryDialog
 {
 	Q_OBJECT
 	public:
-		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0,  bool modal = FALSE, bool newEntry = FALSE);
+		CEditEntryDlg(IDatabase* _db, IEntryHandle* _entry,QWidget* parent = 0, bool newEntry = FALSE);
 		~CEditEntryDlg();
 		void InitGroupComboBox();
 		static void saveAttachment(IEntryHandle* pEntry, QWidget* ParentWidget=NULL);

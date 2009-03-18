@@ -28,7 +28,7 @@ class SimplePasswordDialog : public QDialog, private Ui_SimplePasswordDialog
 	Q_OBJECT
 
 	public:
-		SimplePasswordDialog(QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
+		SimplePasswordDialog(QWidget* parent = 0, Qt::WFlags fl = 0 );
 		~SimplePasswordDialog();
 		QString password;
 

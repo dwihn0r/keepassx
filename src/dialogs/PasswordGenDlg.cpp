@@ -473,6 +473,7 @@ PassCharValidator::PassCharValidator(QObject* parent) : QValidator(parent) {
 }
 
 QValidator::State PassCharValidator::validate(QString& input, int& pos) const {
+	Q_UNUSED(pos);
 	QSet<QChar> chars;
 	
 	for (int i=0; i<input.size(); i++) {

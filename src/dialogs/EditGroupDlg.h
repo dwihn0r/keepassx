@@ -27,8 +27,8 @@ class CEditGroupDialog : public QDialog, private Ui_EditGroupDialog
 {
 	Q_OBJECT
 	public:
-		CEditGroupDialog(IDatabase*,IGroupHandle*,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
-		CEditGroupDialog(IDatabase*,CGroup*,QWidget* parent = 0,  bool modal = FALSE, Qt::WFlags fl = 0 );
+		CEditGroupDialog(IDatabase*,IGroupHandle*,QWidget* parent = 0,  Qt::WFlags fl = 0 );
+		CEditGroupDialog(IDatabase*,CGroup*,QWidget* parent = 0, Qt::WFlags fl = 0 );
 		~CEditGroupDialog();
 		virtual void showEvent(QShowEvent *event);
 	private:

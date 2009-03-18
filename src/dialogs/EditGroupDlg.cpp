@@ -22,7 +22,7 @@
 #include "EditGroupDlg.h"
 #include "SelectIconDlg.h"
 
-CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWidget* parent, bool modal, Qt::WFlags fl)
+CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWidget* parent, Qt::WFlags fl)
 : QDialog(parent,fl)
 {
 	setupUi(this);
@@ -40,7 +40,7 @@ CEditGroupDialog::CEditGroupDialog(IDatabase* database,IGroupHandle* Handle,QWid
 }
 
 
-CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* parent, bool modal, Qt::WFlags fl)
+CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* parent, Qt::WFlags fl)
 	: QDialog(parent,fl)
 {
 	setupUi(this);

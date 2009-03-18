@@ -27,7 +27,7 @@ class CDbSettingsDlg : public QDialog, private Ui_DatabaseSettingsDlg
 {
 	Q_OBJECT
 	public:
-		CDbSettingsDlg(QWidget* parent,IDatabase* db, bool modal = FALSE, Qt::WFlags fl = 0 );
+		CDbSettingsDlg(QWidget* parent,IDatabase* db, Qt::WFlags fl = 0 );
 		~CDbSettingsDlg();
 		virtual void paintEvent(QPaintEvent *);
 

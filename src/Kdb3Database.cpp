@@ -377,7 +377,7 @@ switch(FieldType)
 }
 
 //! Extracts one group from raw decrypted data.
-bool Kdb3Database::readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint32 FieldSize, quint8 *pData)
+bool Kdb3Database::readGroupField(StdGroup* group,QList<quint32>& Levels,quint16 FieldType, quint8 *pData)
 {
 	switch(FieldType)
 	{
@@ -663,7 +663,7 @@ bool Kdb3Database::loadReal(QString filename, bool readOnly, bool differentEncod
 			LOAD_RETURN_CLEANUP
 		}
 	
-		bRet = readGroupField(&group,Levels, FieldType, FieldSize, (quint8 *)pField);
+		bRet = readGroupField(&group,Levels, FieldType, (quint8 *)pField);
 		if ((FieldType == 0xFFFF) && (bRet == true)){
 			Groups << group;
 			CurGroup++; // Now and ONLY now the counter gets increased
@@ -823,8 +823,8 @@ void Kdb3Database::deleteGroup(IGroupHandle* group){
 	deleteGroup(((GroupHandle*)group)->Group);
 }
 
+/*
 void Kdb3Database::GroupHandle::setIndex(int index){
-	/*
 	quint32 ParentId=((GroupHandle*)parent())->Id;
 	int Pos=pDB->getGroupListIndex(this);
 	int NewPos=0;
@@ -857,9 +857,8 @@ void Kdb3Database::GroupHandle::setIndex(int index){
 			NewIndex++;
 		}
 	}
-	*/
 }
-
+*/
 
 bool Kdb3Database::convHexToBinaryKey(char* HexKey, char* dst){
 	QString hex=QString::fromAscii(HexKey,64);
@@ -1397,7 +1396,7 @@ bool Kdb3Database::save(){
 
 	unsigned int pos=DB_HEADER_SIZE; // Skip the header, it will be written later
 
-	serializeGroups(Groups,buffer,pos);
+	serializeGroups(buffer,pos);
 	serializeEntries(saveEntries,buffer,pos);
 	serializeEntries(UnknownMetaStreams,buffer,pos);
 	serializeEntries(MetaStreams,buffer,pos);
@@ -1556,7 +1555,7 @@ void Kdb3Database::appendChildrenToGroupList(QList<StdGroup*>& list,StdGroup& gr
 }
 
 
-void Kdb3Database::serializeGroups(QList<StdGroup>& GroupList,char* buffer,unsigned int& pos){
+void Kdb3Database::serializeGroups(char* buffer,unsigned int& pos){
 	quint16 FieldType;
 	quint32 FieldSize;
 	quint32 Flags=0; //unused

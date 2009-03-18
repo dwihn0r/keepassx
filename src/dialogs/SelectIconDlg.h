@@ -27,7 +27,7 @@ class CSelectIconDlg:public QDialog, private Ui_SelectIconDlg{
 	Q_OBJECT
 	
 	public:
-		CSelectIconDlg(IDatabase* db,int ImageID,QWidget* parent = 0,  bool modal = false, Qt::WFlags fl = 0);
+		CSelectIconDlg(IDatabase* db,int ImageID,QWidget* parent = 0, Qt::WFlags fl = 0);
 
 	private slots:
 		void OnAddIcon();

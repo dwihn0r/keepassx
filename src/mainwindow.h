@@ -63,8 +63,8 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void OnViewToolbarIconSize28(bool);
 		void OnGroupSelectionChanged(IGroupHandle*);
 		void OnQuickSearch();
-		void OnColumnVisibilityChanged(QAction* action);
-		void OnUsernPasswVisibilityChanged(bool hide);
+		void OnColumnVisibilityChanged();
+		void OnUsernPasswVisibilityChanged();
 		void OnFileModified();
 		void OnExtrasSettings();
 		void OnExtrasPasswordGen();
@@ -72,8 +72,8 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		//void OnExtrasTrashCan(); //TODO TrashCan
 		void OnHelpAbout();
 		//void OnHelpHandbook(); //TODO Handbook
-		void OnItemExpanded(QTreeWidgetItem*);
-		void OnItemCollaped(QTreeWidgetItem*);
+		//void OnItemExpanded(QTreeWidgetItem*);
+		//void OnItemCollaped(QTreeWidgetItem*);
 		void OnShowSearchResults();
 		void OnEntryChanged(SelectionState);
 		void OnSysTrayActivated(QSystemTrayIcon::ActivationReason);

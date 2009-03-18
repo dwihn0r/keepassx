@@ -68,6 +68,7 @@ void WaitAnimationWidget::refreshAnimation(){
 }
 
 void WaitAnimationWidget::paintEvent(QPaintEvent* event){
+	Q_UNUSED(event);
 	if(timer.isActive()){
 		QPainter painter(this);
 		painter.setRenderHints(QPainter::Antialiasing,true);
@@ -82,6 +83,7 @@ void WaitAnimationWidget::paintEvent(QPaintEvent* event){
 }
 
 void WaitAnimationWidget::resizeEvent(QResizeEvent* event){
+	Q_UNUSED(event);
 	float r;
 	if(width()>height())
 		r=height()/2;

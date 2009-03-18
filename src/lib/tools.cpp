@@ -342,8 +342,8 @@ QList<Translation> getAllTranslations(){
 		QDir dir(paths[i]);
 		QStringList TrFiles=dir.entryList(QStringList()<<"*.qm",QDir::Files);
 		for (int j=0;j<TrFiles.size();j++){
-			if (filename.exactMatch(TrFiles[j]) && tmpTranslator.load(TrFiles[j],paths[i]) &&
-				!names.contains(filename.cap(1)))
+			if (filename.exactMatch(TrFiles[j]) && TrFiles[j]!="keepassx-xx_XX.qm" &&
+				tmpTranslator.load(TrFiles[j],paths[i]) && !names.contains(filename.cap(1)))
 			{
 				Translation t;
 				t.nameCode = filename.cap(1);
