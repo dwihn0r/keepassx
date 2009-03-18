@@ -231,7 +231,7 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 		//entry moved to another group
 		case 2: //modified
 		case 3: //not modified
-			Items.removeOne(item);
+			Items.removeAll(item);
 			delete item;
 			emit fileModified();
 			break;
