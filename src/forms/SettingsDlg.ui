@@ -832,16 +832,6 @@ QListView::item {
              <property name="selectionBehavior" >
               <enum>QAbstractItemView::SelectRows</enum>
              </property>
-             <item>
-              <property name="text" >
-               <string>System Language</string>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>English</string>
-              </property>
-             </item>
             </widget>
            </item>
            <item>

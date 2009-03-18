@@ -58,6 +58,7 @@ class CSettingsDlg : public QDialog, private Ui_SettingsDialog
 	private:
  		virtual void paintEvent(QPaintEvent*);
 		virtual void resizeEvent(QResizeEvent*);
+		void initLanguageList();
 		void apply();
  		QColor color1,color2,textcolor;
  		QPixmap BannerPixmap;

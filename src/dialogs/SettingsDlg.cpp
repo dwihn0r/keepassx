@@ -130,10 +130,10 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	
 	//Language
 	translations = getAllTranslations();
+	initLanguageList();
 	QString currentLang = config->language();
 	bool foundCurrent = false;
 	for (int i=0; i<translations.size(); i++){
-		listSelectLanguage->addItem(translations[i].nameLong);
 		if (translations[i].nameCode==currentLang){
 			listSelectLanguage->setCurrentRow(i+2);
 			foundCurrent = true;
@@ -272,7 +272,8 @@ void CSettingsDlg::apply(){
 	if (config->language() != oldLang){
 		installTranslator();
 		retranslateUi(this);
-		OnSelectLanguage(langIndex);
+		initLanguageList();
+		listSelectLanguage->setCurrentRow(langIndex);
 	}
 
 	//Security
@@ -282,7 +283,7 @@ void CSettingsDlg::apply(){
 	config->setLockOnMinimize(CheckBox_LockMinimize->isChecked());
 	config->setLockOnInactivity(CheckBox_InactivityLock->isChecked());
 	config->setLockAfterSec(SpinBox_InacitivtyTime->value());
-	
+
 	//Features
 	//config->setFeatureBookmarks(CheckBox_FeatureBookmarks->isChecked());
 
@@ -398,6 +399,9 @@ void CSettingsDlg::OnBackupDeleteChange(){
 }
 
 void CSettingsDlg::OnSelectLanguage(int index){
+	if (index == -1)
+		return;
+	
 	if (index==0){
 		labelLang->clear();
 		labelAuthor->clear();
@@ -413,6 +417,14 @@ void CSettingsDlg::OnSelectLanguage(int index){
 			labelLang->setText(translations[index-2].nameEnglish);
 		labelAuthor->setText(translations[index-2].author);
 	}
+}
+
+void CSettingsDlg::initLanguageList() {
+	listSelectLanguage->clear(); // completely rebuild the list because of a bug in Qt 4.3
+	listSelectLanguage->addItem(tr("System Language"));
+	listSelectLanguage->addItem("English (United States)"); // Don't translate this string
+	for (int i=0; i<translations.size(); i++)
+		listSelectLanguage->addItem(translations[i].nameLong);
 }
 
 #ifdef GLOBAL_AUTOTYPE
