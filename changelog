@@ -1,5 +1,5 @@
 ----------------------------
-    0.4.0beta1 (2009-01-11)
+    0.4.0 (2009-03-??)
 ----------------------------
 - Added pronounceable password generator
 - Added action "Copy URL to Clipboard"
@@ -12,13 +12,19 @@
 - Store list of preferred characters in password generator (Bug #2432748)
 - Implemented backup feature
 - Don't include entries from "Backup" group in search results
+- Added menu action to sort groups (Bug #2268672)
 - Clear Klipper history when clearing clipboard
+- Use serif font for all password fields (Bug #2594868)
 - Redesigned the Settings dialog and added ability to select language
-- Added gl_ES and it_IT translations
+- Added gl_ES, fi_FI, it_IT and tr_TR translations
 - Cache and protect MasterKey - speeds up saving database
 - Added 2 new password generator options
+- Changed default config filename to "config.ini"
+- XDG compliant config location on Linux
+- Fixed: Crash on saving a database (Bug #1955677)
 - Fixed: Unnamed Database saved as ".kdb" (Bugs #2109972, #2118340)
 - Fixed: Date of Modification isn't updated (Bugs #2108658, #2121768)
+- Fixed: Cannot open DB from KeePassX 0.2.2 (Bug #2535569)
 - Fixed: Predefined expire times don't work (Bug #2109987)
 - Fixed: Sorting isn't consistent (Bug #2108655)
 - Fixed: KeepassX fails to lock itself after Ctrl-V (Bug #2106604)
@@ -26,6 +32,11 @@
 - Fixed: No password generated using list of very special characters (Bug #2230887)
 - Fixed: Crash if minimize to systray with locked workbench on Mac OS (Bug #2482531)
 - Fixed: Exports aren't sorted consistently (Bug #2108661)
+- Fixed: Sudden exit on bookmarking a new (not saved) file (Bug #2599802)
+- Fixed: -min parameter is sometimes ignored (Debian Bug #514414)
+- Fixed: Cloned entries are not immediately sorted
+- Fixed: Crash when moving entry to another group (Bug #2644545)
+- Fixed: Different qm files in different paths, no overruling (Bug #2657158)
 - Improved the initialization of the Windows RNG and fallback random number source (Bug #2091784)
 - Improved Mac OS bundle information (Bugs #2096992, #1921260)
 - Improve tab order in many dialogs (Bug #2130397)
