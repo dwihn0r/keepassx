@@ -26,6 +26,7 @@
 	#include <sys/mman.h>
 	#include <unistd.h>
 #elif defined(Q_WS_WIN)
+	#include <QLibrary>
 	#include <windows.h>
 	#include <io.h>
 #endif

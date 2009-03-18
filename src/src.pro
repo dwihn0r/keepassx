@@ -2,7 +2,7 @@
 CONFIG = qt uic resources thread stl warn_on
 QT += xml
 
-contains(QMAKE_CXX, g++) : QMAKE_CXXFLAGS_WARN_ON += -Wno-sign-compare
+*-g++ : QMAKE_CXXFLAGS_WARN_ON += -Wno-sign-compare
 
 DEPENDPATH += crypto dialogs export forms import lib translations res
 INCLUDEPATH += . lib crypto plugins/interfaces export import dialogs

@@ -1432,17 +1432,15 @@ bool Kdb3Database::save(){
 		aes.key256(FinalKey);
 		aes.cbc_encrypt((unsigned char*)buffer+DB_HEADER_SIZE,(unsigned char*)buffer+DB_HEADER_SIZE,EncryptedPartSize,(unsigned char*)EncryptionIV);
 	}
-	else{
-		if(Algorithm == Twofish_Cipher){
-			CTwofish twofish;
-			if(twofish.init(FinalKey, 32, EncryptionIV) == false){
-				UNEXP_ERROR
-				delete [] buffer;
-				return false;
-			}
-			EncryptedPartSize = (unsigned long)twofish.padEncrypt((quint8*)buffer+DB_HEADER_SIZE,
-				pos - DB_HEADER_SIZE,(quint8*)buffer+DB_HEADER_SIZE);
+	else{ // Algorithm == Twofish_Cipher
+		CTwofish twofish;
+		if(twofish.init(FinalKey, 32, EncryptionIV) == false){
+			UNEXP_ERROR
+			delete [] buffer;
+			return false;
 		}
+		EncryptedPartSize = (unsigned long)twofish.padEncrypt((quint8*)buffer+DB_HEADER_SIZE,
+			pos - DB_HEADER_SIZE,(quint8*)buffer+DB_HEADER_SIZE);
 	}
 	if((EncryptedPartSize > (0xFFFFFFE - 202)) || (!EncryptedPartSize && Groups.size())){
 		UNEXP_ERROR
