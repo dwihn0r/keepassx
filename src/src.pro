@@ -151,7 +151,7 @@ TRANSLATIONS_KX = translations/keepassx-de_DE.ts \
                   translations/keepassx-gl_ES.ts \
                   translations/keepassx-it_IT.ts \
 #                  translations/keepassx-ja_JP.ts \
-#                  translations/keepassx-ru_RU.ts \
+                  translations/keepassx-ru_RU.ts \
                   translations/keepassx-tr_TR.ts
 
 TRANSLATIONS_QT = translations/qt_fi.ts \

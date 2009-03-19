@@ -127,7 +127,7 @@ set(keepassx_TRANSLATIONS
 	translations/keepassx-gl_ES.ts
 	translations/keepassx-it_IT.ts
 #	translations/keepassx-ja_JP.ts
-#	translations/keepassx-ru_RU.ts
+	translations/keepassx-ru_RU.ts
 	translations/keepassx-tr_TR.ts
 	translations/qt_fi.ts
 	translations/qt_it.ts
