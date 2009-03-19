@@ -144,21 +144,22 @@ FORMS += forms/AboutDlg.ui \
          forms/WorkspaceLockedWidget.ui
 
 TRANSLATIONS_KX = translations/keepassx-de_DE.ts \
-#                  translations/keepassx-cs_CZ.ts \
                   translations/keepassx-es_ES.ts \
                   translations/keepassx-fi_FI.ts \
                   translations/keepassx-fr_FR.ts \
                   translations/keepassx-gl_ES.ts \
                   translations/keepassx-it_IT.ts \
-#                  translations/keepassx-ja_JP.ts \
                   translations/keepassx-ru_RU.ts \
                   translations/keepassx-tr_TR.ts
+
+TRANSLATIONS_DISABLED = translations/keepassx-cs_CZ.ts \
+                        translations/keepassx-ja_JP.ts
 
 TRANSLATIONS_QT = translations/qt_fi.ts \
                   translations/qt_it.ts \
                   translations/qt_tr.ts
 
-TRANSLATIONS = $$TRANSLATIONS_KX translations/keepassx-xx_XX.ts
+TRANSLATIONS = $$TRANSLATIONS_KX $$TRANSLATIONS_DISABLED translations/keepassx-xx_XX.ts
 TRANSLATIONS_COMPILE = $$TRANSLATIONS_KX $$TRANSLATIONS_QT
 
 HEADERS += main.h \

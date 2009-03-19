@@ -346,7 +346,7 @@ Seulement une autorisée par entrée.</translation>
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="89"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="90"/>
         <source>Auto-Type</source>
         <translation>Saisie Automatique</translation>
     </message>
@@ -1020,19 +1020,24 @@ Vérifiez vérifier vos permissions.</translation>
 <context>
     <name>CSettingsDlg</name>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="349"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="350"/>
         <source>Settings</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="354"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="355"/>
         <source>Select a directory...</source>
         <translation>Sélectionner un répertoire....</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="361"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="362"/>
         <source>Select an executable...</source>
         <translation>Sélectionner un exécutable....</translation>
+    </message>
+    <message>
+        <location filename="../dialogs/SettingsDlg.cpp" line="424"/>
+        <source>System Language</source>
+        <translation type="unfinished">Langue du Système</translation>
     </message>
 </context>
 <context>
@@ -1673,77 +1678,77 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileErrors</name>
     <message>
-        <location filename="../lib/tools.cpp" line="61"/>
+        <location filename="../lib/tools.cpp" line="62"/>
         <source>No error occurred.</source>
         <translation>Aucune erreur.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="62"/>
+        <location filename="../lib/tools.cpp" line="63"/>
         <source>An error occurred while reading from the file.</source>
         <translation>Une erreur est survenue lors de la lecture du fichier.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="63"/>
+        <location filename="../lib/tools.cpp" line="64"/>
         <source>An error occurred while writing to the file.</source>
         <translation>Une erreur est survenue lors de l&apos;écriture du fichier.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="64"/>
+        <location filename="../lib/tools.cpp" line="65"/>
         <source>A fatal error occurred.</source>
         <translation>Une erreur fatale est survenue.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="65"/>
+        <location filename="../lib/tools.cpp" line="66"/>
         <source>An resource error occurred.</source>
         <translation>Une erreur de ressource est survenue.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="66"/>
+        <location filename="../lib/tools.cpp" line="67"/>
         <source>The file could not be opened.</source>
         <translation>Le fichier n&apos;a pu être ouvert.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="67"/>
+        <location filename="../lib/tools.cpp" line="68"/>
         <source>The operation was aborted.</source>
         <translation>L&apos;opération a été annulée.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="68"/>
+        <location filename="../lib/tools.cpp" line="69"/>
         <source>A timeout occurred.</source>
         <translation>Délai dépassé.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="69"/>
+        <location filename="../lib/tools.cpp" line="70"/>
         <source>An unspecified error occurred.</source>
         <translation>Une erreur non spécifiée est survenue.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="70"/>
+        <location filename="../lib/tools.cpp" line="71"/>
         <source>The file could not be removed.</source>
         <translation>Le fichier n&apos;a pu être enlevé.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="71"/>
+        <location filename="../lib/tools.cpp" line="72"/>
         <source>The file could not be renamed.</source>
         <translation>Le fichier n&apos;a pu être renommé.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="72"/>
+        <location filename="../lib/tools.cpp" line="73"/>
         <source>The position in the file could not be changed.</source>
         <translation>La position dans le fichier n&apos;a pu être changée.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="73"/>
+        <location filename="../lib/tools.cpp" line="74"/>
         <source>The file could not be resized.</source>
         <translation>Le fichier ne peut être redimensionné.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="74"/>
+        <location filename="../lib/tools.cpp" line="75"/>
         <source>The file could not be accessed.</source>
         <translation>Le fichier n&apos;est pas accessible.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="75"/>
+        <location filename="../lib/tools.cpp" line="76"/>
         <source>The file could not be copied.</source>
         <translation>Le fichier n&apos;a pu être copié.</translation>
     </message>
@@ -2162,12 +2167,12 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
         <translation>Arborescence de groupe invalide.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="934"/>
+        <location filename="../Kdb3Database.cpp" line="933"/>
         <source>Key file is empty.</source>
         <translation>Le fichier clé est vide.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1314"/>
+        <location filename="../Kdb3Database.cpp" line="1313"/>
         <source>The database must contain at least one group.</source>
         <translation>La base de données doit contenir au moins un groupe.</translation>
     </message>
@@ -2187,7 +2192,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
         <translation>Impossible d&apos;initialiser l&apos;algorithme twofish.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1334"/>
+        <location filename="../Kdb3Database.cpp" line="1333"/>
         <source>The database has been opened read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2195,22 +2200,22 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1178"/>
+        <location filename="../Kdb3Database.cpp" line="1177"/>
         <source>Bytes</source>
         <translation>Octets</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1186"/>
+        <location filename="../Kdb3Database.cpp" line="1185"/>
         <source>KiB</source>
         <translation>kio</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1192"/>
+        <location filename="../Kdb3Database.cpp" line="1191"/>
         <source>MiB</source>
         <translation>Mio</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1197"/>
+        <location filename="../Kdb3Database.cpp" line="1196"/>
         <source>GiB</source>
         <translation>Gio</translation>
     </message>
@@ -2218,52 +2223,52 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
 <context>
     <name>KeepassEntryView</name>
     <message>
-        <location filename="../lib/EntryView.cpp" line="484"/>
+        <location filename="../lib/EntryView.cpp" line="474"/>
         <source>Title</source>
         <translation>Títre</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="486"/>
+        <location filename="../lib/EntryView.cpp" line="476"/>
         <source>Username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="488"/>
+        <location filename="../lib/EntryView.cpp" line="478"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="490"/>
+        <location filename="../lib/EntryView.cpp" line="480"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="492"/>
+        <location filename="../lib/EntryView.cpp" line="482"/>
         <source>Comments</source>
         <translation>Commentaires</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="494"/>
+        <location filename="../lib/EntryView.cpp" line="484"/>
         <source>Expires</source>
         <translation>Expire le</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="496"/>
+        <location filename="../lib/EntryView.cpp" line="486"/>
         <source>Creation</source>
         <translation>Créé le</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="498"/>
+        <location filename="../lib/EntryView.cpp" line="488"/>
         <source>Last Change</source>
         <translation>Dernier changement</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="500"/>
+        <location filename="../lib/EntryView.cpp" line="490"/>
         <source>Last Access</source>
         <translation>Dernier accès</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="502"/>
+        <location filename="../lib/EntryView.cpp" line="492"/>
         <source>Attachment</source>
         <translation>Pièce jointe</translation>
     </message>
@@ -2278,7 +2283,7 @@ La clé est mauvaise ou le fichier est endommagé.</translation>
         <translation>Effacer ?</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="504"/>
+        <location filename="../lib/EntryView.cpp" line="494"/>
         <source>Group</source>
         <translation>Groupe</translation>
     </message>
@@ -2739,12 +2744,12 @@ Do you want to save the changes?</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../lib/tools.cpp" line="139"/>
+        <location filename="../lib/tools.cpp" line="140"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="146"/>
+        <location filename="../lib/tools.cpp" line="147"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation>Le fichier &apos;%1&apos; n&apos;a pu être  trouvé.</translation>
     </message>
@@ -3383,91 +3388,91 @@ Do you want to save the changes?</source>
 <context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="31"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="32"/>
         <source>Enter Master Key</source>
         <translation>Entrer la clé maitre</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="34"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="35"/>
         <source>Set Master Key</source>
         <translation>Définir la clé maitre</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="37"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="38"/>
         <source>Change Master Key</source>
         <translation>Changer la clé maitre</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="41"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="42"/>
         <source>Database Key</source>
         <translation>Clé de la base de données</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="131"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="132"/>
         <source>Last File</source>
         <translation>Dernier Fichier</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="177"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="178"/>
         <source>Select a Key File</source>
         <translation>Selectionner  un fichier clé</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>All Files (*)</source>
         <translation>Tous les Fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>Key Files (*.key)</source>
         <translation>Fichiers clé (*.key)</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="205"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="206"/>
         <source>Please enter a Password or select a key file.</source>
         <translation>Entrer un mot de passe ou sélectionner un fichier clé.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="210"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="211"/>
         <source>Please enter a Password.</source>
         <translation>Entrer un mot de passe.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="215"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="216"/>
         <source>Please provide a key file.</source>
         <translation>Sélectionner un fichier clé.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="261"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="262"/>
         <source>%1:
 No such file or directory.</source>
         <translation>%1 : Fichier ou répertoire inexistant.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="227"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="228"/>
         <source>The selected key file or directory is not readable.</source>
         <translation>Le fichier clé choisi n&apos;est pas lisible.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="246"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="247"/>
         <source>The given directory does not contain any key files.</source>
         <translation>Le répertoire désigné ne contient aucun fichier clé.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="252"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="253"/>
         <source>The given directory contains more then one key files.
 Please specify the key file directly.</source>
         <translation>Le répertoire désigné contient plus d&apos;un fichier clé.
 Pourriez-vous sélectionner le fichier clé désiré.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="265"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="266"/>
         <source>%1:
 File is not readable.</source>
         <translation>%1 : Fichier illisible.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="339"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="340"/>
         <source>Create Key File...</source>
         <translation>Créer le fichier clé...</translation>
     </message>
@@ -3955,7 +3960,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="obsolete">A&amp;nnuler</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="981"/>
+        <location filename="../forms/SettingsDlg.ui" line="971"/>
         <source>Clear clipboard after:</source>
         <translation>Effacer le presse-papier après:</translation>
     </message>
@@ -3970,7 +3975,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="obsolete">A&amp;fficher le mot de passe en clair par défaut</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="953"/>
+        <location filename="../forms/SettingsDlg.ui" line="943"/>
         <source>Alt+O</source>
         <translation>Alt+F</translation>
     </message>
@@ -4045,7 +4050,7 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation>Couleurs alternées pour les rangées </translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1132"/>
+        <location filename="../forms/SettingsDlg.ui" line="1122"/>
         <source>Browse...</source>
         <translation>Parcourir...</translation>
     </message>
@@ -4105,37 +4110,37 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation>Sécurité</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="950"/>
+        <location filename="../forms/SettingsDlg.ui" line="940"/>
         <source>Edit Entry Dialog</source>
         <translation>Dialogue de modification d&apos;entrée</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1333"/>
+        <location filename="../forms/SettingsDlg.ui" line="1323"/>
         <source>Plug-Ins</source>
         <translation>Greffons</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1342"/>
+        <location filename="../forms/SettingsDlg.ui" line="1332"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1349"/>
+        <location filename="../forms/SettingsDlg.ui" line="1339"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translation>Intégration à Gnome (Gtk 2.x)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1356"/>
+        <location filename="../forms/SettingsDlg.ui" line="1346"/>
         <source>KDE 4 Desktop Integration</source>
         <translation>Intégration à KDE4</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1371"/>
+        <location filename="../forms/SettingsDlg.ui" line="1361"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation>Vous devez redémarrer le programme pour que les changements prennent effet.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1391"/>
+        <location filename="../forms/SettingsDlg.ui" line="1381"/>
         <source>Configure...</source>
         <translation>Configurer...</translation>
     </message>
@@ -4160,62 +4165,62 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation>Personnaliser la vue de détail de l&apos;entrée...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1285"/>
+        <location filename="../forms/SettingsDlg.ui" line="1275"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation>Vous pouvez désactiver plusieurs fonctions de KeePassX ici selon vos besoins pour conserver l&apos;interface utilisateur claire.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1295"/>
+        <location filename="../forms/SettingsDlg.ui" line="1285"/>
         <source>Bookmarks</source>
         <translation>Signets</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1151"/>
+        <location filename="../forms/SettingsDlg.ui" line="1141"/>
         <source>Auto-Type Fine Tuning</source>
         <translation>Réglage fin de la saisie automatique</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1160"/>
+        <location filename="../forms/SettingsDlg.ui" line="1150"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation>Temps entre l&apos;activation d&apos;une action de saisie automatique par l&apos;utilisateur et le première frappe de touche simulée.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1209"/>
+        <location filename="../forms/SettingsDlg.ui" line="1199"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1173"/>
+        <location filename="../forms/SettingsDlg.ui" line="1163"/>
         <source>Pre-Gap:</source>
         <translation>Pre-Gap :</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1196"/>
+        <location filename="../forms/SettingsDlg.ui" line="1186"/>
         <source>Key Stroke Delay:</source>
         <translation>Délai de frappe des touches :</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1206"/>
+        <location filename="../forms/SettingsDlg.ui" line="1196"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation>Délai entre deux frappes de touches simulées. Augmenter le si la Saisie Automatique saute aléatoirement des caractères.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1125"/>
+        <location filename="../forms/SettingsDlg.ui" line="1115"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation>Le répertoire où sont normalement montés les périphériques tels que les CD et les clés USB.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1115"/>
+        <location filename="../forms/SettingsDlg.ui" line="1105"/>
         <source>Media Root:</source>
         <translation>Racine des Media :</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1141"/>
+        <location filename="../forms/SettingsDlg.ui" line="1131"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation>Activer ceci si vous voulez utiliser vos signets et le dernier fichier ouvert indépendamment de leurs chemins absolus. Particulièrement utile en cas d&apos;utilisation portable de KeePassX et par conséquent avec des points de montage variables.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1144"/>
+        <location filename="../forms/SettingsDlg.ui" line="1134"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation>Enregistrert les chemins relatifs (signets et dernier fichier)</translation>
     </message>
@@ -4235,22 +4240,22 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation>Démarre verrouillé</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1019"/>
+        <location filename="../forms/SettingsDlg.ui" line="1009"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation>Verrouille l&apos;espace de travail lors de la minimisation de la fenêtre</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1224"/>
+        <location filename="../forms/SettingsDlg.ui" line="1214"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation>Raccourci global de Saisie Automatique :</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1091"/>
+        <location filename="../forms/SettingsDlg.ui" line="1081"/>
         <source>Custom Browser Command</source>
         <translation>Commande personnalisée du navigateur</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1103"/>
+        <location filename="../forms/SettingsDlg.ui" line="1093"/>
         <source>Browse</source>
         <translation>Parcourir</translation>
     </message>
@@ -4260,27 +4265,27 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation>Sauvegarde automatique de la base de données à la sortie et au verrouillage de l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="941"/>
+        <location filename="../forms/SettingsDlg.ui" line="931"/>
         <source>Show plain text passwords in:</source>
         <translation>Afficher les mots de passe en clair dans :</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="960"/>
+        <location filename="../forms/SettingsDlg.ui" line="950"/>
         <source>Database Key Dialog</source>
         <translation>Dialogue de clé de base de données</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1057"/>
+        <location filename="../forms/SettingsDlg.ui" line="1047"/>
         <source>seconds</source>
         <translation>secondes</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1028"/>
+        <location filename="../forms/SettingsDlg.ui" line="1018"/>
         <source>Lock database after inactivity of</source>
         <translation>Verrouille la base de données après une inactivité de </translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1253"/>
+        <location filename="../forms/SettingsDlg.ui" line="1243"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation>Utiliser le titre de l&apos;entrée pour correspondre à la fenêtre globale de Saisie Automatique</translation>
     </message>
@@ -4327,20 +4332,20 @@ Make sure you have write access to &apos;~/.keepass&apos;.</source>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="837"/>
         <source>System Language</source>
-        <translation>Langue du Système</translation>
+        <translation type="obsolete">Langue du Système</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="842"/>
         <source>English</source>
-        <translation>Anglais</translation>
+        <translation type="obsolete">Anglais</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="867"/>
+        <location filename="../forms/SettingsDlg.ui" line="857"/>
         <source>Language:</source>
         <translation>Langue :</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="874"/>
+        <location filename="../forms/SettingsDlg.ui" line="864"/>
         <source>Author:</source>
         <translation>Auteur :</translation>
     </message>
@@ -4496,7 +4501,7 @@ ouverte dans le menu déroulant ou entrez le nom de la fenêtre manuellement :</
 <context>
     <name>Translation</name>
     <message>
-        <location filename="../lib/tools.cpp" line="351"/>
+        <location filename="../lib/tools.cpp" line="352"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation>fat115</translation>
     </message>
@@ -4508,7 +4513,7 @@ ouverte dans le menu déroulant ou entrez le nom de la fenêtre manuellement :</
 </translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="350"/>
+        <location filename="../lib/tools.cpp" line="351"/>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
         <translation>Français (France)</translation>

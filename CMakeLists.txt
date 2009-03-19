@@ -7,7 +7,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0 FATAL_ERROR)
 MESSAGE("CMake is still experimental, use qmake instead")
 
 SET( keepassx_VERSION_SHORT "0.4.0" )
-SET( keepassx_VERSION "0.4.0beta1" )
+SET( keepassx_VERSION "0.4.0" )
 
 ADD_DEFINITIONS(-D'KEEPASSX_VERSION="${keepassx_VERSION}"')
 

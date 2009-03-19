@@ -34,7 +34,7 @@ void initAutoType(KeepassMainWindow* mainWin) {
 AutoTypeGlobalX11::AutoTypeGlobalX11(KeepassMainWindow* mainWin) : AutoTypeX11(mainWin) {
 	wm_state = XInternAtom(dpy, "WM_STATE", true);
 	windowRoot = XRootWindow(dpy, mainWin->x11Info().screen());
-	focusedWindow = NULL;
+	focusedWindow = 0;
 	//windowBlacklist << "kicker" << "KDE Desktop";
 	classBlacklist << "desktop_window" << "gnome-panel"; // Gnome
 	classBlacklist << "kdesktop" << "kicker"; // KDE 3
@@ -44,7 +44,7 @@ AutoTypeGlobalX11::AutoTypeGlobalX11(KeepassMainWindow* mainWin) : AutoTypeX11(m
 void AutoTypeGlobalX11::perform(IEntryHandle* entry, bool hideWindow, int nr, bool wasLocked){
 	if (focusedWindow && (!hideWindow || wasLocked)) { // detect if global auto-type
 		XSetInputFocus(dpy, focusedWindow, RevertToPointerRoot, CurrentTime);
-		focusedWindow = NULL;
+		focusedWindow = 0;
 	}
 	AutoTypeX11::perform(entry, hideWindow, nr, wasLocked);
 }
@@ -205,7 +205,7 @@ void AutoTypeGlobalX11::performGlobal(){
 	}
 	
 	if (validEntries.size()==1){
-		focusedWindow = NULL;
+		focusedWindow = 0;
 		perform(validEntries[0],wasLocked,entryNumbers[0],wasLocked);
 	}
 	else if (validEntries.size()>1){

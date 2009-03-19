@@ -202,7 +202,7 @@ lisenssin version 2 mukaisesti.</translation>
         <translation>Käyttäjätunnus</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="89"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="90"/>
         <source>Auto-Type</source>
         <translation>Automaattikirjoitus</translation>
     </message>
@@ -461,19 +461,24 @@ Haluatko varmasti poistaa sen?</translation>
 <context>
     <name>CSettingsDlg</name>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="349"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="350"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="354"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="355"/>
         <source>Select a directory...</source>
         <translation>Valitse kansio...</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="361"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="362"/>
         <source>Select an executable...</source>
         <translation>Valitse suoritettava ohjelma...</translation>
+    </message>
+    <message>
+        <location filename="../dialogs/SettingsDlg.cpp" line="424"/>
+        <source>System Language</source>
+        <translation type="unfinished">Järjestelmäkieli</translation>
     </message>
 </context>
 <context>
@@ -1050,77 +1055,77 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileErrors</name>
     <message>
-        <location filename="../lib/tools.cpp" line="61"/>
+        <location filename="../lib/tools.cpp" line="62"/>
         <source>No error occurred.</source>
         <translation>Virhettä ei tapahtunut.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="62"/>
+        <location filename="../lib/tools.cpp" line="63"/>
         <source>An error occurred while reading from the file.</source>
         <translation>Tapahtui virhe luettaessa tiedostosta.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="63"/>
+        <location filename="../lib/tools.cpp" line="64"/>
         <source>An error occurred while writing to the file.</source>
         <translation>Tapahtui virhe kirjoitettaessa tiedostoon.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="64"/>
+        <location filename="../lib/tools.cpp" line="65"/>
         <source>A fatal error occurred.</source>
         <translation>Tapahtui kriittinen virhe.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="65"/>
+        <location filename="../lib/tools.cpp" line="66"/>
         <source>An resource error occurred.</source>
         <translation>Tapahtui resurssivirhe.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="66"/>
+        <location filename="../lib/tools.cpp" line="67"/>
         <source>The file could not be opened.</source>
         <translation>Tiedostoa ei voitu avata.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="67"/>
+        <location filename="../lib/tools.cpp" line="68"/>
         <source>The operation was aborted.</source>
         <translation>Toiminto keskeytettiin.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="68"/>
+        <location filename="../lib/tools.cpp" line="69"/>
         <source>A timeout occurred.</source>
         <translation>Tapahtui aikakatkaisu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="69"/>
+        <location filename="../lib/tools.cpp" line="70"/>
         <source>An unspecified error occurred.</source>
         <translation>Tapahtui määrittelemätön virhe.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="70"/>
+        <location filename="../lib/tools.cpp" line="71"/>
         <source>The file could not be removed.</source>
         <translation>Tiedostoa ei voitu poistaa.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="71"/>
+        <location filename="../lib/tools.cpp" line="72"/>
         <source>The file could not be renamed.</source>
         <translation>Tiedostoa ei voitu nimetä uudestaan.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="72"/>
+        <location filename="../lib/tools.cpp" line="73"/>
         <source>The position in the file could not be changed.</source>
         <translation>Sijaintia tiedoston sisällä ei voitu muuttaa.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="73"/>
+        <location filename="../lib/tools.cpp" line="74"/>
         <source>The file could not be resized.</source>
         <translation>Tiedoston kokoa ei voitu muuttaa.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="74"/>
+        <location filename="../lib/tools.cpp" line="75"/>
         <source>The file could not be accessed.</source>
         <translation>Tiedostoon ei päästy käsiksi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="75"/>
+        <location filename="../lib/tools.cpp" line="76"/>
         <source>The file could not be copied.</source>
         <translation>Tiedostoa ei voitu kopioida.</translation>
     </message>
@@ -1479,12 +1484,12 @@ Avain on väärä tai tiedosto on vioittunut.</translation>
         <translation>Virheellinen ryhmäpuu.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="934"/>
+        <location filename="../Kdb3Database.cpp" line="933"/>
         <source>Key file is empty.</source>
         <translation>Avaintiedosto on tyhjä.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1314"/>
+        <location filename="../Kdb3Database.cpp" line="1313"/>
         <source>The database must contain at least one group.</source>
         <translation>Tietokannan täytyy sisältää ainakin yksi ryhmä.</translation>
     </message>
@@ -1499,7 +1504,7 @@ Avain on väärä tai tiedosto on vioittunut.</translation>
         <translation>Twofish-algoritmia ei voitu alustaa.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1334"/>
+        <location filename="../Kdb3Database.cpp" line="1333"/>
         <source>The database has been opened read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1507,22 +1512,22 @@ Avain on väärä tai tiedosto on vioittunut.</translation>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1178"/>
+        <location filename="../Kdb3Database.cpp" line="1177"/>
         <source>Bytes</source>
         <translation>Tavua</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1186"/>
+        <location filename="../Kdb3Database.cpp" line="1185"/>
         <source>KiB</source>
         <translation>KiB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1192"/>
+        <location filename="../Kdb3Database.cpp" line="1191"/>
         <source>MiB</source>
         <translation>MiB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1197"/>
+        <location filename="../Kdb3Database.cpp" line="1196"/>
         <source>GiB</source>
         <translation>GiB</translation>
     </message>
@@ -1550,57 +1555,57 @@ Avain on väärä tai tiedosto on vioittunut.</translation>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="484"/>
+        <location filename="../lib/EntryView.cpp" line="474"/>
         <source>Title</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="486"/>
+        <location filename="../lib/EntryView.cpp" line="476"/>
         <source>Username</source>
         <translation>Käyttäjätunnus</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="488"/>
+        <location filename="../lib/EntryView.cpp" line="478"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="490"/>
+        <location filename="../lib/EntryView.cpp" line="480"/>
         <source>Password</source>
         <translation>Salasana</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="492"/>
+        <location filename="../lib/EntryView.cpp" line="482"/>
         <source>Comments</source>
         <translation>Kommentit</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="494"/>
+        <location filename="../lib/EntryView.cpp" line="484"/>
         <source>Expires</source>
         <translation>Vanhenee</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="496"/>
+        <location filename="../lib/EntryView.cpp" line="486"/>
         <source>Creation</source>
         <translation>Luontipäivä</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="498"/>
+        <location filename="../lib/EntryView.cpp" line="488"/>
         <source>Last Change</source>
         <translation>Viimeksi muutettu</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="500"/>
+        <location filename="../lib/EntryView.cpp" line="490"/>
         <source>Last Access</source>
         <translation>Viimeksi käytetty</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="502"/>
+        <location filename="../lib/EntryView.cpp" line="492"/>
         <source>Attachment</source>
         <translation>Liite</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="504"/>
+        <location filename="../lib/EntryView.cpp" line="494"/>
         <source>Group</source>
         <translation>Ryhmä</translation>
     </message>
@@ -1941,12 +1946,12 @@ Haluatko tallentaa muutokset?</translation>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../lib/tools.cpp" line="139"/>
+        <location filename="../lib/tools.cpp" line="140"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="146"/>
+        <location filename="../lib/tools.cpp" line="147"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation>Tiedostoa &quot;%1&quot; ei löytynyt.</translation>
     </message>
@@ -2320,91 +2325,91 @@ Haluatko tallentaa muutokset?</translation>
 <context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="31"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="32"/>
         <source>Enter Master Key</source>
         <translation>Syötä pääsalasana</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="34"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="35"/>
         <source>Set Master Key</source>
         <translation>Aseta pääsalasana</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="37"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="38"/>
         <source>Change Master Key</source>
         <translation>Vaihda pääsalasanaa</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="41"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="42"/>
         <source>Database Key</source>
         <translation>Tietokannan avain</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="131"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="132"/>
         <source>Last File</source>
         <translation>Viimeisin tiedosto</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="177"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="178"/>
         <source>Select a Key File</source>
         <translation>Valitse avaintiedosto</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>All Files (*)</source>
         <translation>Kaikki tiedostot (*)</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>Key Files (*.key)</source>
         <translation>Avaintiedostot (*.key)</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="205"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="206"/>
         <source>Please enter a Password or select a key file.</source>
         <translation>Syötä salasana tai valitse avaintiedosto.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="210"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="211"/>
         <source>Please enter a Password.</source>
         <translation>Syötä salasana.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="215"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="216"/>
         <source>Please provide a key file.</source>
         <translation>Syötä avaintiedosto.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="261"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="262"/>
         <source>%1:
 No such file or directory.</source>
         <translation>%1: Tiedostoa tai kansiota ei löydy.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="227"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="228"/>
         <source>The selected key file or directory is not readable.</source>
         <translation>Valittu avaintiedosto tai kansio ei ole luettavissa.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="246"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="247"/>
         <source>The given directory does not contain any key files.</source>
         <translation>Annetussa kansiossa ei ole avaintiedostoja.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="252"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="253"/>
         <source>The given directory contains more then one key files.
 Please specify the key file directly.</source>
         <translation>Annetussa kansiossa on useampi kuin yksi avaintiedosto.
 Valitse avaintiedosto suoraan.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="265"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="266"/>
         <source>%1:
 File is not readable.</source>
         <translation>%1: Tiedosto ei ole luettavissa.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="339"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="340"/>
         <source>Create Key File...</source>
         <translation>Luo avaintiedosto...</translation>
     </message>
@@ -2719,62 +2724,62 @@ File is not readable.</source>
         <translation>Turvallisuus</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="950"/>
+        <location filename="../forms/SettingsDlg.ui" line="940"/>
         <source>Edit Entry Dialog</source>
         <translation>Tietueen muokkausikkuna</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="953"/>
+        <location filename="../forms/SettingsDlg.ui" line="943"/>
         <source>Alt+O</source>
         <translation>Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="981"/>
+        <location filename="../forms/SettingsDlg.ui" line="971"/>
         <source>Clear clipboard after:</source>
         <translation>Tyhjennä leikepöytä viiveellä:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1019"/>
+        <location filename="../forms/SettingsDlg.ui" line="1009"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation>Lukitse työtila pienennettäessä pääikkuna</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1285"/>
+        <location filename="../forms/SettingsDlg.ui" line="1275"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation>Voit poistaa monia ohjelman ominaisuuksia tarpeidesi mukaan ja pitääksesi käyttöliittymän selkeänä.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1295"/>
+        <location filename="../forms/SettingsDlg.ui" line="1285"/>
         <source>Bookmarks</source>
         <translation>Kirjanmerkit</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1333"/>
+        <location filename="../forms/SettingsDlg.ui" line="1323"/>
         <source>Plug-Ins</source>
         <translation>Lisäosat</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1342"/>
+        <location filename="../forms/SettingsDlg.ui" line="1332"/>
         <source>None</source>
         <translation>Ei mitään</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1349"/>
+        <location filename="../forms/SettingsDlg.ui" line="1339"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translation>Gnome-työpöydän integrointi (Gtk 2.x)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1356"/>
+        <location filename="../forms/SettingsDlg.ui" line="1346"/>
         <source>KDE 4 Desktop Integration</source>
         <translation>KDE4-työpöydän integrointi</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1371"/>
+        <location filename="../forms/SettingsDlg.ui" line="1361"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation>Ohjelma täytyy käynnistää uudestaan, jotta muutokset tulevat voimaan.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1391"/>
+        <location filename="../forms/SettingsDlg.ui" line="1381"/>
         <source>Configure...</source>
         <translation>Määrittele...</translation>
     </message>
@@ -2784,72 +2789,72 @@ File is not readable.</source>
         <translation>Lisäasetukset</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1151"/>
+        <location filename="../forms/SettingsDlg.ui" line="1141"/>
         <source>Auto-Type Fine Tuning</source>
         <translation>Automaattikirjoituksen hienosäätö</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1160"/>
+        <location filename="../forms/SettingsDlg.ui" line="1150"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation>Aika automaattisen täydennyksen aktivoinnin ja ensimmäisen simuloidun näppäilyn välillä.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1209"/>
+        <location filename="../forms/SettingsDlg.ui" line="1199"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1173"/>
+        <location filename="../forms/SettingsDlg.ui" line="1163"/>
         <source>Pre-Gap:</source>
         <translation>Esitauko:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1196"/>
+        <location filename="../forms/SettingsDlg.ui" line="1186"/>
         <source>Key Stroke Delay:</source>
         <translation>Näppäinpainallusten viive:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1206"/>
+        <location filename="../forms/SettingsDlg.ui" line="1196"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation>Viive simuloitujen näppäinpainallusten välillä. Kasvata tätä, jos automaattikirjoitus hukkaa satunnaisesti merkkejä.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1091"/>
+        <location filename="../forms/SettingsDlg.ui" line="1081"/>
         <source>Custom Browser Command</source>
         <translation>Oma selainkomento</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1103"/>
+        <location filename="../forms/SettingsDlg.ui" line="1093"/>
         <source>Browse</source>
         <translation>Selaa</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1115"/>
+        <location filename="../forms/SettingsDlg.ui" line="1105"/>
         <source>Media Root:</source>
         <translation>Liitospisteiden juurikansio:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1125"/>
+        <location filename="../forms/SettingsDlg.ui" line="1115"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation>Kansio, jonne taltiot, kuten CD-levyt ja muistitikut normaalisti liitetään.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1132"/>
+        <location filename="../forms/SettingsDlg.ui" line="1122"/>
         <source>Browse...</source>
         <translation>Selaa...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1141"/>
+        <location filename="../forms/SettingsDlg.ui" line="1131"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation>Ota tämä käyttöön, os haluat käyttää kirjanmerkkejä ja viimeksi avattuja tiedostoja riippumatta niiden absoluuttisesta polusta. Tämä en erityisen hyödyllistä käytettäessä ohjelmaa eri tietokoneissa ja liitospisteen vaihtuessa eri paikkoihin.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1144"/>
+        <location filename="../forms/SettingsDlg.ui" line="1134"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation>Tallenna suhteelliset polut (kirjanmerkit ja viimeisin tiedosto)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1224"/>
+        <location filename="../forms/SettingsDlg.ui" line="1214"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation>Automaattikirjoituksen pikanäppäin:</translation>
     </message>
@@ -2859,27 +2864,27 @@ File is not readable.</source>
         <translation>Tallenna tietokanta automaattisesti suljettaessa ja lukittaessa työtila</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="941"/>
+        <location filename="../forms/SettingsDlg.ui" line="931"/>
         <source>Show plain text passwords in:</source>
         <translation>Näytä selväkieliset salasanat:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="960"/>
+        <location filename="../forms/SettingsDlg.ui" line="950"/>
         <source>Database Key Dialog</source>
         <translation>Tietokanta-avaimen ikkuna</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1057"/>
+        <location filename="../forms/SettingsDlg.ui" line="1047"/>
         <source>seconds</source>
         <translation>sekuntia</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1028"/>
+        <location filename="../forms/SettingsDlg.ui" line="1018"/>
         <source>Lock database after inactivity of</source>
         <translation>Lukitse tietokanta sen oltua jouten</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1253"/>
+        <location filename="../forms/SettingsDlg.ui" line="1243"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation>Käytä tietueen otsikkoa automaattitäydennyksen kohdeikkunan täsmäämiseen</translation>
     </message>
@@ -2926,20 +2931,20 @@ File is not readable.</source>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="837"/>
         <source>System Language</source>
-        <translation>Järjestelmäkieli</translation>
+        <translation type="obsolete">Järjestelmäkieli</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="842"/>
         <source>English</source>
-        <translation>Englanti</translation>
+        <translation type="obsolete">Englanti</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="867"/>
+        <location filename="../forms/SettingsDlg.ui" line="857"/>
         <source>Language:</source>
         <translation>Kieli:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="874"/>
+        <location filename="../forms/SettingsDlg.ui" line="864"/>
         <source>Author:</source>
         <translation>Tekijä:</translation>
     </message>
@@ -3002,7 +3007,7 @@ from the drop-down list, or enter the window title manually:</source>
 <context>
     <name>Translation</name>
     <message>
-        <location filename="../lib/tools.cpp" line="351"/>
+        <location filename="../lib/tools.cpp" line="352"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation>Ilkka Tuohela, Jussi Sainio</translation>
     </message>
@@ -3013,7 +3018,7 @@ from the drop-down list, or enter the window title manually:</source>
         <translation>hile@iki.fi, -</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="350"/>
+        <location filename="../lib/tools.cpp" line="351"/>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
         <translation>Finnish (Finland)</translation>

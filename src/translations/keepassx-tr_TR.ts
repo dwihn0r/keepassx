@@ -202,7 +202,7 @@ ile dağıtılmaktadır.</translation>
         <translation>Kullanıcı Adı</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="89"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="90"/>
         <source>Auto-Type</source>
         <translation>Otomatik-Tip</translation>
     </message>
@@ -461,19 +461,24 @@ Emin misiniz?</translation>
 <context>
     <name>CSettingsDlg</name>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="349"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="350"/>
         <source>Settings</source>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="354"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="355"/>
         <source>Select a directory...</source>
         <translation>Bir dizin seçin...</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="361"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="362"/>
         <source>Select an executable...</source>
         <translation>Bir çalıştırılabilir dosya seçin...</translation>
+    </message>
+    <message>
+        <location filename="../dialogs/SettingsDlg.cpp" line="424"/>
+        <source>System Language</source>
+        <translation type="unfinished">Sistem Dili</translation>
     </message>
 </context>
 <context>
@@ -1053,77 +1058,77 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileErrors</name>
     <message>
-        <location filename="../lib/tools.cpp" line="61"/>
+        <location filename="../lib/tools.cpp" line="62"/>
         <source>No error occurred.</source>
         <translation>Hiç hata oluşmadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="62"/>
+        <location filename="../lib/tools.cpp" line="63"/>
         <source>An error occurred while reading from the file.</source>
         <translation>Dosyadan okunurken bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="63"/>
+        <location filename="../lib/tools.cpp" line="64"/>
         <source>An error occurred while writing to the file.</source>
         <translation>Dosyaya yazılırken bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="64"/>
+        <location filename="../lib/tools.cpp" line="65"/>
         <source>A fatal error occurred.</source>
         <translation>Sonlandırıcı bir hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="65"/>
+        <location filename="../lib/tools.cpp" line="66"/>
         <source>An resource error occurred.</source>
         <translation>Bir kaynak hatası oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="66"/>
+        <location filename="../lib/tools.cpp" line="67"/>
         <source>The file could not be opened.</source>
         <translation>Dosya açılamadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="67"/>
+        <location filename="../lib/tools.cpp" line="68"/>
         <source>The operation was aborted.</source>
         <translation>İşlem sonlandırıldı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="68"/>
+        <location filename="../lib/tools.cpp" line="69"/>
         <source>A timeout occurred.</source>
         <translation>Bir zaman aşımı oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="69"/>
+        <location filename="../lib/tools.cpp" line="70"/>
         <source>An unspecified error occurred.</source>
         <translation>Belirtilmemiş hata oluştu.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="70"/>
+        <location filename="../lib/tools.cpp" line="71"/>
         <source>The file could not be removed.</source>
         <translation>Dosya silinemedi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="71"/>
+        <location filename="../lib/tools.cpp" line="72"/>
         <source>The file could not be renamed.</source>
         <translation>Dosya yeniden adlandırılamadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="72"/>
+        <location filename="../lib/tools.cpp" line="73"/>
         <source>The position in the file could not be changed.</source>
         <translation>Dosyanın içerisindeki konum değiştirilemedi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="73"/>
+        <location filename="../lib/tools.cpp" line="74"/>
         <source>The file could not be resized.</source>
         <translation>Dosya yeniden boyutlandırılamadı.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="74"/>
+        <location filename="../lib/tools.cpp" line="75"/>
         <source>The file could not be accessed.</source>
         <translation>Dosyaya erişilemedi.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="75"/>
+        <location filename="../lib/tools.cpp" line="76"/>
         <source>The file could not be copied.</source>
         <translation>Dosya kopyalanamadı.</translation>
     </message>
@@ -1482,12 +1487,12 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
         <translation>Geçersiz grup ağacı.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="934"/>
+        <location filename="../Kdb3Database.cpp" line="933"/>
         <source>Key file is empty.</source>
         <translation>Anahtar dosyası boş.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1314"/>
+        <location filename="../Kdb3Database.cpp" line="1313"/>
         <source>The database must contain at least one group.</source>
         <translation>Veritabanı en az bir grup içermelidir.</translation>
     </message>
@@ -1502,7 +1507,7 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
         <translation>Twofish algoritması başlatılamadı.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1334"/>
+        <location filename="../Kdb3Database.cpp" line="1333"/>
         <source>The database has been opened read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1510,22 +1515,22 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1178"/>
+        <location filename="../Kdb3Database.cpp" line="1177"/>
         <source>Bytes</source>
         <translation>Bayt</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1186"/>
+        <location filename="../Kdb3Database.cpp" line="1185"/>
         <source>KiB</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1192"/>
+        <location filename="../Kdb3Database.cpp" line="1191"/>
         <source>MiB</source>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1197"/>
+        <location filename="../Kdb3Database.cpp" line="1196"/>
         <source>GiB</source>
         <translation>GB</translation>
     </message>
@@ -1553,57 +1558,57 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
         <translation>TAMAM</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="484"/>
+        <location filename="../lib/EntryView.cpp" line="474"/>
         <source>Title</source>
         <translation>Başlık</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="486"/>
+        <location filename="../lib/EntryView.cpp" line="476"/>
         <source>Username</source>
         <translation>Kullanıcı Adı</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="488"/>
+        <location filename="../lib/EntryView.cpp" line="478"/>
         <source>URL</source>
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="490"/>
+        <location filename="../lib/EntryView.cpp" line="480"/>
         <source>Password</source>
         <translation>Parola</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="492"/>
+        <location filename="../lib/EntryView.cpp" line="482"/>
         <source>Comments</source>
         <translation>Yorumlar</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="494"/>
+        <location filename="../lib/EntryView.cpp" line="484"/>
         <source>Expires</source>
         <translation>Süre Dolumu</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="496"/>
+        <location filename="../lib/EntryView.cpp" line="486"/>
         <source>Creation</source>
         <translation>Oluşturulma</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="498"/>
+        <location filename="../lib/EntryView.cpp" line="488"/>
         <source>Last Change</source>
         <translation>Son Değişiklik</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="500"/>
+        <location filename="../lib/EntryView.cpp" line="490"/>
         <source>Last Access</source>
         <translation>Son Erişim</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="502"/>
+        <location filename="../lib/EntryView.cpp" line="492"/>
         <source>Attachment</source>
         <translation>Eklenti</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="504"/>
+        <location filename="../lib/EntryView.cpp" line="494"/>
         <source>Group</source>
         <translation>Grup</translation>
     </message>
@@ -1942,12 +1947,12 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../lib/tools.cpp" line="139"/>
+        <location filename="../lib/tools.cpp" line="140"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="146"/>
+        <location filename="../lib/tools.cpp" line="147"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation>&apos;%1&apos; dosyası bulunamadı.</translation>
     </message>
@@ -2321,93 +2326,93 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
 <context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="31"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="32"/>
         <source>Enter Master Key</source>
         <translation>Ana Anahtarı Gir</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="34"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="35"/>
         <source>Set Master Key</source>
         <translation>Ana Anahtarı Ayarla</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="37"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="38"/>
         <source>Change Master Key</source>
         <translation>Ana Anahtarı Değiştir</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="41"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="42"/>
         <source>Database Key</source>
         <translation>Veritabanı Anahtarı</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="131"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="132"/>
         <source>Last File</source>
         <translation>Son Dosya</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="177"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="178"/>
         <source>Select a Key File</source>
         <translation>Anahtar dosyasını Seç</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>All Files (*)</source>
         <translation>Tüm Dosyalar (*)</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>Key Files (*.key)</source>
         <translation>Key Dosyaları (*.key)</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="205"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="206"/>
         <source>Please enter a Password or select a key file.</source>
         <translation>Lütfen gir parola girin ya da anahtar dosyası seçin.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="210"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="211"/>
         <source>Please enter a Password.</source>
         <translation>Lütfen bir parola girin.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="215"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="216"/>
         <source>Please provide a key file.</source>
         <translation>Lütfen bir key dosyası girin.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="261"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="262"/>
         <source>%1:
 No such file or directory.</source>
         <translation>%1:
 Böyle bir dosya ya da dizin yok.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="227"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="228"/>
         <source>The selected key file or directory is not readable.</source>
         <translation>Seçilen anahtar dosyası ya da dizin okunabilir değil.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="246"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="247"/>
         <source>The given directory does not contain any key files.</source>
         <translation>Verilen dizin bir anahtar dosyası içermiyor.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="252"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="253"/>
         <source>The given directory contains more then one key files.
 Please specify the key file directly.</source>
         <translation>Verilen dizin birden fazla anahtar dosyası içeriyor.
 Lütfen anahtar dosyasını belirtin.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="265"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="266"/>
         <source>%1:
 File is not readable.</source>
         <translation>%1:
 Dosya okunabilir değil.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="339"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="340"/>
         <source>Create Key File...</source>
         <translation>Anahtar Dosyası Oluştur...</translation>
     </message>
@@ -2722,62 +2727,62 @@ Dosya okunabilir değil.</translation>
         <translation>Güvenlik</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="950"/>
+        <location filename="../forms/SettingsDlg.ui" line="940"/>
         <source>Edit Entry Dialog</source>
         <translation>Girdi Düzenleme Penceresi</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="953"/>
+        <location filename="../forms/SettingsDlg.ui" line="943"/>
         <source>Alt+O</source>
         <translation>Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="981"/>
+        <location filename="../forms/SettingsDlg.ui" line="971"/>
         <source>Clear clipboard after:</source>
         <translation>Bu süre geçince panoyu temizle:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1019"/>
+        <location filename="../forms/SettingsDlg.ui" line="1009"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation>Ana pencereyi küçültürken çalışma alanını kilitle</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1285"/>
+        <location filename="../forms/SettingsDlg.ui" line="1275"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1295"/>
+        <location filename="../forms/SettingsDlg.ui" line="1285"/>
         <source>Bookmarks</source>
         <translation>Yerimleri</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1333"/>
+        <location filename="../forms/SettingsDlg.ui" line="1323"/>
         <source>Plug-Ins</source>
         <translation>Eklentiler</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1342"/>
+        <location filename="../forms/SettingsDlg.ui" line="1332"/>
         <source>None</source>
         <translation>Hiçbiri</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1349"/>
+        <location filename="../forms/SettingsDlg.ui" line="1339"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translation>Gnome Masaüstü Bütünleşmesi (Gtk 2.x)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1356"/>
+        <location filename="../forms/SettingsDlg.ui" line="1346"/>
         <source>KDE 4 Desktop Integration</source>
         <translation>KDE4 Masaüstü Bütünleşmesi</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1371"/>
+        <location filename="../forms/SettingsDlg.ui" line="1361"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation>Değişikliklerin etkin olabilmesi için uygulamayı yeniden başlatmanız gerekir.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1391"/>
+        <location filename="../forms/SettingsDlg.ui" line="1381"/>
         <source>Configure...</source>
         <translation>Yapılandır...</translation>
     </message>
@@ -2787,72 +2792,72 @@ Dosya okunabilir değil.</translation>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1151"/>
+        <location filename="../forms/SettingsDlg.ui" line="1141"/>
         <source>Auto-Type Fine Tuning</source>
         <translation>Otomatik-Tip İyileştirmesi</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1160"/>
+        <location filename="../forms/SettingsDlg.ui" line="1150"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1209"/>
+        <location filename="../forms/SettingsDlg.ui" line="1199"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1173"/>
+        <location filename="../forms/SettingsDlg.ui" line="1163"/>
         <source>Pre-Gap:</source>
         <translation>Pre-Gap:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1196"/>
+        <location filename="../forms/SettingsDlg.ui" line="1186"/>
         <source>Key Stroke Delay:</source>
         <translation>Anahtar Gecikmesi:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1206"/>
+        <location filename="../forms/SettingsDlg.ui" line="1196"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1091"/>
+        <location filename="../forms/SettingsDlg.ui" line="1081"/>
         <source>Custom Browser Command</source>
         <translation>Özel Tarayıcı Komutu</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1103"/>
+        <location filename="../forms/SettingsDlg.ui" line="1093"/>
         <source>Browse</source>
         <translation>Gözat</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1115"/>
+        <location filename="../forms/SettingsDlg.ui" line="1105"/>
         <source>Media Root:</source>
         <translation>Ortam Kök Dizini:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1125"/>
+        <location filename="../forms/SettingsDlg.ui" line="1115"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation>CD ve bellek çubukları gibi depolama ortamlarının bağlandığı dizin.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1132"/>
+        <location filename="../forms/SettingsDlg.ui" line="1122"/>
         <source>Browse...</source>
         <translation>Gözat...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1141"/>
+        <location filename="../forms/SettingsDlg.ui" line="1131"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1144"/>
+        <location filename="../forms/SettingsDlg.ui" line="1134"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation>Değişken yolları kaydet (yer imleri ve son dosyalar)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1224"/>
+        <location filename="../forms/SettingsDlg.ui" line="1214"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation>Genel Otomatik-Tip Kısayolu:</translation>
     </message>
@@ -2862,27 +2867,27 @@ Dosya okunabilir değil.</translation>
         <translation>Çıkışta veritabanını otomatik olarak kaydet ve çalışma alanını kilitle</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="941"/>
+        <location filename="../forms/SettingsDlg.ui" line="931"/>
         <source>Show plain text passwords in:</source>
         <translation>Düz metin parolaları böyle göster:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="960"/>
+        <location filename="../forms/SettingsDlg.ui" line="950"/>
         <source>Database Key Dialog</source>
         <translation>Veritabanı Anahtarı Penceresi</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1057"/>
+        <location filename="../forms/SettingsDlg.ui" line="1047"/>
         <source>seconds</source>
         <translation>saniye</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1028"/>
+        <location filename="../forms/SettingsDlg.ui" line="1018"/>
         <source>Lock database after inactivity of</source>
         <translation>Şu kadar etkinlik olmazsa veritabanını kilitle</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1253"/>
+        <location filename="../forms/SettingsDlg.ui" line="1243"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation>Genel Otomatik Tip için Pencereleri eşlemek amacıyla girdinin başlığını kullan</translation>
     </message>
@@ -2929,20 +2934,20 @@ Dosya okunabilir değil.</translation>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="837"/>
         <source>System Language</source>
-        <translation>Sistem Dili</translation>
+        <translation type="obsolete">Sistem Dili</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="842"/>
         <source>English</source>
-        <translation>İngilizce</translation>
+        <translation type="obsolete">İngilizce</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="867"/>
+        <location filename="../forms/SettingsDlg.ui" line="857"/>
         <source>Language:</source>
         <translation>Dil:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="874"/>
+        <location filename="../forms/SettingsDlg.ui" line="864"/>
         <source>Author:</source>
         <translation>Yazar:</translation>
     </message>
@@ -3005,7 +3010,7 @@ from the drop-down list, or enter the window title manually:</source>
 <context>
     <name>Translation</name>
     <message>
-        <location filename="../lib/tools.cpp" line="351"/>
+        <location filename="../lib/tools.cpp" line="352"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation>Serdar Soytetir</translation>
     </message>
@@ -3016,7 +3021,7 @@ from the drop-down list, or enter the window title manually:</source>
         <translation>tulliana@gmail.com</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="350"/>
+        <location filename="../lib/tools.cpp" line="351"/>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
         <translation>Türkçe</translation>

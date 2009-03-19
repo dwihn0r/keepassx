@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="en_US">
-<defaultcodec></defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2003,52 +2002,52 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassEntryView</name>
     <message>
-        <location filename="../lib/EntryView.cpp" line="484"/>
+        <location filename="../lib/EntryView.cpp" line="474"/>
         <source>Title</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="486"/>
+        <location filename="../lib/EntryView.cpp" line="476"/>
         <source>Username</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="488"/>
+        <location filename="../lib/EntryView.cpp" line="478"/>
         <source>URL</source>
         <translation>Ссылка</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="490"/>
+        <location filename="../lib/EntryView.cpp" line="480"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="492"/>
+        <location filename="../lib/EntryView.cpp" line="482"/>
         <source>Comments</source>
         <translation>Комментарий</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="494"/>
+        <location filename="../lib/EntryView.cpp" line="484"/>
         <source>Expires</source>
         <translation>Окончание</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="496"/>
+        <location filename="../lib/EntryView.cpp" line="486"/>
         <source>Creation</source>
         <translation>Создание</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="498"/>
+        <location filename="../lib/EntryView.cpp" line="488"/>
         <source>Last Change</source>
         <translation>Последнее изменение</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="500"/>
+        <location filename="../lib/EntryView.cpp" line="490"/>
         <source>Last Access</source>
         <translation>Последний доступ</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="502"/>
+        <location filename="../lib/EntryView.cpp" line="492"/>
         <source>Attachment</source>
         <translation>Вложение</translation>
     </message>
@@ -2063,7 +2062,7 @@ The key is wrong or the file is damaged.</source>
         <translation>Стереть?</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="504"/>
+        <location filename="../lib/EntryView.cpp" line="494"/>
         <source>Group</source>
         <translation>Группа</translation>
     </message>
@@ -2119,82 +2118,82 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Shift+Ctrl+S</source>
         <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Shift+Ctrl+F</source>
         <translation>Shift+Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -2204,7 +2203,7 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="649"/>
+        <location filename="../mainwindow.cpp" line="515"/>
         <source>Save modified file?</source>
         <translation>Сохранить изменения файла?</translation>
     </message>
@@ -2241,22 +2240,22 @@ to save the changes?</source>
         <translation type="obsolete">&lt;B&gt;Группа: &lt;/B&gt;%1  &lt;B&gt;Название: &lt;/B&gt;%2  &lt;B&gt;Имя: &lt;/B&gt;%3  &lt;B&gt;Ссылка: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создано: &lt;/B&gt;%6  &lt;B&gt;Изменено: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Окончание: &lt;/B&gt;%9</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="982"/>
+        <location filename="../mainwindow.cpp" line="854"/>
         <source>Clone Entry</source>
         <translation>Дублировать запись</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="984"/>
+        <location filename="../mainwindow.cpp" line="856"/>
         <source>Delete Entry</source>
         <translation>Удалить запись</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="997"/>
+        <location filename="../mainwindow.cpp" line="869"/>
         <source>Clone Entries</source>
         <translation>Дублировать записи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="999"/>
+        <location filename="../mainwindow.cpp" line="871"/>
         <source>Delete Entries</source>
         <translation>Удалить записи</translation>
     </message>
@@ -2273,7 +2272,7 @@ to save the changes?</source>
         <translation type="obsolete">Сохранить базу паролей как...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1546"/>
+        <location filename="../mainwindow.cpp" line="1418"/>
         <source>Ready</source>
         <translation>Готов</translation>
     </message>
@@ -2283,17 +2282,17 @@ to save the changes?</source>
         <translation type="obsolete">[новый]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="600"/>
         <source>Open Database...</source>
         <translation>Открыть базу паролей...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1549"/>
+        <location filename="../mainwindow.cpp" line="1421"/>
         <source>Loading Database...</source>
         <translation>Загрузка базы паролей...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1552"/>
+        <location filename="../mainwindow.cpp" line="1424"/>
         <source>Loading Failed</source>
         <translation>Ошибка загрузки</translation>
     </message>
@@ -2318,7 +2317,7 @@ to save the changes?</source>
         <translation type="obsolete">Неизвестная ошибка в PwDatabase::openDatabase()</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
@@ -2333,142 +2332,142 @@ to save the changes?</source>
         <translation type="obsolete">KeePassX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="682"/>
+        <location filename="../mainwindow.cpp" line="476"/>
         <source>Unknown error while loading database.</source>
         <translation>Неизвестная ошибка при загруски базы данных.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1035"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation>KeePass база паролей (*.kdb)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1035"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>All Files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1035"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>Save Database...</source>
         <translation>Сохранить базу паролей...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="870"/>
+        <location filename="../mainwindow.cpp" line="742"/>
         <source>1 Month</source>
         <translation>1 месяц</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="744"/>
         <source>%1 Months</source>
         <translation>%1 месяца</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="878"/>
+        <location filename="../mainwindow.cpp" line="750"/>
         <source>1 Year</source>
         <translation>1 год</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="880"/>
+        <location filename="../mainwindow.cpp" line="752"/>
         <source>%1 Years</source>
         <translation>%1 лет</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="886"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>1 Day</source>
         <translation>1 день</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="888"/>
+        <location filename="../mainwindow.cpp" line="760"/>
         <source>%1 Days</source>
         <translation>%1 дней</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="892"/>
+        <location filename="../mainwindow.cpp" line="764"/>
         <source>less than 1 day</source>
         <translation>меньше, чем один день</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1449"/>
+        <location filename="../mainwindow.cpp" line="1321"/>
         <source>Locked</source>
         <translation>заблокировано</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1336"/>
         <source>Unlocked</source>
         <translation>разблокированно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="500"/>
+        <location filename="../mainwindow.cpp" line="498"/>
         <source>The database file does not exist.</source>
         <translation>Файл базы паролей не найден.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1237"/>
+        <location filename="../mainwindow.cpp" line="1109"/>
         <source>new</source>
         <translation>новый</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="856"/>
+        <location filename="../mainwindow.cpp" line="728"/>
         <source>Expired</source>
         <translation>просрочен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1450"/>
+        <location filename="../mainwindow.cpp" line="1322"/>
         <source>Un&amp;lock Workspace</source>
         <translation>&amp;Разблокировать главное окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1465"/>
+        <location filename="../mainwindow.cpp" line="1337"/>
         <source>&amp;Lock Workspace</source>
         <translation>&amp;Заблокировать главное окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="686"/>
+        <location filename="../mainwindow.cpp" line="478"/>
         <source>The following error occured while opening the database:</source>
         <translation>Ошибка при открытии быза паролей:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1039"/>
+        <location filename="../mainwindow.cpp" line="911"/>
         <source>File could not be saved.</source>
         <translation>Не удалось сохранить файл.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>Show &amp;Toolbar</source>
         <translation>&amp;Отобразить панель инструментов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="408"/>
+        <location filename="../mainwindow.cpp" line="406"/>
         <source>Database locked</source>
         <translation>База паролей заблокирована</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="412"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -2479,31 +2478,31 @@ Do you want to open it anyway?</source>
 Продолжить открытие?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation>База паролей была изменена.
 Сохранить изменения?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="536"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation>Не удалось удалить файл блокирования базы паролей.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>Open read-only</source>
         <translation>Открыть только для чтения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1555"/>
+        <location filename="../mainwindow.cpp" line="1427"/>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Не удалось создать файл блокирования базы паролей. База паролей будет открыта только для чтения.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="610"/>
         <source>Information</source>
-        <translation>Информация</translation>
+        <translation type="obsolete">Информация</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="622"/>
@@ -2539,103 +2538,103 @@ The synchronization proceeds as following:
     <message>
         <location filename="../mainwindow.cpp" line="629"/>
         <source>Please, open a database first.</source>
-        <translation>Для начала откройте пожалуйста базу паролей.</translation>
+        <translation type="obsolete">Для начала откройте пожалуйста базу паролей.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="633"/>
         <source>Open Database to synchronize with...</source>
-        <translation>Выбор базы паролей для синхронизации...</translation>
+        <translation type="obsolete">Выбор базы паролей для синхронизации...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="637"/>
         <source>Can&apos;t synchronize with the own file.</source>
-        <translation>База паролей уже открыта. Выберете другую базу паролей нельзя синхронизации.</translation>
+        <translation type="obsolete">База паролей уже открыта. Выберете другую базу паролей нельзя синхронизации.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="730"/>
         <source>Error saving current file</source>
-        <translation>Ошибка сохранения файла</translation>
+        <translation type="obsolete">Ошибка сохранения файла</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="651"/>
         <source>The current file was modified and must be saved before synchronization can proceed.
 Do you want to save the changes?</source>
-        <translation>Базу паролей необходимо сохранить перед началом синхронизации.
+        <translation type="obsolete">Базу паролей необходимо сохранить перед началом синхронизации.
 Продолжить?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="695"/>
         <source>Synchronization complete</source>
-        <translation>Синхронизация завершена</translation>
+        <translation type="obsolete">Синхронизация завершена</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="696"/>
         <source>Synchronization successfully finished.
 
 </source>
-        <translation>Синхронизация завершена.
+        <translation type="obsolete">Синхронизация завершена.
 
 </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="697"/>
         <source>Groups processed: </source>
-        <translation>Групп обработано: </translation>
+        <translation type="obsolete">Групп обработано: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="699"/>
         <source>Groups created: </source>
-        <translation>Групп создано: </translation>
+        <translation type="obsolete">Групп создано: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="701"/>
         <source>Groups synchronized: </source>
-        <translation>Групп синхронизировано: </translation>
+        <translation type="obsolete">Групп синхронизировано: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="703"/>
         <source>Groups deleted: </source>
-        <translation>Групп стёрто: </translation>
+        <translation type="obsolete">Групп стёрто: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="705"/>
         <source>Entries processed: </source>
-        <translation>Записей обработано: </translation>
+        <translation type="obsolete">Записей обработано: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="707"/>
         <source>Entries created: </source>
-        <translation>Записей создано: </translation>
+        <translation type="obsolete">Записей создано: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="709"/>
         <source>Entries synchronized: </source>
-        <translation>Записей синхронизировано: </translation>
+        <translation type="obsolete">Записей синхронизировано: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="711"/>
         <source>Entries deleted: </source>
-        <translation>Записей стёрто: </translation>
+        <translation type="obsolete">Записей стёрто: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="718"/>
         <source>Unknown error while saving database: </source>
-        <translation>Неизвестная ошибка при сохранении базы паролей: </translation>
+        <translation type="obsolete">Неизвестная ошибка при сохранении базы паролей: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="721"/>
         <source>The following error occurred while saving the database:</source>
-        <translation>Ошибка при сохранении базы паролей:</translation>
+        <translation type="obsolete">Ошибка при сохранении базы паролей:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="722"/>
         <source>Error:</source>
-        <translation>Ошибка:</translation>
+        <translation type="obsolete">Ошибка:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="726"/>
         <source>Close failed</source>
-        <translation>Ошибка закрытия файла</translation>
+        <translation type="obsolete">Ошибка закрытия файла</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="627"/>
@@ -2659,7 +2658,7 @@ The synchronization proceeds as following:
 Please consider:
 - No conflicts resolving is possible
 - No stored icons synchronization is implemented yet</source>
-        <translation type="unfinished">ВНИМАНИЕ!  Синхронизация еще не протестирована в достаточной степени.
+        <translation type="obsolete">ВНИМАНИЕ!  Синхронизация еще не протестирована в достаточной степени.
 ВНИМАНИЕ!  Синхронизация может повредить одну или обе базы паролей.
 
 Пожалуйста, сделайте РЕЗЕРВНЫЕ КОПИИ баз паролей.
@@ -2719,7 +2718,7 @@ Please consider:
         <translation type="obsolete">XML-файл KWallet (*.xml)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="590"/>
+        <location filename="../forms/MainWindow.ui" line="589"/>
         <source>Add New Group...</source>
         <translation>Добавить новую группу...</translation>
     </message>
@@ -2864,7 +2863,7 @@ Please consider:
         <translation type="obsolete">Plain Text (*.txt)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="507"/>
+        <location filename="../forms/MainWindow.ui" line="506"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
@@ -2899,7 +2898,7 @@ Please consider:
         <translation type="obsolete">28x28</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="192"/>
+        <location filename="../forms/MainWindow.ui" line="191"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
@@ -2924,7 +2923,7 @@ Please consider:
         <translation type="obsolete">&amp;Правка</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="231"/>
+        <location filename="../forms/MainWindow.ui" line="230"/>
         <source>E&amp;xtras</source>
         <translation>&amp;Дополнительно</translation>
     </message>
@@ -2934,37 +2933,37 @@ Please consider:
         <translation>&amp;Справка</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="541"/>
+        <location filename="../forms/MainWindow.ui" line="540"/>
         <source>&amp;New Database...</source>
         <translation>Со&amp;здать базу паролей...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="263"/>
+        <location filename="../forms/MainWindow.ui" line="262"/>
         <source>&amp;Open Database...</source>
         <translation>&amp;Открыть базу паролей...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="268"/>
+        <location filename="../forms/MainWindow.ui" line="267"/>
         <source>&amp;Close Database</source>
         <translation>&amp;Закрыть базу паролей</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="273"/>
+        <location filename="../forms/MainWindow.ui" line="272"/>
         <source>&amp;Save Database</source>
         <translation>&amp;Сохранить базу паролей</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="278"/>
+        <location filename="../forms/MainWindow.ui" line="277"/>
         <source>Save Database &amp;As...</source>
         <translation>Сохранить базу паролей &amp;как...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="283"/>
+        <location filename="../forms/MainWindow.ui" line="282"/>
         <source>&amp;Database Settings...</source>
         <translation>Н&amp;астройки базы паролей...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="288"/>
+        <location filename="../forms/MainWindow.ui" line="287"/>
         <source>Change &amp;Master Key...</source>
         <translation>&amp;Изменить основной пароль...</translation>
     </message>
@@ -2974,22 +2973,22 @@ Please consider:
         <translation type="obsolete">В&amp;ыход</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="475"/>
+        <location filename="../forms/MainWindow.ui" line="474"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Настройка...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="483"/>
+        <location filename="../forms/MainWindow.ui" line="482"/>
         <source>&amp;About...</source>
         <translation>&amp;О программе...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="499"/>
+        <location filename="../forms/MainWindow.ui" line="498"/>
         <source>&amp;KeePassX Handbook...</source>
         <translation>&amp;Руководство &quot;KeePassX&quot;...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="567"/>
+        <location filename="../forms/MainWindow.ui" line="566"/>
         <source>Recycle Bin...</source>
         <translation>Мусорная корзина...</translation>
     </message>
@@ -2999,7 +2998,7 @@ Please consider:
         <translation>Группы</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="293"/>
+        <location filename="../forms/MainWindow.ui" line="292"/>
         <source>&amp;Lock Workspace</source>
         <translation>&amp;Заблокировать главное окно</translation>
     </message>
@@ -3009,229 +3008,229 @@ Please consider:
         <translation>&amp;Закладки</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="196"/>
+        <location filename="../forms/MainWindow.ui" line="195"/>
         <source>Toolbar &amp;Icon Size</source>
         <translation>Раз&amp;мер значков панели инструментов</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="204"/>
+        <location filename="../forms/MainWindow.ui" line="203"/>
         <source>&amp;Columns</source>
         <translation>&amp;Столбцы</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="258"/>
+        <location filename="../forms/MainWindow.ui" line="257"/>
         <source>&amp;Manage Bookmarks...</source>
         <translation>&amp;Настроить закладки...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="298"/>
+        <location filename="../forms/MainWindow.ui" line="297"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="311"/>
+        <location filename="../forms/MainWindow.ui" line="310"/>
         <source>&amp;Edit Group...</source>
         <translation>Изменить &amp;группу...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="316"/>
+        <location filename="../forms/MainWindow.ui" line="315"/>
         <source>&amp;Delete Group</source>
         <translation>У&amp;далить группу</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="321"/>
+        <location filename="../forms/MainWindow.ui" line="320"/>
         <source>Copy Password &amp;to Clipboard</source>
         <translation>Скопировать &amp;пароль в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="326"/>
+        <location filename="../forms/MainWindow.ui" line="325"/>
         <source>Copy &amp;Username to Clipboard</source>
         <translation>Скопировать &amp;имя в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="331"/>
+        <location filename="../forms/MainWindow.ui" line="330"/>
         <source>&amp;Open URL</source>
         <translation>Открыть &amp;ссылку</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="336"/>
+        <location filename="../forms/MainWindow.ui" line="335"/>
         <source>&amp;Save Attachment As...</source>
         <translation>&amp;Сохранить вложение как...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="341"/>
+        <location filename="../forms/MainWindow.ui" line="340"/>
         <source>Add &amp;New Entry...</source>
         <translation>Добавить новую &amp;запись...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="346"/>
+        <location filename="../forms/MainWindow.ui" line="345"/>
         <source>&amp;View/Edit Entry...</source>
         <translation>&amp;Просмотр/правка записи...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="351"/>
+        <location filename="../forms/MainWindow.ui" line="350"/>
         <source>De&amp;lete Entry</source>
         <translation>&amp;Удалить запись</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="356"/>
+        <location filename="../forms/MainWindow.ui" line="355"/>
         <source>&amp;Clone Entry</source>
         <translation>&amp;Дублировать запись</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="361"/>
+        <location filename="../forms/MainWindow.ui" line="360"/>
         <source>Search &amp;in Database...</source>
         <translation>По&amp;иск в базе паролей...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="366"/>
+        <location filename="../forms/MainWindow.ui" line="365"/>
         <source>Search in this &amp;Group...</source>
         <translation>Поиск в текущей г&amp;руппе...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="374"/>
+        <location filename="../forms/MainWindow.ui" line="373"/>
         <source>Show &amp;Entry Details</source>
         <translation>Отобразить данные &amp;записи</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="382"/>
+        <location filename="../forms/MainWindow.ui" line="381"/>
         <source>Hide &amp;Usernames</source>
         <translation>Скрыть &amp;имена</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="390"/>
+        <location filename="../forms/MainWindow.ui" line="389"/>
         <source>Hide &amp;Passwords</source>
         <translation>Скрыть &amp;пароли</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="398"/>
+        <location filename="../forms/MainWindow.ui" line="397"/>
         <source>&amp;Title</source>
         <translation>&amp;Название</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="406"/>
+        <location filename="../forms/MainWindow.ui" line="405"/>
         <source>User&amp;name</source>
         <translation>Имя &amp;пользователя</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="414"/>
+        <location filename="../forms/MainWindow.ui" line="413"/>
         <source>&amp;URL</source>
         <translation>&amp;Ссылка</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="422"/>
+        <location filename="../forms/MainWindow.ui" line="421"/>
         <source>&amp;Password</source>
         <translation>&amp;Пароль</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="430"/>
+        <location filename="../forms/MainWindow.ui" line="429"/>
         <source>&amp;Comment</source>
         <translation>&amp;Комментарий</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="438"/>
+        <location filename="../forms/MainWindow.ui" line="437"/>
         <source>E&amp;xpires</source>
         <translation>&amp;Окончание срока годности</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="446"/>
+        <location filename="../forms/MainWindow.ui" line="445"/>
         <source>C&amp;reation</source>
         <translation>&amp;Создание</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="454"/>
+        <location filename="../forms/MainWindow.ui" line="453"/>
         <source>&amp;Last Change</source>
         <translation>Последнее &amp;изменение</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="462"/>
+        <location filename="../forms/MainWindow.ui" line="461"/>
         <source>Last &amp;Access</source>
         <translation>Последний &amp;доступ</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="470"/>
+        <location filename="../forms/MainWindow.ui" line="469"/>
         <source>A&amp;ttachment</source>
         <translation>&amp;Вложение</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="494"/>
+        <location filename="../forms/MainWindow.ui" line="493"/>
         <source>Show &amp;Statusbar</source>
         <translation>Отобразить &amp;панель статуса</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="512"/>
+        <location filename="../forms/MainWindow.ui" line="511"/>
         <source>&amp;Perform AutoType</source>
         <translation>Применить &amp;автоввод</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="520"/>
+        <location filename="../forms/MainWindow.ui" line="519"/>
         <source>&amp;16x16</source>
         <translation>&amp;16x16</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="528"/>
+        <location filename="../forms/MainWindow.ui" line="527"/>
         <source>&amp;22x22</source>
         <translation>&amp;22x22</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="536"/>
+        <location filename="../forms/MainWindow.ui" line="535"/>
         <source>2&amp;8x28</source>
         <translation>2&amp;8x28</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="546"/>
+        <location filename="../forms/MainWindow.ui" line="545"/>
         <source>&amp;Password Generator...</source>
         <translation>&amp;Генератор паролей...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="557"/>
+        <location filename="../forms/MainWindow.ui" line="556"/>
         <source>&amp;Group (search results only)</source>
         <translation>&amp;Группа (поиск в результатах предыдущего поиска)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="562"/>
+        <location filename="../forms/MainWindow.ui" line="561"/>
         <source>Show &amp;Expired Entries...</source>
         <translation>Показать записи с &amp;истекшим сроком годности...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="575"/>
+        <location filename="../forms/MainWindow.ui" line="574"/>
         <source>&amp;Add Bookmark...</source>
         <translation>&amp;Добавить закладку...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="580"/>
+        <location filename="../forms/MainWindow.ui" line="579"/>
         <source>Bookmark &amp;this Database...</source>
         <translation>&amp;Добавить эту базу паролей в закладки...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="306"/>
+        <location filename="../forms/MainWindow.ui" line="305"/>
         <source>&amp;Add New Subgroup...</source>
         <translation>&amp;Добавить новую подгруппу...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="585"/>
+        <location filename="../forms/MainWindow.ui" line="584"/>
         <source>Copy URL to Clipboard</source>
         <translation>Скопировать ссылку в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="173"/>
+        <location filename="../forms/MainWindow.ui" line="172"/>
         <source>&amp;Entries</source>
         <translation>&amp;Записи</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="241"/>
+        <location filename="../forms/MainWindow.ui" line="240"/>
         <source>&amp;Groups</source>
         <translation>&amp;Группы</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="595"/>
+        <location filename="../forms/MainWindow.ui" line="594"/>
         <source>Sort groups</source>
         <translation>Сортировать группы</translation>
     </message>
     <message>
         <location filename="../forms/MainWindow.ui" line="600"/>
         <source>S&amp;ynchronize Database...</source>
-        <translation>&amp;Синхронизировать базу паролей...</translation>
+        <translation type="obsolete">&amp;Синхронизировать базу паролей...</translation>
     </message>
 </context>
 <context>
@@ -3592,7 +3591,7 @@ The key is wrong or the file is damaged.</source>
     <message>
         <location filename="../forms/SearchDlg.ui" line="90"/>
         <source>A&amp;nhang</source>
-        <translation type="obsolete">&amp;Вложение</translation>
+        <translation type="unfinished">&amp;Вложение</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="93"/>
@@ -3697,7 +3696,7 @@ The key is wrong or the file is damaged.</source>
     <message>
         <location filename="../forms/SearchDlg.ui" line="90"/>
         <source>Attachment</source>
-        <translation>Вложение</translation>
+        <translation type="obsolete">Вложение</translation>
     </message>
 </context>
 <context>
@@ -3873,7 +3872,7 @@ The key is wrong or the file is damaged.</source>
     <message encoding="UTF-8">
         <location filename="../forms/SettingsDlg.ui" line="194"/>
         <source>Alt+Ö</source>
-        <translation type="obsolete">Alt+O</translation>
+        <translation type="unfinished">Alt+O</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="298"/>
@@ -4367,5 +4366,3 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 </TS>
-
- 	  	 
