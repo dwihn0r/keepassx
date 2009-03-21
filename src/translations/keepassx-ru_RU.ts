@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="en_US">
+<!DOCTYPE TS><TS version="1.1" language="ru_RU">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -3724,11 +3724,6 @@ The key is wrong or the file is damaged.</source>
 </context>
 <context>
     <name>SettingsDialog</name>
-    <message>
-        <location filename="" line="0"/>
-        <source>Alt+&#xd6;</source>
-        <translation type="obsolete">Alt+Ö</translation>
-    </message>
     <message>
         <location filename="" line="0"/>
         <source>O&amp;K</source>
