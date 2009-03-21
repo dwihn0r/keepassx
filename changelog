@@ -1,5 +1,5 @@
 ----------------------------
-    0.4.0 (2009-03-19)
+    0.4.0 (2009-03-21)
 ----------------------------
 - Added pronounceable password generator
 - Added action "Copy URL to Clipboard"
@@ -16,7 +16,7 @@
 - Clear Klipper history when clearing clipboard
 - Use serif font for all password fields (Bug #2594868)
 - Redesigned the Settings dialog and added ability to select language
-- Added gl_ES, fi_FI, it_IT and tr_TR translations
+- Added Finnish, Gallican, Italian and Turkish translations
 - Cache and protect MasterKey - speeds up saving database
 - Added 2 new password generator options
 - Changed default config filename to "config.ini"
