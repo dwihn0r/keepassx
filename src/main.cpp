@@ -58,6 +58,10 @@ int main(int argc, char **argv)
 #else
 	QApplication* app = new QApplication(argc,argv);
 #endif
+	EventListener* eventListener = new EventListener();
+	app->installEventFilter(eventListener);
+	
+	QApplication::setQuitOnLastWindowClosed(false);
 	
 	AppDir = QApplication::applicationFilePath();
 	AppDir.truncate(AppDir.lastIndexOf("/"));
@@ -188,11 +192,16 @@ int main(int argc, char **argv)
 	
 	installTranslator();
 
-	EventListener* eventListener = new EventListener();
-	app->installEventFilter(eventListener);
+#ifdef Q_WS_MAC
+	if (args.file().isEmpty() && !eventListener->file().isEmpty()) {
+		args.setFile(eventListener->file());
+	}
+#endif
 
-	QApplication::setQuitOnLastWindowClosed(false);
 	KeepassMainWindow *mainWin = new KeepassMainWindow(args.file(), args.startMinimized(), args.startLocked());
+#ifdef Q_WS_MAC
+	eventListener->setMainWin(mainWin);
+#endif
 
 	int r=app->exec();
 	delete mainWin;
@@ -288,6 +297,16 @@ bool EventListener::eventFilter(QObject*, QEvent* event){
 		if ( (t>=QEvent::MouseButtonPress && t<=QEvent::KeyRelease) || (t>=QEvent::HoverEnter && t<=QEvent::HoverMove) )
 			EventOccurred = true;
 	}
+	
+#ifdef Q_WS_MAC
+	if (event->type() == QEvent::FileOpen) {
+		QString filename = static_cast<QFileOpenEvent*>(event)->file();
+		if (pMainWindow)
+			pMainWindow->openFile(filename);
+		else
+			pFile = filename;
+	}
+#endif
 	
 	return false;
 }

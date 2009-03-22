@@ -39,6 +39,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 	
 	public slots:
 		void OnUnLockWorkspace();
+		void openFile(const QString& filename);
 
 	signals:
 		void entryChanged();

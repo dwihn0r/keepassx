@@ -20,6 +20,8 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
+#include "mainwindow.h"
+
 QString findPlugin(const QString& filename);
 void loadImages();
 void initAppPaths(int argc, char **argv);
@@ -37,6 +39,7 @@ public:
 	bool startMinimized() {return StartMinimized;}
 	bool startLocked() {return StartLocked;}
 	bool help() {return Help;}
+	void setFile(const QString& filename) {File = filename;};
 private:
 	QString Error;
 	QString File;
@@ -49,6 +52,19 @@ private:
 
 class EventListener : public QObject {
 	Q_OBJECT
+	
+#ifdef Q_WS_MAC
+	public:
+		EventListener() { pMainWindow = NULL; };
+		inline QString file() { return pFile; };
+		inline void setMainWin(KeepassMainWindow* mainWin) {
+			pMainWindow = mainWin;
+		};
+	
+	private:
+		QString pFile;
+		KeepassMainWindow* pMainWindow;
+#endif
 	
 	protected:
 		bool eventFilter(QObject*, QEvent* event);
