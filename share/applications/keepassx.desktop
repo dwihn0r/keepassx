@@ -12,5 +12,6 @@ Comment[es]=Gestor de contraseñas multiplataforma
 Comment[fr]=Gestionnaire de mot de passe
 Terminal=false
 Type=Application
-Categories=Qt;Utility;
+Categories=Qt;Utility;Security;
 MimeType=application/x-keepass;
+X-SuSE-translate=true

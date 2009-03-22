@@ -276,10 +276,9 @@ void KeepassEntryView::OnNewEntry(){
 }
 
 void KeepassEntryView::OnEntryActivated(QTreeWidgetItem* item,int Column){
+	Q_UNUSED(item);
+	
 	switch (columnListIndex(Column)){
-		case 0:
-			editEntry((EntryViewItem*)item);
-			break;
 		case 1:
 			OnUsernameToClipboard();
 			break;
@@ -290,7 +289,11 @@ void KeepassEntryView::OnEntryActivated(QTreeWidgetItem* item,int Column){
 			OnPasswordToClipboard();
 			break;
 	}
+}
 
+void KeepassEntryView::OnEntryDblClicked(QTreeWidgetItem* item,int Column){
+	if (columnListIndex(Column) == 0)
+		editEntry((EntryViewItem*)item);
 }
 
 void KeepassEntryView::OnEditEntry(){

@@ -190,6 +190,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
 
 	connect(EntryView,SIGNAL(itemActivated(QTreeWidgetItem*,int)),EntryView,SLOT(OnEntryActivated(QTreeWidgetItem*,int)));
+	connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),EntryView,SLOT(OnEntryDblClicked(QTreeWidgetItem*,int)));
 	connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
 	connect(GroupView,SIGNAL(groupChanged(IGroupHandle*)),EntryView,SLOT(OnGroupChanged(IGroupHandle*)));
 	connect(GroupView,SIGNAL(groupChanged(IGroupHandle*)),this,SLOT(OnGroupSelectionChanged(IGroupHandle*)));
@@ -1101,6 +1102,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 	if (config->language() != oldLang){
 		retranslateUi(this);
 		WorkspaceLockedWidget.retranslateUi(LockedCentralWidget);
+		ViewShowToolbarAction->setText(tr("Show &Toolbar"));
 		EntryView->updateColumns();
 		if (FileOpen) {
 			if (db->file())

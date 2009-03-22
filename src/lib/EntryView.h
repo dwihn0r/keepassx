@@ -78,6 +78,7 @@ class KeepassEntryView:public QTreeWidget{
 		void OnGroupChanged(IGroupHandle* group);
 		void OnShowSearchResults();
 		void OnEntryActivated(QTreeWidgetItem*,int);
+		void OnEntryDblClicked(QTreeWidgetItem*,int);
 		void OnNewEntry();
 		void OnItemsChanged();
 		void updateIcons();
