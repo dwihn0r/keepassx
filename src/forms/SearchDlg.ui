@@ -30,7 +30,7 @@
      <property name="sizeType" >
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>50</height>
@@ -40,10 +40,7 @@
    </item>
    <item>
     <layout class="QGridLayout" >
-     <property name="horizontalSpacing" >
-      <number>4</number>
-     </property>
-     <property name="verticalSpacing" >
+     <property name="spacing" >
       <number>4</number>
      </property>
      <item row="1" column="0" >
@@ -54,7 +51,7 @@
        <property name="sizeType" >
         <enum>QSizePolicy::Maximum</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
@@ -68,19 +65,13 @@
         <string>Include:</string>
        </property>
        <layout class="QGridLayout" >
-        <property name="horizontalSpacing" >
-         <number>6</number>
-        </property>
-        <property name="verticalSpacing" >
+        <property name="spacing" >
          <number>6</number>
         </property>
         <item row="0" column="1" >
          <widget class="QCheckBox" name="checkBox_Password" >
           <property name="text" >
            <string>Pass&amp;words</string>
-          </property>
-          <property name="shortcut" >
-           <string>Alt+W</string>
           </property>
          </widget>
         </item>
@@ -89,18 +80,12 @@
           <property name="text" >
            <string>A&amp;nhang</string>
           </property>
-          <property name="shortcut" >
-           <string>Alt+N</string>
-          </property>
          </widget>
         </item>
         <item row="0" column="2" >
          <widget class="QCheckBox" name="checkBox_URL" >
           <property name="text" >
            <string>U&amp;RLs</string>
-          </property>
-          <property name="shortcut" >
-           <string>Alt+R</string>
           </property>
          </widget>
         </item>
@@ -109,9 +94,6 @@
           <property name="text" >
            <string>C&amp;omments</string>
           </property>
-          <property name="shortcut" >
-           <string>Alt+O</string>
-          </property>
          </widget>
         </item>
         <item row="1" column="0" >
@@ -119,18 +101,12 @@
           <property name="text" >
            <string>&amp;Usernames</string>
           </property>
-          <property name="shortcut" >
-           <string>Alt+U</string>
-          </property>
          </widget>
         </item>
         <item row="0" column="0" >
          <widget class="QCheckBox" name="checkBox_Title" >
           <property name="text" >
            <string>&amp;Titles</string>
-          </property>
-          <property name="shortcut" >
-           <string>Alt+T</string>
           </property>
          </widget>
         </item>
@@ -147,18 +123,12 @@
          <property name="text" >
           <string>&amp;Case Sensitive</string>
          </property>
-         <property name="shortcut" >
-          <string>Alt+C</string>
-         </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_regExp" >
          <property name="text" >
           <string>Regular E&amp;xpression</string>
-         </property>
-         <property name="shortcut" >
-          <string>Alt+X</string>
          </property>
         </widget>
        </item>
@@ -188,7 +158,7 @@
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
        <height>40</height>

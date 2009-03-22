@@ -190,9 +190,6 @@ QListView::item {
              <property name="text" >
               <string>Remember last opened file</string>
              </property>
-             <property name="shortcut" >
-              <string>Alt+Ö</string>
-             </property>
             </widget>
            </item>
            <item>
@@ -531,9 +528,6 @@ QListView::item {
                 <property name="text" >
                  <string>Change...</string>
                 </property>
-                <property name="shortcut" >
-                 <string/>
-                </property>
                </widget>
               </item>
               <item row="0" column="4" >
@@ -622,9 +616,6 @@ QListView::item {
                 <property name="text" >
                  <string>Change...</string>
                 </property>
-                <property name="shortcut" >
-                 <string/>
-                </property>
                </widget>
               </item>
               <item row="0" column="5" >
@@ -674,9 +665,6 @@ QListView::item {
                 </property>
                 <property name="text" >
                  <string>C&amp;hange...</string>
-                </property>
-                <property name="shortcut" >
-                 <string>Alt+H</string>
                 </property>
                </widget>
               </item>
@@ -938,9 +926,6 @@ QListView::item {
              <widget class="QCheckBox" name="CheckBox_ShowPasswords" >
               <property name="text" >
                <string>Edit Entry Dialog</string>
-              </property>
-              <property name="shortcut" >
-               <string>Alt+O</string>
               </property>
              </widget>
             </item>
