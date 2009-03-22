@@ -193,6 +193,7 @@ int main(int argc, char **argv)
 	installTranslator();
 
 #ifdef Q_WS_MAC
+	QApplication::processEvents();
 	if (args.file().isEmpty() && !eventListener->file().isEmpty()) {
 		args.setFile(eventListener->file());
 	}
@@ -301,10 +302,15 @@ bool EventListener::eventFilter(QObject*, QEvent* event){
 #ifdef Q_WS_MAC
 	if (event->type() == QEvent::FileOpen) {
 		QString filename = static_cast<QFileOpenEvent*>(event)->file();
-		if (pMainWindow)
-			pMainWindow->openFile(filename);
-		else
+		if (pMainWindow) {
+			if (QApplication::activeModalWidget() == NULL)
+				pMainWindow->openFile(filename);
+			else
+				return true; // ignore file open events while a modal dialog is displayed
+		}
+		else {
 			pFile = filename;
+		}
 	}
 #endif
 	
