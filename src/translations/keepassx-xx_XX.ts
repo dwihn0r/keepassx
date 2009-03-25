@@ -1133,7 +1133,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="324"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="303"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1143,92 +1143,57 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="59"/>
-        <source>Alt+W</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="92"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="89"/>
         <source>&amp;Lower Letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="95"/>
-        <source>Alt+L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="118"/>
-        <source>Alt+N</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="115"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="106"/>
         <source>&amp;Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="131"/>
-        <source>Alt+S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="138"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="123"/>
         <source>&amp;Upper Letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="141"/>
-        <source>Alt+U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="158"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="140"/>
         <source>&amp;Special Characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="169"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="151"/>
         <source>Use &amp;only following characters:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="172"/>
-        <source>Alt+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="338"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="317"/>
         <source>Length:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="374"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="353"/>
         <source>Quality:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="401"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="380"/>
         <source>Enable entropy collection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="404"/>
-        <source>Alt+M</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="430"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="406"/>
         <source>Collect only once per session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="460"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="436"/>
         <source>New Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="483"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="459"/>
         <source>Generate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1238,52 +1203,52 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="105"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="99"/>
         <source>&amp;Underline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="128"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="116"/>
         <source>&amp;White Spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="151"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="133"/>
         <source>&amp;Minus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="214"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="193"/>
         <source>Exclude look-alike characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="221"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="200"/>
         <source>Ensure that password contains characters from every group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="237"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="216"/>
         <source>Pronounceable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="261"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="240"/>
         <source>Lower Letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="268"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="247"/>
         <source>Upper Letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="275"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="254"/>
         <source>Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="282"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="261"/>
         <source>Special Characters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1542,57 +1507,57 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="474"/>
+        <location filename="../lib/EntryView.cpp" line="477"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="476"/>
+        <location filename="../lib/EntryView.cpp" line="479"/>
         <source>Username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="478"/>
+        <location filename="../lib/EntryView.cpp" line="481"/>
         <source>URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="480"/>
+        <location filename="../lib/EntryView.cpp" line="483"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="482"/>
+        <location filename="../lib/EntryView.cpp" line="485"/>
         <source>Comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="484"/>
+        <location filename="../lib/EntryView.cpp" line="487"/>
         <source>Expires</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="486"/>
+        <location filename="../lib/EntryView.cpp" line="489"/>
         <source>Creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="488"/>
+        <location filename="../lib/EntryView.cpp" line="491"/>
         <source>Last Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="490"/>
+        <location filename="../lib/EntryView.cpp" line="493"/>
         <source>Last Access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="492"/>
+        <location filename="../lib/EntryView.cpp" line="495"/>
         <source>Attachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="494"/>
+        <location filename="../lib/EntryView.cpp" line="497"/>
         <source>Group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1628,272 +1593,272 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="1418"/>
+        <location filename="../mainwindow.cpp" line="1420"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1321"/>
+        <location filename="../mainwindow.cpp" line="1323"/>
         <source>Locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1336"/>
+        <location filename="../mainwindow.cpp" line="1338"/>
         <source>Unlocked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Ctrl+Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="375"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="377"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Shift+Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="379"/>
         <source>Shift+Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>The database file does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1421"/>
+        <location filename="../mainwindow.cpp" line="1423"/>
         <source>Loading Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1424"/>
+        <location filename="../mainwindow.cpp" line="1426"/>
         <source>Loading Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../mainwindow.cpp" line="477"/>
         <source>Unknown error while loading database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>The following error occured while opening the database:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>Save modified file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1109"/>
+        <location filename="../mainwindow.cpp" line="1111"/>
         <source>new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Open Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="728"/>
+        <location filename="../mainwindow.cpp" line="729"/>
         <source>Expired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="742"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>1 Month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="744"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>%1 Months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="750"/>
+        <location filename="../mainwindow.cpp" line="751"/>
         <source>1 Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="752"/>
+        <location filename="../mainwindow.cpp" line="753"/>
         <source>%1 Years</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="758"/>
+        <location filename="../mainwindow.cpp" line="759"/>
         <source>1 Day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="760"/>
+        <location filename="../mainwindow.cpp" line="761"/>
         <source>%1 Days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="764"/>
+        <location filename="../mainwindow.cpp" line="765"/>
         <source>less than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="854"/>
+        <location filename="../mainwindow.cpp" line="855"/>
         <source>Clone Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="856"/>
+        <location filename="../mainwindow.cpp" line="857"/>
         <source>Delete Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="869"/>
+        <location filename="../mainwindow.cpp" line="870"/>
         <source>Clone Entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="871"/>
+        <location filename="../mainwindow.cpp" line="872"/>
         <source>Delete Entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="911"/>
+        <location filename="../mainwindow.cpp" line="912"/>
         <source>File could not be saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>Save Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1322"/>
+        <location filename="../mainwindow.cpp" line="1324"/>
         <source>Un&amp;lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1337"/>
+        <location filename="../mainwindow.cpp" line="1339"/>
         <source>&amp;Lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="1105"/>
         <source>Show &amp;Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
+        <location filename="../mainwindow.cpp" line="407"/>
         <source>Database locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="410"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -1901,23 +1866,23 @@ Do you want to open it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="516"/>
+        <location filename="../mainwindow.cpp" line="517"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Open read-only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1427"/>
+        <location filename="../mainwindow.cpp" line="1429"/>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2400,32 +2365,27 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="194"/>
-        <source>Alt+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../forms/PasswordDlg.ui" line="163"/>
         <source>Key File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="203"/>
+        <location filename="../forms/PasswordDlg.ui" line="200"/>
         <source>Generate Key File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="235"/>
+        <location filename="../forms/PasswordDlg.ui" line="232"/>
         <source>Please repeat your password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="253"/>
+        <location filename="../forms/PasswordDlg.ui" line="250"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="280"/>
+        <location filename="../forms/PasswordDlg.ui" line="277"/>
         <source>Passwords are not equal.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2446,97 +2406,57 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="68"/>
+        <location filename="../forms/SearchDlg.ui" line="65"/>
         <source>Include:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="80"/>
+        <location filename="../forms/SearchDlg.ui" line="74"/>
         <source>Pass&amp;words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="83"/>
-        <source>Alt+W</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="90"/>
+        <location filename="../forms/SearchDlg.ui" line="81"/>
         <source>A&amp;nhang</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="93"/>
-        <source>Alt+N</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="100"/>
+        <location filename="../forms/SearchDlg.ui" line="88"/>
         <source>U&amp;RLs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="103"/>
-        <source>Alt+R</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="110"/>
+        <location filename="../forms/SearchDlg.ui" line="95"/>
         <source>C&amp;omments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="113"/>
-        <source>Alt+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="120"/>
+        <location filename="../forms/SearchDlg.ui" line="102"/>
         <source>&amp;Usernames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="123"/>
-        <source>Alt+U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="130"/>
+        <location filename="../forms/SearchDlg.ui" line="109"/>
         <source>&amp;Titles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="133"/>
-        <source>Alt+T</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="148"/>
+        <location filename="../forms/SearchDlg.ui" line="124"/>
         <source>&amp;Case Sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="151"/>
-        <source>Alt+C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="158"/>
+        <location filename="../forms/SearchDlg.ui" line="131"/>
         <source>Regular E&amp;xpression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="161"/>
-        <source>Alt+X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SearchDlg.ui" line="168"/>
+        <location filename="../forms/SearchDlg.ui" line="138"/>
         <source>Include Subgroups (recursive)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="180"/>
+        <location filename="../forms/SearchDlg.ui" line="150"/>
         <source>Search For:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2576,103 +2496,93 @@ File is not readable.</source>
         <source>Remember last opened file</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../forms/SettingsDlg.ui" line="194"/>
-        <source>Alt+Ö</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="222"/>
+        <location filename="../forms/SettingsDlg.ui" line="219"/>
         <source>Remember last key type and location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="252"/>
+        <location filename="../forms/SettingsDlg.ui" line="249"/>
         <source>Start minimized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="282"/>
+        <location filename="../forms/SettingsDlg.ui" line="279"/>
         <source>Start locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="298"/>
+        <location filename="../forms/SettingsDlg.ui" line="295"/>
         <source>Save recent directories of file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="321"/>
+        <location filename="../forms/SettingsDlg.ui" line="318"/>
         <source>Clear History Now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="343"/>
+        <location filename="../forms/SettingsDlg.ui" line="340"/>
         <source>Always ask before deleting entries or groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="477"/>
+        <location filename="../forms/SettingsDlg.ui" line="474"/>
         <source>Banner Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="491"/>
+        <location filename="../forms/SettingsDlg.ui" line="488"/>
         <source>Text Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="623"/>
+        <location filename="../forms/SettingsDlg.ui" line="617"/>
         <source>Change...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="548"/>
+        <location filename="../forms/SettingsDlg.ui" line="542"/>
         <source>Color 2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="676"/>
+        <location filename="../forms/SettingsDlg.ui" line="667"/>
         <source>C&amp;hange...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="679"/>
-        <source>Alt+H</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SettingsDlg.ui" line="692"/>
+        <location filename="../forms/SettingsDlg.ui" line="680"/>
         <source>Color 1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="720"/>
+        <location filename="../forms/SettingsDlg.ui" line="708"/>
         <source>Alternating Row Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="732"/>
+        <location filename="../forms/SettingsDlg.ui" line="720"/>
         <source>Customize Entry Detail View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="761"/>
+        <location filename="../forms/SettingsDlg.ui" line="749"/>
         <source>Group tree at start-up:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="768"/>
+        <location filename="../forms/SettingsDlg.ui" line="756"/>
         <source>Restore last state</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="775"/>
+        <location filename="../forms/SettingsDlg.ui" line="763"/>
         <source>Expand all items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="782"/>
+        <location filename="../forms/SettingsDlg.ui" line="770"/>
         <source>Do not expand any item</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2682,62 +2592,57 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="940"/>
+        <location filename="../forms/SettingsDlg.ui" line="928"/>
         <source>Edit Entry Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="943"/>
-        <source>Alt+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SettingsDlg.ui" line="971"/>
+        <location filename="../forms/SettingsDlg.ui" line="956"/>
         <source>Clear clipboard after:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1009"/>
+        <location filename="../forms/SettingsDlg.ui" line="994"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1275"/>
+        <location filename="../forms/SettingsDlg.ui" line="1260"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1285"/>
+        <location filename="../forms/SettingsDlg.ui" line="1270"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1323"/>
+        <location filename="../forms/SettingsDlg.ui" line="1308"/>
         <source>Plug-Ins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1332"/>
+        <location filename="../forms/SettingsDlg.ui" line="1317"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1339"/>
+        <location filename="../forms/SettingsDlg.ui" line="1324"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1346"/>
+        <location filename="../forms/SettingsDlg.ui" line="1331"/>
         <source>KDE 4 Desktop Integration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1361"/>
+        <location filename="../forms/SettingsDlg.ui" line="1346"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1381"/>
+        <location filename="../forms/SettingsDlg.ui" line="1366"/>
         <source>Configure...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2747,102 +2652,102 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1141"/>
+        <location filename="../forms/SettingsDlg.ui" line="1126"/>
         <source>Auto-Type Fine Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1150"/>
+        <location filename="../forms/SettingsDlg.ui" line="1135"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1199"/>
+        <location filename="../forms/SettingsDlg.ui" line="1184"/>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1163"/>
+        <location filename="../forms/SettingsDlg.ui" line="1148"/>
         <source>Pre-Gap:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1186"/>
+        <location filename="../forms/SettingsDlg.ui" line="1171"/>
         <source>Key Stroke Delay:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1196"/>
+        <location filename="../forms/SettingsDlg.ui" line="1181"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1081"/>
+        <location filename="../forms/SettingsDlg.ui" line="1066"/>
         <source>Custom Browser Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1093"/>
+        <location filename="../forms/SettingsDlg.ui" line="1078"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1105"/>
+        <location filename="../forms/SettingsDlg.ui" line="1090"/>
         <source>Media Root:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1115"/>
+        <location filename="../forms/SettingsDlg.ui" line="1100"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1122"/>
+        <location filename="../forms/SettingsDlg.ui" line="1107"/>
         <source>Browse...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1131"/>
+        <location filename="../forms/SettingsDlg.ui" line="1116"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1134"/>
+        <location filename="../forms/SettingsDlg.ui" line="1119"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1214"/>
+        <location filename="../forms/SettingsDlg.ui" line="1199"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="438"/>
+        <location filename="../forms/SettingsDlg.ui" line="435"/>
         <source>Automatically save database on exit and workspace locking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="931"/>
+        <location filename="../forms/SettingsDlg.ui" line="919"/>
         <source>Show plain text passwords in:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="950"/>
+        <location filename="../forms/SettingsDlg.ui" line="935"/>
         <source>Database Key Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1047"/>
+        <location filename="../forms/SettingsDlg.ui" line="1032"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1018"/>
+        <location filename="../forms/SettingsDlg.ui" line="1003"/>
         <source>Lock database after inactivity of</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1243"/>
+        <location filename="../forms/SettingsDlg.ui" line="1228"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2867,32 +2772,32 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="375"/>
+        <location filename="../forms/SettingsDlg.ui" line="372"/>
         <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="403"/>
+        <location filename="../forms/SettingsDlg.ui" line="400"/>
         <source>Delete backup entries older than:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="429"/>
+        <location filename="../forms/SettingsDlg.ui" line="426"/>
         <source>days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="445"/>
+        <location filename="../forms/SettingsDlg.ui" line="442"/>
         <source>Automatically save database after every change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="857"/>
+        <location filename="../forms/SettingsDlg.ui" line="845"/>
         <source>Language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="864"/>
+        <location filename="../forms/SettingsDlg.ui" line="852"/>
         <source>Author:</source>
         <translation type="unfinished"></translation>
     </message>

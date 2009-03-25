@@ -1564,22 +1564,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="141"/>
         <source>Alt+U</source>
-        <translation>Alt+U</translation>
+        <translation type="obsolete">Alt+U</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="118"/>
         <source>Alt+N</source>
-        <translation>Alt+N</translation>
+        <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="404"/>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="95"/>
         <source>Alt+L</source>
-        <translation>Alt+L</translation>
+        <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="13"/>
@@ -1597,42 +1597,42 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&amp;Отмена</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="483"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="459"/>
         <source>Generate</source>
         <translation>Генерировать</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="460"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="436"/>
         <source>New Password:</source>
         <translation>Новый пароль:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="374"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="353"/>
         <source>Quality:</source>
         <translation>Качество:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="324"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="303"/>
         <source>Options</source>
         <translation>Опции</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="138"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="123"/>
         <source>&amp;Upper Letters</source>
         <translation>&amp;Прописные буквы</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="92"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="89"/>
         <source>&amp;Lower Letters</source>
         <translation>&amp;Строчные буквы</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="115"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="106"/>
         <source>&amp;Numbers</source>
         <translation>&amp;Цифры</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="158"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="140"/>
         <source>&amp;Special Characters</source>
         <translation>&amp;Специальные символы</translation>
     </message>
@@ -1657,17 +1657,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Alt+H</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="169"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="151"/>
         <source>Use &amp;only following characters:</source>
         <translation>&amp;Только следующие символы:</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="172"/>
         <source>Alt+O</source>
-        <translation>Alt+O</translation>
+        <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="338"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="317"/>
         <source>Length:</source>
         <translation>Длинна:</translation>
     </message>
@@ -1684,7 +1684,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="59"/>
         <source>Alt+W</source>
-        <translation>Alt+W</translation>
+        <translation type="obsolete">Alt+W</translation>
     </message>
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="122"/>
@@ -1694,15 +1694,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/PasswordGenDlg.ui" line="131"/>
         <source>Alt+S</source>
-        <translation>Alt+S</translation>
+        <translation type="obsolete">Alt+S</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="401"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="380"/>
         <source>Enable entropy collection</source>
         <translation>Включить механизм сбора энтропии</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="430"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="406"/>
         <source>Collect only once per session</source>
         <translation>Сбор только один раз за сессию</translation>
     </message>
@@ -1712,52 +1712,52 @@ p, li { white-space: pre-wrap; }
         <translation>Случайные числа</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="105"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="99"/>
         <source>&amp;Underline</source>
         <translation>По&amp;дчёркивание</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="128"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="116"/>
         <source>&amp;White Spaces</source>
         <translation>&amp;Пробелы</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="151"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="133"/>
         <source>&amp;Minus</source>
         <translation>&amp;Знак минуса</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="214"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="193"/>
         <source>Exclude look-alike characters</source>
         <translation>Исключить похожие символы</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="221"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="200"/>
         <source>Ensure that password contains characters from every group</source>
         <translation>Пороли должны включать в себя символы из всех групп</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="237"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="216"/>
         <source>Pronounceable</source>
         <translation>Удобно произносимые пароли</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="261"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="240"/>
         <source>Lower Letters</source>
         <translation>Строчные буквы</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="268"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="247"/>
         <source>Upper Letters</source>
         <translation>Прописные буквы</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="275"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="254"/>
         <source>Numbers</source>
         <translation>Цифры</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="282"/>
+        <location filename="../forms/PasswordGenDlg.ui" line="261"/>
         <source>Special Characters</source>
         <translation>Специальные символы</translation>
     </message>
@@ -2002,52 +2002,52 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassEntryView</name>
     <message>
-        <location filename="../lib/EntryView.cpp" line="474"/>
+        <location filename="../lib/EntryView.cpp" line="477"/>
         <source>Title</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="476"/>
+        <location filename="../lib/EntryView.cpp" line="479"/>
         <source>Username</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="478"/>
+        <location filename="../lib/EntryView.cpp" line="481"/>
         <source>URL</source>
         <translation>Ссылка</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="480"/>
+        <location filename="../lib/EntryView.cpp" line="483"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="482"/>
+        <location filename="../lib/EntryView.cpp" line="485"/>
         <source>Comments</source>
         <translation>Комментарий</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="484"/>
+        <location filename="../lib/EntryView.cpp" line="487"/>
         <source>Expires</source>
         <translation>Окончание</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="486"/>
+        <location filename="../lib/EntryView.cpp" line="489"/>
         <source>Creation</source>
         <translation>Создание</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="488"/>
+        <location filename="../lib/EntryView.cpp" line="491"/>
         <source>Last Change</source>
         <translation>Последнее изменение</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="490"/>
+        <location filename="../lib/EntryView.cpp" line="493"/>
         <source>Last Access</source>
         <translation>Последний доступ</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="492"/>
+        <location filename="../lib/EntryView.cpp" line="495"/>
         <source>Attachment</source>
         <translation>Вложение</translation>
     </message>
@@ -2062,7 +2062,7 @@ The key is wrong or the file is damaged.</source>
         <translation>Стереть?</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="494"/>
+        <location filename="../lib/EntryView.cpp" line="497"/>
         <source>Group</source>
         <translation>Группа</translation>
     </message>
@@ -2118,82 +2118,82 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="377"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Shift+Ctrl+S</source>
         <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="379"/>
         <source>Shift+Ctrl+F</source>
         <translation>Shift+Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -2203,7 +2203,7 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>Save modified file?</source>
         <translation>Сохранить изменения файла?</translation>
     </message>
@@ -2240,22 +2240,22 @@ to save the changes?</source>
         <translation type="obsolete">&lt;B&gt;Группа: &lt;/B&gt;%1  &lt;B&gt;Название: &lt;/B&gt;%2  &lt;B&gt;Имя: &lt;/B&gt;%3  &lt;B&gt;Ссылка: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Пароль: &lt;/B&gt;%5  &lt;B&gt;Создано: &lt;/B&gt;%6  &lt;B&gt;Изменено: &lt;/B&gt;%7  &lt;B&gt;Доступ: &lt;/B&gt;%8  &lt;B&gt;Окончание: &lt;/B&gt;%9</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="854"/>
+        <location filename="../mainwindow.cpp" line="855"/>
         <source>Clone Entry</source>
         <translation>Дублировать запись</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="856"/>
+        <location filename="../mainwindow.cpp" line="857"/>
         <source>Delete Entry</source>
         <translation>Удалить запись</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="869"/>
+        <location filename="../mainwindow.cpp" line="870"/>
         <source>Clone Entries</source>
         <translation>Дублировать записи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="871"/>
+        <location filename="../mainwindow.cpp" line="872"/>
         <source>Delete Entries</source>
         <translation>Удалить записи</translation>
     </message>
@@ -2272,7 +2272,7 @@ to save the changes?</source>
         <translation type="obsolete">Сохранить базу паролей как...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1418"/>
+        <location filename="../mainwindow.cpp" line="1420"/>
         <source>Ready</source>
         <translation>Готов</translation>
     </message>
@@ -2282,17 +2282,17 @@ to save the changes?</source>
         <translation type="obsolete">[новый]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Open Database...</source>
         <translation>Открыть базу паролей...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1421"/>
+        <location filename="../mainwindow.cpp" line="1423"/>
         <source>Loading Database...</source>
         <translation>Загрузка базы паролей...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1424"/>
+        <location filename="../mainwindow.cpp" line="1426"/>
         <source>Loading Failed</source>
         <translation>Ошибка загрузки</translation>
     </message>
@@ -2317,7 +2317,7 @@ to save the changes?</source>
         <translation type="obsolete">Неизвестная ошибка в PwDatabase::openDatabase()</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="375"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
@@ -2332,142 +2332,142 @@ to save the changes?</source>
         <translation type="obsolete">KeePassX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../mainwindow.cpp" line="477"/>
         <source>Unknown error while loading database.</source>
         <translation>Неизвестная ошибка при загруски базы данных.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation>KeePass база паролей (*.kdb)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>All Files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>Save Database...</source>
         <translation>Сохранить базу паролей...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="742"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>1 Month</source>
         <translation>1 месяц</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="744"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>%1 Months</source>
         <translation>%1 месяца</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="750"/>
+        <location filename="../mainwindow.cpp" line="751"/>
         <source>1 Year</source>
         <translation>1 год</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="752"/>
+        <location filename="../mainwindow.cpp" line="753"/>
         <source>%1 Years</source>
         <translation>%1 лет</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="758"/>
+        <location filename="../mainwindow.cpp" line="759"/>
         <source>1 Day</source>
         <translation>1 день</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="760"/>
+        <location filename="../mainwindow.cpp" line="761"/>
         <source>%1 Days</source>
         <translation>%1 дней</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="764"/>
+        <location filename="../mainwindow.cpp" line="765"/>
         <source>less than 1 day</source>
         <translation>меньше, чем один день</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1321"/>
+        <location filename="../mainwindow.cpp" line="1323"/>
         <source>Locked</source>
         <translation>заблокировано</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1336"/>
+        <location filename="../mainwindow.cpp" line="1338"/>
         <source>Unlocked</source>
         <translation>разблокированно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>The database file does not exist.</source>
         <translation>Файл базы паролей не найден.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1109"/>
+        <location filename="../mainwindow.cpp" line="1111"/>
         <source>new</source>
         <translation>новый</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="728"/>
+        <location filename="../mainwindow.cpp" line="729"/>
         <source>Expired</source>
         <translation>просрочен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1322"/>
+        <location filename="../mainwindow.cpp" line="1324"/>
         <source>Un&amp;lock Workspace</source>
         <translation>&amp;Разблокировать главное окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1337"/>
+        <location filename="../mainwindow.cpp" line="1339"/>
         <source>&amp;Lock Workspace</source>
         <translation>&amp;Заблокировать главное окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>The following error occured while opening the database:</source>
         <translation>Ошибка при открытии быза паролей:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="911"/>
+        <location filename="../mainwindow.cpp" line="912"/>
         <source>File could not be saved.</source>
         <translation>Не удалось сохранить файл.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="1105"/>
         <source>Show &amp;Toolbar</source>
         <translation>&amp;Отобразить панель инструментов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
+        <location filename="../mainwindow.cpp" line="407"/>
         <source>Database locked</source>
         <translation>База паролей заблокирована</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="410"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -2478,24 +2478,24 @@ Do you want to open it anyway?</source>
 Продолжить открытие?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="516"/>
+        <location filename="../mainwindow.cpp" line="517"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation>База паролей была изменена.
 Сохранить изменения?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation>Не удалось удалить файл блокирования базы паролей.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Open read-only</source>
         <translation>Открыть только для чтения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1427"/>
+        <location filename="../mainwindow.cpp" line="1429"/>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Не удалось создать файл блокирования базы паролей. База паролей будет открыта только для чтения.</translation>
     </message>
@@ -3385,7 +3385,7 @@ File is not readable.</source>
     <message>
         <location filename="../forms/PasswordDlg.ui" line="194"/>
         <source>Alt+B</source>
-        <translation>Alt+B</translation>
+        <translation type="obsolete">Alt+B</translation>
     </message>
     <message>
         <location filename="" line="0"/>
@@ -3413,22 +3413,22 @@ File is not readable.</source>
         <translation>Файл-ключ:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="203"/>
+        <location filename="../forms/PasswordDlg.ui" line="200"/>
         <source>Generate Key File...</source>
         <translation>Создать файл-ключ...</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="235"/>
+        <location filename="../forms/PasswordDlg.ui" line="232"/>
         <source>Please repeat your password:</source>
         <translation>Введите повторно пароль:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="253"/>
+        <location filename="../forms/PasswordDlg.ui" line="250"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="280"/>
+        <location filename="../forms/PasswordDlg.ui" line="277"/>
         <source>Passwords are not equal.</source>
         <translation>Пароли не одинаковы.</translation>
     </message>
@@ -3581,32 +3581,32 @@ The key is wrong or the file is damaged.</source>
     <message>
         <location filename="../forms/SearchDlg.ui" line="133"/>
         <source>Alt+T</source>
-        <translation>Alt+T</translation>
+        <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="123"/>
         <source>Alt+U</source>
-        <translation>Alt+U</translation>
+        <translation type="obsolete">Alt+U</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="90"/>
+        <location filename="../forms/SearchDlg.ui" line="81"/>
         <source>A&amp;nhang</source>
         <translation type="unfinished">&amp;Вложение</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="93"/>
         <source>Alt+N</source>
-        <translation>Alt+N</translation>
+        <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="83"/>
         <source>Alt+W</source>
-        <translation>Alt+W</translation>
+        <translation type="obsolete">Alt+W</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="151"/>
         <source>Alt+C</source>
-        <translation>Alt+C</translation>
+        <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="19"/>
@@ -3614,62 +3614,62 @@ The key is wrong or the file is damaged.</source>
         <translation>Поиск...</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="180"/>
+        <location filename="../forms/SearchDlg.ui" line="150"/>
         <source>Search For:</source>
         <translation>Поиск:</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="158"/>
+        <location filename="../forms/SearchDlg.ui" line="131"/>
         <source>Regular E&amp;xpression</source>
         <translation>Регулярное &amp;выражение</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="161"/>
         <source>Alt+X</source>
-        <translation>Alt+X</translation>
+        <translation type="obsolete">Alt+X</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="148"/>
+        <location filename="../forms/SearchDlg.ui" line="124"/>
         <source>&amp;Case Sensitive</source>
         <translation>&amp;С учётом регистра</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="68"/>
+        <location filename="../forms/SearchDlg.ui" line="65"/>
         <source>Include:</source>
         <translation>Включая:</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="130"/>
+        <location filename="../forms/SearchDlg.ui" line="109"/>
         <source>&amp;Titles</source>
         <translation>&amp;Название</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="120"/>
+        <location filename="../forms/SearchDlg.ui" line="102"/>
         <source>&amp;Usernames</source>
         <translation>&amp;Имя</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="110"/>
+        <location filename="../forms/SearchDlg.ui" line="95"/>
         <source>C&amp;omments</source>
         <translation>Ко&amp;мментарий</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="113"/>
         <source>Alt+O</source>
-        <translation>Alt+O</translation>
+        <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="100"/>
+        <location filename="../forms/SearchDlg.ui" line="88"/>
         <source>U&amp;RLs</source>
         <translation>&amp;Ссылки</translation>
     </message>
     <message>
         <location filename="../forms/SearchDlg.ui" line="103"/>
         <source>Alt+R</source>
-        <translation>Alt+R</translation>
+        <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="80"/>
+        <location filename="../forms/SearchDlg.ui" line="74"/>
         <source>Pass&amp;words</source>
         <translation>&amp;Пароли</translation>
     </message>
@@ -3689,7 +3689,7 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Alt+S</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="168"/>
+        <location filename="../forms/SearchDlg.ui" line="138"/>
         <source>Include Subgroups (recursive)</source>
         <translation>Включая подгруппы (рекурсивно)</translation>
     </message>
@@ -3750,7 +3750,7 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">&amp;Отмена</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="971"/>
+        <location filename="../forms/SettingsDlg.ui" line="956"/>
         <source>Clear clipboard after:</source>
         <translation>Буфер очищать через:</translation>
     </message>
@@ -3767,7 +3767,7 @@ The key is wrong or the file is damaged.</source>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="943"/>
         <source>Alt+O</source>
-        <translation>Alt+O</translation>
+        <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="309"/>
@@ -3775,37 +3775,37 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">&amp;Внешний вид</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="477"/>
+        <location filename="../forms/SettingsDlg.ui" line="474"/>
         <source>Banner Color</source>
         <translation>Цвет банера</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="491"/>
+        <location filename="../forms/SettingsDlg.ui" line="488"/>
         <source>Text Color:</source>
         <translation>Цвет текста:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="623"/>
+        <location filename="../forms/SettingsDlg.ui" line="617"/>
         <source>Change...</source>
         <translation>Изменить...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="548"/>
+        <location filename="../forms/SettingsDlg.ui" line="542"/>
         <source>Color 2:</source>
         <translation>Цвет 2:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="676"/>
+        <location filename="../forms/SettingsDlg.ui" line="667"/>
         <source>C&amp;hange...</source>
         <translation>&amp;Изменить</translation>
     </message>
     <message>
         <location filename="../forms/SettingsDlg.ui" line="679"/>
         <source>Alt+H</source>
-        <translation>Alt+H</translation>
+        <translation type="obsolete">Alt+H</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="692"/>
+        <location filename="../forms/SettingsDlg.ui" line="680"/>
         <source>Color 1:</source>
         <translation>Цвет 1:</translation>
     </message>
@@ -3830,17 +3830,17 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Безопасность</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="720"/>
+        <location filename="../forms/SettingsDlg.ui" line="708"/>
         <source>Alternating Row Colors</source>
         <translation>Переменные цвета столбцов</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1122"/>
+        <location filename="../forms/SettingsDlg.ui" line="1107"/>
         <source>Browse...</source>
         <translation>Обзор...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="222"/>
+        <location filename="../forms/SettingsDlg.ui" line="219"/>
         <source>Remember last key type and location</source>
         <translation>Запоминать последний тип и положение ключа</translation>
     </message>
@@ -3867,30 +3867,30 @@ The key is wrong or the file is damaged.</source>
     <message encoding="UTF-8">
         <location filename="../forms/SettingsDlg.ui" line="194"/>
         <source>Alt+Ö</source>
-        <translation type="unfinished">Alt+O</translation>
+        <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="298"/>
+        <location filename="../forms/SettingsDlg.ui" line="295"/>
         <source>Save recent directories of file dialogs</source>
         <translation>Сохранять последнии выбранные директории диалогов выбора файла</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="761"/>
+        <location filename="../forms/SettingsDlg.ui" line="749"/>
         <source>Group tree at start-up:</source>
         <translation>Группировка дерева при запуске программы:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="768"/>
+        <location filename="../forms/SettingsDlg.ui" line="756"/>
         <source>Restore last state</source>
         <translation>Восстанавливать последнее состояние</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="775"/>
+        <location filename="../forms/SettingsDlg.ui" line="763"/>
         <source>Expand all items</source>
         <translation>Раскрыть все дерево</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="782"/>
+        <location filename="../forms/SettingsDlg.ui" line="770"/>
         <source>Do not expand any item</source>
         <translation>Не раскрывать дерево</translation>
     </message>
@@ -3900,37 +3900,37 @@ The key is wrong or the file is damaged.</source>
         <translation>Безопасность</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="940"/>
+        <location filename="../forms/SettingsDlg.ui" line="928"/>
         <source>Edit Entry Dialog</source>
         <translation>Диалоге редактирования записей</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1323"/>
+        <location filename="../forms/SettingsDlg.ui" line="1308"/>
         <source>Plug-Ins</source>
         <translation>Дополнения (Plug-Ins)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1332"/>
+        <location filename="../forms/SettingsDlg.ui" line="1317"/>
         <source>None</source>
         <translation>ничего</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1339"/>
+        <location filename="../forms/SettingsDlg.ui" line="1324"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translation>Gnome интеграция (Gtk 2.x)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1346"/>
+        <location filename="../forms/SettingsDlg.ui" line="1331"/>
         <source>KDE 4 Desktop Integration</source>
         <translation>KDE 4 интеграция</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1361"/>
+        <location filename="../forms/SettingsDlg.ui" line="1346"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation>Изменения вступят в силу после перезагруски программы.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1381"/>
+        <location filename="../forms/SettingsDlg.ui" line="1366"/>
         <source>Configure...</source>
         <translation>Конфигурация...</translation>
     </message>
@@ -3940,77 +3940,77 @@ The key is wrong or the file is damaged.</source>
         <translation>Дополнительно</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="321"/>
+        <location filename="../forms/SettingsDlg.ui" line="318"/>
         <source>Clear History Now</source>
         <translation>Очистить историю прямо сейчас</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="343"/>
+        <location filename="../forms/SettingsDlg.ui" line="340"/>
         <source>Always ask before deleting entries or groups</source>
         <translation>Переспрашивать перед удалением записей и групп</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="732"/>
+        <location filename="../forms/SettingsDlg.ui" line="720"/>
         <source>Customize Entry Detail View...</source>
         <translation>Настройта окна детальной информации записи...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1275"/>
+        <location filename="../forms/SettingsDlg.ui" line="1260"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation>Для упрощения интерфейса пользователя Вы можете здесь отключить некоторые функции KeePassX.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1285"/>
+        <location filename="../forms/SettingsDlg.ui" line="1270"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1141"/>
+        <location filename="../forms/SettingsDlg.ui" line="1126"/>
         <source>Auto-Type Fine Tuning</source>
         <translation>Настройка функции автоввода</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1150"/>
+        <location filename="../forms/SettingsDlg.ui" line="1135"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation>Задержка неред началом симуляции нажатия клавишь.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1199"/>
+        <location filename="../forms/SettingsDlg.ui" line="1184"/>
         <source>ms</source>
         <translation>мс</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1163"/>
+        <location filename="../forms/SettingsDlg.ui" line="1148"/>
         <source>Pre-Gap:</source>
         <translation>Pre-Gap:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1186"/>
+        <location filename="../forms/SettingsDlg.ui" line="1171"/>
         <source>Key Stroke Delay:</source>
         <translation>Время нажатия клавиши:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1196"/>
+        <location filename="../forms/SettingsDlg.ui" line="1181"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation>Задержка между нажатиями клавишь.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1115"/>
+        <location filename="../forms/SettingsDlg.ui" line="1100"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation>Директория монтировки устройсв (CD, USB накопителей).</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1105"/>
+        <location filename="../forms/SettingsDlg.ui" line="1090"/>
         <source>Media Root:</source>
         <translation>Медиа Root:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1131"/>
+        <location filename="../forms/SettingsDlg.ui" line="1116"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation>Не использовать абсолютные пути для закладок и последнего открытого файла. Это наиболее удобно при использовании переносной версии KeePassX.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1134"/>
+        <location filename="../forms/SettingsDlg.ui" line="1119"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation>Сохранять относительные пути (для закладок и последнего открытого файла)</translation>
     </message>
@@ -4020,62 +4020,62 @@ The key is wrong or the file is damaged.</source>
         <translation>Минимизировать в системный трей</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="252"/>
+        <location filename="../forms/SettingsDlg.ui" line="249"/>
         <source>Start minimized</source>
         <translation>Минимизировать при загрузке</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="282"/>
+        <location filename="../forms/SettingsDlg.ui" line="279"/>
         <source>Start locked</source>
         <translation>Блокировать главное окно при запуске</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1009"/>
+        <location filename="../forms/SettingsDlg.ui" line="994"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation>Блокировать главное окно при минимизации программы</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1214"/>
+        <location filename="../forms/SettingsDlg.ui" line="1199"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation>Глобальная горячая клавиша для автоввода:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1081"/>
+        <location filename="../forms/SettingsDlg.ui" line="1066"/>
         <source>Custom Browser Command</source>
         <translation>Команда браузера</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1093"/>
+        <location filename="../forms/SettingsDlg.ui" line="1078"/>
         <source>Browse</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="438"/>
+        <location filename="../forms/SettingsDlg.ui" line="435"/>
         <source>Automatically save database on exit and workspace locking</source>
         <translation>Автоматически сохранять базу паролей при закрытии программы или блокировки главного окна</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="931"/>
+        <location filename="../forms/SettingsDlg.ui" line="919"/>
         <source>Show plain text passwords in:</source>
         <translation>Отображать пароли в:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="950"/>
+        <location filename="../forms/SettingsDlg.ui" line="935"/>
         <source>Database Key Dialog</source>
         <translation>Диалоге пароля базы</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1047"/>
+        <location filename="../forms/SettingsDlg.ui" line="1032"/>
         <source>seconds</source>
         <translation>секунд</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1018"/>
+        <location filename="../forms/SettingsDlg.ui" line="1003"/>
         <source>Lock database after inactivity of</source>
         <translation>Блокировать базу данных в случае неиспользования компьютера в течении</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1243"/>
+        <location filename="../forms/SettingsDlg.ui" line="1228"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation>Использовать названия записей при поиске окна для автоввода</translation>
     </message>
@@ -4100,22 +4100,22 @@ The key is wrong or the file is damaged.</source>
         <translation>Язык (Language)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="375"/>
+        <location filename="../forms/SettingsDlg.ui" line="372"/>
         <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
         <translation>При изменении записей сохранять копию в группу &apos;Backup&apos;</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="403"/>
+        <location filename="../forms/SettingsDlg.ui" line="400"/>
         <source>Delete backup entries older than:</source>
         <translation>Стирать копии записей через:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="429"/>
+        <location filename="../forms/SettingsDlg.ui" line="426"/>
         <source>days</source>
         <translation>дней</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="445"/>
+        <location filename="../forms/SettingsDlg.ui" line="442"/>
         <source>Automatically save database after every change</source>
         <translation>Автоматически сохранять базу паролей при каждом изменении</translation>
     </message>
@@ -4130,12 +4130,12 @@ The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Английский</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="857"/>
+        <location filename="../forms/SettingsDlg.ui" line="845"/>
         <source>Language:</source>
         <translation>Язык (Language):</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="864"/>
+        <location filename="../forms/SettingsDlg.ui" line="852"/>
         <source>Author:</source>
         <translation>Автор:</translation>
     </message>

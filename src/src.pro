@@ -149,6 +149,7 @@ TRANSLATIONS_KX = translations/keepassx-de_DE.ts \
                   translations/keepassx-fr_FR.ts \
                   translations/keepassx-gl_ES.ts \
                   translations/keepassx-it_IT.ts \
+                  translations/keepassx-nb_NO.ts \
                   translations/keepassx-ru_RU.ts \
                   translations/keepassx-tr_TR.ts
 
@@ -160,7 +161,8 @@ TRANSLATIONS_QT = translations/qt_fi.ts \
                   translations/qt_tr.ts
 
 TRANSLATIONS = $$TRANSLATIONS_KX $$TRANSLATIONS_DISABLED translations/keepassx-xx_XX.ts
-TRANSLATIONS_COMPILE = $$TRANSLATIONS_KX $$TRANSLATIONS_QT
+#TRANSLATIONS_UPDATE = $$TRANSLATIONS_KX $$TRANSLATIONS_DISABLED translations/keepassx-xx_XX.ts
+#TRANSLATIONS_COMPILE = $$TRANSLATIONS_KX $$TRANSLATIONS_QT
 
 HEADERS += main.h \
            global.h \
@@ -290,25 +292,25 @@ else {
 
 RESOURCES += res/resources.qrc
 
-isEmpty(QMAKE_LRELEASE) {
-	win32 {
-		QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\lrelease.exe
-	}
-	else {
-		QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
-		!exists($$QMAKE_LRELEASE) : QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-	}
-}
+#isEmpty(QMAKE_LRELEASE) {
+#	win32 {
+#		QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\lrelease.exe
+#	}
+#	else {
+#		QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
+#		!exists($$QMAKE_LRELEASE) : QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+#	}
+#}
 
-exists($$QMAKE_LRELEASE) {
-	updateqm.input = TRANSLATIONS_COMPILE
-	updateqm.output = ../share/keepassx/i18n/${QMAKE_FILE_BASE}.qm
-	updateqm.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm ../share/keepassx/i18n/${QMAKE_FILE_BASE}.qm
-	updateqm.CONFIG += no_link
-	
-	QMAKE_EXTRA_COMPILERS += updateqm
-	PRE_TARGETDEPS += compiler_updateqm_make_all
-}
-else {
-	message("*** lrelease not found - can't compile translation files")
-}
+#exists($$QMAKE_LRELEASE) {
+#	updateqm.input = TRANSLATIONS_COMPILE
+#	updateqm.output = ../share/keepassx/i18n/${QMAKE_FILE_BASE}.qm
+#	updateqm.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm ../share/keepassx/i18n/${QMAKE_FILE_BASE}.qm
+#	updateqm.CONFIG += no_link
+#	
+#	QMAKE_EXTRA_COMPILERS += updateqm
+#	PRE_TARGETDEPS += compiler_updateqm_make_all
+#}
+#else {
+#	message("*** lrelease not found - can't compile translation files")
+#}
