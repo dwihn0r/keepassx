@@ -155,9 +155,13 @@ void KeepassEntryView::OnDeleteEntry(){
 	IGroupHandle* bGroup;
 	if (config->backup() && ((EntryViewItem*)entries[0])->EntryHandle->group() != (bGroup=db->backupGroup()))
 		backup = true;
+	if (backup && !bGroup) {
+		emit requestCreateGroup("Backup", 4, NULL);
+		bGroup = db->backupGroup();
+	}
 	for(int i=0; i<entries.size();i++){
 		IEntryHandle* entryHandle = ((EntryViewItem*)entries[i])->EntryHandle;
-		if (backup){
+		if (backup && bGroup){
 			db->moveEntry(entryHandle, bGroup);
 			QDateTime now = QDateTime::currentDateTime();
 			entryHandle->setLastAccess(now);
