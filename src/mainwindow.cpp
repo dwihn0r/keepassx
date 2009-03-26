@@ -657,7 +657,8 @@ void KeepassMainWindow::setStateFileOpen(bool IsOpen){
 
 void KeepassMainWindow::setStateFileModified(bool mod){
 	if (config->autoSaveChange() && mod && db->file()){
-		OnFileSave();
+		if (OnFileSave())
+			return; // return on success, so we don't set the state to modified
 	}
 	
 	ModFlag=mod;
