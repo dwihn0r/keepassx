@@ -256,6 +256,9 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 		if ((bGroup = db->backupGroup())!=NULL)
 			db->addEntry(&old, bGroup);
 	}
+	
+	if (result == 1)
+		OnItemsChanged();
 }
 
 
