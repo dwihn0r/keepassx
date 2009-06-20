@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="cs_CZ">
+<!DOCTYPE TS>
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX %1</source>
         <translation type="obsolete">KeePassX %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
         <translation type="obsolete">&lt;b&gt;Aktuální překlad: český&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
         <translation type="obsolete">&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../dialogs/AboutDlg.cpp" line="34"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation type="obsolete">Marek Straka</translation>
     </message>
     <message>
-        <location filename="../dialogs/AboutDlg.cpp" line="35"/>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
         <translation type="obsolete">marek@straka.info (&lt;a href=&quot;http://marek.straka.info&quot;&gt;marek.straka.info&lt;/a&gt;)</translation>
@@ -35,22 +31,20 @@
         <translation type="unfinished">Vývojová skupina</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Tarek Saidi</source>
         <translation type="obsolete">Tarek Saidi</translation>
     </message>
     <message>
+        <location filename="../dialogs/AboutDlg.cpp" line="46"/>
         <location filename="../dialogs/AboutDlg.cpp" line="48"/>
         <source>Developer, Project Admin</source>
         <translation type="unfinished">Vývojář, vedoucí projektu</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>tariq@users.berlios.de</source>
         <translation type="obsolete">tariq@users.berlios.de</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Eugen Gorschenin</source>
         <translation type="obsolete">Eugen Gorschenin</translation>
     </message>
@@ -60,7 +54,6 @@
         <translation type="unfinished">Webový designér</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>geugen@users.berlios.de</source>
         <translation type="obsolete">geugen@users.berlios.de</translation>
     </message>
@@ -70,7 +63,6 @@
         <translation type="unfinished">Poděkování</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Matthias Miller</source>
         <translation type="obsolete">Matthias Miller</translation>
     </message>
@@ -80,12 +72,10 @@
         <translation type="unfinished">Patches pro lepší MacOS X podporu</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>www.outofhanwell.com</source>
         <translation type="obsolete">www.outofhanwell.com</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>James Nicholls</source>
         <translation type="obsolete">James Nicholls</translation>
     </message>
@@ -105,12 +95,12 @@
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../dialogs/AboutDlg.cpp" line="68"/>
+        <location filename="../dialogs/AboutDlg.cpp" line="67"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation type="unfinished">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
-        <location filename="../dialogs/AboutDlg.cpp" line="69"/>
+        <location filename="../dialogs/AboutDlg.cpp" line="68"/>
         <source>Make sure that the program is installed correctly.</source>
         <translation type="unfinished">Ujistěte se, že program je správně nainstalován.</translation>
     </message>
@@ -120,29 +110,27 @@
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file &apos;%1&apos;</source>
         <translation type="obsolete">Nelze otevřít soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The following error occured:
 %1</source>
         <translation type="obsolete">Vyskytl se následující problém:
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>http://keepassx.sf.net</source>
         <translation type="obsolete">http://keepassx.sf.net</translation>
     </message>
     <message>
+        <location filename="../dialogs/AboutDlg.cpp" line="50"/>
         <location filename="../dialogs/AboutDlg.cpp" line="54"/>
         <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/AboutDlg.cpp" line="42"/>
+        <location filename="../dialogs/AboutDlg.cpp" line="41"/>
         <source>Information on how to translate KeePassX can be found under:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -166,27 +154,26 @@
 <context>
     <name>AboutDlg</name>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="50"/>
+        <location filename="../forms/AboutDlg.ui" line="14"/>
+        <location filename="../forms/AboutDlg.ui" line="43"/>
         <source>About</source>
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="213"/>
+        <location filename="../forms/AboutDlg.ui" line="182"/>
         <source>License</source>
         <translation>Licence</translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="188"/>
+        <location filename="../forms/AboutDlg.ui" line="165"/>
         <source>Translation</source>
         <translation>Překlad</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - Cross Platform Password Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;KeePassX&lt;/span&gt; - multiplatformní správce hesel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Copyright (C) 2005 - 2006 Tarek Saidi 
 KeePassX is distributed under the terms of the 
 General Public License (GPL) version 2.</source>
@@ -195,32 +182,32 @@ KeePassX je šířen pod podmínkami
 General Public License (GPL) verze 2.</translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="163"/>
+        <location filename="../forms/AboutDlg.ui" line="148"/>
         <source>Credits</source>
         <translation>Poděkování</translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="127"/>
+        <location filename="../forms/AboutDlg.ui" line="120"/>
         <source>http://keepassx.sourceforge.net</source>
         <translation>http://keepassx.sourceforge.net</translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="134"/>
+        <location filename="../forms/AboutDlg.ui" line="127"/>
         <source>keepassx@gmail.com</source>
         <translation>keepassx@gmail.com</translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="74"/>
+        <location filename="../forms/AboutDlg.ui" line="67"/>
         <source>AppName</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="92"/>
+        <location filename="../forms/AboutDlg.ui" line="85"/>
         <source>AppFunc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/AboutDlg.ui" line="141"/>
+        <location filename="../forms/AboutDlg.ui" line="134"/>
         <source>Copyright (C) 2005 - 2009 KeePassX Team
 KeePassX is distributed under the terms of the
 General Public License (GPL) version 2.</source>
@@ -232,6 +219,8 @@ General Public License (GPL) verze 2.</translation>
 <context>
     <name>AddBookmarkDlg</name>
     <message>
+        <location filename="../dialogs/AddBookmarkDlg.cpp" line="32"/>
+        <location filename="../dialogs/AddBookmarkDlg.cpp" line="56"/>
         <location filename="../forms/AddBookmarkDlg.ui" line="32"/>
         <source>Add Bookmark</source>
         <translation type="unfinished"></translation>
@@ -252,6 +241,7 @@ General Public License (GPL) verze 2.</translation>
         <translation type="unfinished">Projít...</translation>
     </message>
     <message>
+        <location filename="../dialogs/AddBookmarkDlg.cpp" line="40"/>
         <location filename="../dialogs/AddBookmarkDlg.cpp" line="44"/>
         <source>Edit Bookmark</source>
         <translation type="unfinished"></translation>
@@ -270,21 +260,18 @@ General Public License (GPL) verze 2.</translation>
 <context>
     <name>AutoType</name>
     <message>
-        <location filename="../lib/AutoType_X11.cpp" line="68"/>
         <source>More than one &apos;Auto-Type:&apos; key sequence found.
 Allowed is only one per entry.</source>
         <translation type="obsolete">Nalezena více než jedna &apos;Auto-Type:&apos; klíčová sekvence
 Je dovolena pouze jedna na každý záznam.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Syntax Error in Auto-Type sequence near character %1
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
+					Found &apos;{&apos; without closing &apos;}&apos;</source>
         <translation type="obsolete">Chyba syntaxe v Auto-Type sekvenci poblíž znaku %1
-<byte value="x9"/>Nalezeno &apos;{&apos; bez uzavření &apos;}&apos;</translation>
+	Nalezeno &apos;{&apos; bez uzavření &apos;}&apos;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Chyba</translation>
     </message>
@@ -302,11 +289,13 @@ Je dovolena pouze jedna na každý záznam.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="33"/>
         <location filename="../dialogs/AutoTypeDlg.cpp" line="35"/>
         <source>Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="33"/>
         <location filename="../dialogs/AutoTypeDlg.cpp" line="35"/>
         <source>Title</source>
         <translation type="unfinished">Název</translation>
@@ -317,7 +306,6 @@ Je dovolena pouze jedna na každý záznam.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
@@ -330,138 +318,112 @@ Je dovolena pouze jedna na každý záznam.</translation>
 <context>
     <name>CAboutDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX %1</source>
         <translation type="obsolete">KeePassX %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation type="obsolete">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Make sure that the program is installed correctly.</source>
         <translation type="obsolete">Ujistěte se, že program je správně nainstalován.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file &apos;%1&apos;</source>
         <translation type="obsolete">Nelze otevřít soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The following error occured:
 %1</source>
         <translation type="obsolete">Vyskytl se následující problém:
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Current Translation: None&lt;/b&gt;&lt;br&gt;&lt;br&gt;</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
         <translation type="obsolete">&lt;b&gt;Aktuální překlad: český&lt;/b&gt;&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
         <translation type="obsolete">&lt;b&gt;Autor:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
         <translation type="obsolete">marek@straka.info (&lt;a href=&quot;http://marek.straka.info&quot;&gt;marek.straka.info&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Matthias Miller</source>
         <translation type="obsolete">Matthias Miller</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Eugen Gorschenin</source>
         <translation type="obsolete">Eugen Gorschenin</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation type="obsolete">Marek Straka</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Team</source>
         <translation type="obsolete">Vývojová skupina</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Tarek Saidi</source>
         <translation type="obsolete">Tarek Saidi</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Developer, Project Admin</source>
         <translation type="obsolete">Vývojář, vedoucí projektu</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>tariq@users.berlios.de</source>
         <translation type="obsolete">tariq@users.berlios.de</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Web Designer</source>
         <translation type="obsolete">Webový designér</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>geugen@users.berlios.de</source>
         <translation type="obsolete">geugen@users.berlios.de</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Thanks To</source>
         <translation type="obsolete">Poděkování</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Patches for better MacOS X support</source>
         <translation type="obsolete">Patches pro lepší MacOS X podporu</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>www.outofhanwell.com</source>
         <translation type="obsolete">www.outofhanwell.com</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Information on how to translate KeePassX can be found under:
 http://keepassx.sourceforge.net/</source>
         <translation type="obsolete">Informace o tom jak přeložit KeePassX lze nalézt zde:
 http://keepassx.sourceforge.net/</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>James Nicholls</source>
         <translation type="obsolete">James Nicholls</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Main Application Icon</source>
         <translation type="obsolete">Hlavní ikonka aplikace</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>http://keepassx.sf.net</source>
         <translation type="obsolete">http://keepassx.sf.net</translation>
     </message>
@@ -489,11 +451,14 @@ http://keepassx.sourceforge.net/</translation>
         <translation>Prosím zadejte počet šifrovacích kol.</translation>
     </message>
     <message>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="64"/>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="70"/>
         <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
+        <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="70"/>
         <location filename="../dialogs/DatabaseSettingsDlg.cpp" line="74"/>
         <source>Error</source>
         <translation>Chyba</translation>
@@ -529,6 +494,11 @@ Please check your input.</source>
 Prosím zkontrolujte zadané údaje.</translation>
     </message>
     <message>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="177"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="299"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="321"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="338"/>
         <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>OK</source>
         <translation>OK</translation>
@@ -539,12 +509,10 @@ Prosím zkontrolujte zadané údaje.</translation>
         <translation>Uložit přílohu...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Overwrite?</source>
         <translation type="obsolete">Přepsat?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>A file with this name already exists.
 Do you want to replace it?</source>
         <translation type="obsolete">Soubor s tímto jménem již existuje.
@@ -556,26 +524,28 @@ Chcete ho přepsat?</translation>
         <translation>Ano</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Ne</translation>
     </message>
     <message>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="299"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="321"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="338"/>
         <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not remove old file.</source>
         <translation type="obsolete">Nelze odstranit starý soubor.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not create new file.</source>
         <translation type="obsolete">Nelze vytvořit nový soubor.</translation>
     </message>
     <message>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="338"/>
         <location filename="../dialogs/EditEntryDlg.cpp" line="343"/>
         <source>Error while writing the file.</source>
         <translation>Chyba při zápisu souboru.</translation>
@@ -603,6 +573,7 @@ Jste si tím jistí?</translation>
         <translation type="unfinished">Upravit záznam</translation>
     </message>
     <message>
+        <location filename="../dialogs/EditEntryDlg.cpp" line="299"/>
         <location filename="../dialogs/EditEntryDlg.cpp" line="331"/>
         <source>Could not open file.</source>
         <translation>Nelze otevřít soubor.</translation>
@@ -681,27 +652,22 @@ Jste si tím jistí?</translation>
 <context>
     <name>CGenPwDialog</name>
     <message>
-        <location filename="../dialogs/PasswordGenDlg.cpp" line="180"/>
         <source>Notice</source>
         <translation type="obsolete">Poznámka</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordGenDlg.cpp" line="178"/>
         <source>You need to enter at least one character</source>
         <translation type="obsolete">Je nutné vložit minimálně jeden znak</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordGenDlg.cpp" line="178"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open &apos;/dev/random&apos; or &apos;/dev/urandom&apos;.</source>
         <translation type="obsolete">Nelze otevřít  &apos;/dev/random&apos; nebo &apos;/dev/urandom&apos;.</translation>
     </message>
@@ -711,7 +677,6 @@ Jste si tím jistí?</translation>
         <translation>Generátor hesla</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>%1 Bit</source>
         <translation type="obsolete">%1 bitů</translation>
     </message>
@@ -724,141 +689,116 @@ Jste si tím jistí?</translation>
 <context>
     <name>CPasswordDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a Password.</source>
         <translation type="obsolete">Vložte prosím heslo.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please choose a key file.</source>
         <translation type="obsolete">Vyberte prosím soubor s klíčem.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a Password or select a key file.</source>
         <translation type="obsolete">Vložte prosím heslo nebo vyberte soubor s klíčem.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Database Key</source>
         <translation type="obsolete">Klíč k databázi</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Select a Key File</source>
         <translation type="obsolete">Vyberte soubor s klíčem</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>*.key</source>
         <translation type="obsolete">*.key</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected Error: File does not exist.</source>
         <translation type="obsolete">Neočekávaná chyba: Soubor neexistuje.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The selected key file or directory does not exist.</source>
         <translation type="obsolete">Vybraný soubor s klíčem nebo adresář neexistuje.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The given directory does not contain any key files.</source>
         <translation type="obsolete">Daný adresář neobsahuje žádné soubory s klíči.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The given directory contains more then one key file.
 Please specify the key file directly.</source>
         <translation type="obsolete">Daný adresář obsahuje více než jeden klíč.
 Zadejte prosím klíč přímo.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The key file found in the given directory is not readable.
 Please check your permissions.</source>
         <translation type="obsolete">Nalezený soubor s klíčem v zadaném adresáři nelze přečíst.
 Zkontrolujte prosím parametry souboru.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file could not be found.</source>
         <translation type="obsolete">Soubor s klíčem nemohl být nalezen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file is not readable.
 Please check your permissions.</source>
         <translation type="obsolete">Soubor s klíčem nelze přečíst.
 Zkontrolujte prosím parametry souboru.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Warning</source>
         <translation type="obsolete">Upozornění</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Password an password repetition are not equal.
 Please check your input.</source>
         <translation type="obsolete">Heslo a opakované heslo nejsou stejné.
 Zkontrolujte zadané údaje.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a password or select a key file.</source>
         <translation type="obsolete">Prosím vložte heslo nebo vyberte soubor s klíčem.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>A file with the name &apos;pwsafe.key&apos; already exisits in the given directory.
 Do you want to replace it?</source>
         <translation type="obsolete">Soubor se jménem &apos;pwsafe.key&apos; již v zadaném adresáři existuje.
 Chcete ho přepsat?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Ano</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Ne</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The exisiting file is not writable.</source>
         <translation type="obsolete">Existující soubor není zapisovatelný.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>A file with the this name already exisits.
 Do you want to replace it?</source>
         <translation type="obsolete">Soubor s tímto jménem již existuje.
 Chcete ho zaměnit?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The selected key file or directory is not readable.
 Please check your permissions.</source>
         <translation type="obsolete">Vybraný soubor s klíčem nebo adresář nelze otevřít.
 Prosím zkontrolujte jeho parametry.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
@@ -866,22 +806,18 @@ Prosím zkontrolujte jeho parametry.</translation>
 <context>
     <name>CSearchDlg</name>
     <message>
-        <location filename="" line="0"/>
         <source>Notice</source>
         <translation type="obsolete">Poznámka</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Please enter a search string.</source>
         <translation type="obsolete">Prosím vložte hledaný řetězec.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search</source>
         <translation type="obsolete">Vyhledat</translation>
     </message>
@@ -894,24 +830,26 @@ Prosím zkontrolujte jeho parametry.</translation>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../dialogs/SelectIconDlg.cpp" line="93"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="60"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="97"/>
         <source>Add Icons...</source>
         <translation>Přidat ikonky...</translation>
     </message>
     <message>
-        <location filename="../dialogs/SelectIconDlg.cpp" line="94"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="60"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="97"/>
         <source>Images (%1)</source>
         <translation>Obrázky (%1)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>%1: File could not be loaded.
 </source>
         <translation type="obsolete">%1: Soubor nemohl být otevřen.
 </translation>
     </message>
     <message>
-        <location filename="../dialogs/SelectIconDlg.cpp" line="98"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="72"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="102"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
@@ -921,14 +859,13 @@ Prosím zkontrolujte jeho parametry.</translation>
         <translation>Zaměnit...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>An error occured while loading the icon(s):
 %1</source>
         <translation type="obsolete">Vyskytla se chyba během otevírání ikonky (ikonek):
 %1</translation>
     </message>
     <message>
-        <location filename="../dialogs/SelectIconDlg.cpp" line="98"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="102"/>
         <source>An error occured while loading the icon.</source>
         <translation>Během otevírání ikonky se vyskytla chyba.</translation>
     </message>
@@ -943,12 +880,12 @@ Prosím zkontrolujte jeho parametry.</translation>
         <translation type="unfinished">Vybrat</translation>
     </message>
     <message>
-        <location filename="../dialogs/SelectIconDlg.cpp" line="62"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="66"/>
         <source>%1: File could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/SelectIconDlg.cpp" line="68"/>
+        <location filename="../dialogs/SelectIconDlg.cpp" line="72"/>
         <source>An error occured while loading the icon(s):</source>
         <translation type="unfinished"></translation>
     </message>
@@ -956,22 +893,25 @@ Prosím zkontrolujte jeho parametry.</translation>
 <context>
     <name>CSettingsDlg</name>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="350"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="212"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="319"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="333"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="347"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="355"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="352"/>
         <source>Select a directory...</source>
         <translation>Výběr adresáře...</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="362"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="359"/>
         <source>Select an executable...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="424"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="421"/>
         <source>System Language</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1089,6 +1029,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../forms/CustomizeDetailViewDlg.ui" line="51"/>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="135"/>
         <source>B</source>
         <translation type="unfinished"></translation>
@@ -1129,6 +1070,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../forms/CustomizeDetailViewDlg.ui" line="109"/>
         <location filename="../forms/CustomizeDetailViewDlg.ui" line="148"/>
         <source>C</source>
         <translation type="unfinished"></translation>
@@ -1264,7 +1206,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
@@ -1272,6 +1213,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Database</name>
     <message>
+        <location filename="../Database.cpp" line="78"/>
         <location filename="../Database.cpp" line="96"/>
         <source>Never</source>
         <translation type="unfinished">Nikdy</translation>
@@ -1411,12 +1353,10 @@ p, li { white-space: pre-wrap; }
         <translation>Skupina:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;zrušit</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
@@ -1436,17 +1376,14 @@ p, li { white-space: pre-wrap; }
         <translation>Ge&amp;n.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>...</source>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">O&amp;K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+K</translation>
     </message>
@@ -1461,7 +1398,6 @@ p, li { white-space: pre-wrap; }
         <translation>Příloha:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&gt;</source>
         <translation type="obsolete">&gt;</translation>
     </message>
@@ -1489,22 +1425,18 @@ p, li { white-space: pre-wrap; }
         <translation>Ikonka:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;zrušit</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">O&amp;K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+K</translation>
     </message>
@@ -1573,7 +1505,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Export_Txt</name>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file (FileError=%1)</source>
         <translation type="obsolete">Nelze otevřít soubor (FileError=%1)</translation>
     </message>
@@ -1687,22 +1618,18 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>GenPwDlg</name>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="141"/>
         <source>Alt+U</source>
         <translation type="obsolete">Alt+U</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="118"/>
         <source>Alt+N</source>
         <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="404"/>
         <source>Alt+M</source>
         <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="95"/>
         <source>Alt+L</source>
         <translation type="obsolete">Alt+L</translation>
     </message>
@@ -1712,12 +1639,10 @@ p, li { white-space: pre-wrap; }
         <translation>Generátor hesla</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Accep&amp;t</source>
         <translation type="obsolete">Převzí&amp;t</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;zrušit</translation>
     </message>
@@ -1762,22 +1687,18 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Zvláštní znaky</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="145"/>
         <source>Minus</source>
         <translation type="obsolete">Minus</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="99"/>
         <source>U&amp;nderline</source>
         <translation type="obsolete">Po&amp;dtržítko</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>h&amp;igher ANSI-Characters</source>
         <translation type="obsolete">&amp;Speciální ANSI znaky</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+H</source>
         <translation type="obsolete">Alt+H</translation>
     </message>
@@ -1787,7 +1708,6 @@ p, li { white-space: pre-wrap; }
         <translation>Používat &amp;jen následující znaky: </translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="172"/>
         <source>Alt+O</source>
         <translation type="obsolete">Alt+O</translation>
     </message>
@@ -1797,7 +1717,6 @@ p, li { white-space: pre-wrap; }
         <translation>Délka:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Use &quot;/dev/rando&amp;m&quot;</source>
         <translation type="obsolete">Použít &quot;/dev/rando&amp;m&quot;</translation>
     </message>
@@ -1807,17 +1726,14 @@ p, li { white-space: pre-wrap; }
         <translation>Použít následující &amp;skupiny znaků:</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="59"/>
         <source>Alt+W</source>
         <translation type="obsolete">Alt+W</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="122"/>
         <source>White &amp;Spaces</source>
         <translation type="obsolete">Me&amp;zery</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordGenDlg.ui" line="131"/>
         <source>Alt+S</source>
         <translation type="obsolete">Alt+S</translation>
     </message>
@@ -1888,6 +1804,32 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>HelpDlg</name>
+    <message>
+        <location filename="../forms/HelpDlg.ui" line="14"/>
+        <source>Help Contents - KeePassX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/HelpDlg.ui" line="22"/>
+        <location filename="../forms/HelpDlg.ui" line="25"/>
+        <source>Previous Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/HelpDlg.ui" line="32"/>
+        <location filename="../forms/HelpDlg.ui" line="35"/>
+        <source>Next Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/HelpDlg.ui" line="42"/>
+        <location filename="../forms/HelpDlg.ui" line="45"/>
+        <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Import_KWalletXml</name>
     <message>
         <location filename="../import/Import_KWalletXml.cpp" line="25"/>
@@ -1900,6 +1842,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../import/Import_KWalletXml.cpp" line="38"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="43"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="45"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="47"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="49"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="55"/>
         <location filename="../import/Import_KWalletXml.cpp" line="57"/>
         <source>Import Failed</source>
         <translation type="unfinished"></translation>
@@ -1910,6 +1858,10 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Neplatná XML data (viz stdout pro podrobnosti).</translation>
     </message>
     <message>
+        <location filename="../import/Import_KWalletXml.cpp" line="43"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="47"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="49"/>
+        <location filename="../import/Import_KWalletXml.cpp" line="55"/>
         <location filename="../import/Import_KWalletXml.cpp" line="57"/>
         <source>Invalid XML file.</source>
         <translation type="unfinished">Neplatný XML soubor.</translation>
@@ -1933,6 +1885,9 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="34"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="41"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="49"/>
         <location filename="../import/Import_KeePassX_Xml.cpp" line="53"/>
         <source>Import Failed</source>
         <translation type="unfinished"></translation>
@@ -1944,6 +1899,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="41"/>
+        <location filename="../import/Import_KeePassX_Xml.cpp" line="49"/>
         <location filename="../import/Import_KeePassX_Xml.cpp" line="53"/>
         <source>Parsing error: File is no valid KeePassX XML file.</source>
         <translation type="unfinished"></translation>
@@ -1962,6 +1919,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../import/Import_PwManager.cpp" line="40"/>
+        <location filename="../import/Import_PwManager.cpp" line="48"/>
+        <location filename="../import/Import_PwManager.cpp" line="51"/>
+        <location filename="../import/Import_PwManager.cpp" line="54"/>
+        <location filename="../import/Import_PwManager.cpp" line="57"/>
+        <location filename="../import/Import_PwManager.cpp" line="60"/>
+        <location filename="../import/Import_PwManager.cpp" line="67"/>
+        <location filename="../import/Import_PwManager.cpp" line="91"/>
+        <location filename="../import/Import_PwManager.cpp" line="103"/>
         <location filename="../import/Import_PwManager.cpp" line="109"/>
         <source>Import Failed</source>
         <translation type="unfinished"></translation>
@@ -1982,6 +1948,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
+        <location filename="../import/Import_PwManager.cpp" line="54"/>
         <location filename="../import/Import_PwManager.cpp" line="57"/>
         <source>Unsupported hash algorithm.</source>
         <translation type="unfinished">Nepodporovaný hash algoritmus.</translation>
@@ -2028,101 +1995,106 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Kdb3Database</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="524"/>
+        <location filename="../Kdb3Database.cpp" line="516"/>
+        <location filename="../Kdb3Database.cpp" line="525"/>
         <source>Could not open file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="540"/>
+        <location filename="../Kdb3Database.cpp" line="541"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation type="unfinished">Neočekávaná velikost souboru (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="557"/>
+        <location filename="../Kdb3Database.cpp" line="558"/>
         <source>Wrong Signature</source>
         <translation type="unfinished">Chybný podpis</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="562"/>
+        <location filename="../Kdb3Database.cpp" line="563"/>
         <source>Unsupported File Version.</source>
         <translation type="unfinished">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="571"/>
+        <location filename="../Kdb3Database.cpp" line="572"/>
         <source>Unknown Encryption Algorithm.</source>
         <translation type="unfinished">Neznámý algoritmus zašifrování.</translation>
     </message>
     <message>
+        <location filename="../Kdb3Database.cpp" line="599"/>
+        <source>Unable to initialize the twofish algorithm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../Kdb3Database.cpp" line="606"/>
+        <source>Unknown encryption algorithm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../Kdb3Database.cpp" line="611"/>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
         <translation type="unfinished">Rozšifrování se nepodařilo.
 Buď je nesprávný klíč nebo je soubor poškozen.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="632"/>
+        <location filename="../Kdb3Database.cpp" line="637"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation type="unfinished">Hash test selhal.
 Klíč je chybný nebo je soubor poškozen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [G1]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G1]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [G2]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G2]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E1]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E1]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E2]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E2]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E3]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E3]</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="717"/>
+        <location filename="../Kdb3Database.cpp" line="722"/>
         <source>Invalid group tree.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="933"/>
+        <location filename="../Kdb3Database.cpp" line="938"/>
         <source>Key file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1313"/>
+        <location filename="../Kdb3Database.cpp" line="1318"/>
         <source>The database must contain at least one group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1325"/>
         <source>Could not open file for writing.</source>
         <translation type="obsolete">Nebylo možné otevřít soubor pro zápis.</translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="711"/>
+        <location filename="../Kdb3Database.cpp" line="660"/>
+        <location filename="../Kdb3Database.cpp" line="667"/>
+        <location filename="../Kdb3Database.cpp" line="679"/>
+        <location filename="../Kdb3Database.cpp" line="693"/>
+        <location filename="../Kdb3Database.cpp" line="700"/>
+        <location filename="../Kdb3Database.cpp" line="716"/>
         <source>Unexpected error: Offset is out of range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="598"/>
-        <source>Unable to initalize the twofish algorithm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Kdb3Database.cpp" line="1333"/>
+        <location filename="../Kdb3Database.cpp" line="1338"/>
         <source>The database has been opened read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2130,22 +2102,22 @@ Klíč je chybný nebo je soubor poškozen.</translation>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1177"/>
+        <location filename="../Kdb3Database.cpp" line="1182"/>
         <source>Bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1185"/>
+        <location filename="../Kdb3Database.cpp" line="1190"/>
         <source>KiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1191"/>
+        <location filename="../Kdb3Database.cpp" line="1196"/>
         <source>MiB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Kdb3Database.cpp" line="1196"/>
+        <location filename="../Kdb3Database.cpp" line="1201"/>
         <source>GiB</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2153,57 +2125,56 @@ Klíč je chybný nebo je soubor poškozen.</translation>
 <context>
     <name>KeepassEntryView</name>
     <message>
-        <location filename="../lib/EntryView.cpp" line="477"/>
+        <location filename="../lib/EntryView.cpp" line="493"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="479"/>
+        <location filename="../lib/EntryView.cpp" line="495"/>
         <source>Username</source>
         <translation>Uživatelské jméno</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="481"/>
+        <location filename="../lib/EntryView.cpp" line="497"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="483"/>
+        <location filename="../lib/EntryView.cpp" line="499"/>
         <source>Password</source>
         <translation>Heslo</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="485"/>
+        <location filename="../lib/EntryView.cpp" line="501"/>
         <source>Comments</source>
         <translation>Komentáře</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="487"/>
+        <location filename="../lib/EntryView.cpp" line="503"/>
         <source>Expires</source>
         <translation>Vyprší</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="489"/>
+        <location filename="../lib/EntryView.cpp" line="505"/>
         <source>Creation</source>
         <translation>Vytvoření</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="491"/>
+        <location filename="../lib/EntryView.cpp" line="507"/>
         <source>Last Change</source>
         <translation>Poslední změna</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="493"/>
+        <location filename="../lib/EntryView.cpp" line="509"/>
         <source>Last Access</source>
         <translation>Poslední přístup</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="495"/>
+        <location filename="../lib/EntryView.cpp" line="511"/>
         <source>Attachment</source>
         <translation>Příloha</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>%1 items</source>
         <translation type="obsolete">%1 položky</translation>
     </message>
@@ -2213,22 +2184,22 @@ Klíč je chybný nebo je soubor poškozen.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="497"/>
+        <location filename="../lib/EntryView.cpp" line="513"/>
         <source>Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="258"/>
+        <location filename="../lib/EntryView.cpp" line="268"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="258"/>
+        <location filename="../lib/EntryView.cpp" line="268"/>
         <source>At least one group must exist before adding an entry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="258"/>
+        <location filename="../lib/EntryView.cpp" line="268"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -2251,7 +2222,6 @@ Klíč je chybný nebo je soubor poškozen.</translation>
         <translation>Výsledky hledání</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Groups</source>
         <translation type="obsolete">Skupiny</translation>
     </message>
@@ -2269,375 +2239,376 @@ Klíč je chybný nebo je soubor poškozen.</translation>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+N</source>
         <translation type="unfinished">Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Ctrl+K</source>
         <translation>Ctrl+K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>Shift+Ctrl+S</source>
         <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Shift+Ctrl+F</source>
         <translation>Shift+Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="400"/>
+        <location filename="../mainwindow.cpp" line="480"/>
+        <location filename="../mainwindow.cpp" line="503"/>
+        <location filename="../mainwindow.cpp" line="539"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The following error occured while opening the database:
 %1</source>
         <translation type="obsolete">Při otevírání databáze se objevila následující chyba:
 %1 </translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="516"/>
+        <location filename="../mainwindow.cpp" line="520"/>
         <source>Save modified file?</source>
         <translation>Uložit změněný soubor?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="471"/>
         <source>The current file was modified. Do you want
 to save the changes?</source>
         <translation type="obsolete">Aktuální soubor byl změněn. Mají být
 změny uloženy? </translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Ano</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Ne</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX - %1</source>
         <translation type="obsolete">KeePassX - %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&lt;B&gt;Group: &lt;/B&gt;%1  &lt;B&gt;Title: &lt;/B&gt;%2  &lt;B&gt;Username: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Password: &lt;/B&gt;%5  &lt;B&gt;Creation: &lt;/B&gt;%6  &lt;B&gt;Last Change: &lt;/B&gt;%7  &lt;B&gt;LastAccess: &lt;/B&gt;%8  &lt;B&gt;Expires: &lt;/B&gt;%9</source>
         <translation type="obsolete">&lt;B&gt;Skupina: &lt;/B&gt;%1  &lt;B&gt;Název: &lt;/B&gt;%2  &lt;B&gt;Uživ. jméno: &lt;/B&gt;%3  &lt;B&gt;URL: &lt;/B&gt;&lt;a href=%4&gt;%4&lt;/a&gt;  &lt;B&gt;Heslo: &lt;/B&gt;%5  &lt;B&gt;Vytvořeno: &lt;/B&gt;%6  &lt;B&gt;Poslední změna: &lt;/B&gt;%7  &lt;B&gt;Poslední přístup: &lt;/B&gt;%8  &lt;B&gt;Vyprší: &lt;/B&gt;%9</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="855"/>
+        <location filename="../mainwindow.cpp" line="794"/>
+        <location filename="../mainwindow.cpp" line="809"/>
+        <location filename="../mainwindow.cpp" line="845"/>
+        <location filename="../mainwindow.cpp" line="860"/>
         <source>Clone Entry</source>
         <translation>Naklonovat záznam</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="857"/>
+        <location filename="../mainwindow.cpp" line="796"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="847"/>
+        <location filename="../mainwindow.cpp" line="862"/>
         <source>Delete Entry</source>
         <translation>Smazat záznam</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="870"/>
+        <location filename="../mainwindow.cpp" line="824"/>
+        <location filename="../mainwindow.cpp" line="875"/>
         <source>Clone Entries</source>
         <translation>Naklonovat záznamy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="826"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>Delete Entries</source>
         <translation>Smazat záznamy</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File could not be saved.
 %1</source>
         <translation type="obsolete">Soubor nemohl být uložen.
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save Database As...</source>
         <translation type="obsolete">Uložit databázi jako ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1420"/>
+        <location filename="../mainwindow.cpp" line="1427"/>
         <source>Ready</source>
         <translation>Připraveno</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>[new]</source>
         <translation type="obsolete">[nový]</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="603"/>
+        <location filename="../mainwindow.cpp" line="607"/>
         <source>Open Database...</source>
         <translation>Otevřít databázi ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1423"/>
+        <location filename="../mainwindow.cpp" line="1430"/>
         <source>Loading Database...</source>
         <translation>Otevírání databáze ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1426"/>
+        <location filename="../mainwindow.cpp" line="1433"/>
         <source>Loading Failed</source>
         <translation>Otevření selhalo</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not create key file. The following error occured:
 %1</source>
         <translation type="obsolete">Nebylo možné vytvořit klíčový soubor. Vyskytla se následující chyba:
 %1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Export To...</source>
         <translation type="obsolete">Vyexportovat do ...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX [new]</source>
         <translation type="obsolete">KeePassX [new]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown error in Import_PwManager::importFile()()</source>
         <translation type="obsolete">Neznámá chyba v Import_PwManager::importFile()()</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown error in Import_KWalletXml::importFile()</source>
         <translation type="obsolete">Neznámaá chyba v Import_KWalletXml::importFile()</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown error in PwDatabase::openDatabase()</source>
         <translation type="obsolete">Neznámá chyba v PwDatabase::openDatabase()</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Toolbar</source>
         <translation type="obsolete">Panel nástrojů</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KeePassX</source>
         <translation type="obsolete">KeePassX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="477"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>Unknown error while loading database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="908"/>
+        <location filename="../mainwindow.cpp" line="607"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="908"/>
+        <location filename="../mainwindow.cpp" line="607"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="908"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Save Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="743"/>
+        <location filename="../mainwindow.cpp" line="748"/>
         <source>1 Month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="745"/>
+        <location filename="../mainwindow.cpp" line="750"/>
         <source>%1 Months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="751"/>
+        <location filename="../mainwindow.cpp" line="756"/>
         <source>1 Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="753"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>%1 Years</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="759"/>
+        <location filename="../mainwindow.cpp" line="764"/>
         <source>1 Day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="766"/>
         <source>%1 Days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="765"/>
+        <location filename="../mainwindow.cpp" line="770"/>
         <source>less than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1323"/>
+        <location filename="../mainwindow.cpp" line="338"/>
+        <location filename="../mainwindow.cpp" line="1322"/>
         <source>Locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1338"/>
+        <location filename="../mainwindow.cpp" line="338"/>
+        <location filename="../mainwindow.cpp" line="1337"/>
         <source>Unlocked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="499"/>
+        <location filename="../mainwindow.cpp" line="400"/>
+        <location filename="../mainwindow.cpp" line="503"/>
         <source>The database file does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1111"/>
+        <location filename="../mainwindow.cpp" line="573"/>
+        <location filename="../mainwindow.cpp" line="971"/>
+        <location filename="../mainwindow.cpp" line="1109"/>
         <source>new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="729"/>
+        <location filename="../mainwindow.cpp" line="734"/>
         <source>Expired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1324"/>
+        <location filename="../mainwindow.cpp" line="1323"/>
         <source>Un&amp;lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1339"/>
+        <location filename="../mainwindow.cpp" line="1338"/>
         <source>&amp;Lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="481"/>
         <source>The following error occured while opening the database:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="912"/>
+        <location filename="../mainwindow.cpp" line="906"/>
+        <location filename="../mainwindow.cpp" line="917"/>
         <source>File could not be saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1105"/>
+        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="1103"/>
         <source>Show &amp;Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="375"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="407"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>Database locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="411"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -2645,23 +2616,23 @@ Do you want to open it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="517"/>
+        <location filename="../mainwindow.cpp" line="521"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="539"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="414"/>
+        <location filename="../mainwindow.cpp" line="416"/>
         <source>Open read-only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1429"/>
+        <location filename="../mainwindow.cpp" line="1436"/>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2679,7 +2650,6 @@ Do you want to save the changes?</source>
         <translation type="unfinished">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
-        <location filename="../lib/tools.cpp" line="146"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
@@ -2687,532 +2657,493 @@ Do you want to save the changes?</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../forms/MainWindow.ui" line="17"/>
+        <location filename="../forms/MainWindow.ui" line="18"/>
         <source>KeePassX</source>
         <translation>KeePassX</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Columns</source>
         <translation type="obsolete">Sloupečky</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>PwManager File (*.pwm)</source>
         <translation type="obsolete">PwManager souboru (*.pwm)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>KWallet XML-File (*.xml)</source>
         <translation type="obsolete">KWallet XML-souboru (*.xml)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="589"/>
+        <location filename="../forms/MainWindow.ui" line="579"/>
         <source>Add New Group...</source>
         <translation type="unfinished">Přidat novou skupinu...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Edit Group...</source>
         <translation type="obsolete">Upravit skupinu...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Delete Group</source>
         <translation type="obsolete">Smazat skupinu</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Copy Password to Clipboard</source>
         <translation type="obsolete">Zkopírovat heslo do schránky</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Copy Username to Clipboard</source>
         <translation type="obsolete">Zkopírovat uživatelské jméno do schránky</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Open URL</source>
         <translation type="obsolete">Otevřít URL</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save Attachment As...</source>
         <translation type="obsolete">Uložit přílohu jako...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Add New Entry...</source>
         <translation type="obsolete">Přidat novou položku...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>View/Edit Entry...</source>
         <translation type="obsolete">Zobrazit/upravit položku...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Delete Entry</source>
         <translation type="obsolete">Smazat položku</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Clone Entry</source>
         <translation type="obsolete">Naklonovat položku</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search In Database...</source>
         <translation type="obsolete">Vyhledat v databázi...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search in this group...</source>
         <translation type="obsolete">Vyhledat v této skupině...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Toolbar</source>
         <translation type="obsolete">Panel nástrojů</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Entry Details</source>
         <translation type="obsolete">Detaily položky</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hide Usernames</source>
         <translation type="obsolete">Skrýt uživatelská jména</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hide Passwords</source>
         <translation type="obsolete">Skrýt hesla</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Title</source>
         <translation type="obsolete">Název</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Username</source>
         <translation type="obsolete">Uživatel</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>URL</source>
         <translation type="obsolete">URL</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Password</source>
         <translation type="obsolete">Heslo</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Comment</source>
         <translation type="obsolete">Komentář</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Expires</source>
         <translation type="obsolete">Platnost</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Creation</source>
         <translation type="obsolete">Vytvoření</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Last Change</source>
         <translation type="obsolete">Poslední změna</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Last Access</source>
         <translation type="obsolete">Poslední přístup</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Attachment</source>
         <translation type="obsolete">Příloha</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Show Statusbar</source>
         <translation type="obsolete">Stavový řádek</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Plain Text (*.txt)</source>
         <translation type="obsolete">Jednoduchého textu (*.txt)</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="506"/>
+        <location filename="../forms/MainWindow.ui" line="496"/>
         <source>Hide</source>
         <translation>Skrýt</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Perform AutoType</source>
         <translation type="obsolete">Provádět autodoplňování</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Type Here</source>
         <translation type="obsolete">Psát zde</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Toolbar Icon Size</source>
         <translation type="obsolete">Velikost ikonek na panelu nástrojů</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>16x16</source>
         <translation type="obsolete">16x16</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>22x22</source>
         <translation type="obsolete">22x22</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>28x28</source>
         <translation type="obsolete">28x28</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="191"/>
+        <location filename="../forms/MainWindow.ui" line="184"/>
         <source>&amp;View</source>
         <translation>&amp;Zobrazit</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="136"/>
+        <location filename="../forms/MainWindow.ui" line="129"/>
         <source>&amp;File</source>
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="145"/>
+        <location filename="../forms/MainWindow.ui" line="138"/>
         <source>&amp;Import from...</source>
         <translation>&amp;Importovat z ...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="140"/>
+        <location filename="../forms/MainWindow.ui" line="133"/>
         <source>&amp;Export to...</source>
         <translation>&amp;Exportovat do ...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="172"/>
         <source>&amp;Edit</source>
         <translation type="obsolete">&amp;Upravit</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="230"/>
+        <location filename="../forms/MainWindow.ui" line="223"/>
         <source>E&amp;xtras</source>
         <translation>&amp;Doplňky</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="128"/>
+        <location filename="../forms/MainWindow.ui" line="121"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="540"/>
+        <location filename="../forms/MainWindow.ui" line="530"/>
         <source>&amp;New Database...</source>
         <translation type="unfinished">Nová &amp;databáze...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="262"/>
+        <location filename="../forms/MainWindow.ui" line="255"/>
         <source>&amp;Open Database...</source>
         <translation>&amp;Otevřít databázi...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="267"/>
+        <location filename="../forms/MainWindow.ui" line="260"/>
         <source>&amp;Close Database</source>
         <translation>Za&amp;vřít databázi</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="272"/>
+        <location filename="../forms/MainWindow.ui" line="265"/>
         <source>&amp;Save Database</source>
         <translation>Uloži&amp;t databázi</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="277"/>
+        <location filename="../forms/MainWindow.ui" line="270"/>
         <source>Save Database &amp;As...</source>
         <translation>Uložit databázi &amp;jako...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="282"/>
+        <location filename="../forms/MainWindow.ui" line="275"/>
         <source>&amp;Database Settings...</source>
         <translation>Nastavení data&amp;báze...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="287"/>
+        <location filename="../forms/MainWindow.ui" line="280"/>
         <source>Change &amp;Master Key...</source>
         <translation>Změnit &amp;master klíč...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>E&amp;xit</source>
         <translation type="obsolete">Uk&amp;ončit</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="474"/>
+        <location filename="../forms/MainWindow.ui" line="467"/>
         <source>&amp;Settings...</source>
         <translation>N&amp;astavení...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="482"/>
+        <location filename="../forms/MainWindow.ui" line="475"/>
         <source>&amp;About...</source>
         <translation>O a&amp;plikaci...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="498"/>
+        <location filename="../forms/MainWindow.ui" line="491"/>
         <source>&amp;KeePassX Handbook...</source>
         <translation>&amp;KeePassX příručka...</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="566"/>
+        <location filename="../forms/MainWindow.ui" line="556"/>
         <source>Recycle Bin...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="55"/>
+        <location filename="../forms/MainWindow.ui" line="48"/>
         <source>Groups</source>
         <translation type="unfinished">Skupiny</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="292"/>
+        <location filename="../forms/MainWindow.ui" line="285"/>
         <source>&amp;Lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="150"/>
+        <location filename="../forms/MainWindow.ui" line="143"/>
         <source>&amp;Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="195"/>
+        <location filename="../forms/MainWindow.ui" line="188"/>
         <source>Toolbar &amp;Icon Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="203"/>
+        <location filename="../forms/MainWindow.ui" line="196"/>
         <source>&amp;Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="257"/>
+        <location filename="../forms/MainWindow.ui" line="250"/>
         <source>&amp;Manage Bookmarks...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="297"/>
+        <location filename="../forms/MainWindow.ui" line="290"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="310"/>
+        <location filename="../forms/MainWindow.ui" line="303"/>
         <source>&amp;Edit Group...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="315"/>
+        <location filename="../forms/MainWindow.ui" line="308"/>
         <source>&amp;Delete Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="320"/>
+        <location filename="../forms/MainWindow.ui" line="313"/>
         <source>Copy Password &amp;to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="325"/>
+        <location filename="../forms/MainWindow.ui" line="318"/>
         <source>Copy &amp;Username to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="330"/>
+        <location filename="../forms/MainWindow.ui" line="323"/>
         <source>&amp;Open URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="335"/>
+        <location filename="../forms/MainWindow.ui" line="328"/>
         <source>&amp;Save Attachment As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="340"/>
+        <location filename="../forms/MainWindow.ui" line="333"/>
         <source>Add &amp;New Entry...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="345"/>
+        <location filename="../forms/MainWindow.ui" line="338"/>
         <source>&amp;View/Edit Entry...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="350"/>
+        <location filename="../forms/MainWindow.ui" line="343"/>
         <source>De&amp;lete Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="355"/>
+        <location filename="../forms/MainWindow.ui" line="348"/>
         <source>&amp;Clone Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="360"/>
+        <location filename="../forms/MainWindow.ui" line="353"/>
         <source>Search &amp;in Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="365"/>
+        <location filename="../forms/MainWindow.ui" line="358"/>
         <source>Search in this &amp;Group...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="373"/>
+        <location filename="../forms/MainWindow.ui" line="366"/>
         <source>Show &amp;Entry Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="381"/>
+        <location filename="../forms/MainWindow.ui" line="374"/>
         <source>Hide &amp;Usernames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="389"/>
+        <location filename="../forms/MainWindow.ui" line="382"/>
         <source>Hide &amp;Passwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="397"/>
+        <location filename="../forms/MainWindow.ui" line="390"/>
         <source>&amp;Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="405"/>
+        <location filename="../forms/MainWindow.ui" line="398"/>
         <source>User&amp;name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="413"/>
+        <location filename="../forms/MainWindow.ui" line="406"/>
         <source>&amp;URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="421"/>
+        <location filename="../forms/MainWindow.ui" line="414"/>
         <source>&amp;Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="429"/>
+        <location filename="../forms/MainWindow.ui" line="422"/>
         <source>&amp;Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="437"/>
+        <location filename="../forms/MainWindow.ui" line="430"/>
         <source>E&amp;xpires</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="445"/>
+        <location filename="../forms/MainWindow.ui" line="438"/>
         <source>C&amp;reation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="453"/>
+        <location filename="../forms/MainWindow.ui" line="446"/>
         <source>&amp;Last Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="461"/>
+        <location filename="../forms/MainWindow.ui" line="454"/>
         <source>Last &amp;Access</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="469"/>
+        <location filename="../forms/MainWindow.ui" line="462"/>
         <source>A&amp;ttachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="493"/>
+        <location filename="../forms/MainWindow.ui" line="486"/>
         <source>Show &amp;Statusbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="511"/>
+        <location filename="../forms/MainWindow.ui" line="501"/>
         <source>&amp;Perform AutoType</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="519"/>
+        <location filename="../forms/MainWindow.ui" line="509"/>
         <source>&amp;16x16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="527"/>
+        <location filename="../forms/MainWindow.ui" line="517"/>
         <source>&amp;22x22</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="535"/>
+        <location filename="../forms/MainWindow.ui" line="525"/>
         <source>2&amp;8x28</source>
         <translation type="unfinished">28x28 {2&amp;8x?}</translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="545"/>
+        <location filename="../forms/MainWindow.ui" line="535"/>
         <source>&amp;Password Generator...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="556"/>
+        <location filename="../forms/MainWindow.ui" line="546"/>
         <source>&amp;Group (search results only)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="561"/>
+        <location filename="../forms/MainWindow.ui" line="551"/>
         <source>Show &amp;Expired Entries...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="574"/>
+        <location filename="../forms/MainWindow.ui" line="564"/>
         <source>&amp;Add Bookmark...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="579"/>
+        <location filename="../forms/MainWindow.ui" line="569"/>
         <source>Bookmark &amp;this Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="305"/>
+        <location filename="../forms/MainWindow.ui" line="298"/>
         <source>&amp;Add New Subgroup...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="584"/>
+        <location filename="../forms/MainWindow.ui" line="574"/>
         <source>Copy URL to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="172"/>
+        <location filename="../forms/MainWindow.ui" line="165"/>
         <source>&amp;Entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="240"/>
+        <location filename="../forms/MainWindow.ui" line="233"/>
         <source>&amp;Groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/MainWindow.ui" line="594"/>
+        <location filename="../forms/MainWindow.ui" line="584"/>
         <source>Sort groups</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3220,6 +3151,7 @@ Do you want to save the changes?</source>
 <context>
     <name>ManageBookmarksDlg</name>
     <message>
+        <location filename="../dialogs/ManageBookmarksDlg.cpp" line="56"/>
         <location filename="../forms/ManageBookmarksDlg.ui" line="19"/>
         <source>Manage Bookmarks</source>
         <translation type="unfinished"></translation>
@@ -3258,11 +3190,13 @@ Do you want to save the changes?</source>
         <translation type="unfinished">Vyberte soubor s klíčem</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="179"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="341"/>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="180"/>
         <location filename="../dialogs/PasswordDlg.cpp" line="342"/>
         <source>Key Files (*.key)</source>
         <translation type="unfinished"></translation>
@@ -3283,6 +3217,7 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../dialogs/PasswordDlg.cpp" line="224"/>
         <location filename="../dialogs/PasswordDlg.cpp" line="262"/>
         <source>%1:
 No such file or directory.</source>
@@ -3299,7 +3234,7 @@ No such file or directory.</source>
         <translation type="unfinished">Daný adresář neobsahuje žádné soubory s klíči.</translation>
     </message>
     <message>
-        <location filename="../dialogs/PasswordDlg.cpp" line="253"/>
+        <location filename="../dialogs/PasswordDlg.cpp" line="252"/>
         <source>The given directory contains more then one key files.
 Please specify the key file directly.</source>
         <translation type="unfinished"></translation>
@@ -3319,22 +3254,18 @@ File is not readable.</source>
 <context>
     <name>PasswordDlg</name>
     <message>
-        <location filename="" line="0"/>
         <source>TextLabel</source>
         <translation type="obsolete">Textová nálepka</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>...</source>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
@@ -3354,7 +3285,6 @@ File is not readable.</source>
         <translation>Heslo:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file or directory:</source>
         <translation type="obsolete">Soubor s klíčem nebo adresář:</translation>
     </message>
@@ -3364,22 +3294,18 @@ File is not readable.</source>
         <translation>&amp;Projít...</translation>
     </message>
     <message>
-        <location filename="../forms/PasswordDlg.ui" line="194"/>
         <source>Alt+B</source>
         <translation type="obsolete">Alt+B</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Use Password AND Key File</source>
         <translation type="obsolete">Použít heslo současně se souborem s klíčem</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Exit</source>
         <translation type="obsolete">Ukončit</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Password Repet.:</source>
         <translation type="obsolete">Zopakování hesla:</translation>
     </message>
@@ -3417,89 +3343,72 @@ File is not readable.</source>
 <context>
     <name>PwDatabase</name>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown Error</source>
         <translation type="obsolete">Neznámá chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation type="obsolete">Neočekávaná velikost souboru (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Wrong Signature</source>
         <translation type="obsolete">Chybný podpis</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>AES-Init Failed</source>
         <translation type="obsolete">AES-Init selhal</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [G1]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G1]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [G2]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G2]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E1]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E1]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E2]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E2]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E3]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E3]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Hash test selhal.
 Klíč je chybný nebo je soubor poškozen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open key file.</source>
         <translation type="obsolete">Nebylo možné otevřít soubor s klíčem.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Key file could not be written.</source>
         <translation type="obsolete">Soubor s klíčem nemohl být uložen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file.</source>
         <translation type="obsolete">Nebylo možné otevřít soubor.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file for writing.</source>
         <translation type="obsolete">Nebylo možné otevřít soubor pro zápis.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported File Version.</source>
         <translation type="obsolete">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown Encryption Algorithm.</source>
         <translation type="obsolete">Neznámý algoritmus zašifrování.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Rozšifrování se nepodařilo.
@@ -3509,116 +3418,94 @@ Buď je nesprávný klíč nebo je soubor poškozen.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="" line="0"/>
         <source>Warning</source>
         <translation type="obsolete">Upozornění</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not save configuration file.
 Make sure you have write access to &apos;~/.keepass&apos;.</source>
         <translation type="obsolete">Nebylo možné uložit konfigurační soubor,
 Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File &apos;%1&apos; could not be found.</source>
         <translation type="obsolete">Soubor &apos;%1&apos; nemohl být nalezen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File not found.</source>
         <translation type="obsolete">Soubor nenalezen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file.</source>
         <translation type="obsolete">Nebylo možné otevřít soubor.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File is no valid PwManager file.</source>
         <translation type="obsolete">Soubor není ve formátu PwManager.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported file version.</source>
         <translation type="obsolete">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported hash algorithm.</source>
         <translation type="obsolete">Nepodporovaný hash algoritmus.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported encryption algorithm.</source>
         <translation type="obsolete">Nepodporovaný šifrovací algoritmus.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Compressed files are not supported yet.</source>
         <translation type="obsolete">Zkompresované soubory nejsou ještě  podporovány.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Wrong password.</source>
         <translation type="obsolete">Chybné heslo.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File is damaged (hash test failed).</source>
         <translation type="obsolete">Soubor je poškozen (hast test selhall).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid XML data (see stdout for details).</source>
         <translation type="obsolete">Neplatná XML data (viz stdout pro podrobnosti).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>File is empty.</source>
         <translation type="obsolete">Soubor je prázdný.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid XML file (see stdout for details).</source>
         <translation type="obsolete">Neplatný XML soubor (viz stdout pro detaily).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid XML file.</source>
         <translation type="obsolete">Neplatný XML soubor.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Document does not contain data.</source>
         <translation type="obsolete">Dokument neobsahuje žádná data.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Error</source>
         <translation type="obsolete">Chyba</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Warning:</source>
         <translation type="obsolete">Upozornění:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Invalid RGB color value.
 </source>
         <translation type="obsolete">Neplatná RGB hodnota barvy.
 </translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Never</source>
         <translation type="obsolete">Nikdy</translation>
     </message>
@@ -3626,6 +3513,7 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
 <context>
     <name>SearchDialog</name>
     <message>
+        <location filename="../dialogs/SearchDlg.cpp" line="28"/>
         <location filename="../dialogs/SearchDlg.cpp" line="51"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
@@ -3634,12 +3522,10 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
 <context>
     <name>Search_Dlg</name>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="133"/>
         <source>Alt+T</source>
         <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="123"/>
         <source>Alt+U</source>
         <translation type="obsolete">Alt+U</translation>
     </message>
@@ -3649,17 +3535,14 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>Přílo&amp;ha</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="93"/>
         <source>Alt+N</source>
         <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="83"/>
         <source>Alt+W</source>
         <translation type="obsolete">Alt+W</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="151"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
@@ -3679,7 +3562,6 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>Regulární &amp;výraz</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="161"/>
         <source>Alt+X</source>
         <translation type="obsolete">Alt+X</translation>
     </message>
@@ -3709,7 +3591,6 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>Ko&amp;mentáře</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="113"/>
         <source>Alt+O</source>
         <translation type="obsolete">Alt+O</translation>
     </message>
@@ -3719,7 +3600,6 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>U&amp;RLs</translation>
     </message>
     <message>
-        <location filename="../forms/SearchDlg.ui" line="103"/>
         <source>Alt+R</source>
         <translation type="obsolete">Alt+R</translation>
     </message>
@@ -3729,17 +3609,14 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>He&amp;sla</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Search</source>
         <translation type="obsolete">Hledat</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Clo&amp;se</source>
         <translation type="obsolete">U&amp;zavřít</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+S</source>
         <translation type="obsolete">Alt+S</translation>
     </message>
@@ -3757,425 +3634,405 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>Výběr ikonky</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Add Custom Icon...</source>
         <translation type="obsolete">Přidat vlastní ikonku...</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Pick</source>
         <translation type="obsolete">Vybrat</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Zrušit</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
-    <message encoding="UTF-8">
-        <location filename="../forms/SettingsDlg.ui" line="194"/>
+    <message utf8="true">
         <source>Alt+Ö</source>
         <translation type="obsolete">Alt+Ö</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">O&amp;K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="13"/>
+        <location filename="../forms/SettingsDlg.ui" line="14"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="956"/>
+        <location filename="../forms/SettingsDlg.ui" line="887"/>
         <source>Clear clipboard after:</source>
         <translation>Smazat schránku po:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Seconds</source>
         <translation type="obsolete">Sekundách</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Sh&amp;ow passwords in plain text by default</source>
         <translation type="obsolete">Zobrazovat &amp;hesla vždy jako obyčejný text</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="943"/>
         <source>Alt+O</source>
         <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="309"/>
         <source>Appea&amp;rance</source>
         <translation type="obsolete">Zo&amp;brazení</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="474"/>
+        <location filename="../forms/SettingsDlg.ui" line="421"/>
         <source>Banner Color</source>
         <translation>Barva banneru</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="488"/>
+        <location filename="../forms/SettingsDlg.ui" line="435"/>
         <source>Text Color:</source>
         <translation>Barva textu:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="617"/>
+        <location filename="../forms/SettingsDlg.ui" line="476"/>
+        <location filename="../forms/SettingsDlg.ui" line="564"/>
         <source>Change...</source>
         <translation>Změnit...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="542"/>
+        <location filename="../forms/SettingsDlg.ui" line="489"/>
         <source>Color 2:</source>
         <translation>Barva 2:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="667"/>
+        <location filename="../forms/SettingsDlg.ui" line="614"/>
         <source>C&amp;hange...</source>
         <translation>Z&amp;měnit...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="679"/>
         <source>Alt+H</source>
         <translation type="obsolete">Alt+H</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="680"/>
+        <location filename="../forms/SettingsDlg.ui" line="627"/>
         <source>Color 1:</source>
         <translation>Barva 1:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Expand group tree when opening a database</source>
         <translation type="obsolete">Při otevření databáze rozvinout skupiny ve stromové struktuře </translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Other</source>
         <translation type="obsolete">&amp;Ostatní</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Browser Command:</source>
         <translation type="obsolete">Příkaz pro prohlížeč:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Securi&amp;ty</source>
         <translation type="obsolete">&amp;Bezpečnost</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="708"/>
+        <location filename="../forms/SettingsDlg.ui" line="655"/>
         <source>Alternating Row Colors</source>
         <translation>Střídavě barevné podklady řádků</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1107"/>
+        <location filename="../forms/SettingsDlg.ui" line="1030"/>
         <source>Browse...</source>
         <translation>Projít...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="219"/>
+        <location filename="../forms/SettingsDlg.ui" line="182"/>
         <source>Remember last key type and location</source>
         <translation>Zapamatovat naposledy napsaný klíč a umístění</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Mounting Root:</source>
         <translation type="obsolete">Mountovat jako Root:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="191"/>
+        <location filename="../forms/SettingsDlg.ui" line="154"/>
         <source>Remember last opened file</source>
         <translation>Zapamatovat naposledy otevřený soubor</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="122"/>
+        <location filename="../forms/SettingsDlg.ui" line="115"/>
         <source>Show system tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="180"/>
-        <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/SettingsDlg.ui" line="295"/>
+        <location filename="../forms/SettingsDlg.ui" line="258"/>
         <source>Save recent directories of file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="749"/>
+        <location filename="../forms/SettingsDlg.ui" line="696"/>
         <source>Group tree at start-up:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="756"/>
+        <location filename="../forms/SettingsDlg.ui" line="703"/>
         <source>Restore last state</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="763"/>
+        <location filename="../forms/SettingsDlg.ui" line="710"/>
         <source>Expand all items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="770"/>
+        <location filename="../forms/SettingsDlg.ui" line="717"/>
         <source>Do not expand any item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="94"/>
+        <location filename="../forms/SettingsDlg.ui" line="95"/>
         <source>Security</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="928"/>
+        <location filename="../forms/SettingsDlg.ui" line="859"/>
         <source>Edit Entry Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1308"/>
+        <location filename="../forms/SettingsDlg.ui" line="1215"/>
         <source>Plug-Ins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1317"/>
+        <location filename="../forms/SettingsDlg.ui" line="1224"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1324"/>
+        <location filename="../forms/SettingsDlg.ui" line="1231"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1331"/>
+        <location filename="../forms/SettingsDlg.ui" line="1238"/>
         <source>KDE 4 Desktop Integration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1346"/>
+        <location filename="../forms/SettingsDlg.ui" line="1253"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1366"/>
+        <location filename="../forms/SettingsDlg.ui" line="1273"/>
         <source>Configure...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="99"/>
+        <location filename="../forms/SettingsDlg.ui" line="100"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="318"/>
+        <location filename="../forms/SettingsDlg.ui" line="281"/>
         <source>Clear History Now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="340"/>
+        <location filename="../forms/SettingsDlg.ui" line="303"/>
         <source>Always ask before deleting entries or groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="720"/>
+        <location filename="../forms/SettingsDlg.ui" line="667"/>
         <source>Customize Entry Detail View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1260"/>
+        <location filename="../forms/SettingsDlg.ui" line="1175"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1270"/>
+        <location filename="../forms/SettingsDlg.ui" line="1185"/>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1126"/>
+        <location filename="../forms/SettingsDlg.ui" line="1049"/>
         <source>Auto-Type Fine Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1135"/>
+        <location filename="../forms/SettingsDlg.ui" line="1058"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1184"/>
+        <location filename="../forms/SettingsDlg.ui" line="1061"/>
+        <location filename="../forms/SettingsDlg.ui" line="1107"/>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1148"/>
+        <location filename="../forms/SettingsDlg.ui" line="1071"/>
         <source>Pre-Gap:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1171"/>
+        <location filename="../forms/SettingsDlg.ui" line="1094"/>
         <source>Key Stroke Delay:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1181"/>
+        <location filename="../forms/SettingsDlg.ui" line="1104"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1100"/>
+        <location filename="../forms/SettingsDlg.ui" line="1023"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1090"/>
+        <location filename="../forms/SettingsDlg.ui" line="1013"/>
         <source>Media Root:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1116"/>
+        <location filename="../forms/SettingsDlg.ui" line="1039"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1119"/>
+        <location filename="../forms/SettingsDlg.ui" line="1042"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="150"/>
+        <location filename="../forms/SettingsDlg.ui" line="143"/>
         <source>Minimize to tray instead of taskbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="249"/>
+        <location filename="../forms/SettingsDlg.ui" line="212"/>
         <source>Start minimized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="279"/>
+        <location filename="../forms/SettingsDlg.ui" line="242"/>
         <source>Start locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="994"/>
+        <location filename="../forms/SettingsDlg.ui" line="925"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1199"/>
+        <location filename="../forms/SettingsDlg.ui" line="1122"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1066"/>
+        <location filename="../forms/SettingsDlg.ui" line="989"/>
         <source>Custom Browser Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1078"/>
+        <location filename="../forms/SettingsDlg.ui" line="1001"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="435"/>
+        <location filename="../forms/SettingsDlg.ui" line="390"/>
         <source>Automatically save database on exit and workspace locking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="919"/>
+        <location filename="../forms/SettingsDlg.ui" line="850"/>
         <source>Show plain text passwords in:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="935"/>
+        <location filename="../forms/SettingsDlg.ui" line="866"/>
         <source>Database Key Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1032"/>
+        <location filename="../forms/SettingsDlg.ui" line="916"/>
+        <location filename="../forms/SettingsDlg.ui" line="963"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1003"/>
+        <location filename="../forms/SettingsDlg.ui" line="934"/>
         <source>Lock database after inactivity of</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1228"/>
+        <location filename="../forms/SettingsDlg.ui" line="1151"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="74"/>
+        <location filename="../forms/SettingsDlg.ui" line="75"/>
         <source>General (1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="79"/>
+        <location filename="../forms/SettingsDlg.ui" line="80"/>
         <source>General (2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="84"/>
+        <location filename="../forms/SettingsDlg.ui" line="85"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="89"/>
+        <location filename="../forms/SettingsDlg.ui" line="90"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="372"/>
+        <location filename="../forms/SettingsDlg.ui" line="327"/>
         <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="400"/>
+        <location filename="../forms/SettingsDlg.ui" line="355"/>
         <source>Delete backup entries older than:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="426"/>
+        <location filename="../forms/SettingsDlg.ui" line="381"/>
         <source>days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="442"/>
+        <location filename="../forms/SettingsDlg.ui" line="397"/>
         <source>Automatically save database after every change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="845"/>
+        <location filename="../forms/SettingsDlg.ui" line="784"/>
         <source>Language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="852"/>
+        <location filename="../forms/SettingsDlg.ui" line="791"/>
         <source>Author:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4211,22 +4068,18 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
 <context>
     <name>SimplePasswordDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">O&amp;K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+K</source>
         <translation type="obsolete">Alt+K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Alt+C</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>...</source>
         <translation type="obsolete">...</translation>
     </message>
@@ -4241,7 +4094,6 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
         <translation>Heslo:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Zrušit</translation>
     </message>
@@ -4249,66 +4101,54 @@ Ujistěte se, že je možný přístup do  &apos;~/.keepass&apos;.</translation>
 <context>
     <name>StandardDatabase</name>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
         <translation type="obsolete">Neočekávaná velikost souboru (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Wrong Signature</source>
         <translation type="obsolete">Chybný podpis</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unsupported File Version.</source>
         <translation type="obsolete">Nepodporovaná verze souboru.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unknown Encryption Algorithm.</source>
         <translation type="obsolete">Neznámý algoritmus zašifrování.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Rozšifrování se nepodařilo.
 Buď je nesprávný klíč nebo je soubor poškozen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
         <translation type="obsolete">Hash test selhal.
 Klíč je chybný nebo je soubor poškozen.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [G1]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G1]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [G2]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [G2]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E1]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E1]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E2]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E2]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Unexpected error: Offset is out of range. [E3]</source>
         <translation type="obsolete">Neočekávaná chyba: Offset je mimo rozsah. [E3]</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open file for writing.</source>
         <translation type="obsolete">Nebylo možné otevřít soubor pro zápis.</translation>
     </message>
@@ -4330,6 +4170,7 @@ from the drop-down list, or enter the window title manually:</source>
 <context>
     <name>Translation</name>
     <message>
+        <location filename="../dialogs/AboutDlg.cpp" line="34"/>
         <location filename="../lib/tools.cpp" line="352"/>
         <source>$TRANSLATION_AUTHOR</source>
         <translation type="unfinished">Marek Straka</translation>
@@ -4350,7 +4191,6 @@ from the drop-down list, or enter the window title manually:</source>
 <context>
     <name>TrashCanDialog</name>
     <message>
-        <location filename="" line="0"/>
         <source>Title</source>
         <translation type="obsolete">Název</translation>
     </message>
@@ -4384,47 +4224,38 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>dbsettingdlg_base</name>
     <message>
-        <location filename="" line="0"/>
         <source>Database Settings</source>
         <translation type="obsolete">Nastavení databáze</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Encryption</source>
         <translation type="obsolete">Zašifrování</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Algorithm:</source>
         <translation type="obsolete">Algoritmus:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>?</source>
         <translation type="obsolete">?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Encryption Rounds:</source>
         <translation type="obsolete">Počet kol zašifrování:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>O&amp;K</source>
         <translation type="obsolete">O&amp;K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Ctrl+K</source>
         <translation type="obsolete">Ctrl+K</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Ctrl+C</source>
         <translation type="obsolete">Ctrl+C</translation>
     </message>

@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr_TR">
+<TS version="2.0" language="pl_PL">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>Information on how to translate KeePassX can be found under:</source>
-        <translation>KeePassX uygulamasının nasıl çevrileceğine ilişkin bilgileri burada bulabilirsiniz:</translation>
+        <translation>Informacje jak tłumaczyć KeePassX można znaleźć pod adresem:</translation>
     </message>
     <message>
         <source>Team</source>
-        <translation>Takım</translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>Developer, Project Admin</source>
-        <translation>Geliştirici, Proje Yöneticisi</translation>
+        <translation>Programista i administrator projektu</translation>
     </message>
     <message>
         <source>Web Designer</source>
-        <translation>Web Tasarımı</translation>
+        <translation>Projektant strony www</translation>
     </message>
     <message>
         <source>Developer</source>
-        <translation>Geliştirici</translation>
+        <translation>Programista</translation>
     </message>
     <message>
         <source>Thanks To</source>
-        <translation>Teşekkürler</translation>
+        <translation>Podziękowania dla</translation>
     </message>
     <message>
         <source>Patches for better MacOS X support</source>
-        <translation>Daha iyi MacOS X desteği için yamalar</translation>
+        <translation>Łatki poprawiające wsparcie dla MacOS X</translation>
     </message>
     <message>
         <source>Main Application Icon</source>
-        <translation>Ugulamanın Simgesi</translation>
+        <translation>Główna ikona programu</translation>
     </message>
     <message>
         <source>Various fixes and improvements</source>
-        <translation>Çeşitli hata düzeltmeleri ve geliştirmeler</translation>
+        <translation>Różne poprawki i rozszerzenia</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation>&apos;%1&apos; dosyası bulunamadı.</translation>
+        <translation>Nie można odnaleźć pliku &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Make sure that the program is installed correctly.</source>
-        <translation>Uygulamanın doğru yüklendiğinden emin olun.</translation>
+        <translation>Upewnij się, że program jest zainstalowany poprawnie.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Current Translation</source>
-        <translation>Şimdiki Çeviri</translation>
+        <translation>Bieżące tłumaczenie</translation>
     </message>
     <message>
         <source>None</source>
         <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation>Hiçbiri</translation>
+        <translation> </translation>
     </message>
     <message>
         <source>Author</source>
-        <translation>Serdar Soytetir</translation>
+        <translation>Autor</translation>
     </message>
 </context>
 <context>
     <name>AboutDlg</name>
     <message>
         <source>About</source>
-        <translation>Hakkında</translation>
+        <translation>O programie</translation>
     </message>
     <message>
         <source>AppName</source>
-        <translation>AppName</translation>
+        <translation type="unfinished">Nazwa Programu</translation>
     </message>
     <message>
         <source>AppFunc</source>
-        <translation>AppFunc</translation>
+        <translation type="unfinished">Funkcja programu</translation>
     </message>
     <message>
         <source>http://keepassx.sourceforge.net</source>
@@ -93,324 +93,323 @@
     </message>
     <message>
         <source>Credits</source>
-        <translation>Katkıda Bulunanlar</translation>
+        <translation>Podziękowania</translation>
     </message>
     <message>
         <source>Translation</source>
-        <translation>Yerelleştirme</translation>
+        <translation>Tłumaczenie</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Lisans</translation>
+        <translation>Licencja</translation>
     </message>
     <message>
         <source>Copyright (C) 2005 - 2009 KeePassX Team
 KeePassX is distributed under the terms of the
 General Public License (GPL) version 2.</source>
-        <translation>Copyright (C) 2005 - 2009 KeePassX Takımı
-KeePassX Genel Kamu Lisansı&apos;nın 2. sürümü
-ile dağıtılmaktadır.</translation>
+        <translation>Copyright (C) 2005 - 2009 Zespół KeePassX
+KeePassX jest rozprowadzany na licencji
+General Public License (GPL) version 2.</translation>
     </message>
 </context>
 <context>
     <name>AddBookmarkDlg</name>
     <message>
         <source>Add Bookmark</source>
-        <translation>Yer İmi Ekle</translation>
+        <translation>Dodaj zakładkę</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Başlık:</translation>
+        <translation>Tytuł:</translation>
     </message>
     <message>
         <source>File:</source>
-        <translation>Dosya:</translation>
+        <translation>Plik:</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Gözat...</translation>
+        <translation>Przeglądaj...</translation>
     </message>
     <message>
         <source>Edit Bookmark</source>
-        <translation>Yer İmini Düzenle</translation>
+        <translation>Edytuj Zakładkę</translation>
     </message>
     <message>
         <source>KeePass Databases (*.kdb)</source>
-        <translation>KeePassX Veritabanları (*.kdb)</translation>
+        <translation>Bazy KeePass (*.kdb)</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
 </context>
 <context>
     <name>AutoTypeDlg</name>
     <message>
         <source>KeePassX - Auto-Type</source>
-        <translation>KeePassX - Otomatik-Tip</translation>
+        <translation type="unfinished">KeePassX - Auto-Type</translation>
     </message>
     <message>
         <source>Click on an entry to auto-type it.</source>
-        <translation>Bir girdiyi otomatik-tip yapmak için üzerine tıklayın.</translation>
+        <translation type="unfinished">Kliknij na wpis, to auto-type it.</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation>Grup</translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Başlık</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Kullanıcı Adı</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>Auto-Type</source>
-        <translation>Otomatik-Tip</translation>
+        <translation type="unfinished">Auto-Type</translation>
     </message>
 </context>
 <context>
     <name>CDbSettingsDlg</name>
     <message>
         <source>Settings</source>
-        <translation>Ayarlar</translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>AES(Rijndael):  256 Bit   (default)</source>
-        <translation>AES(Rijndael):  256 Bit   (öntanımlı)</translation>
+        <translation type="unfinished">AES(Rijndael):  256 Bitów   (domyślnie)</translation>
     </message>
     <message>
         <source>Twofish:  256 Bit</source>
-        <translation> Twofish:  256 Bit</translation>
+        <translation type="unfinished">Twofish:  256 Bitów</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Uyarı</translation>
+        <translation>Uwaga!</translation>
     </message>
     <message>
         <source>Please determine the number of encryption rounds.</source>
-        <translation>Lütfen şifrelemenin kaç basamak ile yapılacağını belirtin.</translation>
+        <translation>Podaj ilość powtórzeń szyfrowania</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>&apos;%1&apos; is not valid integer value.</source>
-        <translation>&apos;%1&apos; geçerli bir tam sayı değeri değil.</translation>
+        <translation>&apos;%1&apos; nie jest liczbą całkowitą.</translation>
     </message>
     <message>
         <source>The number of encryption rounds have to be greater than 0.</source>
-        <translation>Sıfırdan büyük olması gereken ve şifrelemenin kaç basamaklı olacağını belirten sayı.</translation>
+        <translation>Ilość powtórzeń szyfrowania musi być większa od 0.</translation>
     </message>
 </context>
 <context>
     <name>CEditEntryDlg</name>
     <message>
         <source>Today</source>
-        <translation>Bugün</translation>
+        <translation>Dziś</translation>
     </message>
     <message>
         <source>1 Week</source>
-        <translation>1 Hafta</translation>
+        <translation>1 tydzień</translation>
     </message>
     <message>
         <source>2 Weeks</source>
-        <translation>1 Hafta</translation>
+        <translation>2 tygodnie</translation>
     </message>
     <message>
         <source>3 Weeks</source>
-        <translation>3 Hafta</translation>
+        <translation>3 tygodnie</translation>
     </message>
     <message>
         <source>1 Month</source>
-        <translation>1 Ay</translation>
+        <translation>1 miesiąc</translation>
     </message>
     <message>
         <source>3 Months</source>
-        <translation>3 Ay</translation>
+        <translation>3 miesiące</translation>
     </message>
     <message>
         <source>6 Months</source>
-        <translation>6 Ay</translation>
+        <translation>6 miesięcy</translation>
     </message>
     <message>
         <source>1 Year</source>
-        <translation>1 Yıl</translation>
+        <translation>1 rok</translation>
     </message>
     <message>
         <source>Calendar...</source>
-        <translation>Takvim...</translation>
+        <translation>Kalendarz...</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation>%1 Bit</translation>
+        <translation>%1 bit(ów)</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Girdiyi Düzenle</translation>
+        <translation>Edytuj wpis</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Uyarı</translation>
+        <translation>Uwaga</translation>
     </message>
     <message>
         <source>Password and password repetition are not equal.
 Please check your input.</source>
-        <translation>Parola ve parola tekrarı birbirini tutmuyor.
-Lütfen girdilerinizi kontrol edin.</translation>
+        <translation>Podane hasła są różne.
+Sprawdź hasła.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>[Untitled Entry]</source>
-        <translation>[Başlıksız Girdi]</translation>
+        <translation>Nowy wpis</translation>
     </message>
     <message>
         <source>Add Attachment...</source>
-        <translation>Eklenti Ekle...</translation>
+        <translation>Dodaj załącznik...</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>Could not open file.</source>
-        <translation>Dosya açılamadı.</translation>
+        <translation>Nie można otworzyć pliku.</translation>
     </message>
     <message>
         <source>The chosen entry has no attachment or it is empty.</source>
-        <translation>Seçilen girdinin eklentisi yok ya da boş.</translation>
+        <translation>Wybrany wpis nie ma załącznika lub jest pusty.</translation>
     </message>
     <message>
         <source>Save Attachment...</source>
-        <translation>Eklentiyi kaydet...</translation>
+        <translation>Zapisz załącznik...</translation>
     </message>
     <message>
         <source>Error while writing the file.</source>
-        <translation>Dosya yazılırken hata.</translation>
+        <translation>Błąd podczas zapisu do pliku.</translation>
     </message>
     <message>
         <source>Delete Attachment?</source>
-        <translation>Eklenti silinsin mi?</translation>
+        <translation>Usunąć załącznik?</translation>
     </message>
     <message>
         <source>You are about to delete the attachment of this entry.
 Are you sure?</source>
-        <translation>Bu girdinin eklentisini silmek üzeresiniz.
-Emin misiniz?</translation>
+        <translation>Czy na pewno usunąć załącznik?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Evet</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No, Cancel</source>
-        <translation>Hayır, İptal Et</translation>
+        <translation>Nie. Anuluj</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Yeni Girdi</translation>
+        <translation>Nowy wpis</translation>
     </message>
 </context>
 <context>
     <name>CGenPwDialog</name>
     <message>
         <source>Password Generator</source>
-        <translation>Parola Oluşturucu</translation>
+        <translation>Generator haseł</translation>
     </message>
     <message>
         <source>%1 Bits</source>
-        <translation>%1 Bit</translation>
+        <translation>%1 Bit(ów)</translation>
     </message>
 </context>
 <context>
     <name>CSelectIconDlg</name>
     <message>
         <source>Replace...</source>
-        <translation>Değiştir...</translation>
+        <translation>Zmień...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Sil</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Add Custom Icon</source>
-        <translation>Özel Simge Ekle</translation>
+        <translation>Dodaj własną ikonę</translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation>Al</translation>
+        <translation>Wybierz</translation>
     </message>
     <message>
         <source>Add Icons...</source>
-        <translation>Simge Ekle...</translation>
+        <translation>Dodaj ikony...</translation>
     </message>
     <message>
         <source>Images (%1)</source>
-        <translation>Resimler (%1)</translation>
+        <translation>Obrazy (%1)</translation>
     </message>
     <message>
         <source>%1: File could not be loaded.</source>
-        <translation>%1: Dosya yüklenemedi.</translation>
+        <translation>%1: Nie można otworzyć pliku.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>An error occured while loading the icon(s):</source>
-        <translation>Simgeler yüklenirken bir hata oluştu:</translation>
+        <translation>Wystąpił błąd podczas ładowania ikon:</translation>
     </message>
     <message>
         <source>An error occured while loading the icon.</source>
-        <translation>Simge yüklenirken bir hata oluştu.</translation>
+        <translation>Wystąpił błąd podczas ładowania ikony.</translation>
     </message>
 </context>
 <context>
     <name>CSettingsDlg</name>
     <message>
         <source>Settings</source>
-        <translation>Ayarlar</translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Select a directory...</source>
-        <translation>Bir dizin seçin...</translation>
+        <translation>Wybierz katalog...</translation>
     </message>
     <message>
         <source>Select an executable...</source>
-        <translation>Bir çalıştırılabilir dosya seçin...</translation>
+        <translation>Wybierz plik wykonawczy...</translation>
     </message>
     <message>
         <source>System Language</source>
-        <translation type="unfinished">Sistem Dili</translation>
+        <translation type="unfinished">Domyślny język</translation>
     </message>
 </context>
 <context>
     <name>CalendarDialog</name>
     <message>
         <source>Calendar</source>
-        <translation>Takvim</translation>
+        <translation>Kalendarz</translation>
     </message>
 </context>
 <context>
     <name>CollectEntropyDlg</name>
     <message>
         <source>Random Number Generator</source>
-        <translation>Rastgele Sayı Oluşturucu</translation>
+        <translation>Generator liczb pseudolosowych</translation>
     </message>
     <message>
         <source>Collecting entropy...
 Please move the mouse and/or press some keys until enought entropy for a reseed of the random number generator is collected.</source>
-        <translation>Atıl enerji toplanıyor...
-Rastgele sayı oluşturucudan yeterli atıl enerji toplanırken fareyi oynatın ya da rastgele tuşlara basın.</translation>
+        <translation>Zbieranie entropii...
+Proszę poruszać myszą i/lub naciskać dowolne znaki na klawiaturze w celu zebrania etropii dla ziarna generatora.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -420,50 +419,50 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#006400;&quot;&gt;Rastgele havuzu başarılı bir şekilde yeniden oluşturuldu!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#006400;&quot;&gt;Nowe ziarno (seed) dla gereratora zebrane pomyślnie!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Entropy Collection</source>
-        <translation>Enerji Toplama</translation>
+        <translation>Zbieranie entropii</translation>
     </message>
 </context>
 <context>
     <name>CustomizeDetailViewDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Pencere</translation>
+        <translation type="unfinished">Szczegółowy widok wpisu</translation>
     </message>
     <message>
         <source>Rich Text Editor</source>
-        <translation>Zengin Metin Düzenleyici</translation>
+        <translation>Edytor Rich Text (rtf)</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation>Kalın</translation>
+        <translation>Pogrubienie</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>K</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation>Yatık</translation>
+        <translation>Kursywa</translation>
     </message>
     <message>
         <source>I</source>
-        <translation>Y</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>Underlined</source>
-        <translation>Altı çizgili</translation>
+        <translation>Pokreślenie</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>A</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Left-Aligned</source>
-        <translation>Sola-Dayalı</translation>
+        <translation>Wyrównanie do lewej</translation>
     </message>
     <message>
         <source>L</source>
@@ -471,7 +470,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Centered</source>
-        <translation>Ortalanmış</translation>
+        <translation>Wyśrodkowanie</translation>
     </message>
     <message>
         <source>C</source>
@@ -479,7 +478,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Right-Aligned</source>
-        <translation>Sağa-Dayalı</translation>
+        <translation>Wyrównanie do prawej</translation>
     </message>
     <message>
         <source>R</source>
@@ -487,95 +486,95 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Justified</source>
-        <translation>İki Tarafa Dayalı</translation>
+        <translation>Wyjustowanie</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation>Metin Rengi</translation>
+        <translation>Kolor tekstu</translation>
     </message>
     <message>
         <source>Font Size</source>
-        <translation>Yazı Tipi Boyutu</translation>
+        <translation>Rozmiar czcionki</translation>
     </message>
     <message>
         <source>6</source>
-        <translation>6</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7</source>
-        <translation>7</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>8</source>
-        <translation>8</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9</source>
-        <translation>9</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>10</source>
-        <translation>10</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>11</source>
-        <translation>11</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>12</source>
-        <translation>12</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>14</source>
-        <translation>14</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>16</source>
-        <translation>16</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>18</source>
-        <translation>18</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>20</source>
-        <translation>20</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>22</source>
-        <translation>22</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>24</source>
-        <translation>24</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>26</source>
-        <translation>26</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>28</source>
-        <translation>28</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>36</source>
-        <translation>36</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>42</source>
-        <translation>42</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>78</source>
-        <translation>78</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Şablonlar</translation>
+        <translation>Szablon</translation>
     </message>
     <message>
         <source>T</source>
-        <translation>T</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HTML</source>
@@ -583,155 +582,155 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Group</source>
-        <translation>Grup</translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Başlık</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Kullanıcı Adı</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Parola</translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <source>Url</source>
-        <translation>Adres</translation>
+        <translation>Adress URL</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Yorum Satırı Yap</translation>
+        <translation>Komentarz</translation>
     </message>
     <message>
         <source>Attachment Name</source>
-        <translation>Eklenti Adı</translation>
+        <translation>Nazwa załącznika</translation>
     </message>
     <message>
         <source>Creation Date</source>
-        <translation>Oluşturulma Tarihi</translation>
+        <translation>Data utworzenia</translation>
     </message>
     <message>
         <source>Last Access Date</source>
-        <translation>Son Erişim Tarihi</translation>
+        <translation>Data ostatniego odczytu</translation>
     </message>
     <message>
         <source>Last Modification Date</source>
-        <translation>Son Değiştirilme Tarihi</translation>
+        <translation>Data ostatniej modyfikacji</translation>
     </message>
     <message>
         <source>Expiration Date</source>
-        <translation>Süre Dolumu Tarihi</translation>
+        <translation>Data wygaśnięcia</translation>
     </message>
     <message>
         <source>Time till Expiration</source>
-        <translation>Süre Dolumuna Kalan Süre</translation>
+        <translation>Czas pozostały do wygaśnięcia</translation>
     </message>
 </context>
 <context>
     <name>Database</name>
     <message>
         <source>Never</source>
-        <translation>Asla</translation>
+        <translation type="unfinished">Nigdy</translation>
     </message>
 </context>
 <context>
     <name>DatabaseSettingsDlg</name>
     <message>
         <source>Database Settings</source>
-        <translation>Veritabanı Ayarları</translation>
+        <translation>Ustawienia bazy danych</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation>Şifreleme</translation>
+        <translation>Szyfrowanie</translation>
     </message>
     <message>
         <source>Algorithm:</source>
-        <translation>Algoritma:</translation>
+        <translation>Algorytm:</translation>
     </message>
     <message>
         <source>Encryption Rounds:</source>
-        <translation>Şifreleme Basamağı:</translation>
+        <translation>Ilość szyfrowań:</translation>
     </message>
     <message>
         <source>Calculate rounds for a 1-second delay on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Oszacuj ilość szyfrowań możliwych w 1 sekundzie na tym komputerze</translation>
     </message>
 </context>
 <context>
     <name>DetailViewTemplate</name>
     <message>
         <source>Group</source>
-        <translation>Grup</translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Başlık</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Kullanıcı Adı</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Parola</translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>Adres</translation>
+        <translation>Adress URL</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Oluşturulma</translation>
+        <translation>Data utworzenia</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Son Erişim</translation>
+        <translation>Ostatni odczyt</translation>
     </message>
     <message>
         <source>Last Modification</source>
-        <translation>Son Değiştirilme</translation>
+        <translation>Ostatnia modyfikacja</translation>
     </message>
     <message>
         <source>Expiration</source>
-        <translation>Süre Dolumu</translation>
+        <translation>Wygasa</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Yorum Satırı Yap</translation>
+        <translation>Komentarz</translation>
     </message>
 </context>
 <context>
     <name>EditEntryDialog</name>
     <message>
         <source>Edit Entry</source>
-        <translation>Girdiyi Düzenle</translation>
+        <translation>Edytuj wpis</translation>
     </message>
     <message>
         <source>Ge&amp;n.</source>
-        <translation>Olu&amp;ştur.</translation>
+        <translation>Generuj</translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Kalite:</translation>
+        <translation>Jakość:</translation>
     </message>
     <message>
         <source>Attachment:</source>
-        <translation>Eklenti:</translation>
+        <translation>Załącznik:</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Başlık:</translation>
+        <translation>Tytuł:</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Kullanıcı adı:</translation>
+        <translation>Użytkownik:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Açıklama:</translation>
+        <translation>Komentarz:</translation>
     </message>
     <message>
         <source>%1</source>
@@ -739,50 +738,50 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>URL:</source>
-        <translation>Adres:</translation>
+        <translation>Adres URL:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation>Grup:</translation>
+        <translation>Grupa:</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Parola (Yeniden):</translation>
+        <translation>Powtórz hasło:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Parola:</translation>
+        <translation>Hasło:</translation>
     </message>
     <message>
         <source>Expires:</source>
-        <translation>Süre Dolumu:</translation>
+        <translation>Wygasa:</translation>
     </message>
     <message>
         <source>Never</source>
-        <translation>Asla</translation>
+        <translation>Nigdy</translation>
     </message>
     <message>
         <source>%1 Bit</source>
-        <translation>%1 Bit</translation>
+        <translation>%1 Bit(ów)</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Simge:</translation>
+        <translation>Ikona:</translation>
     </message>
 </context>
 <context>
     <name>EditGroupDialog</name>
     <message>
         <source>Group Properties</source>
-        <translation>Grup Özellikleri</translation>
+        <translation type="unfinished">Właściwości grupy</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Simge:</translation>
+        <translation>Ikona:</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Başlık:</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>&gt;</source>
@@ -793,266 +792,238 @@ p, li { white-space: pre-wrap; }
     <name>ExpiredEntriesDialog</name>
     <message>
         <source>Expired Entries</source>
-        <translation>Süresi Dolmuş Girdiler</translation>
+        <translation>Wygasłe wpisy</translation>
     </message>
     <message>
         <source>Double click on an entry to jump to it.</source>
-        <translation>Bir girdiye geçmek için üzerine çift tıklayın.</translation>
+        <translation>Kliknij dwukrotnie na wpis aby do niego przejść</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation>Grup</translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Başlık</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Kullanıcı Adı</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>Expired</source>
-        <translation>Süresi Dolmuş</translation>
+        <translation>Data wygaśnięcia</translation>
     </message>
     <message>
         <source>Expired Entries in the Database</source>
-        <translation>Veritabanındaki Dolmuş Girdiler</translation>
+        <translation>Wygasłe wpisy w bazie</translation>
     </message>
 </context>
 <context>
     <name>Export_KeePassX_Xml</name>
     <message>
         <source>KeePassX XML File</source>
-        <translation>KeePassX XML Dosyası</translation>
+        <translation>Plik XML KeePassX</translation>
     </message>
     <message>
         <source>XML Files (*.xml)</source>
-        <translation>XML Dosyaları (*.xml)</translation>
+        <translation>Pliki XML (*.xml)</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
 </context>
 <context>
     <name>Export_Txt</name>
     <message>
         <source>Text File</source>
-        <translation>Metin Dosyası</translation>
+        <translation>Plik tekstowy</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
     <message>
         <source>Text Files (*.txt)</source>
-        <translation>Metin Dosyaları (*.txt)</translation>
+        <translation>Pliki tekstowe (*.txt)</translation>
     </message>
 </context>
 <context>
     <name>ExporterBase</name>
     <message>
         <source>Export Failed</source>
-        <translation>Dışarıya Aktarma İşlemi Başarısız Oldu</translation>
+        <translation>Eksport się nie powiódł</translation>
     </message>
     <message>
         <source>Export File...</source>
-        <translation>Dosyaya Aktar...</translation>
+        <translation>Eksportuj plik</translation>
     </message>
 </context>
 <context>
     <name>FileErrors</name>
     <message>
         <source>No error occurred.</source>
-        <translation>Hiç hata oluşmadı.</translation>
+        <translation>Brak błędów.</translation>
     </message>
     <message>
         <source>An error occurred while reading from the file.</source>
-        <translation>Dosyadan okunurken bir hata oluştu.</translation>
+        <translation>Wystąpij błąd podczas odczytu z pliku.</translation>
     </message>
     <message>
         <source>An error occurred while writing to the file.</source>
-        <translation>Dosyaya yazılırken bir hata oluştu.</translation>
+        <translation>Wystąpij błąd podczas zapisu do pliku.</translation>
     </message>
     <message>
         <source>A fatal error occurred.</source>
-        <translation>Sonlandırıcı bir hata oluştu.</translation>
+        <translation>Wystąpił krytyczny błąd.</translation>
     </message>
     <message>
         <source>An resource error occurred.</source>
-        <translation>Bir kaynak hatası oluştu.</translation>
+        <translation>Błąd zasobów.</translation>
     </message>
     <message>
         <source>The file could not be opened.</source>
-        <translation>Dosya açılamadı.</translation>
+        <translation>Nie można otworzyć pliku.</translation>
     </message>
     <message>
         <source>The operation was aborted.</source>
-        <translation>İşlem sonlandırıldı.</translation>
+        <translation>Przerwano operację.</translation>
     </message>
     <message>
         <source>A timeout occurred.</source>
-        <translation>Bir zaman aşımı oluştu.</translation>
+        <translation>Upłynął limit czasu.</translation>
     </message>
     <message>
         <source>An unspecified error occurred.</source>
-        <translation>Belirtilmemiş hata oluştu.</translation>
+        <translation>Wystąpił nieokreślony błąd.</translation>
     </message>
     <message>
         <source>The file could not be removed.</source>
-        <translation>Dosya silinemedi.</translation>
+        <translation>Usunięcie pliku nie powiodło się.</translation>
     </message>
     <message>
         <source>The file could not be renamed.</source>
-        <translation>Dosya yeniden adlandırılamadı.</translation>
+        <translation>Zmiana nazwy pliku nie powiodła się.</translation>
     </message>
     <message>
         <source>The position in the file could not be changed.</source>
-        <translation>Dosyanın içerisindeki konum değiştirilemedi.</translation>
+        <translation>Nie można zmienić pozycji w pliku.</translation>
     </message>
     <message>
         <source>The file could not be resized.</source>
-        <translation>Dosya yeniden boyutlandırılamadı.</translation>
+        <translation>Nie można zmienić rozmiaru pliku.</translation>
     </message>
     <message>
         <source>The file could not be accessed.</source>
-        <translation>Dosyaya erişilemedi.</translation>
+        <translation>Brak dostępu do pliku.</translation>
     </message>
     <message>
         <source>The file could not be copied.</source>
-        <translation>Dosya kopyalanamadı.</translation>
+        <translation>Nie można skopiować pliku.</translation>
     </message>
 </context>
 <context>
     <name>GenPwDlg</name>
     <message>
         <source>Password Generator</source>
-        <translation>Parola Oluşturucu</translation>
+        <translation>Generator haseł</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Seçenekler</translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>&amp;Şu karakter gruplarını kullan:</translation>
-    </message>
-    <message>
-        <source>Alt+W</source>
-        <translation type="obsolete">Alt+W</translation>
+        <translation>Użyj następujących grup znakowych:</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
-        <translation>&amp;Küçük Harfler</translation>
-    </message>
-    <message>
-        <source>Alt+L</source>
-        <translation type="obsolete">Alt+L</translation>
-    </message>
-    <message>
-        <source>Alt+N</source>
-        <translation type="obsolete">Alt+N</translation>
+        <translation>Małe litery</translation>
     </message>
     <message>
         <source>&amp;Numbers</source>
-        <translation>Raka&amp;mlar</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
+        <translation>Cyfry</translation>
     </message>
     <message>
         <source>&amp;Upper Letters</source>
-        <translation>&amp;Büyük Harfler</translation>
-    </message>
-    <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+U</translation>
+        <translation>Wielkie litery</translation>
     </message>
     <message>
         <source>&amp;Special Characters</source>
-        <translation>Ö&amp;zel Karakterler</translation>
+        <translation>Znaki specjalne</translation>
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Sadece bu karak&amp;terleri kullan:</translation>
-    </message>
-    <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+O</translation>
+        <translation>Użyj tylko następujących znaków:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation>Uzunluk:</translation>
+        <translation>Długość:</translation>
     </message>
     <message>
         <source>Quality:</source>
-        <translation>Kalite:</translation>
+        <translation>Jakość:</translation>
     </message>
     <message>
         <source>Enable entropy collection</source>
-        <translation>Enerji toplamayı etkinleştir</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
+        <translation>Aktywuj pobieranie danych losowych</translation>
     </message>
     <message>
         <source>Collect only once per session</source>
-        <translation>Her oturum için bir kere topla</translation>
+        <translation>Pobierz jednokrotnie w czasie sesji</translation>
     </message>
     <message>
         <source>New Password:</source>
-        <translation>Yeni Parola:</translation>
+        <translation>Nowe hasło:</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation>Oluştur</translation>
+        <translation>Generuj</translation>
     </message>
     <message>
         <source>Random</source>
-        <translation>Rastgele</translation>
+        <translation>Losowe</translation>
     </message>
     <message>
         <source>&amp;Underline</source>
-        <translation>Altı &amp;çizili</translation>
+        <translation>Znak podkreślenia</translation>
     </message>
     <message>
         <source>&amp;White Spaces</source>
-        <translation>Beyaz Alanla&amp;r</translation>
+        <translation>Spacja</translation>
     </message>
     <message>
         <source>&amp;Minus</source>
-        <translation>&amp;Eksi</translation>
+        <translation>Minus</translation>
     </message>
     <message>
         <source>Exclude look-alike characters</source>
-        <translation>Buna benzer karakterleri hariç tut</translation>
+        <translation>Nie używaj podobnych znaków</translation>
     </message>
     <message>
         <source>Ensure that password contains characters from every group</source>
-        <translation>Parolanın her gruptan karakter içerdiğinden emin olun</translation>
+        <translation>Użyj znaków z każdej z powyższych grup</translation>
     </message>
     <message>
         <source>Pronounceable</source>
-        <translation>Okunabilir</translation>
+        <translation>Do wypowiedzenia</translation>
     </message>
     <message>
         <source>Lower Letters</source>
-        <translation>Küçük Harfler</translation>
+        <translation>Małe litery</translation>
     </message>
     <message>
         <source>Upper Letters</source>
-        <translation>Büyük Harfler</translation>
+        <translation>Wielkie litery</translation>
     </message>
     <message>
         <source>Numbers</source>
-        <translation>Rakamlar</translation>
+        <translation>Cyfry</translation>
     </message>
     <message>
         <source>Special Characters</source>
-        <translation>Özel Karakterler</translation>
+        <translation>Znaki specjalne</translation>
     </message>
 </context>
 <context>
@@ -1078,173 +1049,172 @@ p, li { white-space: pre-wrap; }
     <name>Import_KWalletXml</name>
     <message>
         <source>XML Files (*.xml)</source>
-        <translation>XML Dosyaları (*.xml)</translation>
+        <translation>Pliki XML (*.xml)</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
     <message>
         <source>Import Failed</source>
-        <translation>İçeri Aktarma Başarısız Oldu</translation>
+        <translation>Import się nie powiódł</translation>
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
-        <translation>Geçersiz XML verisi (detaylar için stdout çıktısına bakın).</translation>
+        <translation>Niepoprawne dane XML (po szczegóły zobacz stdout).</translation>
     </message>
     <message>
         <source>Invalid XML file.</source>
-        <translation>Geçersiz XML dosyası.</translation>
+        <translation>Niepoprawny format pliku XML.</translation>
     </message>
     <message>
         <source>Document does not contain data.</source>
-        <translation>Belge veri içermiyor.</translation>
+        <translation>Plik nie zawiera żadnych danych.</translation>
     </message>
 </context>
 <context>
     <name>Import_KeePassX_Xml</name>
     <message>
         <source>KeePass XML Files (*.xml)</source>
-        <translation>KeePassX XML Dosyaları (*.xml)</translation>
+        <translation>Plik KeePassX XML</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
     <message>
         <source>Import Failed</source>
-        <translation>İçeri Aktarma Başarısız Oldu</translation>
+        <translation>Import się nie powiódł</translation>
     </message>
     <message>
         <source>XML parsing error on line %1 column %2:
 %3</source>
-        <translation>Satır %1 sütun %2 konumunda XML ayrıştırma hatası:
+        <translation>Błąd przetwarzania XML w linii %1, kolumnie %2:
 %3</translation>
     </message>
     <message>
         <source>Parsing error: File is no valid KeePassX XML file.</source>
-        <translation>Ayrıştırma hatası: Dosya geçerli bir KeePassX XML dosyası değil.</translation>
+        <translation>Błąd przetwarzania: Plik nie jest poprawnym plikiem XML programu KeePassX</translation>
     </message>
 </context>
 <context>
     <name>Import_PwManager</name>
     <message>
         <source>PwManager Files (*.pwm)</source>
-        <translation>PwManager Dosyaları (*.pwm)</translation>
+        <translation>Pliki PwManager (*.pwm)</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
     <message>
         <source>Import Failed</source>
-        <translation>İçeri Aktarma Başarısız Oldu</translation>
+        <translation>Import się nie powiódł</translation>
     </message>
     <message>
         <source>File is empty.</source>
-        <translation>Dosya boş.</translation>
+        <translation>Plik jest pusty.</translation>
     </message>
     <message>
         <source>File is no valid PwManager file.</source>
-        <translation>Dosya geçerli bir PwManager dosyası değil.</translation>
+        <translation>Plik nie jest poprawnym plikiem formatu PwManager.</translation>
     </message>
     <message>
         <source>Unsupported file version.</source>
-        <translation>Desteklenmeyen dosya sürümü.</translation>
+        <translation>Niewspierana wersja pliku.</translation>
     </message>
     <message>
         <source>Unsupported hash algorithm.</source>
-        <translation>Desteklenmeyen özet algoritması.</translation>
+        <translation>Niewspierany algorytm hasz.</translation>
     </message>
     <message>
         <source>Unsupported encryption algorithm.</source>
-        <translation>Desteklenmeyen şifreleme algoritması.</translation>
+        <translation>Niewspierany algorytm szyfrowania.</translation>
     </message>
     <message>
         <source>Compressed files are not supported yet.</source>
-        <translation>Sıkıştırılmış dosyalar henüz desteklenmiyor.</translation>
+        <translation>Spakowane pliki nie są wspierane.</translation>
     </message>
     <message>
         <source>Wrong password.</source>
-        <translation>Yanlış parola.</translation>
+        <translation>Hasło niepoprawne</translation>
     </message>
     <message>
         <source>File is damaged (hash test failed).</source>
-        <translation>Dosya bozulmuş (özet testi başarısız oldu).</translation>
+        <translation>Plik jest uszkodzony (Test hasza się nie powiódł).</translation>
     </message>
     <message>
         <source>Invalid XML data (see stdout for details).</source>
-        <translation>Geçersiz XML verisi (detaylar için stdout çıktısına bakın).</translation>
+        <translation>Niepoprawne dane XML (sczczegóły: zobacz standardowe wyjście).</translation>
     </message>
 </context>
 <context>
     <name>ImporterBase</name>
     <message>
         <source>Import File...</source>
-        <translation>İçeriye Dosya Aktar...</translation>
+        <translation>Importuj plik...</translation>
     </message>
     <message>
         <source>Import Failed</source>
-        <translation>İçeri Aktarma Başarısız Oldu</translation>
+        <translation>Import się nie powiódł</translation>
     </message>
 </context>
 <context>
     <name>Kdb3Database</name>
     <message>
         <source>Could not open file.</source>
-        <translation>Dosya açılamadı.</translation>
+        <translation>Nie można otworzyć pliku.</translation>
     </message>
     <message>
         <source>Unexpected file size (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</source>
-        <translation>Beklenmeyen dosya boyutu (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
+        <translation>Niepoprawny rozmiar pliku (DB_TOTAL_SIZE &lt; DB_HEADER_SIZE)</translation>
     </message>
     <message>
         <source>Wrong Signature</source>
-        <translation>Yanlış İmza</translation>
+        <translation>Niepoprawny podpis</translation>
     </message>
     <message>
         <source>Unsupported File Version.</source>
-        <translation>Desteklenmeyen Dosya Sürümü.</translation>
+        <translation>Niewspierana wersja pliku.</translation>
     </message>
     <message>
         <source>Unknown Encryption Algorithm.</source>
-        <translation>Bilinmeyen Şifreleme Algoritması.</translation>
+        <translation>Nieznany algorytm szyfrowania.</translation>
     </message>
     <message>
         <source>Decryption failed.
 The key is wrong or the file is damaged.</source>
-        <translation>Şifre çözme işlemi başarısız.
-Anahtar yanlış ya da dosya bozuk.</translation>
+        <translation>Deszyfrowanie nie powiodło się. Klucz jest niepoprawny lub plik z kluczem jest uszkodzony.</translation>
     </message>
     <message>
         <source>Hash test failed.
 The key is wrong or the file is damaged.</source>
-        <translation>Özet kontrolü başarısız.
-Anahtar yanlış ya da dosya bozulmuş.</translation>
+        <translation>Niepoprawny hasz.
+Klucz jest niepoprawny lub plik z kluczem jest uszkodzony.</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range.</source>
-        <translation>Beklenmeyen hata: Konum dışı.</translation>
+        <translation>Wystąpił nieoczekiwany błąd: Offset jest poza zasięgiem.</translation>
     </message>
     <message>
         <source>Invalid group tree.</source>
-        <translation>Geçersiz grup ağacı.</translation>
+        <translation>Niepoprawne drzewo grup.</translation>
     </message>
     <message>
         <source>Key file is empty.</source>
-        <translation>Anahtar dosyası boş.</translation>
+        <translation>Plik z kluczem jest pusty.</translation>
     </message>
     <message>
         <source>The database must contain at least one group.</source>
-        <translation>Veritabanı en az bir grup içermelidir.</translation>
-    </message>
-    <message>
-        <source>Could not open file for writing.</source>
-        <translation type="obsolete">Yazmak için açılamadı.</translation>
+        <translation>Baza musi posiadać przynajmniej jedną grupę.</translation>
     </message>
     <message>
         <source>Unable to initalize the twofish algorithm.</source>
-        <translation type="obsolete">Twofish algoritması başlatılamadı.</translation>
+        <translation type="obsolete">Algorytm twofish nie może zostać zainicjalizowany.</translation>
+    </message>
+    <message>
+        <source>The database has been opened read-only.</source>
+        <translation>Baza otwarta tylko do odczytu.</translation>
     </message>
     <message>
         <source>Unable to initialize the twofish algorithm.</source>
@@ -1254,373 +1224,363 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
         <source>Unknown encryption algorithm.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>The database has been opened read-only.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Kdb3Database::EntryHandle</name>
     <message>
         <source>Bytes</source>
-        <translation>Bayt</translation>
+        <translation>Bajtów</translation>
     </message>
     <message>
         <source>KiB</source>
-        <translation>KB</translation>
+        <translation>KiB</translation>
     </message>
     <message>
         <source>MiB</source>
-        <translation>MB</translation>
+        <translation>MiB</translation>
     </message>
     <message>
         <source>GiB</source>
-        <translation>GB</translation>
+        <translation>GiB</translation>
     </message>
 </context>
 <context>
     <name>KeepassEntryView</name>
     <message>
         <source>Delete?</source>
-        <translation>Silinsin mi?</translation>
+        <translation>Usunąć?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>At least one group must exist before adding an entry.</source>
-        <translation>Bir girdi eklenmeden önce en az bir grup olmalıdır.</translation>
+        <translation>Aby dodać wpis, musi istnieć przynajmniej jedna grupa.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Başlık</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Kullanıcı Adı</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>URL</source>
-        <translation>Adres</translation>
+        <translation>Adres URL</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Parola</translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation>Yorumlar</translation>
+        <translation>Komentarz</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Süre Dolumu</translation>
+        <translation>Wygasa</translation>
     </message>
     <message>
         <source>Creation</source>
-        <translation>Oluşturulma</translation>
+        <translation>Utworzono</translation>
     </message>
     <message>
         <source>Last Change</source>
-        <translation>Son Değişiklik</translation>
+        <translation>Ostatnia zmiana</translation>
     </message>
     <message>
         <source>Last Access</source>
-        <translation>Son Erişim</translation>
+        <translation>Ostani odczyt</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Eklenti</translation>
+        <translation>Załącznik</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation>Grup</translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>Are you sure you want to delete this entry?</source>
-        <translation>Bu girdiyi silmek istediğinizden emin misiniz?</translation>
+        <translation>Czy na pewno usunąć ten wpis?</translation>
     </message>
     <message>
         <source>Are you sure you want to delete these %1 entries?</source>
-        <translation>Bu %1 girdiyi silmek istediğinizden emin misiniz?</translation>
+        <translation>Czy na pewno usunąć wybrane wpisy (%1)?</translation>
     </message>
 </context>
 <context>
     <name>KeepassGroupView</name>
     <message>
         <source>Search Results</source>
-        <translation>Arama Sonuçları</translation>
+        <translation>Wyniki wyszukiwania</translation>
     </message>
     <message>
         <source>Delete?</source>
-        <translation>Silinsin mi?</translation>
+        <translation>Usunąć?</translation>
     </message>
     <message>
         <source>Are you sure you want to delete this group, all its child groups and all their entries?</source>
-        <translation>Bu grubu silmek istediğinizden emin misiniz, tüm alt gruplar ve girdileri de silinecek?</translation>
+        <translation>Czy na pewno chcesz usunąć tę grupę wraz z wszystkimi podgrupami i wpisami?</translation>
     </message>
 </context>
 <context>
     <name>KeepassMainWindow</name>
     <message>
         <source>Ready</source>
-        <translation>Hazır</translation>
+        <translation>Gotowe</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Kilitli</translation>
+        <translation>Zablokowane</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>Kilidi Açılmış</translation>
+        <translation>Odblokowane</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation>Ctrl+O</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation>Ctrl+S</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+L</source>
-        <translation>Ctrl+L</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation>Ctrl+Q</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+G</source>
-        <translation>Ctrl+G</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+C</source>
-        <translation>Ctrl+C</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+B</source>
-        <translation>Ctrl+B</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+U</source>
-        <translation>Ctrl+U</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+Y</source>
-        <translation>Ctrl+Y</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation>Ctrl+E</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+D</source>
-        <translation>Ctrl+D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+K</source>
-        <translation>Ctrl+K</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation>Ctrl+F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+V</source>
-        <translation>Ctrl+V</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+W</source>
-        <translation>Ctrl+W</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shift+Ctrl+S</source>
-        <translation>Shift+Ctrl+S</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shift+Ctrl+F</source>
-        <translation>Shift+Ctrl+F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>The database file does not exist.</source>
-        <translation>Veritabanı dosyası yok.</translation>
+        <translation>Plik z bazą nie istnieje.</translation>
     </message>
     <message>
         <source>Loading Database...</source>
-        <translation>Veritabanı Yükleniyor...</translation>
+        <translation>Otwieram bazę...</translation>
     </message>
     <message>
         <source>Loading Failed</source>
-        <translation>Yükleme Başarısız Oldu</translation>
+        <translation>Otwieranie bazy nie powiodło się</translation>
     </message>
     <message>
         <source>Unknown error while loading database.</source>
-        <translation>Veritabanı yüklenirken bilinmeyen bir hata oluştu.</translation>
+        <translation>Nieznany błąd podczas otwierania bazy.</translation>
     </message>
     <message>
         <source>The following error occured while opening the database:</source>
-        <translation>Veritabanı açılırken şu hata oluştu:</translation>
+        <translation>Poniższy bląd wystąpił podczas odczytu bazy:</translation>
     </message>
     <message>
         <source>Save modified file?</source>
-        <translation>Değiştirilmiş dosya kaydeilsin mi?</translation>
+        <translation>Zapisać zmieniony plik?</translation>
     </message>
     <message>
         <source>new</source>
-        <translation>yeni</translation>
+        <translation>Nowa baza</translation>
     </message>
     <message>
         <source>Open Database...</source>
-        <translation>Veritabanı Aç...</translation>
+        <translation>Otwórz bazę...</translation>
     </message>
     <message>
         <source>KeePass Databases (*.kdb)</source>
-        <translation>KeePassX Veritabanları (*.kdb)</translation>
+        <translation>Bazy KeePass (*.kdb)</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
     <message>
         <source>Expired</source>
-        <translation>Süresi Dolmuş</translation>
+        <translation>Wygasł</translation>
     </message>
     <message>
         <source>1 Month</source>
-        <translation>1 Ay</translation>
+        <translation>1 miesiąc</translation>
     </message>
     <message>
         <source>%1 Months</source>
-        <translation>%1 Ay</translation>
+        <translation>%1 (miesiące) miesięcy</translation>
     </message>
     <message>
         <source>1 Year</source>
-        <translation>1 Yıl</translation>
+        <translation>1 rok</translation>
     </message>
     <message>
         <source>%1 Years</source>
-        <translation>%1 Yıl</translation>
+        <translation>%1 lat(a)</translation>
     </message>
     <message>
         <source>1 Day</source>
-        <translation>1 Gün</translation>
+        <translation>1 dzień</translation>
     </message>
     <message>
         <source>%1 Days</source>
-        <translation>%1 Gün</translation>
+        <translation>%1 dni</translation>
     </message>
     <message>
         <source>less than 1 day</source>
-        <translation>1 günden az</translation>
+        <translation>mniej niż 1 dzień</translation>
     </message>
     <message>
         <source>Clone Entry</source>
-        <translation>Girdiyi İkile</translation>
+        <translation>Duplikuj wpis</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Girdiyi Sil</translation>
+        <translation>Usuń wpis</translation>
     </message>
     <message>
         <source>Clone Entries</source>
-        <translation>Girdileri İkile</translation>
+        <translation>Duplikuj wpis</translation>
     </message>
     <message>
         <source>Delete Entries</source>
-        <translation>Girdileri Sil</translation>
+        <translation>Usuń wpisy</translation>
     </message>
     <message>
         <source>File could not be saved.</source>
-        <translation>Dosya kaydedilemedi.</translation>
+        <translation>Nie można zapisać pliku.</translation>
     </message>
     <message>
         <source>Save Database...</source>
-        <translation>Veritabanını Kaydet...</translation>
+        <translation>Zapisz bazę...</translation>
     </message>
     <message>
         <source>Un&amp;lock Workspace</source>
-        <translation>Çalışma A&amp;lanının Kilidini Aç</translation>
+        <translation>Odblokuj obszar roboczy</translation>
     </message>
     <message>
         <source>&amp;Lock Workspace</source>
-        <translation>Çalışma A&amp;lanını Kilitle</translation>
+        <translation>Zablokuj obszar roboczy</translation>
     </message>
     <message>
         <source>Show &amp;Toolbar</source>
-        <translation>&amp;Araç Çubuğunu Göster</translation>
+        <translation>Pokaż pasek narzędzi</translation>
     </message>
     <message>
         <source>Ctrl+N</source>
-        <translation>Ctrl+N</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+P</source>
-        <translation>Ctrl+P</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+X</source>
-        <translation>Ctrl+X</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+I</source>
-        <translation>Ctrl+I</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Database locked</source>
-        <translation>Veritabanı kilitli</translation>
+        <translation>Baza zablokowana</translation>
     </message>
     <message>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
 Do you want to open it anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t create database lock file.</source>
-        <translation type="obsolete">Veritabanı kilit dosyası oluşturulamadı.</translation>
+        <translation>Baza, którą próbujesz odczytać jest zablokowana.
+To oznacza, że albo inny użytkownik jej używa lub program KeePassX nie zakończył poprawnie ostatniej sesji.
+Czy mimo wszystko chcesz ją otworzyć?</translation>
     </message>
     <message>
         <source>The current file was modified.
 Do you want to save the changes?</source>
-        <translation>Geçerli dosya üzerinde değişiklikler yapıldı.
-Değişiklikleri kaydetmek ister misiniz?</translation>
+        <translation>W bieżącym pliku są niezpisane zmiany.
+Zapisać te zmiany?</translation>
     </message>
     <message>
         <source>Couldn&apos;t remove database lock file.</source>
-        <translation>Veritabanı kilit dosyası silinemedi.</translation>
+        <translation>Nie można usunąć pliku blokady (.lock).</translation>
     </message>
     <message>
         <source>Open read-only</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz tylko do odczytu</translation>
     </message>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można utworzyć pliku blokady (.lock). Baza zostanie otwarta tylko do odczytu.</translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; could not be found.</source>
-        <translation>&apos;%1&apos; dosyası bulunamadı.</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">TAMAM</translation>
+        <translation>Nie można odnaleźć pliku &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -1631,219 +1591,207 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Gruplar</translation>
+        <translation>Grupy</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Yardım</translation>
+        <translation>&amp;Pomoc</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Dosya</translation>
+        <translation>&amp;Plik</translation>
     </message>
     <message>
         <source>&amp;Export to...</source>
-        <translation>D&amp;ışarı aktar...</translation>
+        <translation>&amp;Eksportuj do...</translation>
     </message>
     <message>
         <source>&amp;Import from...</source>
-        <translation>&amp;İçeri aktar...</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Düzenle</translation>
+        <translation>&amp;Importuj z...</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Görünüm</translation>
+        <translation>&amp;Widok</translation>
     </message>
     <message>
         <source>E&amp;xtras</source>
-        <translation>Daha Fa&amp;zlası</translation>
+        <translation>E&amp;xtras</translation>
     </message>
     <message>
         <source>&amp;Open Database...</source>
-        <translation>&amp;Veritabanı Aç...</translation>
+        <translation>&amp;Otwórz bazę</translation>
     </message>
     <message>
         <source>&amp;Close Database</source>
-        <translation>Veritabanını &amp;Kapat</translation>
+        <translation>Zamknij bazę</translation>
     </message>
     <message>
         <source>&amp;Save Database</source>
-        <translation>Veritabanını Kayde&amp;t</translation>
+        <translation>Zapi&amp;sz bazę</translation>
     </message>
     <message>
         <source>Save Database &amp;As...</source>
-        <translation>Veritabanını &amp;Farklı Kaydet...</translation>
+        <translation>Zapisz j&amp;ako...</translation>
     </message>
     <message>
         <source>&amp;Database Settings...</source>
-        <translation>Veri&amp;tabanı Ayarları...</translation>
+        <translation>&amp;Ustawienia bazy...</translation>
     </message>
     <message>
         <source>Change &amp;Master Key...</source>
-        <translation>Uygulama Anahtarını De&amp;ğiştir...</translation>
+        <translation>Zmień główny klucz</translation>
     </message>
     <message>
         <source>&amp;Lock Workspace</source>
-        <translation>Çalışma A&amp;lanını Kilitle</translation>
+        <translation>Zablokuj obszar roboczy</translation>
     </message>
     <message>
         <source>&amp;Settings...</source>
-        <translation>A&amp;yarlar...</translation>
+        <translation>&amp;Ustawienia</translation>
     </message>
     <message>
         <source>&amp;About...</source>
-        <translation>H&amp;akkında...</translation>
+        <translation>&amp;O programie</translation>
     </message>
     <message>
         <source>&amp;KeePassX Handbook...</source>
-        <translation>&amp;KeePassX El Kitabı...</translation>
+        <translation>Książka pomocy &amp;KeePassX</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Gizle</translation>
-    </message>
-    <message>
-        <source>Standard KeePass Single User Database (*.kdb)</source>
-        <translation type="obsolete">Standart KeePassX Veritabanı Dosyası (*.kdb)</translation>
-    </message>
-    <message>
-        <source>Advanced KeePassX Database (*.kxdb)</source>
-        <translation type="obsolete">Gelişmiş KeePassX Veritabanı Dosyası (*.kxdb)</translation>
+        <translation>Ukryj</translation>
     </message>
     <message>
         <source>Recycle Bin...</source>
-        <translation>Çöp Kutusu...</translation>
+        <translation>Kosz</translation>
     </message>
     <message>
         <source>&amp;Bookmarks</source>
-        <translation>&amp;Yer İmleri</translation>
+        <translation>Zakładki</translation>
     </message>
     <message>
         <source>Toolbar &amp;Icon Size</source>
-        <translation>Araç Çubuğu &amp;Simge Boyutu</translation>
+        <translation>Rozmiar ikon paska narzędzi</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
-        <translation>&amp;Sütunlar</translation>
+        <translation>Widoczne kolumny</translation>
     </message>
     <message>
         <source>&amp;Manage Bookmarks...</source>
-        <translation>&amp;Yer İmlerini Yönet...</translation>
+        <translation>Zarządzaj zakładkami...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Çık</translation>
+        <translation>Zamknij program</translation>
     </message>
     <message>
         <source>&amp;Edit Group...</source>
-        <translation>&amp;Grubu Düzenle...</translation>
+        <translation>Edytuj grupę...</translation>
     </message>
     <message>
         <source>&amp;Delete Group</source>
-        <translation>Grubu &amp;Sil</translation>
+        <translation>Usuń grupę</translation>
     </message>
     <message>
         <source>Copy Password &amp;to Clipboard</source>
-        <translation>Parolayı Panoya &amp;Kopyala</translation>
+        <translation>Skopiuj hasło do schowka</translation>
     </message>
     <message>
         <source>Copy &amp;Username to Clipboard</source>
-        <translation>Kullanıcı &amp;Adını Panoya Kopyala</translation>
+        <translation>Skopiuj użytkownika do schowka</translation>
     </message>
     <message>
         <source>&amp;Open URL</source>
-        <translation>&amp;Adres Aç</translation>
+        <translation>Otwórz adres URL</translation>
     </message>
     <message>
         <source>&amp;Save Attachment As...</source>
-        <translation>&amp;Eklentiyi Farklı Kaydet...</translation>
+        <translation>Zapisz załącznik</translation>
     </message>
     <message>
         <source>Add &amp;New Entry...</source>
-        <translation>Yeni &amp;Girdi Ekle...</translation>
+        <translation>Dodaj nowy wpis...</translation>
     </message>
     <message>
         <source>&amp;View/Edit Entry...</source>
-        <translation>&amp;Girdiyi Göster/Düzenle...</translation>
+        <translation>Zobacz/Edytuj wpis...</translation>
     </message>
     <message>
         <source>De&amp;lete Entry</source>
-        <translation>Girdiyi &amp;Sil</translation>
+        <translation>Usuń wpis</translation>
     </message>
     <message>
         <source>&amp;Clone Entry</source>
-        <translation>Girdiyi &amp;Çoğalt</translation>
+        <translation>Duplikuj wpis</translation>
     </message>
     <message>
         <source>Search &amp;in Database...</source>
-        <translation>&amp;Veritabanında Ara...</translation>
+        <translation>Szukaj w bazie...</translation>
     </message>
     <message>
         <source>Search in this &amp;Group...</source>
-        <translation>&amp;Bu Grup içerisinde Ara...</translation>
+        <translation>Szukaj w tej grupie...</translation>
     </message>
     <message>
         <source>Show &amp;Entry Details</source>
-        <translation>&amp;Girdi Ayrıntılarını Göster</translation>
+        <translation>Pokaż szczegóły wpisu</translation>
     </message>
     <message>
         <source>Hide &amp;Usernames</source>
-        <translation>Kullanıcı &amp;Adlarını Gizle</translation>
+        <translation>Ukryj nazwę użytkownika</translation>
     </message>
     <message>
         <source>Hide &amp;Passwords</source>
-        <translation>Parolaları &amp;Gizle</translation>
+        <translation>Ukryj hasła</translation>
     </message>
     <message>
         <source>&amp;Title</source>
-        <translation>&amp;Başlık</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>User&amp;name</source>
-        <translation>&amp;Kullanıcı Adı</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>&amp;URL</source>
-        <translation>&amp;Adres</translation>
+        <translation>Adres URL</translation>
     </message>
     <message>
         <source>&amp;Password</source>
-        <translation>&amp;Parola</translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <source>&amp;Comment</source>
-        <translation>&amp;Açıklama</translation>
+        <translation>Komentarz</translation>
     </message>
     <message>
         <source>E&amp;xpires</source>
-        <translation>&amp;Süre Dolumu</translation>
+        <translation>Wygasa</translation>
     </message>
     <message>
         <source>C&amp;reation</source>
-        <translation>&amp;Oluşturulma</translation>
+        <translation>Utworzono</translation>
     </message>
     <message>
         <source>&amp;Last Change</source>
-        <translation>&amp;Son Değişiklik</translation>
+        <translation>Ostatnia zmiana</translation>
     </message>
     <message>
         <source>Last &amp;Access</source>
-        <translation>Son &amp;Erişim</translation>
+        <translation>Ostatni odczyt</translation>
     </message>
     <message>
         <source>A&amp;ttachment</source>
-        <translation>&amp;Eklenti</translation>
+        <translation>Załącznik</translation>
     </message>
     <message>
         <source>Show &amp;Statusbar</source>
-        <translation>&amp;Durum Çubuğunu Göster</translation>
+        <translation>Pokaż pasek stanu</translation>
     </message>
     <message>
         <source>&amp;Perform AutoType</source>
-        <translation>&amp;Otomatik Tip İyileştirmesi Yap</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;16x16</source>
@@ -1859,438 +1807,393 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>&amp;New Database...</source>
-        <translation>&amp;Yeni Veritabanı...</translation>
+        <translation>Utwórz &amp;nową bazę...</translation>
     </message>
     <message>
         <source>&amp;Password Generator...</source>
-        <translation>Parola &amp;Oluşturucu...</translation>
+        <translation>Generator haseł</translation>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>&amp;Grup (sadece arama sonuçları)</translation>
+        <translation>Grupa (tylko dla wyników wyszukiwania)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
-        <translation>&amp;Süresi Dolmuş Girdileri Göster...</translation>
+        <translation>Pokaż wygasłe wpisy...</translation>
     </message>
     <message>
         <source>&amp;Add Bookmark...</source>
-        <translation>&amp;Yer İmi Ekle...</translation>
+        <translation>Dodaj zakładkę</translation>
     </message>
     <message>
         <source>Bookmark &amp;this Database...</source>
-        <translation>&amp;Bu Veritabanını Yer İmlerine Ekle...</translation>
+        <translation>Dodaj bazę do zakładek...</translation>
     </message>
     <message>
         <source>&amp;Add New Subgroup...</source>
-        <translation>&amp;Yeni Alt Grup Ekle...</translation>
+        <translation>Dodaj nową podgrupę...</translation>
     </message>
     <message>
         <source>Copy URL to Clipboard</source>
-        <translation>Adresi Panoya Kopyala</translation>
+        <translation>Skopiuj adres URL do schowka</translation>
     </message>
     <message>
         <source>Add New Group...</source>
-        <translation>Yeni Grup Ekle...</translation>
+        <translation>Dodaj nową grupę...</translation>
     </message>
     <message>
         <source>&amp;Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Wpisy</translation>
     </message>
     <message>
         <source>&amp;Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Grupy</translation>
     </message>
     <message>
         <source>Sort groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortuj grupy</translation>
     </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
     <message>
         <source>Manage Bookmarks</source>
-        <translation>Yerimlerini Yönet</translation>
+        <translation>Zarządzaj zakładkami</translation>
     </message>
 </context>
 <context>
     <name>PasswordDialog</name>
     <message>
         <source>Enter Master Key</source>
-        <translation>Ana Anahtarı Gir</translation>
+        <translation>Wpisz główny klucz</translation>
     </message>
     <message>
         <source>Set Master Key</source>
-        <translation>Ana Anahtarı Ayarla</translation>
+        <translation>Wybierz główny klucz</translation>
     </message>
     <message>
         <source>Change Master Key</source>
-        <translation>Ana Anahtarı Değiştir</translation>
+        <translation>Zmień głowny klucz</translation>
     </message>
     <message>
         <source>Database Key</source>
-        <translation>Veritabanı Anahtarı</translation>
+        <translation>Klucz do bazy</translation>
     </message>
     <message>
         <source>Last File</source>
-        <translation>Son Dosya</translation>
+        <translation>Ostatni plik</translation>
     </message>
     <message>
         <source>Select a Key File</source>
-        <translation>Anahtar dosyasını Seç</translation>
+        <translation>Wybierz plik z kluczem</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
     <message>
         <source>Key Files (*.key)</source>
-        <translation>Key Dosyaları (*.key)</translation>
+        <translation>Pliki z kluczem (*.key)</translation>
     </message>
     <message>
         <source>Please enter a Password or select a key file.</source>
-        <translation>Lütfen gir parola girin ya da anahtar dosyası seçin.</translation>
+        <translation>Podaj hasło lub wybierz plik z kluczem.</translation>
     </message>
     <message>
         <source>Please enter a Password.</source>
-        <translation>Lütfen bir parola girin.</translation>
+        <translation>Podaj hasło.</translation>
     </message>
     <message>
         <source>Please provide a key file.</source>
-        <translation>Lütfen bir key dosyası girin.</translation>
+        <translation>Podaj plik z kluczem.</translation>
     </message>
     <message>
         <source>%1:
 No such file or directory.</source>
         <translation>%1:
-Böyle bir dosya ya da dizin yok.</translation>
+Nie ma takiego pliku lub katalogu.</translation>
     </message>
     <message>
         <source>The selected key file or directory is not readable.</source>
-        <translation>Seçilen anahtar dosyası ya da dizin okunabilir değil.</translation>
+        <translation>Brak praw odczytu do wybranego pliku lub katalogu.</translation>
     </message>
     <message>
         <source>The given directory does not contain any key files.</source>
-        <translation>Verilen dizin bir anahtar dosyası içermiyor.</translation>
+        <translation>W wybranym katalogu nie ma żadnych plików z kluczem.</translation>
     </message>
     <message>
         <source>The given directory contains more then one key files.
 Please specify the key file directly.</source>
-        <translation>Verilen dizin birden fazla anahtar dosyası içeriyor.
-Lütfen anahtar dosyasını belirtin.</translation>
+        <translation>Wybrany katalog zawiera więcej niż jeden plik z kluczem.
+Wybierz konkretny plik z kluczem.</translation>
     </message>
     <message>
         <source>%1:
 File is not readable.</source>
-        <translation>%1:
-Dosya okunabilir değil.</translation>
+        <translation>%1: Brak praw odczytu do pliku.</translation>
     </message>
     <message>
         <source>Create Key File...</source>
-        <translation>Anahtar Dosyası Oluştur...</translation>
+        <translation>Utwórz plik z kluczem...</translation>
     </message>
 </context>
 <context>
     <name>PasswordDlg</name>
     <message>
         <source>Last File</source>
-        <translation>Son Dosya</translation>
+        <translation>Ostatni plik</translation>
     </message>
     <message>
         <source>Enter a Password and/or choose a key file.</source>
-        <translation>Bir parola girin ya da bir anahtar dosyası seçin.</translation>
+        <translation>Wpisz hasło i/lub wybierz plik z kluczem.</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Anahtar</translation>
+        <translation>Klucz</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Parola:</translation>
+        <translation>Hasło:</translation>
     </message>
     <message>
         <source>&amp;Browse...</source>
-        <translation>&amp;Gözat...</translation>
-    </message>
-    <message>
-        <source>Alt+B</source>
-        <translation type="obsolete">Alt+B</translation>
+        <translation>Przeglądaj...</translation>
     </message>
     <message>
         <source>Key File:</source>
-        <translation>Anahtar Dosyası:</translation>
+        <translation>Plik z kluczem:</translation>
     </message>
     <message>
         <source>Generate Key File...</source>
-        <translation>Anahtar Dosyası Oluştur...</translation>
+        <translation>Generuj plik z kluczem...</translation>
     </message>
     <message>
         <source>Please repeat your password:</source>
-        <translation>Lütfen parolanızı tekrar girin:</translation>
+        <translation>Powtórz hasło:</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Geri</translation>
+        <translation>Wstecz</translation>
     </message>
     <message>
         <source>Passwords are not equal.</source>
-        <translation>Parolalar aynı değil.</translation>
+        <translation>Podane hasła nie są identyczne.</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Search</source>
-        <translation>Ara</translation>
+        <translation>Szukaj</translation>
     </message>
 </context>
 <context>
     <name>Search_Dlg</name>
     <message>
         <source>Search...</source>
-        <translation>Ara...</translation>
+        <translation>Szukaj...</translation>
     </message>
     <message>
         <source>Include:</source>
-        <translation>İçersin:</translation>
+        <translation>Uwzględnij:</translation>
     </message>
     <message>
         <source>Pass&amp;words</source>
-        <translation>Par&amp;olalar</translation>
-    </message>
-    <message>
-        <source>Alt+W</source>
-        <translation type="obsolete">Alt+W</translation>
+        <translation>Hasła</translation>
     </message>
     <message>
         <source>A&amp;nhang</source>
-        <translation>&amp;Ek</translation>
+        <translation>Załączniki</translation>
     </message>
     <message>
         <source>U&amp;RLs</source>
-        <translation>A&amp;dresler</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+R</translation>
+        <translation>Adresy URL</translation>
     </message>
     <message>
         <source>C&amp;omments</source>
-        <translation>A&amp;çıklamalar</translation>
-    </message>
-    <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+O</translation>
+        <translation>Komentarze</translation>
     </message>
     <message>
         <source>&amp;Usernames</source>
-        <translation>K&amp;ullanıcı Adları</translation>
-    </message>
-    <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+U</translation>
+        <translation>Nazwy użytkowników</translation>
     </message>
     <message>
         <source>&amp;Titles</source>
-        <translation>&amp;Başlıklar</translation>
-    </message>
-    <message>
-        <source>Alt+T</source>
-        <translation type="obsolete">Alt+T</translation>
+        <translation>Tytuły</translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation>Bü&amp;yük Küçük Harflere Duyarlı</translation>
-    </message>
-    <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+C</translation>
+        <translation>Uwzględnij wielkość znaków</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation>Düzenli İ&amp;fade</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
+        <translation>Wyrażenia regularne</translation>
     </message>
     <message>
         <source>Include Subgroups (recursive)</source>
-        <translation>Alt Grupları İçer (özyinelemeli)</translation>
+        <translation>Szukaj w podgrupach (rekursywnie)</translation>
     </message>
     <message>
         <source>Search For:</source>
-        <translation>Şunu Ara:</translation>
+        <translation>Szukaj:</translation>
     </message>
 </context>
 <context>
     <name>SelectIconDlg</name>
     <message>
         <source>Icon Selection</source>
-        <translation>Simge Seçimi</translation>
+        <translation>Wybierz ikonę</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>
-        <translation>Ayarlar</translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Show system tray icon</source>
-        <translation>Sistem çekmecesi simgesini göster</translation>
+        <translation>Pokaż ikonę w tray&apos;u</translation>
     </message>
     <message>
         <source>Minimize to tray instead of taskbar</source>
-        <translation>Görev çubuğu yerine sistem çekmecesine küçült</translation>
+        <translation>Minimalizuj do tray&apos;a zamiast do paska narzędzi</translation>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Ana pencere kapatıldığında sistem çekmecesine küçült</translation>
+        <translation type="obsolete">Minimalizuj do tray&apos;a, gdy główne okno zostanie zamknięte</translation>
     </message>
     <message>
         <source>Remember last opened file</source>
-        <translation>Son açılan dosyayı hatırla</translation>
-    </message>
-    <message utf8="true">
-        <source>Alt+Ö</source>
-        <translation type="obsolete">Alt+Ö</translation>
+        <translation>Zapamiętaj ostatnio otwarty plik</translation>
     </message>
     <message>
         <source>Remember last key type and location</source>
-        <translation>Son anahtar tipini ve konumunu hatırla</translation>
+        <translation>Zapamiętaj typ i lokalizację ostatniego klucza</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation>Küçültülmüş başlat</translation>
+        <translation>Uruchom zminimalizowany</translation>
     </message>
     <message>
         <source>Start locked</source>
-        <translation>Kilitlenmiş başlat</translation>
+        <translation>Uruchom zablokowany</translation>
     </message>
     <message>
         <source>Save recent directories of file dialogs</source>
-        <translation>Dosya pencerelerinin son kullanılan dizinlerini kaydet</translation>
+        <translation>Zapamiętaj katalogi ostatnio otwartych plików</translation>
     </message>
     <message>
         <source>Clear History Now</source>
-        <translation>Geçmişi Şimdi Temizle</translation>
+        <translation>Usuń teraz historię</translation>
     </message>
     <message>
         <source>Always ask before deleting entries or groups</source>
-        <translation>Bir grubu ya da girdiyi silerken her zaman sor</translation>
+        <translation>Pytaj przed usunięciem grup wpisów</translation>
     </message>
     <message>
         <source>Banner Color</source>
-        <translation>Üst Alan Rengi</translation>
+        <translation>Kolor baneru</translation>
     </message>
     <message>
         <source>Text Color:</source>
-        <translation>Metin Rengi:</translation>
+        <translation>Kolor tekstu:</translation>
     </message>
     <message>
         <source>Change...</source>
-        <translation>Değiştir...</translation>
+        <translation>Zmień...</translation>
     </message>
     <message>
         <source>Color 2:</source>
-        <translation>Renk 2:</translation>
+        <translation>Kolor 2:</translation>
     </message>
     <message>
         <source>C&amp;hange...</source>
-        <translation>Deği&amp;ştir...</translation>
-    </message>
-    <message>
-        <source>Alt+H</source>
-        <translation type="obsolete">Alt+H</translation>
+        <translation>Zmień...</translation>
     </message>
     <message>
         <source>Color 1:</source>
-        <translation>Renk 1:</translation>
+        <translation>Kolor 1:</translation>
     </message>
     <message>
         <source>Alternating Row Colors</source>
-        <translation>Satır Renkleri Farklılaştırılıyor</translation>
+        <translation>Naprzemienne kolory wierszy</translation>
     </message>
     <message>
         <source>Customize Entry Detail View...</source>
-        <translation>Ayrıntılı Girdi Görünümünü Özelleştir...</translation>
+        <translation>Dopasuj szczegółowy widok wpisu</translation>
     </message>
     <message>
         <source>Group tree at start-up:</source>
-        <translation>Başlangıçta grup ağacı:</translation>
+        <translation>Grupuj drzewko na starcie:</translation>
     </message>
     <message>
         <source>Restore last state</source>
-        <translation>Son duruma geri dön</translation>
+        <translation>Przywróć ostatni stan</translation>
     </message>
     <message>
         <source>Expand all items</source>
-        <translation>Tüm ögeleri aç</translation>
+        <translation>Rozwiń wszystkie pozycje</translation>
     </message>
     <message>
         <source>Do not expand any item</source>
-        <translation>Hiçbir ögeyi açma</translation>
+        <translation>Nie rozwijaj pozycji</translation>
     </message>
     <message>
         <source>Security</source>
-        <translation>Güvenlik</translation>
+        <translation>Bezpieczeństwo</translation>
     </message>
     <message>
         <source>Edit Entry Dialog</source>
-        <translation>Girdi Düzenleme Penceresi</translation>
-    </message>
-    <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+O</translation>
+        <translation>oknie edytowania wpisu</translation>
     </message>
     <message>
         <source>Clear clipboard after:</source>
-        <translation>Bu süre geçince panoyu temizle:</translation>
+        <translation>Wyczyść schowek po:</translation>
     </message>
     <message>
         <source>Lock workspace when minimizing the main window</source>
-        <translation>Ana pencereyi küçültürken çalışma alanını kilitle</translation>
+        <translation>Zablokuj obszar roboczy, przy minimaliyacji głównego okna</translation>
     </message>
     <message>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfejs użytkownika można uczynić bardziej przejrzystym, wyłączając niektóre opcje KeePassX</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation>Yerimleri</translation>
+        <translation>Zakładki</translation>
     </message>
     <message>
         <source>Plug-Ins</source>
-        <translation>Eklentiler</translation>
+        <translation>Wtyczki</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Hiçbiri</translation>
+        <translation type="unfinished"> </translation>
     </message>
     <message>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
-        <translation>Gnome Masaüstü Bütünleşmesi (Gtk 2.x)</translation>
+        <translation>Integracja Gnome (Gtk 2.x)</translation>
     </message>
     <message>
         <source>KDE 4 Desktop Integration</source>
-        <translation>KDE4 Masaüstü Bütünleşmesi</translation>
+        <translation>Integracja KDE 4</translation>
     </message>
     <message>
         <source>You need to restart the program before the changes take effect.</source>
-        <translation>Değişikliklerin etkin olabilmesi için uygulamayı yeniden başlatmanız gerekir.</translation>
+        <translation>Aby uaktywnić ustawienia, należy uruchomić program ponownie.</translation>
     </message>
     <message>
         <source>Configure...</source>
-        <translation>Yapılandır...</translation>
+        <translation>Konfiguruj...</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Gelişmiş</translation>
+        <translation>Zaawansowane</translation>
     </message>
     <message>
         <source>Auto-Type Fine Tuning</source>
-        <translation>Otomatik-Tip İyileştirmesi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
@@ -2302,11 +2205,11 @@ Dosya okunabilir değil.</translation>
     </message>
     <message>
         <source>Pre-Gap:</source>
-        <translation>Pre-Gap:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Key Stroke Delay:</source>
-        <translation>Anahtar Gecikmesi:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
@@ -2314,23 +2217,23 @@ Dosya okunabilir değil.</translation>
     </message>
     <message>
         <source>Custom Browser Command</source>
-        <translation>Özel Tarayıcı Komutu</translation>
+        <translation>Polecenie uruchamiające przeglądarkę</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation>Gözat</translation>
+        <translation>Przeglądaj...</translation>
     </message>
     <message>
         <source>Media Root:</source>
-        <translation>Ortam Kök Dizini:</translation>
+        <translation>Katalog główny:</translation>
     </message>
     <message>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
-        <translation>CD ve bellek çubukları gibi depolama ortamlarının bağlandığı dizin.</translation>
+        <translation>Katalog, w którym wymienne nośniki (CD, pendrive) są montowane.</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Gözat...</translation>
+        <translation>Przeglądaj...</translation>
     </message>
     <message>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
@@ -2338,124 +2241,124 @@ Dosya okunabilir değil.</translation>
     </message>
     <message>
         <source>Save relative paths (bookmarks and last file)</source>
-        <translation>Değişken yolları kaydet (yer imleri ve son dosyalar)</translation>
+        <translation>Zapamiętaj ścieżki jako względne (zakładki i ostatnio otwarty plik)</translation>
     </message>
     <message>
         <source>Global Auto-Type Shortcut:</source>
-        <translation>Genel Otomatik-Tip Kısayolu:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Automatically save database on exit and workspace locking</source>
-        <translation>Çıkışta veritabanını otomatik olarak kaydet ve çalışma alanını kilitle</translation>
+        <translation>Automatycznie zapisz bazę przy wyjściu z programu lub blokadzie obszaru roboczego</translation>
     </message>
     <message>
         <source>Show plain text passwords in:</source>
-        <translation>Düz metin parolaları böyle göster:</translation>
+        <translation>Pokaż jawne hasła w:</translation>
     </message>
     <message>
         <source>Database Key Dialog</source>
-        <translation>Veritabanı Anahtarı Penceresi</translation>
+        <translation>oknie klucza bazy</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation>saniye</translation>
+        <translation>sekundach</translation>
     </message>
     <message>
         <source>Lock database after inactivity of</source>
-        <translation>Şu kadar etkinlik olmazsa veritabanını kilitle</translation>
+        <translation>Zablokuj obszar roboczy po</translation>
     </message>
     <message>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
-        <translation>Genel Otomatik Tip için Pencereleri eşlemek amacıyla girdinin başlığını kullan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>General (1)</source>
-        <translation>Genel (1)</translation>
+        <translation>Główne (1)</translation>
     </message>
     <message>
         <source>General (2)</source>
-        <translation>Genel (2)</translation>
+        <translation>Główne (2)</translation>
     </message>
     <message>
         <source>Appearance</source>
-        <translation>Görünüm</translation>
+        <translation>Wygląd</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Dil</translation>
+        <translation>Język</translation>
     </message>
     <message>
         <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
-        <translation>Düzenlenen girdileri yedeklemek için &apos;Backup&apos; grubunu kullan</translation>
+        <translation>Zrób kopię zapasową modyfikowanego wpisu w grupie &apos;Kopie Zapasowe&apos;</translation>
     </message>
     <message>
         <source>Delete backup entries older than:</source>
-        <translation>Bundan eski girdileri sil:</translation>
+        <translation>Usuń kopie zapasowe starsze niż:</translation>
     </message>
     <message>
         <source>days</source>
-        <translation>gün</translation>
+        <translation>dni</translation>
     </message>
     <message>
         <source>Automatically save database after every change</source>
-        <translation>Her değişiklikte veritabanını otomatik olarak kaydet</translation>
+        <translation>Automatycznie zapisz bazę po każdej zmianie</translation>
     </message>
     <message>
         <source>System Language</source>
-        <translation type="obsolete">Sistem Dili</translation>
+        <translation type="obsolete">Domyślny język</translation>
     </message>
     <message>
         <source>English</source>
-        <translation type="obsolete">İngilizce</translation>
+        <translation type="obsolete">Angielski</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation>Dil:</translation>
+        <translation>Język:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation>Yazar:</translation>
+        <translation>Autor:</translation>
     </message>
 </context>
 <context>
     <name>ShortcutWidget</name>
     <message>
         <source>Ctrl</source>
-        <translation>Ctrl</translation>
+        <translation type="unfinished">Control</translation>
     </message>
     <message>
         <source>Shift</source>
-        <translation>Shift</translation>
+        <translation type="unfinished">Shift</translation>
     </message>
     <message>
         <source>Alt</source>
-        <translation>Alt</translation>
+        <translation type="unfinished">Alt</translation>
     </message>
     <message>
         <source>AltGr</source>
-        <translation>AltGr</translation>
+        <translation type="unfinished">Prawy Alt</translation>
     </message>
     <message>
         <source>Win</source>
-        <translation>Win</translation>
+        <translation type="unfinished">Win</translation>
     </message>
 </context>
 <context>
     <name>SimplePasswordDialog</name>
     <message>
         <source>Enter your Password</source>
-        <translation>Parolanızı Girin</translation>
+        <translation>Podaj hasło</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Parola:</translation>
+        <translation>Hasło:</translation>
     </message>
 </context>
 <context>
     <name>TargetWindowDlg</name>
     <message>
         <source>Auto-Type: Select Target Window</source>
-        <translation>Otomatik-Tip: Hedef Pencereyi Seçin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>To specify the target window, either select an existing currently-opened window
@@ -2467,42 +2370,39 @@ from the drop-down list, or enter the window title manually:</source>
     <name>Translation</name>
     <message>
         <source>$TRANSLATION_AUTHOR</source>
-        <translation>Serdar Soytetir</translation>
+        <translation>Daniel Mariusz Kmieć</translation>
     </message>
     <message>
         <source>$TRANSLATION_AUTHOR_EMAIL</source>
         <comment>Here you can enter your email or homepage if you want.</comment>
-        <translation>tulliana@gmail.com</translation>
+        <translation type="unfinished">http://kmiec.eu/</translation>
     </message>
     <message>
         <source>$LANGUAGE_NAME</source>
         <comment>Insert your language name in the format: English (United States)</comment>
-        <translation>Türkçe</translation>
+        <translation>Polski (Polska)</translation>
     </message>
 </context>
 <context>
     <name>WorkspaceLockedWidget</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;The workspace is locked.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Çalışma alanı kilitli.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Verdana&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Obszar roboczy jest zablokowany.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unlock</source>
-        <translation>Kilidi Aç</translation>
+        <translation>Odblokuj</translation>
     </message>
     <message>
         <source>Close Database</source>
-        <translation>Veritabanını Kapat</translation>
+        <translation>Zamknij bazę</translation>
     </message>
 </context>
 </TS>
