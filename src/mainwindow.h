@@ -21,6 +21,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QSessionManager>
 #include <QSystemTrayIcon>
 #include "lib/EntryView.h"
 #include "lib/GroupView.h"
@@ -72,7 +73,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void OnExtrasShowExpiredEntries();
 		//void OnExtrasTrashCan(); //TODO TrashCan
 		void OnHelpAbout();
-		//void OnHelpHandbook(); //TODO Handbook
+		void OnHelpHandbook();
 		//void OnItemExpanded(QTreeWidgetItem*);
 		//void OnItemCollaped(QTreeWidgetItem*);
 		void OnShowSearchResults();
@@ -84,6 +85,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void OnDetailViewUrlClicked(const QUrl& url);
 		void OnLockClose();
 		void OnInactivityTimer();
+		void OnShutdown(QSessionManager& manager);
 
 	private:
 		void closeEvent(QCloseEvent* event);
@@ -130,7 +132,6 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		QWidget* NormalCentralWidget;
 		QWidget* LockedCentralWidget;
 		Ui_WorkspaceLockedWidget WorkspaceLockedWidget;
-		bool ShutingDown;
 		bool InUnLock;
 		QList<int> lockGroup;
 		QDialog* unlockDlg;

@@ -37,6 +37,7 @@ class KeepassGroupView:public QTreeWidget{
 		void createItems();
 		void showSearchResults();
 		void setCurrentGroup(IGroupHandle* group);
+		void selectFirstGroup();
 	
 	public slots:
 		void createGroup(const QString& title, quint32 image, GroupViewItem* group=NULL);

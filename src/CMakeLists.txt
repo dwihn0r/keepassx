@@ -20,6 +20,7 @@ SET(keepassx_HEADERS
 	dialogs/EditEntryDlg.h
 	dialogs/EditGroupDlg.h
 	dialogs/ExpiredEntriesDlg.h
+	dialogs/HelpDlg.h
 	dialogs/ManageBookmarksDlg.h
 	dialogs/PasswordDlg.h
 	dialogs/PasswordGenDlg.h
@@ -76,6 +77,7 @@ SET(keepassx_SOURCES
 	dialogs/EditEntryDlg.cpp
 	dialogs/EditGroupDlg.cpp
 	dialogs/ExpiredEntriesDlg.cpp
+	dialogs/HelpDlg.cpp
 	dialogs/ManageBookmarksDlg.cpp
 	dialogs/PasswordDlg.cpp
 	dialogs/PasswordGenDlg.cpp
@@ -104,6 +106,7 @@ SET(keepassx_FORMS
 	forms/EditEntryDlg.ui
 	forms/EditGroupDlg.ui
 	forms/ExpiredEntriesDlg.ui
+	forms/HelpDlg.ui
 	forms/MainWindow.ui
 	forms/ManageBookmarksDlg.ui
 	forms/PasswordDlg.ui

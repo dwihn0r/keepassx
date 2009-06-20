@@ -41,13 +41,17 @@ CSelectIconDlg::CSelectIconDlg(IDatabase* database,int CurrentId,QWidget* parent
 void CSelectIconDlg::updateView(){
 	List->clear();
 	for(int i=0; i<db->numIcons(); i++){
-		QListWidgetItem* item;
+		QListWidgetItem* item = NULL;
 		if(i<BUILTIN_ICONS)
-			List->addItem(item=new QListWidgetItem(QIcon(db->icon(i)),QString::number(i)));
+			item = new QListWidgetItem(QIcon(db->icon(i)),QString::number(i));
 		else
 			if(!db->icon(i).isNull())
-				List->addItem(item=new QListWidgetItem(QIcon(db->icon(i)),"["+QString::number(i)+"]"));
-		item->setData(32,i);
+				item = new QListWidgetItem(QIcon(db->icon(i)),"["+QString::number(i)+"]");
+		
+		if (item) {
+			item->setData(32,i);
+			List->addItem(item);
+		}
 	}
 }
 

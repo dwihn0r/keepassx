@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>AboutDlg</class>
- <widget class="QDialog" name="AboutDlg" >
-  <property name="geometry" >
+ <widget class="QDialog" name="AboutDlg">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,22 +10,22 @@
     <height>305</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>About</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="spacing" >
+  <layout class="QVBoxLayout">
+   <property name="spacing">
     <number>6</number>
    </property>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>50</height>
@@ -33,65 +34,57 @@
     </spacer>
    </item>
    <item>
-    <widget class="QTabWidget" name="tabWidget" >
-     <property name="currentIndex" >
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>397</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
        <string>About</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" >
+        <layout class="QHBoxLayout">
          <item>
-          <widget class="QLabel" name="labelAppName" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+          <widget class="QLabel" name="labelAppName">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="font" >
+           <property name="font">
             <font>
              <pointsize>12</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>AppName</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="labelAppFunc" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+          <widget class="QLabel" name="labelAppFunc">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="font" >
+           <property name="font">
             <font>
              <pointsize>9</pointsize>
             </font>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>AppFunc</string>
            </property>
-           <property name="alignment" >
+           <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
@@ -99,19 +92,19 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeType" >
+           <property name="sizeType">
             <enum>QSizePolicy::Fixed</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>10</width>
              <height>20</height>
@@ -120,24 +113,24 @@
           </spacer>
          </item>
          <item>
-          <layout class="QVBoxLayout" >
+          <layout class="QVBoxLayout">
            <item>
-            <widget class="LinkLabel" name="label_5" >
-             <property name="text" >
+            <widget class="LinkLabel" name="label_5">
+             <property name="text">
               <string>http://keepassx.sourceforge.net</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="LinkLabel" name="label_3" >
-             <property name="text" >
+            <widget class="LinkLabel" name="label_3">
+             <property name="text">
               <string>keepassx@gmail.com</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_4" >
-             <property name="text" >
+            <widget class="QLabel" name="label_4">
+             <property name="text">
               <string>Copyright (C) 2005 - 2009 KeePassX Team
 KeePassX is distributed under the terms of the
 General Public License (GPL) version 2.</string>
@@ -150,75 +143,51 @@ General Public License (GPL) version 2.</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>397</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
        <string>Credits</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
        <item>
-        <widget class="QTextEdit" name="Edit_Thanks" >
-         <property name="readOnly" >
+        <widget class="QTextEdit" name="Edit_Thanks">
+         <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_4" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>397</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
        <string>Translation</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
        <item>
-        <widget class="QTextEdit" name="Edit_Translation" >
-         <property name="readOnly" >
+        <widget class="QTextEdit" name="Edit_Translation">
+         <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>397</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
        <string>License</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
        <item>
-        <widget class="QTextEdit" name="Edit_License" >
-         <property name="readOnly" >
+        <widget class="QTextEdit" name="Edit_License">
+         <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
@@ -228,15 +197,15 @@ General Public License (GPL) version 2.</string>
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="ButtonBox" >
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Ok</set>
+    <widget class="QDialogButtonBox" name="ButtonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
    <class>LinkLabel</class>

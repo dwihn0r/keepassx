@@ -162,7 +162,8 @@ void KeepassGroupView::OnEditGroup(){
 
 void KeepassGroupView::contextMenuEvent(QContextMenuEvent* e){
 	if(!(GroupViewItem*)itemAt(e->pos()))
-		setCurrentItem(NULL);
+		return;
+	
 	e->accept();
 	if(currentItem()==SearchResultItem)
 		ContextMenuSearchGroup->popup(e->globalPos());
@@ -189,6 +190,13 @@ void KeepassGroupView::setCurrentGroup(IGroupHandle* group){
 		if(Items[i]->GroupHandle==group){found=true; break;}
 	if(!found)return;
 	setCurrentItem(Items[i]);
+}
+
+void KeepassGroupView::selectFirstGroup(){
+	if (Items.isEmpty())
+		return;
+	
+	setCurrentItem(Items[0]);
 }
 
 void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){

@@ -17,6 +17,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QPointer>
 #include <QToolBar>
 #include <QStatusBar>
 #include "mainwindow.h"
@@ -40,6 +41,7 @@
 //#include "dialogs/TrashCanDlg.h" //TODO TrashCan
 #include "dialogs/AddBookmarkDlg.h"
 #include "dialogs/ManageBookmarksDlg.h"
+#include "dialogs/HelpDlg.h"
 
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;
@@ -49,7 +51,6 @@ Export_KeePassX_Xml export_KeePassX_Xml;
 
 
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent, Qt::WFlags flags) :QMainWindow(parent,flags){
-	ShutingDown=false;
 	IsLocked=false;
 	EventOccurred=true;
 	inactivityCounter=0;
@@ -91,6 +92,7 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	LockedCentralWidget->setVisible(false);
 
 	setupConnections();
+	connect(qApp, SIGNAL(commitDataRequest(QSessionManager&)), SLOT(OnShutdown(QSessionManager&)));
 	
 	inactivityTimer = new QTimer(this);
 	inactivityTimer->setInterval(500);
@@ -186,7 +188,7 @@ void KeepassMainWindow::setupConnections(){
 	connect(ExtrasShowExpiredEntriesAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasShowExpiredEntries()));
 	//connect(ExtrasTrashCanAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasTrashCan())); //TODO ExtrasTrashCan
 
-	//connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook())); //TODO Handbook
+	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
 
 	connect(EntryView,SIGNAL(itemActivated(QTreeWidgetItem*,int)),EntryView,SLOT(OnEntryActivated(QTreeWidgetItem*,int)));
@@ -267,8 +269,8 @@ void KeepassMainWindow::setupIcons(){
 #else
 	EditAutoTypeAction->setVisible(false);
 #endif
-	//HelpHandbookAction->setIcon(getIcon("manual")); //TODO Handbook
-	HelpAboutAction->setIcon(getIcon("help"));
+	HelpHandbookAction->setIcon(getIcon("manual"));
+	HelpAboutAction->setIcon(getIcon("help_about"));
 	menuBookmarks->menuAction()->setIcon(getIcon("bookmark_folder"));
 	AddThisAsBookmarkAction->setIcon(getIcon("bookmark_this"));
 	AddBookmarkAction->setIcon(getIcon("bookmark_add"));
@@ -491,6 +493,8 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		setStatusBarMsg(StatusBarReady);
 	inactivityCounter = 0;
 	
+	GroupView->selectFirstGroup();
+	
 	return true;
 }
 
@@ -530,7 +534,7 @@ bool KeepassMainWindow::closeDatabase(bool lock){
 	db->close();
 	delete db;
 	db=NULL;
-	if (QFile::exists(currentFile+".lock")){
+	if (!dbReadOnly && QFile::exists(currentFile+".lock")){
 		if (!QFile::remove(currentFile+".lock"))
 			QMessageBox::critical(this, tr("Error"), tr("Couldn't remove database lock file."));
 	}
@@ -939,7 +943,6 @@ void KeepassMainWindow::OnFileChangeKey(){
 }
 
 void KeepassMainWindow::OnFileExit(){
-	ShutingDown=true;
 	close();
 }
 
@@ -1035,17 +1038,10 @@ void KeepassMainWindow::OnFileModified(){
 }
 
 void KeepassMainWindow::closeEvent(QCloseEvent* e){
-	if(!ShutingDown && config->showSysTrayIcon() && config->minimizeToTray()){
-		e->ignore();
-		if (config->lockOnMinimize() && !IsLocked && FileOpen)
-			OnUnLockWorkspace();
-		hide();
-		return;
-	}
-	
 	if(FileOpen && !closeDatabase()){
-		ShutingDown=false;
 		e->ignore();
+		if (!isVisible())
+			show();
 		return;
 	}
 	
@@ -1064,6 +1060,7 @@ void KeepassMainWindow::closeEvent(QCloseEvent* e){
 	config->setShowStatusbar(statusBar()->isVisible());
 	
 	delete SysTray;
+	QMainWindow::closeEvent(e);
 	QApplication::quit();
 }
 
@@ -1136,21 +1133,20 @@ void KeepassMainWindow::OnHelpAbout(){
 	dlg.exec();
 }
 
- //TODO Handbook
-/*void KeepassMainWindow::OnHelpHandbook(){
-	HelpBrowser->openAssistant();
-
-
-}*/
+void KeepassMainWindow::OnHelpHandbook(){
+	QPointer<HelpDlg> dlg = new HelpDlg(this);
+	dlg->exec();
+	delete dlg;
+}
 
 void KeepassMainWindow::OnViewShowToolbar(bool show){
-config->setShowToolbar(show);
-toolBar->setVisible(show);
+	config->setShowToolbar(show);
+	toolBar->setVisible(show);
 }
 
 void KeepassMainWindow::OnViewShowEntryDetails(bool show){
-config->setShowEntryDetails(show);
-DetailView->setVisible(show);
+	config->setShowEntryDetails(show);
+	DetailView->setVisible(show);
 }
 
 /*void KeepassMainWindow::OnItemExpanded(QTreeWidgetItem* item){
@@ -1301,8 +1297,10 @@ void KeepassMainWindow::OnUnLockWorkspace(){
 			item = parent;
 		}
 		
-		if (closeDatabase(true))
+		if (closeDatabase(true)) {
+			setStateFileModified(false);
 			setLock();
+		}
 		else
 			lockGroup.clear();
 	}
@@ -1362,6 +1360,14 @@ void KeepassMainWindow::OnInactivityTimer(){
 				popUpWidget->hide();
 			OnUnLockWorkspace();
 		}
+	}
+}
+
+void KeepassMainWindow::OnShutdown(QSessionManager& manager) {
+	/* QApplication::commitData() only closes visible windows,
+	   so we need to manually close mainwindow if it's hidden */
+	if (manager.allowsInteraction() && !isVisible()) {
+		close();
 	}
 }
 

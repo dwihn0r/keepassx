@@ -71,7 +71,7 @@ AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 	
 	Edit_License->setHtml(QString::fromUtf8(gpl.readAll()));
 	
-	connect(ButtonBox, SIGNAL(accepted()), SLOT(close()));
+	connect(ButtonBox, SIGNAL(rejected()), SLOT(close()));
 }
 
 void AboutDialog::paintEvent(QPaintEvent *event){

@@ -29,6 +29,7 @@ bool KeepassApplication::x11EventFilter(XEvent* event){
 	if (autoType == NULL)
 		return QApplication::x11EventFilter(event);
 	
+#ifdef GLOBAL_AUTOTYPE
 	if (remove_invalid == 0) {
 		AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
 		remove_invalid = ControlMask | ShiftMask | autoTypeGlobal->maskAlt() |
@@ -44,7 +45,12 @@ bool KeepassApplication::x11EventFilter(XEvent* event){
 		autoType->performGlobal();
 		return true;
 	}
-	else{
-		return QApplication::x11EventFilter(event);
+#endif
+	
+	if (event->type == MappingNotify) {
+		dynamic_cast<AutoTypeX11*>(autoType)->updateKeymap();
+		remove_invalid = 0;
 	}
+	
+	return QApplication::x11EventFilter(event);
 }

@@ -64,7 +64,6 @@ public:
 	QString lastKeyLocation(){return settings.value("Options/LastKeyLocation").toString();}
 	tKeyType lastKeyType(){return stringToKeyType(settings.value("Options/LastKeyType").toString());}
 	QByteArray mainWindowGeometry();
-	bool minimizeToTray(){return settings.value("Options/MinimizeToTray",false).toBool();}
 	bool minimizeTray(){return settings.value("Options/MinimizeTray",false).toBool();}
 	bool startMinimized(){return settings.value("Options/StartMinimized",false).toBool();}
 	bool startLocked(){return settings.value("Options/StartLocked",false).toBool();}
@@ -101,7 +100,7 @@ public:
 	bool askBeforeDelete(){return settings.value("Options/AskBeforeDelete",true).toBool();}
 #ifdef AUTOTYPE
 	int autoTypePreGap(){return settings.value("Options/AutoTypePreGap",500).toInt();}
-	int autoTypeKeyStrokeDelay(){return settings.value("Options/AutoTypeKeyStrokeDelay",0).toInt();}
+	int autoTypeKeyStrokeDelay(){return settings.value("Options/AutoTypeKeyStrokeDelay",5).toInt();}
 #endif
 #ifdef GLOBAL_AUTOTYPE
 	Shortcut globalShortcut();
@@ -131,7 +130,6 @@ public:
 	void setLastKeyLocation(const QString& value){settings.setValue("Options/LastKeyLocation",value);}
 	void setLastKeyType(tKeyType value){settings.setValue("Options/LastKeyType",keyTypeToString(value));}
 	void setMainWindowGeometry(const QByteArray& value){settings.setValue("UI/MainWindowGeometry",value);}
-	void setMinimizeToTray(bool value){settings.setValue("Options/MinimizeToTray",value);}
 	void setMinimizeTray(bool value){settings.setValue("Options/MinimizeTray",value);}
 	void setStartMinimized(bool value){settings.setValue("Options/StartMinimized",value);}
 	void setStartLocked(bool value){settings.setValue("Options/StartLocked",value);}

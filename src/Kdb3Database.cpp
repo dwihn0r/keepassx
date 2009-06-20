@@ -21,6 +21,7 @@
 
 #include "crypto/twoclass.h"
 #include <QBuffer>
+#include <algorithm>
 
 #define UNEXP_ERROR error=QString("Unexpected error in: %1, Line:%2").arg(__FILE__).arg(__LINE__);
 
@@ -595,11 +596,15 @@ bool Kdb3Database::loadReal(QString filename, bool readOnly, bool differentEncod
 	else if(Algorithm == Twofish_Cipher){
 		CTwofish twofish;
 		if (twofish.init(FinalKey, 32, EncryptionIV) != true){
-			error=tr("Unable to initalize the twofish algorithm.");
+			error=tr("Unable to initialize the twofish algorithm.");
 			LOAD_RETURN_CLEANUP
 		}
 		crypto_size = (unsigned long)twofish.padDecrypt((quint8 *)buffer + DB_HEADER_SIZE,
 		total_size - DB_HEADER_SIZE, (quint8 *)buffer + DB_HEADER_SIZE);
+	}
+	else{
+		error=tr("Unknown encryption algorithm.");
+		LOAD_RETURN_CLEANUP
 	}
 	
 	if ((crypto_size > 2147483446) || (!crypto_size && NumGroups)){
@@ -1972,7 +1977,7 @@ int KeyTransformBenchmark::benchmark(int pMSecs){
 	ktbRight->start();
 	ktbLeft->wait();
 	ktbRight->wait();
-	int num = ktbLeft->rounds + ktbRight->rounds;
+	int num = std::min(ktbLeft->rounds, ktbRight->rounds);
 	delete ktbLeft;
 	delete ktbRight;
 	

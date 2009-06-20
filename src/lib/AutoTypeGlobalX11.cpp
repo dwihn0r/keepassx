@@ -34,11 +34,20 @@ void initAutoType(KeepassMainWindow* mainWin) {
 AutoTypeGlobalX11::AutoTypeGlobalX11(KeepassMainWindow* mainWin) : AutoTypeX11(mainWin) {
 	wm_state = XInternAtom(dpy, "WM_STATE", true);
 	windowRoot = XRootWindow(dpy, mainWin->x11Info().screen());
+	shortcut.key = 0;
 	focusedWindow = 0;
+	oldCode = 0;
+	oldMod = 0;
 	//windowBlacklist << "kicker" << "KDE Desktop";
 	classBlacklist << "desktop_window" << "gnome-panel"; // Gnome
 	classBlacklist << "kdesktop" << "kicker"; // KDE 3
+	classBlacklist << "Plasma"; // KDE 4
 	classBlacklist << "xfdesktop" << "xfce4-panel"; // Xfce 4
+}
+
+void AutoTypeGlobalX11::updateKeymap() {
+	AutoTypeX11::updateKeymap();
+	registerGlobalShortcut(shortcut);
 }
 
 void AutoTypeGlobalX11::perform(IEntryHandle* entry, bool hideWindow, int nr, bool wasLocked){
@@ -216,11 +225,14 @@ void AutoTypeGlobalX11::performGlobal(){
 }
 
 bool AutoTypeGlobalX11::registerGlobalShortcut(const Shortcut& s){
-	if (s.key==shortcut.key && s.ctrl==shortcut.ctrl && s.shift==shortcut.shift && s.alt==shortcut.alt && s.altgr==shortcut.altgr && s.win==shortcut.win)
-		return true;
+	if (s.key == 0)
+		return false;
 	
 	int code=XKeysymToKeycode(dpy, HelperX11::getKeysym(s.key));
 	uint mod=HelperX11::getShortcutModifierMask(s);
+	
+	if (s.key==shortcut.key && s.ctrl==shortcut.ctrl && s.shift==shortcut.shift && s.alt==shortcut.alt && s.altgr==shortcut.altgr && s.win==shortcut.win && code==oldCode && mod==oldMod)
+		return true;
 	
 	HelperX11::startCatchErrors();
 	XGrabKey(dpy, code, mod, windowRoot, true, GrabModeAsync, GrabModeAsync);
@@ -239,6 +251,8 @@ bool AutoTypeGlobalX11::registerGlobalShortcut(const Shortcut& s){
 	else {
 		unregisterGlobalShortcut();
 		shortcut = s;
+		oldCode = code;
+		oldMod = mod;
 		return true;
 	}
 }
@@ -246,15 +260,14 @@ bool AutoTypeGlobalX11::registerGlobalShortcut(const Shortcut& s){
 void AutoTypeGlobalX11::unregisterGlobalShortcut(){
 	if (shortcut.key==0) return;
 	
-	int code=XKeysymToKeycode(dpy, HelperX11::getKeysym(shortcut.key));
-	uint mod=HelperX11::getShortcutModifierMask(shortcut);
-	
-	XUngrabKey(dpy, code, mod, windowRoot);
-	XUngrabKey(dpy, code, mod | Mod2Mask, windowRoot);
-	XUngrabKey(dpy, code, mod | LockMask, windowRoot);
-	XUngrabKey(dpy, code, mod | Mod2Mask | LockMask, windowRoot);
+	XUngrabKey(dpy, oldCode, oldMod, windowRoot);
+	XUngrabKey(dpy, oldCode, oldMod | Mod2Mask, windowRoot);
+	XUngrabKey(dpy, oldCode, oldMod | LockMask, windowRoot);
+	XUngrabKey(dpy, oldCode, oldMod | Mod2Mask | LockMask, windowRoot);
 	
 	shortcut.key = 0;
+	oldCode = 0;
+	oldMod = 0;
 }
 
 QString AutoTypeGlobalX11::getRootGroupName(IEntryHandle* entry){
