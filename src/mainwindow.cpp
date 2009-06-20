@@ -473,7 +473,8 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		setStateFileModified(static_cast<Kdb3Database*>(db)->hasPasswordEncodingChanged());
 	}
 	else{
-		QFile::remove(filename+".lock");
+		if (!dbReadOnly && QFile::exists(filename+".lock"))
+			QFile::remove(filename+".lock");
 		setStatusBarMsg(StatusBarLoadingFailed);
 		QString error=db->getError();
 		if(error.isEmpty())error=tr("Unknown error while loading database.");
