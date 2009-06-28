@@ -32,6 +32,6 @@ TargetWindowDlg::TargetWindowDlg(QWidget* parent) : QDialog(parent){
 }
 
 void TargetWindowDlg::OnAccept(){
-	pWindowTitle = comboWindow->itemText(comboWindow->currentIndex());
+	pWindowTitle = comboWindow->currentText();
 	accept();
 }
