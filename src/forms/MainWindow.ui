@@ -196,7 +196,6 @@
       <string>&amp;Columns</string>
      </property>
      <addaction name="ViewColumnsGroupAction"/>
-     <addaction name="separator"/>
      <addaction name="ViewColumnsTitleAction"/>
      <addaction name="ViewColumnsUsernameAction"/>
      <addaction name="ViewColumnsUrlAction"/>
@@ -539,11 +538,11 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
    <property name="text">
-    <string>&amp;Group (search results only)</string>
+    <string>&amp;Group</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
   <action name="ExtrasShowExpiredEntriesAction">

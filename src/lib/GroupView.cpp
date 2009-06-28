@@ -36,7 +36,6 @@ KeepassGroupView::KeepassGroupView(QWidget* parent):QTreeWidget(parent){
 	connect(this,SIGNAL(itemCollapsed(QTreeWidgetItem*)),this,SLOT(OnItemCollapsed(QTreeWidgetItem*)));
 }
 
-
 void KeepassGroupView::createItems(){
 	clear();
 	Items.clear();
@@ -55,6 +54,10 @@ void KeepassGroupView::createItems(){
 		Items[i]->setExpanded(Items[i]->GroupHandle->expanded());
 	}
 	SearchResultItem=new GroupViewItem();
+	retranslateUi();
+}
+
+void KeepassGroupView::retranslateUi() {
 	SearchResultItem->setText(0,tr("Search Results"));
 }
 

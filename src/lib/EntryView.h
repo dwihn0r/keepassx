@@ -23,8 +23,6 @@
 
 #include "Kdb3Database.h"
 
-#define NUM_COLUMNS 11
-
 class EntryViewItem;
 class GroupViewItem;
 enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
@@ -36,36 +34,32 @@ class KeepassEntryView:public QTreeWidget{
 		~KeepassEntryView();
 		void showSearchResults();
 		void showGroup(IGroupHandle* group);
-		void updateColumns();
 		void refreshItems();
-		int columnListIndex(int LogicalIndex);
+		void retranslateColumns();
 		IDatabase* db;
 		QList<EntryViewItem*>Items;
 		QList<IEntryHandle*> SearchResults;
 		QMenu *ContextMenu;
-		QBitArray Columns;
 		void setCurrentEntry(IEntryHandle* entry);
 		inline IGroupHandle* getCurrentGroup() { return CurrentGroup; };
+		bool columnVisible(int col);
+		void setColumnVisible(int col, bool visible);
+		
 	private:
-		//void setEntry(IEntryHandle* entry);
-		void updateEntry(EntryViewItem*);
-		void editEntry(EntryViewItem*);
-		void createItems(QList<IEntryHandle*>& entries);
-		int logicalColIndex(int ListIndex);
-
 		QClipboard* Clipboard;
 		QTimer ClipboardTimer;
-		void resizeColumns();
-		bool AutoResizeColumns;
 		QPoint DragStartPos;
 		QList<QTreeWidgetItem*> DragItems;
 		IGroupHandle* CurrentGroup;
 		enum EntryViewMode {Normal, ShowSearchResults};
 		EntryViewMode ViewMode;
-		QList<int> ColumnSizes;
-		QList<int> ColumnOrder;
-		float GroupColumnSize;
-
+		
+		void updateEntry(EntryViewItem*);
+		void editEntry(EntryViewItem*);
+		void createItems(QList<IEntryHandle*>& entries);
+		void saveHeaderView();
+		void restoreHeaderView();
+		
 		void contextMenuEvent(QContextMenuEvent *event);
 		void paintEvent(QPaintEvent* event);
 		void resizeEvent(QResizeEvent* event);
@@ -73,8 +67,6 @@ class KeepassEntryView:public QTreeWidget{
 		void mouseMoveEvent(QMouseEvent *event);
 	
 	private slots:
-		void OnColumnResized();
-		void OnHeaderSectionClicked(int index);
 		void OnGroupChanged(IGroupHandle* group);
 		void OnShowSearchResults();
 		void OnEntryActivated(QTreeWidgetItem*,int);
@@ -93,7 +85,6 @@ class KeepassEntryView:public QTreeWidget{
 		void OnAutoType();
 #endif
 		void removeDragItems();
-		void OnColumnMoved();
 		void OnEditOpenUrl();
 		void OnEditCopyUrl();
 	
@@ -101,6 +92,7 @@ class KeepassEntryView:public QTreeWidget{
 		void fileModified();
 		void selectionChanged(SelectionState);
 		void requestCreateGroup(QString title, quint32 image, GroupViewItem* parent);
+		void viewModeChanged(bool searchResultMode);
 };
 
 

@@ -49,7 +49,6 @@ Import_KWalletXml import_KWalletXml;
 Export_Txt export_Txt;
 Export_KeePassX_Xml export_KeePassX_Xml;
 
-
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent, Qt::WFlags flags) :QMainWindow(parent,flags){
 	IsLocked=false;
 	EventOccurred=true;
@@ -191,8 +190,6 @@ void KeepassMainWindow::setupConnections(){
 	connect(HelpHandbookAction,SIGNAL(triggered()),this,SLOT(OnHelpHandbook()));
 	connect(HelpAboutAction,SIGNAL(triggered()),this,SLOT(OnHelpAbout()));
 
-	connect(EntryView,SIGNAL(itemActivated(QTreeWidgetItem*,int)),EntryView,SLOT(OnEntryActivated(QTreeWidgetItem*,int)));
-	connect(EntryView,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),EntryView,SLOT(OnEntryDblClicked(QTreeWidgetItem*,int)));
 	connect(QuickSearchEdit,SIGNAL(returnPressed()), this, SLOT(OnQuickSearch()));
 	connect(GroupView,SIGNAL(groupChanged(IGroupHandle*)),EntryView,SLOT(OnGroupChanged(IGroupHandle*)));
 	connect(GroupView,SIGNAL(groupChanged(IGroupHandle*)),this,SLOT(OnGroupSelectionChanged(IGroupHandle*)));
@@ -203,6 +200,8 @@ void KeepassMainWindow::setupConnections(){
 	connect(GroupView,SIGNAL(searchResultsSelected()),this,SLOT(OnShowSearchResults()));
 	connect(GroupView,SIGNAL(entriesDropped()),EntryView,SLOT(removeDragItems()));
 	connect(HideSearchResultsAction,SIGNAL(triggered()),GroupView,SLOT(OnHideSearchResults()));
+	connect(EntryView, SIGNAL(viewModeChanged(bool)), SLOT(loadColumnVisibility()));
+	connect(EntryView, SIGNAL(viewModeChanged(bool)), ViewColumnsGroupAction, SLOT(setVisible(bool)));
 
 	connect(SysTray,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(OnSysTrayActivated(QSystemTrayIcon::ActivationReason)));
 	connect(DetailView,SIGNAL(anchorClicked(const QUrl&)),this,SLOT(OnDetailViewUrlClicked(const QUrl&)));
@@ -311,17 +310,7 @@ void KeepassMainWindow::setupMenus(){
 	ViewShowEntryDetailsAction->setChecked(config->showEntryDetails());
 	ViewHidePasswordsAction->setChecked(config->hidePasswords());
 	ViewHideUsernamesAction->setChecked(config->hideUsernames());
-	ViewColumnsTitleAction->setChecked(EntryView->Columns[0]);
-	ViewColumnsUsernameAction->setChecked(EntryView->Columns[1]);
-	ViewColumnsUrlAction->setChecked(EntryView->Columns[2]);
-	ViewColumnsPasswordAction->setChecked(EntryView->Columns[3]);
-	ViewColumnsCommentAction->setChecked(EntryView->Columns[4]);
-	ViewColumnsExpireAction->setChecked(EntryView->Columns[5]);
-	ViewColumnsCreationAction->setChecked(EntryView->Columns[6]);
-	ViewColumnsLastChangeAction->setChecked(EntryView->Columns[7]);
-	ViewColumnsLastAccessAction->setChecked(EntryView->Columns[8]);
-	ViewColumnsAttachmentAction->setChecked(EntryView->Columns[9]);
-	ViewColumnsGroupAction->setChecked(EntryView->Columns[10]);
+	loadColumnVisibility();
 	ViewShowStatusbarAction->setChecked(config->showStatusbar());
 
 	switch(config->toolbarIconSize()){
@@ -383,6 +372,20 @@ void KeepassMainWindow::setupMenus(){
 
 	//ExtrasTrashCanAction->setVisible(false); //TODO For KP 2.x only
 	menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
+}
+
+void KeepassMainWindow::loadColumnVisibility() {
+	ViewColumnsTitleAction->setChecked(EntryView->columnVisible(0));
+	ViewColumnsUsernameAction->setChecked(EntryView->columnVisible(1));
+	ViewColumnsUrlAction->setChecked(EntryView->columnVisible(2));
+	ViewColumnsPasswordAction->setChecked(EntryView->columnVisible(3));
+	ViewColumnsCommentAction->setChecked(EntryView->columnVisible(4));
+	ViewColumnsExpireAction->setChecked(EntryView->columnVisible(5));
+	ViewColumnsCreationAction->setChecked(EntryView->columnVisible(6));
+	ViewColumnsLastChangeAction->setChecked(EntryView->columnVisible(7));
+	ViewColumnsLastAccessAction->setChecked(EntryView->columnVisible(8));
+	ViewColumnsAttachmentAction->setChecked(EntryView->columnVisible(9));
+	ViewColumnsGroupAction->setChecked(EntryView->columnVisible(10));
 }
 
 void KeepassMainWindow::setupDatabaseConnections(IDatabase* DB){
@@ -1013,19 +1016,17 @@ void KeepassMainWindow::OnQuickSearch(){
 }
 
 void KeepassMainWindow::OnColumnVisibilityChanged(){
-	EntryView->Columns[0]=ViewColumnsTitleAction->isChecked();
-	EntryView->Columns[1]=ViewColumnsUsernameAction->isChecked();
-	EntryView->Columns[2]=ViewColumnsUrlAction->isChecked();
-	EntryView->Columns[3]=ViewColumnsPasswordAction->isChecked();
-	EntryView->Columns[4]=ViewColumnsCommentAction->isChecked();
-	EntryView->Columns[5]=ViewColumnsExpireAction->isChecked();
-	EntryView->Columns[6]=ViewColumnsCreationAction->isChecked();
-	EntryView->Columns[7]=ViewColumnsLastChangeAction->isChecked();
-	EntryView->Columns[8]=ViewColumnsLastAccessAction->isChecked();
-	EntryView->Columns[9]=ViewColumnsAttachmentAction->isChecked();
-	EntryView->Columns[10]=ViewColumnsGroupAction->isChecked();
-	EntryView->updateColumns();
-	if(FileOpen) EntryView->refreshItems();
+	EntryView->setColumnVisible(0, ViewColumnsTitleAction->isChecked());
+	EntryView->setColumnVisible(1, ViewColumnsUsernameAction->isChecked());
+	EntryView->setColumnVisible(2, ViewColumnsUrlAction->isChecked());
+	EntryView->setColumnVisible(3, ViewColumnsPasswordAction->isChecked());
+	EntryView->setColumnVisible(4, ViewColumnsCommentAction->isChecked());
+	EntryView->setColumnVisible(5, ViewColumnsExpireAction->isChecked());
+	EntryView->setColumnVisible(6, ViewColumnsCreationAction->isChecked());
+	EntryView->setColumnVisible(7, ViewColumnsLastChangeAction->isChecked());
+	EntryView->setColumnVisible(8, ViewColumnsLastAccessAction->isChecked());
+	EntryView->setColumnVisible(9, ViewColumnsAttachmentAction->isChecked());
+	EntryView->setColumnVisible(10, ViewColumnsGroupAction->isVisible() && ViewColumnsGroupAction->isChecked());
 }
 
 void KeepassMainWindow::OnUsernPasswVisibilityChanged(){
@@ -1102,7 +1103,8 @@ void KeepassMainWindow::OnExtrasSettings(){
 		retranslateUi(this);
 		WorkspaceLockedWidget.retranslateUi(LockedCentralWidget);
 		ViewShowToolbarAction->setText(tr("Show &Toolbar"));
-		EntryView->updateColumns();
+		EntryView->retranslateColumns();
+		GroupView->retranslateUi();
 		if (FileOpen) {
 			if (db->file())
 				setWindowTitle(QString("%1[*] - KeePassX").arg(db->file()->fileName()));

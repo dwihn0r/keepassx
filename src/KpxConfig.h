@@ -49,11 +49,8 @@ public:
 	QColor bannerColor2(){return stringToColor(settings.value("Options/BannerColor2","0,117,175").toString());}
 	QColor bannerTextColor(){return stringToColor(settings.value("Options/BannerTextColor","222,222,222").toString());}
 	int clipboardTimeOut(){return settings.value("Options/ClipboardTimeOut",20).toInt();}
-	QBitArray columns(){return stringToBitArray(settings.value("UI/Columns","11111000000").toString(),11);}
-	QList<int> columnOrder(){return stringToIntArray(settings.value("UI/ColumnOrder","100,100,100,100,100,100,100,100,100,100,100").toString(),11);}
-	QList<int> columnSizes(){return stringToIntArray(settings.value("UI/ColumnSizes","15,10,10,10,10,10,10,10,10,10,10").toString(),11);}
-	int columnSort(){return settings.value("UI/ColumnSort",0).toInt();}
-	Qt::SortOrder columnSortOrder(){return static_cast<Qt::SortOrder>(settings.value("UI/ColumnSortOrder",Qt::AscendingOrder).toInt());}
+	QByteArray entryView(){return settings.value("UI/EntryView").toByteArray();}
+	QByteArray entryViewSearch(){return settings.value("UI/EntryViewSearch").toByteArray();}
 	QStringList fileDlgHistory(unsigned index){return settings.value(QString("FileDlgHistory/ENTRY%1").arg(index)).toStringList();}
 	GrpTreeState groupTreeState(){return stringToGrpTreeState(settings.value("Options/GroupTreeState").toString());}
 	bool hidePasswords(){return settings.value("UI/HidePasswords",true).toBool();}
@@ -115,11 +112,8 @@ public:
 	void setBannerColor2(const QColor& value){settings.setValue("Options/BannerColor2",colorToString(value));}
 	void setBannerTextColor(const QColor& value){settings.setValue("Options/BannerTextColor",colorToString(value));}
 	void setClipboardTimeOut(int value){settings.setValue("Options/ClipboardTimeOut",value);}
-	void setColumns(const QBitArray& value){settings.setValue("UI/Columns",bitArrayToString(value));}
-	void setColumnOrder(const QList<int>& value){settings.setValue("UI/ColumnOrder",intArrayToString(value));}
-	void setColumnSizes(const QList<int>& value){settings.setValue("UI/ColumnSizes",intArrayToString(value));}
-	void setColumnSort(int value){settings.setValue("UI/ColumnSort",value);}
-	void setColumnSortOrder(int value){settings.setValue("UI/ColumnSortOrder",value);}
+	void setEntryView(const QByteArray& value){settings.setValue("UI/EntryView",value);}
+	void setEntryViewSearch(const QByteArray& value){settings.setValue("UI/EntryViewSearch",value);}
 	void setFileDlgHistory(unsigned index,const QStringList& value){settings.setValue(QString("FileDlgHistory/ENTRY%1").arg(index), value);}
 	void setGroupTreeState(GrpTreeState value){settings.setValue("Options/GroupTreeState",grpTreeStateToString(value));}
 	void setHidePasswords(bool value){settings.setValue("UI/HidePasswords",value);}

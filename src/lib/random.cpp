@@ -32,7 +32,6 @@
 #include <QCryptographicHash>
 #include <QCursor>
 #include <QDataStream>
-#include <QDateTime>
 #include <QTime>
 
 void initStdRand();

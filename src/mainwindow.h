@@ -86,6 +86,7 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void OnLockClose();
 		void OnInactivityTimer();
 		void OnShutdown(QSessionManager& manager);
+		void loadColumnVisibility();
 
 	private:
 		void closeEvent(QCloseEvent* event);
