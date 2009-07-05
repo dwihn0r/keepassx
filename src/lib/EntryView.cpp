@@ -21,9 +21,12 @@
 #include <QHeaderView>
 #include <QClipboard>
 #include <QProcess>
+#include <algorithm>
 #include "lib/AutoType.h"
 #include "lib/EntryView.h"
 #include "dialogs/EditEntryDlg.h"
+
+#define NUM_COLUMNS 11
 
 // just for the lessThan funtion
 /*QList<EntryViewItem*>* pItems;
@@ -34,7 +37,8 @@ KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
 	header()->setResizeMode(QHeaderView::Interactive);
 	header()->setStretchLastSection(false);
 	header()->setClickable(true);
-	//header()->setCascadingSectionResizes(true);
+	header()->setCascadingSectionResizes(true);
+	header()->setStretchLastSection(true);
 	retranslateColumns();
 	restoreHeaderView();
 
@@ -68,84 +72,69 @@ void KeepassEntryView::setColumnVisible(int col, bool visible) {
 }
 
 void KeepassEntryView::saveHeaderView() {
-	if (ViewMode == Normal)
-		config->setEntryView( header()->saveState() );
-	else
-		config->setEntryViewSearch( header()->saveState() );
+	QBitArray columns(NUM_COLUMNS);
+	QList<int> columnOrder;
+	QList<int> columnsSizes;
+	int columnSort = header()->sortIndicatorSection();
+	Qt::SortOrder columnSortOrder = header()->sortIndicatorOrder();
+	
+	for (int i=0; i<NUM_COLUMNS; ++i) {
+		columns.setBit(i, columnVisible(i));
+		columnOrder << header()->visualIndex(i);
+		columnsSizes << header()->sectionSize(i);
+	}
+	
+	if (ViewMode == Normal) {
+		config->setColumns(columns);
+		config->setColumnOrder(columnOrder);
+		config->setColumnSizes(columnsSizes);
+		config->setColumnSort(columnSort);
+		config->setColumnSortOrder(columnSortOrder);
+	}
+	else {
+		config->setSearchColumns(columns);
+		config->setSearchColumnOrder(columnOrder);
+		config->setSearchColumnSizes(columnsSizes);
+		config->setSearchColumnSort(columnSort);
+		config->setSearchColumnSortOrder(columnSortOrder);
+	}
 }
 
 void KeepassEntryView::restoreHeaderView() {
+	QBitArray columns;
+	QList<int> columnOrder;
+	QList<int> columnSizes;
+	int columnSort;
+	Qt::SortOrder columnSortOrder;
+	
 	if (ViewMode == Normal) {
-		QByteArray state = config->entryView();
-		if (state.isEmpty()) {
-			for (int i=10; i>=0; --i) {
-				if (i <= 3) {
-					setColumnVisible(i, true);
-					header()->moveSection(header()->visualIndex(i), 0);
-				}
-				else {
-					setColumnVisible(i, false);
-				}
-			}
-			header()->setSortIndicator(0, Qt::AscendingOrder);
-			header()->setSortIndicatorShown(true);
-			header()->resizeSection(0, (int) (header()->sectionSize(0) * 1.5));
-		}
-		else {
-			header()->restoreState(state);
-			setColumnVisible(10, false); // just to be sure
-			
-			QApplication::processEvents();
-			
-			//QHash<int, int> sectionSize;
-			QList<int> visibleSections;
-			for (int i=0; i<=10; ++i) {
-				if (columnVisible(i)) {
-					qDebug("%d",i);
-					visibleSections.append(i);
-					header()->hideSection(i);
-				}
-			}
-			
-			QApplication::processEvents();
-			
-			for (int i=0; i<visibleSections.size(); ++i) {
-				qDebug("%d",visibleSections[i]);
-				header()->showSection(visibleSections[i]);
-			}
-			
-			/*for (int i=0; i<=10; ++i) {
-				if (columnVisible(i)) {
-					int size = header()->sectionSize(i);
-					
-					
-					
-					header()->resizeSection(i, 1);
-					header()->resizeSection(i, size);
-				}
-			}*/
-		}
+		columns = config->columns();
+		columnOrder = config->columnOrder();
+		columnSizes = config->columnSizes();
+		columnSort = config->columnSort();
+		columnSortOrder = config->columnSortOrder();
+		columns[10] = 0; // just to be sure
 	}
 	else {
-		QByteArray state = config->entryViewSearch();
-		if (state.isEmpty()) {
-			for (int i=10; i>=0; --i) {
-				if (i <= 3 || i == 10) {
-					setColumnVisible(i, true);
-					header()->moveSection(header()->visualIndex(i), 0);
-				}
-				else {
-					setColumnVisible(i, false);
-				}
-			}
-			header()->moveSection(header()->visualIndex(10), 0);
-			header()->setSortIndicator(10, Qt::AscendingOrder);
-			header()->setSortIndicatorShown(true);
-		}
-		else {
-			header()->restoreState(state);
-		}
+		columns = config->searchColumns();
+		columnOrder = config->searchColumnOrder();
+		columnSizes = config->searchColumnSizes();
+		columnSort = config->searchColumnSort();
+		columnSortOrder = config->searchColumnSortOrder();
 	}
+	
+	QMap<int,int> order; // key=visual index; value=logical index
+	for (int i=0; i<NUM_COLUMNS; ++i) {
+		order.insert(columnOrder[i], i);
+	}
+	
+	for (QMap<int,int>::const_iterator i = order.constBegin(); i != order.constEnd(); ++i) {
+		setColumnVisible(i.value(), columns.testBit(i.value()));
+		header()->moveSection(header()->visualIndex(i.value()), NUM_COLUMNS-1);
+		header()->resizeSection(i.value(), std::max(columnSizes[i.value()], header()->minimumSectionSize()));
+	}
+	
+	header()->setSortIndicator(columnSort, columnSortOrder);
 }
 
 void KeepassEntryView::OnGroupChanged(IGroupHandle* group){
