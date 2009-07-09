@@ -126,12 +126,13 @@ void KeepassEntryView::restoreHeaderView() {
 	QMap<int,int> order; // key=visual index; value=logical index
 	for (int i=0; i<NUM_COLUMNS; ++i) {
 		order.insert(columnOrder[i], i);
+		setColumnVisible(i, false); // initally hide all columns
 	}
 	
 	for (QMap<int,int>::const_iterator i = order.constBegin(); i != order.constEnd(); ++i) {
-		setColumnVisible(i.value(), columns.testBit(i.value()));
 		header()->moveSection(header()->visualIndex(i.value()), NUM_COLUMNS-1);
 		header()->resizeSection(i.value(), std::max(columnSizes[i.value()], header()->minimumSectionSize()));
+		setColumnVisible(i.value(), columns.testBit(i.value()));
 	}
 	
 	header()->setSortIndicator(columnSort, columnSortOrder);
