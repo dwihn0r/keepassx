@@ -53,6 +53,8 @@ class KeepassEntryView:public QTreeWidget{
 		IGroupHandle* CurrentGroup;
 		enum EntryViewMode {Normal, ShowSearchResults};
 		EntryViewMode ViewMode;
+		bool AutoResizeColumns;
+		QList<int> columnSizes;
 		
 		void updateEntry(EntryViewItem*);
 		void editEntry(EntryViewItem*);
@@ -87,6 +89,7 @@ class KeepassEntryView:public QTreeWidget{
 		void removeDragItems();
 		void OnEditOpenUrl();
 		void OnEditCopyUrl();
+		void resizeColumns();
 	
 	signals:
 		void fileModified();

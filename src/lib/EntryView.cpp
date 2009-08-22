@@ -32,16 +32,18 @@
 /*QList<EntryViewItem*>* pItems;
 KeepassEntryView* pEntryView;*/
 
-KeepassEntryView::KeepassEntryView(QWidget* parent):QTreeWidget(parent){
+KeepassEntryView::KeepassEntryView(QWidget* parent) : QTreeWidget(parent) {
 	ViewMode=Normal;
+	AutoResizeColumns = true;
 	header()->setResizeMode(QHeaderView::Interactive);
 	header()->setStretchLastSection(false);
 	header()->setClickable(true);
 	header()->setCascadingSectionResizes(true);
-	header()->setStretchLastSection(true);
+	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	retranslateColumns();
 	restoreHeaderView();
-
+	
+	connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(resizeColumns()));
 	connect(this,SIGNAL(itemSelectionChanged()), SLOT(OnItemsChanged()));
 	connect(&ClipboardTimer, SIGNAL(timeout()), SLOT(OnClipboardTimeOut()));
 	connect(this, SIGNAL(itemActivated(QTreeWidgetItem*,int)), SLOT(OnEntryActivated(QTreeWidgetItem*,int)));
@@ -68,42 +70,46 @@ bool KeepassEntryView::columnVisible(int col) {
 }
 
 void KeepassEntryView::setColumnVisible(int col, bool visible) {
+	if (columnVisible(col) == visible)
+		return; // nothing to do
+	
 	header()->setSectionHidden(col, !visible);
+	if (visible)
+		header()->resizeSection(col, columnSizes[col]);
 }
 
 void KeepassEntryView::saveHeaderView() {
 	QBitArray columns(NUM_COLUMNS);
 	QList<int> columnOrder;
-	QList<int> columnsSizes;
 	int columnSort = header()->sortIndicatorSection();
 	Qt::SortOrder columnSortOrder = header()->sortIndicatorOrder();
 	
 	for (int i=0; i<NUM_COLUMNS; ++i) {
 		columns.setBit(i, columnVisible(i));
 		columnOrder << header()->visualIndex(i);
-		columnsSizes << header()->sectionSize(i);
 	}
 	
 	if (ViewMode == Normal) {
 		config->setColumns(columns);
 		config->setColumnOrder(columnOrder);
-		config->setColumnSizes(columnsSizes);
+		config->setColumnSizes(columnSizes);
 		config->setColumnSort(columnSort);
 		config->setColumnSortOrder(columnSortOrder);
 	}
 	else {
 		config->setSearchColumns(columns);
 		config->setSearchColumnOrder(columnOrder);
-		config->setSearchColumnSizes(columnsSizes);
+		config->setSearchColumnSizes(columnSizes);
 		config->setSearchColumnSort(columnSort);
 		config->setSearchColumnSortOrder(columnSortOrder);
 	}
 }
 
 void KeepassEntryView::restoreHeaderView() {
+	AutoResizeColumns = false;
+	
 	QBitArray columns;
 	QList<int> columnOrder;
-	QList<int> columnSizes;
 	int columnSort;
 	Qt::SortOrder columnSortOrder;
 	
@@ -123,19 +129,65 @@ void KeepassEntryView::restoreHeaderView() {
 		columnSortOrder = config->searchColumnSortOrder();
 	}
 	
+	// compatibility with KeePassX <= 0.4.0 (100 = column hidden)
+	int lastVisibleIndex = -1;
+	for (int i=0; i<NUM_COLUMNS; ++i) {
+		if (columnOrder[i]!=100 && columnOrder[i]>lastVisibleIndex)
+			lastVisibleIndex = columnOrder[i];
+	}
+	
 	QMap<int,int> order; // key=visual index; value=logical index
 	for (int i=0; i<NUM_COLUMNS; ++i) {
+		if (columnOrder[i] == 100)
+			columnOrder[i] = ++lastVisibleIndex;
+		
 		order.insert(columnOrder[i], i);
 		setColumnVisible(i, false); // initally hide all columns
+		if (columnSizes[i] < header()->minimumSectionSize())
+			columnSizes[i] = header()->minimumSectionSize();
 	}
 	
 	for (QMap<int,int>::const_iterator i = order.constBegin(); i != order.constEnd(); ++i) {
 		header()->moveSection(header()->visualIndex(i.value()), NUM_COLUMNS-1);
-		header()->resizeSection(i.value(), std::max(columnSizes[i.value()], header()->minimumSectionSize()));
+		header()->resizeSection(i.value(), columnSizes[i.value()]);
 		setColumnVisible(i.value(), columns.testBit(i.value()));
 	}
 	
 	header()->setSortIndicator(columnSort, columnSortOrder);
+	
+	AutoResizeColumns = true;
+	
+	resizeColumns();
+}
+
+void KeepassEntryView::resizeColumns() {
+	if (!AutoResizeColumns)
+		return;
+	
+	AutoResizeColumns = false;
+	
+	int w = viewport()->width();
+	int sum = 0;
+	
+	for (int i=0; i<NUM_COLUMNS; ++i) {
+		if (columnVisible(i))
+			sum += header()->sectionSize(i);
+	}
+	
+	double stretch = (double)w / (double)sum;
+	
+	for (int i=0; i<NUM_COLUMNS; ++i) {
+		if (columnVisible(i) && header()->sectionSize(i)!=0) {
+			int size = qRound(header()->sectionSize(i) * stretch);
+			header()->resizeSection(i, size);
+			columnSizes[i] = size;
+		}
+		else {
+			columnSizes[i] = qRound(columnSizes[i] * stretch);
+		}
+	}
+	
+	AutoResizeColumns = true;
 }
 
 void KeepassEntryView::OnGroupChanged(IGroupHandle* group){
@@ -426,8 +478,8 @@ void KeepassEntryView::contextMenuEvent(QContextMenuEvent* e){
 }
 
 void KeepassEntryView::resizeEvent(QResizeEvent* e){
-	// TODO resizeColumns();
-	e->accept();
+	resizeColumns();
+	QTreeWidget::resizeEvent(e);
 }
 
 

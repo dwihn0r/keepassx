@@ -50,12 +50,12 @@ public:
 	QColor bannerTextColor(){return stringToColor(settings.value("Options/BannerTextColor","222,222,222").toString());}
 	int clipboardTimeOut(){return settings.value("Options/ClipboardTimeOut",20).toInt();}
 	QBitArray columns(){return stringToBitArray(settings.value("UI/Columns","11111000000").toString(),11);}
-	QList<int> columnOrder(){return stringToIntArray(settings.value("UI/ColumnOrder","100,100,100,100,100,100,100,100,100,100,100").toString(),11);}
+	QList<int> columnOrder(){return stringToIntArray(settings.value("UI/ColumnOrder","1,2,3,4,5,6,7,8,9,10,11").toString(),11);}
 	QList<int> columnSizes(){return stringToIntArray(settings.value("UI/ColumnSizes","15,10,10,10,10,10,10,10,10,10,10").toString(),11);}
 	int columnSort(){return settings.value("UI/ColumnSort",0).toInt();}
 	Qt::SortOrder columnSortOrder(){return static_cast<Qt::SortOrder>(settings.value("UI/ColumnSortOrder",Qt::AscendingOrder).toInt());}
-	QBitArray searchColumns(){return stringToBitArray(settings.value("UI/SearchColumns","11111000000").toString(),11);}
-	QList<int> searchColumnOrder(){return stringToIntArray(settings.value("UI/SearchColumnOrder","100,100,100,100,100,100,100,100,100,100,100").toString(),11);}
+	QBitArray searchColumns(){return stringToBitArray(settings.value("UI/SearchColumns","11110000001").toString(),11);}
+	QList<int> searchColumnOrder(){return stringToIntArray(settings.value("UI/SearchColumnOrder","2,3,4,5,6,7,8,9,10,11,1").toString(),11);}
 	QList<int> searchColumnSizes(){return stringToIntArray(settings.value("UI/SearchColumnSizes","15,10,10,10,10,10,10,10,10,10,10").toString(),11);}
 	int searchColumnSort(){return settings.value("UI/SearchColumnSort",0).toInt();}
 	Qt::SortOrder searchColumnSortOrder(){return static_cast<Qt::SortOrder>(settings.value("UI/SearchColumnSortOrder",Qt::AscendingOrder).toInt());}
