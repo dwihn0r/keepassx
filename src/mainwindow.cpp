@@ -714,23 +714,27 @@ void KeepassMainWindow::updateDetailView(){
 	QString templ=DetailViewTemplate;
 	IEntryHandle* entry=((EntryViewItem*)(EntryView->selectedItems()[0]))->EntryHandle;
 
-	templ.replace("%group%",entry->group()->title());
-	templ.replace("%title%",entry->title());
-	if(config->hideUsernames())templ.replace("%username%","****");
-	else templ.replace("%username%",entry->username());
-	if(!config->hidePasswords()){
+	templ.replace("%group%", Qt::escape(entry->group()->title()));
+	templ.replace("%title%", Qt::escape(entry->title()));
+	if (config->hideUsernames())
+		templ.replace("%username%","****");
+	else
+		templ.replace("%username%", Qt::escape(entry->username()));
+	if (!config->hidePasswords()) {
 		SecString password=entry->password();
 		password.unlock();
-		templ.replace("%password%",password.string());
+		templ.replace("%password%", Qt::escape(password.string()));
 	}
-	else templ.replace("%password%","****");
-	templ.replace("%url%",entry->url());
-	templ.replace("%creation%",entry->creation().toString(Qt::SystemLocaleDate));
-	templ.replace("%lastmod%",entry->lastMod().toString(Qt::SystemLocaleDate));
-	templ.replace("%lastaccess%",entry->lastAccess().toString(Qt::SystemLocaleDate));
-	templ.replace("%expire%",entry->expire().toString(Qt::SystemLocaleDate));
-	templ.replace("%comment%",entry->comment().replace("\n","<br/>"));
-	templ.replace("%attachment%",entry->binaryDesc());
+	else {
+		templ.replace("%password%","****");
+	}
+	templ.replace("%url%", Qt::escape(entry->url()));
+	templ.replace("%creation%", Qt::escape(entry->creation().toString(Qt::SystemLocaleDate)));
+	templ.replace("%lastmod%", Qt::escape(entry->lastMod().toString(Qt::SystemLocaleDate)));
+	templ.replace("%lastaccess%", Qt::escape(entry->lastAccess().toString(Qt::SystemLocaleDate)));
+	templ.replace("%expire%", Qt::escape(entry->expire().toString(Qt::SystemLocaleDate)));
+	templ.replace("%comment%", Qt::escape(entry->comment()).replace("\n","<br/>"));
+	templ.replace("%attachment%", Qt::escape(entry->binaryDesc()));
 
 	if(entry->expire()!=Date_Never){
 		int secs=QDateTime::currentDateTime().secsTo(entry->expire());

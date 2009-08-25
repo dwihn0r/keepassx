@@ -51,8 +51,6 @@ int main(int argc, char **argv)
 {
 	setlocale(LC_CTYPE, "");
 	
-	QT_REQUIRE_VERSION(argc, argv, "4.3.0");
-	
 #if defined(Q_WS_X11) && defined(AUTOTYPE)
 	QApplication* app = new KeepassApplication(argc,argv);
 #else

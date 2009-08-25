@@ -46,8 +46,6 @@ class CGenPwDialog : public QDialog, public Ui_GenPwDlg
 	
 	private slots:
 		void OnGeneratePw();
-		void OnRadio2StateChanged(bool);
-		void OnRadio1StateChanged(bool);
 		void OnCancel();
 		void OnAccept();
 		void estimateQuality();

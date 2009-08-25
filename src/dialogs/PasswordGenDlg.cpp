@@ -33,13 +33,9 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 {
 	setupUi(this);
 	connect(ButtonGenerate, SIGNAL(clicked()), SLOT(OnGeneratePw()));
-	connect(Radio_1, SIGNAL(toggled(bool)), SLOT(OnRadio1StateChanged(bool)));
-	connect(Radio_2, SIGNAL(toggled(bool)), SLOT(OnRadio2StateChanged(bool)));
 	connect(DialogButtons, SIGNAL(rejected()), SLOT(OnCancel()));
 	connect(DialogButtons, SIGNAL(accepted()), SLOT(OnAccept()));
 	connect(tabCategory, SIGNAL(currentChanged(int)), SLOT(estimateQuality()));
-	connect(Radio_1, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
-	connect(Radio_2, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
 	connect(checkBox1, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
 	connect(checkBox2, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
 	connect(checkBox3, SIGNAL(toggled(bool)), SLOT(estimateQuality()));
@@ -57,8 +53,6 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	connect(Check_CollectEntropy, SIGNAL(stateChanged(int)), SLOT(OnCollectEntropyChanged(int)));
 	connect(ButtonChangeEchoMode, SIGNAL(clicked()), SLOT(SwapEchoMode()));
 	connect(tabCategory, SIGNAL(currentChanged(int)), SLOT(setGenerateEnabled()));
-	connect(Radio_1, SIGNAL(toggled(bool)), SLOT(setGenerateEnabled()));
-	connect(Radio_2, SIGNAL(toggled(bool)), SLOT(setGenerateEnabled()));
 	connect(checkBox1, SIGNAL(toggled(bool)), SLOT(setGenerateEnabled()));
 	connect(checkBox2, SIGNAL(toggled(bool)), SLOT(setGenerateEnabled()));
 	connect(checkBox3, SIGNAL(toggled(bool)), SLOT(setGenerateEnabled()));
@@ -87,8 +81,8 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	
 	tabCategory->setCurrentIndex(config->pwGenCategory());
 	QBitArray pwGenOptions=config->pwGenOptions();
-	Radio_1->setChecked(pwGenOptions.at(0));
-	Radio_2->setChecked(!pwGenOptions.at(0));
+	//Radio_1->setChecked(pwGenOptions.at(0));
+	//Radio_2->setChecked(!pwGenOptions.at(0));
 	checkBox1->setChecked(pwGenOptions.at(1));
 	checkBox2->setChecked(pwGenOptions.at(2));
 	checkBox3->setChecked(pwGenOptions.at(3));
@@ -98,8 +92,8 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 	checkBox7->setChecked(pwGenOptions.at(7));
 	Check_CollectEntropy->setChecked(pwGenOptions.at(8));
 	Check_CollectOncePerSession->setChecked(pwGenOptions.at(9));
-	OnRadio1StateChanged(pwGenOptions.at(0));
-	OnRadio2StateChanged(!pwGenOptions.at(0));
+	//OnRadio1StateChanged(pwGenOptions.at(0));
+	//OnRadio2StateChanged(!pwGenOptions.at(0));
 	if (pwGenOptions.size()>=14){
 		checkBoxPU->setChecked(pwGenOptions.at(10));
 		checkBoxPL->setChecked(pwGenOptions.at(11));
@@ -129,7 +123,7 @@ CGenPwDialog::CGenPwDialog(QWidget* parent, bool StandAloneMode,Qt::WFlags fl)
 CGenPwDialog::~CGenPwDialog(){
 	config->setPwGenCategory(tabCategory->currentIndex());
 	QBitArray pwGenOptions(14);
-	pwGenOptions.setBit(0,Radio_1->isChecked());
+	//pwGenOptions.setBit(0,Radio_1->isChecked());
 	pwGenOptions.setBit(1,checkBox1->isChecked());
 	pwGenOptions.setBit(2,checkBox2->isChecked());
 	pwGenOptions.setBit(3,checkBox3->isChecked());
@@ -157,34 +151,6 @@ void CGenPwDialog::paintEvent(QPaintEvent *event){
 	painter.drawPixmap(QPoint(0,0),BannerPixmap);
 }
 
-void CGenPwDialog::OnRadio1StateChanged(bool state)
-{
-	if(state){
-		checkBox1->setEnabled(true);
-		checkBox2->setEnabled(true);
-		checkBox3->setEnabled(true);
-		checkBox4->setEnabled(true);
-		checkBox5->setEnabled(true);
-		checkBox6->setEnabled(true);
-		checkBox7->setEnabled(true);
-	}else{
-		checkBox1->setDisabled(true);
-		checkBox2->setDisabled(true);
-		checkBox3->setDisabled(true);
-		checkBox4->setDisabled(true);
-		checkBox5->setDisabled(true);
-		checkBox6->setDisabled(true);
-		checkBox7->setDisabled(true);
-	}
-}
-
-void CGenPwDialog::OnRadio2StateChanged(bool state){
-	if(state)
-		Edit_chars->setEnabled(true);
-	else
-		Edit_chars->setDisabled(true);
-}
-
 void CGenPwDialog::OnGeneratePw()
 {
 	if(Check_CollectEntropy->isChecked()){
@@ -198,7 +164,7 @@ void CGenPwDialog::OnGeneratePw()
 	int length = Spin_Num->value();
 	QString password;
 	
-	if (tabCategory->currentIndex()==1)
+	if (tabCategory->currentIndex() == 1)
 	{
 		unsigned int mode = 0;
 		if (checkBoxPU->isChecked())
@@ -225,40 +191,37 @@ void CGenPwDialog::OnGeneratePw()
 }
 
 void CGenPwDialog::estimateQuality(){
-	int num=0;
-	if (tabCategory->currentIndex()==0){
-		if(Radio_1->isChecked()){
-			if(checkBox1->isChecked()) {
-				num+=26;
-				if (Check_ExcludeLookAlike->isChecked())
-					num -= 2;
-			}
-			if(checkBox2->isChecked()) {
-				num+=26;
-				if (Check_ExcludeLookAlike->isChecked())
-					num -= 1;
-			}
-			if(checkBox3->isChecked()) {
-				num+=10;
-				if (Check_ExcludeLookAlike->isChecked())
-					num -= 2;
-			}
-			if(checkBox4->isChecked()) {
-				num+=32;
-				if (Check_ExcludeLookAlike->isChecked())
-					num -= 1;
-			}
-			if(checkBox5->isChecked())
-				num++;
-			if(checkBox6->isChecked())
-				num++;
-			if(checkBox7->isChecked())
-				num++;
+	int num = 0;
+	int index = tabCategory->currentIndex();
+	if (index == 0) {
+		if (checkBox1->isChecked()) {
+			num+=26;
+			if (Check_ExcludeLookAlike->isChecked())
+				num -= 2;
 		}
-		else
-			num=Edit_chars->text().length();
+		if (checkBox2->isChecked()) {
+			num+=26;
+			if (Check_ExcludeLookAlike->isChecked())
+				num -= 1;
+		}
+		if (checkBox3->isChecked()) {
+			num+=10;
+			if (Check_ExcludeLookAlike->isChecked())
+				num -= 2;
+		}
+		if (checkBox4->isChecked()) {
+			num+=32;
+			if (Check_ExcludeLookAlike->isChecked())
+				num -= 1;
+		}
+		if (checkBox5->isChecked())
+			num++;
+		if (checkBox6->isChecked())
+			num++;
+		if (checkBox7->isChecked())
+			num++;
 	}
-	else{
+	else if (index == 1) {
 		if (checkBoxPU->isChecked())
 			num+=26;
 		if (checkBoxPL->isChecked())
@@ -267,6 +230,9 @@ void CGenPwDialog::estimateQuality(){
 			num+=10;
 		if (checkBoxPS->isChecked())
 			num+=32;
+	}
+	else {
+		num=Edit_chars->text().length();
 	}
 
 	float bits = 0;
@@ -354,7 +320,7 @@ QString CGenPwDialog::generatePasswordInternal(int length){
 	bool ensureEveryGroup = false;
 	QList<PwGroup> groupTable;
 	
-	if(Radio_1->isChecked()){
+	if (tabCategory->currentIndex() == 0) {
 		if (Check_EveryGroup->isChecked()){
 			if (checkBox1->isChecked()) groups++;
 			if (checkBox2->isChecked()) groups++;
@@ -407,7 +373,7 @@ QString CGenPwDialog::generatePasswordInternal(int length){
 			else AddToAssoctable(assoctable,95,95,num);
 		}
 	}
-	else{
+	else {
 		QString str=Edit_chars->text();
 		for(int i=0;i<str.length();i++){
 			assoctable.append(str[i]);
@@ -446,20 +412,19 @@ QString CGenPwDialog::generatePasswordInternal(int length){
 
 void CGenPwDialog::setGenerateEnabled(){
 	bool enable;
+	int index = tabCategory->currentIndex();
 	
-	if (tabCategory->currentIndex()==0){
-		if (Radio_1->isChecked()){
-			enable = checkBox1->isChecked() || checkBox2->isChecked() || checkBox3->isChecked() || 
-					 checkBox4->isChecked() || checkBox5->isChecked() || checkBox6->isChecked() || 
-					 checkBox7->isChecked();
-		}
-		else{
-			enable = !Edit_chars->text().isEmpty();
-		}
+	if (index == 0) {
+		enable = checkBox1->isChecked() || checkBox2->isChecked() || checkBox3->isChecked() ||
+				 checkBox4->isChecked() || checkBox5->isChecked() || checkBox6->isChecked() ||
+				 checkBox7->isChecked();
 	}
-	else{
+	else if (index == 1) {
 		enable = checkBoxPU->isChecked() || checkBoxPL->isChecked() ||
 				 checkBoxPN->isChecked() || checkBoxPS->isChecked();
+	}
+	else {
+		enable = !Edit_chars->text().isEmpty();
 	}
 	
 	ButtonGenerate->setEnabled(enable);
