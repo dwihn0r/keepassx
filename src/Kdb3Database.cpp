@@ -1455,13 +1455,17 @@ bool Kdb3Database::save(){
 	
 	int size = EncryptedPartSize+DB_HEADER_SIZE;
 	
-	if(!File->resize(size)){
-		delete [] buffer;
-		error=decodeFileError(File->error());
-		return false;
+	if (!File->resize(size)){
+		if (File->size() > size) {
+			if (!File->remove() || !File->open(QIODevice::ReadWrite)) {
+				delete [] buffer;
+				error=decodeFileError(File->error());
+				return false;
+			}
+		}
 	}
 	File->seek(0);
-	if(File->write(buffer,size)!=size){
+	if (File->write(buffer,size)!=size){
 		delete [] buffer;
 		error=decodeFileError(File->error());
 		return false;
