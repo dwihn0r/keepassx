@@ -1,15 +1,21 @@
 ----------------------------
-    0.4.1 (2009-06-XX)
+    0.4.1 (2009-08-XX)
 ----------------------------
 - Added initial documentation
 - Added and improved many translations
+- Seperate columns settings between normal and search results view
+- Interrupt auto-type if the focused window changed meanwhile
+- Reduced height of password generator dialog (Bug #2831504)
+- Fixed: "Key Stroke Delay" interpreted as seconds instead of ms (Bug #2716877)
+- Escape HTML chars in detail view (Bug #2836096)
 - Fixed: Mispelling of initialize in interface (Bug #2806402)
 - Fixed: Race condition on lock file (Bug #2801583)
 - Fixed: Modified entry does not refresh Entry Details Pane (Bug #2782262)
 - Fixed: Logoff doesn't close database correctly (Bug #2726197)
 - Fixed: Incorrect auto-type keymapping when KeePassX is in autostart
 - Fixed: Workspace is being locked after auto-type
-- Fixed: Wrong "Key Stroke Delay" (Bug #2716877)
+- Fixed: compiler warning/error "format not a string literal and no format arguments" (Bug #2815290)
+- Fixed: Makefile uninstall target removes system directories (Bug #2830345)
 - Fixed key rounds benchmark to return incorrect results
 - Set default auto-type key stroke delay to 5ms
 - Removed "Close to Tray" option

@@ -1456,7 +1456,9 @@ bool Kdb3Database::save(){
 	int size = EncryptedPartSize+DB_HEADER_SIZE;
 	
 	if (!File->resize(size)){
+		// only recreate file if the new database is smaller
 		if (File->size() > size) {
+			qDebug("Unable to resize, trying to recreate file");
 			if (!File->remove() || !File->open(QIODevice::ReadWrite)) {
 				delete [] buffer;
 				error=decodeFileError(File->error());

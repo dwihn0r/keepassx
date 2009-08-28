@@ -25,10 +25,12 @@ class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 	
 	public:
 		AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers, bool wasLocked);
+		inline static bool isDialogVisible() { return dialogVisible; };
 	
 	protected:
 		void paintEvent(QPaintEvent* event);
 		void resizeEvent(QResizeEvent* event);
+		void closeEvent(QCloseEvent* event);
 		bool event(QEvent* event);
 	
 	private slots:
@@ -43,4 +45,5 @@ class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 		QHash<QTreeWidgetItem*,AutoTypeEntry> itemToEntry;
 		QPixmap BannerPixmap;
 		bool pWasLocked;
+		static bool dialogVisible;
 };

@@ -53,6 +53,7 @@ class AutoTypeX11 : public AutoType {
 		void SendKeyPressedEvent(KeySym keysym, unsigned int shift);
 		void SendEvent(XKeyEvent *event);
 		static int MyErrorHandler(Display *my_dpy, XErrorEvent *event);
+		Window getFocusWindow();
 		
 		KeepassMainWindow* mainWin;
 		Display* dpy;
@@ -65,6 +66,10 @@ class AutoTypeX11 : public AutoType {
 		int altgr_mask;
 		KeySym altgr_keysym;
 		bool reReadKeymap;
+		Window focusWindow;
+	
+	private:
+		bool inAutoType;
 };
 
 #endif // _AUTOTYPEX11_H_

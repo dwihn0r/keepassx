@@ -47,6 +47,7 @@ class AutoTypeGlobalX11 : public AutoTypeX11, public AutoTypeGlobal {
 		Window focusedWindow;
 		int oldCode;
 		uint oldMod;
+		bool inGlobalAutoType;
 };
 
 #endif // _AUTOTYPEGLOBALX11_H_

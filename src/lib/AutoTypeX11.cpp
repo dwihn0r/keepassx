@@ -38,6 +38,7 @@ AutoTypeAction::AutoTypeAction(AutoTypeActionType t, KeySym d) : type(t), data(d
 AutoTypeX11::AutoTypeX11(KeepassMainWindow* mainWin) {
 	this->mainWin = mainWin;
 	dpy = QX11Info::display();
+	inAutoType = false;
 	
 	keysym_table = NULL;
 	alt_mask = 0;
@@ -57,7 +58,18 @@ void AutoTypeX11::updateKeymap() {
 		meta_mask = Mod4Mask;
 }
 
+Window AutoTypeX11::getFocusWindow() {
+	Window w;
+	int revert_to_return;
+	XGetInputFocus(dpy, &w, &revert_to_return);
+	return w;
+}
+
 void AutoTypeX11::perform(IEntryHandle* entry, bool hideWindow, int nr, bool wasLocked){
+	if (inAutoType)
+		return;
+	inAutoType = true;
+	
 	QString indexStr;
 	if (nr==0)
 		indexStr = "Auto-Type:";
@@ -130,8 +142,16 @@ void AutoTypeX11::perform(IEntryHandle* entry, bool hideWindow, int nr, bool was
 	QApplication::processEvents();
 	sleepTime(config->autoTypePreGap());
 	
+	if (!focusWindow)
+		focusWindow = getFocusWindow();
+	
 	QString type;
 	for(int i=0;i<Keys.size();i++){
+		if (focusWindow != getFocusWindow()) {
+			qWarning("Focus window changed, interrupting auto-type");
+			break;
+		}
+		
 		if (Keys[i].type==TypeKey){
 			SendKeyPressedEvent(Keys[i].data, 0);
 			sleepKeyStrokeDelay();
@@ -154,6 +174,9 @@ void AutoTypeX11::perform(IEntryHandle* entry, bool hideWindow, int nr, bool was
 		if (hideWindow && !(config->showSysTrayIcon() && config->minimizeTray()) )
 			mainWin->showMinimized();
 	}
+	
+	inAutoType = false;
+	focusWindow = NULL;
 }
 
 void AutoTypeX11::sleepTime(int msec){

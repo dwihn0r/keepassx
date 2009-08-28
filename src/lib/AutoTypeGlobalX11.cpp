@@ -38,6 +38,8 @@ AutoTypeGlobalX11::AutoTypeGlobalX11(KeepassMainWindow* mainWin) : AutoTypeX11(m
 	focusedWindow = 0;
 	oldCode = 0;
 	oldMod = 0;
+	inGlobalAutoType = false;
+	
 	//windowBlacklist << "kicker" << "KDE Desktop";
 	classBlacklist << "desktop_window" << "gnome-panel"; // Gnome
 	classBlacklist << "kdesktop" << "kicker"; // KDE 3
@@ -51,11 +53,21 @@ void AutoTypeGlobalX11::updateKeymap() {
 }
 
 void AutoTypeGlobalX11::perform(IEntryHandle* entry, bool hideWindow, int nr, bool wasLocked){
+	if (inGlobalAutoType)
+		return;
+	inGlobalAutoType = true;
+	
 	if (focusedWindow && (!hideWindow || wasLocked)) { // detect if global auto-type
 		XSetInputFocus(dpy, focusedWindow, RevertToPointerRoot, CurrentTime);
 		focusedWindow = 0;
 	}
+	else {
+		focusWindow = NULL;
+	}
+	
 	AutoTypeX11::perform(entry, hideWindow, nr, wasLocked);
+	
+	inGlobalAutoType = false;
 }
 
 void AutoTypeGlobalX11::windowTitles(Window window, QStringList& titleList){
@@ -95,12 +107,13 @@ void AutoTypeGlobalX11::windowTitles(Window window, QStringList& titleList){
 	Window* children = NULL;
 	unsigned int num_children;
 	int tree = XQueryTree(dpy, window, &root, &parent, &children, &num_children);
-	if (tree && children){
+	if (tree && children) {
 		for (uint i=0; i<num_children; i++)
 			windowTitles(children[i], titleList);
 	}
-	else
+	else {
 		XFree(children);
+	}
 }
  
  QStringList AutoTypeGlobalX11::getAllWindowTitles(){
@@ -111,6 +124,13 @@ void AutoTypeGlobalX11::windowTitles(Window window, QStringList& titleList){
 }
 
 void AutoTypeGlobalX11::performGlobal(){
+	if (AutoTypeDlg::isDialogVisible()) {
+		qWarning("Already performing auto-type, ignoring this one");
+		return;
+	}
+	
+	focusWindow = getFocusWindow();
+	
 	bool wasLocked = mainWin->isLocked();
 	if (wasLocked)
 		mainWin->OnUnLockWorkspace();
