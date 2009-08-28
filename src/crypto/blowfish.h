@@ -24,7 +24,6 @@
 #ifndef BLOWFISH_H
 #define BLOWFISH_H
 
-#include "global.h"
 #include <qglobal.h>
 //#include <stdint.h>
 #include <string>

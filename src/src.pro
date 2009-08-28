@@ -187,7 +187,6 @@ TRANSLATIONS = $$TRANSLATIONS_KX $$TRANSLATIONS_DISABLED translations/keepassx-x
 #TRANSLATIONS_COMPILE = $$TRANSLATIONS_KX $$TRANSLATIONS_QT
 
 HEADERS += main.h \
-           global.h \
            mainwindow.h \
            KpxConfig.h \
            Database.h \

@@ -30,6 +30,9 @@
 
 #define BUILTIN_ICONS 69
 
+#define KEEPASS_LITTLE_ENDIAN
+//#define KEEPASS_BIG_ENDIAN
+
 // often used, stable header files for pch
 
 #ifdef __cplusplus
