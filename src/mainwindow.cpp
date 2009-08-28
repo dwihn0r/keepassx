@@ -235,7 +235,6 @@ void KeepassMainWindow::setupToolbar(){
 }
 
 void KeepassMainWindow::setupIcons(){
-	setWindowIcon(getIcon("keepassx"));
 	FileNewAction->setIcon(getIcon("filenew"));
 	FileOpenAction->setIcon(getIcon("fileopen"));
 	FileSaveAction->setIcon(getIcon("filesave"));
@@ -932,7 +931,7 @@ bool KeepassMainWindow::OnFileSaveAs(){
 		return false;
 	}
 	
-	if (!dbReadOnly && QFile::exists(currentFilePath+".lock")){
+	if (!dbReadOnly && !currentFilePath.isEmpty() && QFile::exists(currentFilePath+".lock")){
 		if (!QFile::remove(currentFilePath+".lock"))
 			QMessageBox::critical(this, tr("Error"), tr("Couldn't remove database lock file."));
 	}
@@ -1470,7 +1469,8 @@ void KeepassMainWindow::updateTrayTooltip() {
 	if (!IsLocked && !FileOpen)
 		SysTray->setToolTip(QString("%1 - %2").arg(APP_DISPLAY_NAME, APP_SHORT_FUNC));
 	else {
-		QString tooltip = QString("%1 - %2").arg(APP_DISPLAY_NAME, currentFileName);
+		QString tooltip = QString("%1 - %2").arg(APP_DISPLAY_NAME, currentFilePath.isEmpty()
+				? QString("[%1]").arg(tr("new")) : currentFileName);
 		if (IsLocked)
 			tooltip.append( QString(" (%1)").arg(tr("locked")) );
 		SysTray->setToolTip(tooltip);

@@ -184,6 +184,7 @@ int main(int argc, char **argv)
 	DetailViewTemplate=config->detailViewTemplate();
 
 	loadImages();
+	QApplication::setWindowIcon(getIcon("keepassx_small"));
 	KpxBookmarks::load();
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
