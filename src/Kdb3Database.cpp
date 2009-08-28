@@ -1893,19 +1893,18 @@ void Kdb3Database::moveGroup(IGroupHandle* groupHandle,IGroupHandle* NewParent,i
 }
 
 bool Kdb3Database::changeFile(const QString& filename){
-	if(File)
+	QFile* tmpFile = new QFile(filename);
+	if(!tmpFile->open(QIODevice::ReadWrite)){
+		error = decodeFileError(File->error());
+		delete tmpFile;
+		return false;
+	}
+	
+	if (File)
 		delete File;
-	if(filename==QString()){
-		File=NULL;
-		return true;
-	}
-	File=new QFile(filename);
-	if(!File->open(QIODevice::ReadWrite)){
-		if(!File->open(QIODevice::ReadOnly)){
-			error=decodeFileError(File->error());
-			return false;
-		}
-	}
+	
+	File = tmpFile;
+
 	return true;
 }
 

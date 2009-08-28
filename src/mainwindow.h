@@ -122,6 +122,9 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		void exportDatabase(IExport* exporter,QStringList filters);
 		void saveLastFilename(const QString& filename);
 		void createBookmarkActions();
+		void updateWindowTitle();
+		void updateTrayTooltip();
+		void updateCurrentFile(const QString& filePath);
 		QLineEdit* QuickSearchEdit;
 		QLabel* StatusBarGeneral;
 		//QLabel* StatusBarSelection;
@@ -136,7 +139,8 @@ class KeepassMainWindow : public QMainWindow, private Ui_MainWindow{
 		bool InUnLock;
 		QList<int> lockGroup;
 		QDialog* unlockDlg;
-		QString currentFile;
+		QString currentFilePath;
+		QString currentFileName;
 		int inactivityCounter;
 		QTimer* inactivityTimer;
 		StatusBarMsg statusbarState;
