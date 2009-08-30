@@ -748,7 +748,7 @@ van 1 seconde op deze computer berekenen</translation>
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Nogmaals:</translation>
+        <translation type="obsolete">Nogmaals:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -769,6 +769,10 @@ van 1 seconde op deze computer berekenen</translation>
     <message>
         <source>Icon:</source>
         <translation>Pictogram:</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -937,7 +941,7 @@ van 1 seconde op deze computer berekenen</translation>
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Gebruik de &amp;volgende tekensets:</translation>
+        <translation type="obsolete">Gebruik de &amp;volgende tekensets:</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
@@ -957,7 +961,7 @@ van 1 seconde op deze computer berekenen</translation>
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Gebruik alleen de v&amp;olgende tekens:</translation>
+        <translation type="obsolete">Gebruik alleen de v&amp;olgende tekens:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1027,13 +1031,21 @@ van 1 seconde op deze computer berekenen</translation>
         <source>Special Characters</source>
         <translation>Speciale tekens</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1044,6 +1056,10 @@ van 1 seconde op deze computer berekenen</translation>
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1342,11 +1358,11 @@ De sleutel is onjuist of het bestand is beschadigd.</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Vergrendeld</translation>
+        <translation type="obsolete">Vergrendeld</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>Ontgrendeld</translation>
+        <translation type="obsolete">Ontgrendeld</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -1578,6 +1594,14 @@ Wilt u de wijzigingen opslaan?</translation>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Kan het vergrendelingsbestand van de database niet aanmaken. 
 De database wordt in alleen-lezen-modus geopend.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1823,7 +1847,7 @@ De database wordt in alleen-lezen-modus geopend.</translation>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>&amp;Groep (alleen zoekresultaten)</translation>
+        <translation type="obsolete">&amp;Groep (alleen zoekresultaten)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -1860,6 +1884,10 @@ De database wordt in alleen-lezen-modus geopend.</translation>
     <message>
         <source>Sort groups</source>
         <translation>Groepen sorteren</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

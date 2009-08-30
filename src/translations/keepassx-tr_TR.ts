@@ -747,7 +747,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Parola (Yeniden):</translation>
+        <translation type="obsolete">Parola (Yeniden):</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -768,6 +768,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon:</source>
         <translation>Simge:</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -936,7 +940,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>&amp;Şu karakter gruplarını kullan:</translation>
+        <translation type="obsolete">&amp;Şu karakter gruplarını kullan:</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -976,7 +980,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Sadece bu karak&amp;terleri kullan:</translation>
+        <translation type="obsolete">Sadece bu karak&amp;terleri kullan:</translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -1054,13 +1058,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>Özel Karakterler</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1071,6 +1083,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1372,11 +1388,11 @@ Anahtar yanlış ya da dosya bozulmuş.</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Kilitli</translation>
+        <translation type="obsolete">Kilitli</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>Kilidi Açılmış</translation>
+        <translation type="obsolete">Kilidi Açılmış</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -1587,7 +1603,7 @@ Do you want to open it anyway?</source>
     </message>
     <message>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation type="obsolete">Veritabanı kilit dosyası oluşturulamadı.</translation>
+        <translation type="unfinished">Veritabanı kilit dosyası oluşturulamadı.</translation>
     </message>
     <message>
         <source>The current file was modified.
@@ -1605,6 +1621,10 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1867,7 +1887,7 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>&amp;Grup (sadece arama sonuçları)</translation>
+        <translation type="obsolete">&amp;Grup (sadece arama sonuçları)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -1903,6 +1923,10 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>Sort groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

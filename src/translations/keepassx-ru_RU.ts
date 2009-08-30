@@ -1018,7 +1018,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Повтор пароля:</translation>
+        <translation type="obsolete">Повтор пароля:</translation>
     </message>
     <message>
         <source>Title:</source>
@@ -1095,6 +1095,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>%1 Bit</source>
         <translation>%1 бит</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1351,7 +1355,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>&amp;Только следующие символы:</translation>
+        <translation type="obsolete">&amp;Только следующие символы:</translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -1367,7 +1371,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Только следующие &amp;группы символов:</translation>
+        <translation type="obsolete">Только следующие &amp;группы символов:</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -1433,13 +1437,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>Специальные символы</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1450,6 +1462,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1969,11 +1985,11 @@ to save the changes?</source>
     </message>
     <message>
         <source>Locked</source>
-        <translation>заблокировано</translation>
+        <translation type="obsolete">заблокировано</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>разблокированно</translation>
+        <translation type="obsolete">разблокированно</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
@@ -2213,6 +2229,14 @@ Please consider:
 Обращаем Ваше внимание на то что:
 - Распознование конфликтов не поддерживается
 - Синхронизация сохраненных в базе иконок пока не реализована</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2622,7 +2646,7 @@ Please consider:
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>&amp;Группа (поиск в результатах предыдущего поиска)</translation>
+        <translation type="obsolete">&amp;Группа (поиск в результатах предыдущего поиска)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -2659,6 +2683,10 @@ Please consider:
     <message>
         <source>S&amp;ynchronize Database...</source>
         <translation type="obsolete">&amp;Синхронизировать базу паролей...</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -747,7 +747,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Jelszó ism.:</translation>
+        <translation type="obsolete">Jelszó ism.:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -768,6 +768,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon:</source>
         <translation>Ikon:</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -936,7 +940,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Használja a &amp;következő karakter csoportokat:</translation>
+        <translation type="obsolete">Használja a &amp;következő karakter csoportokat:</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
@@ -956,7 +960,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>&amp;Csak az alábbi karaktereket használja:</translation>
+        <translation type="obsolete">&amp;Csak az alábbi karaktereket használja:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1026,13 +1030,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>Speciális karakterek</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1043,6 +1055,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1340,11 +1356,11 @@ A kulcs rossz vagy a fájl sérült.</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Zárolva</translation>
+        <translation type="obsolete">Zárolva</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>Nyitva</translation>
+        <translation type="obsolete">Nyitva</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -1573,6 +1589,14 @@ El akarja menteni a változásokat?</translation>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Nem sikerült létrehozni a zároló fájlt. Adatbázis megnyitása csak olvasható módban.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1818,7 +1842,7 @@ El akarja menteni a változásokat?</translation>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>&amp;Csoport (csak keresési eredmény)</translation>
+        <translation type="obsolete">&amp;Csoport (csak keresési eredmény)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -1855,6 +1879,10 @@ El akarja menteni a változásokat?</translation>
     <message>
         <source>Sort groups</source>
         <translation>Csoportok rendezése</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

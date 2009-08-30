@@ -747,7 +747,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>重输密码:</translation>
+        <translation type="obsolete">重输密码:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -768,6 +768,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon:</source>
         <translation>图标:</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -936,7 +940,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>使用以下字符组(&amp;W):</translation>
+        <translation type="obsolete">使用以下字符组(&amp;W):</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
@@ -956,7 +960,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>仅使用以下字符(&amp;O):</translation>
+        <translation type="obsolete">仅使用以下字符(&amp;O):</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1026,13 +1030,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>特殊字符</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1043,6 +1055,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1340,11 +1356,11 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Locked</source>
-        <translation>锁定</translation>
+        <translation type="obsolete">锁定</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>未锁定</translation>
+        <translation type="obsolete">未锁定</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -1573,6 +1589,14 @@ Do you want to save the changes?</source>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>无法创建锁定文件。以只读方式打开数据库。</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1818,7 +1842,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>组(&amp;G) (仅在搜寻结果中)</translation>
+        <translation type="obsolete">组(&amp;G) (仅在搜寻结果中)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -1855,6 +1879,10 @@ Do you want to save the changes?</source>
     <message>
         <source>Sort groups</source>
         <translation>对组进行排序</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

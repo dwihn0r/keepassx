@@ -1019,7 +1019,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>もう一度:</translation>
+        <translation type="obsolete">もう一度:</translation>
     </message>
     <message>
         <source>Title:</source>
@@ -1080,6 +1080,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>%1 Bit</source>
         <translation>%1 ビット</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1324,7 +1328,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>以下の文字のみ使用する(&amp;O):</translation>
+        <translation type="obsolete">以下の文字のみ使用する(&amp;O):</translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -1336,7 +1340,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>以下の文字グループを使用する(&amp;W):</translation>
+        <translation type="obsolete">以下の文字グループを使用する(&amp;W):</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -1402,13 +1406,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>特殊文字</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1419,6 +1431,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1970,11 +1986,11 @@ to save the changes?</source>
     </message>
     <message>
         <source>Locked</source>
-        <translation>ロック済み</translation>
+        <translation type="obsolete">ロック済み</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>未ロック</translation>
+        <translation type="obsolete">未ロック</translation>
     </message>
     <message>
         <source>Ctrl+L</source>
@@ -2063,6 +2079,14 @@ Do you want to save the changes?</source>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>ロックファイルを生成できませんでした。データベースを読み取り専用で開きます。</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2513,7 +2537,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>グループ (検索結果のみ) (&amp;G)</translation>
+        <translation type="obsolete">グループ (検索結果のみ) (&amp;G)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -2546,6 +2570,10 @@ Do you want to save the changes?</source>
     <message>
         <source>Sort groups</source>
         <translation>グループを並べ替える</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

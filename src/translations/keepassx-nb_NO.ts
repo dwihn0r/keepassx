@@ -744,7 +744,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Gjenta passord:</translation>
+        <translation type="obsolete">Gjenta passord:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -765,6 +765,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon:</source>
         <translation>Ikon:</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -933,7 +937,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Bruk følgende tegngruppe:</translation>
+        <translation type="obsolete">Bruk følgende tegngruppe:</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -973,7 +977,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Bruk kun følgende tegn:</translation>
+        <translation type="obsolete">Bruk kun følgende tegn:</translation>
     </message>
     <message>
         <source>Alt+O</source>
@@ -1051,13 +1055,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>Spesielle tegn</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1068,6 +1080,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1364,11 +1380,11 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Låst</translation>
+        <translation type="obsolete">Låst</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>Ulåst</translation>
+        <translation type="obsolete">Ulåst</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -1597,6 +1613,14 @@ Vil du lagre endringene?</translation>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Kanikke lage låsefil. Åpner databsen for bare-les.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1842,7 +1866,7 @@ Vil du lagre endringene?</translation>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>Gruppe (kun søkeresultat)</translation>
+        <translation type="obsolete">Gruppe (kun søkeresultat)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -1879,6 +1903,10 @@ Vil du lagre endringene?</translation>
     <message>
         <source>Sort groups</source>
         <translation>Sorter grupper</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

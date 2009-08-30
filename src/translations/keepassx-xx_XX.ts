@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.0">
 <context>
     <name>AboutDialog</name>
+    <message>
+        <source>Current Translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>Please replace &apos;None&apos; with the language of your translation</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Information on how to translate KeePassX can be found under:</source>
         <translation type="unfinished"></translation>
@@ -16,11 +29,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Web Designer</source>
+        <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Developer</source>
+        <source>Web Designer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -55,19 +68,6 @@
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Current Translation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>Please replace &apos;None&apos; with the language of your translation</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Author</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AboutDlg</name>
@@ -92,6 +92,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Copyright (C) 2005 - 2009 KeePassX Team
+KeePassX is distributed under the terms of the
+General Public License (GPL) version 2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Credits</source>
         <translation type="unfinished"></translation>
     </message>
@@ -103,29 +109,11 @@
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Copyright (C) 2005 - 2009 KeePassX Team
-KeePassX is distributed under the terms of the
-General Public License (GPL) version 2.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>AddBookmarkDlg</name>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -140,17 +128,21 @@ General Public License (GPL) version 2.</source>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AutoTypeDlg</name>
-    <message>
-        <source>KeePassX - Auto-Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click on an entry to auto-type it.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Group</source>
         <translation type="unfinished"></translation>
@@ -165,6 +157,14 @@ General Public License (GPL) version 2.</source>
     </message>
     <message>
         <source>Auto-Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KeePassX - Auto-Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click on an entry to auto-type it.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -250,6 +250,10 @@ General Public License (GPL) version 2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>New Entry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Edit Entry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -309,10 +313,6 @@ Are you sure?</source>
     </message>
     <message>
         <source>No, Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Entry</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -399,6 +399,10 @@ Are you sure?</source>
 <context>
     <name>CollectEntropyDlg</name>
     <message>
+        <source>Entropy Collection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Random Number Generator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -414,13 +418,57 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#006400;&quot;&gt;Random pool successfully reseeded!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Entropy Collection</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CustomizeDetailViewDialog</name>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Url</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attachment Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creation Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Access Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Modification Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expiration Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time till Expiration</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
@@ -573,54 +621,6 @@ p, li { white-space: pre-wrap; }
         <source>HTML</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Username</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Url</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Attachment Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Creation Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last Access Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last Modification Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Expiration Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time till Expiration</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Database</name>
@@ -726,10 +726,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>URL:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -738,7 +734,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password Repet.:</source>
+        <source>Repeat:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -747,6 +743,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Expires:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -784,6 +784,10 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ExpiredEntriesDialog</name>
     <message>
+        <source>Expired Entries in the Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Expired Entries</source>
         <translation type="unfinished"></translation>
     </message>
@@ -807,17 +811,9 @@ p, li { white-space: pre-wrap; }
         <source>Expired</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Expired Entries in the Database</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Export_KeePassX_Xml</name>
-    <message>
-        <source>KeePassX XML File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>XML Files (*.xml)</source>
         <translation type="unfinished"></translation>
@@ -826,13 +822,13 @@ p, li { white-space: pre-wrap; }
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>KeePassX XML File</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Export_Txt</name>
-    <message>
-        <source>Text File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
@@ -841,15 +837,19 @@ p, li { white-space: pre-wrap; }
         <source>Text Files (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Text File</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExporterBase</name>
     <message>
-        <source>Export Failed</source>
+        <source>Export File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export File...</source>
+        <source>Export Failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -923,11 +923,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Options</source>
+        <source>Random</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use follo&amp;wing character groups:</source>
+        <source>Use following character groups:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -935,51 +935,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Upper Letters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Special Characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use &amp;only following characters:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quality:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable entropy collection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Collect only once per session</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Generate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Numbers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -987,7 +947,15 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&amp;Upper Letters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Minus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Special Characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1018,11 +986,47 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable entropy collection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Collect only once per session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
     <message>
-        <source>Help Contents - KeePassX</source>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1234,22 +1238,6 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassEntryView</name>
     <message>
-        <source>Delete?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>At least one group must exist before adding an entry.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1301,6 +1289,22 @@ The key is wrong or the file is damaged.</source>
         <source>Are you sure you want to delete these %1 entries?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At least one group must exist before adding an entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KeepassGroupView</name>
@@ -1320,19 +1324,19 @@ The key is wrong or the file is damaged.</source>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <source>Ready</source>
+        <source>Show &amp;Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Locked</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unlocked</source>
+        <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1364,6 +1368,10 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Ctrl+I</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Ctrl+Y</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1384,11 +1392,15 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+V</source>
+        <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+W</source>
+        <source>Ctrl+X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1408,11 +1420,18 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loading Database...</source>
+        <source>Database locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loading Failed</source>
+        <source>The database you are trying to open is locked.
+This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
+
+Do you want to open it anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open read-only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1428,7 +1447,12 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>new</source>
+        <source>The current file was modified.
+Do you want to save the changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t remove database lock file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1500,6 +1524,10 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Un&amp;lock Workspace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1508,51 +1536,27 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show &amp;Toolbar</source>
+        <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+N</source>
+        <source>Loading Database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Database locked</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The database you are trying to open is locked.
-This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
-
-Do you want to open it anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The current file was modified.
-Do you want to save the changes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t remove database lock file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open read-only</source>
+        <source>Loading Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1594,11 +1598,35 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&amp;Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Toolbar &amp;Icon Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>E&amp;xtras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Manage Bookmarks...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1630,43 +1658,11 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;About...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;KeePassX Handbook...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Recycle Bin...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Bookmarks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Toolbar &amp;Icon Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Columns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Manage Bookmarks...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add New Subgroup...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1770,7 +1766,23 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&amp;Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show &amp;Statusbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;KeePassX Handbook...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1798,11 +1810,15 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Group (search results only)</source>
+        <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recycle Bin...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1814,23 +1830,11 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Add New Subgroup...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy URL to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add New Group...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Entries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1938,11 +1942,11 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Browse...</source>
+        <source>Key File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Key File:</source>
+        <source>&amp;Browse...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2034,6 +2038,30 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>General (1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General (2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show system tray icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2067,6 +2095,26 @@ File is not readable.</source>
     </message>
     <message>
         <source>Always ask before deleting entries or groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete backup entries older than:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically save database on exit and workspace locking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically save database after every change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2118,7 +2166,15 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Security</source>
+        <source>Language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show plain text passwords in:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2126,11 +2182,83 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Database Key Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Clear clipboard after:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Lock workspace when minimizing the main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock database after inactivity of</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Browser Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media Root:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save relative paths (bookmarks and last file)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-Type Fine Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pre-Gap:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key Stroke Delay:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global Auto-Type Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2163,130 +2291,6 @@ File is not readable.</source>
     </message>
     <message>
         <source>Configure...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto-Type Fine Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ms</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pre-Gap:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key Stroke Delay:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Custom Browser Command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Media Root:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save relative paths (bookmarks and last file)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Global Auto-Type Shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Automatically save database on exit and workspace locking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show plain text passwords in:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Database Key Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lock database after inactivity of</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use entries&apos; title to match the window for Global Auto-Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General (1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General (2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Appearance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save backups of modified entries into the &apos;Backup&apos; group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete backup entries older than:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>days</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Automatically save database after every change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Language:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Author:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

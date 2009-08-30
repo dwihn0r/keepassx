@@ -746,7 +746,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Password Repet.:</source>
-        <translation>Powtórz hasło:</translation>
+        <translation type="obsolete">Powtórz hasło:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -767,6 +767,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Icon:</source>
         <translation>Ikona:</translation>
+    </message>
+    <message>
+        <source>Repeat:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -935,7 +939,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use follo&amp;wing character groups:</source>
-        <translation>Użyj następujących grup znakowych:</translation>
+        <translation type="obsolete">Użyj następujących grup znakowych:</translation>
     </message>
     <message>
         <source>&amp;Lower Letters</source>
@@ -955,7 +959,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use &amp;only following characters:</source>
-        <translation>Użyj tylko następujących znaków:</translation>
+        <translation type="obsolete">Użyj tylko następujących znaków:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1025,13 +1029,21 @@ p, li { white-space: pre-wrap; }
         <source>Special Characters</source>
         <translation>Znaki specjalne</translation>
     </message>
+    <message>
+        <source>Use following character groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the following characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpDlg</name>
-    <message>
-        <source>Help Contents - KeePassX</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
@@ -1042,6 +1054,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>First Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1338,11 +1354,11 @@ Klucz jest niepoprawny lub plik z kluczem jest uszkodzony.</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Zablokowane</translation>
+        <translation type="obsolete">Zablokowane</translation>
     </message>
     <message>
         <source>Unlocked</source>
-        <translation>Odblokowane</translation>
+        <translation type="obsolete">Odblokowane</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -1570,6 +1586,14 @@ Zapisać te zmiany?</translation>
     <message>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Nie można utworzyć pliku blokady (.lock). Baza zostanie otwarta tylko do odczytu.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create database lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>locked</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1815,7 +1839,7 @@ Zapisać te zmiany?</translation>
     </message>
     <message>
         <source>&amp;Group (search results only)</source>
-        <translation>Grupa (tylko dla wyników wyszukiwania)</translation>
+        <translation type="obsolete">Grupa (tylko dla wyników wyszukiwania)</translation>
     </message>
     <message>
         <source>Show &amp;Expired Entries...</source>
@@ -1852,6 +1876,10 @@ Zapisać te zmiany?</translation>
     <message>
         <source>Sort groups</source>
         <translation>Sortuj grupy</translation>
+    </message>
+    <message>
+        <source>&amp;Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
