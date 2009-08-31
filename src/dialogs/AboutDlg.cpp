@@ -24,7 +24,7 @@
 AboutDialog::AboutDialog(QWidget* parent):QDialog(parent)
 {
 	setupUi(this);
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),QString("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx"),QString("%1 %2").arg(APP_DISPLAY_NAME, APP_VERSION),width());
 
     labelAppName->setText(APP_DISPLAY_NAME);
     labelAppFunc->setText(QString(" -  ").append(APP_LONG_FUNC));

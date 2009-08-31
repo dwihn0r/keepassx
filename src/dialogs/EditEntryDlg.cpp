@@ -144,7 +144,7 @@ CEditEntryDlg::~CEditEntryDlg(){
 }
 
 void CEditEntryDlg::resizeEvent(QResizeEvent *event){
-	createBanner(&BannerPixmap,getPixmap("keepassx_large"),pNewEntry?tr("New Entry"):tr("Edit Entry"),width());
+	createBanner(&BannerPixmap,getPixmap("keepassx"),pNewEntry?tr("New Entry"):tr("Edit Entry"),width());
 	QDialog::resizeEvent(event);
 }
 

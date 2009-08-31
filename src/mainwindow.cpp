@@ -273,7 +273,7 @@ void KeepassMainWindow::setupIcons(){
 	AddThisAsBookmarkAction->setIcon(getIcon("bookmark_this"));
 	AddBookmarkAction->setIcon(getIcon("bookmark_add"));
 	ManageBookmarksAction->setIcon(getIcon("bookmark"));
-	SysTray->setIcon(getIcon("keepassx_large"));
+	SysTray->setIcon(getIcon("keepassx"));
 	if(config->showSysTrayIcon())
 		SysTray->show();
 }
@@ -1344,7 +1344,7 @@ void KeepassMainWindow::resetLock(){
 	LockedCentralWidget->setParent(NULL);
 	setCentralWidget(NormalCentralWidget);
 	NormalCentralWidget->setVisible(true);
-	SysTray->setIcon(getIcon("keepassx_large"));
+	SysTray->setIcon(getIcon("keepassx"));
 	FileUnLockWorkspaceAction->setText(tr("&Lock Workspace"));
 	IsLocked=false;
 	updateTrayTooltip();

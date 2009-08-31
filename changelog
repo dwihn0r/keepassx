@@ -1,7 +1,7 @@
 ----------------------------
     0.4.1 (2009-08-XX)
 ----------------------------
-- Added initial documentation
+- Added initial documentation (by Jussi Sainio)
 - Added and improved many translations
 - Seperate columns settings between normal and search results view
 - Interrupt auto-type if the focused window changed meanwhile
