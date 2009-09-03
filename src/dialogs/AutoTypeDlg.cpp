@@ -29,6 +29,7 @@ AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers, bool 
 	setAttribute(Qt::WA_DeleteOnClose);
 	setWindowFlags(windowFlags()|Qt::WindowStaysOnTopHint);
 	setGeometry( QRect(QApplication::desktop()->screenGeometry(QCursor::pos()).center() - rect().center(), size()) );
+	setWindowIcon(getIcon("keepassx_small"));
 	entryList->setAlternatingRowColors(config->alternatingRowColors());
 	
 	bool hideUsernames = config->hideUsernames();

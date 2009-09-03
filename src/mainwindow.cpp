@@ -235,6 +235,7 @@ void KeepassMainWindow::setupToolbar(){
 }
 
 void KeepassMainWindow::setupIcons(){
+	setWindowIcon(getIcon("keepassx_small"));
 	FileNewAction->setIcon(getIcon("filenew"));
 	FileOpenAction->setIcon(getIcon("fileopen"));
 	FileSaveAction->setIcon(getIcon("filesave"));

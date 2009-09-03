@@ -184,12 +184,6 @@ int main(int argc, char **argv)
 	DetailViewTemplate=config->detailViewTemplate();
 
 	loadImages();
-#ifdef Q_WS_MAC
-	// use large icon for Mac OS dock
-	QApplication::setWindowIcon(getIcon("keepassx_large"));
-#else
-	QApplication::setWindowIcon(getIcon("keepassx_small"));
-#endif
 	KpxBookmarks::load();
 	initYarrow(); //init random number generator
 	SecString::generateSessionKey();
