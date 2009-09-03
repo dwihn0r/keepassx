@@ -650,6 +650,13 @@ QListView::item {
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="CheckBox_AlwaysOnTop">
+           <property name="text">
+            <string>Show window always on top</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QCheckBox" name="CheckBox_AlternatingRowColors">
            <property name="text">
             <string>Alternating Row Colors</string>

@@ -64,6 +64,7 @@ public:
 	bool hidePasswords(){return settings.value("UI/HidePasswords",true).toBool();}
 	bool hideUsernames(){return settings.value("UI/HideUsernames",true).toBool();}
 	QByteArray hSplitterPos(){return settings.value("UI/HSplitterPos").toByteArray();}
+	bool alwaysOnTop(){return settings.value("UI/AlwaysOnTop",false).toBool();}
 	IntegrPluginType integrPlugin(){return stringToIntegrPluginType(settings.value("Options/IntegrPlugin").toString());}
 	QString lastFile(){return settings.value("Options/LastFile").toString();}
 	QString lastKeyLocation(){return settings.value("Options/LastKeyLocation").toString();}
@@ -135,6 +136,7 @@ public:
 	void setHidePasswords(bool value){settings.setValue("UI/HidePasswords",value);}
 	void setHideUsernames(bool value){settings.setValue("UI/HideUsernames",value);}
 	void setHSplitterPos(const QByteArray& value){settings.setValue("UI/HSplitterPos",value);}
+	void setAlwaysOnTop(bool value){settings.setValue("UI/AlwaysOnTop",value);}
 	void setIntegrPlugin(IntegrPluginType value){settings.setValue("Options/IntegrPlugin",integrPluginTypeToString(value));}
 	void setLastFile(const QString& value){settings.setValue("Options/LastFile",value);}
 	void setLastKeyLocation(const QString& value){settings.setValue("Options/LastKeyLocation",value);}

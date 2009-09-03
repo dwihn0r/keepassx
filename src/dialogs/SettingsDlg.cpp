@@ -106,6 +106,7 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	}
 
 	//Appearance
+	CheckBox_AlwaysOnTop->setChecked(config->alwaysOnTop());
 	QPixmap *pxt=new QPixmap(pixmTextColor->width(),pixmTextColor->height());
 	pxt->fill(config->bannerTextColor());
 	pixmTextColor->clear();
@@ -252,6 +253,7 @@ void CSettingsDlg::apply(){
 	config->setAutoSaveChange(CheckBox_AutoSaveChange->isChecked());
 
 	//Appearence
+	config->setAlwaysOnTop(CheckBox_AlwaysOnTop->isChecked());
 	config->setBannerColor1(color1);
 	config->setBannerColor2(color2);
 	config->setBannerTextColor(textcolor);

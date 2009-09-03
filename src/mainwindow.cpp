@@ -84,6 +84,8 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	//statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config->showStatusbar());
 	setStatusBarMsg(StatusBarReady);
+	if (config->alwaysOnTop())
+		setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
 
 	NormalCentralWidget=QMainWindow::centralWidget();
 	LockedCentralWidget=new QWidget(this);
@@ -1114,6 +1116,7 @@ void KeepassMainWindow::showEvent(QShowEvent* event){
 
 void KeepassMainWindow::OnExtrasSettings(){
 	QString oldLang = config->language();
+	bool oldAlwaysOnTop = config->alwaysOnTop();
 	CSettingsDlg dlg(this);
 	dlg.exec();
 	if (config->language() != oldLang){
@@ -1130,6 +1133,13 @@ void KeepassMainWindow::OnExtrasSettings(){
 	EntryView->setAlternatingRowColors(config->alternatingRowColors());
 	SysTray->setVisible(config->showSysTrayIcon());
 	menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
+	if (config->alwaysOnTop() != oldAlwaysOnTop) {
+		if (config->alwaysOnTop())
+			setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+		else
+			setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);
+		show();
+	}
 	
 	EventOccurred = true;
 	if (config->lockOnInactivity() && config->lockAfterSec()!=0 && !inactivityTimer->isActive()){
