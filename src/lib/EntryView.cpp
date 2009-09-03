@@ -242,7 +242,7 @@ void KeepassEntryView::OnDeleteEntry(){
 	}
 	
 	bool backup = false;
-	IGroupHandle* bGroup;
+	IGroupHandle* bGroup = NULL;
 	if (config->backup() && ((EntryViewItem*)entries[0])->EntryHandle->group() != (bGroup=db->backupGroup()))
 		backup = true;
 	if (backup && !bGroup) {
@@ -266,40 +266,68 @@ void KeepassEntryView::OnDeleteEntry(){
 	emit fileModified();
 }
 
-
+QString KeepassEntryView::columnString(IEntryHandle* entry, int col, bool forceClearText) {
+	switch (col) {
+		case 0:
+			return entry->title();
+		case 1:
+			if (config->hideUsernames() && !forceClearText)
+				return "******";
+			else
+				return entry->username();
+		case 2:
+			return entry->url();
+		case 3:
+		{
+			if (config->hidePasswords() && !forceClearText) {
+				return "******";
+			}
+			else {
+				SecString password = entry->password();
+				password.unlock();
+				return password.string();
+			}
+		}
+		case 4:
+		{
+			QString comment = entry->comment();
+			int toPos = comment.indexOf(QRegExp("[\\r\\n]"));
+			if (toPos == -1)
+				return comment;
+			else
+				return comment.left(toPos);
+		}
+		case 5:
+			return entry->expire().dateToString(Qt::SystemLocaleDate);
+		case 6:
+			return entry->creation().dateToString(Qt::SystemLocaleDate);
+		case 7:
+			return entry->lastMod().dateToString(Qt::SystemLocaleDate);
+		case 8:
+			return entry->lastAccess().dateToString(Qt::SystemLocaleDate);
+		case 9:
+			return entry->binaryDesc();
+		case 10:
+			return entry->group()->title();
+		default:
+			Q_ASSERT(false);
+			return QString();
+	}
+}
 
 void KeepassEntryView::updateEntry(EntryViewItem* item){
 	IEntryHandle* entry = item->EntryHandle;
-	int j=0;
-	item->setText(j++,entry->title());
-	item->setIcon(0,db->icon(entry->image()));
-	if(config->hideUsernames())
-		item->setText(j++,"******");
-	else
-		item->setText(j++,entry->username());
-	item->setText(j++,entry->url());
-	if(config->hidePasswords())
-		item->setText(j++,"******");
-	else{
-		SecString password=entry->password();
-		password.unlock();
-		item->setText(j++,password.string());
-	}
-	QString comment = entry->comment();
-	int toPos = comment.indexOf(QRegExp("[\\r\\n]"));
-	if (toPos == -1)
-		item->setText(j++,comment);
-	else
-		item->setText(j++,comment.left(toPos));
-	item->setText(j++,entry->expire().dateToString(Qt::SystemLocaleDate));
-	item->setText(j++,entry->creation().dateToString(Qt::SystemLocaleDate));
-	item->setText(j++,entry->lastMod().dateToString(Qt::SystemLocaleDate));
-	item->setText(j++,entry->lastAccess().dateToString(Qt::SystemLocaleDate));
-	item->setText(j++,entry->binaryDesc());
+	
+	int cols = NUM_COLUMNS - 1;
 	if (ViewMode == ShowSearchResults) {
-		item->setText(j,entry->group()->title());
-		item->setIcon(j++,db->icon(entry->group()->image()));
+		item->setIcon(10, db->icon(entry->group()->image()));
+		++cols;
 	}
+	
+	for (int i=0; i<cols; ++i) {
+		item->setText(i, columnString(entry, i));
+	}
+	item->setIcon(0, db->icon(entry->image()));
 }
 
 void KeepassEntryView::editEntry(EntryViewItem* item){
@@ -511,41 +539,15 @@ void KeepassEntryView::showGroup(IGroupHandle* group){
 }
 
 void KeepassEntryView::createItems(QList<IEntryHandle*>& entries){
-	for(int i=0;i<entries.size();i++){
-		if(!entries[i]->isValid())continue;
-		EntryViewItem* item=new EntryViewItem(this);
+	for (int i=0; i<entries.size(); ++i) {
+		if (!entries[i]->isValid())
+			continue;
+		
+		EntryViewItem* item = new EntryViewItem(this);
 		Items.push_back(item);
-		Items.back()->EntryHandle=entries[i];
-		int j=0;
-		item->setText(j++,entries[i]->title());
-		item->setIcon(0,db->icon(entries[i]->image()));
-		if(config->hideUsernames())
-			item->setText(j++,"******");
-		else
-			item->setText(j++,entries[i]->username());
-		item->setText(j++,entries[i]->url());
-		if(config->hidePasswords())
-			item->setText(j++,"******");
-		else{
-			SecString password=entries[i]->password();
-			password.unlock();
-			item->setText(j++,password.string());
-		}
-		QString comment = entries[i]->comment();
-		int toPos = comment.indexOf(QRegExp("[\\r\\n]"));
-		if (toPos == -1)
-			item->setText(j++,comment);
-		else
-			item->setText(j++,comment.left(toPos));
-		item->setText(j++,entries[i]->expire().dateToString(Qt::SystemLocaleDate));
-		item->setText(j++,entries[i]->creation().dateToString(Qt::SystemLocaleDate));
-		item->setText(j++,entries[i]->lastMod().dateToString(Qt::SystemLocaleDate));
-		item->setText(j++,entries[i]->lastAccess().dateToString(Qt::SystemLocaleDate));
-		item->setText(j++,entries[i]->binaryDesc());
-		if (ViewMode == ShowSearchResults) {
-			item->setText(j,entries[i]->group()->title());
-			item->setIcon(j++,db->icon(entries[i]->group()->image()));
-		}
+		Items.back()->EntryHandle = entries[i];
+		
+		updateEntry(item);
 	}
 }
 
@@ -604,7 +606,9 @@ void KeepassEntryView::mouseMoveEvent(QMouseEvent *event){
 	QDrag *drag = new QDrag(this);
 	QMimeData *mimeData = new QMimeData;
 	void* pDragItems=&DragItems;
-	mimeData->setData("text/plain;charset=UTF-8",DragItems.first()->text(0).toUtf8());
+	if (header()->logicalIndexAt(event->pos()) != -1) {
+		mimeData->setText(columnStringView(DragStartItem, header()->logicalIndexAt(event->pos()), true));
+	}
 	mimeData->setData("application/x-keepassx-entry",QByteArray((char*)&pDragItems,sizeof(void*)));
 	drag->setMimeData(mimeData);
 	EventOccurredBlock = true;

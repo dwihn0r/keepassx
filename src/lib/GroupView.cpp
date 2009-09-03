@@ -497,7 +497,6 @@ void KeepassGroupView::mouseMoveEvent(QMouseEvent *event){
 	QDrag *drag = new QDrag(this);
 	QMimeData *mimeData = new QMimeData;
 
-	mimeData->setData("text/plain;charset=UTF-8",DragItem->text(0).toUtf8());
 	mimeData->setData("application/x-keepassx-group",QByteArray());
 	drag->setMimeData(mimeData);
 

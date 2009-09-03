@@ -23,9 +23,20 @@
 
 #include "Kdb3Database.h"
 
-class EntryViewItem;
 class GroupViewItem;
 enum SelectionState{NONE,SINGLE,MULTIPLE,SEARCHGROUP};
+
+class EntryViewItem:public QTreeWidgetItem{
+	public:
+		EntryViewItem(QTreeWidget *parent);
+		EntryViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
+		EntryViewItem(QTreeWidgetItem *parent);
+		EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
+		IEntryHandle* EntryHandle;
+		bool operator<(const QTreeWidgetItem& other) const;
+	private:
+		int compare(const QTreeWidgetItem& other, int col, int index) const;
+};
 
 class KeepassEntryView:public QTreeWidget{
 	Q_OBJECT
@@ -56,6 +67,10 @@ class KeepassEntryView:public QTreeWidget{
 		bool AutoResizeColumns;
 		QList<int> columnSizes;
 		
+		QString columnString(IEntryHandle* entry, int col, bool forceClearText=false);
+		inline QString columnStringView(EntryViewItem* item, int col, bool forceClearText=false) {
+			return columnString(item->EntryHandle, col, forceClearText);
+		};
 		void updateEntry(EntryViewItem*);
 		void editEntry(EntryViewItem*);
 		void createItems(QList<IEntryHandle*>& entries);
@@ -97,19 +112,5 @@ class KeepassEntryView:public QTreeWidget{
 		void requestCreateGroup(QString title, quint32 image, GroupViewItem* parent);
 		void viewModeChanged(bool searchResultMode);
 };
-
-
-class EntryViewItem:public QTreeWidgetItem{
-	public:
-		EntryViewItem(QTreeWidget *parent);
-		EntryViewItem(QTreeWidget *parent, QTreeWidgetItem * preceding);
-		EntryViewItem(QTreeWidgetItem *parent);
-		EntryViewItem(QTreeWidgetItem *parent, QTreeWidgetItem * preceding);
-		IEntryHandle* EntryHandle;
-		bool operator<(const QTreeWidgetItem& other) const;
-	private:
-		int compare(const QTreeWidgetItem& other, int col, int index) const;
-};
-
 
 #endif
