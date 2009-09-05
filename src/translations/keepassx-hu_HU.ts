@@ -2343,6 +2343,10 @@ A fájl nem olvasható.</translation>
         <source>Author:</source>
         <translation>Szerző:</translation>
     </message>
+    <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShortcutWidget</name>

@@ -2551,6 +2551,10 @@ Il file non è leggibile.</translation>
         <source>Author:</source>
         <translation>Autore:</translation>
     </message>
+    <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShortcutWidget</name>

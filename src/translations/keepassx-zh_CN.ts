@@ -2343,6 +2343,10 @@ File is not readable.</source>
         <source>Author:</source>
         <translation>译者:</translation>
     </message>
+    <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShortcutWidget</name>

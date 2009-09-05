@@ -195,24 +195,24 @@ General Public License (GPL) version 2.</translation>
 um diesen mit Auto-Type auszuführen.</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="36"/>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="38"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="37"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="39"/>
         <source>Group</source>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="36"/>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="38"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="37"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="39"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="38"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="39"/>
         <source>Username</source>
         <translation>Benutzername</translation>
     </message>
     <message>
-        <location filename="../dialogs/AutoTypeDlg.cpp" line="92"/>
+        <location filename="../dialogs/AutoTypeDlg.cpp" line="93"/>
         <source>Auto-Type</source>
         <translation>Auto-Type</translation>
     </message>
@@ -487,25 +487,25 @@ Are you sure?</source>
 <context>
     <name>CSettingsDlg</name>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="212"/>
-        <location filename="../dialogs/SettingsDlg.cpp" line="319"/>
-        <location filename="../dialogs/SettingsDlg.cpp" line="333"/>
-        <location filename="../dialogs/SettingsDlg.cpp" line="347"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="213"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="321"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="335"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="349"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="352"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="354"/>
         <source>Select a directory...</source>
         <translation>Wählen Sie ein Verzeichnis aus...</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="359"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="361"/>
         <source>Select an executable...</source>
         <translation>Ausführbare Datei auswählen...</translation>
     </message>
     <message>
-        <location filename="../dialogs/SettingsDlg.cpp" line="421"/>
+        <location filename="../dialogs/SettingsDlg.cpp" line="423"/>
         <source>System Language</source>
         <translation>Systemsprache</translation>
     </message>
@@ -1672,17 +1672,17 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
         <translation>Gruppe</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="348"/>
+        <location filename="../lib/EntryView.cpp" line="376"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="348"/>
+        <location filename="../lib/EntryView.cpp" line="376"/>
         <source>At least one group must exist before adding an entry.</source>
         <translation>Es muss mindestens eine Gruppe existieren, bevor ein Eintrag hinzugefügt werden kann.</translation>
     </message>
     <message>
-        <location filename="../lib/EntryView.cpp" line="348"/>
+        <location filename="../lib/EntryView.cpp" line="376"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -1718,208 +1718,208 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
 <context>
     <name>KeepassMainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>Ctrl+O</source>
         <translation>Strg+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Ctrl+G</source>
         <translation>Strg+G</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="353"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Ctrl+C</source>
         <translation>Strg+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ctrl+B</source>
         <translation>Strg+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Ctrl+U</source>
         <translation>Strg+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Ctrl+Y</source>
         <translation>Strg+Y</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Ctrl+D</source>
         <translation>Strg+D</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Ctrl+K</source>
         <translation>Strg+K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>Ctrl+F</source>
         <translation>Strg+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1461"/>
-        <location filename="../mainwindow.cpp" line="1475"/>
+        <location filename="../mainwindow.cpp" line="1472"/>
+        <location filename="../mainwindow.cpp" line="1486"/>
         <source>locked</source>
         <translation>gesperrt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="351"/>
         <source>Ctrl+W</source>
         <translation>Strg+W</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Shift+Ctrl+S</source>
         <translation>Umschalt+Strg+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Shift+Ctrl+F</source>
         <translation>Umschalt+Strg+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
-        <location filename="../mainwindow.cpp" line="482"/>
-        <location filename="../mainwindow.cpp" line="505"/>
-        <location filename="../mainwindow.cpp" line="541"/>
-        <location filename="../mainwindow.cpp" line="924"/>
-        <location filename="../mainwindow.cpp" line="936"/>
+        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="508"/>
+        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="927"/>
+        <location filename="../mainwindow.cpp" line="939"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="522"/>
+        <location filename="../mainwindow.cpp" line="525"/>
         <source>Save modified file?</source>
         <translation>Bearbeitete Datei speichern?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
-        <location filename="../mainwindow.cpp" line="814"/>
-        <location filename="../mainwindow.cpp" line="850"/>
-        <location filename="../mainwindow.cpp" line="865"/>
+        <location filename="../mainwindow.cpp" line="802"/>
+        <location filename="../mainwindow.cpp" line="817"/>
+        <location filename="../mainwindow.cpp" line="853"/>
+        <location filename="../mainwindow.cpp" line="868"/>
         <source>Clone Entry</source>
         <translation>Eintrag duplizieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="801"/>
-        <location filename="../mainwindow.cpp" line="816"/>
-        <location filename="../mainwindow.cpp" line="852"/>
-        <location filename="../mainwindow.cpp" line="867"/>
+        <location filename="../mainwindow.cpp" line="804"/>
+        <location filename="../mainwindow.cpp" line="819"/>
+        <location filename="../mainwindow.cpp" line="855"/>
+        <location filename="../mainwindow.cpp" line="870"/>
         <source>Delete Entry</source>
         <translation>Eintrag löschen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="829"/>
-        <location filename="../mainwindow.cpp" line="880"/>
+        <location filename="../mainwindow.cpp" line="832"/>
+        <location filename="../mainwindow.cpp" line="883"/>
         <source>Clone Entries</source>
         <translation>Einträge duplizieren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="831"/>
-        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="834"/>
+        <location filename="../mainwindow.cpp" line="885"/>
         <source>Delete Entries</source>
         <translation>Einträge löschen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="924"/>
+        <location filename="../mainwindow.cpp" line="927"/>
         <source>Couldn&apos;t create database lock file.</source>
         <translation>Konnten die Sperrdatei für die Datenbank nicht erstellen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1438"/>
+        <location filename="../mainwindow.cpp" line="1449"/>
         <source>Ready</source>
         <translation>Bereit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="608"/>
+        <location filename="../mainwindow.cpp" line="611"/>
         <source>Open Database...</source>
         <translation>Datenbank öffnen...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1441"/>
+        <location filename="../mainwindow.cpp" line="1452"/>
         <source>Loading Database...</source>
         <translation>Datenbank laden...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1444"/>
+        <location filename="../mainwindow.cpp" line="1455"/>
         <source>Loading Failed</source>
         <translation>Laden fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>Ctrl+V</source>
         <translation>Strg+V</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="481"/>
+        <location filename="../mainwindow.cpp" line="484"/>
         <source>Unknown error while loading database.</source>
         <translation>Beim laden der Datenbank ist ein unbekannter Fehler aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="608"/>
-        <location filename="../mainwindow.cpp" line="918"/>
+        <location filename="../mainwindow.cpp" line="611"/>
+        <location filename="../mainwindow.cpp" line="921"/>
         <source>KeePass Databases (*.kdb)</source>
         <translation>KeePass-Datenbank (*.kdb)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="608"/>
-        <location filename="../mainwindow.cpp" line="918"/>
+        <location filename="../mainwindow.cpp" line="611"/>
+        <location filename="../mainwindow.cpp" line="921"/>
         <source>All Files (*)</source>
         <translation>Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="918"/>
+        <location filename="../mainwindow.cpp" line="921"/>
         <source>Save Database...</source>
         <translation>Datenbank speichern...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="753"/>
+        <location filename="../mainwindow.cpp" line="756"/>
         <source>1 Month</source>
         <translation>1 Monat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="755"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>%1 Months</source>
         <translation>%1 Monate</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="764"/>
         <source>1 Year</source>
         <translation>1 Jahr</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="766"/>
         <source>%1 Years</source>
         <translation>%1 Jahre</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="769"/>
+        <location filename="../mainwindow.cpp" line="772"/>
         <source>1 Day</source>
         <translation>1 Tag</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="771"/>
+        <location filename="../mainwindow.cpp" line="774"/>
         <source>%1 Days</source>
         <translation>%1 Tage</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="775"/>
+        <location filename="../mainwindow.cpp" line="778"/>
         <source>less than 1 day</source>
         <translation>weniger als einem Tag</translation>
     </message>
@@ -1932,86 +1932,86 @@ Der Schlüssel ist falsch oder die Datei ist beschädigt.</translation>
         <translation type="obsolete">Entsperrt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="353"/>
         <source>Ctrl+L</source>
         <translation>Strg+L</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
-        <location filename="../mainwindow.cpp" line="505"/>
+        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="508"/>
         <source>The database file does not exist.</source>
         <translation>Die Datenbankdatei existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1459"/>
-        <location filename="../mainwindow.cpp" line="1473"/>
+        <location filename="../mainwindow.cpp" line="1470"/>
+        <location filename="../mainwindow.cpp" line="1484"/>
         <source>new</source>
         <translation>neu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="739"/>
+        <location filename="../mainwindow.cpp" line="742"/>
         <source>Expired</source>
         <translation>Abgelaufen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1333"/>
+        <location filename="../mainwindow.cpp" line="1344"/>
         <source>Un&amp;lock Workspace</source>
         <translation>Arbeits&amp;bereich entsperren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1348"/>
+        <location filename="../mainwindow.cpp" line="1359"/>
         <source>&amp;Lock Workspace</source>
         <translation>&amp;Arbeitsbereich sperren</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="483"/>
+        <location filename="../mainwindow.cpp" line="486"/>
         <source>The following error occured while opening the database:</source>
         <translation>Der folgende Fehler ist beim öffnen der Datenbank aufgetreten:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="911"/>
-        <location filename="../mainwindow.cpp" line="929"/>
+        <location filename="../mainwindow.cpp" line="914"/>
+        <location filename="../mainwindow.cpp" line="932"/>
         <source>File could not be saved.</source>
         <translation>Die Datei kann nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="1121"/>
+        <location filename="../mainwindow.cpp" line="309"/>
+        <location filename="../mainwindow.cpp" line="1125"/>
         <source>Show &amp;Toolbar</source>
         <translation>&amp;Werkzeugleiste anzeigen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="349"/>
         <source>Ctrl+N</source>
         <translation>Strg+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Ctrl+P</source>
         <translation>Strg+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="366"/>
         <source>Ctrl+X</source>
         <translation>Strg+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>Ctrl+I</source>
         <translation>Strg+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="411"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Database locked</source>
         <translation>Datenbank gesperrt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="412"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>The database you are trying to open is locked.
 This means that either someone else has opened the file or KeePassX crashed last time it opened the database.
 
@@ -2021,24 +2021,24 @@ Das bedeutet, dass jemand anders die Datei geöffnet hat oder KeePassX das letzt
 Wollen Sie die Datenbank trotzdem öffnen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="526"/>
         <source>The current file was modified.
 Do you want to save the changes?</source>
         <translation>Die aktuelle Datei wurde geändert. Möchten Sie die Änderungen speichern?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="541"/>
-        <location filename="../mainwindow.cpp" line="936"/>
+        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="939"/>
         <source>Couldn&apos;t remove database lock file.</source>
         <translation>Konnte Datenbaksperrdatei nicht entfernen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../mainwindow.cpp" line="421"/>
         <source>Open read-only</source>
         <translation>Schreibgeschützt öffnen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1447"/>
+        <location filename="../mainwindow.cpp" line="1458"/>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Es kann keine Sperrdatei erstellt werden. Die Datenbank wird schreibgeschützt geöffnet.</translation>
     </message>
@@ -2646,7 +2646,7 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="887"/>
+        <location filename="../forms/SettingsDlg.ui" line="894"/>
         <source>Clear clipboard after:</source>
         <translation>Zwischenablage leeren nach:</translation>
     </message>
@@ -2682,12 +2682,12 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Farbe 1:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="655"/>
+        <location filename="../forms/SettingsDlg.ui" line="662"/>
         <source>Alternating Row Colors</source>
         <translation>Abwechselnde Zeilenfarben</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1030"/>
+        <location filename="../forms/SettingsDlg.ui" line="1037"/>
         <source>Browse...</source>
         <translation>Durchsuchen ...</translation>
     </message>
@@ -2716,22 +2716,22 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Verzeichnisse der zuletzt geöffneten Dateien merken</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="696"/>
+        <location filename="../forms/SettingsDlg.ui" line="703"/>
         <source>Group tree at start-up:</source>
         <translation>Gruppen-Baumansicht nach dem starten:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="703"/>
+        <location filename="../forms/SettingsDlg.ui" line="710"/>
         <source>Restore last state</source>
         <translation>Letzten Zustand wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="710"/>
+        <location filename="../forms/SettingsDlg.ui" line="717"/>
         <source>Expand all items</source>
         <translation>Alle Gruppen aufklappen</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="717"/>
+        <location filename="../forms/SettingsDlg.ui" line="724"/>
         <source>Do not expand any item</source>
         <translation>Gruppen eingeklappt halten</translation>
     </message>
@@ -2741,38 +2741,38 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Sicherheit</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="859"/>
+        <location filename="../forms/SettingsDlg.ui" line="866"/>
         <source>Edit Entry Dialog</source>
         <translation>Dialog zum Bearbeiten von Einträgen</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1215"/>
+        <location filename="../forms/SettingsDlg.ui" line="1222"/>
         <source>Plug-Ins</source>
         <translation>Plugins</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1224"/>
+        <location filename="../forms/SettingsDlg.ui" line="1231"/>
         <source>None</source>
         <translation>nichts</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1231"/>
+        <location filename="../forms/SettingsDlg.ui" line="1238"/>
         <source>Gnome Desktop Integration (Gtk 2.x)</source>
         <translatorcomment>GNOME, GTK</translatorcomment>
         <translation>GNOME-Oberflächenintegration (GTK 2.x)</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1238"/>
+        <location filename="../forms/SettingsDlg.ui" line="1245"/>
         <source>KDE 4 Desktop Integration</source>
         <translation>KDE-4-Oberflächenintegration</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1253"/>
+        <location filename="../forms/SettingsDlg.ui" line="1260"/>
         <source>You need to restart the program before the changes take effect.</source>
         <translation>Sie müssen das Programm neu starten, damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1273"/>
+        <location filename="../forms/SettingsDlg.ui" line="1280"/>
         <source>Configure...</source>
         <translation>Einrichten ...</translation>
     </message>
@@ -2792,68 +2792,68 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Frage immer vor dem löschen von Einträgen und Gruppen</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="667"/>
+        <location filename="../forms/SettingsDlg.ui" line="674"/>
         <source>Customize Entry Detail View...</source>
         <translation>Ansicht der Eintragdetails anpassen ...</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1175"/>
+        <location filename="../forms/SettingsDlg.ui" line="1182"/>
         <source>You can disable several features of KeePassX here according to your needs in order to keep the user interface slim.</source>
         <translation>Sie können hier Funktionen von KeePassX nach Ihren Wünschen deaktivieren, um das Erscheinungsbild gering zu halten.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1185"/>
+        <location filename="../forms/SettingsDlg.ui" line="1192"/>
         <source>Bookmarks</source>
         <translation>Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1049"/>
+        <location filename="../forms/SettingsDlg.ui" line="1056"/>
         <source>Auto-Type Fine Tuning</source>
         <translation>Auto-Type-Details</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1058"/>
+        <location filename="../forms/SettingsDlg.ui" line="1065"/>
         <source>Time between the activation of an auto-type action by the user and the first simulated key stroke.</source>
         <translation>Zeit zwischen der Aktivierung einer Auto-Type-Aktion durch den Benutzer bis zum ersten simulierten Tastenanschlag.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1061"/>
-        <location filename="../forms/SettingsDlg.ui" line="1107"/>
+        <location filename="../forms/SettingsDlg.ui" line="1068"/>
+        <location filename="../forms/SettingsDlg.ui" line="1114"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1071"/>
+        <location filename="../forms/SettingsDlg.ui" line="1078"/>
         <source>Pre-Gap:</source>
         <translation>Pause vor erstem Tastenanschlag:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1094"/>
+        <location filename="../forms/SettingsDlg.ui" line="1101"/>
         <source>Key Stroke Delay:</source>
         <translation>Pause nach jedem Tastenanschlag:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1104"/>
+        <location filename="../forms/SettingsDlg.ui" line="1111"/>
         <source>Delay between two simulated key strokes. Increase this if Auto-Type is randomly skipping characters.</source>
         <translation>Verzögerung zwischen zwei simulierten Tasteneingaben. Erhöhen Sie dies, wenn Auto-Type unregelmäßig Zeichen auslässt.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1023"/>
+        <location filename="../forms/SettingsDlg.ui" line="1030"/>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
         <translation>Das Verzeichnis, in dem normalerweise Speichermedien (Festplatten, CDs, DVDs, USB-Sticks) eingehängt werden.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1013"/>
+        <location filename="../forms/SettingsDlg.ui" line="1020"/>
         <source>Media Root:</source>
         <translation>Hauptmedienverzeichnis:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1039"/>
+        <location filename="../forms/SettingsDlg.ui" line="1046"/>
         <source>Enable this if you want to use your bookmarks and the last opened file independet from their absolute paths. This is especially useful when using KeePassX portably and therefore with changing mount points in the file system.</source>
         <translation>Aktivieren Sie diese Option, wenn Sie Ihre Lesezeichen und die zuletzt geöffnete Datei unabhänig von deren absoluten Pfaden verwenden wollen. Dies ist besonders sinnvoll, wenn Sie KeePassX flexibel einsetzen und sich dadurch die Einhängepunkte im Dateisystem ändern.</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1042"/>
+        <location filename="../forms/SettingsDlg.ui" line="1049"/>
         <source>Save relative paths (bookmarks and last file)</source>
         <translation>Relative Pfade speichern (Lesezeichen und zuletzt geöffnete Datei)</translation>
     </message>
@@ -2873,22 +2873,22 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Mit gesperrtem Arbeitsbereich starten</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="925"/>
+        <location filename="../forms/SettingsDlg.ui" line="932"/>
         <source>Lock workspace when minimizing the main window</source>
         <translation>Arbeisbereich sperren wenn das Hauptfenster minimiert wird</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1122"/>
+        <location filename="../forms/SettingsDlg.ui" line="1129"/>
         <source>Global Auto-Type Shortcut:</source>
         <translation>Globaler Auto-Type-Kurzbefehl:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="989"/>
+        <location filename="../forms/SettingsDlg.ui" line="996"/>
         <source>Custom Browser Command</source>
         <translation>Benutzerdefinierter Web-Browser</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1001"/>
+        <location filename="../forms/SettingsDlg.ui" line="1008"/>
         <source>Browse</source>
         <translation>Durchsuchen</translation>
     </message>
@@ -2898,28 +2898,28 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Datenbank beim Beenden und Sperren des Arbeitsbereiches automatisch speichern</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="850"/>
+        <location filename="../forms/SettingsDlg.ui" line="857"/>
         <source>Show plain text passwords in:</source>
         <translation>Passwörter im Klartext anzeigen:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="866"/>
+        <location filename="../forms/SettingsDlg.ui" line="873"/>
         <source>Database Key Dialog</source>
         <translation>Datenbankschlüssel-Dialog</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="916"/>
-        <location filename="../forms/SettingsDlg.ui" line="963"/>
+        <location filename="../forms/SettingsDlg.ui" line="923"/>
+        <location filename="../forms/SettingsDlg.ui" line="970"/>
         <source>seconds</source>
         <translation>Sekunden</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="934"/>
+        <location filename="../forms/SettingsDlg.ui" line="941"/>
         <source>Lock database after inactivity of</source>
         <translation>Datenbank bei Inaktivität sperren nach</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="1151"/>
+        <location filename="../forms/SettingsDlg.ui" line="1158"/>
         <source>Use entries&apos; title to match the window for Global Auto-Type</source>
         <translation>Vergleiche den Titel der Einträge mit Fenter für globales Auto-Type</translation>
     </message>
@@ -2964,12 +2964,17 @@ Die Datei ist nicht lesbar.</translation>
         <translation>Datenbank automatisch nach jeder Änderung speichern</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="784"/>
+        <location filename="../forms/SettingsDlg.ui" line="655"/>
+        <source>Show window always on top</source>
+        <translation>Halte das Fenster immer im Vordergrund</translation>
+    </message>
+    <message>
+        <location filename="../forms/SettingsDlg.ui" line="791"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="../forms/SettingsDlg.ui" line="791"/>
+        <location filename="../forms/SettingsDlg.ui" line="798"/>
         <source>Author:</source>
         <translation>Autor:</translation>
     </message>

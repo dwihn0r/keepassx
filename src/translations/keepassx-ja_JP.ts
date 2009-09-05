@@ -1059,7 +1059,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ge&amp;n.</source>
-        <translation>生成(&amp;N)</translation>
+        <translation>生成(&amp;N).</translation>
     </message>
     <message>
         <source>...</source>
@@ -1083,7 +1083,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Repeat:</source>
-        <translation type="unfinished"></translation>
+        <translation>もう一度:</translation>
     </message>
 </context>
 <context>
@@ -1408,34 +1408,34 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use following character groups:</source>
-        <translation type="unfinished"></translation>
+        <translation>以下の文字グループを使用する:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタム</translation>
     </message>
     <message>
         <source>Use the following characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>以下の文字を使用する:</translation>
     </message>
 </context>
 <context>
     <name>HelpDlg</name>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>前のページ</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>次のページ</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>最初のページ</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
 </context>
 <context>
@@ -1576,11 +1576,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unable to initialize the twofish algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>twofish アルゴリズムを初期化できませんでした。</translation>
     </message>
     <message>
         <source>Unknown encryption algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>不明な暗号化アルゴリズムです。</translation>
     </message>
     <message>
         <source>Decryption failed.
@@ -2082,11 +2082,11 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>データベースのロックファイルを作成できません。</translation>
     </message>
     <message>
         <source>locked</source>
-        <translation type="unfinished"></translation>
+        <translation>ロック済み</translation>
     </message>
 </context>
 <context>
@@ -2573,7 +2573,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <source>&amp;Group</source>
-        <translation type="unfinished"></translation>
+        <translation>グループ(&amp;G)</translation>
     </message>
 </context>
 <context>
@@ -3212,6 +3212,10 @@ File is not readable.</source>
     <message>
         <source>Author:</source>
         <translation>作者:</translation>
+    </message>
+    <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

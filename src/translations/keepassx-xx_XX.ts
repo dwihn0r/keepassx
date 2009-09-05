@@ -2142,6 +2142,10 @@ File is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Alternating Row Colors</source>
         <translation type="unfinished"></translation>
     </message>

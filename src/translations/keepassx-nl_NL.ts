@@ -2348,6 +2348,10 @@ Kan het bestand niet lezen.</translation>
         <source>Author:</source>
         <translation>Vertaler:</translation>
     </message>
+    <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShortcutWidget</name>

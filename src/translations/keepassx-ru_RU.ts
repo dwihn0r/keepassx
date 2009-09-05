@@ -3421,6 +3421,10 @@ The key is wrong or the file is damaged.</source>
         <source>Author:</source>
         <translation>Автор:</translation>
     </message>
+    <message>
+        <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShortcutWidget</name>
