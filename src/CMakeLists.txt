@@ -128,12 +128,20 @@ set(keepassx_TRANSLATIONS
 	translations/keepassx-fi_FI.ts
 	translations/keepassx-fr_FR.ts
 	translations/keepassx-gl_ES.ts
+	translations/keepassx-hu_HU.ts
 	translations/keepassx-it_IT.ts
-#	translations/keepassx-ja_JP.ts
+	translations/keepassx-ja_JP.ts
+	translations/keepassx-nb_NO.ts
+	translations/keepassx-nl_NL.ts
+	translations/keepassx-pl_PL.ts
 	translations/keepassx-ru_RU.ts
 	translations/keepassx-tr_TR.ts
+	translations/keepassx-uk_UA.ts
+	translations/keepassx-zh_CN.ts
 	translations/qt_fi.ts
+	translations/qt_hu.ts
 	translations/qt_it.ts
+	translations/qt_nl.ts
 	translations/qt_tr.ts
 )
 
