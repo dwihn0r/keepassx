@@ -62,6 +62,21 @@ Window AutoTypeX11::getFocusWindow() {
 	Window w;
 	int revert_to_return;
 	XGetInputFocus(dpy, &w, &revert_to_return);
+	int tree;
+	do {
+		XTextProperty textProp;
+		if (XGetWMName(dpy, w, &textProp) != 0) {
+			break;
+		}
+		Window root = 0;
+		Window parent = 0;
+		Window* children = NULL;
+		unsigned int num_children;
+		tree = XQueryTree(dpy, w, &root, &parent, &children, &num_children);
+		w = parent;
+		if (children) XFree(children);
+	} while (tree && w);
+	
 	return w;
 }
 
