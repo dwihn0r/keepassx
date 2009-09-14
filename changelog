@@ -1,10 +1,10 @@
 ----------------------------
-    0.4.1 (2009-09-XX)
+    0.4.1 (2009-09-14)
 ----------------------------
 - Added initial documentation (by Jussi Sainio)
 - Added and improved many translations
-- Added ability to drag'n'drop fields (username, password, ...) to other applications
-- Added option to show the application window always on top
+- Added ability to drag'n'drop fields (username, password, ...) to other applications [Linux]
+- Added option to show the application window always on top [Linux and Windows]
 - Seperate columns settings between normal and search results view
 - Interrupt auto-type if the focused window changed meanwhile
 - Reduced height of password generator dialog (Bug #2831504)
