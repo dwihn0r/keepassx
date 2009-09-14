@@ -84,8 +84,10 @@ KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool Arg
 	//statusBar()->addWidget(StatusBarSelection,85);
 	statusBar()->setVisible(config->showStatusbar());
 	setStatusBarMsg(StatusBarReady);
+#ifndef Q_WS_MAC
 	if (config->alwaysOnTop())
 		setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+#endif
 
 	NormalCentralWidget=QMainWindow::centralWidget();
 	LockedCentralWidget=new QWidget(this);
@@ -1133,6 +1135,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 	EntryView->setAlternatingRowColors(config->alternatingRowColors());
 	SysTray->setVisible(config->showSysTrayIcon());
 	menuBookmarks->menuAction()->setVisible(config->featureBookmarks());
+#ifndef Q_WS_MAC
 	if (config->alwaysOnTop() != oldAlwaysOnTop) {
 		if (config->alwaysOnTop())
 			setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
@@ -1140,6 +1143,7 @@ void KeepassMainWindow::OnExtrasSettings(){
 			setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);
 		show();
 	}
+#endif
 	
 	EventOccurred = true;
 	if (config->lockOnInactivity() && config->lockAfterSec()!=0 && !inactivityTimer->isActive()){

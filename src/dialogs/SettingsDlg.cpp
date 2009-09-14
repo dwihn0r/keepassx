@@ -69,6 +69,9 @@ CSettingsDlg::CSettingsDlg(QWidget* parent):QDialog(parent,Qt::Dialog)
 	Edit_GlobalShortcut->setVisible(false);
 	CheckBox_EntryTitlesMatch->setVisible(false);
 #endif
+#ifdef Q_WS_MAC
+	CheckBox_AlwaysOnTop->setVisible(false);
+#endif
 	
 #ifdef GLOBAL_AUTOTYPE
 	pShortcut = autoType->getShortcut();
