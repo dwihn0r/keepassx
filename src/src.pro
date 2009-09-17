@@ -175,6 +175,7 @@ TRANSLATIONS_KX = translations/keepassx-de_DE.ts \
                   translations/keepassx-uk_UA.ts \
                   translations/keepassx-zh_CN.ts
 
+# also update in translations_release.sh
 TRANSLATIONS_DISABLED = translations/keepassx-cs_CZ.ts
 
 TRANSLATIONS_QT = translations/qt_fi.ts \

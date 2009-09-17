@@ -20,4 +20,3 @@ $LRELEASE translations/*.ts
 mv translations/*.qm ../share/keepassx/i18n
 rm ../share/keepassx/i18n/keepassx-xx_XX.qm
 rm ../share/keepassx/i18n/keepassx-cs_CZ.qm
-rm ../share/keepassx/i18n/keepassx-ja_JP.qm
