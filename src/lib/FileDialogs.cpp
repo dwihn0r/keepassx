@@ -18,6 +18,9 @@
  ***************************************************************************/
 
 #include <QFileDialog>
+#if QT_VERSION >= 0x040400
+	#include <QDesktopServices>
+#endif
 
 IFileDialog* KpxFileDialogs::iFileDialog=NULL;
 QtStandardFileDialogs DefaultQtDlgs;
@@ -146,8 +149,13 @@ int QtStandardFileDialogs::getLastFilter(){
 
 QString FileDlgHistory::getDir(const QString& name){
 	Entry e=History.value(name);
-	if(e.isNull())
+	if(e.isNull()) {
+#if QT_VERSION >= 0x040400
+		return QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+#else
 		return QDir::homePath();
+#endif
+	}
 	else
 		return e.Dir;
 }
