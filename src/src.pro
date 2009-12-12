@@ -63,7 +63,7 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
 	INSTALLS += shareapp shararemime sharemimelnk sharepixmaps
 	
 	contains(DEFINES,AUTOTYPE){
-		LIBS += -lXtst
+		LIBS += -lX11 -lXtst
 		SOURCES += lib/HelperX11.cpp lib/AutoTypeX11.cpp
 		HEADERS += lib/HelperX11.h lib/AutoTypeX11.h
 	}
