@@ -609,6 +609,7 @@ bool Kdb3Database::loadReal(QString filename, bool readOnly, bool differentEncod
 	
 	if ((crypto_size > 2147483446) || (!crypto_size && NumGroups)){
 		error=tr("Decryption failed.\nThe key is wrong or the file is damaged.");
+		KeyError=true;
 		LOAD_RETURN_CLEANUP
 	}
 	SHA256::hashBuffer(buffer+DB_HEADER_SIZE,FinalKey,crypto_size);
