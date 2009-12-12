@@ -233,7 +233,7 @@ public:
 /*!
 This is the common base interface for databases. Every database class must implement this interface necessarily.
 */
-class IDatabase:public QObject{
+class IDatabase{
 public:
 	virtual ~IDatabase(){};
 	
