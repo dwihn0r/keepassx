@@ -44,12 +44,14 @@ bool Export_Txt::exportDatabase(QWidget* GuiParent, IDatabase* db){
 		for(int e=0;e<entries.size();e++){
 			SecString password=entries[e]->password();
 			password.unlock();
-			file->write(EntryTemplate.arg(entries[e]->title())
-									.arg(entries[e]->username())
-									.arg(entries[e]->url())
-									.arg(password.string())
-									.arg(entries[e]->comment().replace('\n',"\n            "))
-									.toUtf8());
+			QString entryText = EntryTemplate.arg(
+						entries[e]->title(),
+						entries[e]->username(),
+						entries[e]->url(),
+						password.string(),
+						entries[e]->comment().replace('\n',"\n            "));
+									
+			file->write( entryText.toUtf8() );
 			password.lock();
 		}
 	}
