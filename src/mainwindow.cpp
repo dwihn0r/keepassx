@@ -185,6 +185,9 @@ void KeepassMainWindow::setupConnections(){
 	connect(ViewToolButtonSize22Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize22(bool)));
 	connect(ViewToolButtonSize28Action,SIGNAL(toggled(bool)), this, SLOT(OnViewToolbarIconSize28(bool)));
 	connect(ViewShowStatusbarAction,SIGNAL(toggled(bool)),statusBar(),SLOT(setVisible(bool)));
+#ifdef Q_WS_MAC
+	connect(ViewMinimizeAction, SIGNAL(triggered()), SLOT(showMinimized()));
+#endif
 
 	connect(ExtrasSettingsAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasSettings()));
 	connect(ExtrasPasswordGenAction,SIGNAL(triggered(bool)),this,SLOT(OnExtrasPasswordGen()));
@@ -322,6 +325,11 @@ void KeepassMainWindow::setupMenus(){
 		case 22: ViewToolButtonSize22Action->setChecked(true); break;
 		case 28: ViewToolButtonSize28Action->setChecked(true); break;
 	}
+	
+#ifdef Q_WS_MAC
+	ViewMenu->addSeparator();
+	ViewMenu->addAction(ViewMinimizeAction);
+#endif
 
 	SysTrayMenu = new QMenu(APP_DISPLAY_NAME,this);
 	SysTrayMenu->addAction(FileUnLockWorkspaceAction);
@@ -372,6 +380,7 @@ void KeepassMainWindow::setupMenus(){
 #ifdef Q_WS_MAC
 	FileSaveAsAction->setShortcut(tr("Shift+Ctrl+S"));
 	EditGroupSearchAction->setShortcut(tr("Shift+Ctrl+F"));
+	ViewMinimizeAction->setShortcut(tr("Ctrl+M"));
 #endif
 
 	//ExtrasTrashCanAction->setVisible(false); //TODO For KP 2.x only
