@@ -427,7 +427,6 @@ void KeepassEntryView::OnEditOpenUrl(){
 void KeepassEntryView::OnEditCopyUrl(){
 	if (selectedItems().size() == 0) return;
 	QString url = ((EntryViewItem*)selectedItems().first())->EntryHandle->url();
-	if (url.trimmed().isEmpty()) return;
 	if (url.startsWith("cmd://") && url.length()>6)
 		url = url.right(url.length()-6);
 	
@@ -440,13 +439,12 @@ void KeepassEntryView::OnEditCopyUrl(){
 void KeepassEntryView::OnUsernameToClipboard(){
 	if (selectedItems().size() == 0) return;
 	QString username = ((EntryViewItem*)selectedItems().first())->EntryHandle->username();
-	if (username.trimmed().isEmpty()) return;
 	Clipboard->setText(username,  QClipboard::Clipboard);
 	if(Clipboard->supportsSelection()){
 		Clipboard->setText(username, QClipboard::Selection);
 	}
 	
-	if (config->clipboardTimeOut()!=0) {
+	if (config->clipboardTimeOut()!=0 && !username.trimmed().isEmpty()) {
 		ClipboardTimer.setSingleShot(true);
 		ClipboardTimer.start(config->clipboardTimeOut()*1000);
 	}
@@ -457,13 +455,12 @@ void KeepassEntryView::OnPasswordToClipboard(){
 	SecString password;
 	password=((EntryViewItem*)selectedItems().first())->EntryHandle->password();
 	password.unlock();
-	if (password.string().isEmpty()) return;
 	Clipboard->setText(password.string(), QClipboard::Clipboard);
 	if(Clipboard->supportsSelection()){
 		Clipboard->setText(password.string(), QClipboard::Selection);
 	}
 	
-	if (config->clipboardTimeOut()!=0) {
+	if (config->clipboardTimeOut()!=0 && !password.string().isEmpty()) {
 		ClipboardTimer.setSingleShot(true);
 		ClipboardTimer.start(config->clipboardTimeOut()*1000);
 	}
