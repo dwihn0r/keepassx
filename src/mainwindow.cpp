@@ -1254,7 +1254,14 @@ void KeepassMainWindow::OnSysTrayActivated(QSystemTrayIcon::ActivationReason rea
 }
 
 void KeepassMainWindow::restoreWindow(){
+#ifdef Q_WS_WIN
+	if (windowState() & Qt::WindowMaximized)
+		showMaximized();
+	else
+		showNormal();
+#else
 	showNormal();
+#endif
 	activateWindow();
 	if (IsLocked)
 		OnUnLockWorkspace();
