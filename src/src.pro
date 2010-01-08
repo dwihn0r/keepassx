@@ -120,6 +120,7 @@ isEqual(QMAKE_WIN32,1){
 	data.files += ../share/keepassx/*
 	data.path = $${PREFIX}/share
 	INSTALLS += data
+	win32-msvc*: LIBS += advapi32.lib
 	!isEqual(INSTALL_QTLIB,0){
 		qt_libs.files = $${QMAKE_LIBDIR_QT}/QtCore4.dll $${QMAKE_LIBDIR_QT}/QtGui4.dll $${QMAKE_LIBDIR_QT}/QtXml4.dll
 		qt_libs.path = $${PREFIX}
