@@ -31,11 +31,6 @@
 ** randpass.c - Random password generation module of PWGEN program
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <unistd.h>
-
 #include "random.h"
 
 #include "randpass.h"
