@@ -52,7 +52,7 @@ bool Kdb3Database::StdEntryLessThan(const Kdb3Database::StdEntry& This,const Kdb
 }
 
 
-Kdb3Database::Kdb3Database() : RawMasterKey(32), RawMasterKey_CP1252(32),
+Kdb3Database::Kdb3Database() : File(NULL), RawMasterKey(32), RawMasterKey_CP1252(32),
 	RawMasterKey_Latin1(32), RawMasterKey_UTF8(32), MasterKey(32){
 }
 
@@ -448,14 +448,28 @@ bool Kdb3Database::createGroupTree(QList<quint32>& Levels){
 	for(int i=0;i<Groups.size();i++)EntryIndexCounter << 0;
 
 	for(int e=0;e<Entries.size();e++){
+		int groupIndex = -1;
 		for(int g=0;g<Groups.size();g++){
 			if(Entries[e].GroupId==Groups[g].Id){
-				Groups[g].Entries.append(&Entries[e]);
-				Entries[e].Group=&Groups[g];
-				Entries[e].Index=EntryIndexCounter[g];
-				EntryIndexCounter[g]++;
+				groupIndex = g;
+				break;
 			}
 		}
+		
+		if (groupIndex == -1) {
+			qWarning("Orphaned entry found, assigning to first group");
+			for(int g=0;g<Groups.size();g++){
+				if(Groups[g].Id == RootGroup.Children[0]->Id){
+					groupIndex = g;
+					break;
+				}
+			}
+		}
+		
+		Groups[groupIndex].Entries.append(&Entries[e]);
+		Entries[e].Group=&Groups[groupIndex];
+		Entries[e].Index=EntryIndexCounter[groupIndex];
+		EntryIndexCounter[groupIndex]++;
 	}
 
 	return true;
@@ -1105,13 +1119,16 @@ IGroupHandle* Kdb3Database::addGroup(const CGroup* group,IGroupHandle* ParentHan
 		Groups.back().Parent->Children.append(&Groups.back());
 	}
 	else{
+		// Insert to root group. Try to keep Backup group at the end.
 		Groups.back().Parent=&RootGroup;
 		Groups.back().Index=RootGroup.Children.size();
-		if (group->Title!="Backup" && RootGroup.Children.size() && RootGroup.Children.last()->Title=="Backup"){
+		int position = RootGroup.Children.size();
+		if (group->Title!="Backup" && !RootGroup.Children.isEmpty() && RootGroup.Children.last()->Title=="Backup"){
 			RootGroup.Children.last()->Index = Groups.back().Index;
 			Groups.back().Index--;
+			position--;
 		}
-		Groups.back().Parent->Children.append(&Groups.back());
+		RootGroup.Children.insert(position, &Groups.back());
 	}
 	return &GroupHandles.back();
 }
@@ -1136,11 +1153,25 @@ IGroupHandle* Kdb3Database::backupGroup(bool create){
 	return group;
 }
 
+Kdb3Database::StdEntry::StdEntry(){
+	Handle = NULL;
+	Group = NULL;
+}
+
+Kdb3Database::StdGroup::StdGroup(){
+	Index=0;
+	Id=0;
+	Parent=NULL;
+	Handle=NULL;
+}
+
 Kdb3Database::StdGroup::StdGroup(const CGroup& other){
 	Index=0;
 	Id=other.Id;
 	Image=other.Image;
 	Title=other.Title;
+	Parent=NULL;
+	Handle=NULL;
 }
 
 void Kdb3Database::EntryHandle::setTitle(const QString& Title){Entry->Title=Title; }
@@ -1226,6 +1257,7 @@ void Kdb3Database::EntryHandle::setVisualIndex(int index){
 Kdb3Database::EntryHandle::EntryHandle(Kdb3Database* db){
 	pDB=db;
 	valid=true;
+	Entry=NULL;
 }
 
 

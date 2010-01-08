@@ -117,6 +117,7 @@ public:
 
 	class StdEntry:public CEntry{
 		public:
+				StdEntry();
 				quint16 Index;
 				EntryHandle* Handle;
 				StdGroup* Group;
@@ -124,7 +125,7 @@ public:
 
 	class StdGroup:public CGroup{
 		public:
-			StdGroup():CGroup(){};
+			StdGroup();
 			StdGroup(const CGroup&);
 			quint16 Index;
 			StdGroup* Parent;
