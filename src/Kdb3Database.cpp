@@ -518,12 +518,6 @@ bool Kdb3Database::load(QString identifier, bool readOnly){
 	return false;
 
 bool Kdb3Database::loadReal(QString filename, bool readOnly, bool differentEncoding) {
-	unsigned long total_size,crypto_size;
-	quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
-	quint8 FinalRandomSeed[16];
-	quint8 ContentsHash[32];
-	quint8 EncryptionIV[16];
-	
 	File = new QFile(filename);
 	if (readOnly) {
 		if(!File->open(QIODevice::ReadOnly)){
@@ -546,6 +540,14 @@ bool Kdb3Database::loadReal(QString filename, bool readOnly, bool differentEncod
 			}
 		}
 	}
+	
+	openedReadOnly = readOnly;
+	
+	unsigned long total_size,crypto_size;
+	quint32 Signature1,Signature2,Version,NumGroups,NumEntries,Flags;
+	quint8 FinalRandomSeed[16];
+	quint8 ContentsHash[32];
+	quint8 EncryptionIV[16];
 	
 	total_size=File->size();
 	char* buffer = new char[total_size];
@@ -1352,6 +1354,18 @@ bool Kdb3Database::save(){
 		return false;
 	}
 	
+	if (!File->isOpen()) {
+		if(!File->open(QIODevice::ReadWrite)){
+			error=tr("Could not open file.");
+			return false;
+		}
+	}
+	
+	if(!(File->openMode() & QIODevice::WriteOnly)){
+		error = tr("The database has been opened read-only.");
+		return false;
+	}
+	
 	//Delete old backup entries
 	if (config->backup() && config->backupDelete() && config->backupDeleteAfter()>0 && backupGroup()){
 		QDateTime time = QDateTime::currentDateTime().addDays(-config->backupDeleteAfter());
@@ -1366,11 +1380,6 @@ bool Kdb3Database::save(){
 	quint8 FinalRandomSeed[16];
 	quint8 ContentsHash[32];
 	quint8 EncryptionIV[16];
-
-	if(!(File->openMode() & QIODevice::WriteOnly)){
-		error = tr("The database has been opened read-only.");
-		return false;
-	}
 
 	unsigned int FileSize;
 
@@ -1488,28 +1497,50 @@ bool Kdb3Database::save(){
 	
 	int size = EncryptedPartSize+DB_HEADER_SIZE;
 	
-	if (!File->resize(size)){
-		// only recreate file if the new database is smaller
-		if (File->size() > size) {
-			qDebug("Unable to resize, trying to recreate file");
-			if (!File->remove() || !File->open(QIODevice::ReadWrite)) {
-				delete [] buffer;
-				error=decodeFileError(File->error());
-				return false;
-			}
-		}
-	}
-	File->seek(0);
-	if (File->write(buffer,size)!=size){
-		delete [] buffer;
+	if (!saveFileTransactional(buffer, size)) {
 		error=decodeFileError(File->error());
+		delete [] buffer;
 		return false;
 	}
-	if (!syncFile(File))
-		qWarning("Unable to flush file to disk");
 
 	delete [] buffer;
 	//if(SearchGroupID!=-1)Groups.push_back(SearchGroup);
+	return true;
+}
+
+bool Kdb3Database::saveFileTransactional(char* buffer, int size) {
+	QString orgFilename = File->fileName();
+	QFile* tmpFile = new QFile(orgFilename + ".tmp");
+	if (!tmpFile->open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+		tmpFile->remove();
+		delete tmpFile;
+		return false;
+	}
+	if (tmpFile->write(buffer,size) != size) {
+		tmpFile->remove();
+		delete tmpFile;
+		return false;
+	}
+	if (!syncFile(tmpFile))
+		qWarning("Unable to flush file to disk");
+	tmpFile->close();
+	if (!File->remove()) {
+		delete tmpFile;
+		return false;
+	}
+	delete File;
+	File = NULL;
+	if (!tmpFile->rename(orgFilename)) {
+		delete tmpFile;
+		File = new QFile(orgFilename);
+		return false;
+	}
+	File = tmpFile;
+	if (!tmpFile->open(QIODevice::ReadWrite)) {
+		delete tmpFile;
+		return false;
+	}
+	
 	return true;
 }
 
