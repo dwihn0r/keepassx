@@ -50,6 +50,7 @@ Export_Txt export_Txt;
 Export_KeePassX_Xml export_KeePassX_Xml;
 
 KeepassMainWindow::KeepassMainWindow(const QString& ArgFile,bool ArgMin,bool ArgLock,QWidget *parent, Qt::WFlags flags) :QMainWindow(parent,flags){
+	ShutingDown=false;
 	IsLocked=false;
 	EventOccurred=true;
 	inactivityCounter=0;
@@ -978,6 +979,7 @@ void KeepassMainWindow::OnFileChangeKey(){
 }
 
 void KeepassMainWindow::OnFileExit(){
+	ShutingDown = true;
 	close();
 }
 
@@ -1070,7 +1072,16 @@ void KeepassMainWindow::OnFileModified(){
 }
 
 void KeepassMainWindow::closeEvent(QCloseEvent* e){
+	if (!ShutingDown && config->showSysTrayIcon() && config->minimizeToTray()){
+		e->ignore();
+		if (config->lockOnMinimize() && !IsLocked && FileOpen)
+			OnUnLockWorkspace();
+		hide();
+		return;
+	}
+	
 	if(FileOpen && !closeDatabase()){
+		ShutingDown = false;
 		e->ignore();
 		if (!isVisible())
 			show();
@@ -1406,6 +1417,8 @@ void KeepassMainWindow::OnInactivityTimer(){
 }
 
 void KeepassMainWindow::OnShutdown(QSessionManager& manager) {
+	ShutingDown = true;
+	
 	/* QApplication::commitData() only closes visible windows,
 	   so we need to manually close mainwindow if it's hidden */
 	if (manager.allowsInteraction() && !isVisible()) {
