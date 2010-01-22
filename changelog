@@ -1,4 +1,18 @@
 ----------------------------
+    0.4.2 (2010-??-??)
+----------------------------
+
+- Fix build errors with MSVC compiler (Bug #2926945), Qt 4.6 (Bug #2900850) and binutils gold linker
+- Switch focus to new entries (Bug #2899867, #2928843)
+- Added Cmd-M shortcut on Mac OS to minimize window (Bug: #2827152)
+- Copy to clipboard even if field is empty (Bug: #2889145)
+- Fixed possible database corruption when adding a new group while the Backup group exists (Bug #2897997)
+- Don't give up asking for the password after one decryption error when using the Twofish algorithm
+- Fixed: Maximized state not saved when minimizing to tray [Windows] (Bug #2926367)
+- Better detection of the default directory to save the database
+- Add Japanese and Ukrainian translations missing in the last release
+
+----------------------------
     0.4.1 (2009-09-14)
 ----------------------------
 - Added initial documentation (by Jussi Sainio)
