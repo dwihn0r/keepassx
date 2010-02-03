@@ -1,7 +1,9 @@
 ----------------------------
-    0.4.2 (2010-??-??)
+    0.4.2 (2010-02-??)
 ----------------------------
 
+- Re-added "Close to Tray" option
+- Make database file saving transactional to avoid data loss
 - Fix build errors with MSVC compiler (Bug #2926945), Qt 4.6 (Bug #2900850) and binutils gold linker
 - Switch focus to new entries (Bug #2899867, #2928843)
 - Added Cmd-M shortcut on Mac OS to minimize window (Bug: #2827152)
