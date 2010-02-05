@@ -58,6 +58,10 @@ KeepassEntryView::KeepassEntryView(QWidget* parent) : QTreeWidget(parent) {
 
 KeepassEntryView::~KeepassEntryView(){
 	saveHeaderView();
+	if (ClipboardTimer.isActive()) {
+		ClipboardTimer.stop();
+		OnClipboardTimeOut();
+	}
 }
 
 void KeepassEntryView::retranslateColumns() {
