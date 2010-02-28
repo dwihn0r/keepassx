@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<!DOCTYPE TS><TS version="1.1" language="it_IT">
+<defaultcodec></defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -178,9 +178,9 @@ E&apos; permessa solo una per voce.</translation>
     </message>
     <message>
         <source>Syntax Error in Auto-Type sequence near character %1
-						Found &apos;{&apos; without closing &apos;}&apos;</source>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
         <translation type="obsolete">Errore sintassi nella sequenza Auto Digitazione vicina al carattere %1
-	Trovati &apos;{&apos; senza chiusura &apos;}&apos;</translation>
+<byte value="x9"/>Trovati &apos;{&apos; senza chiusura &apos;}&apos;</translation>
     </message>
     <message>
         <source>Auto-Type string contains invalid characters</source>
@@ -827,7 +827,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Repeat:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripeti:</translation>
     </message>
 </context>
 <context>
@@ -1132,34 +1132,34 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use following character groups:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizza i seguenti gruppi di carattere:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizza</translation>
     </message>
     <message>
         <source>Use the following characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizza i seguenti caratteri:</translation>
     </message>
 </context>
 <context>
     <name>HelpDlg</name>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina precedente</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina successiva</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Prima pagina</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenuti guida</translation>
     </message>
 </context>
 <context>
@@ -1300,11 +1300,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unable to initialize the twofish algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile inizializzare l&apos;algoritmo twofish.</translation>
     </message>
     <message>
         <source>Unknown encryption algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algoritmo di cifratura sconosciuto.</translation>
     </message>
     <message>
         <source>Decryption failed.
@@ -1705,11 +1705,11 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare il file di blocco del database.</translation>
     </message>
     <message>
         <source>locked</source>
-        <translation type="unfinished"></translation>
+        <translation>bloccato</translation>
     </message>
 </context>
 <context>
@@ -2015,7 +2015,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <source>&amp;Group</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gruppo</translation>
     </message>
 </context>
 <context>
@@ -2283,7 +2283,7 @@ Il file non è leggibile.</translation>
         <source>Remember last opened file</source>
         <translation>Ricorda l&apos;ultimo file aperto</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <source>Alt+Ö</source>
         <translation type="obsolete">Alt+Ö</translation>
     </message>
@@ -2553,7 +2553,7 @@ Il file non è leggibile.</translation>
     </message>
     <message>
         <source>Show window always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra finestra sempre in primo piano</translation>
     </message>
 </context>
 <context>

@@ -772,7 +772,7 @@ van 1 seconde op deze computer berekenen</translation>
     </message>
     <message>
         <source>Repeat:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nogmaals:</translation>
     </message>
 </context>
 <context>
@@ -1033,34 +1033,34 @@ van 1 seconde op deze computer berekenen</translation>
     </message>
     <message>
         <source>Use following character groups:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik de volgende tekensets:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Op maat</translation>
     </message>
     <message>
         <source>Use the following characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik de volgende tekens:</translation>
     </message>
 </context>
 <context>
     <name>HelpDlg</name>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorblad</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoudsopgave</translation>
     </message>
 </context>
 <context>
@@ -1213,8 +1213,8 @@ De sleutel is onjuist of het bestand is beschadigd.</translation>
     </message>
     <message>
         <source>Unexpected error: Offset is out of range.</source>
-        <translatorcomment>Don&apos;t know what &quot;offset&quot; means in this context.</translatorcomment>
-        <translation>Onverwachte fout: &apos;Offset is out of range&apos;.</translation>
+        <translatorcomment>&quot;Sleuteloffset&quot; gesuggereerd in keepasx.forums.</translatorcomment>
+        <translation>Onverwachte fout: Sleuteloffset is buiten bereik.</translation>
     </message>
     <message>
         <source>Invalid group tree.</source>
@@ -1238,11 +1238,11 @@ De sleutel is onjuist of het bestand is beschadigd.</translation>
     </message>
     <message>
         <source>Unable to initialize the twofish algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het Twofish-algoritme niet starten.</translation>
     </message>
     <message>
         <source>Unknown encryption algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend versleutelingsalgoritme.</translation>
     </message>
 </context>
 <context>
@@ -1597,11 +1597,11 @@ De database wordt in alleen-lezen-modus geopend.</translation>
     </message>
     <message>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan het vergrendelingsbestand van de database niet aanmaken.</translation>
     </message>
     <message>
         <source>locked</source>
-        <translation type="unfinished"></translation>
+        <translation>vergrendeld</translation>
     </message>
 </context>
 <context>
@@ -1887,7 +1887,7 @@ De database wordt in alleen-lezen-modus geopend.</translation>
     </message>
     <message>
         <source>&amp;Group</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Groep</translation>
     </message>
 </context>
 <context>
@@ -2064,7 +2064,7 @@ Kan het bestand niet lezen.</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation>RegExp (Regular E&amp;xpression)</translation>
+        <translation>RegExp (Reguliere E&amp;xpressie)</translation>
     </message>
     <message>
         <source>Include Subgroups (recursive)</source>
@@ -2266,7 +2266,7 @@ Kan het bestand niet lezen.</translation>
     </message>
     <message>
         <source>The directory where storage devices like CDs and memory sticks are normally mounted.</source>
-        <translation>De map waar opslagmedia zoals cd&apos;s en geheugenkaarten normaliter te vinden (mounted) zijn.</translation>
+        <translation>De map waar opslagmedia zoals cd&apos;s en geheugenkaarten normaliter gekoppeld zijn.</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -2290,7 +2290,7 @@ Kan het bestand niet lezen.</translation>
     </message>
     <message>
         <source>Show plain text passwords in:</source>
-        <translation>Wachtwoorden voluit tonen in:</translation>
+        <translation>Wachtwoorden leesbaar tonen in:</translation>
     </message>
     <message>
         <source>Database Key Dialog</source>
@@ -2350,7 +2350,7 @@ Kan het bestand niet lezen.</translation>
     </message>
     <message>
         <source>Show window always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Venster altijd op de voorgrond weergeven</translation>
     </message>
 </context>
 <context>

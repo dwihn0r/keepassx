@@ -171,7 +171,10 @@ TRANSLATIONS_KX = translations/keepassx-de_DE.ts \
                   translations/keepassx-nb_NO.ts \
                   translations/keepassx-nl_NL.ts \
                   translations/keepassx-pl_PL.ts \
+                  translations/keepassx-pt_PT.ts \
                   translations/keepassx-ru_RU.ts \
+                  translations/keepassx-sk_SK.ts \
+                  translations/keepassx-sr_RS.ts \
                   translations/keepassx-tr_TR.ts \
                   translations/keepassx-uk_UA.ts \
                   translations/keepassx-zh_CN.ts

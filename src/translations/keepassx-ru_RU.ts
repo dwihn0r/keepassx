@@ -1098,7 +1098,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Repeat:</source>
-        <translation type="unfinished"></translation>
+        <translation>Повтор пароля:</translation>
     </message>
 </context>
 <context>
@@ -1363,7 +1363,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Length:</source>
-        <translation>Длинна:</translation>
+        <translation>Длина:</translation>
     </message>
     <message>
         <source>Use &quot;/dev/rando&amp;m&quot;</source>
@@ -1415,7 +1415,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ensure that password contains characters from every group</source>
-        <translation>Пороли должны включать в себя символы из всех групп</translation>
+        <translation>Пароли должны включать в себя символы из всех групп</translation>
     </message>
     <message>
         <source>Pronounceable</source>
@@ -1439,34 +1439,34 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use following character groups:</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать следующие группы символов:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Свой вариант</translation>
     </message>
     <message>
         <source>Use the following characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать следующие символы:</translation>
     </message>
 </context>
 <context>
     <name>HelpDlg</name>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущая страница</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующая страница</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>В начало</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Содержание</translation>
     </message>
 </context>
 <context>
@@ -1606,11 +1606,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unable to initialize the twofish algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка инициализации алгоритма twofish.</translation>
     </message>
     <message>
         <source>Unknown encryption algorithm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный алгоритм шифрования.</translation>
     </message>
     <message>
         <source>Decryption failed.
@@ -2232,11 +2232,11 @@ Please consider:
     </message>
     <message>
         <source>Couldn&apos;t create database lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось создать файл блокирования базы паролей.</translation>
     </message>
     <message>
         <source>locked</source>
-        <translation type="unfinished"></translation>
+        <translation>заблокировано</translation>
     </message>
 </context>
 <context>
@@ -2686,7 +2686,7 @@ Please consider:
     </message>
     <message>
         <source>&amp;Group</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Группа</translation>
     </message>
 </context>
 <context>
@@ -3423,7 +3423,7 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Show window always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать поверх остальных окон.</translation>
     </message>
 </context>
 <context>
