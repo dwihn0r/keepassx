@@ -1603,6 +1603,10 @@ De database wordt in alleen-lezen-modus geopend.</translation>
         <source>locked</source>
         <translation>vergrendeld</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1889,6 +1893,10 @@ De database wordt in alleen-lezen-modus geopend.</translation>
         <source>&amp;Group</source>
         <translation>&amp;Groep</translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2098,7 +2106,7 @@ Kan het bestand niet lezen.</translation>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Minimaliseren naar systeemvak wanneer het venster wordt gesloten</translation>
+        <translation type="unfinished">Minimaliseren naar systeemvak wanneer het venster wordt gesloten</translation>
     </message>
     <message>
         <source>Remember last opened file</source>

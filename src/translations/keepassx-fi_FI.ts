@@ -1626,6 +1626,10 @@ Haluatko tallentaa muutokset?</translation>
         <source>Couldn&apos;t create lock file. Opening the database read-only.</source>
         <translation>Lukkotiedostoa ei voitu luoda. Avataan tietokanta vain luettavaksi.</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1928,6 +1932,10 @@ Haluatko tallentaa muutokset?</translation>
         <source>Sort groups</source>
         <translation>Järjestä ryhmät</translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2171,13 +2179,13 @@ File is not readable.</source>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Pienennä ilmoitusalueelle painettaessa pääikkunan sulkemisnappia</translation>
+        <translation type="unfinished">Pienennä ilmoitusalueelle painettaessa pääikkunan sulkemisnappia</translation>
     </message>
     <message>
         <source>Remember last opened file</source>
         <translation>Muista viimeisin avattu tiedosto</translation>
     </message>
-    <message encoding="UTF-8">
+    <message utf8="true">
         <source>Alt+Ö</source>
         <translation type="obsolete">Alt-Ö</translation>
     </message>

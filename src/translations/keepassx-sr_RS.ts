@@ -664,43 +664,83 @@ p, li { white-space: pre-wrap; }
     <name>DetailViewTemplate</name>
     <message>
         <source>Group:</source>
-        <translation>Grupa:</translation>
+        <translation type="obsolete">Grupa:</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Naslov:</translation>
+        <translation type="obsolete">Naslov:</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Korisničko ime:</translation>
+        <translation type="obsolete">Korisničko ime:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Lozinka:</translation>
+        <translation type="obsolete">Lozinka:</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation>URL:</translation>
+        <translation type="obsolete">URL:</translation>
     </message>
     <message>
         <source>Creation:</source>
-        <translation>Kreirano:</translation>
+        <translation type="obsolete">Kreirano:</translation>
     </message>
     <message>
         <source>Last Access:</source>
-        <translation>Poslednji pristup:</translation>
+        <translation type="obsolete">Poslednji pristup:</translation>
     </message>
     <message>
         <source>Last Modification:</source>
-        <translation>Poslednja izmena:</translation>
+        <translation type="obsolete">Poslednja izmena:</translation>
     </message>
     <message>
         <source>Expiration:</source>
-        <translation>Ističe:</translation>
+        <translation type="obsolete">Ističe:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Napomena:</translation>
+        <translation type="obsolete">Napomena:</translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished">Grupa</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Naslov</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">Korisničko ime</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished">Lozinka</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation type="unfinished">URL</translation>
+    </message>
+    <message>
+        <source>Creation</source>
+        <translation type="unfinished">Kreirano</translation>
+    </message>
+    <message>
+        <source>Last Access</source>
+        <translation type="unfinished">Poslednji pristup</translation>
+    </message>
+    <message>
+        <source>Last Modification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expiration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished">Napomena</translation>
     </message>
 </context>
 <context>
@@ -1574,6 +1614,10 @@ Da li želite da sačuvate izmene?</translation>
         <source>locked</source>
         <translation>zaključano</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1858,6 +1902,10 @@ Da li želite da sačuvate izmene?</translation>
     <message>
         <source>Sort groups</source>
         <translation>Sortiraj grupe</translation>
+    </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2318,6 +2366,10 @@ Datoteka je nečitljiva.</translation>
     <message>
         <source>Configure...</source>
         <translation>Konfiguriši...</translation>
+    </message>
+    <message>
+        <source>Minimize to tray when clicking the main window&apos;s close button</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

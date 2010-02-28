@@ -1598,6 +1598,10 @@ Do you want to save the changes?</source>
         <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1884,6 +1888,10 @@ Do you want to save the changes?</source>
         <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2093,7 +2101,7 @@ File is not readable.</source>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">点击主窗口的关闭按钮时，最小化到系统托盘</translation>
+        <translation type="unfinished">点击主窗口的关闭按钮时，最小化到系统托盘</translation>
     </message>
     <message>
         <source>Remember last opened file</source>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="it_IT">
-<defaultcodec></defaultcodec>
+<!DOCTYPE TS>
+<TS version="2.0" language="it_IT">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -178,9 +178,9 @@ E&apos; permessa solo una per voce.</translation>
     </message>
     <message>
         <source>Syntax Error in Auto-Type sequence near character %1
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>Found &apos;{&apos; without closing &apos;}&apos;</source>
+						Found &apos;{&apos; without closing &apos;}&apos;</source>
         <translation type="obsolete">Errore sintassi nella sequenza Auto Digitazione vicina al carattere %1
-<byte value="x9"/>Trovati &apos;{&apos; senza chiusura &apos;}&apos;</translation>
+	Trovati &apos;{&apos; senza chiusura &apos;}&apos;</translation>
     </message>
     <message>
         <source>Auto-Type string contains invalid characters</source>
@@ -1711,6 +1711,10 @@ Do you want to save the changes?</source>
         <source>locked</source>
         <translation>bloccato</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -2017,6 +2021,10 @@ Do you want to save the changes?</source>
         <source>&amp;Group</source>
         <translation>&amp;Gruppo</translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2277,13 +2285,13 @@ Il file non è leggibile.</translation>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Riduci alla barra di sistema al click del pulsante chiudi della finestra principale</translation>
+        <translation type="unfinished">Riduci alla barra di sistema al click del pulsante chiudi della finestra principale</translation>
     </message>
     <message>
         <source>Remember last opened file</source>
         <translation>Ricorda l&apos;ultimo file aperto</translation>
     </message>
-    <message encoding="UTF-8">
+    <message utf8="true">
         <source>Alt+Ö</source>
         <translation type="obsolete">Alt+Ö</translation>
     </message>

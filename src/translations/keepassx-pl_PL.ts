@@ -1595,6 +1595,10 @@ Zapisać te zmiany?</translation>
         <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1881,6 +1885,10 @@ Zapisać te zmiany?</translation>
         <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2089,7 +2097,7 @@ File is not readable.</source>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Minimalizuj do tray&apos;a, gdy główne okno zostanie zamknięte</translation>
+        <translation type="unfinished">Minimalizuj do tray&apos;a, gdy główne okno zostanie zamknięte</translation>
     </message>
     <message>
         <source>Remember last opened file</source>

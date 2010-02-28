@@ -1575,6 +1575,10 @@ Deseja gravar as alterações?</translation>
         <source>locked</source>
         <translation>bloqueado</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1856,6 +1860,10 @@ Deseja gravar as alterações?</translation>
     <message>
         <source>Sort groups</source>
         <translation>Ordenar grupos</translation>
+    </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2319,6 +2327,10 @@ Não foi possível ler o ficheiro.</translation>
     <message>
         <source>Configure...</source>
         <translation>Configurar...</translation>
+    </message>
+    <message>
+        <source>Minimize to tray when clicking the main window&apos;s close button</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

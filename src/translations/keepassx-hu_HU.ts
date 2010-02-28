@@ -1598,6 +1598,10 @@ El akarja menteni a változásokat?</translation>
         <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1884,6 +1888,10 @@ El akarja menteni a változásokat?</translation>
         <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2093,7 +2101,7 @@ A fájl nem olvasható.</translation>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Minimalizálás a rendszertálcára amikor a főablak bezáródik</translation>
+        <translation type="unfinished">Minimalizálás a rendszertálcára amikor a főablak bezáródik</translation>
     </message>
     <message>
         <source>Remember last opened file</source>

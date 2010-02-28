@@ -2238,6 +2238,10 @@ Please consider:
         <source>locked</source>
         <translation>заблокировано</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -2687,6 +2691,10 @@ Please consider:
     <message>
         <source>&amp;Group</source>
         <translation>&amp;Группа</translation>
+    </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3199,7 +3207,7 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Сворачиваться в системный трей при закрытии главного окна  </translation>
+        <translation type="unfinished">Сворачиваться в системный трей при закрытии главного окна  </translation>
     </message>
     <message utf8="true">
         <source>Alt+Ö</source>

@@ -1644,25 +1644,6 @@ The key is wrong or the file is damaged.</source>
     </message>
     <message>
         <source>Bytes</source>
-        <translation>バイト</translation>
-    </message>
-    <message>
-        <source>KiB</source>
-        <translation>KiB</translation>
-    </message>
-    <message>
-        <source>MiB</source>
-        <translation>MiB</translation>
-    </message>
-    <message>
-        <source>GiB</source>
-        <translation>GiB</translation>
-    </message>
-</context>
-<context>
-    <name>Kdb3Database::EntryHandle</name>
-    <message>
-        <source>Bytes</source>
         <translation type="obsolete">バイト</translation>
     </message>
     <message>
@@ -1676,6 +1657,25 @@ The key is wrong or the file is damaged.</source>
     <message>
         <source>GiB</source>
         <translation type="obsolete">GiB</translation>
+    </message>
+</context>
+<context>
+    <name>Kdb3Database::EntryHandle</name>
+    <message>
+        <source>Bytes</source>
+        <translation type="unfinished">バイト</translation>
+    </message>
+    <message>
+        <source>KiB</source>
+        <translation type="unfinished">KiB</translation>
+    </message>
+    <message>
+        <source>MiB</source>
+        <translation type="unfinished">MiB</translation>
+    </message>
+    <message>
+        <source>GiB</source>
+        <translation type="unfinished">GiB</translation>
     </message>
 </context>
 <context>

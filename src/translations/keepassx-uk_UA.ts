@@ -1572,6 +1572,10 @@ Do you want to save the changes?</source>
         <source>locked</source>
         <translation>заблокована</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1853,6 +1857,10 @@ Do you want to save the changes?</source>
     <message>
         <source>Sort groups</source>
         <translation>Впорядкувати групи</translation>
+    </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2313,6 +2321,10 @@ File is not readable.</source>
     </message>
     <message>
         <source>Show window always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimize to tray when clicking the main window&apos;s close button</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

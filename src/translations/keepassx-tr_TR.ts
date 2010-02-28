@@ -1627,6 +1627,10 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
         <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1929,6 +1933,10 @@ Değişiklikleri kaydetmek ister misiniz?</translation>
         <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2170,7 +2178,7 @@ Dosya okunabilir değil.</translation>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Ana pencere kapatıldığında sistem çekmecesine küçült</translation>
+        <translation type="unfinished">Ana pencere kapatıldığında sistem çekmecesine küçült</translation>
     </message>
     <message>
         <source>Remember last opened file</source>

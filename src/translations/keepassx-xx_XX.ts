@@ -1412,6 +1412,10 @@ The key is wrong or the file is damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1841,6 +1845,10 @@ Do you want to save the changes?</source>
         <source>Sort groups</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2067,6 +2075,10 @@ File is not readable.</source>
     </message>
     <message>
         <source>Minimize to tray instead of taskbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimize to tray when clicking the main window&apos;s close button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

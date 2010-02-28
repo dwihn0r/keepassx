@@ -1622,6 +1622,10 @@ Vil du lagre endringene?</translation>
         <source>locked</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1908,6 +1912,10 @@ Vil du lagre endringene?</translation>
         <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageBookmarksDlg</name>
@@ -2151,7 +2159,7 @@ File is not readable.</source>
     </message>
     <message>
         <source>Minimize to tray when clicking the main window&apos;s close button</source>
-        <translation type="obsolete">Minimize to tray when clicking the main window&apos;s close button</translation>
+        <translation type="unfinished">Minimize to tray when clicking the main window&apos;s close button</translation>
     </message>
     <message>
         <source>Remember last opened file</source>

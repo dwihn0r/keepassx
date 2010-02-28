@@ -1573,6 +1573,10 @@ Do you want to save the changes?</source>
         <source>locked</source>
         <translation>uzamknutý</translation>
     </message>
+    <message>
+        <source>Ctrl+M</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -1854,6 +1858,10 @@ Do you want to save the changes?</source>
     <message>
         <source>Sort groups</source>
         <translation>Zoradiť skupiny</translation>
+    </message>
+    <message>
+        <source>&amp;Minimize Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2313,6 +2321,10 @@ Súbor nie je možné načítať.</translation>
     <message>
         <source>Configure...</source>
         <translation>Konfigurovať...</translation>
+    </message>
+    <message>
+        <source>Minimize to tray when clicking the main window&apos;s close button</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
