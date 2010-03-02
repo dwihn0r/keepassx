@@ -206,6 +206,9 @@ void KeepassGroupView::dragEnterEvent ( QDragEnterEvent * event ){
 	LastHoverItem=NULL;
 	InsLinePos=-1;
 	
+	if (event->source() == NULL)
+		return; // drag event came from another application
+	
 	if(event->mimeData()->hasFormat("application/x-keepassx-group")){
 		DragType=GroupDrag;
 		event->acceptProposedAction();
