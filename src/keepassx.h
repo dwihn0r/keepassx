@@ -26,7 +26,7 @@
 #define APP_CODE_NAME       "keepassx"
 #define APP_SHORT_FUNC      "Password Manager"
 #define APP_LONG_FUNC       "Cross Platform Password Manager"
-#define APP_VERSION         "0.4.2b"
+#define APP_VERSION         "0.4.2"
 
 #define BUILTIN_ICONS 69
 
