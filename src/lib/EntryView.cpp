@@ -372,16 +372,23 @@ void KeepassEntryView::editEntry(EntryViewItem* item){
 
 
 void KeepassEntryView::OnNewEntry(){
-	IEntryHandle* NewEntry = NULL;
+	IGroupHandle* ParentGroup;
+	
 	if (!CurrentGroup){ // We must be viewing search results. Add the new entry to the first group.
 		if (db->groups().size() > 0)
-			NewEntry=db->newEntry(db->sortedGroups()[0]);
+			ParentGroup = db->sortedGroups()[0];
+			
 		else{
 			QMessageBox::critical(NULL,tr("Error"),tr("At least one group must exist before adding an entry."),tr("OK"));
 		}
 	}
-	else
-		NewEntry=db->newEntry(CurrentGroup);
+	else{
+		ParentGroup = CurrentGroup;
+	}
+	
+	IEntryHandle* NewEntry = db->newEntry(ParentGroup);
+	NewEntry->setImage(ParentGroup->image());
+	
 	CEditEntryDlg dlg(db,NewEntry,this,true);
 	if(!dlg.exec()){
 		db->deleteLastEntry();
