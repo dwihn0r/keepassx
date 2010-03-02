@@ -50,19 +50,16 @@ CEditGroupDialog::CEditGroupDialog(IDatabase* database,CGroup* Group,QWidget* pa
 	connect( ButtonBox, SIGNAL( accepted() ), this, SLOT( OnOK() ) );
 	connect( ButtonBox, SIGNAL( rejected() ), this, SLOT( OnCancel() ) );
 	connect( Button_Icon, SIGNAL( clicked() ), this, SLOT( OnIconDlg() ));
+	
+	EditTitle->setText(group->Title);
+	
+	for(int i=0;i<db->numIcons();i++){
+		ComboIconPicker->insertItem(i,db->icon(i),"");
+	}
+	ComboIconPicker->setCurrentIndex(group->Image);
 }
 
 CEditGroupDialog::~CEditGroupDialog(){
-}
-
-void CEditGroupDialog::showEvent(QShowEvent *event){
-	if(event->spontaneous()==false){
-		EditTitle->setText(group->Title);
-		for(int i=0;i<db->numIcons();i++){
-			ComboIconPicker->insertItem(i,db->icon(i),"");
-		}
-		ComboIconPicker->setCurrentIndex(group->Image);
-	}
 }
 
 void CEditGroupDialog::OnOK()
