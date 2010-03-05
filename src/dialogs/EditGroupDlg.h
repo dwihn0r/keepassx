@@ -32,6 +32,7 @@ class CEditGroupDialog : public QDialog, private Ui_EditGroupDialog
 		~CEditGroupDialog();
 	
 	private:
+		void init();
 		IDatabase* db;
 		IGroupHandle* handle; 
 		CGroup* group;
