@@ -147,7 +147,7 @@
 	</p>
 
 	<a name="autotype" />
-	<h2>Setup Auto-Type (currently Linux only)</h2>
+	<h2>Setup Auto-Type (currently Linux and OS X only)</h2>
 	<p>
 		<b>Auto-Type</b> is a feature that allows you to e.g. log in
 		to web page by hitting only one key combination. 
@@ -158,7 +158,7 @@
 		database, it executes a predefined key sequence 
 		(by default your username, <tt>TAB</tt>, password, <tt>ENTER</tt>) in
 		the active window. This feature is currently available
-		in the Linux version only.
+		in the Linux and OS X versions only.
 	</p>
 	<p>
 		To enable Auto-Type, first go to 
@@ -220,6 +220,21 @@
 	<p>
 		By modifing the Auto-Type key sequence you can tailor
 		Auto-Type to suit almost every web login page you'll enter.
+	</p>
+	<p>
+		For OS X, there are two additional Auto-Type elements: <tt>{CLEARFIELD}</tt> and
+		<tt>{MACSENDKEYCODES}</tt>. <tt>{CLEARFIELD}</tt> clears the typing target to ensure
+		it is empty before typing into it. <tt>{MACSENDKEYCODES}</tt> should be put at the
+		beginning of and Auto-Type string to force the use of a more primitive typing
+		mechanism when the normal mechanism fails.  A known case where this is required
+		is a web site where the login dialog is implemented in flash.  The following
+		is an example:<br><br>
+
+		<tt>{MACSENDKEYCODES}{USERNAME}{TAB}{PASSWORD}{ENTER}</tt>
+	</p>
+	<p>
+		Also note that the use of <tt>{CLEARFIELD}</tt> may require the user to define
+		a somewhat larger Key Stroke Delay in Preferences.
 	</p>
 	
 <!--

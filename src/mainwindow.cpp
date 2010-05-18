@@ -43,6 +43,10 @@
 #include "dialogs/ManageBookmarksDlg.h"
 #include "dialogs/HelpDlg.h"
 
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_MAC)
+#include "lib/HelperMacX.h"
+#endif
+
 Import_KeePassX_Xml import_KeePassX_Xml;
 Import_PwManager import_PwManager;
 Import_KWalletXml import_KWalletXml;
@@ -433,6 +437,10 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		QPushButton* readOnlyButton = new QPushButton(tr("Open read-only"), &msgBox);
 		msgBox.addButton(readOnlyButton, QMessageBox::AcceptRole);
 		msgBox.setDefaultButton(readOnlyButton);
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_MAC)
+		// On MacX, QMessageBox is not brought to foreground on exec() when app not already there
+		HelperMacX::processToFront(HelperMacX::getKeepassxPID());
+#endif
 		msgBox.exec();
 		
 		if (!msgBox.clickedButton() || msgBox.clickedButton() == msgBox.button(QMessageBox::No))
@@ -454,6 +462,10 @@ bool KeepassMainWindow::openDatabase(QString filename,bool IsAuto){
 		dlg.setWindowModality(Qt::WindowModal);
 		unlockDlg = &dlg;
 	}
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_MAC)
+	// On MacX, QMessageBox is not brought to foreground on exec() when app not already there
+	HelperMacX::processToFront(HelperMacX::getKeepassxPID());
+#endif
 	bool rejected = (dlg.exec()==PasswordDialog::Exit_Cancel);
 	if (InUnLock)
 		unlockDlg = NULL;
@@ -578,6 +590,10 @@ void KeepassMainWindow::OnFileNewKdb(){
 	IDatabase* db_new=dynamic_cast<IDatabase*>(new Kdb3Database());
 	db_new->create();
 	PasswordDialog dlg(this,PasswordDialog::Mode_Set,PasswordDialog::Flag_None,"New Database");
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_MAC)
+	// On MacX, QMessageBox is not brought to foreground on exec()
+	HelperMacX::processToFront(HelperMacX::getKeepassxPID());
+#endif
 	if(dlg.exec()==PasswordDialog::Exit_Ok){
 		if(FileOpen)
 			if(!closeDatabase())return;
@@ -1323,6 +1339,11 @@ void KeepassMainWindow::OnUnLockWorkspace(){
 	if(IsLocked){
 		if (InUnLock) return;
 		InUnLock = true;
+#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_MAC)
+		// show in case minimized, especially in another Space
+		// only needed if invoked from global autotype
+		show();
+#endif
 		if ( openDatabase(currentFilePath,true) ){
 			QTreeWidgetItem* item = GroupView->invisibleRootItem();
 			if (lockGroup.size()>0){

@@ -1,10 +1,10 @@
 /***************************************************************************
+ *   Copyright (C) 2009 by Jeff Gibbons                                    *
  *   Copyright (C) 2005-2008 by Felix Geyer                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; version 2 of the License.               *
-
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -19,13 +19,19 @@
 
 #include "ShortcutWidget.h"
 
-#if defined(GLOBAL_AUTOTYPE) && defined(Q_WS_X11)
+#if defined(GLOBAL_AUTOTYPE) && (defined(Q_WS_X11) || defined(Q_WS_MAC))
 
 #include <QKeyEvent>
-#include <QX11Info>
 #include <QPalette>
+#ifdef Q_WS_X11
+#include <QX11Info>
 #include "HelperX11.h"
 #include "AutoTypeGlobalX11.h"
+#endif
+#ifdef Q_WS_MAC
+#include "lib/HelperMacX.h"
+#include "lib/AutoTypeGlobalMacX.h"
+#endif
 
 ShortcutWidget::ShortcutWidget(QWidget* parent) : QLineEdit(parent), lock(false), failed(false){
 }
@@ -55,18 +61,36 @@ void ShortcutWidget::keyReleaseEvent(QKeyEvent* event){
 void ShortcutWidget::keyEvent(QKeyEvent* event, bool release){
 	if (release && lock)
 		return;
-	
+
+#ifdef Q_WS_X11
 	AutoTypeGlobalX11* autoTypeGlobal = static_cast<AutoTypeGlobalX11*>(autoType);
 	
 	unsigned int mods = HelperX11::keyboardModifiers(QX11Info::display());
 	displayShortcut(event->nativeVirtualKey(), release, mods & ControlMask,
 			mods & ShiftMask, mods & autoTypeGlobal->maskAlt(),
 			mods & autoTypeGlobal->maskAltGr(), mods & autoTypeGlobal->maskMeta());
+#endif
+#ifdef Q_WS_MAC
+	AutoTypeGlobalMacX* autoTypeGlobal = static_cast<AutoTypeGlobalMacX*>(autoType);
+	quint32 mods = event->nativeModifiers();
+	// mods >> 16 bits denote outside main keyboard eg keypad, arrow keys, home, end, etc
+	if ((0 != (mods >> 16)) || (0 == mods)) return;
+	quint32 key = event->nativeVirtualKey();
+	// prohibited keys
+	switch (key) {
+		case kVK_Delete: case kVK_Escape: case kVK_Return: case kVK_Tab: case kVK_ANSI_KeypadEnter: return;
+	}
+	displayShortcut(HelperMacX::keycodeToKeysym(key), release,
+					mods & autoTypeGlobal->maskCtrl(), mods & autoTypeGlobal->maskShift(),
+					mods & autoTypeGlobal->maskAlt(),  mods & autoTypeGlobal->maskAltGr(),
+					mods & autoTypeGlobal->maskMeta());
+#endif
 }
 
 void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool shift, bool alt, bool altgr, bool win){
 	QString text;
 	
+#ifdef Q_WS_X11
 	if (ctrl)
 		text.append(tr("Ctrl")).append(" + ");
 	if (shift)
@@ -87,6 +111,20 @@ void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool 
 		else{
 			text.append(static_cast<quint32>(keysym));
 		}
+#endif
+#ifdef Q_WS_MAC
+	if (ctrl)
+		text.append(kControlUnicode);
+	if (shift)
+		text.append(kShiftUnicode);
+	if (alt)
+		text.append(kOptionUnicode);
+	if (win)
+		text.append(kCommandUnicode);
+	KeySym keysym = key;
+	if (!release && (NoSymbol != keysym)){
+		text.append(QChar(keysym).toUpper());
+#endif	
 
 		lock = ctrl || shift || alt || altgr || win;
 		if (lock){
@@ -96,11 +134,13 @@ void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool 
 			pShortcut.alt = alt;
 			pShortcut.altgr = altgr;
 			pShortcut.win = win;
-			failed = autoType->registerGlobalShortcut(pShortcut);
-			if (!failed)
+			failed = !autoType->registerGlobalShortcut(pShortcut);
+			if (failed)
 				setBackgroundColor(QColor(255, 150, 150));
-			else
+			else {
 				setBackgroundColor(Qt::white);
+				setText(text);
+			}
 		}
 	}
 	else {
@@ -108,8 +148,6 @@ void ShortcutWidget::displayShortcut(quint32 key, bool release, bool ctrl, bool 
 		if (failed)
 			setBackgroundColor(Qt::white);
 	}
-	
-	setText(text);
 }
 
 void ShortcutWidget::setBackgroundColor(const QColor& c){

@@ -35,6 +35,7 @@ class AutoTypeDlg : public QWidget, private Ui::AutoTypeDlg
 	
 	private slots:
 		void itemSelected(QTreeWidgetItem* item);
+		void cancelled();
 	
 	private:
 		struct AutoTypeEntry {

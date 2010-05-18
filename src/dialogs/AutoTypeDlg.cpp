@@ -18,6 +18,10 @@
 
 #include <QDesktopWidget>
 #include "AutoTypeDlg.h"
+#ifdef Q_WS_MAC
+#include "lib/AutoTypeGlobalMacX.h"
+#include "lib/HelperMacX.h"
+#endif
 
 bool AutoTypeDlg::dialogVisible = false;
 
@@ -67,7 +71,7 @@ AutoTypeDlg::AutoTypeDlg(QList<IEntryHandle*> entries, QList<int> numbers, bool 
 	if (!hideUsernames)
 		entryList->setColumnWidth(1, entryList->columnWidth(1)+10);
 	
-	connect(ButtonBox, SIGNAL(rejected()), SLOT(close()));
+	connect(ButtonBox, SIGNAL(rejected()), SLOT(cancelled()));
 	connect(entryList, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(itemSelected(QTreeWidgetItem*)));
 	connect(entryList, SIGNAL(returnPressed(QTreeWidgetItem*)), SLOT(itemSelected(QTreeWidgetItem*)));
 }
@@ -112,4 +116,11 @@ bool AutoTypeDlg::event(QEvent* event){
 void AutoTypeDlg::itemSelected(QTreeWidgetItem* item){
 	close();
 	autoType->perform(itemToEntry[item].dbHandle, pWasLocked, itemToEntry[item].nr, pWasLocked);
+}
+
+void AutoTypeDlg::cancelled(){
+	close();
+#ifdef Q_WS_MAC
+	static_cast<AutoTypeGlobalMacX*>(autoType)->cancelled();
+#endif
 }

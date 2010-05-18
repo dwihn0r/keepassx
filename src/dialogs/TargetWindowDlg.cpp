@@ -23,7 +23,10 @@
 TargetWindowDlg::TargetWindowDlg(QWidget* parent) : QDialog(parent){
 	setupUi(this);
 	QStringList windowTitles = autoType->getAllWindowTitles();
+#ifndef Q_WS_MAC
+	// on MacX, titles are in top to bottom order which is better than alpha order so no sort
 	windowTitles.sort();
+#endif
 	for (QStringList::const_iterator i = windowTitles.constBegin(); i != windowTitles.constEnd(); ++i)
 		comboWindow->addItem(*i);
 	

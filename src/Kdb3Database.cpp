@@ -976,6 +976,7 @@ bool Kdb3Database::setFileKey(const QString& filename){
 			RawMasterKey.lock();
 			return true;
 		}
+		file.seek(0);
 	}
 	SHA256 sha;
 	unsigned char* buffer[2048];

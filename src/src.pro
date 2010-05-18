@@ -80,12 +80,19 @@ unix : !macx : !isEqual(QMAKE_WIN32,1){
 #-------------------------------------------------------------------------------
 macx {
 	isEmpty(PREFIX): PREFIX = /Applications
+	!isEqual(AUTOTYPE,0){
+		DEFINES += AUTOTYPE
+		!isEqual(GLOBAL_AUTOTYPE,0){
+			DEFINES += GLOBAL_AUTOTYPE
+		}
+	}
 	TARGET = ../bin/KeePassX
 	target.path = $${PREFIX}
 	data.files += ../share/keepassx
 	data.path = Contents/Resources
 	INSTALLS += data
 	LIBS += -framework CoreFoundation
+	LIBS += -framework Carbon
 	isEqual(LINK,DYNAMIC){
 		isEmpty(QT_FRAMEWORK_DIR): QT_FRAMEWORK_DIR = /Library/Frameworks
 		private_frameworks.files += $${QT_FRAMEWORK_DIR}/QtCore.framework
@@ -95,7 +102,7 @@ macx {
 		QMAKE_BUNDLE_DATA +=  private_frameworks
 	}
 	isEqual(LINK,STATIC){
-		LIBS += -framework Carbon -framework AppKit -lz
+		LIBS += -framework AppKit -lz
 	}
 	QMAKE_BUNDLE_DATA += data
 	QMAKE_INFO_PLIST= ../share/macx_bundle/Info.plist
@@ -106,6 +113,14 @@ macx {
 	}
 	isEqual(ARCH,INTEL): CONFIG += x86
 	isEqual(ARCH,PPC): CONFIG += ppc
+	contains(DEFINES,AUTOTYPE){
+		SOURCES += lib/HelperMacX.cpp lib/AutoTypeMacX.cpp
+		HEADERS += lib/HelperMacX.h lib/AutoTypeMacX.h
+	}
+	contains(DEFINES,GLOBAL_AUTOTYPE){
+		SOURCES += lib/AutoTypeGlobalMacX.cpp
+		HEADERS += lib/AutoTypeGlobalMacX.h
+	}
 #	SOURCES += main_macx.cpp
 }
 
