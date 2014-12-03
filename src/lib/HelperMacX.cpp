@@ -108,9 +108,8 @@ OSType HelperMacX::getProcessSignature(pid_t pid){
 	OSErr err;
 	ProcessSerialNumber processSerialNumber;
 	ProcessInfoRec processInfoRec;
+	memset(&processInfoRec, 0, sizeof(processInfoRec));
 	processInfoRec.processInfoLength = sizeof(processInfoRec);
-	processInfoRec.processAppSpec = NULL;
-	processInfoRec.processName = NULL;
 	err = GetProcessForPID(pid, &processSerialNumber);
 	if (noErr != err) {
 		qWarning("HelperMacX::getProcessSignature: GetProcessForPID error for pid %d: %d", pid, err);

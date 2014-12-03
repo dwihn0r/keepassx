@@ -20,6 +20,10 @@
 #ifndef RANDOM_H_
 #define RANDOM_H_
 
+#ifndef _WIN32
+#include <unistd.h> // for getpid()
+#endif
+
 #ifndef quint8
 typedef unsigned char quint8;
 #endif
